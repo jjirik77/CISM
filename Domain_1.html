@@ -31,23 +31,23 @@
         .chart-container {
             position: relative;
             width: 100%;
-            max-width: 1000px; /* Specific max-width for charts */
-            height: 50vh;
-            max-height: 600px; /* Max height for charts */
+            max-width: 900px; /* Increased max-width for charts */
+            height: 50vh; /* Increased height */
+            max-height: 500px; /* Increased max height */
             margin-left: auto;
             margin-right: auto;
             overflow: hidden; /* Prevent overflow */
         }
         @media (min-width: 640px) { /* sm */
             .chart-container {
-                height: 35vh;
-                max-height: 350px;
+                height: 45vh; /* Increased height for sm screens */
+                max-height: 450px; /* Increased max height for sm screens */
             }
         }
         @media (min-width: 768px) { /* md */
             .chart-container {
-                height: 30vh;
-                max-height: 300px;
+                height: 40vh; /* Increased height for md screens */
+                max-height: 400px; /* Increased max height for md screens */
             }
         }
         .nav-item.active {
@@ -74,7 +74,7 @@
 <body class="leading-relaxed">
     <div class="container mx-auto p-4 sm:p-6 lg:p-8">
         <header class="text-center py-8 bg-white rounded-lg shadow-md mb-8">
-            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-2">CISM 2024: Domain 1</h1>
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-2">CISM Domain 1 Study Guide</h1>
             <p class="text-xl sm:text-2xl text-gray-600">Information Security Governance</p>
             <p class="text-md text-gray-500 mt-2">Your Interactive Study Guide for Strategic Security Leadership</p>
         </header>
@@ -238,14 +238,17 @@
                         <p class="text-gray-700 mb-4">Information governance frameworks and standards provide structured approaches and best practices, offering proven methodologies for establishing and managing information security programs effectively.</p>
 
                         <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Adoption and adaptation of governance frameworks</h4>
-                        <p class="text-gray-600 mb-4">Key frameworks include COBIT (for IT governance), ISO/IEC 27001 (for ISMS), NIST CSF (for cybersecurity risk management), ITIL (for IT service management), and COSO (for internal control and ERM).</p>
-                        <ul class="list-disc list-inside text-gray-700 mb-4 ml-4">
-                            <li><strong>COBIT:</strong> Business-oriented framework for governing and managing enterprise IT, aligning IT goals with business goals.</li>
-                            <li><strong>ISO/IEC 27001:</strong> International standard for establishing, implementing, maintaining, and continually improving an Information Security Management System (ISMS).</li>
-                            <li><strong>NIST CSF:</strong> Voluntary framework for managing cybersecurity risk, structured around Identify, Protect, Detect, Respond, Recover functions.</li>
-                            <li><strong>ITIL:</strong> Practices for IT service management, including security considerations within service lifecycle.</li>
-                            <li><strong>COSO:</strong> Principles for establishing effective internal controls and enterprise risk management.</li>
-                        </ul>
+                        <p class="text-gray-600 mb-4">Explore key frameworks below:</p>
+                        <div class="flex flex-wrap justify-center gap-4 mb-6">
+                            <button class="framework-btn bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-200 transition-colors duration-200" data-framework="cobit">COBIT</button>
+                            <button class="framework-btn bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-green-200 transition-colors duration-200" data-framework="iso27001">ISO/IEC 27001</button>
+                            <button class="framework-btn bg-purple-100 text-purple-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-purple-200 transition-colors duration-200" data-framework="nistCsf">NIST CSF</button>
+                            <button class="framework-btn bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-yellow-200 transition-colors duration-200" data-framework="itil">ITIL</button>
+                            <button class="framework-btn bg-red-100 text-red-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-red-200 transition-colors duration-200" data-framework="coso">COSO</button>
+                        </div>
+                        <div id="framework-description" class="p-4 bg-gray-50 rounded-md text-gray-700">
+                            <p class="font-bold">Select a framework above to learn more.</p>
+                        </div>
 
                         <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Framework selection criteria based on organizational needs</h4>
                         <p class="text-gray-600 mb-4">Choosing the right framework depends on context (industry, size), business objectives, available resources, integration with existing systems, certifiability requirements, and the organization's specific risk profile.</p>
@@ -402,11 +405,36 @@
         };
         const kriLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
+        // Data for Information Governance Frameworks
+        const frameworkData = {
+            cobit: {
+                name: "COBIT",
+                description: "COBIT (Control Objectives for Information and Related Technologies) is a comprehensive framework for IT governance and management, developed by ISACA. It provides a business-oriented framework for governing and managing enterprise IT, aligning IT goals with business goals, and addressing risk and value delivery. COBIT 5 and COBIT 2019 are the latest versions."
+            },
+            iso27001: {
+                name: "ISO/IEC 27001",
+                description: "ISO/IEC 27001 is an international standard that specifies requirements for establishing, implementing, maintaining, and continually improving an Information Security Management System (ISMS). It promotes a systematic approach to managing sensitive company information so that it remains secure. It is certifiable."
+            },
+            nistCsf: {
+                name: "NIST Cybersecurity Framework (CSF)",
+                description: "NIST Cybersecurity Framework (CSF) is a voluntary framework developed by the National Institute of Standards and Technology (NIST) for critical infrastructure. It provides a flexible approach to managing cybersecurity risk, structured around five core functions: Identify, Protect, Detect, Respond, Recover. Widely adopted beyond critical infrastructure."
+            },
+            itil: {
+                name: "ITIL (Information Technology Infrastructure Library)",
+                description: "ITIL (Information Technology Infrastructure Library) is a set of detailed practices for IT service management (ITSM) that focuses on aligning IT services with the needs of business. While not a security-specific framework, it includes security considerations within its service lifecycle processes."
+            },
+            coso: {
+                name: "COSO (Committee of Sponsoring Organizations of the Treadway Commission)",
+                description: "COSO (Committee of Sponsoring Organizations of the Treadway Commission) focuses on enterprise risk management (ERM) and internal control. It provides principles and concepts for establishing effective internal controls across an organization, which are highly relevant to information security."
+            }
+        };
+
+
         let cultureImpactChartInstance;
         let priorityChartInstance;
         let kriChartInstance;
 
-        // Utility function to wrap labels for charts
+        // Utility function to wrap labels for charts (no longer used for legend directly)
         const wrapLabel = (label, maxCharsPerLine = 16) => {
             if (label.length <= maxCharsPerLine) return label;
             const words = label.split(' ');
@@ -430,7 +458,8 @@
             cultureImpactChartInstance = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
-                    labels: cultureChartData.default.labels.map(label => wrapLabel(label)),
+                    // Removed .map(label => wrapLabel(label)) here so legend uses full labels
+                    labels: cultureChartData.default.labels,
                     datasets: [{
                         data: cultureChartData.default.data,
                         backgroundColor: cultureChartData.default.colors,
@@ -442,16 +471,17 @@
                     maintainAspectRatio: false,
                     plugins: {
                         legend: {
-                            position: 'top',
+                            position: 'top', // Moved back to 'top'
                             labels: {
                                 font: {
-                                    size: 14
+                                    size: 12 // Kept at 12 for better fit with wider container
                                 }
                             }
                         },
                         tooltip: {
                             callbacks: {
                                 title: function(context) {
+                                    // Tooltip title can still wrap if needed, using the original label
                                     const label = context[0].label;
                                     return Array.isArray(label) ? label.join(' ') : label;
                                 },
@@ -566,7 +596,8 @@
         // Update Chart Functions
         const updateChart = (chartInstance, newData, newLabels, newColors) => {
             if (chartInstance) {
-                chartInstance.data.labels = newLabels.map(label => wrapLabel(label));
+                // Ensure labels are not pre-wrapped when updating
+                chartInstance.data.labels = newLabels;
                 chartInstance.data.datasets[0].data = newData;
                 if (newColors) {
                     chartInstance.data.datasets[0].backgroundColor = newColors;
@@ -634,6 +665,7 @@
                 button.addEventListener('click', () => {
                     const dataSetKey = button.dataset.dataSet;
                     const data = cultureChartData[dataSetKey];
+                    // Pass original labels, not wrapped ones
                     updateChart(cultureImpactChartInstance, data.data, data.labels, data.colors);
                 });
             });
@@ -698,6 +730,20 @@
                 button.addEventListener('click', () => {
                     const structureType = button.dataset.structure;
                     document.getElementById('structure-description').innerHTML = structureDescriptions[structureType];
+                });
+            });
+
+            // Information Governance Frameworks and Standards - New Logic
+            const frameworkDescriptionDiv = document.getElementById('framework-description');
+            document.querySelectorAll('.framework-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const frameworkKey = button.dataset.framework;
+                    const data = frameworkData[frameworkKey];
+                    if (data) {
+                        frameworkDescriptionDiv.innerHTML = `<p class='font-bold'>${data.name}:</p><p>${data.description}</p>`;
+                    } else {
+                        frameworkDescriptionDiv.innerHTML = `<p class='font-bold'>Framework not found.</p>`;
+                    }
                 });
             });
         });
