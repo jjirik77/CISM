@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CISM 2024: Domain 1 - Information Security Governance (Interactive Study Guide)</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F5EF; /* Warm Neutral Background */
+            color: #333333;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .section-header {
+            border-left: 4px solid #8FB8A1; /* Soft Green Accent */
+            padding-left: 1rem;
+        }
+        .accordion-button {
+            background-color: #EDEAE0; /* Secondary Neutral */
+            border-bottom: 1px solid #D5D2C8;
+        }
+        .accordion-content {
+            background-color: #FFFFFF;
+            border-bottom: 1px solid #D5D2C8;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px; /* Specific max-width for charts */
+            height: 40vh;
+            max-height: 400px; /* Max height for charts */
+            margin-left: auto;
+            margin-right: auto;
+            overflow: hidden; /* Prevent overflow */
+        }
+        @media (min-width: 640px) { /* sm */
+            .chart-container {
+                height: 35vh;
+                max-height: 350px;
+            }
+        }
+        @media (min-width: 768px) { /* md */
+            .chart-container {
+                height: 30vh;
+                max-height: 300px;
+            }
+        }
+        .nav-item.active {
+            border-bottom: 2px solid #A1C9CE; /* Soft Blue Accent */
+            font-weight: 600;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .tooltip-custom-title {
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        .tooltip-custom-body {
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body class="leading-relaxed">
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <header class="text-center py-8 bg-white rounded-lg shadow-md mb-8">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-2">CISM 2024: Domain 1</h1>
+            <p class="text-xl sm:text-2xl text-gray-600">Information Security Governance</p>
+            <p class="text-md text-gray-500 mt-2">Your Interactive Study Guide for Strategic Security Leadership</p>
+        </header>
+
+        <nav class="bg-white p-4 rounded-lg shadow-md mb-8 flex justify-center sticky top-0 z-10">
+            <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200 active" data-target="enterprise-governance">Enterprise Governance</button>
+            <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="information-security-strategy">Information Security Strategy</button>
+        </nav>
+
+        <main id="content-area">
+            <!-- Enterprise Governance Section -->
+            <section id="enterprise-governance" class="content-section fade-in">
+                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Section A: Enterprise Governance</h2>
+                <p class="mb-8 text-gray-700">Enterprise governance establishes the fundamental framework for how an organization operates, directly influencing the effectiveness and integration of its information security initiatives. This section explores the profound impact of organizational culture, the imperative of legal and regulatory compliance, and the critical role of organizational structures in defining and distributing security responsibilities.</p>
+
+                <!-- Sub-Domain: Organizational Culture -->
+                <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
+                    <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                        1. Organizational Culture
+                        <span class="accordion-icon text-2xl">+</span>
+                    </button>
+                    <div class="accordion-content hidden p-6">
+                        <p class="text-gray-700 mb-4">Organizational culture is the shared values, beliefs, and practices that significantly shape how individuals perceive and engage with security. A strong security-aware culture fosters vigilance and adherence to policies, while a weak one can undermine even the best technical controls. Understanding and influencing this culture is paramount for an information security manager.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Influence of corporate culture on security behaviors and decision-making</h4>
+                        <p class="text-gray-600 mb-4">Corporate culture profoundly shapes how individuals perceive and engage with security. It impacts risk appetite and influences security-related decisions. For instance, a culture prioritizing rapid innovation might accept higher security risks.</p>
+                        <div class="chart-container mb-6">
+                            <canvas id="cultureImpactChart"></canvas>
+                        </div>
+                        <div class="flex flex-wrap justify-center gap-4 mb-4">
+                            <button class="toggle-chart-data bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-200 transition-colors duration-200" data-chart-id="cultureImpactChart" data-data-set="default">Default View</button>
+                            <button class="toggle-chart-data bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-green-200 transition-colors duration-200" data-chart-id="cultureImpactChart" data-data-set="strongSecurity">Strong Security Culture</button>
+                            <button class="toggle-chart-data bg-red-100 text-red-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-red-200 transition-colors duration-200" data-chart-id="cultureImpactChart" data-data-set="weakSecurity">Weak Security Culture</button>
+                        </div>
+                        <p class="text-gray-600 text-sm italic">This chart illustrates a simulated distribution of employee security behaviors based on the prevailing organizational culture. Use the buttons to see how culture can shift these behaviors.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Promoting a security-aware culture through leadership and communication</h4>
+                        <p class="text-gray-600 mb-4">Cultivating a security-aware culture requires continuous effort, driven by leadership and effective communication. This includes comprehensive security awareness programs, clear policies, and open communication channels to foster vigilance.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Tone at the top: executive sponsorship and support</h4>
+                        <p class="text-gray-600 mb-4">The commitment of senior management is paramount. Executive sponsorship ensures visible commitment, adequate resource allocation, and accountability for security across the organization.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">d. Change management and resistance mitigation in security initiatives</h4>
+                        <p class="text-gray-600">Implementing new security measures often encounters resistance. Effective change management involves early stakeholder engagement, clear communication of the "why," and providing adequate training and support to facilitate adoption.</p>
+                    </div>
+                </div>
+
+                <!-- Sub-Domain: Legal, Regulatory, and Contractual Requirements -->
+                <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
+                    <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                        2. Legal, Regulatory, and Contractual Requirements
+                        <span class="accordion-icon text-2xl">+</span>
+                    </button>
+                    <div class="accordion-content hidden p-6">
+                        <p class="text-gray-700 mb-4">The information security manager must navigate a complex and evolving landscape of laws, regulations, and contractual obligations. Compliance is not merely a legal checkbox but a fundamental aspect of risk management and maintaining stakeholder trust.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Identification and interpretation of applicable laws and regulations</h4>
+                        <p class="text-gray-600 mb-4">Organizations must identify all pertinent laws and regulations based on their operations, industry, and geography. Key examples include:</p>
+                        <div class="relative mb-6">
+                            <input type="text" id="regulationsFilter" placeholder="Filter regulations (e.g., GDPR, HIPAA)" class="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 mb-4">
+                            <div id="regulationsList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                                <!-- Regulation items will be dynamically loaded here -->
+                            </div>
+                        </div>
+                        <p class="text-gray-600 text-sm italic mb-4">Type in the filter box to quickly find specific regulations or terms. Click on each regulation to expand its description.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Contractual obligations related to information security</h4>
+                        <p class="text-gray-600 mb-4">Beyond laws, contracts such as Service Level Agreements (SLAs), Business Associate Agreements (BAAs), and Non-Disclosure Agreements (NDAs) impose specific security requirements that must be diligently managed.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Security’s role in legal compliance and audit readiness</h4>
+                        <p class="text-gray-600 mb-4">Information security is central to achieving and demonstrating compliance. This involves establishing compliance programs, preparing for audits with robust documentation, and continuous monitoring of control effectiveness.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">d. Data protection and privacy laws by region/jurisdiction</h4>
+                        <p class="text-gray-600 mb-4">The global privacy landscape necessitates understanding specific laws across jurisdictions (e.g., GDPR in EU, CCPA in California), particularly for cross-border data transfers and implementing 'privacy by design' principles.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700">e. Intellectual property rights, industry-specific mandates</h4>
+                        <p class="text-gray-600">Protecting intellectual property through security controls and adhering to industry-specific mandates (e.g., PCI DSS, NERC CIP) are critical for protecting assets and ensuring operational continuity within specific sectors.</p>
+                    </div>
+                </div>
+
+                <!-- Sub-Domain: Organizational Structures, Roles, and Responsibilities -->
+                <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
+                    <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                        3. Organizational Structures, Roles, and Responsibilities
+                        <span class="accordion-icon text-2xl">+</span>
+                    </button>
+                    <div class="accordion-content hidden p-6">
+                        <p class="text-gray-700 mb-4">Effective information security governance relies on clearly defined organizational structures, roles, and responsibilities. This clarity ensures accountability, prevents gaps, and facilitates efficient execution of security functions.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Governance structures (centralized, decentralized, hybrid)</h4>
+                        <p class="text-gray-600 mb-4">Organizations adopt different models for security governance. Explore the common structures below:</p>
+                        <div class="flex flex-wrap justify-center gap-4 mb-6">
+                            <button class="structure-btn bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-200 transition-colors duration-200" data-structure="centralized">Centralized</button>
+                            <button class="structure-btn bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-green-200 transition-colors duration-200" data-structure="decentralized">Decentralized</button>
+                            <button class="structure-btn bg-purple-100 text-purple-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-purple-200 transition-colors duration-200" data-structure="hybrid">Hybrid</button>
+                        </div>
+                        <div id="structure-description" class="p-4 bg-gray-50 rounded-md text-gray-700">
+                            <p class="font-bold">Select a structure above to learn more.</p>
+                            <p>Centralized: Security managed by a single team. Pro: Consistency, scale. Con: Less responsive to local needs.</p>
+                        </div>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Defining roles and responsibilities: Board, Executive, CISO, Data Owners, Users</h4>
+                        <p class="text-gray-600 mb-4">Clear role definitions are fundamental to accountability. Each level, from the Board with ultimate oversight to every user adhering to policies, plays a crucial part in the security posture.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Segregation of duties (SoD), accountability, escalation paths</h4>
+                        <p class="text-gray-600 mb-4">Implementing Segregation of Duties prevents a single point of control, reducing fraud and error. Clear accountability ensures ownership, while defined escalation paths enable timely incident and risk resolution.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700">d. Security steering committees and governance forums</h4>
+                        <p class="text-gray-600">Formal committees and forums provide structured decision-making and oversight, ensuring strategic direction and alignment with business objectives.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Information Security Strategy Section -->
+            <section id="information-security-strategy" class="content-section hidden fade-in">
+                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Section B: Information Security Strategy</h2>
+                <p class="mb-8 text-gray-700">Information Security Strategy is about charting the course for the organization's security posture. It translates high-level governance principles into actionable plans, focusing on aligning security objectives with business goals, adopting appropriate frameworks, and effectively planning and resourcing initiatives.</p>
+
+                <!-- Sub-Domain: Information Security Strategy Development -->
+                <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
+                    <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                        1. Information Security Strategy Development
+                        <span class="accordion-icon text-2xl">+</span>
+                    </button>
+                    <div class="accordion-content hidden p-6">
+                        <p class="text-gray-700 mb-4">Developing a robust information security strategy is a complex but critical process that ensures security efforts are purposeful and aligned with business value. It's about proactive planning to enable, rather than hinder, business operations.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Alignment of security objectives with organizational goals</h4>
+                        <p class="text-gray-600 mb-4">The cornerstone of any effective security strategy is its direct alignment with the organization's overarching business goals. Security should enable business objectives and manage risks effectively.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Defining vision, mission, and guiding principles for the security program</h4>
+                        <p class="text-gray-600 mb-4">Just like the broader organization, the security program needs clear vision, mission, and guiding principles to define its purpose and inform all security decisions and actions.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Determining risk appetite and tolerance</h4>
+                        <p class="text-gray-600 mb-4">Understanding the organization's willingness to accept risk (risk appetite) and acceptable deviation (risk tolerance) is crucial for shaping the security strategy and prioritizing investments.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">d. Incorporating threat landscape and business drivers</h4>
+                        <p class="text-gray-600 mb-4">The strategy must be dynamic, continuously adapting to evolving external threats (threat landscape) and internal business needs (business drivers) to remain relevant and effective.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">e. Prioritizing security initiatives based on business impact</h4>
+                        <p class="text-gray-600 mb-4">With limited resources, security initiatives must be prioritized based on their potential business impact, leveraging Business Impact Analysis (BIA) and cost-benefit analysis.</p>
+                        <div class="chart-container mb-6">
+                            <canvas id="priorityChart"></canvas>
+                        </div>
+                        <div class="flex flex-wrap justify-center gap-4 mb-4">
+                            <button class="toggle-chart-data bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-200 transition-colors duration-200" data-chart-id="priorityChart" data-data-set="overall">Overall Priorities</button>
+                            <button class="toggle-chart-data bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-green-200 transition-colors duration-200" data-chart-id="priorityChart" data-data-set="complianceDriven">Compliance-Driven</button>
+                            <button class="toggle-chart-data bg-red-100 text-red-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-red-200 transition-colors duration-200" data-chart-id="priorityChart" data-data-set="revenueDriven">Revenue-Driven</button>
+                        </div>
+                        <p class="text-gray-600 text-sm italic">This chart simulates the prioritization of security initiatives. Use the buttons to see how priorities might shift based on different business drivers or strategic focuses.</p>
+                    </div>
+                </div>
+
+                <!-- Sub-Domain: Information Governance Frameworks and Standards -->
+                <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
+                    <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                        2. Information Governance Frameworks and Standards
+                        <span class="accordion-icon text-2xl">+</span>
+                    </button>
+                    <div class="accordion-content hidden p-6">
+                        <p class="text-gray-700 mb-4">Information governance frameworks and standards provide structured approaches and best practices, offering proven methodologies for establishing and managing information security programs effectively.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Adoption and adaptation of governance frameworks</h4>
+                        <p class="text-gray-600 mb-4">Key frameworks include COBIT (for IT governance), ISO/IEC 27001 (for ISMS), NIST CSF (for cybersecurity risk management), ITIL (for IT service management), and COSO (for internal control and ERM).</p>
+                        <ul class="list-disc list-inside text-gray-700 mb-4 ml-4">
+                            <li><strong>COBIT:</strong> Business-oriented framework for governing and managing enterprise IT, aligning IT goals with business goals.</li>
+                            <li><strong>ISO/IEC 27001:</strong> International standard for establishing, implementing, maintaining, and continually improving an Information Security Management System (ISMS).</li>
+                            <li><strong>NIST CSF:</strong> Voluntary framework for managing cybersecurity risk, structured around Identify, Protect, Detect, Respond, Recover functions.</li>
+                            <li><strong>ITIL:</strong> Practices for IT service management, including security considerations within service lifecycle.</li>
+                            <li><strong>COSO:</strong> Principles for establishing effective internal controls and enterprise risk management.</li>
+                        </ul>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Framework selection criteria based on organizational needs</h4>
+                        <p class="text-gray-600 mb-4">Choosing the right framework depends on context (industry, size), business objectives, available resources, integration with existing systems, certifiability requirements, and the organization's specific risk profile.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700">c. Integrating governance frameworks into enterprise governance</h4>
+                        <p class="text-gray-600">Security frameworks must be integrated seamlessly into the broader enterprise governance structure through harmonization, consistent language, and a robust top-down/bottom-up communication flow.</p>
+                    </div>
+                </div>
+
+                <!-- Sub-Domain: Strategic Planning (e.g., Budgets, Resources, Business Case) -->
+                <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
+                    <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                        3. Strategic Planning (Budgets, Resources, Business Case)
+                        <span class="accordion-icon text-2xl">+</span>
+                    </button>
+                    <div class="accordion-content hidden p-6">
+                        <p class="text-gray-700 mb-4">Strategic planning translates the security strategy into practical implementation, involving careful resource allocation, financial justification, and continuous performance measurement.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Building a multi-year information security roadmap</h4>
+                        <p class="text-gray-600 mb-4">A security roadmap visualizes the evolution of the security program over time, outlining phases to bridge the gap between the current and desired security states, while remaining flexible to adapt to changes.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Developing a business case for security investments</h4>
+                        <p class="text-gray-600 mb-4">A strong business case is essential for securing funding. It clearly articulates the problem, proposed solution, tangible and intangible benefits, costs, and value proposition of a security investment.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Budgeting, staffing, and resource allocation</h4>
+                        <p class="text-gray-600 mb-4">Strategic planning includes developing annual and multi-year budgets, assessing staffing needs (internal, contractors, MSSPs), and prioritizing resource allocation based on the roadmap and risk priorities.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">d. Defining and monitoring KPIs and KRIs to measure strategic performance</h4>
+                        <p class="text-gray-600 mb-4">To ensure effectiveness, security performance is measured using Key Performance Indicators (KPIs) for current performance and Key Risk Indicators (KRIs) for anticipating future problems. Regular reporting provides insights to management.</p>
+                        <div class="chart-container mb-6">
+                            <canvas id="kriChart"></canvas>
+                        </div>
+                        <div class="mb-4">
+                            <label for="kriSelect" class="block text-gray-700 text-sm font-bold mb-2">Select KRI to view trend:</label>
+                            <select id="kriSelect" class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-200">
+                                <option value="criticalVulnerabilities">Critical Vulnerabilities Detected</option>
+                                <option value="phishingAttempts">Phishing Attempts Reported</option>
+                                <option value="accessFailures">Failed Access Attempts</option>
+                            </select>
+                        </div>
+                        <p class="text-gray-600 text-sm italic">This line chart illustrates simulated trends for various Key Risk Indicators (KRIs) over time, helping to anticipate potential issues. Select an KRI from the dropdown to see its trend.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700">e. Continuous improvement through maturity models (e.g., CMMI, PDCA)</h4>
+                        <p class="text-gray-600">Information security requires continuous improvement, often guided by maturity models like CMMI and iterative methodologies such as the Plan-Do-Check-Act (PDCA) cycle.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center py-6 mt-8 text-gray-500 text-sm">
+            <p>&copy; 2024 CISM Study Guide. All rights reserved. For educational purposes only.</p>
+        </footer>
+    </div>
+
+    <script>
+        // JS Variables for current state and base data
+        const currentSection = {
+            id: 'enterprise-governance'
+        };
+
+        const regulationData = [
+            {
+                name: "GDPR",
+                jurisdiction: "EU/EEA",
+                description: "General Data Protection Regulation. Strict rules on personal data collection, processing, and storage for individuals within these regions. Key concepts include consent, data subject rights, breach notification."
+            },
+            {
+                name: "HIPAA",
+                jurisdiction: "USA",
+                description: "Health Insurance Portability and Accountability Act. U.S. law protecting the privacy and security of protected health information (PHI). Sets standards for healthcare providers and related entities."
+            },
+            {
+                name: "SOX",
+                jurisdiction: "USA",
+                description: "Sarbanes-Oxley Act. U.S. federal law mandating certain practices in financial record keeping and reporting for public companies. Implications for IT controls related to financial data integrity."
+            },
+            {
+                name: "PCI DSS",
+                jurisdiction: "Global (Contractual)",
+                description: "Payment Card Industry Data Security Standard. A set of security standards for organizations that handle branded credit cards. Often mandated by contracts."
+            },
+            {
+                name: "CCPA",
+                jurisdiction: "USA (California)",
+                description: "California Consumer Privacy Act. Grants consumers specific rights regarding their personal information collected by businesses. Focus on transparency and consumer control."
+            },
+            {
+                name: "LGPD",
+                jurisdiction: "Brazil",
+                description: "Lei Geral de Proteção de Dados. Brazil's comprehensive data protection law, similar in scope to GDPR, establishing rules for collecting, handling, and sharing personal data."
+            },
+            {
+                name: "NERC CIP",
+                jurisdiction: "USA/Canada",
+                description: "North American Electric Reliability Corporation Critical Infrastructure Protection. Standards designed to secure the assets required for operating the North American bulk electric system."
+            }
+        ];
+
+        const cultureChartData = {
+            default: {
+                labels: ['Vigilant & Proactive', 'Compliant (Policy-Driven)', 'Indifferent/Unaware', 'Resistant/Bypassing Controls'],
+                data: [35, 45, 15, 5],
+                colors: ['#8FB8A1', '#A1C9CE', '#FFD700', '#FF6384']
+            },
+            strongSecurity: {
+                labels: ['Vigilant & Proactive', 'Compliant (Policy-Driven)', 'Indifferent/Unaware', 'Resistant/Bypassing Controls'],
+                data: [55, 35, 8, 2],
+                colors: ['#28a745', '#17a2b8', '#ffc107', '#dc3545']
+            },
+            weakSecurity: {
+                labels: ['Vigilant & Proactive', 'Compliant (Policy-Driven)', 'Indifferent/Unaware', 'Resistant/Bypassing Controls'],
+                data: [10, 30, 40, 20],
+                colors: ['#28a745', '#17a2b8', '#ffc107', '#dc3545']
+            }
+        };
+
+        const priorityChartData = {
+            overall: {
+                labels: ['Data Protection Enhancement', 'Cloud Security Migration', 'Incident Response Plan', 'Security Awareness Program', 'Vendor Risk Management'],
+                data: [90, 75, 85, 70, 60],
+                backgroundColor: ['#A1C9CE', '#8FB8A1', '#FFD700', '#FF6384', '#6A5ACD']
+            },
+            complianceDriven: {
+                labels: ['GDPR Compliance', 'PCI DSS Remediation', 'HIPAA Training', 'Audit Readiness Tools', 'Data Residency Solutions'],
+                data: [95, 90, 80, 75, 70],
+                backgroundColor: ['#2196F3', '#4CAF50', '#FFC107', '#F44336', '#9C27B0']
+            },
+            revenueDriven: {
+                labels: ['Secure New Product Launch', 'Enable Remote Work', 'Protect Customer Data', 'Supply Chain Security', 'R&D IP Protection'],
+                data: [90, 85, 80, 70, 95],
+                backgroundColor: ['#4CAF50', '#2196F3', '#FFC107', '#F44336', '#9C27B0']
+            }
+        };
+
+        const kriTrendData = {
+            criticalVulnerabilities: {
+                label: 'Critical Vulnerabilities Detected',
+                data: [25, 22, 18, 15, 12, 10, 9, 8, 7, 6, 5, 4],
+                borderColor: '#FF6384',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)'
+            },
+            phishingAttempts: {
+                label: 'Phishing Attempts Reported',
+                data: [120, 115, 130, 105, 90, 85, 95, 110, 125, 100, 90, 80],
+                borderColor: '#A1C9CE',
+                backgroundColor: 'rgba(161, 201, 206, 0.2)'
+            },
+            accessFailures: {
+                label: 'Failed Access Attempts',
+                data: [500, 480, 450, 420, 400, 380, 350, 330, 300, 280, 250, 230],
+                borderColor: '#8FB8A1',
+                backgroundColor: 'rgba(143, 184, 161, 0.2)'
+            }
+        };
+        const kriLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+        let cultureImpactChartInstance;
+        let priorityChartInstance;
+        let kriChartInstance;
+
+        // Utility function to wrap labels for charts
+        const wrapLabel = (label, maxCharsPerLine = 16) => {
+            if (label.length <= maxCharsPerLine) return label;
+            const words = label.split(' ');
+            let line = '';
+            let lines = [];
+            words.forEach(word => {
+                if ((line + word).length > maxCharsPerLine) {
+                    lines.push(line.trim());
+                    line = word + ' ';
+                } else {
+                    line += word + ' ';
+                }
+            });
+            lines.push(line.trim());
+            return lines;
+        };
+
+        // Initialize Charts
+        const initCultureImpactChart = () => {
+            const ctx = document.getElementById('cultureImpactChart').getContext('2d');
+            cultureImpactChartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: cultureChartData.default.labels.map(label => wrapLabel(label)),
+                    datasets: [{
+                        data: cultureChartData.default.data,
+                        backgroundColor: cultureChartData.default.colors,
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    size: 14
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: function(context) {
+                                    const label = context[0].label;
+                                    return Array.isArray(label) ? label.join(' ') : label;
+                                },
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed) {
+                                        label += context.parsed + '%';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        };
+
+        const initPriorityChart = () => {
+            const ctx = document.getElementById('priorityChart').getContext('2d');
+            priorityChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: priorityChartData.overall.labels.map(label => wrapLabel(label)),
+                    datasets: [{
+                        label: 'Prioritization Score (1-100)',
+                        data: priorityChartData.overall.data,
+                        backgroundColor: priorityChartData.overall.backgroundColor
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            title: {
+                                display: true,
+                                text: 'Priority Score'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: function(context) {
+                                    const label = context[0].label;
+                                    return Array.isArray(label) ? label.join(' ') : label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        };
+
+        const initKRIChart = () => {
+            const ctx = document.getElementById('kriChart').getContext('2d');
+            kriChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: kriLabels,
+                    datasets: [{
+                        label: kriTrendData.criticalVulnerabilities.label,
+                        data: kriTrendData.criticalVulnerabilities.data,
+                        borderColor: kriTrendData.criticalVulnerabilities.borderColor,
+                        backgroundColor: kriTrendData.criticalVulnerabilities.backgroundColor,
+                        fill: true,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Count'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Month'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: function(context) {
+                                    return context[0].label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        };
+
+        // Update Chart Functions
+        const updateChart = (chartInstance, newData, newLabels, newColors) => {
+            if (chartInstance) {
+                chartInstance.data.labels = newLabels.map(label => wrapLabel(label));
+                chartInstance.data.datasets[0].data = newData;
+                if (newColors) {
+                    chartInstance.data.datasets[0].backgroundColor = newColors;
+                }
+                chartInstance.update();
+            }
+        };
+
+        const updateLineChart = (chartInstance, newData, newLabel, newBorderColor, newBackgroundColor) => {
+            if (chartInstance) {
+                chartInstance.data.datasets[0].label = newLabel;
+                chartInstance.data.datasets[0].data = newData;
+                chartInstance.data.datasets[0].borderColor = newBorderColor;
+                chartInstance.data.datasets[0].backgroundColor = newBackgroundColor;
+                chartInstance.data.datasets[0].fill = true; // Ensure fill is true for area effect
+                chartInstance.update();
+            }
+        };
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initial Chart Render
+            initCultureImpactChart();
+            initPriorityChart();
+            initKRIChart();
+
+            // Navigation
+            document.querySelectorAll('.nav-item').forEach(button => {
+                button.addEventListener('click', () => {
+                    document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    document.querySelectorAll('.content-section').forEach(section => {
+                        section.classList.add('hidden');
+                        section.classList.remove('fade-in');
+                    });
+
+                    const targetSection = document.getElementById(button.dataset.target);
+                    targetSection.classList.remove('hidden');
+                    targetSection.classList.add('fade-in');
+                    currentSection.id = button.dataset.target;
+                });
+            });
+
+            // Accordion Functionality
+            document.querySelectorAll('.accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const icon = button.querySelector('.accordion-icon');
+
+                    if (content.classList.contains('hidden')) {
+                        content.classList.remove('hidden');
+                        content.classList.add('fade-in');
+                        icon.textContent = '–';
+                    } else {
+                        content.classList.add('hidden');
+                        content.classList.remove('fade-in');
+                        icon.textContent = '+';
+                    }
+                });
+            });
+
+            // Culture Impact Chart Toggles
+            document.querySelectorAll('.toggle-chart-data[data-chart-id="cultureImpactChart"]').forEach(button => {
+                button.addEventListener('click', () => {
+                    const dataSetKey = button.dataset.dataSet;
+                    const data = cultureChartData[dataSetKey];
+                    updateChart(cultureImpactChartInstance, data.data, data.labels, data.colors);
+                });
+            });
+
+            // Priority Chart Toggles
+            document.querySelectorAll('.toggle-chart-data[data-chart-id="priorityChart"]').forEach(button => {
+                button.addEventListener('click', () => {
+                    const dataSetKey = button.dataset.dataSet;
+                    const data = priorityChartData[dataSetKey];
+                    updateChart(priorityChartInstance, data.data, data.labels, data.backgroundColor);
+                });
+            });
+
+            // KRI Chart Selector
+            document.getElementById('kriSelect').addEventListener('change', (event) => {
+                const selectedKRI = event.target.value;
+                const data = kriTrendData[selectedKRI];
+                updateLineChart(kriChartInstance, data.data, data.label, data.borderColor, data.backgroundColor);
+            });
+
+            // Populate Regulations List and add expand/collapse functionality
+            const regulationsListDiv = document.getElementById('regulationsList');
+            const renderRegulations = (filterText = '') => {
+                regulationsListDiv.innerHTML = '';
+                const filteredData = regulationData.filter(reg =>
+                    reg.name.toLowerCase().includes(filterText.toLowerCase()) ||
+                    reg.description.toLowerCase().includes(filterText.toLowerCase()) ||
+                    reg.jurisdiction.toLowerCase().includes(filterText.toLowerCase())
+                );
+
+                filteredData.forEach(reg => {
+                    const div = document.createElement('div');
+                    div.className = 'regulation-item p-4 border border-gray-200 rounded-md bg-gray-50 hover:bg-gray-100 cursor-pointer';
+                    div.innerHTML = `
+                        <h5 class="text-md font-semibold text-gray-800">${reg.name} <span class="text-gray-500 text-sm">(${reg.jurisdiction})</span></h5>
+                        <div class="regulation-details hidden mt-2 text-gray-600 text-sm">
+                            <p>${reg.description}</p>
+                        </div>
+                    `;
+                    div.addEventListener('click', () => {
+                        const details = div.querySelector('.regulation-details');
+                        details.classList.toggle('hidden');
+                        details.classList.toggle('fade-in');
+                    });
+                    regulationsListDiv.appendChild(div);
+                });
+            };
+
+            document.getElementById('regulationsFilter').addEventListener('input', (event) => {
+                renderRegulations(event.target.value);
+            });
+
+            renderRegulations(); // Initial render of regulations
+
+            // Structure Description Toggles
+            const structureDescriptions = {
+                centralized: "<p class='font-bold'>Centralized:</p><p>Security functions are managed by a single, central team or department. Provides consistency and economies of scale but can be less responsive to localized business needs.</p>",
+                decentralized: "<p class='font-bold'>Decentralized:</p><p>Security responsibilities are distributed across various business units. Fosters greater ownership and responsiveness but may lead to inconsistencies or gaps without central coordination.</p>",
+                hybrid: "<p class='font-bold'>Hybrid:</p><p>A blend of centralized and decentralized approaches. A central team sets strategy and standards, while business units handle implementation. Often the most practical for large, complex organizations.</p>"
+            };
+            document.querySelectorAll('.structure-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const structureType = button.dataset.structure;
+                    document.getElementById('structure-description').innerHTML = structureDescriptions[structureType];
+                });
+            });
+        });
+    </script>
+</body>
+</html>
