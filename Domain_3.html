@@ -100,6 +100,8 @@
             border-radius: 0.75rem; /* More rounded */
             cursor: pointer;
             transition: all 0.2s ease-in-out;
+            flex: 1 1 calc(50% - 1rem); /* Two cards per row on larger screens */
+            max-width: calc(50% - 1rem); /* Max width for two columns */
             box-sizing: border-box;
             text-align: left;
             font-weight: 600;
@@ -1062,7 +1064,7 @@
                 <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Key Terms</h2>
                 <p class="mb-8 text-gray-700">Test your knowledge of key terms in Information Security Program Development and Management with these interactive flashcards. Click on a card to reveal its definition.</p>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6">
                     <!-- Key Terms will be populated here by JavaScript -->
                 </div>
             </section>
@@ -1071,9 +1073,8 @@
             <section id="domain-summary" class="content-section hidden">
                 <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Domain Summary</h2>
                 <div class="p-6 bg-white rounded-lg shadow-md">
-                    <p class="text-gray-700 mb-4">Domain 3, "Information Security Program Development and Management," is a cornerstone of the CISM certification, emphasizing the strategic and operational aspects of information security. It constitutes a significant portion of the exam, reflecting its importance in real-world information security leadership roles.</p>
-                    <p class="text-gray-700 mb-4">The **Program Development** phase focuses on establishing the foundational elements. This includes identifying and allocating necessary resources—people, tools, and technologies—while ensuring they align with the organizational structure and program scope. A critical aspect is the accurate identification and classification of information assets based on their business impact, coupled with assigning clear data ownership and handling guidelines. The development process is guided by industry standards and frameworks like ISO/IEC 27001, NIST CSF, COBIT, TOGAF, and SABSA, which provide structured approaches to align security practices with regulatory, business, and technical standards. Finally, this phase involves developing robust information security policies, procedures, and guidelines, ensuring they are version-controlled, regularly reviewed, and auditable for compliance. Program metrics, including Key Performance Indicators (KPIs) and Key Risk Indicators (KRIs), are defined to measure maturity, coverage, and gaps.</p>
-                    <p class="text-gray-700">The **Program Management** phase shifts to the ongoing execution and optimization of the security program. This involves the thoughtful design and selection of administrative, technical, and physical controls based on thorough risk analysis, ensuring they are cost-effective, scalable, and integrated using principles like defense-in-depth and compensating controls. Implementation requires seamless integration with existing IT architecture and business workflows, necessitating strong coordination across departments like IT, DevOps, HR, and procurement. Continuous testing and evaluation of controls through internal audits, penetration testing, and vulnerability scanning are vital to detect failures, track remediation, and update the organization's risk posture. A robust information security awareness and training program, tailored to various roles and delivered through diverse methods, is crucial for fostering a security-conscious culture. Managing external services, including vendors and cloud providers, is another key area, requiring clear security expectations in contracts, diligent risk assessments, and ongoing compliance monitoring. Finally, effective communication and reporting of program performance, risk posture, and incident trends to executives and stakeholders, tailored to different audiences, is essential for informed decision-making and continuous improvement.</p>
+                    <p class="text-gray-700 mb-4">Domain 3: Information Security Program is the most extensive domain in the CISM framework and focuses on establishing, implementing, and managing an information security program that effectively supports the organization's security strategy. It encompasses building and maintaining policies, procedures, and standards that reflect business goals and risk treatment decisions. This domain emphasizes the importance of asset identification and classification, resource planning, control selection, awareness training, and performance measurement to ensure the program is structured, repeatable, and aligned with enterprise needs.</p>
+                    <p class="text-gray-700">The domain also covers operational integration—ensuring that security is embedded into day-to-day business processes and across functional areas such as HR, IT, and procurement. Managing third-party relationships, enforcing service-level agreements (SLAs), and continuously improving the program based on key performance indicators (KPIs) and audit findings are essential aspects. Ultimately, Domain 3 ensures that the information security program is not just a collection of policies or tools but a well-governed, adaptable system that delivers measurable value, enables compliance, and strengthens enterprise security posture across all layers of the organization.</p>
                 </div>
             </section>
         </main>
