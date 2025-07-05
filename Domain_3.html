@@ -1,0 +1,1636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CISM 2024: Domain 3 - Information Security Program Development and Management (Interactive Study Guide)</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F5EF; /* Warm Neutral Background */
+            color: #333333;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        /* Enhanced Section Header with new accent color */
+        .section-header {
+            border-left: 6px solid #00A896; /* Vibrant Teal Accent */
+            padding-left: 1.25rem;
+            font-size: 2.5rem; /* Slightly larger */
+            color: #222222; /* Darker text for contrast */
+        }
+        /* Refined Accordion Button and Content */
+        .accordion-button {
+            background-color: #EDEAE0; /* Secondary Neutral */
+            border-bottom: 1px solid #D5D2C8;
+            border-radius: 0.75rem; /* More rounded */
+            padding: 1rem 1.5rem; /* Increased padding */
+            font-size: 1.25rem; /* Slightly larger font */
+            font-weight: 700; /* Bolder */
+            color: #333333;
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+        }
+        .accordion-button:hover {
+            background-color: #D5D2C8; /* Darker on hover */
+            transform: translateY(-1px);
+        }
+        .accordion-content {
+            background-color: #FFFFFF;
+            border-bottom: 1px solid #D5D2C8;
+            border-radius: 0 0 0.75rem 0.75rem; /* Match top radius */
+            padding: 1.5rem; /* More padding */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px; /* Increased max-width for charts */
+            height: 50vh; /* Increased height */
+            max-height: 500px; /* Increased max height */
+            margin-left: auto;
+            margin-right: auto;
+            overflow: hidden; /* Prevent overflow */
+        }
+        @media (min-width: 640px) { /* sm */
+            .chart-container {
+                height: 45vh; /* Increased height for sm screens */
+                max-height: 450px; /* Increased max height for sm screens */
+            }
+        }
+        @media (min-width: 768px) { /* md */
+            .chart-container {
+                height: 40vh; /* Increased height for md screens */
+                max-height: 400px; /* Increased max height for md screens */
+            }
+        }
+        /* Active Navigation Item */
+        .nav-item.active {
+            border-bottom: 3px solid #00A896; /* Vibrant Teal Accent */
+            font-weight: 700; /* Bolder */
+            color: #222222;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .tooltip-custom-title {
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        .tooltip-custom-body {
+            font-size: 0.8em;
+        }
+        /* Removed specific spin button styles as input type is now text */
+        
+        /* New styles for Domain 3 elements */
+
+        /* Interactive Cards (General) - Unified Styling */
+        .framework-card, .control-type-card, .training-method-card, .control-concept-card { /* Added control-concept-card */
+            background-color: #EDEAE0; /* Secondary Neutral */
+            border: 1px solid #D5D2C8;
+            padding: 1rem;
+            border-radius: 0.75rem; /* More rounded */
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            flex: 1 1 calc(50% - 1rem); /* Two cards per row on larger screens */
+            max-width: calc(50% - 1rem); /* Max width for two columns */
+            box-sizing: border-box;
+            text-align: left;
+            font-weight: 600;
+            color: #333333;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08); /* Subtle initial shadow */
+        }
+
+        .framework-card:hover, .control-type-card:hover, .training-method-card:hover, .control-concept-card:hover { /* Added control-concept-card */
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* More pronounced shadow on hover */
+        }
+        /* Active state for interactive cards */
+        .framework-card.active,
+        .control-type-card.active,
+        .training-method-card.active,
+        .control-concept-card.active,
+        .policy-cycle-step.active,
+        .implementation-step-card.active,
+        .third-party-step-card.active,
+        .audience-circle.active {
+            border-color: #00A896; /* Vibrant Teal border */
+            box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3); /* Teal glow */
+            background-color: #E0F7F5; /* Very light teal background */
+        }
+
+        .framework-card .card-title, .control-type-card .card-title, .training-method-card .card-title, .control-concept-card .card-title { /* Added control-concept-card */
+            font-size: 1.15em; /* Slightly larger title */
+            margin-bottom: 0.6rem;
+            text-align: center;
+            color: #004085; /* Dark blue for title for consistency */
+        }
+
+        /* All description elements are hidden by default */
+        .card-description, .step-description, .circle-description {
+            font-weight: 400; /* Regular font weight for description */
+            font-size: 0.9em;
+            color: #555555;
+            margin-top: 0.5rem;
+            display: none; /* Hidden by default */
+        }
+        /* Show description when parent card is active */
+        .framework-card.active .card-description,
+        .control-type-card.active .card-description,
+        .training-method-card.active .card-description,
+        .control-concept-card.active .card-description,
+        .policy-cycle-step.active .step-description,
+        .implementation-step-card.active .step-description,
+        .third-party-step-card.active .step-description,
+        .audience-circle.active .circle-description {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+
+        /* Information Classification Table */
+        .classification-table {
+            width: 100%;
+            max-width: 700px;
+            margin: 1rem auto;
+            border-collapse: collapse;
+        }
+        .classification-table th, .classification-table td {
+            border: 1px solid #D5D2C8;
+            padding: 0.75rem;
+            text-align: left;
+        }
+        .classification-table th {
+            background-color: #EDEAE0;
+            font-weight: 600;
+            color: #333333;
+        }
+        .classification-table td {
+            background-color: #FFFFFF;
+            color: #555555;
+            font-size: 0.9em;
+        }
+        .classification-table .classification-level {
+            font-weight: 700;
+            color: #004085; /* Dark Blue */
+        }
+        .classification-table .business-impact {
+            font-style: italic;
+        }
+
+        /* Policy Review Cycle Visual */
+        .policy-cycle-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background-color: #EDEAE0;
+            border-radius: 0.75rem;
+            max-width: 500px;
+            margin: 1rem auto;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .policy-cycle-step {
+            background-color: #FFFFFF;
+            color: #333333;
+            padding: 0.8rem 1.2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            width: 80%; /* Adjust width for better flow */
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        .policy-cycle-step:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .policy-cycle-step .step-title {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Specific colors for policy cycle steps */
+        .policy-cycle-step.step-1 { background-color: #E0F2F7; color: #004085; } /* Light Blue */
+        .policy-cycle-step.step-2 { background-color: #D4EDDA; color: #155724; } /* Light Green */
+        .policy-cycle-step.step-3 { background-color: #FFF3CD; color: #856404; } /* Light Yellow */
+        .policy-cycle-step.step-4 { background-color: #E6E6FA; color: #4B0082; } /* Lavender */
+        .policy-cycle-step.step-5 { background-color: #F8D7DA; color: #721C24; } /* Light Red */
+        .policy-cycle-step.step-6 { background-color: #D1ECF1; color: #0C5460; } /* Light Cyan */
+
+
+        .policy-cycle-arrow {
+            font-size: 2.5em;
+            color: #D5D2C8;
+            line-height: 0;
+            margin: -0.5rem 0;
+        }
+        .policy-cycle-arrow.loop-arrow {
+            position: absolute;
+            right: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3em;
+            color: #8FB8A1;
+        }
+        
+        /* Control Implementation Steps - Flowchart Style */
+        .implementation-steps-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem;
+            background-color: #EDEAE0;
+            border-radius: 0.75rem;
+            max-width: 400px;
+            margin: 1rem auto;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .implementation-step-card {
+            background-color: #FFFFFF;
+            color: #333333;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            font-weight: 600;
+            text-align: center;
+            width: 90%;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .implementation-step-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .implementation-step-card .step-title {
+            font-size: 1.05em;
+            margin-bottom: 0.5rem;
+        }
+        /* .implementation-step-card .step-description is handled by general .step-description rule */
+
+        /* Specific colors for implementation steps */
+        .implementation-step-card.impl-step-1 { background-color: #F0F8FF; color: #001f3f; } /* Alice Blue */
+        .implementation-step-card.impl-step-2 { background-color: #F5FFFA; color: #003300; } /* Mint Cream */
+        .implementation-step-card.impl-step-3 { background-color: #FAEBD7; color: #4B0082; } /* Antique White with Indigo */
+        .implementation-step-card.impl-step-4 { background-color: #FFF0F5; color: #8B0000; } /* Lavender Blush with Dark Red */
+        .implementation-step-card.impl-step-5 { background-color: #E0FFFF; color: #00008B; } /* Light Cyan with Dark Blue */
+
+
+        /* Third-Party Risk Assessment Steps - Flowchart Style */
+        .third-party-steps-container {
+            display: flex;
+            flex-direction: column; /* Arrange vertically */
+            align-items: center; /* Center items horizontally */
+            gap: 0.5rem; /* Space between steps and arrows */
+            padding: 1rem;
+            background-color: #EDEAE0;
+            border-radius: 0.75rem;
+            max-width: 400px;
+            margin: 1rem auto;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .third-party-step-card {
+            background-color: #FFFFFF;
+            color: #333333;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            font-weight: 600;
+            text-align: center;
+            width: 90%; /* Make cards take most of the container width */
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .third-party-step-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .third-party-step-card .step-title {
+            font-size: 1.05em;
+            margin-bottom: 0.5rem;
+        }
+        /* .third-party-step-card .step-description is handled by general .step-description rule */
+
+        /* Reporting Audience Circle Grid */
+        .audience-grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* Two columns */
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background-color: #EDEAE0;
+            border-radius: 0.75rem;
+            max-width: 700px;
+            margin: 1rem auto;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            justify-items: center; /* Center circles in their grid cells */
+        }
+        .audience-circle {
+            width: 180px; /* Increased size for better clickability and content */
+            height: 180px; /* Increased size */
+            background-color: #FFFFFF;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.9em;
+            color: #333333;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+            padding: 15px; /* Increased padding to prevent text overflow */
+            box-sizing: border-box; /* Include padding in width/height */
+        }
+        .audience-circle:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            background-color: #D5D2C8;
+        }
+        .audience-circle .circle-title {
+            font-size: 1.15em; /* Slightly larger title */
+            margin-bottom: 0.4rem;
+            color: #004085; /* Dark blue for title */
+        }
+        /* .audience-circle .circle-description is handled by general .circle-description rule */
+
+        /* Specific colors for audience circles */
+        .audience-circle.executives { background-color: #A1C9CE; color: #333333; } /* Soft Blue */
+        .audience-circle.technical { background-color: #8FB8A1; color: #333333; } /* Soft Green */
+        .audience-circle.end-users { background-color: #FFD700; color: #333333; } /* Gold */
+        .audience-circle.legal-compliance { background-color: #FF6384; color: #333333; } /* Pinkish Red */
+
+
+        /* Responsive Adjustments for new cards/elements */
+        @media (max-width: 768px) {
+            .framework-card, .control-type-card, .training-method-card, .control-concept-card { /* Added control-concept-card */
+                flex: 1 1 100%;
+                max-width: 100%;
+            }
+            .policy-cycle-step {
+                width: 95%;
+            }
+            .policy-cycle-arrow.loop-arrow {
+                right: 50%;
+                bottom: -30px; /* Position below */
+                transform: translateX(50%) rotate(0deg); /* Horizontal arrow below */
+            }
+            .implementation-step-card, .third-party-step-card { /* Apply to both step cards */
+                width: 95%; /* Adjust for mobile */
+                max-width: 95%; /* Adjust for mobile */
+            }
+            .audience-grid-container {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Adjust for smaller screens */
+                gap: 1rem;
+            }
+            .audience-circle {
+                width: 140px; /* Adjusted size for mobile */
+                height: 140px; /* Adjusted size for mobile */
+                font-size: 0.8em;
+                padding: 10px;
+            }
+            .audience-circle .circle-title {
+                font-size: 1em;
+            }
+            .audience-circle .circle-description {
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <header class="text-center py-8 bg-white rounded-lg shadow-md mb-8">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-2">CISM Domain 3 Study Guide</h1>
+            <p class="text-xl sm:text-2xl text-gray-600">Information Security Program Development and Management</p>
+            <p class="text-md text-gray-500 mt-2">Crafting and Nurturing Your Organization's Security Posture</p>
+        </header>
+
+        <nav class="bg-white p-4 rounded-lg shadow-md mb-8 flex justify-center sticky top-0 z-10">
+            <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200 active" data-target="program-development">Program Development</button>
+            <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="program-management">Program Management</button>
+        </nav>
+
+        <main id="content-area">
+            <!-- Information Security Program Development Section -->
+            <section id="program-development" class="content-section fade-in">
+                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Section A: Information Security Program Development</h2>
+                <p class="mb-8 text-gray-700">This section is the blueprint for establishing a robust information security program. It focuses on strategic planning, resource allocation, and laying down the foundational elements that will govern security efforts across the organization.</p>
+
+                <!-- Sub-Domain: Information Security Program Resources -->
+                <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
+                    <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                        1. Information Security Program Resources (People, Tools, Technologies)
+                        <span class="accordion-icon text-2xl">+</span>
+                    </button>
+                    <div class="accordion-content hidden p-6">
+                        <p class="text-gray-700 mb-4">Building an information security program requires the right blend of human capital, effective tools, and appropriate technologies. Proper resource allocation ensures the program has the necessary support to achieve its objectives.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Identify and allocate internal/external staff, tools, and technologies.</h4>
+                        <p class="text-gray-600 mb-4">Effective resource planning is crucial. This involves assessing current capabilities and identifying where additional people, tools, or technologies are needed, aligning them with the program's scope and budget. Below is a simulation of budget allocation:</p>
+                        <div class="p-4 bg-gray-50 rounded-md shadow-sm mb-6">
+                            <h6 class="text-md font-semibold text-gray-700 mb-2 text-center">Simulated Security Budget Allocation</h6>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label for="totalBudgetInput" class="block text-gray-700 text-sm font-bold mb-1">Total Annual Budget ($):</label>
+                                    <input type="text" id="totalBudgetInput" value="1,000,000" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200">
+                                </div>
+                                <div class="md:col-span-2">
+                                    <p class="text-gray-700 font-bold mb-2">Allocate Percentages (Sum to 100%):</p>
+                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                        <div>
+                                            <label for="peopleAllocation" class="block text-gray-700 text-sm mb-1">People (%):</label>
+                                            <input type="number" id="peopleAllocation" value="40" min="0" max="100" step="1" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 text-center">
+                                            <p class="text-sm text-gray-500 mt-1">$<span id="peopleAmount"></span></p>
+                                        </div>
+                                        <div>
+                                            <label for="toolsAllocation" class="block text-gray-700 text-sm mb-1">Tools & Software (%):</label>
+                                            <input type="number" id="toolsAllocation" value="30" min="0" max="100" step="1" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 text-center">
+                                            <p class="text-sm text-gray-500 mt-1">$<span id="toolsAmount"></span></p>
+                                        </div>
+                                        <div>
+                                            <label for="trainingAllocation" class="block text-gray-700 text-sm mb-1">Training & Awareness (%):</label>
+                                            <input type="number" id="trainingAllocation" value="15" min="0" max="100" step="1" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 text-center">
+                                            <p class="text-sm text-gray-500 mt-1">$<span id="trainingAmount"></span></p>
+                                        </div>
+                                        <div>
+                                            <label for="complianceAllocation" class="block text-gray-700 text-sm mb-1">Compliance & Audit (%):</label>
+                                            <input type="number" id="complianceAllocation" value="15" min="0" max="100" step="1" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 text-center">
+                                            <p class="text-sm text-gray-500 mt-1">$<span id="complianceAmount"></span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p id="allocationFeedback" class="text-red-600 text-sm font-semibold text-center mb-2"></p>
+                            <div class="chart-container h-64 sm:h-72 md:h-80 lg:h-96">
+                                <canvas id="resourceAllocationChart"></canvas>
+                            </div>
+                            <p class="text-gray-600 text-sm italic mt-2 text-center">Adjust the percentages and total budget to see the allocation changes.</p>
+                        </div>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Align resources with organizational structure and program scope.</h4>
+                        <p class="text-gray-600 mb-4">Security resources must be strategically positioned within the organization to maximize their effectiveness. This means understanding reporting lines, collaboration points, and the overall scope of the security program relative to business operations.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700">c. Ensure roles and responsibilities are defined and supported.</h4>
+                        <p class="text-gray-600">Clear roles, documented responsibilities, and management support are vital. This ensures accountability and empowers security personnel to carry out their duties effectively, fostering a security-conscious culture.</p>
+                    </div>
+                </div>
+
+                <!-- Sub-Domain: Information Asset Identification and Classification -->
+                <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
+                    <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                        2. Information Asset Identification and Classification
+                        <span class="accordion-icon text-2xl">+</span>
+                    </button>
+                    <div class="accordion-content hidden p-6">
+                        <p class="text-gray-700 mb-4">You can't protect what you don't know you have. Identifying and classifying information assets is the foundational step in determining appropriate security controls.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Maintain an accurate inventory of data, systems, and infrastructure.</h4>
+                        <p class="text-gray-600 mb-4">A comprehensive and up-to-date inventory is essential. This includes all forms of data (at rest, in transit, in processing), hardware, software, and network components, ensuring all critical assets are accounted for.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Apply classification based on business impact (e.g., confidentiality, criticality).</h4>
+                        <p class="text-gray-600 mb-4">Information classification categorizes data based on its sensitivity, value, and the impact its compromise would have on the business (e.g., financial, reputational, legal). This drives control selection. See an example classification table below:</p>
+                        <div class="mb-6 p-4 bg-gray-50 rounded-md shadow-sm">
+                            <h6 class="text-md font-semibold text-gray-700 mb-2 text-center">Sample Information Classification and Business Impact</h6>
+                            <table class="classification-table">
+                                <thead>
+                                    <tr>
+                                        <th>Classification Level</th>
+                                        <th>Confidentiality Impact</th>
+                                        <th>Integrity Impact</th>
+                                        <th>Availability Impact</th>
+                                        <th>Handling Guidelines (Examples)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="classification-level">Public</td>
+                                        <td>Low (No significant harm)</td>
+                                        <td>Low</td>
+                                        <td>Low</td>
+                                        <td>Publicly shareable, no access restrictions.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="classification-level">Internal Use</td>
+                                        <td>Moderate (Minor business disruption)</td>
+                                        <td>Moderate</td>
+                                        <td>Moderate</td>
+                                        <td>Share within organization, restricted external sharing.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="classification-level">Confidential</td>
+                                        <td>High (Significant business disruption, legal/financial impact)</td>
+                                        <td>High</td>
+                                        <td>High</td>
+                                        <td>Restricted access to authorized personnel, encryption, strict audit trails.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="classification-level">Restricted / Sensitive</td>
+                                        <td>Severe (Critical business impact, severe legal/financial penalties)</td>
+                                        <td>Severe</td>
+                                        <td>Severe</td>
+                                        <td>Highly restricted, need-to-know, strong encryption, multi-factor authentication, secure environments.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-gray-600 text-sm italic mt-2 text-center">Classification dictates the level of protection an asset requires.</p>
+                        </div>
+
+                        <h4 class="text-lg font-semibold text-gray-700">c. Assign data ownership and handling guidelines.</h4>
+                        <p class="text-gray-600">Assigning clear data ownership ensures accountability for protecting specific datasets. Data owners, typically business managers, define access rights and approve handling procedures, ensuring data is used and protected according to its classification.</p>
+                    </div>
+                </div>
+
+                <!-- Sub-Domain: Industry Standards and Frameworks for Information Security -->
+                <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
+                    <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                        3. Industry Standards and Frameworks for Information Security
+                        <span class="accordion-icon text-2xl">+</span>
+                    </button>
+                    <div class="accordion-content hidden p-6">
+                        <p class="text-gray-700 mb-4">Leveraging established frameworks provides a structured, recognized approach to designing and managing an information security program. They offer best practices and help ensure compliance and effectiveness.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Use frameworks such as ISO/IEC 27001, NIST CSF, COBIT, TOGAF, and SABSA.</h4>
+                        <p class="text-gray-600 mb-4">Each framework serves a distinct purpose, offering guidance for different aspects of information security management and governance. Click on a card to learn more about its primary use case:</p>
+                        <div class="flex flex-wrap justify-center gap-4 mb-6">
+                            <div class="framework-card" data-framework="iso27001">
+                                <span class="card-title">ISO/IEC 27001</span>
+                                <div class="card-description"></div>
+                            </div>
+                            <div class="framework-card" data-framework="nistcsf">
+                                <span class="card-title">NIST CSF</span>
+                                <div class="card-description"></div>
+                            </div>
+                            <div class="framework-card" data-framework="cobit">
+                                <span class="card-title">COBIT</span>
+                                <div class="card-description"></div>
+                            </div>
+                            <div class="framework-card" data-framework="togaf">
+                                <span class="card-title">TOGAF</span>
+                                <div class="card-description"></div>
+                            </div>
+                            <div class="framework-card" data-framework="sabsa">
+                                <span class="card-title">SABSA</span>
+                                <div class="card-description"></div>
+                            </div>
+                        </div>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Align program practices with regulatory, business, and technical standards.</h4>
+                        <p class="text-gray-600 mb-4">A well-designed security program integrates legal mandates, industry best practices, and internal business requirements. This ensures compliance, relevance, and operational efficiency.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700">c. Map frameworks to enterprise and security objectives.</h4>
+                        <p class="text-gray-600">The chosen frameworks should not be implemented in isolation but explicitly mapped to the organization's strategic goals and security objectives. This demonstrates the business value of security initiatives.</p>
+                    </div>
+                </div>
+
+                <!-- Sub-Domain: Information Security Policies, Procedures, and Guidelines -->
+                <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
+                    <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                        4. Information Security Policies, Procedures, and Guidelines
+                        <span class="accordion-icon text-2xl">+</span>
+                    </button>
+                    <div class="accordion-content hidden p-6">
+                        <p class="text-gray-700 mb-4">These documents form the backbone of the security program, translating strategic objectives into actionable requirements for the entire organization.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Establish version control and review cycles.</h4>
+                        <p class="text-gray-600 mb-4">Security documentation is dynamic. Implementing version control ensures consistency and auditability, while regular review cycles (e.g., annually, or after significant changes) keep them current and effective. See the continuous policy review cycle below:</p>
+                        <div class="p-4 bg-gray-50 rounded-md shadow-sm mb-6">
+                            <h6 class="text-md font-semibold text-gray-700 mb-2 text-center">Information Security Policy Review Cycle</h6>
+                            <div class="policy-cycle-container">
+                                <div class="policy-cycle-step step-1" data-step="develop-update">
+                                    <span class="step-title">Develop/Update Policy</span>
+                                    <div class="step-description"></div>
+                                </div>
+                                <span class="policy-cycle-arrow">↓</span>
+                                <div class="policy-cycle-step step-2" data-step="review-approve">
+                                    <span class="step-title">Review & Approve (Stakeholders/Mgmt)</span>
+                                    <div class="step-description"></div>
+                                </div>
+                                <span class="policy-cycle-arrow">↓</span>
+                                <div class="policy-cycle-step step-3" data-step="communicate-implement">
+                                    <span class="step-title">Communicate & Implement</span>
+                                    <div class="step-description"></div>
+                                </div>
+                                <span class="policy-cycle-arrow">↓</span>
+                                <div class="policy-cycle-step step-4" data-step="monitor-enforce">
+                                    <span class="step-title">Monitor & Enforce</span>
+                                    <div class="step-description"></div>
+                                </div>
+                                <span class="policy-cycle-arrow">↓</span>
+                                <div class="policy-cycle-step step-5" data-step="audit-assess">
+                                    <span class="step-title">Audit & Assess Effectiveness</span>
+                                    <div class="step-description"></div>
+                                </div>
+                                <span class="policy-cycle-arrow">↓</span>
+                                <div class="policy-cycle-step step-6" data-step="identify-gaps">
+                                    <span class="step-title">Identify Gaps/Changes Needed</span>
+                                    <div class="step-description"></div>
+                                </div>
+                                <span class="policy-cycle-arrow loop-arrow">↻</span>
+                            </div>
+                            <p class="text-gray-600 text-sm italic mt-2 text-center">Policies require a continuous lifecycle of development, approval, implementation, and review. Click on each step to learn more.</p>
+                        </div>
+
+                        <h4 class="text-lg font-semibold text-gray-700">c. Ensure policies support compliance and are auditable.</h4>
+                        <p class="text-gray-600">Policies must clearly align with regulatory requirements and industry standards. They should also be written in a way that allows for easy verification and auditing of compliance.</p>
+                    </div>
+                </div>
+
+                <!-- Sub-Domain: Information Security Program Metrics -->
+                <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
+                    <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                        5. Information Security Program Metrics
+                        <span class="accordion-icon text-2xl">+</span>
+                    </button>
+                    <div class="accordion-content hidden p-6">
+                        <p class="text-gray-700 mb-4">Measuring the performance of the security program is crucial for demonstrating value, identifying areas for improvement, and making data-driven decisions.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Define KPIs (Key Performance Indicators) (e.g., control implementation rate, training participation).</h4>
+                        <p class="text-gray-600 mb-4">KPIs assess the effectiveness of security activities and processes. They indicate whether the program is meeting its objectives. Examples include percentage of critical vulnerabilities patched on time, successful security awareness training completion rates, and incident response times.</p>
+                        
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Establish KRIs (Key Risk Indicators) (e.g., number of unpatched systems, failed audits).</h4>
+                        <p class="text-gray-600 mb-4">KRIs are forward-looking metrics that provide early warning signals of increasing risk exposure. They help proactive risk management by indicating potential future problems. Examples include a rising number of unpatched systems, an increase in successful phishing attacks, or repeated audit findings. View the trends for simulated KPIs and KRIs below:</p>
+                        <div class="chart-container mb-6">
+                            <canvas id="programMetricsChart"></canvas>
+                        </div>
+                        <div class="mb-4">
+                            <label for="programMetricSelect" class="block text-gray-700 text-sm font-bold mb-2">Select Metric Type to view trend:</label>
+                            <select id="programMetricSelect" class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-200">
+                                <option value="kpiImplementationRate">Control Implementation Rate (KPI)</option>
+                                <option value="kpiTrainingParticipation">Training Participation Rate (KPI)</option>
+                                <option value="kriUnpatchedSystems">Unpatched Systems (KRI)</option>
+                                <option value="kriFailedAudits">Failed Audit Findings (KRI)</option>
+                            </select>
+                        </div>
+                        <p class="text-gray-600 text-sm italic">This line chart illustrates simulated trends for various Key Performance Indicators (KPIs) and Key Risk Indicators (KRIs) for an information security program.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700">c. Use dashboards to report maturity, coverage, and gaps.</h4>
+                        <p class="text-gray-600">Visual dashboards consolidate metrics, providing a clear and concise overview of the program's maturity, the extent of control coverage, and any existing gaps to senior management and other stakeholders.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Information Security Program Management Section -->
+            <section id="program-management" class="content-section hidden p-6">
+                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Section B: Information Security Program Management</h2>
+                <p class="mb-8 text-gray-700">This section focuses on the operational aspects of the information security program, from designing and implementing controls to ongoing monitoring, training, and managing external relationships.</p>
+
+                <!-- Sub-Domain: Information Security Control Design and Selection -->
+                <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
+                    <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                        1. Information Security Control Design and Selection
+                        <span class="accordion-icon text-2xl">+</span>
+                    </button>
+                    <div class="accordion-content hidden p-6">
+                        <p class="text-gray-700 mb-4">Controls are the safeguards that mitigate risks. Their design and selection must be strategic, balancing protection with business enablement.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Identify appropriate administrative, technical, and physical controls based on risk analysis.</h4>
+                        <p class="text-gray-600 mb-4">Control selection is a risk-driven process. Controls should directly address identified threats and vulnerabilities. Click on a control type to see examples:</p>
+                        <div class="flex flex-wrap justify-center gap-4 mb-6">
+                            <div class="control-type-card" data-control="administrative">
+                                <span class="card-title">Administrative Controls</span>
+                                <div class="card-description"></div>
+                            </div>
+                            <div class="control-type-card" data-control="technical">
+                                <span class="card-title">Technical Controls</span>
+                                <div class="card-description"></div>
+                            </div>
+                            <div class="control-type-card" data-control="physical">
+                                <span class="card-title">Physical Controls</span>
+                                <div class="card-description"></div>
+                            </div>
+                        </div>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Align control choices with organizational policies, compliance requirements, and frameworks (e.g., ISO/IEC 27002, NIST CSF).</h4>
+                        <p class="text-gray-600 mb-4">Controls must support internal policies and ensure adherence to external regulations and industry standards. Frameworks like ISO/IEC 27002 provide extensive control catalogs to guide selection.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Consider cost-effectiveness, scalability, and business impact in control selection.</h4>
+                        <p class="text-gray-600 mb-4">Security controls should offer a positive return on investment, be able to grow with the organization, and minimize disruption to legitimate business operations. This involves balancing security needs with practical considerations.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700">d. Incorporate layered defense (defense-in-depth) and compensating controls where needed.</h4>
+                        <p class="text-gray-600 mb-4">These are crucial strategies for building resilient security. Click on each card to learn more:</p>
+                        <div class="flex flex-wrap justify-center gap-4 mb-6">
+                            <div class="control-concept-card" data-concept="defense-in-depth">
+                                <span class="card-title">Defense-in-Depth</span>
+                                <div class="card-description"></div>
+                            </div>
+                            <div class="control-concept-card" data-concept="compensating-controls">
+                                <span class="card-title">Compensating Controls</span>
+                                <div class="card-description"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sub-Domain: Information Security Control Integration and Implementation -->
+                <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
+                    <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                        2. Information Security Control Integration and Implementation
+                        <span class="accordion-icon text-2xl">+</span>
+                    </button>
+                    <div class="accordion-content hidden p-6">
+                        <p class="text-gray-700 mb-4">This phase turns security plans into reality, integrating controls seamlessly into the operational environment.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Implement selected controls into operational systems, processes, and third-party environments.</h4>
+                        <p class="text-gray-600 mb-4">Implementation involves configuring technical solutions, embedding security into workflows, and extending security requirements to external partners. See key steps below:</p>
+                        <div class="p-4 bg-gray-50 rounded-md shadow-sm mb-6">
+                            <h6 class="text-md font-semibold text-gray-700 mb-2 text-center">Control Implementation Steps</h6>
+                            <div class="implementation-steps-container">
+                                <div class="implementation-step-card" data-step="planning-design">
+                                    <span class="step-title">1. Planning & Design Integration</span>
+                                    <div class="step-description"></div>
+                                </div>
+                                <span class="step-arrow">↓</span>
+                                <div class="implementation-step-card" data-step="technical-deployment">
+                                    <span class="step-title">2. Technical Configuration & Deployment</span>
+                                    <div class="step-description"></div>
+                                </div>
+                                <span class="step-arrow">↓</span>
+                                <div class="implementation-step-card" data-step="process-embedding">
+                                    <span class="step-title">3. Process & Workflow Embedding</span>
+                                    <div class="step-description"></div>
+                                </div>
+                                <span class="step-arrow">↓</span>
+                                <div class="implementation-step-card" data-step="third-party-coordination">
+                                    <span class="step-title">4. Third-Party Coordination & Contractual Enforcement</span>
+                                    <div class="step-description"></div>
+                                </div>
+                                <span class="step-arrow">↓</span>
+                                <div class="implementation-step-card" data-step="testing-validation">
+                                    <span class="step-title">5. Testing & Validation of Implementation</span>
+                                    <div class="step-description"></div>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 text-sm italic mt-2 text-center">A structured approach ensures successful control integration. Click on each step to learn more.</p>
+                        </div>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Ensure seamless integration with IT architecture and business workflows.</h4>
+                        <p class="text-gray-600 mb-4">Controls should enhance, not impede, existing IT systems and business processes. This requires careful planning to avoid operational friction and ensure user adoption.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Coordinate with IT, DevOps, HR, and procurement for system-wide rollout.</h4>
+                        <p class="text-gray-600 mb-4">Cross-functional collaboration is vital. Security managers must work with various departments to ensure controls are implemented correctly across the enterprise, from secure development to vendor management.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700">d. Validate that implementation aligns with design specifications and risk treatment plans.</h4>
+                        <p class="text-gray-600">After implementation, verification is critical. This involves checking that controls are configured as intended and effectively address the risks they were designed to mitigate.</p>
+                    </div>
+                </div>
+
+                <!-- Sub-Domain: Information Security Control Testing and Evaluation -->
+                <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
+                    <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                        3. Information Security Control Testing and Evaluation
+                        <span class="accordion-icon text-2xl">+</span>
+                    </button>
+                    <div class="accordion-content hidden p-6">
+                        <p class="text-gray-700 mb-4">Continuous testing and evaluation are essential to confirm that controls remain effective and that the organization's security posture is sound.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Test controls for effectiveness, reliability, and coverage through internal audits, penetration testing, and vulnerability scanning.</h4>
+                        <p class="text-gray-600 mb-4">Various methods are used to validate controls. Click on a method to learn more:</p>
+                        <div class="flex flex-wrap justify-center gap-4 mb-6">
+                            <div class="control-type-card control-testing-card" data-control="internal-audits">
+                                <span class="card-title">Internal Audits</span>
+                                <div class="card-description"></div>
+                            </div>
+                            <div class="control-type-card control-testing-card" data-control="penetration-testing">
+                                <span class="card-title">Penetration Testing (Pen Test)</span>
+                                <div class="card-description"></div>
+                            </div>
+                            <div class="control-type-card control-testing-card" data-control="vulnerability-scanning">
+                                <span class="card-title">Vulnerability Scanning</span>
+                                <div class="card-description"></div>
+                            </div>
+                            <div class="control-type-card control-testing-card" data-control="security-assessments">
+                                <span class="card-title">Security Assessments</span>
+                                <div class="card-description"></div>
+                            </div>
+                        </div>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Perform periodic assessments to detect control failures or misconfigurations.</h4>
+                        <p class="text-gray-600 mb-4">Regular and scheduled assessments, combined with continuous monitoring, help identify when controls become ineffective due to changes, human error, or evolving threats.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Document findings, track remediation, and update risk posture based on evaluation results.</h4>
+                        <p class="text-gray-600 mb-4">Comprehensive documentation of findings, a robust remediation process with clear ownership, and continuous updates to the risk register are essential for effective risk management.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700">d. Use testing results to inform improvement plans and reporting to stakeholders.</h4>
+                        <p class="text-gray-600">The outcomes of testing and evaluation directly feed into the continuous improvement cycle of the information security program, guiding future investments and strategic adjustments.</p>
+                    </div>
+                </div>
+
+                <!-- Sub-Domain: Information Security Awareness and Training -->
+                <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
+                    <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                        4. Information Security Awareness and Training
+                        <span class="accordion-icon text-2xl">+</span>
+                    </button>
+                    <div class="accordion-content hidden p-6">
+                        <p class="text-gray-700 mb-4">People are often the most critical component of an organization's security posture. Effective awareness and training programs empower employees to be a strong defense.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Develop training programs tailored to roles (e.g., general staff, developers, executives).</h4>
+                        <p class="text-gray-600 mb-4">Training content should be relevant to the audience's responsibilities and potential exposure. General staff need basic hygiene, developers need secure coding, and executives need strategic risk understanding.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Promote understanding of policies, threats (e.g., phishing), and secure behaviors.</h4>
+                        <p class="text-gray-600 mb-4">Training should clearly articulate organizational policies, educate on common threats, and instill practical secure behaviors (e.g., identifying phishing, using strong passwords, secure data handling).</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Use varied delivery methods (e.g., eLearning, simulations, briefings).</h4>
+                        <p class="text-gray-600 mb-4">Diverse delivery methods improve engagement and retention. Click on a method to see its characteristics:</p>
+                        <div class="flex flex-wrap justify-center gap-4 mb-6">
+                            <div class="training-method-card" data-method="elearning">
+                                <span class="card-title">eLearning Modules</span>
+                                <div class="card-description"></div>
+                            </div>
+                            <div class="training-method-card" data-method="simulations">
+                                <span class="card-title">Simulations</span>
+                                <div class="card-description"></div>
+                            </div>
+                            <div class="training-method-card" data-method="briefings">
+                                <span class="card-title">Live Briefings/Workshops</span>
+                                <div class="card-description"></div>
+                            </div>
+                            <div class="training-method-card" data-method="gamification">
+                                <span class="card-title">Gamification</span>
+                                <div class="card-description"></div>
+                            </div>
+                        </div>
+
+                        <h4 class="text-lg font-semibold text-gray-700">d. Measure effectiveness through testing, surveys, and incident trends.</h4>
+                        <p class="text-gray-600">Assess the impact of training through pre/post-tests, employee surveys, and analysis of security incident data (e.g., reduction in phishing clicks). This feedback loop helps improve future programs.</p>
+                    </div>
+                </div>
+
+                <!-- Sub-Domain: Management of External Services -->
+                <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
+                    <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                        5. Management of External Services
+                        <span class="accordion-icon text-2xl">+</span>
+                    </button>
+                    <div class="accordion-content hidden p-6">
+                        <p class="text-gray-700 mb-4">Outsourcing services introduces third-party risk. Effective management is critical to ensure external providers maintain adequate security for your data and systems.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Define and document security expectations in contracts and service level agreements (SLAs).</h4>
+                        <p class="text-gray-600 mb-4">Security requirements must be explicitly stated in contracts and SLAs, covering data protection, incident response, audit rights, and compliance with relevant standards.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Conduct risk assessments and due diligence for vendors, MSPs, and cloud providers.</h4>
+                        <p class="text-gray-600 mb-4">Before engaging external services, perform thorough risk assessments and due diligence to evaluate their security posture and capabilities. Key steps include:</p>
+                        <div class="p-4 bg-gray-50 rounded-md shadow-sm mb-6">
+                            <h6 class="text-md font-semibold text-gray-700 mb-2 text-center">Third-Party Risk Assessment Steps</h6>
+                            <div class="third-party-steps-container">
+                                <div class="third-party-step-card" data-step="scoping">
+                                    <span class="step-title">1. Vendor Scoping</span>
+                                    <div class="step-description"></div>
+                                </div>
+                                <span class="step-arrow">↓</span>
+                                <div class="third-party-step-card" data-step="vetting">
+                                    <span class="step-title">2. Initial Vetting</span>
+                                    <div class="step-description"></div>
+                                </div>
+                                <span class="step-arrow">↓</span>
+                                <div class="third-party-step-card" data-step="assessment">
+                                    <span class="step-title">3. Security Assessment</span>
+                                    <div class="step-description"></div>
+                                </div>
+                                <span class="step-arrow">↓</span>
+                                <div class="third-party-step-card" data-step="contractual">
+                                    <span class="step-title">4. Contractual Agreement</span>
+                                    <div class="step-description"></div>
+                                </div>
+                                <span class="step-arrow">↓</span>
+                                <div class="third-party-step-card" data-step="monitoring">
+                                    <span class="step-title">5. Ongoing Monitoring</span>
+                                    <div class="step-description"></div>
+                                </div>
+                                <span class="step-arrow">↓</span>
+                                <div class="third-party-step-card" data-step="exit">
+                                    <span class="step-title">6. Exit Strategy</span>
+                                    <div class="step-description"></div>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 text-sm italic mt-2 text-center">A structured approach for managing third-party security risks. Click on each step to learn more.</p>
+                        </div>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Monitor third-party compliance with security policies and regulatory obligations.</h4>
+                        <p class="text-gray-600 mb-4">Ongoing oversight is necessary to ensure external providers continuously adhere to agreed-upon security requirements and regulatory mandates.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700">d. Include requirements for incident response, audit rights, and data protection.</h4>
+                        <p class="text-gray-600">Contracts should explicitly detail how third parties must handle incidents, grant audit access, and protect your data throughout its lifecycle (e.g., encryption, access controls, secure disposal).</p>
+                    </div>
+                </div>
+
+                <!-- Sub-Domain: Information Security Program Communications and Reporting -->
+                <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
+                    <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                        6. Information Security Program Communications and Reporting
+                        <span class="accordion-icon text-2xl">+</span>
+                    </button>
+                    <div class="accordion-content hidden p-6">
+                        <p class="mb-8 text-gray-700">Effective communication is paramount. It builds trust, ensures understanding, and drives informed decision-making across all levels of the organization.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Report program performance, risk posture, and incident trends to executives and stakeholders.</h4>
+                        <p class="text-gray-600 mb-4">Regular, clear, and concise reporting keeps leadership informed about the program's effectiveness, current risk landscape, and security incident trends, enabling them to make strategic decisions.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Use dashboards, KPIs, and metrics to support decision-making.</h4>
+                        <p class="text-gray-600 mb-4">Visual tools and data-driven metrics provide actionable insights, facilitating discussions around security investments, resource allocation, and strategic adjustments.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Tailor communication to technical and non-technical audiences.</h4>
+                        <p class="text-gray-600 mb-4">The level of detail and language used should vary based on the audience. Executives need high-level business impact, while technical teams require granular data. Click on an audience type to see what kind of communication they typically need:</p>
+                        <div class="p-4 bg-gray-50 rounded-md shadow-sm mb-6">
+                            <h6 class="text-md font-semibold text-gray-700 mb-4 text-center">Tailoring Security Communications to Audiences</h6>
+                            <div class="audience-grid-container">
+                                <div class="audience-circle executives" data-audience="executive">
+                                    <span class="circle-title">Executives/Board</span>
+                                    <div class="circle-description"></div>
+                                </div>
+                                <div class="audience-circle technical" data-audience="technical">
+                                    <span class="circle-title">Technical Teams</span>
+                                    <div class="circle-description"></div>
+                                </div>
+                                <div class="audience-circle end-users" data-audience="endUsers">
+                                    <span class="circle-title">End Users</span>
+                                    <div class="circle-description"></div>
+                                </div>
+                                <div class="audience-circle legal-compliance" data-audience="legalCompliance">
+                                    <span class="circle-title">Legal/Compliance</span>
+                                    <div class="circle-description"></div>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 text-sm italic mt-2 text-center">Effective communication adapts to the recipient's role and information needs. Click on each circle to learn more.</p>
+                        </div>
+
+                        <h4 class="text-lg font-semibold text-gray-700">d. Communicate achievements, compliance status, and required improvements regularly.</h4>
+                        <p class="text-gray-600">Transparent reporting builds credibility. Regularly share successes, current compliance standing, and clearly outline areas where further investment or effort is needed, fostering a culture of continuous improvement.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center py-6 mt-8 text-gray-500 text-sm">
+            <p>&copy; 2024 CISM Study Guide. All rights reserved. For educational purposes only.</p>
+        </footer>
+    </div>
+
+    <script>
+        // JS Variables for current state and base data
+        const currentSection = {
+            id: 'program-development'
+        };
+
+        // Data for Section A.1.a (Resource Allocation)
+        const resourceAllocationData = {
+            labels: ['People (Staffing)', 'Tools & Software', 'Training & Awareness', 'Compliance & Audit'],
+            data: [40, 30, 15, 15], // Default percentages
+            colors: ['#A1C9CE', '#8FB8A1', '#FFD700', '#FF6384']
+        };
+
+        // Data for Section A.5.a/b (Program Metrics)
+        const programMetricsTrendData = {
+            kpiImplementationRate: {
+                label: 'Control Implementation Rate (%)',
+                data: [70, 75, 80, 85, 88, 90, 92, 93, 94, 95, 96, 97], // Simulating increasing KPI
+                borderColor: '#A1C9CE',
+                backgroundColor: 'rgba(161, 201, 206, 0.2)'
+            },
+            kpiTrainingParticipation: {
+                label: 'Training Participation Rate (%)',
+                data: [60, 65, 70, 72, 75, 78, 80, 82, 85, 87, 88, 89], // Simulating increasing KPI
+                borderColor: '#8FB8A1',
+                backgroundColor: 'rgba(143, 184, 161, 0.2)'
+            },
+            kriUnpatchedSystems: {
+                label: 'Number of Unpatched Critical Systems (KRI)',
+                data: [20, 18, 15, 12, 10, 8, 7, 6, 5, 4, 3, 2], // Simulating decreasing KRI (good)
+                borderColor: '#FF6384',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)'
+            },
+            kriFailedAudits: {
+                label: 'Number of Failed Audit Findings (KRI)',
+                data: [5, 4, 3, 3, 2, 2, 1, 1, 1, 0, 0, 0], // Simulating decreasing KRI (good)
+                borderColor: '#FFD700',
+                backgroundColor: 'rgba(255, 215, 0, 0.2)'
+            }
+        };
+        const programMetricsLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+
+        // Data for Section B.1.a (Control Types)
+        const controlTypeDescriptions = {
+            administrative: "Policies, procedures, guidelines, security awareness training, background checks, incident response plans. These are rules and practices that govern behavior.",
+            technical: "Firewalls, IDS/IPS, encryption, access control systems (MFA), antivirus, logging/monitoring tools. These are enforced through technology.",
+            physical: "Locks, security guards, surveillance cameras, alarm systems, environmental controls, secure data centers. These protect physical access to assets."
+        };
+
+        // Data for Section B.3.a (Control Testing Methods)
+        const controlTestingDescriptions = {
+            'internal-audits': {
+                title: "Internal Audits",
+                description: "Focus: Compliance with policies, standards, and regulatory requirements.<br>Goal: Verify that controls are implemented and operating as intended."
+            },
+            'penetration-testing': {
+                title: "Penetration Testing (Pen Test)",
+                description: "Focus: Simulating real-world attacks to identify exploitable vulnerabilities. <br>Goal: Evaluate the effectiveness of security controls from an attacker's perspective."
+            },
+            'vulnerability-scanning': {
+                title: "Vulnerability Scanning",
+                description: "Focus: Automated identification of known security weaknesses in systems and applications. <br>Goal: Provide a broad, quick assessment of potential vulnerabilities."
+            },
+            'security-assessments': {
+                title: "Security Assessments",
+                description: "Focus: Broader reviews including configuration reviews, policy compliance, and architectural analysis. <br>Goal: Comprehensive evaluation of the security posture."
+            }
+        };
+
+        // Data for Section B.6.c (Reporting Audiences)
+        const audienceDescriptions = {
+            executive: {
+                title: "Executives/Board",
+                description: "Strategic overview, risk posture, compliance status, ROI of security investments. Focus on business impact. Example: Quarterly security briefing on top risks and program maturity."
+            },
+            technical: {
+                title: "Technical Teams",
+                description: "Vulnerability details, technical control performance, incident forensics, operational procedures, threat intelligence specifics. Example: Weekly dashboard review of SIEM alerts and patch compliance."
+            },
+            endUsers: {
+                title: "End Users",
+                description: "Policy awareness, common threats (e.g., phishing), secure behaviors, how to report incidents. Simple, actionable advice. Example: Phishing simulation results, security tips newsletter."
+            },
+            legalCompliance: {
+                title: "Legal/Compliance",
+                description: "Regulatory compliance status, audit findings, data privacy adherence, incident legal implications, contractual obligations. Example: Annual compliance report, data breach notification procedures."
+            }
+        };
+
+        // Data for Policy Review Cycle Steps (A.4.b)
+        const policyCycleDescriptions = {
+            'develop-update': "This initial phase involves identifying the need for new policies or reviewing existing ones. It includes research, drafting, and ensuring alignment with organizational objectives, risk assessments, and regulatory requirements.",
+            'review-approve': "Once drafted, policies undergo a rigorous review process involving key stakeholders, legal teams, and senior management. Formal approval ensures buy-in and organizational endorsement.",
+            'communicate-implement': "Approved policies must be effectively communicated to all relevant employees. Implementation involves integrating policy requirements into operational procedures, systems, and employee training programs.",
+            'monitor-enforce': "This ongoing phase involves continuously monitoring adherence to policies and enforcing their requirements. This includes technical controls, regular checks, and addressing non-compliance.",
+            'audit-assess': "Periodically, independent audits and assessments are conducted to evaluate the effectiveness of policies and controls. This identifies gaps, weaknesses, and areas for improvement.",
+            'identify-gaps': "Based on monitoring, enforcement, and audit results, new risks, technological changes, or regulatory updates, gaps and necessary changes to policies are identified, feeding back into the 'Develop/Update Policy' phase."
+        };
+
+        // Data for Third-Party Risk Assessment Steps (B.5.b)
+        const thirdPartyStepsDescriptions = {
+            'scoping': "Involves identifying the criticality of the external service and the sensitivity of the data it will handle. This initial assessment helps determine the level of due diligence required.",
+            'vetting': "Conduct initial background checks and gather information on the vendor's security posture. This often includes security questionnaires, reviewing certifications (e.g., SOC 2, ISO 27001), and requesting security policies.",
+            'assessment': "Perform a deeper dive into the vendor's security controls. This might involve reviewing their audit reports, penetration test results, and assessing their incident response capabilities. For critical vendors, on-site audits may be conducted.",
+            'contractual': "Formalize security expectations in contracts and Service Level Agreements (SLAs). This includes defining data protection requirements, incident notification procedures, audit rights, and compliance obligations.",
+            'monitoring': "Continuously monitor the third-party's compliance with security policies and contractual obligations. This involves regular reviews, performance tracking against SLAs, and staying informed about any security incidents involving the vendor.",
+            'exit': "Plan for the secure termination of the relationship. This includes ensuring all organizational data is securely returned or destroyed, revoking access, and managing the transition to a new provider or internal process."
+        };
+
+        // Data for Control Implementation Steps (B.2.a)
+        const implementationStepsDescriptions = {
+            'planning-design': "This initial phase involves detailed planning for how new controls will integrate with existing IT architecture and business processes. It includes defining technical specifications, identifying dependencies, and creating a rollout strategy to minimize disruption.",
+            'technical-deployment': "This step involves the actual installation, configuration, and deployment of technical security controls (e.g., firewalls, endpoint protection, encryption). It requires careful attention to secure baseline configurations and testing in a non-production environment.",
+            'process-embedding': "Administrative controls and security procedures must be integrated into daily business operations. This includes updating existing workflows, training employees on new security practices, and ensuring that security is a natural part of business processes.",
+            'third-party-coordination': "For controls involving external services (e.g., cloud providers, managed security services), this step involves coordinating with third parties to ensure their systems and processes meet the defined security requirements, often enforced through contractual agreements and SLAs.",
+            'testing-validation': "After deployment, controls must be thoroughly tested to ensure they are functioning as intended and effectively mitigating identified risks. This includes functional testing, security testing (e.g., vulnerability scans, penetration tests), and compliance checks."
+        };
+
+        // Data for Defense-in-Depth and Compensating Controls (B.1.d)
+        const controlConceptDescriptions = {
+            'defense-in-depth': {
+                title: "Defense-in-Depth",
+                description: "Implementing multiple layers of security controls to protect critical assets. If one control fails, another layer acts as a backup. This principle acknowledges that no single control is foolproof. For example, a firewall (network layer), strong authentication (access layer), and encryption (data layer) protecting a sensitive database."
+            },
+            'compensating-controls': {
+                title: "Compensating Controls",
+                description: "Implementing alternative controls when a primary control is not feasible or practical due to technical or business constraints. Compensating controls should provide a similar level of protection to the original control. For instance, if a legacy system cannot support multi-factor authentication, implementing network segmentation and strict access logging can compensate for the weaker authentication."
+            }
+        };
+
+        // Data for Training Method Descriptions (B.4.c)
+        const trainingMethodDescriptions = {
+            'elearning': {
+                title: "eLearning Modules",
+                description: "Self-paced, scalable, consistent content delivery. Good for foundational knowledge and annual refreshers."
+            },
+            'simulations': {
+                title: "Simulations",
+                description: "Practical, experiential learning (e.g., phishing simulations, tabletop exercises). Highly effective for behavioral change and testing incident response."
+            },
+            'briefings': {
+                title: "Live Briefings/Workshops",
+                description: "Interactive, allows for Q&A, tailored to specific groups (e.g., executive updates, developer deep dives). Builds direct engagement."
+            },
+            'gamification': {
+                title: "Gamification",
+                description: "Incorporates game-like elements (points, badges, leaderboards) to make learning fun and encourage participation and competition."
+            }
+        };
+
+        // Data for Framework Descriptions (A.3.a)
+        const frameworkDescriptions = {
+            iso27001: {
+                name: "ISO/IEC 27001",
+                description: "Establishing, implementing, maintaining, and continually improving an Information Security Management System (ISMS). It’s a certifiable standard that provides a systematic approach to managing sensitive company information."
+            },
+            nistcsf: {
+                name: "NIST CSF",
+                description: "Providing a voluntary, flexible framework for managing cybersecurity risk for organizations, particularly critical infrastructure. It offers a common language and systematic approach to improve cybersecurity posture."
+            },
+            cobit: {
+                name: "COBIT",
+                description: "A comprehensive framework for governance and management of enterprise IT, which includes information security as a key domain. It helps align IT with business goals, ensuring value delivery and risk optimization."
+            },
+            togaf: {
+                name: "TOGAF",
+                description: "An enterprise architecture framework for designing, planning, implementing, and governing an enterprise information technology architecture. It can be used to integrate security architecture into the broader enterprise structure."
+            },
+            sabsa: {
+                name: "SABSA",
+                description: "A framework for developing business-driven security architectures. It emphasizes a top-down approach, ensuring that security solutions are directly aligned with business needs and objectives."
+            }
+        };
+
+
+        let resourceAllocationChartInstance;
+        let programMetricsChartInstance;
+
+        // Initialize Charts
+        const initResourceAllocationChart = () => {
+            const ctx = document.getElementById('resourceAllocationChart').getContext('2d');
+            resourceAllocationChartInstance = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: resourceAllocationData.labels,
+                    datasets: [{
+                        label: 'Budget Allocation (%)',
+                        data: resourceAllocationData.data,
+                        backgroundColor: resourceAllocationData.colors,
+                        borderColor: resourceAllocationData.colors.map(color => color.replace('0.2)', '1)')), // Solid border
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y', // Horizontal bar chart
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 100,
+                            title: {
+                                display: true,
+                                text: 'Percentage of Budget'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Security Area'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false // No legend needed for single dataset bar chart
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.label + ': ' + context.parsed.x + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        };
+
+        const initProgramMetricsChart = () => {
+            const ctx = document.getElementById('programMetricsChart').getContext('2d');
+            programMetricsChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: programMetricsLabels,
+                    datasets: [{
+                        label: programMetricsTrendData.kpiImplementationRate.label,
+                        data: programMetricsTrendData.kpiImplementationRate.data,
+                        borderColor: programMetricsTrendData.kpiImplementationRate.borderColor,
+                        backgroundColor: programMetricsTrendData.kpiImplementationRate.backgroundColor,
+                        fill: true,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Value'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Month'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: function(context) {
+                                    return context[0].label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        };
+
+        // Update Chart Functions
+        const updateBarChart = (chartInstance, newData) => {
+            if (chartInstance) {
+                chartInstance.data.datasets[0].data = newData;
+                chartInstance.update();
+            }
+        };
+
+        const updateLineChart = (chartInstance, newData, newLabel, newBorderColor, newBackgroundColor) => {
+            if (chartInstance) {
+                chartInstance.data.datasets[0].label = newLabel;
+                chartInstance.data.datasets[0].data = newData;
+                chartInstance.data.datasets[0].borderColor = newBorderColor;
+                chartInstance.data.datasets[0].backgroundColor = newBackgroundColor;
+                chartInstance.data.datasets[0].fill = true;
+                chartInstance.update();
+            }
+        };
+
+        // Resource Allocation Chart Logic (updated for interactive percentages)
+        const updateResourceAllocationChart = () => {
+            const totalBudgetInput = document.getElementById('totalBudgetInput');
+            const rawTotalBudget = totalBudgetInput.value.replace(/,/g, '');
+            let totalBudget = parseFloat(rawTotalBudget);
+
+            if (isNaN(totalBudget) || totalBudget <= 0) {
+                console.error('Please enter a valid positive number for the total budget.');
+                totalBudgetInput.value = '';
+                updateBarChart(resourceAllocationChartInstance, [0, 0, 0, 0]);
+                document.getElementById('peopleAmount').textContent = '0';
+                document.getElementById('toolsAmount').textContent = '0';
+                document.getElementById('trainingAmount').textContent = '0';
+                document.getElementById('complianceAmount').textContent = '0';
+                document.getElementById('allocationFeedback').textContent = 'Please enter a valid total budget.';
+                return;
+            }
+
+            totalBudgetInput.value = totalBudget.toLocaleString('en-US'); // Format total budget input
+
+            const peoplePercent = parseFloat(document.getElementById('peopleAllocation').value);
+            const toolsPercent = parseFloat(document.getElementById('toolsAllocation').value);
+            const trainingPercent = parseFloat(document.getElementById('trainingAllocation').value);
+            const compliancePercent = parseFloat(document.getElementById('complianceAllocation').value);
+
+            const sumPercentages = peoplePercent + toolsPercent + trainingPercent + compliancePercent;
+            const feedbackElement = document.getElementById('allocationFeedback');
+
+            if (sumPercentages !== 100) {
+                feedbackElement.textContent = `Percentages must sum to 100%. Current sum: ${sumPercentages}%`;
+                feedbackElement.classList.remove('text-green-600');
+                feedbackElement.classList.add('text-red-600');
+            } else {
+                feedbackElement.textContent = 'Allocation valid!';
+                feedbackElement.classList.remove('text-red-600');
+                feedbackElement.classList.add('text-green-600');
+            }
+
+            const peopleAmount = (totalBudget * (peoplePercent / 100)).toLocaleString('en-US');
+            const toolsAmount = (totalBudget * (toolsPercent / 100)).toLocaleString('en-US');
+            const trainingAmount = (totalBudget * (trainingPercent / 100)).toLocaleString('en-US');
+            const complianceAmount = (totalBudget * (compliancePercent / 100)).toLocaleString('en-US');
+
+            document.getElementById('peopleAmount').textContent = peopleAmount;
+            document.getElementById('toolsAmount').textContent = toolsAmount;
+            document.getElementById('trainingAmount').textContent = trainingAmount;
+            document.getElementById('complianceAmount').textContent = complianceAmount;
+
+            updateBarChart(resourceAllocationChartInstance, [peoplePercent, toolsPercent, trainingPercent, compliancePercent]);
+        };
+
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initial Chart Render
+            initResourceAllocationChart();
+            initProgramMetricsChart();
+            
+            // Initial calculation for resource allocation (if needed, or just display defaults)
+            updateResourceAllocationChart(); 
+
+            // Navigation
+            document.querySelectorAll('.nav-item').forEach(button => {
+                button.addEventListener('click', () => {
+                    document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    document.querySelectorAll('.content-section').forEach(section => {
+                        section.classList.add('hidden');
+                        section.classList.remove('fade-in');
+                    });
+
+                    const targetSection = document.getElementById(button.dataset.target);
+                    targetSection.classList.remove('hidden');
+                    targetSection.classList.add('fade-in');
+                    currentSection.id = button.dataset.target;
+                });
+            });
+
+            // Accordion Functionality
+            document.querySelectorAll('.accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const icon = button.querySelector('.accordion-icon');
+
+                    if (content.classList.contains('hidden')) {
+                        content.classList.remove('hidden');
+                        content.classList.add('fade-in');
+                        icon.textContent = '–';
+                    } else {
+                        content.classList.add('hidden');
+                        content.classList.remove('fade-in');
+                        icon.textContent = '+';
+                    }
+                });
+            });
+
+            // Event listeners for budget allocation inputs
+            document.getElementById('totalBudgetInput').addEventListener('input', updateResourceAllocationChart);
+            document.getElementById('totalBudgetInput').addEventListener('blur', updateResourceAllocationChart);
+            document.getElementById('peopleAllocation').addEventListener('input', updateResourceAllocationChart);
+            document.getElementById('toolsAllocation').addEventListener('input', updateResourceAllocationChart);
+            document.getElementById('trainingAllocation').addEventListener('input', updateResourceAllocationChart);
+            document.getElementById('complianceAllocation').addEventListener('input', updateResourceAllocationChart);
+
+
+            // Framework Card Toggles (A.3.a)
+            document.querySelectorAll('.framework-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const descriptionDiv = card.querySelector('.card-description');
+                    const frameworkKey = card.dataset.framework;
+
+                    // Close all other open card descriptions and remove 'active' class
+                    document.querySelectorAll('.framework-card').forEach(otherCard => {
+                        if (otherCard !== card) {
+                            otherCard.classList.remove('active'); // Remove active class from card
+                        }
+                    });
+
+                    // Toggle the clicked card's active class
+                    card.classList.toggle('active');
+
+                    // If the card is now active, populate its description
+                    if (card.classList.contains('active') && descriptionDiv && frameworkDescriptions[frameworkKey]) {
+                        descriptionDiv.innerHTML = `<p>${frameworkDescriptions[frameworkKey].description}</p>`; // Set content
+                    } else if (descriptionDiv) {
+                        descriptionDiv.innerHTML = ''; // Clear content if deactivating
+                    }
+                });
+            });
+
+            // Policy Cycle Step Toggles (A.4.b)
+            document.querySelectorAll('.policy-cycle-step').forEach(step => {
+                step.addEventListener('click', () => {
+                    const descriptionDiv = step.querySelector('.step-description');
+                    const stepKey = step.dataset.step;
+
+                    // Close all other open step descriptions and remove 'active' class
+                    document.querySelectorAll('.policy-cycle-step').forEach(otherStep => {
+                        if (otherStep !== step) {
+                            otherStep.classList.remove('active');
+                        }
+                    });
+
+                    // Toggle the clicked step's active class
+                    step.classList.toggle('active');
+
+                    // If the step is now active, populate its description
+                    if (step.classList.contains('active') && descriptionDiv && policyCycleDescriptions[stepKey]) {
+                        descriptionDiv.innerHTML = `<p>${policyCycleDescriptions[stepKey]}</p>`; // Set content
+                    } else if (descriptionDiv) {
+                        descriptionDiv.innerHTML = ''; // Clear content if deactivating
+                    }
+                });
+            });
+
+
+            // Program Metrics Chart Selector (A.5.a/b)
+            document.getElementById('programMetricSelect').addEventListener('change', (event) => {
+                const selectedMetric = event.target.value;
+                const data = programMetricsTrendData[selectedMetric];
+                updateLineChart(programMetricsChartInstance, data.data, data.label, data.borderColor, data.backgroundColor);
+            });
+
+            // Control Type Card Toggles (B.1.a)
+            document.querySelectorAll('.control-type-card:not(.control-testing-card)').forEach(card => { // Exclude control-testing-card
+                card.addEventListener('click', () => {
+                    const descriptionDiv = card.querySelector('.card-description');
+                    const controlKey = card.dataset.control;
+
+                    // Close all other open card descriptions and remove 'active' class
+                    document.querySelectorAll('.control-type-card:not(.control-testing-card)').forEach(otherCard => {
+                        if (otherCard !== card) {
+                            otherCard.classList.remove('active');
+                        }
+                    });
+
+                    // Toggle the clicked card's active class
+                    card.classList.toggle('active');
+
+                    // If the card is now active, populate its description
+                    if (card.classList.contains('active') && descriptionDiv && controlTypeDescriptions[controlKey]) {
+                        descriptionDiv.innerHTML = `<p>${controlTypeDescriptions[controlKey]}</p>`; // Set content
+                    } else if (descriptionDiv) {
+                        descriptionDiv.innerHTML = ''; // Clear content if deactivating
+                    }
+                });
+            });
+
+            // Control Concept Card Toggles (B.1.d)
+            document.querySelectorAll('.control-concept-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const descriptionDiv = card.querySelector('.card-description');
+                    const conceptKey = card.dataset.concept;
+
+                    // Close all other open concept descriptions and remove 'active' class
+                    document.querySelectorAll('.control-concept-card').forEach(otherCard => {
+                        if (otherCard !== card) {
+                            otherCard.classList.remove('active');
+                        }
+                    });
+
+                    // Toggle the clicked card's active class
+                    card.classList.toggle('active');
+
+                    // If the card is now active, populate its description
+                    if (card.classList.contains('active') && descriptionDiv && controlConceptDescriptions[conceptKey]) {
+                        descriptionDiv.innerHTML = `<p>${controlConceptDescriptions[conceptKey].description}</p>`; // Set content
+                    } else if (descriptionDiv) {
+                        descriptionDiv.innerHTML = ''; // Clear content if deactivating
+                    }
+                });
+            });
+            
+            // Training Method Card Toggles (B.4.c)
+            document.querySelectorAll('.training-method-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const descriptionDiv = card.querySelector('.card-description');
+                    const methodKey = card.dataset.method;
+
+                    // Close all other open card descriptions and remove 'active' class
+                    document.querySelectorAll('.training-method-card').forEach(otherCard => {
+                        if (otherCard !== card) {
+                            otherCard.classList.remove('active');
+                        }
+                    });
+
+                    // Toggle the clicked card's active class
+                    card.classList.toggle('active');
+
+                    // If the card is now active, populate its description
+                    if (card.classList.contains('active') && descriptionDiv && trainingMethodDescriptions[methodKey]) {
+                        descriptionDiv.innerHTML = `<p>${trainingMethodDescriptions[methodKey].description}</p>`; // Set content
+                    } else if (descriptionDiv) {
+                        descriptionDiv.innerHTML = ''; // Clear content if deactivating
+                    }
+                });
+            });
+
+            // Third-Party Step Card Toggles (B.5.b)
+            document.querySelectorAll('.third-party-step-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const descriptionDiv = card.querySelector('.step-description');
+                    const stepKey = card.dataset.step;
+
+                    // Close all other open step descriptions and remove 'active' class
+                    document.querySelectorAll('.third-party-step-card').forEach(otherCard => {
+                        if (otherCard !== card) {
+                            otherCard.classList.remove('active'); // Remove active class
+                        }
+                    });
+
+                    // Toggle the clicked card's active class
+                    card.classList.toggle('active');
+
+                    // If the card is now active, populate its description
+                    if (card.classList.contains('active') && descriptionDiv && thirdPartyStepsDescriptions[stepKey]) {
+                        descriptionDiv.innerHTML = `<p>${thirdPartyStepsDescriptions[stepKey]}</p>`; // Set content
+                    } else if (descriptionDiv) {
+                        descriptionDiv.innerHTML = ''; // Clear content if deactivating
+                    }
+                });
+            });
+
+            // Control Implementation Steps Toggles (B.2.a)
+            document.querySelectorAll('.implementation-step-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const descriptionDiv = card.querySelector('.step-description');
+                    const stepKey = card.dataset.step;
+
+                    // Close all other open step descriptions and remove 'active' class
+                    document.querySelectorAll('.implementation-step-card').forEach(otherCard => {
+                        if (otherCard !== card) {
+                            otherCard.classList.remove('active'); // Remove active class
+                        }
+                    });
+
+                    // Toggle the clicked card's active class
+                    card.classList.toggle('active');
+
+                    // If the card is now active, populate its description
+                    if (card.classList.contains('active') && descriptionDiv && implementationStepsDescriptions[stepKey]) {
+                        descriptionDiv.innerHTML = `<p>${implementationStepsDescriptions[stepKey]}</p>`; // Set content
+                    } else if (descriptionDiv) {
+                        descriptionDiv.innerHTML = ''; // Clear content if deactivating
+                    }
+                });
+            });
+
+            // Control Testing Card Toggles (B.3.a)
+            document.querySelectorAll('.control-testing-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const descriptionDiv = card.querySelector('.card-description');
+                    const controlKey = card.dataset.control;
+
+                    // Close all other open card descriptions and remove 'active' class
+                    document.querySelectorAll('.control-testing-card').forEach(otherCard => {
+                        if (otherCard !== card) {
+                            otherCard.classList.remove('active');
+                        }
+                    });
+
+                    // Toggle the clicked card's active class
+                    card.classList.toggle('active');
+
+                    // If the card is now active, populate its description
+                    if (card.classList.contains('active') && descriptionDiv && controlTestingDescriptions[controlKey]) {
+                        descriptionDiv.innerHTML = `<p>${controlTestingDescriptions[controlKey].description}</p>`; // Set content
+                    } else if (descriptionDiv) {
+                        descriptionDiv.innerHTML = ''; // Clear content if deactivating
+                    }
+                });
+            });
+
+
+            // Audience Circle Toggles (B.6.c)
+            document.querySelectorAll('.audience-circle').forEach(circle => {
+                circle.addEventListener('click', () => {
+                    const descriptionDiv = circle.querySelector('.circle-description');
+                    const audienceKey = circle.dataset.audience;
+
+                    // Close all other open audience descriptions and remove 'active' class
+                    document.querySelectorAll('.audience-circle').forEach(otherCircle => {
+                        if (otherCircle !== circle) {
+                            otherCircle.classList.remove('active'); // Remove active class
+                        }
+                    });
+
+                    // Toggle the clicked circle's active class
+                    circle.classList.toggle('active');
+
+                    // If the circle is now active, populate its description
+                    if (circle.classList.contains('active') && descriptionDiv && audienceDescriptions[audienceKey]) {
+                        descriptionDiv.innerHTML = `<p>${audienceDescriptions[audienceKey].description}</p>`; // Set content
+                    } else if (descriptionDiv) {
+                        descriptionDiv.innerHTML = ''; // Clear content if deactivating
+                    }
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>
