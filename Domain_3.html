@@ -350,7 +350,7 @@
         }
         /* .third-party-step-card .step-description is handled by general .step-description rule */
 
-        /* Reporting Audience Circle Grid */
+        /* Reporting Audience Rectangular Cards */
         .audience-grid-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr); /* Two columns */
@@ -361,11 +361,11 @@
             max-width: 700px;
             margin: 1rem auto;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            justify-items: center; /* Center circles in their grid cells */
+            justify-items: center; /* Center cards in their grid cells */
         }
         .audience-circle {
-            background-color: #FFFFFF; /* Keep base color */
-            border-radius: 0.75rem; /* Make it rectangular with rounded corners */
+            background-color: #EDEAE0; /* Match other interactive cards */
+            border-radius: 0.75rem; /* Rectangular with rounded corners */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -379,7 +379,7 @@
             cursor: pointer;
             padding: 15px;
             box-sizing: border-box;
-            min-height: 150px; /* Ensure enough height for text */
+            min-height: 100px; /* Adjusted min-height for uniformity */
             flex: 1 1 calc(50% - 1rem); /* Two cards per row on larger screens */
             max-width: calc(50% - 1rem); /* Max width for two columns */
         }
@@ -395,10 +395,22 @@
         }
         /* .audience-circle .circle-description is handled by general .circle-description rule */
 
+        /* Specific colors for audience cards (overriding base .audience-circle background) */
+        .audience-circle.executives { background-color: #A1C9CE; } /* Soft Blue */
+        .audience-circle.technical { background-color: #8FB8A1; } /* Soft Green */
+        .audience-circle.end-users { background-color: #FFD700; } /* Gold */
+        .audience-circle.legal-compliance { background-color: #FF6384; } /* Pinkish Red */
+        /* Active state for audience cards */
+        .audience-circle.active {
+            border-color: #00A896;
+            box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3);
+            background-color: #E0F7F5;
+        }
+
 
         /* Responsive Adjustments for new cards/elements */
         @media (max-width: 768px) {
-            .framework-card, .control-type-card, .training-method-card, .control-concept-card { /* Added control-concept-card */
+            .framework-card, .control-type-card, .training-method-card, .control-concept-card {
                 flex: 1 1 100%;
                 max-width: 100%;
             }
@@ -407,28 +419,29 @@
             }
             .policy-cycle-arrow.loop-arrow {
                 right: 50%;
-                bottom: -30px; /* Position below */
-                transform: translateX(50%) rotate(0deg); /* Horizontal arrow below */
+                bottom: -30px;
+                transform: translateX(50%) rotate(0deg);
             }
-            .implementation-step-card, .third-party-step-card { /* Apply to both step cards */
-                width: 95%; /* Adjust for mobile */
-                max-width: 95%; /* Adjust for mobile */
+            .implementation-step-card, .third-party-step-card {
+                width: 95%;
+                max-width: 95%;
             }
             .audience-grid-container {
-                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Adjust for smaller screens */
+                grid-template-columns: 1fr; /* Single column on mobile */
                 gap: 1rem;
             }
             .audience-circle {
-                width: 140px; /* Adjusted size for mobile */
-                height: 140px; /* Adjusted size for mobile */
-                font-size: 0.8em;
-                padding: 10px;
+                width: 100%; /* Full width on mobile */
+                height: auto; /* Auto height on mobile */
+                min-height: 100px; /* Adjusted min-height for mobile */
+                font-size: 0.9em;
+                padding: 15px;
             }
             .audience-circle .circle-title {
-                font-size: 1em;
+                font-size: 1.1em;
             }
             .audience-circle .circle-description {
-                font-size: 0.8em;
+                font-size: 0.9em;
             }
         }
 
@@ -443,15 +456,12 @@
             transition: all 0.2s ease-in-out;
             box-sizing: border-box;
             font-weight: 600;
-            min-height: 160px; /* Adjusted height for content */
+            min-height: 100px; /* Adjusted height for content */
             display: flex;
             flex-direction: column;
             justify-content: center; /* Centered vertically */
             align-items: center; /* Centered horizontally */
             box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-            /* Adjusted width for 2 columns on larger screens */
-            flex: 1 1 calc(50% - 1rem);
-            max-width: calc(50% - 1rem);
         }
 
         .key-term-card:hover {
@@ -1052,7 +1062,7 @@
                             <h6 class="text-md font-semibold text-gray-700 mb-4 text-center">Tailoring Security Communications to Audiences</h6>
                             <div class="audience-grid-container">
                                 <div class="audience-circle executives" data-audience="executive">
-                                    <span class="circle-title">Executives/Board</span>
+                                    <span class="circle-title">Executives<br>Board</span>
                                     <div class="circle-description"></div>
                                 </div>
                                 <div class="audience-circle technical" data-audience="technical">
@@ -1064,7 +1074,7 @@
                                     <div class="circle-description"></div>
                                 </div>
                                 <div class="audience-circle legal-compliance" data-audience="legalCompliance">
-                                    <span class="circle-title">Legal/Compliance</span>
+                                    <span class="circle-title">Legal<br>Compliance</span>
                                     <div class="circle-description"></div>
                                 </div>
                             </div>
@@ -1175,7 +1185,7 @@
         // Data for Section B.6.c (Reporting Audiences)
         const audienceDescriptions = {
             executive: {
-                title: "Executives/Board",
+                title: "Executives<br>Board",
                 description: "Strategic overview, risk posture, compliance status, ROI of security investments. Focus on business impact. Example: Quarterly security briefing on top risks and program maturity."
             },
             technical: {
@@ -1187,7 +1197,7 @@
                 description: "Policy awareness, common threats (e.g., phishing), secure behaviors, how to report incidents. Simple, actionable advice. Example: Phishing simulation results, security tips newsletter."
             },
             legalCompliance: {
-                title: "Legal/Compliance",
+                title: "Legal<br>Compliance",
                 description: "Regulatory compliance status, audit findings, data privacy adherence, incident legal implications, contractual obligations. Example: Annual compliance report, data breach notification procedures."
             }
         };
@@ -1283,7 +1293,7 @@
             { term: "Information Asset Classification", definition: "Categorizing information based on its sensitivity, value, and the impact its compromise would have on the business." },
             { term: "ISO/IEC 27001", definition: "A globally recognized standard for establishing, implementing, maintaining, and continually improving an Information Security Management System (ISMS)." },
             { term: "NIST Cybersecurity Framework (CSF)", definition: "A voluntary framework providing a common language and systematic methodology for managing cybersecurity risk, particularly for critical infrastructure." },
-            { term: "COBIT", definition: "A comprehensive framework for governance and management of enterprise IT, which includes information security as a key domain. It helps align IT with business goals, ensuring value delivery and risk optimization." },
+            { term: "COBIT", definition: "A comprehensive framework for governance and management of enterprise IT, which includes information security as a key domain." },
             { term: "TOGAF", definition: "An enterprise architecture framework that can be used to integrate security architecture into the broader enterprise structure." },
             { term: "SABSA", definition: "A framework for developing business-driven security architectures, ensuring security solutions align with business needs." },
             { term: "Information Security Policy", definition: "High-level statements of management's intent and direction for information security, defining what is to be done and why." },
