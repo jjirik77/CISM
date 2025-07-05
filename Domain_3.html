@@ -33,6 +33,9 @@
             font-weight: 700; /* Bolder */
             color: #333333;
             transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+            display: flex; /* Added for centering */
+            justify-content: center; /* Added for horizontal centering */
+            align-items: center; /* Added for vertical centering */
         }
         .accordion-button:hover {
             background-color: #D5D2C8; /* Darker on hover */
@@ -109,7 +112,8 @@
             min-height: 100px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center; /* Centered vertically */
+            align-items: center; /* Centered horizontally */
             box-shadow: 0 2px 5px rgba(0,0,0,0.08); /* Subtle initial shadow */
         }
 
@@ -217,6 +221,10 @@
             position: relative;
             cursor: pointer;
             transition: all 0.2s ease-in-out;
+            display: flex; /* Added for centering */
+            flex-direction: column; /* Ensure vertical stacking of title and description */
+            justify-content: center; /* Centered vertically */
+            align-items: center; /* Centered horizontally */
         }
         .policy-cycle-step:hover {
             transform: translateY(-2px);
@@ -226,6 +234,10 @@
             display: block;
             margin-bottom: 0.5rem;
         }
+        .policy-cycle-step .step-description { /* Added text-align: center for policy step descriptions */
+            text-align: center;
+        }
+
 
         /* Specific colors for policy cycle steps */
         .policy-cycle-step.step-1 { background-color: #E0F2F7; color: #004085; } /* Light Blue */
@@ -277,8 +289,8 @@
             cursor: pointer;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            justify-content: center; /* Centered vertically */
+            align-items: center; /* Centered horizontally */
         }
         .implementation-step-card:hover {
             transform: translateY(-2px);
@@ -324,8 +336,8 @@
             cursor: pointer;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            justify-content: center; /* Centered vertically */
+            align-items: center; /* Centered horizontally */
         }
         .third-party-step-card:hover {
             transform: translateY(-2px);
@@ -358,7 +370,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: center; /* Centered vertically */
             text-align: center;
             font-weight: 600;
             font-size: 0.9em;
@@ -434,12 +446,12 @@
             cursor: pointer;
             transition: all 0.2s ease-in-out;
             box-sizing: border-box;
-            text-align: left;
             font-weight: 600;
             min-height: 160px; /* Adjusted height for content */
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center; /* Centered vertically */
+            align-items: center; /* Centered horizontally */
             box-shadow: 0 2px 5px rgba(0,0,0,0.08);
             /* Adjusted width for 2 columns on larger screens */
             flex: 1 1 calc(50% - 1rem);
@@ -494,8 +506,8 @@
                 grid-template-columns: repeat(2, 1fr); /* Two columns on large screens */
             }
             .key-term-card {
-                flex: 1 1 calc(100% - 1rem); /* Each card takes full width */
-                max-width: calc(110% - 1rem);
+                flex: 1 1 calc(50% - 1rem); /* Each card takes half width */
+                max-width: calc(50% - 1rem);
             }
         }
     </style>
@@ -509,15 +521,25 @@
         </header>
 
         <nav class="bg-white p-4 rounded-lg shadow-md mb-8 flex justify-center sticky top-0 z-10">
-            <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200 active" data-target="program-development">Program Development</button>
+            <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200 active" data-target="introduction">Introduction</button>
+            <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="program-development">Program Development</button>
             <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="program-management">Program Management</button>
             <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="key-terms">Key Terms</button>
             <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="domain-summary">Domain Summary</button>
         </nav>
 
         <main id="content-area">
+            <!-- New Section for Introduction -->
+            <section id="introduction" class="content-section fade-in">
+                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Introduction to CISM Domain 3</h2>
+                <div class="p-6 bg-white rounded-lg shadow-md">
+                    <p class="text-gray-700 mb-4">Welcome to the interactive study guide for CISM Domain 3: Information Security Program Development and Management. This domain is pivotal for aspiring and current information security managers, as it delves into the strategic and operational aspects required to build, implement, and maintain a robust information security program. Understanding this domain is crucial for aligning security initiatives with broader business objectives, ensuring that security is not just a technical function but an integral part of organizational governance.</p>
+                    <p class="text-gray-700">Throughout this guide, you will explore key concepts such as resource allocation, information asset management, adherence to industry frameworks, policy development, and performance measurement. By mastering these areas, you will gain the expertise to effectively manage an organization's security posture, mitigate risks, and contribute significantly to its resilience in the face of evolving cyber threats. This interactive format is designed to enhance your learning experience, making complex topics more accessible and engaging.</p>
+                </div>
+            </section>
+
             <!-- Information Security Program Development Section -->
-            <section id="program-development" class="content-section fade-in">
+            <section id="program-development" class="content-section hidden">
                 <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Section A: Information Security Program Development</h2>
                 <p class="mb-8 text-gray-700">This section is the blueprint for establishing a robust information security program. It focuses on strategic planning, resource allocation, and laying down the foundational elements that will govern security efforts across the organization.</p>
 
@@ -1080,7 +1102,7 @@
         </main>
 
         <footer class="text-center py-6 mt-8 text-gray-500 text-sm">
-            <p>&copy; 2024 CISM Study Guide. All rights reserved. For educational purposes only.</p>
+            <p>&copy; 2024 CISM Study Guide. All rights reserved. For educational purposes.</p>
         </footer>
     </div>
 
@@ -1524,8 +1546,23 @@
                     if (button.dataset.target === 'key-terms') {
                         renderKeyTerms();
                     }
+                    // For the Introduction tab, ensure it's displayed by default or when clicked
+                    if (button.dataset.target === 'introduction') {
+                        // No specific rendering function needed for introduction, just show the section
+                    }
                 });
             });
+
+            // Set the Introduction tab as active by default on load
+            const introButton = document.querySelector('.nav-item[data-target="introduction"]');
+            const introSection = document.getElementById('introduction');
+            if (introButton && introSection) {
+                introButton.classList.add('active');
+                introSection.classList.remove('hidden');
+                introSection.classList.add('fade-in');
+                currentSection.id = 'introduction';
+            }
+
 
             // Accordion Functionality
             document.querySelectorAll('.accordion-button').forEach(button => {
