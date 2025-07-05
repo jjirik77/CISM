@@ -93,7 +93,7 @@
         /* New styles for Domain 3 elements */
 
         /* Interactive Cards (General) - Unified Styling */
-        .framework-card, .control-type-card, .training-method-card, .control-concept-card { /* Added control-concept-card */
+        .framework-card, .control-type-card, .training-method-card, .control-concept-card, .key-term-card { /* Added key-term-card */
             background-color: #EDEAE0; /* Secondary Neutral */
             border: 1px solid #D5D2C8;
             padding: 1rem;
@@ -101,7 +101,7 @@
             cursor: pointer;
             transition: all 0.2s ease-in-out;
             flex: 1 1 calc(50% - 1rem); /* Two cards per row on larger screens */
-            max-width: calc(50% - 1rem); /* Max width for two columns */
+            max-width: calc(150px - 1rem); /* Max width for two columns */
             box-sizing: border-box;
             text-align: left;
             font-weight: 600;
@@ -113,7 +113,7 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.08); /* Subtle initial shadow */
         }
 
-        .framework-card:hover, .control-type-card:hover, .training-method-card:hover, .control-concept-card:hover { /* Added control-concept-card */
+        .framework-card:hover, .control-type-card:hover, .training-method-card:hover, .control-concept-card:hover, .key-term-card:hover { /* Added key-term-card */
             transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* More pronounced shadow on hover */
         }
@@ -125,13 +125,14 @@
         .policy-cycle-step.active,
         .implementation-step-card.active,
         .third-party-step-card.active,
-        .audience-circle.active {
+        .audience-circle.active,
+        .key-term-card.active { /* Added key-term-card */
             border-color: #00A896; /* Vibrant Teal border */
             box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3); /* Teal glow */
             background-color: #E0F7F5; /* Very light teal background */
         }
 
-        .framework-card .card-title, .control-type-card .card-title, .training-method-card .card-title, .control-concept-card .card-title { /* Added control-concept-card */
+        .framework-card .card-title, .control-type-card .card-title, .training-method-card .card-title, .control-concept-card .card-title, .key-term-card .card-title { /* Added key-term-card */
             font-size: 1.15em; /* Slightly larger title */
             margin-bottom: 0.6rem;
             text-align: center;
@@ -154,7 +155,8 @@
         .policy-cycle-step.active .step-description,
         .implementation-step-card.active .step-description,
         .third-party-step-card.active .step-description,
-        .audience-circle.active .circle-description {
+        .audience-circle.active .circle-description,
+        .key-term-card.active .card-description { /* Added key-term-card */
             display: block;
             animation: fadeIn 0.5s ease-in-out;
         }
@@ -421,6 +423,81 @@
                 font-size: 0.8em;
             }
         }
+
+        /* Key Term Card Specific Styles */
+        .key-term-card {
+            background-color: #EDEAE0; /* Grey background */
+            color: #333333;
+            border: 1px solid #D5D2C8;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            box-sizing: border-box;
+            text-align: left;
+            font-weight: 600;
+            min-height: 160px; /* Adjusted height for content */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+            /* Adjusted width for 2 columns on larger screens */
+            flex: 1 1 calc(50% - 1rem);
+            max-width: calc(50% - 1rem);
+        }
+
+        .key-term-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .key-term-card.active {
+            border-color: #004085; /* Dark blue border when active */
+            box-shadow: 0 4px 8px rgba(0, 64, 133, 0.3); /* Blue glow */
+            background-color: #E0F2F7; /* Lighter blue background when active */
+        }
+
+        .key-term-card .card-title {
+            font-size: 1.25em; /* Larger title for key terms */
+            font-weight: 700;
+            color: #004085; /* Blue text for term */
+            margin-bottom: 0.8rem;
+            text-align: center;
+        }
+
+        .key-term-card .card-description {
+            font-weight: 400;
+            font-size: 1em; /* Larger description font */
+            color: #555555;
+            text-align: center; /* Centered text for description */
+            margin-top: 0.5rem;
+            display: none; /* Hidden by default */
+        }
+        .key-term-card.active .card-description {
+            display: block; /* Show when active */
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        /* Responsive adjustment for key terms grid */
+        @media (max-width: 768px) {
+            .key-terms .grid {
+                grid-template-columns: 1fr; /* Single column on mobile */
+            }
+            .key-term-card {
+                flex: 1 1 100%;
+                max-width: 100%;
+            }
+        }
+        /* Adjusted for larger screens to maintain 2 columns for key terms */
+        @media (min-width: 1024px) {
+            .key-terms .grid {
+                grid-template-columns: repeat(2, 1fr); /* Two columns on large screens */
+            }
+            .key-term-card {
+                flex: 1 1 calc(50% - 1rem); /* Each card takes half width */
+                max-width: calc(50% - 1rem);
+            }
+        }
     </style>
 </head>
 <body>
@@ -434,6 +511,8 @@
         <nav class="bg-white p-4 rounded-lg shadow-md mb-8 flex justify-center sticky top-0 z-10">
             <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200 active" data-target="program-development">Program Development</button>
             <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="program-management">Program Management</button>
+            <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="key-terms">Key Terms</button>
+            <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="domain-summary">Domain Summary</button>
         </nav>
 
         <main id="content-area">
@@ -850,12 +929,6 @@
                     <div class="accordion-content hidden p-6">
                         <p class="text-gray-700 mb-4">People are often the most critical component of an organization's security posture. Effective awareness and training programs empower employees to be a strong defense.</p>
 
-                        <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Develop training programs tailored to roles (e.g., general staff, developers, executives).</h4>
-                        <p class="text-gray-600 mb-4">Training content should be relevant to the audience's responsibilities and potential exposure. General staff need basic hygiene, developers need secure coding, and executives need strategic risk understanding.</p>
-
-                        <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Promote understanding of policies, threats (e.g., phishing), and secure behaviors.</h4>
-                        <p class="text-gray-600 mb-4">Training should clearly articulate organizational policies, educate on common threats, and instill practical secure behaviors (e.g., identifying phishing, using strong passwords, secure data handling).</p>
-
                         <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Use varied delivery methods (e.g., eLearning, simulations, briefings).</h4>
                         <p class="text-gray-600 mb-4">Diverse delivery methods improve engagement and retention. Click on a method to see its characteristics:</p>
                         <div class="flex flex-wrap justify-center gap-4 mb-6">
@@ -983,6 +1056,26 @@
                         <h4 class="text-lg font-semibold text-gray-700">d. Communicate achievements, compliance status, and required improvements regularly.</h4>
                         <p class="text-gray-600">Transparent reporting builds credibility. Regularly share successes, current compliance standing, and clearly outline areas where further investment or effort is needed, fostering a culture of continuous improvement.</p>
                     </div>
+                </div>
+            </section>
+
+            <!-- New Section for Key Terms -->
+            <section id="key-terms" class="content-section hidden">
+                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Key Terms</h2>
+                <p class="mb-8 text-gray-700">Test your knowledge of key terms in Information Security Program Development and Management with these interactive flashcards. Click on a card to reveal its definition.</p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Key Terms will be populated here by JavaScript -->
+                </div>
+            </section>
+
+            <!-- New Section for Domain Summary -->
+            <section id="domain-summary" class="content-section hidden">
+                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Domain Summary</h2>
+                <div class="p-6 bg-white rounded-lg shadow-md">
+                    <p class="text-gray-700 mb-4">Domain 3, "Information Security Program Development and Management," is a cornerstone of the CISM certification, emphasizing the strategic and operational aspects of information security. It constitutes a significant portion of the exam, reflecting its importance in real-world information security leadership roles.</p>
+                    <p class="text-gray-700 mb-4">The **Program Development** phase focuses on establishing the foundational elements. This includes identifying and allocating necessary resources—people, tools, and technologies—while ensuring they align with the organizational structure and program scope. A critical aspect is the accurate identification and classification of information assets based on their business impact, coupled with assigning clear data ownership and handling guidelines. The development process is guided by industry standards and frameworks like ISO/IEC 27001, NIST CSF, COBIT, TOGAF, and SABSA, which provide structured approaches to align security practices with regulatory, business, and technical standards. Finally, this phase involves developing robust information security policies, procedures, and guidelines, ensuring they are version-controlled, regularly reviewed, and auditable for compliance. Program metrics, including Key Performance Indicators (KPIs) and Key Risk Indicators (KRIs), are defined to measure maturity, coverage, and gaps.</p>
+                    <p class="text-gray-700">The **Program Management** phase shifts to the ongoing execution and optimization of the security program. This involves the thoughtful design and selection of administrative, technical, and physical controls based on thorough risk analysis, ensuring they are cost-effective, scalable, and integrated using principles like defense-in-depth and compensating controls. Implementation requires seamless integration with existing IT architecture and business workflows, necessitating strong coordination across departments like IT, DevOps, HR, and procurement. Continuous testing and evaluation of controls through internal audits, penetration testing, and vulnerability scanning are vital to detect failures, track remediation, and update the organization's risk posture. A robust information security awareness and training program, tailored to various roles and delivered through diverse methods, is crucial for fostering a security-conscious culture. Managing external services, including vendors and cloud providers, is another key area, requiring clear security expectations in contracts, diligent risk assessments, and ongoing compliance monitoring. Finally, effective communication and reporting of program performance, risk posture, and incident trends to executives and stakeholders, tailored to different audiences, is essential for informed decision-making and continuous improvement.</p>
                 </div>
             </section>
         </main>
@@ -1167,6 +1260,25 @@
             }
         };
 
+        // NEW: Key Terms Data for Flip Cards
+        const keyTermsData = [
+            { term: "Information Security Program", definition: "A comprehensive set of policies, procedures, and controls designed to protect an organization's information assets." },
+            { term: "Information Asset Classification", definition: "Categorizing information based on its sensitivity, value, and the impact its compromise would have on the business." },
+            { term: "ISO/IEC 27001", definition: "A globally recognized standard for establishing, implementing, maintaining, and continually improving an Information Security Management System (ISMS)." },
+            { term: "NIST Cybersecurity Framework (CSF)", definition: "A voluntary framework providing a common language and systematic methodology for managing cybersecurity risk, particularly for critical infrastructure." },
+            { term: "COBIT", definition: "A comprehensive framework for governance and management of enterprise IT, including information security as a key domain." },
+            { term: "TOGAF", definition: "An enterprise architecture framework that can be used to integrate security architecture into the broader enterprise structure." },
+            { term: "SABSA", definition: "A framework for developing business-driven security architectures, ensuring security solutions align with business needs." },
+            { term: "Information Security Policy", definition: "High-level statements of management's intent and direction for information security, defining what is to be done and why." },
+            { term: "Key Performance Indicator (KPI)", definition: "A measurable value that demonstrates how effectively a company is achieving key business objectives related to security activities." },
+            { term: "Key Risk Indicator (KRI)", definition: "Forward-looking metrics that provide an early warning signal of increasing risk exposure, prompting proactive measures." },
+            { term: "Defense-in-Depth", definition: "Implementing multiple layers of security controls to protect critical assets, ensuring that if one control fails, another layer acts as a backup." },
+            { term: "Compensating Controls", definition: "Alternative security controls implemented when a primary control is not feasible or practical, aiming to provide a similar level of protection." },
+            { term: "Third-Party Risk Management", definition: "The process of identifying, assessing, and mitigating risks associated with external vendors, suppliers, and service providers." },
+            { term: "Service Level Agreement (SLA)", definition: "A contract between a service provider and a customer that specifies the level of service expected, including security expectations and performance metrics." },
+            { term: "Security Awareness Training", definition: "Educational programs designed to inform employees about information security risks, policies, and best practices to foster a security-conscious culture." }
+        ];
+
 
         let resourceAllocationChartInstance;
         let programMetricsChartInstance;
@@ -1342,6 +1454,48 @@
         };
 
 
+        // Function to render Key Terms cards (updated to expanding card style)
+        const renderKeyTerms = () => {
+            const keyTermsContainer = document.querySelector('#key-terms .grid');
+            keyTermsContainer.innerHTML = ''; // Clear existing cards
+
+            keyTermsData.forEach((item, index) => {
+                const cardHtml = `
+                    <div class="key-term-card" data-term-key="${index}">
+                        <h3 class="card-title">${item.term}</h3>
+                        <div class="card-description"></div>
+                    </div>
+                `;
+                keyTermsContainer.insertAdjacentHTML('beforeend', cardHtml);
+            });
+
+            // Add event listeners for key term cards
+            document.querySelectorAll('.key-term-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const descriptionDiv = card.querySelector('.card-description');
+                    const termIndex = parseInt(card.dataset.termKey);
+
+                    // Close all other open cards and remove 'active' class
+                    document.querySelectorAll('.key-term-card').forEach(otherCard => {
+                        if (otherCard !== card) {
+                            otherCard.classList.remove('active');
+                        }
+                    });
+
+                    // Toggle the clicked card's active class
+                    card.classList.toggle('active');
+
+                    // If the card is now active, populate its description
+                    if (card.classList.contains('active') && descriptionDiv && keyTermsData[termIndex]) {
+                        descriptionDiv.innerHTML = `<p>${keyTermsData[termIndex].definition}</p>`; // Set content
+                    } else if (descriptionDiv) {
+                        descriptionDiv.innerHTML = ''; // Clear content if deactivating
+                    }
+                });
+            });
+        };
+
+
         // Event Listeners
         document.addEventListener('DOMContentLoaded', () => {
             // Initial Chart Render
@@ -1366,6 +1520,11 @@
                     targetSection.classList.remove('hidden');
                     targetSection.classList.add('fade-in');
                     currentSection.id = button.dataset.target;
+
+                    // Render key terms if that section is activated
+                    if (button.dataset.target === 'key-terms') {
+                        renderKeyTerms();
+                    }
                 });
             });
 
