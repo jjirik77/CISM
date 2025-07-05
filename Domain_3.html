@@ -33,9 +33,10 @@
             font-weight: 700; /* Bolder */
             color: #333333;
             transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
-            display: flex; /* Added for centering */
-            justify-content: center; /* Added for horizontal centering */
-            align-items: center; /* Added for vertical centering */
+            display: flex; /* Ensure flex behavior */
+            justify-content: space-between; /* Pushes content and icon to ends */
+            align-items: center; /* Vertically centers items */
+            text-align: left; /* Keep text aligned left within the button */
         }
         .accordion-button:hover {
             background-color: #D5D2C8; /* Darker on hover */
@@ -363,23 +364,24 @@
             justify-items: center; /* Center circles in their grid cells */
         }
         .audience-circle {
-            width: 180px; /* Increased size for better clickability and content */
-            height: 180px; /* Increased size */
-            background-color: #FFFFFF;
-            border-radius: 50%;
+            background-color: #FFFFFF; /* Keep base color */
+            border-radius: 0.75rem; /* Make it rectangular with rounded corners */
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center; /* Centered vertically */
-            text-align: center;
+            justify-content: center; /* Center content vertically */
+            text-align: center; /* Center text horizontally */
             font-weight: 600;
             font-size: 0.9em;
             color: #333333;
             box-shadow: 0 2px 4px rgba(0,0,0,0.08);
             transition: all 0.2s ease-in-out;
             cursor: pointer;
-            padding: 15px; /* Increased padding to prevent text overflow */
-            box-sizing: border-box; /* Include padding in width/height */
+            padding: 15px;
+            box-sizing: border-box;
+            min-height: 150px; /* Ensure enough height for text */
+            flex: 1 1 calc(50% - 1rem); /* Two cards per row on larger screens */
+            max-width: calc(50% - 1rem); /* Max width for two columns */
         }
         .audience-circle:hover {
             transform: translateY(-3px);
@@ -392,12 +394,6 @@
             color: #004085; /* Dark blue for title */
         }
         /* .audience-circle .circle-description is handled by general .circle-description rule */
-
-        /* Specific colors for audience circles */
-        .audience-circle.executives { background-color: #A1C9CE; color: #333333; } /* Soft Blue */
-        .audience-circle.technical { background-color: #8FB8A1; color: #333333; } /* Soft Green */
-        .audience-circle.end-users { background-color: #FFD700; color: #333333; } /* Gold */
-        .audience-circle.legal-compliance { background-color: #FF6384; color: #333333; } /* Pinkish Red */
 
 
         /* Responsive Adjustments for new cards/elements */
@@ -506,7 +502,7 @@
                 grid-template-columns: repeat(2, 1fr); /* Two columns on large screens */
             }
             .key-term-card {
-                flex: 1 1 calc(100% - 1rem); /* Each card takes half width */
+                flex: 1 1 calc(100% - 1rem); /* Each card takes full width */
                 max-width: calc(110% - 1rem);
             }
         }
@@ -531,7 +527,7 @@
         <main id="content-area">
             <!-- New Section for Introduction -->
             <section id="introduction" class="content-section fade-in">
-                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Introduction</h2>
+                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Introduction to CISM Domain 3</h2>
                 <div class="p-6 bg-white rounded-lg shadow-md">
                     <p class="text-gray-700 mb-4">Welcome to the interactive study guide for CISM Domain 3: Information Security Program Development and Management. This domain is pivotal for aspiring and current information security managers, as it delves into the strategic and operational aspects required to build, implement, and maintain a robust information security program. Understanding this domain is crucial for aligning security initiatives with broader business objectives, ensuring that security is not just a technical function but an integral part of organizational governance.</p>
                     <p class="text-gray-700">Throughout this guide, you will explore key concepts such as resource allocation, information asset management, adherence to industry frameworks, policy development, and performance measurement. By mastering these areas, you will gain the expertise to effectively manage an organization's security posture, mitigate risks, and contribute significantly to its resilience in the face of evolving cyber threats. This interactive format is designed to enhance your learning experience, making complex topics more accessible and engaging.</p>
@@ -540,14 +536,14 @@
 
             <!-- Information Security Program Development Section -->
             <section id="program-development" class="content-section hidden">
-                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Section B: Information Security Program Development</h2>
+                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Section A: Information Security Program Development</h2>
                 <p class="mb-8 text-gray-700">This section is the blueprint for establishing a robust information security program. It focuses on strategic planning, resource allocation, and laying down the foundational elements that will govern security efforts across the organization.</p>
 
                 <!-- Sub-Domain: Information Security Program Resources -->
                 <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
                     <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
                         1. Information Security Program Resources (People, Tools, Technologies)
-        
+                        <span class="accordion-icon text-2xl">+</span>
                     </button>
                     <div class="accordion-content hidden p-6">
                         <p class="text-gray-700 mb-4">Building an information security program requires the right blend of human capital, effective tools, and appropriate technologies. Proper resource allocation ensures the program has the necessary support to achieve its objectives.</p>
@@ -606,7 +602,7 @@
                 <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
                     <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
                         2. Information Asset Identification and Classification
-                       
+                        <span class="accordion-icon text-2xl">+</span>
                     </button>
                     <div class="accordion-content hidden p-6">
                         <p class="text-gray-700 mb-4">You can't protect what you don't know you have. Identifying and classifying information assets is the foundational step in determining appropriate security controls.</p>
@@ -670,8 +666,8 @@
                 <!-- Sub-Domain: Industry Standards and Frameworks for Information Security -->
                 <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
                     <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
-                        3. Industry Standards and Frameworks for Information Security
-
+                        3. Information Security Program Resources (People, Tools, Technologies)
+                        <span class="accordion-icon text-2xl">+</span>
                     </button>
                     <div class="accordion-content hidden p-6">
                         <p class="text-gray-700 mb-4">Leveraging established frameworks provides a structured, recognized approach to designing and managing an information security program. They offer best practices and help ensure compliance and effectiveness.</p>
@@ -713,7 +709,7 @@
                 <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
                     <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
                         4. Information Security Policies, Procedures, and Guidelines
-                    
+                        <span class="accordion-icon text-2xl">+</span>
                     </button>
                     <div class="accordion-content hidden p-6">
                         <p class="text-gray-700 mb-4">These documents form the backbone of the security program, translating strategic objectives into actionable requirements for the entire organization.</p>
@@ -766,7 +762,7 @@
                 <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
                     <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
                         5. Information Security Program Metrics
-                        
+                        <span class="accordion-icon text-2xl">+</span>
                     </button>
                     <div class="accordion-content hidden p-6">
                         <p class="text-gray-700 mb-4">Measuring the performance of the security program is crucial for demonstrating value, identifying areas for improvement, and making data-driven decisions.</p>
@@ -805,7 +801,7 @@
                 <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
                     <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
                         1. Information Security Control Design and Selection
-                       
+                        <span class="accordion-icon text-2xl">+</span>
                     </button>
                     <div class="accordion-content hidden p-6">
                         <p class="text-gray-700 mb-4">Controls are the safeguards that mitigate risks. Their design and selection must be strategic, balancing protection with business enablement.</p>
@@ -852,7 +848,7 @@
                 <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
                     <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
                         2. Information Security Control Integration and Implementation
-                        
+                        <span class="accordion-icon text-2xl">+</span>
                     </button>
                     <div class="accordion-content hidden p-6">
                         <p class="text-gray-700 mb-4">This phase turns security plans into reality, integrating controls seamlessly into the operational environment.</p>
@@ -905,7 +901,7 @@
                 <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
                     <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
                         3. Information Security Control Testing and Evaluation
-                        
+                        <span class="accordion-icon text-2xl">+</span>
                     </button>
                     <div class="accordion-content hidden p-6">
                         <p class="text-gray-700 mb-4">Continuous testing and evaluation are essential to confirm that controls remain effective and that the organization's security posture is sound.</p>
@@ -946,7 +942,7 @@
                 <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
                     <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
                         4. Information Security Awareness and Training
-                        
+                        <span class="accordion-icon text-2xl">+</span>
                     </button>
                     <div class="accordion-content hidden p-6">
                         <p class="text-gray-700 mb-4">People are often the most critical component of an organization's security posture. Effective awareness and training programs empower employees to be a strong defense.</p>
@@ -981,7 +977,7 @@
                 <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
                     <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
                         5. Management of External Services
-                       
+                        <span class="accordion-icon text-2xl">+</span>
                     </button>
                     <div class="accordion-content hidden p-6">
                         <p class="text-gray-700 mb-4">Outsourcing services introduces third-party risk. Effective management is critical to ensure external providers maintain adequate security for your data and systems.</p>
@@ -1039,7 +1035,7 @@
                 <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
                     <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
                         6. Information Security Program Communications and Reporting
-                       
+                        <span class="accordion-icon text-2xl">+</span>
                     </button>
                     <div class="accordion-content hidden p-6">
                         <p class="mb-8 text-gray-700">Effective communication is paramount. It builds trust, ensures understanding, and drives informed decision-making across all levels of the organization.</p>
@@ -1287,7 +1283,7 @@
             { term: "Information Asset Classification", definition: "Categorizing information based on its sensitivity, value, and the impact its compromise would have on the business." },
             { term: "ISO/IEC 27001", definition: "A globally recognized standard for establishing, implementing, maintaining, and continually improving an Information Security Management System (ISMS)." },
             { term: "NIST Cybersecurity Framework (CSF)", definition: "A voluntary framework providing a common language and systematic methodology for managing cybersecurity risk, particularly for critical infrastructure." },
-            { term: "COBIT", definition: "A comprehensive framework for governance and management of enterprise IT, including information security as a key domain." },
+            { term: "COBIT", definition: "A comprehensive framework for governance and management of enterprise IT, which includes information security as a key domain. It helps align IT with business goals, ensuring value delivery and risk optimization." },
             { term: "TOGAF", definition: "An enterprise architecture framework that can be used to integrate security architecture into the broader enterprise structure." },
             { term: "SABSA", definition: "A framework for developing business-driven security architectures, ensuring security solutions align with business needs." },
             { term: "Information Security Policy", definition: "High-level statements of management's intent and direction for information security, defining what is to be done and why." },
