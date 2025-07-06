@@ -378,12 +378,19 @@
         @media (min-width: 1024px) {
             #key-terms .grid {
                 grid-template-columns: repeat(6, 1fr); /* Six columns on large screens */
+                gap: 1.5rem; /* Ensure gap is consistent */
             }
             .key-term-card {
-                /* (100% - (6-1)*gap) / 6 */
-                /* gap-6 is 1.5rem, so (100% - 5*1.5rem) / 6 = (100% - 7.5rem) / 6 */
-                flex: 1 1 calc((100% - 7.5rem) / 6);
-                max-width: calc((100% - 7.5rem) / 6);
+                /* Calculate width for 6 columns with gap-6 (1.5rem) */
+                flex: 1 1 calc((100% - (5 * 1.5rem)) / 6);
+                max-width: calc((100% - (5 * 1.5rem)) / 6);
+                min-height: 180px; /* Increased min-height for more text */
+            }
+            .key-term-card .card-title {
+                font-size: 1em; /* Slightly smaller title for more space */
+            }
+            .key-term-card .card-description {
+                font-size: 0.85em; /* Slightly smaller description for more space */
             }
         }
     </style>
@@ -871,7 +878,7 @@
         // Data for Section A.3.a (Risk Assessment Methods)
         const riskMethodDescriptions = {
             qualitative: "Uses descriptive terms (e.g., high, medium, low) for likelihood and impact. It's subjective but quick and often used for initial assessments or when precise data is unavailable. Good for prioritization.",
-            quantitative: "Assigns numerical values (e.g., monetary cost, probability percentages) to likelihood and impact. It aims to provide a more objective and measurable view of risk. Useful for cost-benefit analysis (e.g., SLE, ARO, ALE).",
+            quantitative: "Assigns numerical values (e.g., monetary cost, probability percentages) to likelihood and impact. Aims for objective, measurable views of risk. Useful for cost-benefit analysis (e.g., SLE, ARO, ALE).",
             hybrid: "Combines elements of both qualitative and quantitative approaches. Often, qualitative assessments are used to identify and prioritize risks, and then quantitative analysis is applied to the most critical risks for detailed analysis."
         };
 
