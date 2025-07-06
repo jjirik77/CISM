@@ -16,17 +16,38 @@
         .container {
             max-width: 1200px;
         }
+        /* Enhanced Section Header with new accent color from Domain 3 */
         .section-header {
-            border-left: 4px solid #8FB8A1; /* Soft Green Accent */
-            padding-left: 1rem;
+            border-left: 6px solid #00A896; /* Vibrant Teal Accent */
+            padding-left: 1.25rem;
+            font-size: 2.5rem; /* Slightly larger */
+            color: #222222; /* Darker text for contrast */
         }
+        /* Refined Accordion Button and Content from Domain 3 */
         .accordion-button {
             background-color: #EDEAE0; /* Secondary Neutral */
             border-bottom: 1px solid #D5D2C8;
+            border-radius: 0.75rem; /* More rounded */
+            padding: 1rem 1.5rem; /* Increased padding */
+            font-size: 1.25rem; /* Slightly larger font */
+            font-weight: 700; /* Bolder */
+            color: #333333;
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+            display: flex; /* Ensure flex behavior */
+            justify-content: space-between; /* Pushes content and icon to ends */
+            align-items: center; /* Vertically centers items */
+            text-align: left; /* Keep text aligned left within the button */
+        }
+        .accordion-button:hover {
+            background-color: #D5D2C8; /* Darker on hover */
+            transform: translateY(-1px);
         }
         .accordion-content {
             background-color: #FFFFFF;
             border-bottom: 1px solid #D5D2C8;
+            border-radius: 0 0 0.75rem 0.75rem; /* Match top radius */
+            padding: 1.5rem; /* More padding */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow */
         }
         .chart-container {
             position: relative;
@@ -50,9 +71,11 @@
                 max-height: 400px; /* Increased max height for md screens */
             }
         }
+        /* Active Navigation Item from Domain 3 */
         .nav-item.active {
-            border-bottom: 2px solid #A1C9CE; /* Soft Blue Accent */
-            font-weight: 600;
+            border-bottom: 3px solid #00A896; /* Vibrant Teal Accent */
+            font-weight: 700; /* Bolder */
+            color: #222222;
         }
         .fade-in {
             animation: fadeIn 0.5s ease-in-out;
@@ -124,69 +147,65 @@
             font-size: 0.9em;
         }
 
-        /* Styles for Risk Framework Cards */
-        .risk-framework-card {
+        /* Unified Styles for Interactive Cards (Frameworks, Response, Methods, Key Terms) */
+        .risk-framework-card, .risk-response-card, .risk-method-card, .key-term-card {
             background-color: #EDEAE0; /* Secondary Neutral */
             border: 1px solid #D5D2C8;
             padding: 1rem;
-            border-radius: 0.5rem;
+            border-radius: 0.75rem; /* More rounded */
             cursor: pointer;
             transition: all 0.2s ease-in-out;
-            flex: 1 1 calc(50% - 1rem); /* Two cards per row on larger screens */
-            max-width: calc(50% - 1rem); /* Max width for two columns */
-            box-sizing: border-box; /* Include padding and border in the element's total width and height */
-            text-align: left; /* Align text left within the card */
-            font-weight: 600;
-            color: #333333;
-            min-height: 100px; /* Ensure cards have a minimum height */
-            display: flex; /* Use flexbox for content alignment */
-            flex-direction: column; /* Stack content vertically */
-            justify-content: space-between; /* Push description to bottom if needed */
-        }
-
-        .risk-framework-card:hover {
-            background-color: #D5D2C8; /* Slightly darker on hover */
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .risk-framework-card .card-title {
-            font-size: 1.1em;
-            margin-bottom: 0.5rem;
-            text-align: center; /* Center the title */
-        }
-
-        .risk-framework-card .card-description {
-            font-weight: 400; /* Regular font weight for description */
-            font-size: 0.9em;
-            color: #555555;
-            margin-top: 0.5rem; /* Space between title and description */
-        }
-
-        /* Styles for Risk Response Cards (New) */
-        .risk-response-card {
-            border: 1px solid #D5D2C8;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-            flex: 1 1 calc(50% - 1rem); /* Two cards per row on larger screens */
-            max-width: calc(50% - 1rem);
             box-sizing: border-box;
             text-align: left;
             font-weight: 600;
+            color: #333333;
             min-height: 100px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: center; /* Centered vertically */
+            align-items: center; /* Centered horizontally */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08); /* Subtle initial shadow */
         }
 
-        .risk-response-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        .risk-framework-card:hover, .risk-response-card:hover, .risk-method-card:hover, .key-term-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* More pronounced shadow on hover */
         }
 
-        /* Specific colors for risk response cards */
+        /* Active state for all interactive cards */
+        .risk-framework-card.active, .risk-response-card.active, .risk-method-card.active, .key-term-card.active {
+            border-color: #00A896; /* Vibrant Teal border */
+            box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3); /* Teal glow */
+            background-color: #E0F7F5; /* Very light teal background */
+        }
+
+        .risk-framework-card .card-title, .risk-response-card .card-title, .risk-method-card .card-title, .key-term-card .card-title {
+            font-size: 1.15em; /* Slightly larger title */
+            margin-bottom: 0.6rem;
+            text-align: center;
+            color: #004085; /* Dark blue for title for consistency */
+        }
+
+        .risk-framework-card .card-description, .risk-response-card .card-description, .risk-method-card .card-description, .key-term-card .card-description {
+            font-weight: 400; /* Regular font weight for description */
+            font-size: 0.9em;
+            color: #555555;
+            margin-top: 0.5rem;
+            display: none; /* Hidden by default */
+            text-align: left; /* Default text alignment for descriptions */
+        }
+        /* Specific override for key-term-card description text alignment */
+        .key-term-card .card-description {
+            text-align: center;
+        }
+
+        .risk-framework-card.active .card-description, .risk-response-card.active .card-description, .risk-method-card.active .card-description, .key-term-card.active .card-description {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+
+        /* Specific colors for risk response cards (overriding general card background) */
         .risk-response-card.mitigate { background-color: #D4EDDA; color: #155724; } /* Light Green */
         .risk-response-card.mitigate:hover { background-color: #C3E6CB; }
         .risk-response-card.transfer { background-color: #CCE5FF; color: #004085; } /* Light Blue */
@@ -196,17 +215,14 @@
         .risk-response-card.accept { background-color: #FFF3CD; color: #856404; } /* Light Yellow */
         .risk-response-card.accept:hover { background-color: #FFECB3; }
 
-        .risk-response-card .card-title {
-            font-size: 1.1em;
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
+        /* Specific colors for risk method cards (overriding general card background) */
+        .risk-method-card.qualitative { background-color: #F0F8FF; color: #001f3f; } /* Alice Blue */
+        .risk-method-card.qualitative:hover { background-color: #E0F2FF; }
+        .risk-method-card.quantitative { background-color: #F5FFFA; color: #003300; } /* Mint Cream */
+        .risk-method-card.quantitative:hover { background-color: #E6FFF2; }
+        .risk-method-card.hybrid { background-color: #FAEBD7; color: #4B0082; } /* Antique White with Indigo */
+        .risk-method-card.hybrid:hover { background-color: #F0DDC0; }
 
-        .risk-response-card .card-description {
-            font-weight: 400;
-            font-size: 0.9em;
-            margin-top: 0.5rem;
-        }
 
         /* Risk Posture Scorecard Table Styles */
         .risk-scorecard-table {
@@ -264,7 +280,8 @@
             width: fit-content; /* Adjust width to content */
             display: flex; /* Use flexbox for content alignment */
             flex-direction: column; /* Stack content vertically */
-            justify-content: space-between; /* Push description to bottom if needed */
+            justify-content: center; /* Centered vertically */
+            align-items: center; /* Centered horizontally */
         }
 
         .role-node:hover {
@@ -272,10 +289,17 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
+        .role-node.active {
+            border-color: #00A896; /* Vibrant Teal border */
+            box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3); /* Teal glow */
+            background-color: #E0F7F5; /* Very light teal background */
+        }
 
         .role-node .role-title {
             display: block;
-            margin-bottom: 0.5rem; /* Space between title and description */
+            margin-bottom: 0.6rem; /* Space between title and description */
+            font-size: 1.15em; /* Slightly larger title */
+            color: #004085; /* Dark blue for title for consistency */
         }
         .role-node .role-description {
             font-weight: 400; /* Regular font weight for description */
@@ -283,6 +307,11 @@
             color: #555555;
             text-align: left; /* Align description text left */
             margin-top: 0.5rem;
+            display: none; /* Hidden by default */
+        }
+        .role-node.active .role-description {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
         }
 
 
@@ -325,56 +354,13 @@
         .role-node.it-ops { background-color: #FF6384; color: #333333; } /* Pinkish Red */
         .role-node.end-users { background-color: #B0C4DE; color: #333333; } /* Light Steel Blue - Changed for readability */
 
-        /* Styles for Risk Method Cards */
-        .risk-method-card {
-            border: 1px solid #D5D2C8;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-            flex: 1 1 calc(33.33% - 1rem); /* Three cards per row */
-            max-width: calc(33.33% - 1rem);
-            box-sizing: border-box;
-            text-align: left;
-            font-weight: 600;
-            min-height: 100px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .risk-method-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .risk-method-card.qualitative { background-color: #F0F8FF; color: #001f3f; } /* Alice Blue */
-        .risk-method-card.qualitative:hover { background-color: #E0F2FF; }
-        .risk-method-card.quantitative { background-color: #F5FFFA; color: #003300; } /* Mint Cream */
-        .risk-method-card.quantitative:hover { background-color: #E6FFF2; }
-        .risk-method-card.hybrid { background-color: #FAEBD7; color: #4B0082; } /* Antique White with Indigo */
-        .risk-method-card.hybrid:hover { background-color: #F0DDC0; }
 
-        .risk-method-card .card-title {
-            font-size: 1.1em;
-            margin-bottom: 0.5rem;
-            text-align: center;
-        }
-        .risk-method-card .card-description {
-            font-weight: 400;
-            font-size: 0.9em;
-            margin-top: 0.5rem;
-        }
-
-
-        /* Adjust for responsiveness of hierarchy chart */
+        /* Responsive Adjustments for new cards/elements */
         @media (max-width: 768px) {
-            .flex.justify-center.gap-8 {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            .role-node,
             .risk-framework-card,
             .risk-response-card,
-            .risk-method-card { /* Apply to new method cards too */
+            .risk-method-card,
+            .key-term-card { /* Apply to all interactive cards */
                 flex: 1 1 100%; /* Stack cards on medium screens */
                 max-width: 100%;
             }
@@ -388,6 +374,18 @@
                 display: none; /* Hide horizontal stubs */
             }
         }
+        /* Adjusted for larger screens to maintain 6 columns for key terms */
+        @media (min-width: 1024px) {
+            #key-terms .grid {
+                grid-template-columns: repeat(6, 1fr); /* Six columns on large screens */
+            }
+            .key-term-card {
+                /* (100% - (6-1)*gap) / 6 */
+                /* gap-6 is 1.5rem, so (100% - 5*1.5rem) / 6 = (100% - 7.5rem) / 6 */
+                flex: 1 1 calc((100% - 7.5rem) / 6);
+                max-width: calc((100% - 7.5rem) / 6);
+            }
+        }
     </style>
 </head>
 <body class="leading-relaxed">
@@ -399,15 +397,27 @@
         </header>
 
         <nav class="bg-white p-4 rounded-lg shadow-md mb-8 flex justify-center sticky top-0 z-10">
-            <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200 active" data-target="risk-assessment">Information Security Risk Assessment</button>
+            <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200 active" data-target="introduction">Introduction</button>
+            <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="risk-assessment">Information Security Risk Assessment</button>
             <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="risk-response">Information Security Risk Response</button>
+            <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="key-terms">Key Terms</button>
+            <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="domain-summary">Domain Summary</button>
         </nav>
 
         <main id="content-area">
+            <!-- New Section for Introduction -->
+            <section id="introduction" class="content-section fade-in">
+                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Introduction to CISM Domain 2</h2>
+                <div class="p-6 bg-white rounded-lg shadow-md">
+                    <p class="text-gray-700 mb-4">Welcome to the interactive study guide for CISM Domain 2: Information Security Risk Management. This domain is the cornerstone of effective information security, focusing on how organizations identify, assess, respond to, and monitor risks to their valuable information assets. A strong grasp of these principles is not just theoretical; it's crucial for making informed, business-aligned decisions that proactively protect the enterprise.</p>
+                    <p class="text-gray-700">Throughout this guide, you will explore the dynamic threat landscape, learn how to analyze vulnerabilities, apply various risk assessment methodologies, and understand the critical strategies for responding to risks. We will also delve into the importance of clear risk and control ownership and the continuous process of monitoring and reporting. This interactive format is designed to enhance your learning experience, making complex topics more accessible and engaging.</p>
+                </div>
+            </section>
+
             <!-- Information Security Risk Assessment Section -->
-            <section id="risk-assessment" class="content-section fade-in">
+            <section id="risk-assessment" class="content-section hidden">
                 <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Section A: Information Security Risk Assessment</h2>
-                <p class="mb-8 text-gray-700">Information security risk assessment is the systematic process of identifying potential threats and vulnerabilities, analyzing their potential impact, and determining the likelihood of their occurrence. It's about understanding *what could go wrong* and *how bad it could be*.</p>
+                <p class="mb-8 text-gray-700">Information security risk assessment is the systematic process of identifying potential threats and vulnerabilities, analyzing their potential impact, and determining the likelihood of their occurrence. It's about understanding "what could go wrong" and "how bad it could be".</p>
 
                 <!-- Sub-Domain: Emerging Risk and Threat Landscape -->
                 <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
@@ -609,7 +619,7 @@
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                                 <div>
                                     <label for="assetValue" class="block text-gray-700 text-sm font-bold mb-1">Asset Value (AV) ($):</label>
-                                    <input type="number" id="assetValue" value="100000" min="0" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200">
+                                    <input type="text" id="assetValue" value="100,000" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200">
                                 </div>
                                 <div>
                                     <label for="exposureFactor" class="block text-gray-700 text-sm font-bold mb-1">Exposure Factor (EF) (% loss):</label>
@@ -631,7 +641,7 @@
             </section>
 
             <!-- Information Security Risk Response Section -->
-            <section id="risk-response" class="content-section hidden fade-in">
+            <section id="risk-response" class="content-section hidden">
                 <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Section B: Information Security Risk Response</h2>
                 <p class="mb-8 text-gray-700">Once risks have been assessed and analyzed, the next critical phase is to determine how to address them. This involves selecting and implementing appropriate risk treatment strategies.</p>
 
@@ -806,6 +816,26 @@
                     </div>
                 </div>
             </section>
+
+            <!-- New Section for Key Terms -->
+            <section id="key-terms" class="content-section hidden">
+                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Key Terms</h2>
+                <p class="mb-8 text-gray-700">Test your knowledge of key terms in Information Security Risk Management with these interactive flashcards. Click on a card to reveal its definition.</p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6">
+                    <!-- Key Terms will be populated here by JavaScript -->
+                </div>
+            </section>
+
+            <!-- New Section for Domain Summary -->
+            <section id="domain-summary" class="content-section hidden">
+                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Domain Summary</h2>
+                <div class="p-6 bg-white rounded-lg shadow-md">
+                    <p class="text-gray-700 mb-4">Domain 2: Information Security Risk Management is a critical component of the CISM framework, focusing on the systematic identification, assessment, response, and monitoring of risks to an organization's information assets. It emphasizes a proactive approach to understanding the evolving threat landscape, including emerging threats like ransomware, insider threats, and third-party risks, and analyzing their potential impact.</p>
+                    <p class="text-gray-700 mb-4">The domain covers various risk assessment methodologies, including qualitative, quantitative, and hybrid approaches, and the use of standardized frameworks such as ISO/IEC 27005, NIST SP 800-30, FAIR, and OCTAVE. It highlights the importance of distinguishing between inherent and residual risk and evaluating risks based on their likelihood and business impact. Furthermore, Domain 2 delves into risk response strategies—mitigating with controls, transferring through contracts or insurance, avoiding risky activities, or accepting risks with management approval—ensuring these align with legal, regulatory, and business constraints.</p>
+                    <p class="text-gray-700">Crucially, this domain stresses the assignment of clear risk and control ownership to appropriate stakeholders, establishing accountability for implementation and operation. Finally, it covers the continuous process of risk monitoring and reporting, including maintaining risk registers, tracking Key Risk Indicators (KRIs), and communicating risk posture to leadership through dashboards and executive summaries, all aimed at supporting continuous improvement in the organization's security posture.</p>
+                </div>
+            </section>
         </main>
 
         <footer class="text-center py-6 mt-8 text-gray-500 text-sm">
@@ -816,7 +846,7 @@
     <script>
         // JS Variables for current state and base data
         const currentSection = {
-            id: 'risk-assessment'
+            id: 'introduction' // Default to introduction
         };
 
         // Data for Section A.1.a (Emerging Threats)
@@ -841,12 +871,12 @@
         // Data for Section A.3.a (Risk Assessment Methods)
         const riskMethodDescriptions = {
             qualitative: "Uses descriptive terms (e.g., high, medium, low) for likelihood and impact. It's subjective but quick and often used for initial assessments or when precise data is unavailable. Good for prioritization.",
-            quantitative: "Assigns numerical values (e.g., monetary cost, probability percentages) to likelihood and impact. Aims for objective, measurable views of risk. Useful for cost-benefit analysis (e.g., SLE, ARO, ALE).",
+            quantitative: "Assigns numerical values (e.g., monetary cost, probability percentages) to likelihood and impact. It aims to provide a more objective and measurable view of risk. Useful for cost-benefit analysis (e.g., SLE, ARO, ALE).",
             hybrid: "Combines elements of both qualitative and quantitative approaches. Often, qualitative assessments are used to identify and prioritize risks, and then quantitative analysis is applied to the most critical risks for detailed analysis."
         };
 
-        // Data for Section A.3.c (Risk Frameworks) - Descriptions are now within the HTML for direct display
-        const riskFrameworkDescriptions = { /* This object is no longer directly used by JS for rendering, but kept for reference */
+        // Data for Section A.3.c (Risk Frameworks)
+        const riskFrameworkDescriptions = {
             iso27005: {
                 name: "ISO/IEC 27005",
                 description: "Provides guidelines for information security risk management. It supports the general concepts specified in ISO/IEC 27001 (for ISMS) and is designed to assist the satisfactory implementation of information security based on a risk management approach."
@@ -866,7 +896,7 @@
         };
 
         // Data for Section B.1.a (Risk Response Options)
-        const riskResponseDescriptions = { /* This object is no longer directly used by JS for rendering, but kept for reference */
+        const riskResponseDescriptions = {
             mitigate: "Implement controls to lower the likelihood or impact of a risk. This is the most common response, involving security controls like firewalls, encryption, or security awareness training.",
             transfer: "Shift the financial or operational burden of a risk to a third party (e.g., purchasing cyber insurance, outsourcing to a vendor with strong security clauses).",
             avoid: "Eliminate the risk entirely by choosing not to engage in or ceasing an activity that gives rise to the risk (e.g., deciding not to store sensitive customer data, discontinuing an insecure legacy application).",
@@ -920,6 +950,25 @@
             }
         };
         const riskMonitoringKRILabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+        // Data for Key Terms (New for Domain 2)
+        const keyTermsData = [
+            { term: "Inherent Risk", definition: "The level of risk that exists before any controls or other mitigating factors are put in place. It's the raw risk." },
+            { term: "Residual Risk", definition: "The level of risk that remains after controls have been implemented and account for their effectiveness. This is the risk that management accepts." },
+            { term: "Risk Appetite", definition: "The amount of risk an organization is willing to take to achieve its objectives. It's a high-level strategic statement." },
+            { term: "Risk Tolerance", definition: "The acceptable deviation from the risk appetite. It sets specific thresholds for different types of risks." },
+            { term: "Qualitative Risk Assessment", definition: "Uses descriptive terms (e.g., high, medium, low) to define likelihood and impact. It's subjective but quick and often used for initial assessments." },
+            { term: "Quantitative Risk Assessment", definition: "Assigns numerical values (e.g., monetary cost, probability percentages) to likelihood and impact. It aims to provide a more objective and measurable view of risk (e.g., ALE, SLE, ARO)." },
+            { term: "Annualized Loss Expectancy (ALE)", definition: "The expected monetary loss for an asset due to a risk over a one-year period. Calculated as Single Loss Expectancy (SLE) multiplied by Annualized Rate of Occurrence (ARO)." },
+            { term: "Single Loss Expectancy (SLE)", definition: "The monetary loss expected each time a risk event occurs. Calculated as Asset Value (AV) multiplied by Exposure Factor (EF)." },
+            { term: "Annualized Rate of Occurrence (ARO)", definition: "The estimated frequency at which a threat event is expected to occur within a one-year period." },
+            { term: "Risk Mitigation", definition: "Reducing the likelihood or impact of a risk through the implementation of security controls." },
+            { term: "Risk Transfer", definition: "Shifting the financial or operational burden of a risk to a third party, often through insurance or contractual agreements." },
+            { term: "Risk Avoidance", definition: "Eliminating the risk entirely by choosing not to engage in or ceasing an activity that gives rise to the risk." },
+            { term: "Risk Acceptance", definition: "Acknowledging the existence of a risk and deciding to take no further action to mitigate it, usually with formal management approval." },
+            { term: "Key Risk Indicator (KRI)", definition: "Metrics that provide an early warning signal of increasing risk exposure, helping in proactive risk management." },
+            { term: "Risk Register", definition: "A central repository for all identified risks, including their description, ownership, assessment, and treatment status." }
+        ];
 
 
         let threatDistributionChartInstance;
@@ -1065,12 +1114,23 @@
 
         // Quantitative Risk Calculation Function
         const calculateQuantitativeRisk = () => {
-            const assetValue = parseFloat(document.getElementById('assetValue').value);
+            const assetValueInput = document.getElementById('assetValue');
+            const rawAssetValue = assetValueInput.value.replace(/,/g, ''); // Remove commas for parsing
+            let assetValue = parseFloat(rawAssetValue);
+
             const exposureFactor = parseFloat(document.getElementById('exposureFactor').value);
             const aro = parseFloat(document.getElementById('aro').value);
 
             let sle = 0;
             let ale = 0;
+
+            if (!isNaN(assetValue)) {
+                // Format the input value immediately after parsing
+                assetValueInput.value = assetValue.toLocaleString('en-US');
+            } else {
+                assetValue = 0; // Treat invalid input as 0 for calculation
+            }
+
 
             if (!isNaN(assetValue) && !isNaN(exposureFactor)) {
                 sle = assetValue * exposureFactor;
@@ -1080,8 +1140,9 @@
                 ale = sle * aro;
             }
 
-            document.getElementById('sleResult').textContent = sle.toFixed(2);
-            document.getElementById('aleResult').textContent = ale.toFixed(2);
+            // Format monetary values with commas and two decimal places
+            document.getElementById('sleResult').textContent = sle.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('aleResult').textContent = ale.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         };
 
 
@@ -1109,8 +1170,24 @@
                     targetSection.classList.remove('hidden');
                     targetSection.classList.add('fade-in');
                     currentSection.id = button.dataset.target;
+
+                    // Specific rendering for Key Terms section if activated
+                    if (button.dataset.target === 'key-terms') {
+                        renderKeyTerms();
+                    }
                 });
             });
+
+            // Set the Introduction tab as active by default on load
+            const introButton = document.querySelector('.nav-item[data-target="introduction"]');
+            const introSection = document.getElementById('introduction');
+            if (introButton && introSection) {
+                introButton.classList.add('active');
+                introSection.classList.remove('hidden');
+                introSection.classList.add('fade-in');
+                currentSection.id = 'introduction';
+            }
+
 
             // Accordion Functionality
             document.querySelectorAll('.accordion-button').forEach(button => {
@@ -1143,20 +1220,24 @@
             document.querySelectorAll('.risk-method-card').forEach(card => {
                 card.addEventListener('click', () => {
                     const descriptionDiv = card.querySelector('.card-description');
+                    const methodKey = card.dataset.method;
 
                     // Close all other open cards in this section
                     document.querySelectorAll('.risk-method-card').forEach(otherCard => {
                         const otherDescriptionDiv = otherCard.querySelector('.card-description');
                         if (otherCard !== card && !otherDescriptionDiv.classList.contains('hidden')) {
-                            otherDescriptionDiv.classList.add('hidden');
-                            otherDescriptionDiv.classList.remove('fade-in');
+                            otherCard.classList.remove('active');
                         }
                     });
 
-                    // Toggle the clicked card's description
-                    if (descriptionDiv) {
-                        descriptionDiv.classList.toggle('hidden');
-                        descriptionDiv.classList.toggle('fade-in');
+                    // Toggle the clicked card's active class
+                    card.classList.toggle('active');
+
+                    // If the card is now active, populate its description
+                    if (card.classList.contains('active') && descriptionDiv && riskMethodDescriptions[methodKey]) {
+                        descriptionDiv.innerHTML = `<p>${riskMethodDescriptions[methodKey]}</p>`; // Set content
+                    } else if (descriptionDiv) {
+                        descriptionDiv.innerHTML = ''; // Clear content if deactivating
                     }
                 });
             });
@@ -1165,48 +1246,56 @@
             document.querySelectorAll('.risk-framework-card').forEach(card => {
                 card.addEventListener('click', () => {
                     const descriptionDiv = card.querySelector('.card-description');
+                    const frameworkKey = card.dataset.framework;
 
                     // Close all other open cards
                     document.querySelectorAll('.risk-framework-card').forEach(otherCard => {
                         const otherDescriptionDiv = otherCard.querySelector('.card-description');
                         if (otherCard !== card && !otherDescriptionDiv.classList.contains('hidden')) {
-                            otherDescriptionDiv.classList.add('hidden');
-                            otherDescriptionDiv.classList.remove('fade-in');
+                            otherCard.classList.remove('active');
                         }
                     });
 
-                    // Toggle the clicked card's description
-                    if (descriptionDiv) {
-                        descriptionDiv.classList.toggle('hidden');
-                        descriptionDiv.classList.toggle('fade-in');
+                    // Toggle the clicked card's active class
+                    card.classList.toggle('active');
+
+                    // If the card is now active, populate its description
+                    if (card.classList.contains('active') && descriptionDiv && riskFrameworkDescriptions[frameworkKey]) {
+                        descriptionDiv.innerHTML = `<p>${riskFrameworkDescriptions[frameworkKey].description}</p>`; // Set content
+                    } else if (descriptionDiv) {
+                        descriptionDiv.innerHTML = ''; // Clear content if deactivating
                     }
                 });
             });
 
 
-            // Risk Response Option Description Toggles (Updated Logic)
+            // Risk Response Option Description Toggles
             document.querySelectorAll('.risk-response-card').forEach(card => {
                 card.addEventListener('click', () => {
                     const descriptionDiv = card.querySelector('.card-description');
+                    const responseKey = card.dataset.response;
 
                     // Close all other open cards
                     document.querySelectorAll('.risk-response-card').forEach(otherCard => {
                         const otherDescriptionDiv = otherCard.querySelector('.card-description');
                         if (otherCard !== card && !otherDescriptionDiv.classList.contains('hidden')) {
-                            otherDescriptionDiv.classList.add('hidden');
-                            otherDescriptionDiv.classList.remove('fade-in');
+                            otherCard.classList.remove('active');
                         }
                     });
 
-                    // Toggle the clicked card's description
-                    if (descriptionDiv) {
-                        descriptionDiv.classList.toggle('hidden');
-                        descriptionDiv.classList.toggle('fade-in');
+                    // Toggle the clicked card's active class
+                    card.classList.toggle('active');
+
+                    // If the card is now active, populate its description
+                    if (card.classList.contains('active') && descriptionDiv && riskResponseDescriptions[responseKey]) {
+                        descriptionDiv.innerHTML = `<p>${riskResponseDescriptions[responseKey]}</p>`; // Set content
+                    } else if (descriptionDiv) {
+                        descriptionDiv.innerHTML = ''; // Clear content if deactivating
                     }
                 });
             });
 
-            // Risk and Control Ownership Role Details (New Logic)
+            // Risk and Control Ownership Role Details
             document.querySelectorAll('.role-node').forEach(roleNode => {
                 roleNode.addEventListener('click', () => {
                     const roleKey = roleNode.dataset.role;
@@ -1217,16 +1306,18 @@
                     document.querySelectorAll('.role-node').forEach(otherRoleNode => {
                         const otherRoleDescriptionDiv = otherRoleNode.querySelector('.role-description');
                         if (otherRoleNode !== roleNode && otherRoleDescriptionDiv && !otherRoleDescriptionDiv.classList.contains('hidden')) {
-                            otherRoleDescriptionDiv.classList.add('hidden');
-                            otherRoleDescriptionDiv.classList.remove('fade-in');
+                            otherRoleNode.classList.remove('active');
                         }
                     });
 
-                    // Toggle the clicked role's description
-                    if (roleDescriptionDiv && roleInfo) {
+                    // Toggle the clicked role's active class
+                    roleNode.classList.toggle('active');
+
+                    // If the role node is now active, populate its description
+                    if (roleNode.classList.contains('active') && roleDescriptionDiv && roleInfo) {
                         roleDescriptionDiv.innerHTML = `<p>${roleInfo.description}</p>`; // Set content
-                        roleDescriptionDiv.classList.toggle('hidden');
-                        roleDescriptionDiv.classList.toggle('fade-in');
+                    } else if (roleDescriptionDiv) {
+                        roleDescriptionDiv.innerHTML = ''; // Clear content if deactivating
                     }
                 });
             });
@@ -1243,6 +1334,48 @@
             document.getElementById('assetValue').addEventListener('input', calculateQuantitativeRisk);
             document.getElementById('exposureFactor').addEventListener('input', calculateQuantitativeRisk);
             document.getElementById('aro').addEventListener('input', calculateQuantitativeRisk);
+
+            // Function to render Key Terms cards
+            const renderKeyTerms = () => {
+                const keyTermsContainer = document.querySelector('#key-terms .grid');
+                if (!keyTermsContainer) return; // Exit if container not found
+                keyTermsContainer.innerHTML = ''; // Clear existing cards
+
+                keyTermsData.forEach((item, index) => {
+                    const cardHtml = `
+                        <div class="key-term-card" data-term-key="${index}">
+                            <h3 class="card-title">${item.term}</h3>
+                            <div class="card-description"></div>
+                        </div>
+                    `;
+                    keyTermsContainer.insertAdjacentHTML('beforeend', cardHtml);
+                });
+
+                // Add event listeners for key term cards
+                document.querySelectorAll('.key-term-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        const descriptionDiv = card.querySelector('.card-description');
+                        const termIndex = parseInt(card.dataset.termKey);
+
+                        // Close all other open cards and remove 'active' class
+                        document.querySelectorAll('.key-term-card').forEach(otherCard => {
+                            if (otherCard !== card) {
+                                otherCard.classList.remove('active');
+                            }
+                        });
+
+                        // Toggle the clicked card's active class
+                        card.classList.toggle('active');
+
+                        // If the card is now active, populate its description
+                        if (card.classList.contains('active') && descriptionDiv && keyTermsData[termIndex]) {
+                            descriptionDiv.innerHTML = `<p>${keyTermsData[termIndex].definition}</p>`; // Set content
+                        } else if (descriptionDiv) {
+                            descriptionDiv.innerHTML = ''; // Clear content if deactivating
+                        }
+                    });
+                });
+            };
         });
     </script>
 </body>
