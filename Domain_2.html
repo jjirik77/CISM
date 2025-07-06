@@ -381,11 +381,14 @@
                 gap: 1.5rem; /* Ensure gap is consistent */
             }
             .key-term-card {
-                /* Calculate width for 6 columns with gap-6 (1.5rem) */
-                flex: 1 1 calc((100% - (5 * 1.5rem)) / 6);
-                min-width: 150px;
-                max-width: calc((100% - (5 * 1.5rem)) / 6);
-                min-height: 180px; /* Increased min-height for more text */
+                /* Adjusted for larger screens to maintain 2 columns for key terms */
+        @media (min-width: 1024px) {
+            .key-terms .grid {
+                grid-template-columns: repeat(2, 1fr); /* Two columns on large screens */
+            }
+            .key-term-card {
+                flex: 1 1 calc(100% - 1rem); /* Each card takes full width */
+                max-width: calc(110% - 1rem);
             }
             .key-term-card .card-title {
                 font-size: 1em; /* Slightly smaller title for more space */
