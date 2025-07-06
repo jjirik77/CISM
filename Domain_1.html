@@ -112,12 +112,14 @@
             text-align: center; /* Center text horizontally */
             font-weight: 600;
             color: #333333;
-            min-height: 180px; /* Consistent min-height for all cards */
+            min-height: 100px; /* Consistent min-height for all cards, changed to 100px */
             display: flex;
             flex-direction: column;
             justify-content: center; /* Center vertically initially */
             align-items: center; /* Center horizontally */
             box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+            flex: 0 0 150px; /* Fixed width for all cards */
+            max-width: 150px; /* Fixed max-width for all cards */
         }
 
         .interactive-card:hover {
@@ -221,8 +223,8 @@
             margin-top: 1rem;
         }
         .privacy-region-card { /* Make these smaller horizontally */
-            flex: 0 0 calc(33.333% - 1rem); /* 3 columns on larger screens */
-            max-width: calc(33.333% - 1rem);
+            flex: 0 0 150px; /* Fixed width for privacy cards */
+            max-width: 150px; /* Fixed max-width */
         }
         @media (max-width: 768px) {
             .privacy-region-card {
@@ -247,8 +249,8 @@
             margin-top: 1rem;
         }
         .contract-clause-card { /* Make these smaller horizontally */
-            flex: 0 0 calc(33.333% - 1rem); /* 3 columns on larger screens */
-            max-width: calc(33.333% - 1rem);
+            flex: 0 0 150px; /* Fixed width for contract cards */
+            max-width: 150px; /* Fixed max-width */
         }
         @media (max-width: 768px) {
             .contract-clause-card {
@@ -401,6 +403,7 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
+            align-items: stretch; /* Ensure cards stretch to fill height */
             gap: 1rem;
             margin-top: 1rem;
         }
@@ -413,9 +416,9 @@
             cursor: pointer;
             transition: all 0.2s ease-in-out;
             box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-            flex: 0 0 calc(20% - 1rem); /* 5 columns on larger screens, smaller horizontally */
-            max-width: calc(20% - 1rem);
-            min-height: 180px; /* Increased min-height for more text */
+            flex: 0 0 150px; /* Fixed width for change management cards */
+            max-width: 150px; /* Fixed width */
+            min-height: 180px; /* Consistent min-height for more text */
             text-align: center;
             position: relative; /* For arrows */
         }
@@ -554,6 +557,7 @@
             display: flex;
             flex-wrap: wrap; /* Allow wrapping */
             justify-content: center;
+            align-items: stretch; /* Ensure cards stretch to fill height */
             gap: 1rem;
             margin-bottom: 1rem;
         }
