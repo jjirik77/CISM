@@ -598,12 +598,12 @@
                 max-width: calc(50% - 1rem);
             }
             .maturity-level-card::after {
-                content: '▼'; /* Down arrow for wrapped items */
-                right: auto;
-                left: 50%;
-                top: auto;
+                content: '▼';
+                position: absolute;
                 bottom: -1.5rem;
+                left: 50%;
                 transform: translateX(-50%);
+                color: #D5D2C8;
                 font-size: 1.2em;
             }
             .maturity-level-card:last-child::after {
@@ -612,7 +612,7 @@
         }
         @media (max-width: 480px) {
             .maturity-level-card {
-                flex: 1 1 100%; /* 1 column on small screens */
+                flex: 1 1 100%;
                 max-width: 100%;
             }
         }
@@ -631,6 +631,7 @@
             <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200 active" data-target="introduction">Introduction</button>
             <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="enterprise-governance">Enterprise Governance</button>
             <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="information-security-strategy">Information Security Strategy</button>
+            <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="key-terms">Key Terms</button>
             <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="domain-summary">Domain Summary</button>
         </nav>
 
@@ -685,7 +686,7 @@
 
 
                         <h4 class="text-lg font-semibold text-gray-700 mb-3">d. Change management and resistance mitigation in security initiatives</h4>
-                        <p class="text-gray-600 mb-4">Implementing new security measures often encounters resistance. Effective change management involves early stakeholder engagement, clear communication of the "why," and providing adequate training and support to facilitate adoption. Click on each step to learn more:</p>
+                        <p class="text-gray-600 mb-4">Implementing new security measures often encounters resistance. Effective change management involves early stakeholder engagement, clear communication of the "why," and providing adequate training and and support to facilitate adoption. Click on each step to learn more:</p>
                         <div class="flex flex-wrap justify-center gap-4 mb-6">
                             <div class="interactive-card change-management-card" data-card-type="change-management" data-step="communicate">
                                 <span class="card-title">Communicate Early & Often</span>
@@ -1057,6 +1058,16 @@
                     <p class="text-gray-700 mb-4">Domain 1: Information Security Governance is the cornerstone of effective information security management within an organization. It emphasizes aligning security objectives directly with overarching business goals, ensuring that security acts as an enabler rather than a barrier to enterprise success. This domain highlights the critical role of a strong, security-aware organizational culture, driven by visible executive sponsorship and effective communication, and managed through robust change management processes.</p>
                     <p class="text-gray-700 mb-4">A key aspect covered is the navigation of complex legal, regulatory, and contractual requirements, including global data protection laws like GDPR and HIPAA, and industry-specific mandates. The domain also details the importance of clearly defined organizational structures, roles, and responsibilities, promoting accountability through mechanisms like Segregation of Duties and establishing formal governance forums such as security steering committees.</p>
                     <p class="text-gray-700">Furthermore, Domain 1 delves into the strategic planning of information security. This involves developing a clear vision, mission, and guiding principles for the security program, determining the organization's risk appetite, and prioritizing initiatives based on business impact and the evolving threat landscape. It stresses the adoption and integration of established governance frameworks like COBIT, ISO/IEC 27001, and NIST CSF. Finally, it covers the practical aspects of strategic planning, including building multi-year roadmaps, developing compelling business cases for security investments, managing budgets and resources, and continuously monitoring performance through KPIs and KRIs to drive ongoing improvement via maturity models like CMMI and the PDCA cycle.</p>
+                </div>
+            </section>
+
+            <!-- Key Terms Section -->
+            <section id="key-terms" class="content-section hidden">
+                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Key Terms for Domain 1</h2>
+                <p class="mb-8 text-gray-700">Explore essential terms related to Information Security Governance. Click on each term to reveal its definition.</p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <!-- Key Terms will be populated here by JavaScript -->
                 </div>
             </section>
         </main>
@@ -1439,6 +1450,22 @@
             }
         };
 
+        // Data for Key Terms (New for Domain 1)
+        const keyTermsData = [
+            { term: "Information Security Governance", definition: "The system by which information security activities are directed and controlled. It ensures that information security aligns with business objectives and manages risks effectively." },
+            { term: "Organizational Culture", definition: "The shared values, beliefs, and practices that influence how individuals perceive and engage with security within an organization." },
+            { term: "Risk Appetite", definition: "The amount and type of risk that an organization is willing to take in order to meet its strategic objectives." },
+            { term: "Risk Tolerance", definition: "The acceptable deviation from the risk appetite, setting specific thresholds for different types of risks." },
+            { term: "Legal & Regulatory Compliance", definition: "Adherence to laws, regulations, and industry standards (e.g., GDPR, HIPAA, PCI DSS) that dictate how an organization must protect information." },
+            { term: "Segregation of Duties (SoD)", definition: "A control principle that divides critical tasks among different individuals to prevent a single person from controlling an entire process and to reduce the risk of fraud or error." },
+            { term: "Security Steering Committee", definition: "A formal group, typically comprising senior management and key stakeholders, responsible for providing strategic direction, oversight, and resource allocation for the information security program." },
+            { term: "Information Security Strategy", definition: "A long-term plan that outlines how an organization will protect its information assets to support business objectives and manage risks effectively." },
+            { term: "Framework Adoption", definition: "The process of selecting, implementing, and integrating a recognized information security framework (e.g., ISO/IEC 27001, NIST CSF) to structure and improve security practices." },
+            { term: "KPIs (Key Performance Indicators)", definition: "Measurable values that demonstrate how effectively an organization is achieving key business objectives related to information security performance." },
+            { term: "KRIs (Key Risk Indicators)", definition: "Metrics that provide an early warning signal of increasing risk exposure, helping in proactive risk management and decision-making." },
+            { term: "Maturity Model", definition: "A structured approach (e.g., CMMI) that describes the evolutionary stages of an organization's processes, from initial/ad hoc to optimizing, providing a roadmap for continuous improvement in information security." }
+        ];
+
 
         let cultureImpactChartInstance;
         let priorityChartInstance;
@@ -1726,6 +1753,11 @@
                     targetSection.classList.remove('hidden');
                     targetSection.classList.add('fade-in');
                     currentSection.id = button.dataset.target;
+
+                    // Specific rendering for Key Terms section if activated
+                    if (button.dataset.target === 'key-terms') {
+                        renderKeyTerms();
+                    }
                 });
             });
 
@@ -2165,6 +2197,49 @@
                     }
                 });
             });
+
+            // Function to render Key Terms cards
+            const renderKeyTerms = () => {
+                const keyTermsContainer = document.querySelector('#key-terms .grid');
+                if (!keyTermsContainer) return; // Exit if container not found
+                keyTermsContainer.innerHTML = ''; // Clear existing cards
+
+                keyTermsData.forEach((item, index) => {
+                    const cardHtml = `
+                        <div class="interactive-card key-term-card" data-term-key="${index}">
+                            <h3 class="card-title">${item.term}</h3>
+                            <div class="card-description"></div>
+                        </div>
+                    `;
+                    keyTermsContainer.insertAdjacentHTML('beforeend', cardHtml);
+                });
+
+                // Add event listeners for key term cards
+                document.querySelectorAll('.key-term-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        const descriptionDiv = card.querySelector('.card-description');
+                        const termIndex = parseInt(card.dataset.termKey);
+
+                        // Close all other open cards and remove 'active' class
+                        document.querySelectorAll('.key-term-card').forEach(otherCard => {
+                            if (otherCard !== card) {
+                                otherCard.classList.remove('active');
+                                otherCard.querySelector('.card-description').innerHTML = '';
+                            }
+                        });
+
+                        // Toggle the clicked card's active class
+                        card.classList.toggle('active');
+
+                        // If the card is now active, populate its description
+                        if (card.classList.contains('active') && descriptionDiv && keyTermsData[termIndex]) {
+                            descriptionDiv.innerHTML = `<p>${keyTermsData[termIndex].definition}</p>`; // Set content
+                        } else if (descriptionDiv) {
+                            descriptionDiv.innerHTML = ''; // Clear content if deactivating
+                        }
+                    });
+                });
+            };
 
         });
     </script>
