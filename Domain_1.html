@@ -223,8 +223,8 @@
             margin-top: 1rem;
         }
         .privacy-region-card { /* Make these smaller horizontally */
-            flex: 0 0 150px; /* Fixed width for privacy cards */
-            max-width: 150px; /* Fixed max-width */
+            flex: 0 0 250px; /* Fixed width for privacy cards */
+            max-width: 250px; /* Fixed max-width */
         }
         @media (max-width: 768px) {
             .privacy-region-card {
@@ -249,8 +249,8 @@
             margin-top: 1rem;
         }
         .contract-clause-card { /* Make these smaller horizontally */
-            flex: 0 0 150px; /* Fixed width for contract cards */
-            max-width: 150px; /* Fixed max-width */
+            flex: 0 0 250px; /* Fixed width for contract cards */
+            max-width: 250px; /* Fixed max-width */
         }
         @media (max-width: 768px) {
             .contract-clause-card {
@@ -494,7 +494,7 @@
         }
         @media (max-width: 768px) { /* For medium and small screens */
             .journey-step-card {
-                flex: 1 1 calc(50% - 1rem); /* 2 columns on medium screens */
+                flex: 1 1 calc(50% - 1rem);
                 max-width: calc(50% - 1rem);
             }
             .journey-step-arrow {
@@ -515,7 +515,7 @@
         }
         @media (max-width: 480px) {
             .journey-step-card {
-                flex: 1 1 100%; /* 1 column on small screens */
+                flex: 1 1 100%;
                 max-width: 100%;
             }
         }
@@ -668,7 +668,7 @@
                             <button class="toggle-chart-data bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-green-200 transition-colors duration-200" data-chart-id="cultureImpactChart" data-data-set="strongSecurity">Strong Security Culture</button>
                             <button class="toggle-chart-data bg-red-100 text-red-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-red-200 transition-colors duration-200" data-chart-id="cultureImpactChart" data-data-set="weakSecurity">Weak Security Culture</button>
                         </div>
-                        <p class="text-gray-600 text-sm italic">This chart illustrates a simulated distribution of employee security behaviors based on the prevailing organizational culture. Use the buttons to see how culture can shift these behaviors.</p>
+                        <p id="cultureExplanation" class="text-gray-600 text-sm italic mt-2">This chart illustrates a simulated distribution of employee security behaviors based on the prevailing organizational culture. Use the buttons to see how culture can shift these behaviors.</p>
 
                         <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Promoting a security-aware culture through leadership and communication</h4>
                         <p class="text-gray-600 mb-4">Cultivating a security-aware culture requires continuous effort, driven by leadership and effective communication. This includes comprehensive security awareness programs, clear policies, and open communication channels to foster vigilance.</p>
@@ -878,7 +878,7 @@
                             <button class="toggle-chart-data bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-green-200 transition-colors duration-200" data-chart-id="priorityChart" data-data-set="complianceDriven">Compliance-Driven</button>
                             <button class="toggle-chart-data bg-red-100 text-red-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-red-200 transition-colors duration-200" data-chart-id="priorityChart" data-data-set="revenueDriven">Revenue-Driven</button>
                         </div>
-                        <p class="text-gray-600 text-sm italic">This chart simulates the prioritization of security initiatives. Use the buttons to see how priorities might shift based on different business drivers or strategic focuses.</p>
+                        <p id="priorityExplanation" class="text-gray-600 text-sm italic mt-2">This chart simulates the prioritization of security initiatives. Use the buttons to see how priorities might shift based on different business drivers or strategic focuses.</p>
                     </div>
                 </div>
 
@@ -1119,12 +1119,14 @@
             strongSecurity: {
                 labels: ['Vigilant & Proactive', 'Compliant (Policy-Driven)', 'Indifferent/Unaware', 'Resistant/Bypassing Controls'],
                 data: [55, 35, 8, 2],
-                colors: ['#28a745', '#17a2b8', '#ffc107', '#dc3545']
+                colors: ['#28a745', '#17a2b8', '#ffc107', '#dc3545'],
+                explanation: "In a strong security culture, a higher percentage of employees are proactive and vigilant, actively contributing to security efforts. Resistance to controls is minimal."
             },
             weakSecurity: {
                 labels: ['Vigilant & Proactive', 'Compliant (Policy-Driven)', 'Indifferent/Unaware', 'Resistant/Bypassing Controls'],
                 data: [10, 30, 40, 20],
-                colors: ['#28a745', '#17a2b8', '#ffc107', '#dc3545']
+                colors: ['#28a745', '#17a2b8', '#ffc107', '#dc3545'],
+                explanation: "In a weak security culture, a significant portion of employees are indifferent or actively resistant to security controls, leading to higher risks and potential policy bypasses."
             }
         };
 
@@ -1137,12 +1139,14 @@
             complianceDriven: {
                 labels: ['GDPR Compliance', 'PCI DSS Remediation', 'HIPAA Training', 'Audit Readiness Tools', 'Data Residency Solutions'],
                 data: [95, 90, 80, 75, 70],
-                backgroundColor: ['#2196F3', '#4CAF50', '#FFC107', '#F44336', '#9C27B0']
+                backgroundColor: ['#2196F3', '#4CAF50', '#FFC107', '#F44336', '#9C27B0'],
+                explanation: "This view highlights initiatives prioritized due to strict regulatory or legal requirements. Compliance is the primary driver for these security efforts."
             },
             revenueDriven: {
                 labels: ['Secure New Product Launch', 'Enable Remote Work', 'Protect Customer Data', 'Supply Chain Security', 'R&D IP Protection'],
                 data: [90, 85, 80, 70, 95],
-                backgroundColor: ['#4CAF50', '#2196F3', '#FFC107', '#F44336', '#9C27B0']
+                backgroundColor: ['#4CAF50', '#2196F3', '#FFC107', '#F44336', '#9C27B0'],
+                explanation: "This view shows initiatives prioritized for their direct impact on business revenue, such as protecting intellectual property or enabling secure customer-facing services."
             }
         };
 
@@ -1276,7 +1280,7 @@
                 title: "Non-Disclosure Agreement (NDA) Security Clauses",
                 description: `
                     <p><strong>Definition of Confidential Information:</strong> Clearly outlines what information is protected.</p>
-                    <p><strong>Obligation of Confidentiality:</strong> Requires recipient to keep information secret.</p>
+                    <p><strong>Oligibility of Confidentiality:</strong> Requires recipient to keep information secret.</p>
                     <p><strong>Security Measures:</strong> May specify minimum security controls to protect the information.</p>
                     <p><strong>Return/Destruction of Information:</strong> Details how information should be handled upon termination.</p>
                 `
@@ -1422,7 +1426,7 @@
                 description: "Processes are planned, performed, measured, and controlled at the project level. Basic security controls are in place, but consistency across the organization may be limited."
             },
             defined: {
-                title: "Defined (Level 3)",
+                title: "Defined (Level (3)",
                 description: "Processes are well-characterized and understood, described in standards, procedures, tools, and methods. Security is proactive and integrated into standard operating procedures."
             },
             quantitativelyManaged: {
@@ -1759,6 +1763,11 @@
                     const dataSetKey = button.dataset.dataSet;
                     const data = cultureChartData[dataSetKey];
                     updateChart(cultureImpactChartInstance, data.data, data.labels, data.colors);
+                    // Update explanation text
+                    const explanationText = document.getElementById('cultureExplanation');
+                    if (explanationText) {
+                        explanationText.textContent = data.explanation || "This chart illustrates a simulated distribution of employee security behaviors based on the prevailing organizational culture. Use the buttons to see how culture can shift these behaviors.";
+                    }
                 });
             });
 
@@ -2120,6 +2129,12 @@
                     const data = priorityChartData[dataSetKey];
                     // Use the modified update function for priority chart
                     updateChartForPriority(priorityChartInstance, data.data, data.labels, data.backgroundColor);
+
+                    // Update explanation text for priority chart
+                    const explanationText = document.getElementById('priorityExplanation');
+                    if (explanationText && data.explanation) {
+                        explanationText.textContent = data.explanation;
+                    }
                 });
             });
 
