@@ -118,8 +118,8 @@
             justify-content: center; /* Center vertically initially */
             align-items: center; /* Center horizontally */
             box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-            flex: 1 1 auto; /* Make cards flexible by default */
-            max-width: none; /* Remove fixed max-width from general interactive-card */
+            flex: 0 0 150px; /* Fixed width for all cards */
+            max-width: 150px; /* Fixed max-width for all cards */
         }
 
         .interactive-card:hover {
@@ -216,13 +216,13 @@
 
         /* Global Privacy Landscape Grid */
         .privacy-grid-container {
-            display: flex;
+            display: flex; /* Changed to flex for better control over sizing */
             flex-wrap: wrap;
             justify-content: center;
             gap: 1rem;
             margin-top: 1rem;
         }
-        .privacy-region-card {
+        .privacy-region-card { /* Make these smaller horizontally */
             flex: 0 0 250px; /* Fixed width for privacy cards */
             max-width: 250px; /* Fixed max-width */
         }
@@ -248,7 +248,7 @@
             gap: 1rem;
             margin-top: 1rem;
         }
-        .contract-clause-card {
+        .contract-clause-card { /* Make these smaller horizontally */
             flex: 0 0 250px; /* Fixed width for contract cards */
             max-width: 250px; /* Fixed max-width */
         }
@@ -401,16 +401,11 @@
         /* Framework Adoption Journey */
         .journey-step-container {
             display: flex;
-            flex-direction: column; /* Changed to vertical flow */
-            flex-wrap: nowrap; /* Ensure they stay in a single column */
-            justify-content: flex-start;
-            align-items: center; /* Center cards horizontally within the column */
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: stretch; /* Ensure cards stretch to fill height */
             gap: 1rem;
             margin-top: 1rem;
-            overflow-y: auto; /* Allow vertical scrolling if content overflows */
-            padding-right: 1rem; /* Add padding for scrollbar */
-            height: auto;
-            max-height: 600px; /* Add a max-height to enable scrolling if needed */
         }
         .journey-step-card {
             background-color: #A1C9CE; /* Soft Blue */
@@ -421,9 +416,9 @@
             cursor: pointer;
             transition: all 0.2s ease-in-out;
             box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-            flex: 0 0 250px; /* Fixed width for journey cards */
-            max-width: 250px; /* Fixed width */
-            min-height: 100px; /* Consistent min-height for all cards */
+            flex: 0 0 150px; /* Fixed width for change management cards */
+            max-width: 150px; /* Fixed width */
+            min-height: 180px; /* Consistent min-height for more text */
             text-align: center;
             position: relative; /* For arrows */
         }
@@ -463,32 +458,67 @@
         }
         /* Arrow styling for journey steps */
         .journey-step-arrow {
-            width: 2px; /* Vertical line */
-            height: 2rem; /* Length of the arrow line */
+            width: 2rem; /* Length of the arrow line */
+            height: 2px;
             background-color: #D5D2C8;
             position: relative;
-            margin: 0.5rem 0; /* Vertical margin */
-            align-self: center; /* Center arrow horizontally */
+            margin: 0 0.5rem; /* Space between card and arrow */
+            align-self: center; /* Align with cards vertically */
         }
         .journey-step-arrow::after {
             content: '';
             position: absolute;
-            left: 50%;
-            bottom: 0; /* Arrow points down */
+            right: 0;
+            top: 50%;
             width: 0;
             height: 0;
-            border-left: 6px solid transparent;
-            border-right: 6px solid transparent;
-            border-top: 6px solid #D5D2C8; /* Arrowhead pointing down */
-            transform: translateX(-50%);
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+            border-left: 6px solid #D5D2C8;
+            transform: translateY(-50%);
         }
-        /* Hide arrows after the last card in the vertical flow */
-        .journey-step-container .journey-step-arrow:last-child {
-            display: none;
+        /* Adjust for wrapping arrows */
+        @media (min-width: 769px) { /* Only show horizontal arrows on larger screens */
+            .journey-step-card:nth-child(2n)::after { /* Hide right arrow for every second card on desktop */
+                content: none;
+            }
+            .journey-step-card:nth-child(2n-1) + .journey-step-arrow { /* Show arrow after odd cards */
+                display: block;
+            }
+            .journey-step-card:nth-child(2n) + .journey-step-arrow { /* Hide arrow after even cards */
+                display: none;
+            }
+            .journey-step-card:last-child::after {
+                content: none !important; /* Ensure last card never has an arrow */
+            }
         }
-        /* No need for complex media queries for arrows here, as the flow is now vertical by default */
-        /* Removed all media queries that override journey-step-card and journey-step-arrow */
-
+        @media (max-width: 768px) { /* For medium and small screens */
+            .journey-step-card {
+                flex: 1 1 calc(50% - 1rem);
+                max-width: calc(50% - 1rem);
+            }
+            .journey-step-arrow {
+                display: none; /* Hide horizontal arrows on smaller screens */
+            }
+            .journey-step-card::after { /* Add vertical arrow for wrapped items */
+                content: '▼';
+                position: absolute;
+                bottom: -1.5rem;
+                left: 50%;
+                transform: translateX(-50%);
+                color: #D5D2C8;
+                font-size: 1.2em;
+            }
+            .journey-step-card:last-child::after {
+                content: none; /* No arrow after the last card */
+            }
+        }
+        @media (max-width: 480px) {
+            .journey-step-card {
+                flex: 1 1 100%;
+                max-width: 100%;
+            }
+        }
 
         /* Security Budget Allocator */
         .budget-allocator-container {
@@ -517,21 +547,24 @@
 
         /* Maturity Model Levels */
         .maturity-level-container {
+            background-color: #F8F5EF;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            margin-top: 1rem;
+        }
+        .maturity-level-button-group {
             display: flex;
-            flex-direction: row; /* Reverted to horizontal flow */
             flex-wrap: wrap; /* Allow wrapping */
             justify-content: center;
             align-items: stretch; /* Ensure cards stretch to fill height */
             gap: 1rem;
             margin-bottom: 1rem;
-            overflow-x: auto; /* Allow horizontal scrolling if content overflows */
-            padding-bottom: 1rem; /* Add padding for scrollbar */
         }
         .maturity-level-card {
-            flex: 0 0 250px; /* Fixed width for maturity cards */
-            max-width: 250px; /* Fixed max-width */
-            min-height: 100px; /* Consistent height, changed to 100px */
-            text-align: center;
+            flex: 0 0 calc(20% - 1rem); /* 5 columns on larger screens */
+            max-width: calc(20% - 1rem);
+            min-height: 180px; /* Consistent height, increased for text */
             position: relative;
         }
         /* Arrows for maturity levels */
@@ -551,17 +584,17 @@
         /* Responsive adjustments for maturity level arrows */
         @media (max-width: 1024px) {
             .maturity-level-card {
-                flex: 0 0 250px; /* Keep fixed width on medium-large screens */
-                max-width: 250px; /* Keep fixed max-width */
+                flex: 1 1 calc(33% - 1rem); /* 3 columns on medium-large screens */
+                max-width: calc(33% - 1rem);
             }
             .maturity-level-card::after {
-                right: -1rem; /* Adjust arrow position for tighter spacing */
-                font-size: 1.5em;
+                right: -0.75rem; /* Adjust arrow position for tighter spacing */
+                font-size: 1.2em;
             }
         }
         @media (max-width: 768px) {
             .maturity-level-card {
-                flex: 1 1 calc(50% - 1rem);
+                flex: 1 1 calc(50% - 1rem); /* 2 columns on medium screens */
                 max-width: calc(50% - 1rem);
             }
             .maturity-level-card::after {
@@ -885,7 +918,7 @@
                         </div>
 
                         <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Framework selection criteria based on organizational needs</h4>
-                        <p class="text-gray-600 mb-4">Choosing the right framework depends on context (industry, size), business objectives, available resources, and the organization's specific risk profile.</p>
+                        <p class="text-gray-600 mb-4">Choosing the right framework depends on context (industry, size), business objectives, available resources, integration with existing systems, certifiability requirements, and the organization's specific risk profile.</p>
 
                         <h4 class="text-lg font-semibold text-gray-700">c. Integrating governance frameworks into enterprise governance</h4>
                         <p class="text-gray-600 mb-4">Security frameworks must be integrated seamlessly into the broader enterprise governance structure through harmonization, consistent language, and a robust top-down/bottom-up communication flow.</p>
@@ -1033,7 +1066,7 @@
                 <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Key Terms for Domain 1</h2>
                 <p class="mb-8 text-gray-700">Explore essential terms related to Information Security Governance. Click on each term to reveal its definition.</p>
 
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     <!-- Key Terms will be populated here by JavaScript -->
                 </div>
             </section>
@@ -1044,7 +1077,6 @@
         </footer>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Moved Chart.js script here -->
     <script>
         // JS Variables for current state and base data
         const currentSection = {
@@ -1363,28 +1395,28 @@
         };
 
         // Data for Framework Adoption Journey (Domain 1 new interactive) - Already inline, just ensure description is pulled correctly
-        const frameworkJourneySteps = [ // Changed to array for consistent ordering
-            {
+        const frameworkJourneySteps = {
+            defineScope: {
                 title: "Define Scope & Objectives",
                 description: "Establish the boundaries and goals for framework adoption, aligning with business strategy and identifying key stakeholders."
             },
-            {
+            assessCurrentState: {
                 title: "Assess Current State & Gaps",
                 description: "Evaluate the organization's existing security posture, controls, and processes against the chosen framework's requirements to identify deficiencies."
             },
-            {
+            designControls: {
                 title: "Design & Plan Controls",
                 description: "Develop or adapt specific security controls, policies, and procedures, and create a detailed implementation plan with defined timelines and responsibilities to address identified gaps."
             },
-            {
+            implementControls: {
                 title: "Implement Controls",
                 description: "Execute the implementation plan, deploying new security technologies, configuring systems, updating processes, and conducting necessary training programs."
             },
-            {
+            monitorReview: {
                 title: "Monitor, Review & Improve",
                 description: "Continuously monitor the effectiveness of implemented controls, conduct regular internal and external reviews/audits, and apply lessons learned for ongoing improvement and adaptation to evolving risks."
             }
-        ];
+        };
 
         // Data for Security Budget Allocator (Domain 1 new interactive)
         let budgetAllocationData = {
@@ -1417,22 +1449,6 @@
                 description: "Processes are continuously improved through incremental and innovative technological improvements. The focus is on continuous improvement and adapting to new threats and technologies."
             }
         };
-
-        // Data for Key Terms (New for Domain 1)
-        const keyTermsData = [
-            { term: "Information Security Governance", definition: "The system by which information security activities are directed and controlled. It ensures that information security aligns with business objectives and manages risks effectively." },
-            { term: "Organizational Culture", definition: "The shared values, beliefs, and practices that influence how individuals perceive and engage with security within an organization." },
-            { term: "Risk Appetite", definition: "The amount and type of risk that an organization is willing to take in order to meet its strategic objectives." },
-            { term: "Risk Tolerance", definition: "The acceptable deviation from the risk appetite, setting specific thresholds for different types of risks." },
-            { term: "Legal & Regulatory Compliance", definition: "Adherence to laws, regulations, and industry standards (e.g., GDPR, HIPAA, PCI DSS) that dictate how an organization must protect information." },
-            { term: "Segregation of Duties (SoD)", definition: "A control principle that divides critical tasks among different individuals to prevent a single person from controlling an entire process and to reduce the risk of fraud or error." },
-            { term: "Security Steering Committee", definition: "A formal group, typically comprising senior management and key stakeholders, responsible for providing strategic direction, oversight, and resource allocation for the information security program." },
-            { term: "Information Security Strategy", definition: "A long-term plan that outlines how an organization will protect its information assets to support business objectives and manage risks effectively." },
-            { term: "Framework Adoption", definition: "The process of selecting, implementing, and integrating a recognized information security framework (e.g., ISO/IEC 27001, NIST CSF) to structure and improve security practices." },
-            { term: "KPIs (Key Performance Indicators)", definition: "Measurable values that demonstrate how effectively an organization is achieving key business objectives related to information security performance." },
-            { term: "KRIs (Key Risk Indicators)", definition: "Metrics that provide an early warning signal of increasing risk exposure, helping in proactive risk management and decision-making." },
-            { term: "Maturity Model", definition: "A structured approach (e.g., CMMI) that describes the evolutionary stages of an organization's processes, from initial/ad hoc to optimizing, providing a roadmap for continuous improvement in information security." }
-        ];
 
 
         let cultureImpactChartInstance;
@@ -1721,11 +1737,6 @@
                     targetSection.classList.remove('hidden');
                     targetSection.classList.add('fade-in');
                     currentSection.id = button.dataset.target;
-
-                    // Specific rendering for Key Terms section if activated
-                    if (button.dataset.target === 'key-terms') {
-                        renderKeyTerms();
-                    }
                 });
             });
 
@@ -1987,8 +1998,8 @@
             // Framework Adoption Journey (Updated for inline description and arrows)
             document.querySelectorAll('.journey-step-card').forEach(card => {
                 card.addEventListener('click', () => {
-                    const descriptionDiv = card.querySelector('.card-description');
                     const stepKey = card.dataset.step;
+                    const descriptionDiv = card.querySelector('.card-description'); // Changed to .card-description
 
                     document.querySelectorAll('.journey-step-card').forEach(otherCard => {
                         if (otherCard !== card) {
@@ -2166,50 +2177,9 @@
                 });
             });
 
-            // Function to render Key Terms cards
-            const renderKeyTerms = () => {
-                const keyTermsContainer = document.querySelector('#key-terms .grid');
-                if (!keyTermsContainer) return; // Exit if container not found
-                keyTermsContainer.innerHTML = ''; // Clear existing cards
-
-                keyTermsData.forEach((item, index) => {
-                    const cardHtml = `
-                        <div class="interactive-card key-term-card" data-term-key="${index}">
-                            <h3 class="card-title">${item.term}</h3>
-                            <div class="card-description"></div>
-                        </div>
-                    `;
-                    keyTermsContainer.insertAdjacentHTML('beforeend', cardHtml);
-                });
-
-                // Add event listeners for key term cards
-                document.querySelectorAll('.key-term-card').forEach(card => {
-                    card.addEventListener('click', () => {
-                        const descriptionDiv = card.querySelector('.card-description');
-                        const termIndex = parseInt(card.dataset.termKey);
-
-                        // Close all other open cards and remove 'active' class
-                        document.querySelectorAll('.key-term-card').forEach(otherCard => {
-                            if (otherCard !== card) {
-                                otherCard.classList.remove('active');
-                                otherCard.querySelector('.card-description').innerHTML = '';
-                            }
-                        });
-
-                        // Toggle the clicked card's active class
-                        card.classList.toggle('active');
-
-                        // If the card is now active, populate its description
-                        if (card.classList.contains('active') && descriptionDiv && keyTermsData[termIndex]) {
-                            descriptionDiv.innerHTML = `<p>${keyTermsData[termIndex].definition}</p>`; // Set content
-                        } else if (descriptionDiv) {
-                            descriptionDiv.innerHTML = ''; // Clear content if deactivating
-                        }
-                    });
-                });
-            };
-
         });
     </script>
 </body>
 </html>
+
+
