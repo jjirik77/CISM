@@ -1063,43 +1063,12 @@
                         <div class="chart-container mb-6">
                             <canvas id="kriChart"></canvas>
                         </div>
-                        <div class="mb-4">
-                            <label for="kriSelect" class="block text-gray-700 text-sm font-bold mb-2">Select KRI to view trend:</label>
-                            <select id="kriSelect" class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-200">
-                                <option value="criticalVulnerabilities">Critical Vulnerabilities Detected</option>
-                                <option value="phishingAttempts">Phishing Attempts Reported</option>
-                                <option value="accessFailures">Failed Access Attempts</option>
-                            </select>
+                        <div class="mb-4 flex flex-wrap justify-center gap-4">
+                            <button class="kri-toggle-button bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-200 transition-colors duration-200" data-kri-id="criticalVulnerabilities">Critical Vulnerabilities Detected</button>
+                            <button class="kri-toggle-button bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-green-200 transition-colors duration-200" data-kri-id="phishingAttempts">Phishing Attempts Reported</button>
+                            <button class="kri-toggle-button bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full text-sm font-semibold hover:bg-yellow-200 transition-colors duration-200" data-kri-id="accessFailures">Failed Access Attempts</button>
                         </div>
-                        <p class="text-gray-600 text-sm italic">This line chart illustrates simulated trends for various Key Risk Indicators (KRIs) over time, helping to anticipate potential issues. Select an KRI from the dropdown to see its trend.</p>
-
-                        <h4 class="text-lg font-semibold text-gray-700">e. Continuous improvement through maturity models (e.g., CMMI, PDCA)</h4>
-                        <p class="text-gray-600 mb-4">Information security requires continuous improvement, often guided by maturity models like CMMI and iterative methodologies such as the Plan-Do-Check-Act (PDCA) cycle. Explore common maturity levels:</p>
-                        <div class="maturity-level-container">
-                            <h5 class="text-md font-bold text-gray-800 mb-2">Security Maturity Levels</h5>
-                            <div class="maturity-level-button-group">
-                                <div class="maturity-level-card interactive-card" data-level="initial">
-                                    <span class="card-title">Initial</span>
-                                    <div class="card-description"></div>
-                                </div>
-                                <div class="maturity-level-card interactive-card" data-level="managed">
-                                    <span class="card-title">Managed</span>
-                                    <div class="card-description"></div>
-                                </div>
-                                <div class="maturity-level-card interactive-card" data-level="defined">
-                                    <span class="card-title">Defined</span>
-                                    <div class="card-description"></div>
-                                </div>
-                                <div class="maturity-level-card interactive-card" data-level="quantitativelyManaged">
-                                    <span class="card-title">Quantitatively Managed</span>
-                                    <div class="card-description"></div>
-                                </div>
-                                <div class="maturity-level-card interactive-card" data-level="optimizing">
-                                    <span class="card-title">Optimizing</span>
-                                    <div class="card-description"></div>
-                                </div>
-                            </div>
-                        </div>
+                        <p class="text-gray-600 text-sm italic mt-2">This line chart illustrates simulated trends for various Key Risk Indicators (KRIs) over time, helping to anticipate potential issues. Click a button to see its trend.</p>
                     </div>
                 </div>
             </section>
@@ -2290,6 +2259,15 @@
                     } else if (descriptionDiv) {
                         descriptionDiv.innerHTML = '';
                     }
+                });
+            });
+
+            // KRI Toggle Buttons (newly added)
+            document.querySelectorAll('.kri-toggle-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const kriId = button.dataset.kriId;
+                    const data = kriTrendData[kriId];
+                    updateLineChart(kriChartInstance, data.data, data.label, data.borderColor, data.backgroundColor);
                 });
             });
 
