@@ -119,10 +119,15 @@
         }
 
         /* Specific adjustment for .incident-plan-element-card and .response-method-card to be 2 per row with 250px min-width */
-        .incident-plan-element-card, .response-method-card {
-            flex: 1 1 calc(50% - 1rem); /* Two columns */
-            min-width: 250px; /* User requested min-width */
-            max-width: calc(50% - 1rem);
+        .incident-plan-element-card {
+            flex: 0 0 300px; /* Fixed width as requested */
+            min-width: 300px; /* Fixed width as requested */
+            max-width: 300px; /* Fixed width as requested */
+        }
+        .response-method-card {
+            flex: 0 0 250px; /* Fixed width as requested */
+            min-width: 250px; /* Fixed width as requested */
+            max-width: 250px; /* Fixed width as requested */
         }
 
         /* Specific adjustment for .dependency-card and .bcp-element-card */
@@ -165,7 +170,7 @@
         }
         .incident-classification-container .incident-classification-card {
             flex: 0 0 auto; /* Don't grow/shrink, maintain min-width */
-            min-width: 250px; /* User requested min-width */
+            min-width: 350px; /* User requested min-width */
             max-width: 100%; /* Take full width of container if needed */
             text-align: left; /* Align text left within these cards */
         }
@@ -308,11 +313,11 @@
                 max-width: 100%;
                 min-width: unset; /* Allow shrinking below 250px/350px on very small screens if needed */
             }
-            .incident-phases-container, .investigation-steps-container, .eradication-steps-container, .recovery-steps-container {
+            .incident-phases-container {
                 flex-direction: column; /* Stack vertically on small screens */
                 align-items: center;
             }
-            .phase-arrow, .investigation-arrow-clickable {
+            .phase-arrow {
                 transform: rotate(0deg); /* Arrow points down in vertical flow */
                 margin: 0.5rem 0; /* Adjust margin for vertical flow */
             }
@@ -1143,21 +1148,25 @@
                     <div class="accordion-content hidden p-6">
                         <p class="text-gray-700 mb-4">The incident response lifecycle concludes with a review to learn from the event and continuously improve the security posture.</p>
 
-                        <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Conduct after-action reviews and lessons learned sessions.</h4>
-                        <p class="text-gray-600 mb-4">These sessions critically examine what happened, what went well, what could be improved, and why. They foster a culture of continuous learning and accountability. Click on a practice to learn more:</p>
-                        <div class="flex flex-wrap justify-center gap-4 mb-6">
-                            <div class="post-incident-practice-card" data-practice="after-action-review">
-                                <span class="card-title">After-Action Review (AAR)</span>
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Conduct tabletop exercises, simulations, and full-scale drills.</h4>
+                        <p class="text-gray-600 mb-4">These exercises are crucial to ensure the DRP is viable, up-to-date, and that recovery teams are proficient in executing the plan. This identifies gaps and areas for improvement. Click on a testing type to learn more:</p>
+                        <div class="flex flex-wrap justify-center gap-4 mb-6 drp-testing-container">
+                            <div class="testing-type-card" data-testing-type="tabletop">
+                                <span class="card-title">Tabletop Exercises</span>
                                 <div class="card-description"></div>
                             </div>
-                            <div class="post-incident-practice-card" data-practice="lessons-learned">
-                                <span class="card-title">Lessons Learned Sessions</span>
+                            <div class="testing-type-card" data-testing-type="simulation">
+                                <span class="card-title">Simulations</span>
+                                <div class="card-description"></div>
+                            </div>
+                            <div class="testing-type-card" data-testing-type="full-scale">
+                                <span class="card-title">Full-Scale Drills</span>
                                 <div class="card-description"></div>
                             </div>
                         </div>
                         
-                        <h4 class="text-lg font-semibold text-gray-700">b. Update incident documentation, revise BCP/DR, and implement corrective actions.</h4>
-                        <p class="text-gray-600">Findings from the review lead to tangible improvements: updating the IRP, BCP, and DRP, and implementing corrective actions (e.g., new controls, revised procedures, additional training) to strengthen defenses and prevent similar incidents.</p>
+                        <h4 class="text-lg font-semibold text-gray-700">b. Identify plan gaps, clarify roles, and refine procedures based on outcomes.</h4>
+                        <p class="text-gray-600">The goal of testing isn't just to practice, but to identify weaknesses in the plan, ambiguous roles, and inefficient procedures. Findings from these exercises drive continuous improvement of the IRP, BCP, and DRP, along with targeted training for personnel.</p>
                     </div>
                 </div>
             </section>
@@ -1985,40 +1994,41 @@
                 if (isNaN(rpoHours) || rpoHours < 0) rpoHours = 0;
                 if (isNaN(rtoHours) || rtoHours < 0) rtoHours = 0;
 
-                const totalTimeScale = rpoHours + rtoHours;
+                const totalDuration = rpoHours + rtoHours;
 
-                // If totalTimeScale is 0, set default positions or hide
-                if (totalTimeScale === 0) {
-                    rpoPoint.style.left = '50%';
-                    rtoPoint.style.left = '50%';
+                // If totalDuration is 0, handle it gracefully
+                if (totalDuration === 0) {
+                    rpoPoint.style.left = '0%';
+                    incidentPoint.style.left = '0%';
+                    rtoPoint.style.left = '0%';
                     dataLossWindow.style.width = '0%';
+                    dataLossWindow.style.left = '0%';
                     downtimeWindow.style.width = '0%';
+                    downtimeWindow.style.left = '0%';
                     rpoPoint.querySelector('.timeline-label').textContent = 'RPO Point (0h)';
+                    incidentPoint.querySelector('.timeline-label').textContent = 'Incident (0h)';
                     rtoPoint.querySelector('.timeline-label').textContent = 'RTO Point (0h)';
                     return;
                 }
 
-                // Incident is always at 50% for visual centering
-                incidentPoint.style.left = '50%';
+                // Calculate positions as percentages of the total timeline duration
+                const incidentPos = (rpoHours / totalDuration) * 100; // Incident is RPO hours into the total duration
 
-                // Calculate RPO position relative to incident (50%)
-                // RPO is 'before' the incident, so its position is 50% - (rpoHours / totalTimeScale * 50%)
-                const rpoRelativePosition = (rpoHours / totalTimeScale) * 50; // Percentage of the left half
-                rpoPoint.style.left = `${50 - rpoRelativePosition}%`;
-                rpoPoint.querySelector('.timeline-label').textContent = `RPO Point (${rpoHours}h)`;
+                rpoPoint.style.left = `0%`; // RPO point is at the very beginning of the visualized timeline
+                incidentPoint.style.left = `${incidentPos}%`;
+                rtoPoint.style.left = `100%`; // RTO point is at the very end of the visualized timeline
 
-                // Calculate RTO position relative to incident (50%)
-                // RTO is 'after' the incident, so its position is 50% + (rtoHours / totalTimeScale * 50%)
-                const rtoRelativePosition = (rtoHours / totalTimeScale) * 50; // Percentage of the right half
-                rtoPoint.style.left = `${50 + rtoRelativePosition}%`;
-                rtoPoint.querySelector('.timeline-label').textContent = `RTO Point (${rtoHours}h)`;
+                // Data Loss Window: from RPO Point to Incident Point
+                dataLossWindow.style.left = `0%`;
+                dataLossWindow.style.width = `${incidentPos}%`;
 
-                // Calculate widths for the windows
-                dataLossWindow.style.width = `${rpoRelativePosition}%`;
-                dataLossWindow.style.left = `${50 - rpoRelativePosition}%`;
+                // Downtime Window: from Incident Point to RTO Point
+                downtimeWindow.style.left = `${incidentPos}%`;
+                downtimeWindow.style.width = `${100 - incidentPos}%`;
 
-                downtimeWindow.style.width = `${rtoRelativePosition}%`;
-                downtimeWindow.style.left = `50%`; /* Starts from incident point */
+                rpoPoint.querySelector('.timeline-label').textContent = `RPO Point (-${rpoHours}h)`;
+                incidentPoint.querySelector('.timeline-label').textContent = `Incident (0h)`;
+                rtoPoint.querySelector('.timeline-label').textContent = `RTO Point (+${rtoHours}h)`;
             };
 
             rpoInput.addEventListener('input', updateRtoRpoVisualization);
