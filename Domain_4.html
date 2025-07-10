@@ -158,7 +158,7 @@
         .drp-site-container .drp-site-card {
             flex: 1 1 calc(33.333% - 1rem); /* Three columns for DRP sites */
             min-width: 250px; /* User requested min-width */
-            max-width: calc(33.333% - 1rem);
+            max-width: 300px; /* User requested max-width */
         }
 
         /* Specific adjustment for Incident Classification Cards */
@@ -350,7 +350,7 @@
         .key-term-card.active {
             border-color: #004085; /* Dark blue border when active */
             box-shadow: 0 4px 8px rgba(0, 64, 133, 0.3); /* Blue glow */
-            background-color: #E0F2F7; /* Lighter blue background when active */
+            background-color: #E0F7F5; /* Lighter blue background when active */
         }
 
         .key-term-card .card-title {
@@ -400,7 +400,8 @@
         .incident-phase-card {
             flex: 0 0 auto; /* Allow cards to grow/shrink based on content, but don't force multiple per row */
             min-width: 350px; /* Minimum width for each card */
-            max-width: 100%; /* Take full width of parent container */
+            max-width: 350px; /* Fixed max-width as requested */
+            width: 350px; /* Fixed width to prevent horizontal expansion */
             background-color: #FFFFFF;
             border: 1px solid #D5D2C8;
             padding: 0.8rem;
@@ -553,9 +554,9 @@
 
         /* New styles for clickable arrows in forensic steps */
         .investigation-steps-container .investigation-step-card {
-            width: 250px; /* Fixed width as requested */
-            min-width: 250px; /* Fixed width as requested */
-            max-width: 250px; /* Fixed width as requested */
+            width: 300px; /* Fixed width as requested */
+            min-width: 300px; /* Fixed width as requested */
+            max-width: 300px; /* Fixed width as requested */
         }
         .investigation-steps-container .investigation-arrow-clickable {
             position: relative; /* Needed for absolute positioning of description */
