@@ -125,33 +125,59 @@
             max-width: 300px; /* Fixed width as requested */
         }
         .response-method-card {
-            flex: 0 0 250px; /* Fixed width as requested */
-            min-width: 250px; /* Fixed width as requested */
-            max-width: 250px; /* Fixed width as requested */
+            flex: 0 0 200px; /* Fixed width as requested */
+            min-width: 200px; /* Fixed width as requested */
+            max-width: 200px; /* Fixed width as requested */
         }
 
         /* Specific adjustment for .dependency-card and .bcp-element-card */
         .dependency-card {
-            flex: 1 1 calc(50% - 1rem); /* Two columns for dependency */
+            flex: 1 1 350px; /* Two columns for dependency, fixed 350px */
             min-width: 250px; /* User requested min-width */
-            max-width: calc(50% - 1rem);
+            max-width: 350px; /* User requested max-width */
         }
         .bcp-elements-container .bcp-element-card {
             flex: 1 1 auto; /* Allow single card to take full width of container */
-            max-width: 100%;
-            min-width: 350px; /* User requested min-width */
+            max-width: 300px; /* User requested max-width */
+            min-width: 300px; /* User requested min-width */
+            max-height: 100px; /* Set max-height for non-active state */
+            overflow: hidden; /* Hide overflow for non-active state */
+            transition: all 0.3s ease-in-out; /* Smooth transition for height */
+        }
+        .bcp-elements-container .bcp-element-card.active {
+            max-height: none; /* Remove max-height constraint when active */
+            overflow: visible; /* Show all content when active */
+        }
+
+        .backup-details-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            background-color: #F8F5EF; /* Match section background */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
         }
         .backup-details-container .backup-detail-card {
             flex: 1 1 calc(33.333% - 1rem); /* Three columns for backup details */
             min-width: 250px; /* Adjust min-width for nested cards if needed */
-            max-width: calc(33.333% - 1rem);
+            max-width: 250px; /* Max width for nested cards */
+            max-height: 100px; /* Set max-height for non-active state */
+            overflow: hidden; /* Hide overflow for non-active state */
+            transition: all 0.3s ease-in-out; /* Smooth transition for height */
+        }
+        .backup-details-container .backup-detail-card.active {
+            max-height: none; /* Remove max-height constraint when active */
+            overflow: visible; /* Show all content when active */
         }
 
         /* Specific adjustment for DRP testing cards (now under A.6.a) */
         .drp-testing-container .testing-type-card {
             flex: 1 1 calc(33.333% - 1rem); /* Three columns for DRP testing */
             min-width: 250px; /* User requested min-width */
-            max-width: calc(33.333% - 1rem);
+            max-width: 300px; /* User requested max-width */
         }
 
         /* Specific adjustment for DRP Site Type Cards (new under A.4.b) */
@@ -169,10 +195,18 @@
             gap: 1rem; /* Space between cards */
         }
         .incident-classification-container .incident-classification-card {
-            flex: 0 0 auto; /* Don't grow/shrink, maintain min-width */
+            flex: 0 0 350px; /* Fixed width to prevent expansion */
             min-width: 350px; /* User requested min-width */
-            max-width: 100%; /* Take full width of container if needed */
+            max-width: 350px; /* Fixed width to prevent expansion */
             text-align: left; /* Align text left within these cards */
+            min-height: 100px; /* New min-height as requested */
+            max-height: 100px; /* Set max-height for non-active state */
+            overflow: hidden; /* Hide overflow for non-active state */
+            transition: all 0.3s ease-in-out; /* Smooth transition for height */
+        }
+        .incident-classification-container .incident-classification-card.active {
+            max-height: none; /* Remove max-height constraint when active */
+            overflow: visible; /* Show all content when active */
         }
         .incident-classification-container .incident-classification-card .card-title {
             text-align: left; /* Align title left */
@@ -337,8 +371,8 @@
             min-height: 100px; /* Adjusted height for content */
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Centered vertically */
-            align-items: center; /* Centered horizontally */
+            justify-content: center;
+            align-items: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.08);
         }
 
@@ -727,7 +761,6 @@
                     </div>
                 </div>
 
-                <!-- Sub-Domain: Business Impact Analysis (BIA) -->
                 <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
                     <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
                         2. Business Impact Analysis (BIA)
@@ -741,41 +774,20 @@
 
                         <h4 class="text-lg font-semibold text-gray-700">b. Determine metrics like Recovery Time Objective (RTO) and Recovery Point Objective (RPO).</h4>
                         <p class="text-gray-600 mb-4">Based on the acceptable downtime and data loss identified in the BIA, specific RTOs (how quickly systems must be restored) and RPOs (how much data loss is acceptable) are defined. These metrics are fundamental for BCP/DRP development.</p>
-                        <div class="rto-rpo-container">
-                            <h6 class="text-md font-semibold text-gray-700 text-center">Interactive RTO and RPO Visualization</h6>
-                            <div class="rto-rpo-inputs">
-                                <div>
-                                    <label for="rpoInput" class="block text-gray-700 text-sm font-bold mb-1">RPO (Hours Before Incident):</label>
-                                    <input type="number" id="rpoInput" value="4" min="0" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 text-center">
-                                </div>
-                                <div>
-                                    <label for="rtoInput" class="block text-gray-700 text-sm font-bold mb-1">RTO (Hours After Incident):</label>
-                                    <input type="number" id="rtoInput" value="8" min="0" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 text-center">
-                                </div>
+                        <div class="flex flex-wrap justify-center gap-4 mb-6">
+                            <div class="bcp-element-card" data-bcp-element="rto" style="min-width: 300px; max-width: 300px;">
+                                <span class="card-title">Recovery Time Objective (RTO)</span>
+                                <div class="card-description"></div>
                             </div>
-                            <div class="rto-rpo-timeline">
-                                <div class="timeline-marker rpo-point" style="left: 0%;">
-                                    <span class="timeline-label">RPO Point</span>
-                                </div>
-                                <div class="timeline-marker incident-point" style="left: 50%;">
-                                    <span class="timeline-label">Incident Occurs</span>
-                                </div>
-                                <div class="timeline-marker rto-point" style="left: 100%;">
-                                    <span class="timeline-label">RTO Point</span>
-                                </div>
-                                <div class="timeline-indicator data-loss-window" style="width: 50%; left: 0;">
-                                    <span class="text-xs">Data Loss Window</span>
-                                </div>
-                                <div class="timeline-indicator downtime-window" style="width: 50%; right: 0;">
-                                    <span class="text-xs">Downtime Window</span>
-                                </div>
+                            <div class="bcp-element-card" data-bcp-element="rpo" style="min-width: 300px; max-width: 300px;">
+                                <span class="card-title">Recovery Point Objective (RPO)</span>
+                                <div class="card-description"></div>
                             </div>
-                            <p class="text-gray-600 text-sm italic mt-2 text-center">Adjust RPO (data loss tolerance) and RTO (recovery time) to see their visual impact on the timeline.</p>
                         </div>
+                        <p class="text-gray-600 text-sm italic mt-2 text-center">RTO and RPO are business requirements that drive technical recovery strategies.</p>
                     </div>
                 </div>
 
-                <!-- Sub-Domain: Business Continuity Plan (BCP) -->
                 <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
                     <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
                         3. Business Continuity Plan (BCP)
@@ -791,8 +803,7 @@
                                 <span class="card-title">Incident Response (IR)</span>
                                 <div class="card-description"></div>
                             </div>
-                            <span class="text-3xl text-gray-400">→</span> <!-- Arrow for flow -->
-                            <div class="dependency-card" data-dependency="business-continuity">
+                            <span class="text-3xl text-gray-400">→</span> <div class="dependency-card" data-dependency="business-continuity">
                                 <span class="card-title">Business Continuity (BCP)</span>
                                 <div class="card-description"></div>
                             </div>
@@ -801,20 +812,22 @@
                         <h4 class="text-lg font-semibold text-gray-700">b. Include backup arrangements, failover procedures, and alternate work sites.</h4>
                         <p class="text-gray-600 mb-4">A robust BCP specifies mechanisms like regular data backups, redundant systems for seamless failover, and alternative locations for staff to work from if primary facilities are unavailable.</p>
                         <div class="flex flex-wrap justify-center gap-4 mb-6 bcp-elements-container">
-                            <div class="bcp-element-card" data-bcp-element="backups" style="min-width: 350px; flex: 1 1 350px; max-width: 100%;">
+                            <div class="bcp-element-card" data-bcp-element="backups" style="min-width: 300px; max-width: 300px;">
                                 <span class="card-title">Backup Arrangements</span>
-                                <div class="card-description">
-                                    <div class="backup-details-container hidden flex flex-wrap justify-center gap-4 mt-4">
-                                        <!-- These will be dynamically loaded -->
-                                    </div>
-                                </div>
+                                <div class="card-description"></div>
                             </div>
-                            <!-- Removed Failover and Alternate Work Sites cards -->
+                            <div class="bcp-element-card" data-bcp-element="redundant-systems" style="min-width: 300px; max-width: 300px;">
+                                <span class="card-title">Redundant Systems</span>
+                                <div class="card-description"></div>
+                            </div>
+                            <div class="bcp-element-card" data-bcp-element="alternate-locations" style="min-width: 300px; max-width: 300px;">
+                                <span class="card-title">Alternate Locations</span>
+                                <div class="card-description"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Sub-Domain: Disaster Recovery Plan (DRP) -->
                 <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
                     <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
                         4. Disaster Recovery Plan (DRP)
@@ -847,7 +860,6 @@
                     </div>
                 </div>
 
-                <!-- Sub-Domain: Incident Categorization / Classification -->
                 <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
                     <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
                         5. Incident Categorization / Classification
@@ -882,10 +894,9 @@
                     </div>
                 </div>
 
-                <!-- Sub-Domain: Incident Management Testing, Evaluation, and Training -->
                 <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
                     <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
-                        6. Incident Management Testing, Evaluation, and Training
+                        6. Post-Incident Review Practices
                         <span class="accordion-icon text-2xl">+</span>
                     </button>
                     <div class="accordion-content hidden p-6">
@@ -914,12 +925,10 @@
                 </div>
             </section>
 
-            <!-- Incident Management Operations Section -->
             <section id="incident-operations" class="content-section hidden p-6">
                 <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Section B: Incident Management Operations</h2>
                 <p class="mb-8 text-gray-700">This section describes the real-time execution of the incident response plan when a security incident is detected, covering the practical steps from detection to post-incident review.</p>
 
-                <!-- Sub-Domain: Incident Management Techniques and Tools -->
                 <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
                     <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
                         1. Incident Management Techniques and Tools
@@ -954,7 +963,6 @@
                     </div>
                 </div>
 
-                <!-- Sub-Domain: Incident Investigation and Evaluation -->
                 <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
                     <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
                         2. Incident Investigation and Evaluation
@@ -1015,7 +1023,6 @@
                     </div>
                 </div>
 
-                <!-- Sub-Domain: Incident Containment Methods -->
                 <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
                     <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
                         3. Incident Containment Methods
@@ -1050,7 +1057,6 @@
                     </div>
                 </div>
 
-                <!-- Sub-Domain: Incident Response Communications -->
                 <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
                     <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
                         4. Incident Response Communications
@@ -1091,7 +1097,6 @@
                     </div>
                 </div>
 
-                <!-- Sub-Domain: Incident Recovery and Eradication -->
                 <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
                     <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
                         5. Incident Recovery and Eradication
@@ -1140,7 +1145,6 @@
                     </div>
                 </div>
 
-                <!-- Sub-Domain: Post-Incident Review Practices -->
                 <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
                     <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
                         6. Post-Incident Review Practices
@@ -1172,23 +1176,20 @@
                 </div>
             </section>
 
-            <!-- Key Terms Section -->
-            <section id="key-terms" class="content-section hidden">
+            <section id="key-terms" class="content-section hidden p-6">
                 <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Key Terms</h2>
                 <p class="mb-8 text-gray-700">Test your knowledge of key terms in Incident Management with these interactive flashcards. Click on a card to reveal its definition.</p>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6">
-                    <!-- Key Terms will be populated here by JavaScript -->
-                </div>
+                    </div>
             </section>
 
-            <!-- Domain Summary Section -->
-            <section id="domain-summary" class="content-section hidden">
+            <section id="domain-summary" class="content-section hidden p-6">
                 <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Domain Summary</h2>
                 <div class="p-6 bg-white rounded-lg shadow-md">
                     <p class="text-gray-700 mb-4">CISM Domain 4: Incident Management, emphasizes the critical role of information security managers in preparing for, responding to, and recovering from information security incidents. It's a highly practical domain that covers the entire lifecycle of an incident, from proactive planning to post-event analysis.</p>
                     <p class="text-gray-700 mb-4">The domain is split into two key areas: **Incident Management Readiness** focuses on the foundational work, including developing comprehensive Incident Response Plans (IRPs), conducting Business Impact Analyses (BIAs) to understand critical assets and their recovery needs (RTOs/RPOs), and establishing robust Business Continuity Plans (BCPs) and Disaster Recovery Plans (DRPs). It also covers establishing clear incident classification criteria and the importance of regular testing, evaluation, and training for the entire incident management team.</p>
-                    <p class="text-gray-700">**Incident Management Operations** delves into the active phases of incident handling. This includes leveraging various security tools (SIEM, EDR, IDS/IPS), applying forensic methodologies for investigation and root cause analysis, implementing effective containment strategies, and managing multi-faceted communications with both internal and external stakeholders. Finally, it addresses the crucial steps of eradicating threats, recovering systems to a secure state, and conducting thorough post-incident reviews to identify lessons learned and drive continuous improvement in the organization's security posture. A strong grasp of this domain is essential for any CISM professional looking to minimize business disruption and enhance organizational resilience in the face of security challenges.</p>
+                    <p class="text-gray-700">**Incident Management Operations** delves into the active phases of incident handling. This includes leveraging various security tools (SIEM, EDR, IDS/IPS), applying forensic methodologies for investigation and root cause analysis, implementing effective containment strategies, and managing multi-faceted communications with both internal and external stakeholders. Finally, it assesses the crucial steps of eradicating threats, recovering systems to a secure state, and conducting thorough post-incident reviews to identify lessons learned and drive continuous improvement in the organization's security posture. A strong grasp of this domain is essential for any CISM professional looking to minimize business disruption and enhance organizational resilience in the face of security challenges.</p>
                 </div>
             </section>
         </main>
@@ -1258,9 +1259,28 @@
         const bcpElementDescriptions = {
             backups: {
                 title: "Backup Arrangements",
-                description: "Detailed plans for regularly backing up critical data and systems to ensure data availability and integrity after a loss event. This includes defining specific procedures for backup frequency, storage locations, and retention policies."
+                description: `
+                    <p><strong>Backup Frequency:</strong> How often data is backed up (e.g., daily, hourly, continuously). This is determined by the RPO (Recovery Point Objective) and the acceptable data loss tolerance.</p>
+                    <p><strong>Backup Location:</strong> Where backups are stored (e.g., on-site, off-site, cloud). Critical for disaster recovery to ensure backups are not affected by the same event as primary data.</p>
+                    <p><strong>Backup Retention:</strong> How long backups are kept. This is driven by legal, regulatory, and business requirements, ensuring data is available for recovery or audit for a specified period.</p>
+                `
             },
-            // Removed failover and alternate-sites
+            redundant_systems: {
+                title: "Redundant Systems",
+                description: "Implementing duplicate or multiple systems, components, or network paths to ensure continuous operation even if one fails. This includes active-passive, active-active configurations, and load balancing."
+            },
+            alternate_locations: {
+                title: "Alternate Locations",
+                description: "Designated alternative physical locations where essential personnel can relocate and continue business operations if the primary facility becomes unusable. This can range from reciprocal agreements to dedicated hot sites."
+            },
+            rto: {
+                title: "Recovery Time Objective (RTO)",
+                description: "The maximum tolerable duration of time that a system, application, or network can be down after a disaster or incident without causing unacceptable harm to the business. Example: A critical e-commerce platform has an RTO of 4 hours. This means it must be fully operational within 4 hours of an outage."
+            },
+            rpo: {
+                title: "Recovery Point Objective (RPO)",
+                description: "The maximum tolerable amount of data that can be lost from an IT service due to a major incident. It's typically expressed in time, indicating how recent backups need to be. Example: A customer database has an RPO of 1 hour. This means that in a recovery scenario, no more than 1 hour of data should be lost."
+            }
         };
 
         // New data for nested backup cards
@@ -1371,11 +1391,9 @@
                 description: "A meticulous, unbroken record of the seizure, custody, control, transfer, analysis, and disposition of physical or electronic evidence. Essential to maintain evidence integrity and legal admissibility."
             },
             'immutability': {
-                title: "Immutability",
                 description: "The principle that digital evidence, once acquired, should not be altered, modified, or damaged. Forensic copies are made, and analysis is performed on these copies, never the original."
             },
             'least-intrusive': {
-                title: "Least Intrusive Methods",
                 description: "Applying forensic techniques that minimize impact on the live system and original evidence. Prioritizes volatile data collection (e.g., memory) before non-volatile (e.g., disk imaging) to avoid data loss or alteration."
             }
         };
@@ -1429,7 +1447,6 @@
                 description: "Logically or physically dividing a network into smaller, isolated segments to limit the blast radius of an incident and prevent attackers from moving freely between different parts of the network."
             },
             'firewall-rules': {
-                title: "Firewall/IPS Rules",
                 description: "Implementing temporary or permanent firewall rules or IPS signatures to block known malicious IP addresses, domains, or specific attack patterns, thereby preventing inbound/outbound communication with attacker infrastructure."
             }
         };
@@ -1457,7 +1474,6 @@
                 description: "Meticulous, chronological records of all actions taken, observations, and decisions during an incident. Essential for post-incident review, legal purposes, and demonstrating due diligence."
             },
             'regulatory-disclosures': {
-                title: "Regulatory Disclosures",
                 description: "Adherence to legal and regulatory obligations for reporting data breaches or security incidents to relevant authorities and affected individuals within specified timelines, often requiring legal counsel review."
             }
         };
@@ -1473,7 +1489,6 @@
                 description: "Thoroughly remove all traces of the attacker and malicious code from affected systems and networks, including malware, backdoors, unauthorized accounts, and attacker tools."
             },
             'harden-systems': {
-                title: "Harden Systems",
                 description: "Implement additional security controls or configurations on affected and similar systems to strengthen defenses, reduce the attack surface, and prevent re-infection or similar attacks in the future."
             }
         };
@@ -1489,7 +1504,6 @@
                 description: "Bring critical systems and data back online from clean, verified backups, prioritizing services based on the RTO (Recovery Time Objective) and business criticality."
             },
             'verify-monitor': {
-                title: "Verify & Monitor",
                 description: "Continuously monitor restored systems and network activity for any signs of renewed malicious activity or anomalies. Verify that all security controls are operating effectively and that the environment is stable."
             }
         };
@@ -1501,7 +1515,6 @@
                 description: "A structured review process conducted after an incident to analyze the effectiveness of the response. It identifies what went well, what could be improved, and potential root causes of issues, focusing on objective facts rather than blame."
             },
             'lessons-learned': {
-                title: "Lessons Learned Sessions",
                 description: "Collaborative meetings where all involved parties (technical teams, management, legal, communications) discuss the findings from the AAR. The goal is to document key takeaways, share knowledge, and propose actionable recommendations for improving future incident response capabilities."
             }
         };
@@ -1525,7 +1538,6 @@
                 description: "Restoring affected systems and data to normal, secure operation. This involves validating system integrity, restoring from clean backups, and bringing services back online according to RTOs and RPOs."
             },
             'post-incident': {
-                title: "Post-Incident Review",
                 description: "Conducting an after-action review to analyze the incident response, identify lessons learned, and implement corrective actions to improve future security posture and incident readiness."
             }
         };
@@ -1536,7 +1548,7 @@
             { term: "Incident Response Plan (IRP)", definition: "A documented set of procedures for detecting, analyzing, containing, eradicating, and recovering from information security incidents." },
             { term: "Business Impact Analysis (BIA)", definition: "A process to identify and evaluate the potential effects (financial, operational, reputational) of disruptive events on an organization's critical business functions." },
             { term: "Recovery Time Objective (RTO)", definition: "The maximum acceptable downtime for a system or business function after a disruption." },
-            { term: "Recovery Point Objective (RPO)", definition: "The maximum acceptable amount of data loss that an organization can sustain during an incident, typically measured in time (e.g., 1 hour of data loss)." },
+            { term: "Recovery Point Objective (RPO)", definition: "The maximum acceptable amount of data that can be lost from an IT service due to a major incident, typically measured in time (e.g., 1 hour of data loss)." },
             { term: "Business Continuity Plan (BCP)", definition: "A comprehensive plan outlining how an organization will maintain essential business functions during and after a significant disruption, regardless of cause." },
             { term: "Disaster Recovery Plan (DRP)", definition: "A detailed technical plan focused on restoring IT systems, applications, and data after a disaster, aligning with BIA-defined RTOs and RPOs." },
             { term: "Incident Categorization", definition: "The process of classifying incidents based on their type, impact, sensitivity of data involved, and compliance requirements to prioritize response." },
@@ -1615,7 +1627,7 @@
 
         // Event Listeners
         document.addEventListener('DOMContentLoaded', () => {
-            // No charts to initialize in Domain 4 as per the structure
+            // No charts to initialize in Domain 4 as per the plan, but kept for consistency if needed.
             // initResourceAllocationChart(); // Not applicable for D4
             // initProgramMetricsChart(); // Not applicable for D4
             
@@ -1853,79 +1865,47 @@
                 });
             });
 
-            // BCP Element Cards (New) - specifically for the main "Backup Arrangements" card
-            document.querySelectorAll('.bcp-element-card[data-bcp-element="backups"]').forEach(card => {
+            // BCP Element Cards: Backup Arrangements, Redundant Systems, Alternate Locations, RTO, RPO
+            document.querySelectorAll('.bcp-element-card').forEach(card => {
                 card.addEventListener('click', () => {
-                    const descriptionContainer = card.querySelector('.card-description');
-                    let backupDetailsContainer = descriptionContainer.querySelector('.backup-details-container');
+                    const descriptionDiv = card.querySelector('.card-description');
+                    const bcpElementKey = card.dataset.bcpElement;
+                    let details = '';
 
-                    // Close all other open BCP element cards (if any)
+                    // Determine which description to use based on data-bcp-element
+                    if (bcpElementKey === 'backups') {
+                        details = bcpElementDescriptions.backups.description;
+                    } else if (bcpElementKey === 'redundant-systems') {
+                        details = bcpElementDescriptions.redundant_systems.description;
+                    } else if (bcpElementKey === 'alternate-locations') {
+                        details = bcpElementDescriptions.alternate_locations.description;
+                    } else if (bcpElementKey === 'rto') {
+                        details = bcpElementDescriptions.rto.description;
+                    } else if (bcpElementKey === 'rpo') {
+                        details = bcpElementDescriptions.rpo.description;
+                    }
+
+
+                    // Close all other open cards and remove 'active' class
                     document.querySelectorAll('.bcp-element-card').forEach(otherCard => {
                         if (otherCard !== card) {
                             otherCard.classList.remove('active');
-                            const otherBackupDetailsContainer = otherCard.querySelector('.backup-details-container');
-                            if (otherBackupDetailsContainer) {
-                                otherBackupDetailsContainer.classList.add('hidden');
-                                otherBackupDetailsContainer.innerHTML = ''; // Clear content
-                            }
+                            otherCard.querySelector('.card-description').innerHTML = ''; // Clear content
                         }
                     });
 
                     card.classList.toggle('active');
 
                     if (card.classList.contains('active')) {
-                        if (!backupDetailsContainer) { // Create container if it doesn't exist
-                            backupDetailsContainer = document.createElement('div');
-                            backupDetailsContainer.classList.add('backup-details-container', 'flex', 'flex-wrap', 'justify-center', 'gap-4', 'mt-4');
-                            descriptionContainer.appendChild(backupDetailsContainer);
-                        }
-                        backupDetailsContainer.classList.remove('hidden');
-                        
-                        // Populate backup details if not already populated
-                        if (backupDetailsContainer.innerHTML.trim() === '') {
-                            let detailsHtml = '';
-                            for (const key in backupDetailDescriptions) {
-                                detailsHtml += `
-                                    <div class="backup-detail-card" data-detail="${key}">
-                                        <span class="card-title">${backupDetailDescriptions[key].title}</span>
-                                        <div class="card-description"></div>
-                                    </div>
-                                `;
-                            }
-                            backupDetailsContainer.innerHTML = detailsHtml;
-
-                            // Add event listeners for the newly created detail cards
-                            backupDetailsContainer.querySelectorAll('.backup-detail-card').forEach(detailCard => {
-                                detailCard.addEventListener('click', (event) => {
-                                    event.stopPropagation(); // Prevent click from bubbling up to parent bcp-element-card
-                                    const detailDescriptionDiv = detailCard.querySelector('.card-description');
-                                    const detailKey = detailCard.dataset.detail;
-
-                                    // Close other detail cards within the same backup-details-container
-                                    backupDetailsContainer.querySelectorAll('.backup-detail-card').forEach(otherDetailCard => {
-                                        if (otherDetailCard !== detailCard) {
-                                            otherDetailCard.classList.remove('active');
-                                        }
-                                    });
-
-                                    detailCard.classList.toggle('active');
-
-                                    if (detailCard.classList.contains('active') && detailDescriptionDiv && backupDetailDescriptions[detailKey]) {
-                                        detailDescriptionDiv.innerHTML = `<p>${backupDetailDescriptions[detailKey].description}</p>`;
-                                    } else if (detailDescriptionDiv) {
-                                        detailDescriptionDiv.innerHTML = '';
-                                    }
-                                });
-                            });
-                        }
+                        descriptionDiv.innerHTML = details; // Populate directly
+                        descriptionDiv.style.display = 'block'; // Ensure it's visible
                     } else {
-                        if (backupDetailsContainer) {
-                            backupDetailsContainer.classList.add('hidden');
-                            backupDetailsContainer.innerHTML = ''; // Clear content when collapsing
-                        }
+                        descriptionDiv.innerHTML = ''; // Clear content when collapsing
+                        descriptionDiv.style.display = 'none'; // Hide the container
                     }
                 });
             });
+
 
             // Incident Classification Cards (A.5.a)
             document.querySelectorAll('.incident-classification-container .incident-classification-card').forEach(card => {
@@ -1979,7 +1959,7 @@
             });
 
 
-            // RTO/RPO Visualization Logic
+            // RTO/RPO Visualization Logic (Removed as per previous instructions, keeping check for safety)
             const rpoInput = document.getElementById('rpoInput');
             const rtoInput = document.getElementById('rtoInput');
             const rpoPoint = document.querySelector('.rto-rpo-timeline .rpo-point');
@@ -1988,55 +1968,59 @@
             const dataLossWindow = document.querySelector('.rto-rpo-timeline .data-loss-window');
             const downtimeWindow = document.querySelector('.rto-rpo-timeline .downtime-window');
 
-            const updateRtoRpoVisualization = () => {
-                let rpoHours = parseFloat(rpoInput.value);
-                let rtoHours = parseFloat(rtoInput.value);
+            // Only initialize if elements exist
+            if (rpoInput && rtoInput && rpoPoint && rtoPoint && incidentPoint && dataLossWindow && downtimeWindow) {
+                const updateRtoRpoVisualization = () => {
+                    let rpoHours = parseFloat(rpoInput.value);
+                    let rtoHours = parseFloat(rtoInput.value);
 
-                if (isNaN(rpoHours) || rpoHours < 0) rpoHours = 0;
-                if (isNaN(rtoHours) || rtoHours < 0) rtoHours = 0;
+                    if (isNaN(rpoHours) || rpoHours < 0) rpoHours = 0;
+                    if (isNaN(rtoHours) || rtoHours < 0) rtoHours = 0;
 
-                const totalDuration = rpoHours + rtoHours;
+                    const totalDuration = rpoHours + rtoHours;
 
-                // If totalDuration is 0, handle it gracefully
-                if (totalDuration === 0) {
-                    rpoPoint.style.left = '0%';
-                    incidentPoint.style.left = '0%';
-                    rtoPoint.style.left = '0%';
-                    dataLossWindow.style.width = '0%';
-                    dataLossWindow.style.left = '0%';
-                    downtimeWindow.style.width = '0%';
-                    downtimeWindow.style.left = '0%';
-                    rpoPoint.querySelector('.timeline-label').textContent = 'RPO Point (0h)';
-                    incidentPoint.querySelector('.timeline-label').textContent = 'Incident (0h)';
-                    rtoPoint.querySelector('.timeline-label').textContent = 'RTO Point (0h)';
-                    return;
-                }
+                    // If totalDuration is 0, handle it gracefully
+                    if (totalDuration === 0) {
+                        rpoPoint.style.left = '0%';
+                        incidentPoint.style.left = '0%';
+                        rtoPoint.style.left = '0%';
+                        dataLossWindow.style.width = '0%';
+                        dataLossWindow.style.left = '0%';
+                        downtimeWindow.style.width = '0%';
+                        downtimeWindow.style.left = '0%';
+                        rpoPoint.querySelector('.timeline-label').textContent = 'RPO Point (0h)';
+                        incidentPoint.querySelector('.timeline-label').textContent = 'Incident (0h)';
+                        rtoPoint.querySelector('.timeline-label').textContent = 'RTO Point (0h)';
+                        return;
+                    }
 
-                // Calculate positions as percentages of the total timeline duration
-                const incidentPos = (rpoHours / totalDuration) * 100; // Incident is RPO hours into the total duration
+                    // Calculate positions as percentages of the total timeline duration
+                    const incidentPos = (rpoHours / totalDuration) * 100; // Incident is RPO hours into the total duration
 
-                rpoPoint.style.left = `0%`; // RPO point is at the very beginning of the visualized timeline
-                incidentPoint.style.left = `${incidentPos}%`;
-                rtoPoint.style.left = `100%`; // RTO point is at the very end of the visualized timeline
+                    rpoPoint.style.left = `0%`; // RPO point is at the very beginning of the visualized timeline
+                    incidentPoint.style.left = `${incidentPos}%`;
+                    rtoPoint.style.left = `100%`; // RTO point is at the very end of the visualized timeline
 
-                // Data Loss Window: from RPO Point to Incident Point
-                dataLossWindow.style.left = `0%`;
-                dataLossWindow.style.width = `${incidentPos}%`;
+                    // Data Loss Window: from RPO Point to Incident Point
+                    dataLossWindow.style.left = `0%`;
+                    dataLossWindow.style.width = `${incidentPos}%`;
 
-                // Downtime Window: from Incident Point to RTO Point
-                downtimeWindow.style.left = `${incidentPos}%`;
-                downtimeWindow.style.width = `${100 - incidentPos}%`;
+                    // Downtime Window: from Incident Point to RTO Point
+                    downtimeWindow.style.left = `${incidentPos}%`;
+                    downtimeWindow.style.width = `${100 - incidentPos}%`;
 
-                rpoPoint.querySelector('.timeline-label').textContent = `RPO Point (-${rpoHours}h)`;
-                incidentPoint.querySelector('.timeline-label').textContent = `Incident (0h)`;
-                rtoPoint.querySelector('.timeline-label').textContent = `RTO Point (+${rtoHours}h)`;
-            };
+                    rpoPoint.querySelector('.timeline-label').textContent = `RPO Point (-${rpoHours}h)`;
+                    incidentPoint.querySelector('.timeline-label').textContent = `Incident (0h)`;
+                    rtoPoint.querySelector('.timeline-label').textContent = `RTO Point (+${rtoHours}h)`;
+                };
 
-            rpoInput.addEventListener('input', updateRtoRpoVisualization);
-            rtoInput.addEventListener('input', updateRtoRpoVisualization);
+                rpoInput.addEventListener('input', updateRtoRpoVisualization);
+                rtoInput.addEventListener('input', updateRtoRpoVisualization);
 
-            // Initial call to set up the visualization
-            updateRtoRpoVisualization();
+                // Initial call to set up the visualization
+                updateRtoRpoVisualization();
+            }
+
 
             // Forensic Investigation Steps Cards (B.2.b)
             document.querySelectorAll('.investigation-step-card').forEach(card => {
