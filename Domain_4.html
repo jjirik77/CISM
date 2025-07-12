@@ -431,6 +431,8 @@
             background-color: #EDEAE0;
             border-radius: 0.75rem;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            max-width: 400px; /* Added for centering */
+            margin: 0 auto; /* Added for centering */
         }
         .incident-phase-card {
             flex: 0 0 auto; /* Allow cards to grow/shrink based on content, but don't force multiple per row */
@@ -477,6 +479,7 @@
             color: #D5D2C8;
             line-height: 1;
             margin: 0.5rem 0; /* Vertical margin for arrows in a column flow */
+            display: block; /* Ensures centering by parent flex container */
         }
 
         /* RTO/RPO Visualization Specific Styles */
@@ -629,67 +632,47 @@
             color: #555555;
         }
 
-        /* Forensic Arrow - New consistent styling but retaining interactive description */
+        /* Forensic Arrow - Updated to match phase-arrow look, and is non-interactive */
         .forensic-arrow {
             font-size: 2.5em;
             color: #D5D2C8; /* Consistent with phase-arrow */
             line-height: 1;
             margin: 0.5rem 0; /* Consistent with phase-arrow */
-            
-            position: relative; /* Needed for absolute positioning of description */
-            display: flex; /* To center content within */
-            align-items: center; /* Center vertically */
-            justify-content: center; /* Center horizontally */
-            width: 50px; /* Width for the arrow icon */
-            height: 50px; /* Height for the arrow icon */
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-            border-radius: 50%; /* Make them circular */
-            background-color: #EDEAE0; /* Light background */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.08); /* Subtle shadow */
-        }
-
-        .forensic-arrow:hover {
-            transform: scale(1.05); /* Slightly enlarge on hover */
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* More pronounced shadow */
-            background-color: #D5D2C8; /* Darker background on hover */
-        }
-
-        .forensic-arrow.active {
-            border-color: #004085; /* Dark blue border when active */
-            box-shadow: 0 4px 8px rgba(0, 64, 133, 0.3); /* Blue glow */
-            background-color: #E0F7F5; /* Lighter blue background when active */
-        }
-
-        .forensic-arrow .arrow-description {
-            position: absolute;
-            top: 100%; /* Position below the arrow */
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #FFFFFF;
-            border: 1px solid #D5D2C8;
-            border-radius: 0.5rem;
-            padding: 0.75rem;
-            font-size: 0.85em;
-            font-weight: 400;
-            color: #555555;
-            white-space: normal; /* Allow text to wrap */
-            width: 200px; /* Fixed width for description box */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            z-index: 10;
-            display: none; /* Hidden by default */
-            margin-top: 10px; /* Space between arrow and description */
-            text-align: center;
-        }
-
-        .forensic-arrow.active .arrow-description {
-            display: block;
-            animation: fadeIn 0.3s ease-in-out;
+            display: block; /* Ensures centering by parent flex container */
         }
 
         /* Specific adjustment for Forensic Method Cards */
         .forensic-method-container .forensic-method-card {
-            max-width: 200px; /* Set max-width for forensic method cards */
+            flex: 0 0 300px; /* Set to match incident-plan-element-card */
+            min-width: 300px; /* Set to match incident-plan-element-card */
+            max-width: 300px; /* Set to match incident-plan-element-card */
+        }
+        /* Specific adjustment for IR Method Cards (SIEM, EDR, etc.) */
+        .ir-method-card {
+            flex: 0 0 200px; /* Set to match response-method-card */
+            min-width: 200px; /* Set to match response-method-card */
+            max-width: 200px; /* Set to match response-method-card */
+        }
+        /* Specific adjustment for Communication Action Cards (B.4.b) */
+        .comm-action-card {
+            flex: 0 0 300px; /* Fixed width as requested */
+            min-width: 300px; /* Fixed width as requested */
+            max-width: 300px; /* Fixed width as requested */
+        }
+        /* Specific adjustment for Eradication and Recovery Step Cards (B.5.a, B.5.b) */
+        .eradication-step-card, .recovery-step-card {
+            flex: 0 0 250px; /* Fixed width as requested */
+            min-width: 250px; /* Fixed width as requested */
+            max-width: 250px; /* Fixed width as requested */
+        }
+        /* Styling for the container of forensic investigation steps to match incident phases */
+        .investigation-steps-container {
+            padding: 1rem;
+            background-color: #EDEAE0;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            max-width: 400px; /* Added for centering */
+            margin: 0 auto; /* Added for centering */
         }
     </style>
 </head>
@@ -710,7 +693,6 @@
         </nav>
 
         <main id="content-area">
-            <!-- Introduction Section -->
             <section id="introduction" class="content-section fade-in">
                 <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Introduction to CISM Domain 4</h2>
                 <div class="p-6 bg-white rounded-lg shadow-md">
@@ -719,12 +701,10 @@
                 </div>
             </section>
 
-            <!-- Incident Management Readiness Section -->
             <section id="incident-readiness" class="content-section hidden">
                 <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Section A: Incident Management Readiness</h2>
                 <p class="mb-8 text-gray-700">Effective incident management begins long before an incident occurs. This section covers the crucial planning, documentation, and preparation activities that lay the groundwork for a swift and organized response.</p>
 
-                <!-- Sub-Domain: Incident Response Plan / Incident Management Plan -->
                 <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
                     <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
                         1. Incident Response Plan (IRP) / Incident Management Plan (IMP)
@@ -945,7 +925,7 @@
                         <span class="accordion-icon text-2xl">+</span>
                     </button>
                     <div class="accordion-content hidden p-6">
-                        <p class="text-gray-700 mb-4">Regular testing, evaluation, and training are vital to ensure the incident management program remains effective, adaptable, and that personnel are proficient.</p>
+                        <p class="text-gray-700 mb-4">The incident response lifecycle concludes with a review to learn from the event and continuously improve the security posture.</p>
 
                         <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Conduct tabletop exercises, simulations, and full-scale drills.</h4>
                         <p class="text-gray-600 mb-4">These exercises are crucial to ensure the DRP is viable, up-to-date, and that recovery teams are proficient in executing the plan. This identifies gaps and areas for improvement. Click on a testing type to learn more:</p>
@@ -970,7 +950,7 @@
                 </div>
             </section>
 
-            <section id="incident-operations" class="content-section hidden p-6">
+            <section id="incident-operations" class="content-section hidden">
                 <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Section B: Incident Management Operations</h2>
                 <p class="mb-8 text-gray-700">This section describes the real-time execution of the incident response plan when a security incident is detected, covering the practical steps from detection to post-incident review.</p>
 
@@ -985,19 +965,19 @@
                         <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Use tools such as SIEM, EDR, IDS/IPS, and threat intelligence platforms.</h4>
                         <p class="text-gray-600 mb-4">These tools are critical for identifying, analyzing, and responding to incidents. Click on a tool to learn about its primary function in incident management:</p>
                         <div class="flex flex-wrap justify-center gap-4 mb-6">
-                            <div class="ir-method-card" data-tool="siem" style="max-width: 150px;">
+                            <div class="ir-method-card" data-tool="siem">
                                 <span class="card-title">SIEM</span>
                                 <div class="card-description"></div>
                             </div>
-                            <div class="ir-method-card" data-tool="edr" style="max-width: 150px;">
+                            <div class="ir-method-card" data-tool="edr">
                                 <span class="card-title">EDR</span>
                                 <div class="card-description"></div>
                             </div>
-                            <div class="ir-method-card" data-tool="ids-ips" style="max-width: 150px;">
+                            <div class="ir-method-card" data-tool="ids-ips">
                                 <span class="card-title">IDS/IPS</span>
                                 <div class="card-description"></div>
                             </div>
-                            <div class="ir-method-card" data-tool="threat-intel" style="max-width: 150px;">
+                            <div class="ir-method-card" data-tool="threat-intel">
                                 <span class="card-title">Threat Intelligence Platforms</span>
                                 <div class="card-description"></div>
                             </div>
@@ -1019,15 +999,15 @@
                         <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Launch investigations using forensic methodologies.</h4>
                         <p class="text-gray-600 mb-4">Forensic methodologies involve systematic and legally sound processes for collecting, preserving, and analyzing digital evidence to reconstruct events and identify perpetrators. Click on each method to learn more:</p>
                         <div class="flex flex-wrap justify-center gap-4 mb-6 forensic-method-container">
-                            <div class="forensic-method-card" data-method="chain-of-custody" style="max-width: 200px;">
+                            <div class="forensic-method-card" data-method="chain-of-custody">
                                 <span class="card-title">Chain of Custody</span>
                                 <div class="card-description"></div>
                             </div>
-                            <div class="forensic-method-card" data-method="immutability" style="max-width: 200px;">
+                            <div class="forensic-method-card" data-method="immutability">
                                 <span class="card-title">Immutability</span>
                                 <div class="card-description"></div>
                             </div>
-                            <div class="forensic-method-card" data-method="least-intrusive" style="max-width: 200px;">
+                            <div class="forensic-method-card" data-method="least-intrusive">
                                 <span class="card-title">Least Intrusive Methods</span>
                                 <div class="card-description"></div>
                             </div>
@@ -1040,26 +1020,17 @@
                                 <span class="card-title">Collection</span>
                                 <div class="card-description"></div>
                             </div>
-                            <div class="forensic-arrow" data-arrow-key="collection-to-examination">
-                                <span class="text-3xl">↓</span>
-                                <div class="arrow-description"></div>
-                            </div>
+                            <span class="forensic-arrow text-3xl text-gray-400">↓</span>
                             <div class="forensic-step-card" data-step="examination">
                                 <span class="card-title">Examination</span>
                                 <div class="card-description"></div>
                             </div>
-                            <div class="forensic-arrow" data-arrow-key="examination-to-analysis">
-                                <span class="text-3xl">↓</span>
-                                <div class="arrow-description"></div>
-                            </div>
+                            <span class="forensic-arrow text-3xl text-gray-400">↓</span>
                             <div class="forensic-step-card" data-step="analysis">
                                 <span class="card-title">Analysis</span>
                                 <div class="card-description"></div>
                             </div>
-                            <div class="forensic-arrow" data-arrow-key="analysis-to-reporting">
-                                <span class="text-3xl">↓</span>
-                                <div class="arrow-description"></div>
-                            </div>
+                            <span class="forensic-arrow text-3xl text-gray-400">↓</span>
                             <div class="forensic-step-card" data-step="reporting">
                                 <span class="card-title">Reporting</span>
                                 <div class="card-description"></div>
@@ -1098,7 +1069,7 @@
                         </div>
 
                         <h4 class="text-lg font-semibold text-gray-700">b. Balance containment with business and operational impacts.</h4>
-                        <p class="text-gray-600">Containment actions can disrupt business operations. The security manager must make informed decisions, often in consultation with business leaders, to balance the need to stop the attack with minimizing disruption to critical business functions.</p>
+                        <p class="text-600">Containment actions can disrupt business operations. The security manager must make informed decisions, often in consultation with business leaders, to balance the need to stop the attack with minimizing disruption to critical business functions.</p>
                     </div>
                 </div>
 
@@ -1488,7 +1459,6 @@
                 description: "Suspending or disabling user or service accounts that have been compromised or are suspected of being used by an attacker to prevent further unauthorized access."
             },
             'network-segmentation': {
-                title: "Network Segmentation",
                 description: "Logically or physically dividing a network into smaller, isolated segments to limit the blast radius of an incident and prevent attackers from moving freely between different parts of the network."
             },
             'firewall-rules': {
@@ -2084,30 +2054,6 @@
 
                     if (card.classList.contains('active') && descriptionDiv && investigationStepDescriptions[stepKey]) {
                         descriptionDiv.innerHTML = `<p>${investigationStepDescriptions[stepKey].description}</p>`;
-                    } else if (descriptionDiv) {
-                        descriptionDiv.innerHTML = '';
-                    }
-                });
-            });
-
-            // Forensic Investigation Arrows (B.2.b)
-            document.querySelectorAll('.forensic-arrow').forEach(arrow => {
-                arrow.addEventListener('click', (event) => {
-                    event.stopPropagation(); // Prevent accordion from closing
-                    const descriptionDiv = arrow.querySelector('.arrow-description');
-                    const arrowKey = arrow.dataset.arrowKey;
-
-                    // Close all other open arrow descriptions
-                    document.querySelectorAll('.forensic-arrow').forEach(otherArrow => {
-                        if (otherArrow !== arrow) {
-                            otherArrow.classList.remove('active');
-                        }
-                    });
-
-                    arrow.classList.toggle('active');
-
-                    if (arrow.classList.contains('active') && descriptionDiv && investigationArrowDetails[arrowKey]) {
-                        descriptionDiv.innerHTML = `<p>${investigationArrowDetails[arrowKey].description}</p>`;
                     } else if (descriptionDiv) {
                         descriptionDiv.innerHTML = '';
                     }
