@@ -94,7 +94,7 @@
         }
         
         /* Interactive Cards (General) - Unified Styling */
-        .ir-method-card, .containment-method-card, .post-incident-practice-card, .key-term-card, .incident-phase-card, .incident-plan-element-card, .response-method-card, .testing-type-card, .dependency-card, .bcp-element-card, .backup-detail-card, .incident-classification-card, .drp-site-card, .investigation-step-card, .comm-stakeholder-card, .comm-action-card, .eradication-step-card, .recovery-step-card, .forensic-method-card { /* Added new classes */
+        .ir-method-card, .containment-method-card, .post-incident-practice-card, .key-term-card, .incident-phase-card, .incident-plan-element-card, .response-method-card, .testing-type-card, .dependency-card, .bcp-element-card, .backup-detail-card, .incident-classification-card, .drp-site-card, .forensic-step-card, .comm-stakeholder-card, .comm-action-card, .eradication-step-card, .recovery-step-card, .forensic-method-card { /* Added new classes, removed investigation-step-card */
             background-color: #EDEAE0;
             border: 1px solid #D5D2C8;
             padding: 1rem;
@@ -242,7 +242,7 @@
         }
 
 
-        .ir-method-card:hover, .containment-method-card:hover, .post-incident-practice-card:hover, .key-term-card:hover, .incident-phase-card:hover, .incident-plan-element-card:hover, .response-method-card:hover, .testing-type-card:hover, .dependency-card:hover, .bcp-element-card:hover, .backup-detail-card:hover, .incident-classification-card:hover, .drp-site-card:hover, .investigation-step-card:hover, .comm-stakeholder-card:hover, .comm-action-card:hover, .eradication-step-card:hover, .recovery-step-card:hover, .forensic-method-card:hover { /* Added new classes */
+        .ir-method-card:hover, .containment-method-card:hover, .post-incident-practice-card:hover, .key-term-card:hover, .incident-phase-card:hover, .incident-plan-element-card:hover, .response-method-card:hover, .testing-type-card:hover, .dependency-card:hover, .bcp-element-card:hover, .backup-detail-card:hover, .incident-classification-card:hover, .drp-site-card:hover, .forensic-step-card:hover, .comm-stakeholder-card:hover, .comm-action-card:hover, .eradication-step-card:hover, .recovery-step-card:hover, .forensic-method-card:hover, .forensic-arrow:hover { /* Added new classes */
             transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* More pronounced shadow on hover */
         }
@@ -260,18 +260,19 @@
         .backup-detail-card.active,
         .incident-classification-card.active,
         .drp-site-card.active,
-        .investigation-step-card.active,
+        .forensic-step-card.active,
         .comm-stakeholder-card.active,
         .comm-action-card.active,
         .eradication-step-card.active,
         .recovery-step-card.active,
-        .forensic-method-card.active { /* Added new classes */
+        .forensic-method-card.active,
+        .forensic-arrow.active { /* Added new classes */
             border-color: #00A896; /* Vibrant Teal border */
             box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3); /* Teal glow */
             background-color: #E0F7F5; /* Very light teal background */
         }
 
-        .ir-method-card .card-title, .containment-method-card .card-title, .post-incident-practice-card .card-title, .key-term-card .card-title, .incident-phase-card .card-title, .incident-plan-element-card .card-title, .response-method-card .card-title, .dependency-card .card-title, .bcp-element-card .card-title, .backup-detail-card .card-title, .incident-classification-card .card-title, .drp-site-card .card-title, .investigation-step-card .card-title, .comm-stakeholder-card .card-title, .comm-action-card .card-title, .eradication-step-card .card-title, .recovery-step-card .card-title, .forensic-method-card .card-title { /* Added new classes */
+        .ir-method-card .card-title, .containment-method-card .card-title, .post-incident-practice-card .card-title, .key-term-card .card-title, .incident-phase-card .card-title, .incident-plan-element-card .card-title, .response-method-card .card-title, .dependency-card .card-title, .bcp-element-card .card-title, .backup-detail-card .card-title, .incident-classification-card .card-title, .drp-site-card .card-title, .forensic-step-card .card-title, .comm-stakeholder-card .card-title, .comm-action-card .card-title, .eradication-step-card .card-title, .recovery-step-card .card-title, .forensic-method-card .card-title { /* Added new classes */
             font-size: 1.15em; /* Slightly larger title */
             margin-bottom: 0.6rem;
             text-align: center;
@@ -300,7 +301,7 @@
         .backup-detail-card.active .card-description,
         .incident-classification-card.active .card-description,
         .drp-site-card.active .card-description,
-        .investigation-step-card.active .card-description,
+        .forensic-step-card.active .card-description,
         .comm-stakeholder-card.active .card-description,
         .comm-action-card.active .card-description,
         .eradication-step-card.active .card-description,
@@ -342,16 +343,16 @@
 
         /* Responsive Adjustments for new cards/elements */
         @media (max-width: 768px) {
-            .ir-method-card, .containment-method-card, .post-incident-practice-card, .incident-phase-card, .testing-type-card, .incident-plan-element-card, .response-method-card, .dependency-card, .bcp-element-card, .backup-detail-card, .incident-classification-card, .drp-site-card, .investigation-step-card, .comm-stakeholder-card, .comm-action-card, .eradication-step-card, .recovery-step-card, .forensic-method-card { /* Combined and added new classes */
+            .ir-method-card, .containment-method-card, .post-incident-practice-card, .incident-phase-card, .testing-type-card, .incident-plan-element-card, .response-method-card, .dependency-card, .bcp-element-card, .backup-detail-card, .incident-classification-card, .drp-site-card, .forensic-step-card, .comm-stakeholder-card, .comm-action-card, .eradication-step-card, .recovery-step-card, .forensic-method-card { /* Combined and added new classes */
                 flex: 0 0 100%; /* Take full width on small screens */
                 max-width: 100%;
                 min-width: unset; /* Allow shrinking below 250px/350px on very small screens if needed */
             }
-            .incident-phases-container {
+            .incident-phases-container, .investigation-steps-container { /* Added investigation-steps-container */
                 flex-direction: column; /* Stack vertically on small screens */
                 align-items: center;
             }
-            .phase-arrow {
+            .phase-arrow, .forensic-arrow { /* Added forensic-arrow */
                 transform: rotate(0deg); /* Arrow points down in vertical flow */
                 margin: 0.5rem 0; /* Adjust margin for vertical flow */
             }
@@ -586,42 +587,81 @@
             font-size: 0.85em;
         }
 
-        /* New styles for clickable arrows in forensic steps */
-        .investigation-steps-container .investigation-step-card {
-            width: 300px; /* Fixed width as requested */
-            min-width: 300px; /* Fixed width as requested */
-            max-width: 300px; /* Fixed width as requested */
+        /* Forensic Step Cards - New consistent styling */
+        .forensic-step-card {
+            flex: 0 0 auto; /* Allow cards to grow/shrink based on content, but don't force multiple per row */
+            min-width: 350px; /* Minimum width for each card, consistent with incident-phase-card */
+            max-width: 350px; /* Fixed max-width, consistent with incident-phase-card */
+            width: 350px; /* Fixed width to prevent horizontal expansion */
+            background-color: #FFFFFF;
+            border: 1px solid #D5D2C8;
+            padding: 0.8rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            box-sizing: border-box;
+            text-align: center;
+            font-weight: 600;
+            color: #333333;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
         }
-        .investigation-steps-container .investigation-arrow-clickable {
+        .forensic-step-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .forensic-step-card.active {
+            border-color: #00A896;
+            box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3);
+            background-color: #E0F7F5;
+        }
+        .forensic-step-card .card-title {
+            font-size: 1em;
+            margin-bottom: 0.4rem;
+            color: #004085;
+        }
+        .forensic-step-card .card-description {
+            font-size: 0.85em;
+            color: #555555;
+        }
+
+        /* Forensic Arrow - New consistent styling but retaining interactive description */
+        .forensic-arrow {
+            font-size: 2.5em;
+            color: #D5D2C8; /* Consistent with phase-arrow */
+            line-height: 1;
+            margin: 0.5rem 0; /* Consistent with phase-arrow */
+            
             position: relative; /* Needed for absolute positioning of description */
             display: flex; /* To center content within */
             align-items: center; /* Center vertically */
             justify-content: center; /* Center horizontally */
             width: 50px; /* Width for the arrow icon */
             height: 50px; /* Height for the arrow icon */
-            font-size: 2.5em; /* Size of the arrow character */
-            color: #00A896; /* Teal color for arrows */
             cursor: pointer;
             transition: all 0.2s ease-in-out;
             border-radius: 50%; /* Make them circular */
             background-color: #EDEAE0; /* Light background */
             box-shadow: 0 2px 5px rgba(0,0,0,0.08); /* Subtle shadow */
-            margin: 0.5rem 0; /* Vertical margin for column layout */
         }
 
-        .investigation-steps-container .investigation-arrow-clickable:hover {
+        .forensic-arrow:hover {
             transform: scale(1.05); /* Slightly enlarge on hover */
             box-shadow: 0 4px 8px rgba(0,0,0,0.15); /* More pronounced shadow */
             background-color: #D5D2C8; /* Darker background on hover */
         }
 
-        .investigation-steps-container .investigation-arrow-clickable.active {
+        .forensic-arrow.active {
             border-color: #004085; /* Dark blue border when active */
             box-shadow: 0 4px 8px rgba(0, 64, 133, 0.3); /* Blue glow */
             background-color: #E0F7F5; /* Lighter blue background when active */
         }
 
-        .investigation-steps-container .investigation-arrow-clickable .arrow-description {
+        .forensic-arrow .arrow-description {
             position: absolute;
             top: 100%; /* Position below the arrow */
             left: 50%;
@@ -642,9 +682,14 @@
             text-align: center;
         }
 
-        .investigation-steps-container .investigation-arrow-clickable.active .arrow-description {
+        .forensic-arrow.active .arrow-description {
             display: block;
             animation: fadeIn 0.3s ease-in-out;
+        }
+
+        /* Specific adjustment for Forensic Method Cards */
+        .forensic-method-container .forensic-method-card {
+            max-width: 200px; /* Set max-width for forensic method cards */
         }
     </style>
 </head>
@@ -940,19 +985,19 @@
                         <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Use tools such as SIEM, EDR, IDS/IPS, and threat intelligence platforms.</h4>
                         <p class="text-gray-600 mb-4">These tools are critical for identifying, analyzing, and responding to incidents. Click on a tool to learn about its primary function in incident management:</p>
                         <div class="flex flex-wrap justify-center gap-4 mb-6">
-                            <div class="ir-method-card" data-tool="siem">
+                            <div class="ir-method-card" data-tool="siem" style="max-width: 150px;">
                                 <span class="card-title">SIEM</span>
                                 <div class="card-description"></div>
                             </div>
-                            <div class="ir-method-card" data-tool="edr">
+                            <div class="ir-method-card" data-tool="edr" style="max-width: 150px;">
                                 <span class="card-title">EDR</span>
                                 <div class="card-description"></div>
                             </div>
-                            <div class="ir-method-card" data-tool="ids-ips">
+                            <div class="ir-method-card" data-tool="ids-ips" style="max-width: 150px;">
                                 <span class="card-title">IDS/IPS</span>
                                 <div class="card-description"></div>
                             </div>
-                            <div class="ir-method-card" data-tool="threat-intel">
+                            <div class="ir-method-card" data-tool="threat-intel" style="max-width: 150px;">
                                 <span class="card-title">Threat Intelligence Platforms</span>
                                 <div class="card-description"></div>
                             </div>
@@ -974,15 +1019,15 @@
                         <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Launch investigations using forensic methodologies.</h4>
                         <p class="text-gray-600 mb-4">Forensic methodologies involve systematic and legally sound processes for collecting, preserving, and analyzing digital evidence to reconstruct events and identify perpetrators. Click on each method to learn more:</p>
                         <div class="flex flex-wrap justify-center gap-4 mb-6 forensic-method-container">
-                            <div class="forensic-method-card" data-method="chain-of-custody">
+                            <div class="forensic-method-card" data-method="chain-of-custody" style="max-width: 200px;">
                                 <span class="card-title">Chain of Custody</span>
                                 <div class="card-description"></div>
                             </div>
-                            <div class="forensic-method-card" data-method="immutability">
+                            <div class="forensic-method-card" data-method="immutability" style="max-width: 200px;">
                                 <span class="card-title">Immutability</span>
                                 <div class="card-description"></div>
                             </div>
-                            <div class="forensic-method-card" data-method="least-intrusive">
+                            <div class="forensic-method-card" data-method="least-intrusive" style="max-width: 200px;">
                                 <span class="card-title">Least Intrusive Methods</span>
                                 <div class="card-description"></div>
                             </div>
@@ -991,31 +1036,31 @@
                         <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Forensic Investigation Steps.</h4>
                         <p class="text-gray-600 mb-4">A structured approach ensures thorough and legally sound evidence handling. Click on each step or arrow to learn more:</p>
                         <div class="flex flex-col justify-center gap-4 mb-6 investigation-steps-container">
-                            <div class="investigation-step-card" data-step="collection">
+                            <div class="forensic-step-card" data-step="collection">
                                 <span class="card-title">Collection</span>
                                 <div class="card-description"></div>
                             </div>
-                            <div class="investigation-arrow-clickable" data-arrow-key="collection-to-examination">
+                            <div class="forensic-arrow" data-arrow-key="collection-to-examination">
                                 <span class="text-3xl">↓</span>
                                 <div class="arrow-description"></div>
                             </div>
-                            <div class="investigation-step-card" data-step="examination">
+                            <div class="forensic-step-card" data-step="examination">
                                 <span class="card-title">Examination</span>
                                 <div class="card-description"></div>
                             </div>
-                            <div class="investigation-arrow-clickable" data-arrow-key="examination-to-analysis">
+                            <div class="forensic-arrow" data-arrow-key="examination-to-analysis">
                                 <span class="text-3xl">↓</span>
                                 <div class="arrow-description"></div>
                             </div>
-                            <div class="investigation-step-card" data-step="analysis">
+                            <div class="forensic-step-card" data-step="analysis">
                                 <span class="card-title">Analysis</span>
                                 <div class="card-description"></div>
                             </div>
-                            <div class="investigation-arrow-clickable" data-arrow-key="analysis-to-reporting">
+                            <div class="forensic-arrow" data-arrow-key="analysis-to-reporting">
                                 <span class="text-3xl">↓</span>
                                 <div class="arrow-description"></div>
                             </div>
-                            <div class="investigation-step-card" data-step="reporting">
+                            <div class="forensic-step-card" data-step="reporting">
                                 <span class="card-title">Reporting</span>
                                 <div class="card-description"></div>
                             </div>
@@ -2023,13 +2068,13 @@
 
 
             // Forensic Investigation Steps Cards (B.2.b)
-            document.querySelectorAll('.investigation-step-card').forEach(card => {
+            document.querySelectorAll('.forensic-step-card').forEach(card => {
                 card.addEventListener('click', () => {
                     const descriptionDiv = card.querySelector('.card-description');
                     const stepKey = card.dataset.step;
 
                     // Close all other open cards and remove 'active' class
-                    document.querySelectorAll('.investigation-step-card').forEach(otherCard => {
+                    document.querySelectorAll('.forensic-step-card').forEach(otherCard => {
                         if (otherCard !== card) {
                             otherCard.classList.remove('active');
                         }
@@ -2046,14 +2091,14 @@
             });
 
             // Forensic Investigation Arrows (B.2.b)
-            document.querySelectorAll('.investigation-arrow-clickable').forEach(arrow => {
+            document.querySelectorAll('.forensic-arrow').forEach(arrow => {
                 arrow.addEventListener('click', (event) => {
                     event.stopPropagation(); // Prevent accordion from closing
                     const descriptionDiv = arrow.querySelector('.arrow-description');
                     const arrowKey = arrow.dataset.arrowKey;
 
                     // Close all other open arrow descriptions
-                    document.querySelectorAll('.investigation-arrow-clickable').forEach(otherArrow => {
+                    document.querySelectorAll('.forensic-arrow').forEach(otherArrow => {
                         if (otherArrow !== arrow) {
                             otherArrow.classList.remove('active');
                         }
