@@ -125,29 +125,7 @@
         .risk-matrix-table .high { background-color: #F8D7DA; color: #721C24; } /* Red */
         .risk-matrix-table .critical { background-color: #DC3545; color: #FFFFFF; } /* Darker Red */
 
-        /* Vulnerability Mapping Table Styles */
-        .vulnerability-mapping-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 1rem;
-        }
-        .vulnerability-mapping-table th, .vulnerability-mapping-table td {
-            border: 1px solid #D5D2C8;
-            padding: 0.6rem;
-            text-align: left;
-        }
-        .vulnerability-mapping-table th {
-            background-color: #EDEAE0;
-            font-weight: 600;
-            color: #333333;
-        }
-        .vulnerability-mapping-table td {
-            background-color: #FFFFFF;
-            color: #555555;
-            font-size: 0.9em;
-        }
-
-        /* Unified Styles for Interactive Cards (Frameworks, Response, Methods, Key Terms) */
+        /* Unified Styles for Interactive Cards (Frameworks, Response, Methods, Key Terms, Vulnerability Scenarios) */
         .risk-framework-card, .risk-response-card, .risk-method-card, .key-term-card {
             background-color: #EDEAE0; /* Secondary Neutral */
             border: 1px solid #D5D2C8;
@@ -201,6 +179,10 @@
         .key-term-card .card-description {
             text-align: center;
         }
+        /* Specific override for vulnerability-scenario-card description text alignment */
+        .vulnerability-scenario-card .card-description {
+            text-align: left; /* Keep left alignment for detailed impact */
+        }
 
         .risk-framework-card.active .card-description, .risk-response-card.active .card-description, .risk-method-card.active .card-description, .key-term-card.active .card-description {
             display: block;
@@ -249,12 +231,10 @@
             background-color: #FFFFFF;
             color: #555555;
         }
-        .risk-scorecard-table .risk-level-low { background-color: #D4EDDA; color: #155724; font-weight: 600; }
-        .risk-scorecard-table .risk-level-medium { background-color: #FFF3CD; color: #856404; font-weight: 600; }
-        .risk-scorecard-table .risk-level-high { background-color: #F8D7DA; color: #721C24; font-weight: 600; }
-        .risk-scorecard-table .trend-up::before { content: '▲ '; color: #DC3545; } /* Red up arrow */
-        .risk-scorecard-table .trend-down::before { content: '▼ '; color: #28a745; } /* Green down arrow */
-        .risk-scorecard-table .trend-stable::before { content: '▬ '; color: #6c757d; } /* Grey dash */
+        .risk-scorecard-table .risk-level-low { background-color: #D4EDDA; color: #155724; } /* Green */
+        .risk-scorecard-table .risk-level-medium { background-color: #FFF3CD; color: #856404; } /* Yellow */
+        .risk-scorecard-table .risk-level-high { background-color: #F8D7DA; color: #721C24; } /* Red */
+        .risk-scorecard-table .critical { background-color: #DC3545; color: #FFFFFF; } /* Darker Red */
 
         /* Styles for Corporate Hierarchy Chart */
         .hierarchy-chart-container {
@@ -364,6 +344,7 @@
             .risk-response-card,
             .risk-method-card,
             .key-term-card,
+            .vulnerability-scenario-card, /* Added for responsiveness */
             .role-node { /* Apply to all interactive cards */
                 flex: 1 1 100%; /* Stack cards on medium screens */
                 max-width: 100%;
@@ -432,6 +413,157 @@
             min-width: 150px; /* Set min-width as requested */
             width: 150px; /* Fixed width */
             flex-basis: 150px; /* Ensure flex-basis matches width */
+        }
+        /* New styles for vulnerability scenario cards */
+        .vulnerability-scenario-card {
+            min-width: 150px; /* Set min-width as requested */
+            width: 150px; /* Fixed width */
+            flex-basis: 150px; /* Ensure flex-basis matches width */
+            /* min-height: 100px; Removed min-height to allow vertical expansion */
+            text-align: center; /* Center content horizontally */
+            justify-content: center; /* Center content vertically */
+            padding: 1rem;
+            border: 1px solid #D5D2C8;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+            transition: all 0.2s ease-in-out;
+            background-color: #F0F8FF; /* Light background */
+        }
+        .vulnerability-scenario-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        .vulnerability-scenario-card.active {
+            border-color: #00A896;
+            box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3);
+            background-color: #E0F7F5;
+        }
+        .vulnerability-scenario-card .card-title {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #004085;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        .vulnerability-scenario-card .card-description {
+            font-weight: 400;
+            font-size: 0.85em;
+            color: #555555;
+            margin-top: 0.5rem;
+            display: none; /* Hidden by default */
+            text-align: left; /* Keep left alignment for detailed impact */
+        }
+        .vulnerability-scenario-card.active .card-description {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        /* Flowchart specific styles */
+        .flowchart-container {
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping for multiple scenarios */
+            justify-content: center;
+            gap: 1rem; /* Space between scenarios */
+            margin-top: 1rem;
+        }
+
+        .flow-scenario {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2rem; /* Space between individual flow chains */
+        }
+
+        .flow-node {
+            background-color: #EDEAE0;
+            border: 1px solid #D5D2C8;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            box-sizing: border-box;
+            text-align: center;
+            font-weight: 600;
+            color: #333333;
+            /* min-height: 80px; Removed min-height to allow vertical expansion */
+            width: 150px; /* Fixed width for flow nodes - as requested */
+            flex-basis: 150px; /* Fixed flex-basis for flow nodes - as requested */
+        }
+
+        .flow-node:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .flow-node.active {
+            border-color: #00A896;
+            box-shadow: 0 2px 5px rgba(0, 168, 150, 0.3);
+            background-color: #E0F7F5;
+        }
+
+        .flow-node .node-title {
+            font-size: 0.9em; /* Slightly reduced font size for title */
+            font-weight: 700;
+            color: #004085;
+            margin-bottom: 0.4rem;
+            display: block;
+        }
+
+        .flow-node .node-description {
+            font-weight: 400;
+            font-size: 0.75em; /* Slightly reduced font size for description */
+            color: #555555;
+            margin-top: 0.4rem;
+            display: none;
+            word-break: break-word;
+        }
+
+        .flow-node.active .node-description {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .flow-arrow {
+            width: 2px;
+            height: 2rem; /* Length of the arrow line */
+            background-color: #D5D2C8;
+            margin: 0.5rem 0; /* Space above/below arrow */
+            position: relative;
+        }
+        .flow-arrow::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%) translateY(50%) rotate(135deg); /* Corrected to point downwards */
+            width: 8px;
+            height: 8px;
+            border-top: 2px solid #D5D2C8;
+            border-right: 2px solid #D5D2C8;
+        }
+
+        /* Specific colors for flowchart nodes */
+        .vulnerability-node { background-color: #F0F8FF; } /* Alice Blue */
+        .vulnerability-node:hover { background-color: #DDEBF7; }
+        .threat-node { background-color: #FFF3CD; } /* Light Yellow */
+        .threat-node:hover { background-color: #FFE699; }
+        .impact-node { background-color: #F8D7DA; } /* Light Red */
+        .impact-node:hover { background-color: #F5C6CB; }
+
+        /* Ensure titles and descriptions are visible on colored backgrounds */
+        .vulnerability-node .node-title, .threat-node .node-title, .impact-node .node-title {
+            color: #004085; /* Dark blue for titles */
+        }
+        .vulnerability-node .node-description, .threat-node .node-description, .impact-node .node-description {
+            color: #333333; /* Darker text for descriptions */
+        }
+
+        /* Responsive adjustments for flow nodes */
+        @media (max-width: 768px) {
+            .flow-node {
+                width: 100%; /* Full width on small screens */
+                flex-basis: 100%;
+            }
         }
     </style>
 </head>
@@ -517,43 +649,94 @@
                         <p class="text-gray-600 mb-4">Understand which threats could exploit identified vulnerabilities and the potential impact on confidentiality, integrity, availability, and overall business operations. See the example mapping below:</p>
                         <div class="mb-6 p-4 bg-gray-50 rounded-md shadow-sm">
                             <h6 class="text-md font-semibold text-gray-700 mb-2 text-center">Sample Vulnerability-Threat-Impact Mapping</h6>
-                            <table class="vulnerability-mapping-table">
-                                <thead>
-                                    <tr>
-                                        <th>Vulnerability</th>
-                                        <th>Threat</th>
-                                        <th>Potential Impact</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Unpatched Web Server</td>
-                                        <td>Remote Code Execution (RCE) via Exploit</td>
-                                        <td>Data breach (Confidentiality), System compromise (Integrity, Availability)</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Weak Employee Password Policy</td>
-                                        <td>Brute-force/Credential Stuffing Attack</td>
-                                        <td>Unauthorized access to systems/data (Confidentiality, Integrity)</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Lack of Data Encryption at Rest</td>
-                                        <td>Physical theft of storage device</td>
-                                        <td>Data exposure (Confidentiality)</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Single Point of Failure in Network</td>
-                                        <td>Hardware failure, DDoS attack</td>
-                                        <td>Service outage, business disruption (Availability)</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Insufficient Security Awareness Training</td>
-                                        <td>Phishing, Social Engineering</td>
-                                        <td>Credential theft, malware infection, financial fraud (Confidentiality, Integrity, Financial)</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <p class="text-gray-600 text-sm italic mt-2 text-center">This table illustrates common pairings of vulnerabilities, the threats that exploit them, and the resulting potential impacts.</p>
+                            <div class="flowchart-container">
+                                <!-- Scenario 1: Unpatched Web Server -->
+                                <div class="flow-scenario" data-scenario-id="0">
+                                    <div class="flow-node vulnerability-node" data-node-type="vulnerability">
+                                        <span class="node-title">Unpatched Web Server</span>
+                                        <div class="node-description hidden">Servers with outdated software or missing security patches are prime targets for attackers looking to exploit known weaknesses.</div>
+                                    </div>
+                                    <div class="flow-arrow hidden" data-arrow-id="0-1"></div>
+                                    <div class="flow-node threat-node hidden" data-node-type="threat">
+                                        <span class="node-title">Remote Code Execution (RCE)</span>
+                                        <div class="node-description hidden">RCE allows an attacker to execute arbitrary code on a remote system, gaining full control. This is often achieved through exploiting software vulnerabilities.</div>
+                                    </div>
+                                    <div class="flow-arrow hidden" data-arrow-id="1-2"></div>
+                                    <div class="flow-node impact-node hidden" data-node-type="impact">
+                                        <span class="node-title">Data Breach, System Compromise</span>
+                                        <div class="node-description hidden">Confidentiality, Integrity, Availability impact.</div>
+                                    </div>
+                                </div>
+                                <!-- Scenario 2: Weak Employee Password Policy -->
+                                <div class="flow-scenario" data-scenario-id="1">
+                                    <div class="flow-node vulnerability-node" data-node-type="vulnerability">
+                                        <span class="node-title">Weak Employee Password Policy</span>
+                                        <div class="node-description hidden">Policies allowing simple, common, or reused passwords make accounts easy targets for automated guessing attacks.</div>
+                                    </div>
+                                    <div class="flow-arrow hidden" data-arrow-id="0-1"></div>
+                                    <div class="flow-node threat-node hidden" data-node-type="threat">
+                                        <span class="node-title">Brute-force/Credential Stuffing</span>
+                                        <div class="node-description hidden">Brute-force attacks try many passwords until one works. Credential stuffing uses stolen username/password pairs from other breaches to try and log into new systems.</div>
+                                    </div>
+                                    <div class="flow-arrow hidden" data-arrow-id="1-2"></div>
+                                    <div class="flow-node impact-node hidden" data-node-type="impact">
+                                        <span class="node-title">Unauthorized Access</span>
+                                        <div class="node-description hidden">Confidentiality, Integrity impact.</div>
+                                    </div>
+                                </div>
+                                <!-- Scenario 3: Lack of Data Encryption at Rest -->
+                                <div class="flow-scenario" data-scenario-id="2">
+                                    <div class="flow-node vulnerability-node" data-node-type="vulnerability">
+                                        <span class="node-title">Lack of Data Encryption at Rest</span>
+                                        <div class="node-description hidden">Storing sensitive data on devices (laptops, servers, backups) without encryption means the data is readable if the device is lost or stolen.</div>
+                                    </div>
+                                    <div class="flow-arrow hidden" data-arrow-id="0-1"></div>
+                                    <div class="flow-node threat-node hidden" data-node-type="threat">
+                                        <span class="node-title">Physical Theft of Storage Device</span>
+                                        <div class="node-description hidden">An attacker physically gains possession of a storage device containing unencrypted sensitive data.</div>
+                                    </div>
+                                    <div class="flow-arrow hidden" data-arrow-id="1-2"></div>
+                                    <div class="flow-node impact-node hidden" data-node-type="impact">
+                                        <span class="node-title">Data Exposure</span>
+                                        <div class="node-description hidden">Confidentiality impact.</div>
+                                    </div>
+                                </div>
+                                <!-- Scenario 4: Single Point of Failure in Network -->
+                                <div class="flow-scenario" data-scenario-id="3">
+                                    <div class="flow-node vulnerability-node" data-node-type="vulnerability">
+                                        <span class="node-title">Single Point of Failure</span>
+                                        <div class="node-description hidden">A critical component (e.g., a single router, server, or internet link) whose failure would bring down an entire system or service.</div>
+                                    </div>
+                                    <div class="flow-arrow hidden" data-arrow-id="0-1"></div>
+                                    <div class="flow-node threat-node hidden" data-node-type="threat">
+                                        <span class="node-title">Hardware Failure / DDoS</span>
+                                        <div class="node-description hidden">Hardware failure is an accidental event. A DDoS attack is a malicious attempt to disrupt normal traffic of a targeted server, service or network by overwhelming the target or its surrounding infrastructure with a flood of Internet traffic.</div>
+                                    </div>
+                                    <div class="flow-arrow hidden" data-arrow-id="1-2"></div>
+                                    <div class="flow-node impact-node hidden" data-node-type="impact">
+                                        <span class="node-title">Service Outage, Business Disruption</span>
+                                        <div class="node-description hidden">Availability impact.</div>
+                                    </div>
+                                </div>
+                                <!-- Scenario 5: Insufficient Security Awareness Training -->
+                                <div class="flow-scenario" data-scenario-id="4">
+                                    <div class="flow-node vulnerability-node" data-node-type="vulnerability">
+                                        <span class="node-title">Insufficient Awareness Training</span>
+                                        <div class="node-description hidden">Employees who are not regularly trained on common attack vectors are more susceptible to falling for scams.</div>
+                                    </div>
+                                    <div class="flow-arrow hidden" data-arrow-id="0-1"></div>
+                                    <div class="flow-node threat-node hidden" data-node-type="threat">
+                                        <span class="node-title">Phishing / Social Engineering</span>
+                                        <div class="node-description hidden">Phishing uses deceptive emails or messages. Social engineering manipulates people into performing actions or divulging confidential information.</div>
+                                    </div>
+                                    <div class="flow-arrow hidden" data-arrow-id="1-2"></div>
+                                    <div class="flow-node impact-node hidden" data-node-type="impact">
+                                        <span class="node-title">Credential Theft, Malware, Financial Fraud</span>
+                                        <div class="node-description hidden">Confidentiality, Integrity, Financial impact.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 text-sm italic mt-2 text-center">Click on a card to see the potential impact of the vulnerability and threat combination.</p>
                         </div>
                     </div>
                 </div>
@@ -576,7 +759,7 @@
                             </div>
                             <div class="risk-method-card quantitative" data-method="quantitative">
                                 <span class="card-title">Quantitative</span>
-                                <div class="card-description hidden">Assigns numerical values (e.g., monetary cost, probability percentages) to likelihood and impact. It aims to provide a more objective and measurable view of risk. Useful for cost-benefit analysis (e.g., ALE, SLE, ARO).</div>
+                                <div class="card-description hidden">Assigns numerical values (e.g., monetary cost, probability percentages) to likelihood and impact. It aims to provide a more objective and measurable view of risk. Useful for cost-benefit analysis (e.g., SLE, ARO, ALE).</div>
                             </div>
                             <div class="risk-method-card hybrid" data-method="hybrid">
                                 <span class="card-title">Hybrid</span>
@@ -592,19 +775,19 @@
                         <div class="flex flex-wrap justify-center gap-4 mb-6">
                             <div class="risk-framework-card" data-framework="iso27005">
                                 <span class="card-title">ISO/IEC 27005</span>
-                                <div class="card-description hidden">Provides guidelines for information security risk management. It supports the general concepts specified in ISO/IEC 27001 (for ISMS) and is designed to assist the satisfactory implementation of information security based on a risk management approach.</div>
+                                <div class="card-description hidden">Provides guidelines for information security risk management. It supports the general concepts specified in ISO/IEC 27001 (for ISMS) and is designed to assist the satisfactory implementation of information security based on a risk management approach."</div>
                             </div>
                             <div class="risk-framework-card" data-framework="nist80030">
                                 <span class="card-title">NIST SP 800-30</span>
-                                <div class="card-description hidden">A guide for conducting risk assessments, developed by the National Institute of Standards and Technology (NIST). It provides a systematic approach to identifying, analyzing, and mitigating risks to information systems and organizations.</div>
+                                <div class="card-description hidden">A guide for conducting risk assessments, developed by the National Institute of Standards and Technology (NIST). It provides a systematic approach to identifying, analyzing, and mitigating risks to information systems and organizations."</div>
                             </div>
                             <div class="risk-framework-card" data-framework="fair">
                                 <span class="card-title">FAIR</span>
-                                <div class="card-description hidden">A quantitative risk analysis model that focuses on understanding and measuring information risk in financial terms. It helps break down complex risk scenarios into measurable components, enabling more objective risk comparisons and cost-benefit analyses.</div>
+                                <div class="card-description hidden">A quantitative risk analysis model that focuses on understanding and measuring information risk in financial terms. It helps break down complex risk scenarios into measurable components, enabling more objective risk comparisons and cost-benefit analyses."</div>
                             </div>
                             <div class="risk-framework-card" data-framework="octave">
                                 <span class="card-title">OCTAVE</span>
-                                <div class="card-description hidden">A suite of methods that help organizations assess and manage information security risks. It emphasizes a self-directed approach where organizations identify and prioritize risks based on their own operational risk environment, involving key stakeholders from across the organization.</div>
+                                <div class="card-description hidden">A suite of methods that help organizations assess and manage information security risks. It emphasizes a self-directed approach where organizations identify and prioritize risks based on their own operational risk environment, involving key stakeholders from across the organization."</div>
                             </div>
                         </div>
                         <!-- Removed the separate risk-framework-description div -->
@@ -938,7 +1121,7 @@
         // Data for Section A.3.a (Risk Assessment Methods)
         const riskMethodDescriptions = {
             qualitative: "Uses descriptive terms (e.g., high, medium, low) for likelihood and impact. It's subjective but quick and often used for initial assessments or when precise data is unavailable. Good for prioritization.",
-            quantitative: "Assigns numerical values (e.g., monetary cost, probability percentages) to likelihood and impact. It aims to provide a more objective and measurable view of risk. Useful for cost-benefit analysis (e.g., ALE, SLE, ARO).",
+            quantitative: "Assigns numerical values (e.g., monetary cost, probability percentages) to likelihood and impact. It aims to provide a more objective and measurable view of risk. Useful for cost-benefit analysis (e.g., SLE, ARO, ALE).",
             hybrid: "Combines elements of both qualitative and quantitative approaches. Often, qualitative assessments are used to identify and prioritize risks, and then quantitative analysis is applied to the most critical risks for detailed analysis."
         };
 
@@ -1388,7 +1571,7 @@
                     // If the role node is now active, populate its description
                     if (roleNode.classList.contains('active') && roleDescriptionDiv && roleInfo) {
                         roleDescriptionDiv.innerHTML = `<p>${roleInfo.description}</p>`; // Set content
-                    } else if (roleDescriptionDiv) {
+                    } else if (descriptionDiv) {
                         roleDescriptionDiv.innerHTML = ''; // Clear content if deactivating
                     }
                 });
@@ -1448,6 +1631,104 @@
                     });
                 });
             };
+
+            // Vulnerability Scenario Card Toggles
+            document.querySelectorAll('.flow-node[data-node-type="vulnerability"]').forEach(vulnerabilityNode => {
+                vulnerabilityNode.addEventListener('click', () => {
+                    const scenarioContainer = vulnerabilityNode.closest('.flow-scenario');
+                    const threatNode = scenarioContainer.querySelector('.flow-node[data-node-type="threat"]');
+                    const arrow1 = scenarioContainer.querySelector('.flow-arrow[data-arrow-id="0-1"]');
+                    const impactNode = scenarioContainer.querySelector('.flow-node[data-node-type="impact"]');
+                    const arrow2 = scenarioContainer.querySelector('.flow-arrow[data-arrow-id="1-2"]');
+                    const vulnerabilityDescriptionDiv = vulnerabilityNode.querySelector('.node-description');
+
+                    // Close all other scenarios
+                    document.querySelectorAll('.flow-scenario').forEach(otherScenario => {
+                        if (otherScenario !== scenarioContainer) {
+                            otherScenario.querySelectorAll('.flow-node').forEach(node => {
+                                node.classList.remove('active');
+                                const desc = node.querySelector('.node-description');
+                                if (desc) desc.style.display = 'none';
+                            });
+                            otherScenario.querySelectorAll('.flow-arrow').forEach(arrow => arrow.classList.add('hidden'));
+                            otherScenario.querySelectorAll('.flow-node[data-node-type="threat"]').forEach(node => node.classList.add('hidden'));
+                            otherScenario.querySelectorAll('.flow-node[data-node-type="impact"]').forEach(node => node.classList.add('hidden'));
+                        }
+                    });
+
+                    // Toggle current vulnerability node
+                    vulnerabilityNode.classList.toggle('active');
+
+                    if (vulnerabilityNode.classList.contains('active')) {
+                        if (vulnerabilityDescriptionDiv) vulnerabilityDescriptionDiv.style.display = 'block';
+                        if (threatNode) threatNode.classList.remove('hidden');
+                        if (arrow1) arrow1.classList.remove('hidden');
+                    } else {
+                        if (vulnerabilityDescriptionDiv) vulnerabilityDescriptionDiv.style.display = 'none';
+                        if (threatNode) threatNode.classList.add('hidden');
+                        if (arrow1) arrow1.classList.add('hidden');
+                        if (impactNode) impactNode.classList.add('hidden');
+                        if (arrow2) arrow2.classList.add('hidden');
+                    }
+                });
+            });
+
+            document.querySelectorAll('.flow-node[data-node-type="threat"]').forEach(threatNode => {
+                threatNode.addEventListener('click', () => {
+                    const scenarioContainer = threatNode.closest('.flow-scenario');
+                    const impactNode = scenarioContainer.querySelector('.flow-node[data-node-type="impact"]');
+                    const arrow2 = scenarioContainer.querySelector('.flow-arrow[data-arrow-id="1-2"]');
+                    const threatDescriptionDiv = threatNode.querySelector('.node-description');
+
+                    // Close other impact nodes in the same scenario if open
+                    scenarioContainer.querySelectorAll('.flow-node[data-node-type="impact"]').forEach(node => {
+                        if (node !== impactNode) { // Only hide if it's a different impact node in the same scenario
+                            node.classList.remove('active');
+                            const desc = node.querySelector('.node-description');
+                            if (desc) desc.style.display = 'none';
+                        }
+                    });
+
+                    // Toggle current threat node
+                    threatNode.classList.toggle('active');
+
+                    if (threatNode.classList.contains('active')) {
+                        if (threatDescriptionDiv) threatDescriptionDiv.style.display = 'block';
+                        if (impactNode) impactNode.classList.remove('hidden');
+                        if (arrow2) arrow2.classList.remove('hidden');
+                    } else {
+                        if (threatDescriptionDiv) threatDescriptionDiv.style.display = 'none';
+                        if (impactNode) impactNode.classList.add('hidden');
+                        if (arrow2) arrow2.classList.add('hidden');
+                    }
+                });
+            });
+
+            document.querySelectorAll('.flow-node[data-node-type="impact"]').forEach(impactNode => {
+                impactNode.addEventListener('click', () => {
+                    impactNode.classList.toggle('active');
+                    const impactDescriptionDiv = impactNode.querySelector('.node-description');
+                    if (impactNode.classList.contains('active')) {
+                        if (impactDescriptionDiv) impactDescriptionDiv.style.display = 'block';
+                    } else {
+                        if (impactDescriptionDiv) impactDescriptionDiv.style.display = 'none';
+                    }
+                });
+            });
+
+            // Initial state: hide all threat and impact nodes and arrows
+            document.querySelectorAll('.flow-node[data-node-type="threat"]').forEach(node => {
+                node.classList.add('hidden');
+                const desc = node.querySelector('.node-description');
+                if (desc) desc.style.display = 'none';
+            });
+            document.querySelectorAll('.flow-node[data-node-type="impact"]').forEach(node => {
+                node.classList.add('hidden');
+                const desc = node.querySelector('.node-description');
+                if (desc) desc.style.display = 'none';
+            });
+            document.querySelectorAll('.flow-arrow').forEach(arrow => arrow.classList.add('hidden'));
+
         });
     </script>
 </body>
