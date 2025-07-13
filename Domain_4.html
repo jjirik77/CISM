@@ -242,7 +242,7 @@
         }
 
 
-        .ir-method-card:hover, .containment-method-card:hover, .post-incident-practice-card:hover, .key-term-card:hover, .incident-phase-card:hover, .incident-plan-element-card:hover, .response-method-card:hover, .testing-type-card:hover, .dependency-card:hover, .bcp-element-card:hover, .backup-detail-card:hover, .incident-classification-card:hover, .drp-site-card:hover, .forensic-step-card:hover, .comm-stakeholder-card:hover, .comm-action-card:hover, .eradication-step-card:hover, .recovery-step-card:hover, .forensic-method-card:hover, .forensic-arrow:hover { /* Added new classes */
+        .ir-method-card:hover, .containment-method-card:hover, .post-incident-practice-card:hover, .key-term-card:hover, .incident-phase-card:hover, .incident-plan-element-card:hover, .response-method-card:hover, .testing-type-card:hover, .dependency-card:hover, .bcp-element-card:hover, .backup-detail-card:hover, .incident-classification-card:hover, .drp-site-card:hover, .forensic-step-card:hover, .comm-stakeholder-card:hover, .comm-action-card:hover, .eradication-step-card:hover, .recovery-step-card:hover, .forensic-method-card:hover { /* Removed .forensic-arrow:hover */
             transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* More pronounced shadow on hover */
         }
@@ -265,8 +265,7 @@
         .comm-action-card.active,
         .eradication-step-card.active,
         .recovery-step-card.active,
-        .forensic-method-card.active,
-        .forensic-arrow.active { /* Added new classes */
+        .forensic-method-card.active { /* Removed .forensic-arrow.active */
             border-color: #00A896; /* Vibrant Teal border */
             box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3); /* Teal glow */
             background-color: #E0F7F5; /* Very light teal background */
@@ -480,6 +479,9 @@
             line-height: 1;
             margin: 0.5rem 0; /* Vertical margin for arrows in a column flow */
             display: block; /* Ensures centering by parent flex container */
+            text-align: center; /* Ensures text content is centered */
+            width: 100%; /* Ensures the span takes full width for text-align: center to work */
+            cursor: default; /* Explicitly set to default */
         }
 
         /* RTO/RPO Visualization Specific Styles */
@@ -639,6 +641,9 @@
             line-height: 1;
             margin: 0.5rem 0; /* Consistent with phase-arrow */
             display: block; /* Ensures centering by parent flex container */
+            text-align: center; /* Ensures text content is centered */
+            width: 100%; /* Ensures the span takes full width for text-align: center to work */
+            cursor: default; /* Explicitly set to default */
         }
 
         /* Specific adjustment for Forensic Method Cards */
