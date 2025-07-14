@@ -125,6 +125,18 @@
             align-items: center; /* Centered horizontally */
             box-shadow: 0 2px 5px rgba(0,0,0,0.08); /* Subtle initial shadow */
         }
+
+        /* Specific override for control type cards in section B.1.a */
+        .control-type-card {
+            max-width: 250px;
+        }
+
+        /* Specific override for cards in B.3.a and B.4.c */
+        .control-testing-card,
+        .training-method-card {
+            max-width: 200px;
+        }
+
         /* Hover state for all interactive cards */
         .framework-card:hover, .control-type-card:hover, .training-method-card:hover, .control-concept-card:hover, .key-term-card:hover {
             transform: translateY(-3px); /* Slight lift effect */
@@ -536,6 +548,13 @@
                 font-size: 0.9em; /* Consistent with general card description size */
             }
         }
+
+        /* Specific styles for framework cards (A.3.a) */
+        .framework-card {
+            min-width: 150px; /* Set min-width as requested */
+            width: 150px; /* Fixed width */
+            flex-basis: 150px; /* Ensure flex-basis matches width */
+        }
     </style>
 </head>
 <body class="leading-relaxed">
@@ -801,7 +820,7 @@
                         <p class="text-gray-600 mb-4">KPIs assess the effectiveness of security activities and processes. They indicate whether the program is meeting its objectives. Examples include percentage of critical vulnerabilities patched on time, successful security awareness training completion rates, and incident response times.</p>
                         
                         <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Establish KRIs (Key Risk Indicators) (e.g., number of unpatched systems, failed audits).</h4>
-                        <p class="text-gray-600 mb-4">KRIs are forward-looking metrics that provide early warning signals of increasing risk exposure. They help proactive risk management by indicating potential future problems. Examples include a rising number of unpatched systems, an increase in successful phishing attacks, or repeated audit findings. View the trends for simulated KPIs and KRIs below:</p>
+                        <p class="text-gray-600 mb-4">KRIs are forward-looking metrics that provide early warning signals of increasing risk exposure. They help proactive risk management by indicating potential future problems. Examples include a rising number of unpatched systems, an.increase in successful phishing attacks, or repeated audit findings. View the trends for simulated KPIs and KRIs below:</p>
                         <div class="chart-container mb-6">
                             <canvas id="programMetricsChart"></canvas>
                         </div>
@@ -1787,7 +1806,6 @@
                 card.addEventListener('click', () => {
                     const descriptionDiv = card.querySelector('.step-description');
                     const stepKey = card.dataset.step;
-
                     // Close all other open step descriptions and remove 'active' class
                     document.querySelectorAll('.implementation-step-card').forEach(otherCard => {
                         if (otherCard !== card) {
