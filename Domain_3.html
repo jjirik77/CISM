@@ -4,51 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CISM 2024: Domain 3 - Information Security Program Development and Management (Interactive Study Guide)</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Tailwind CSS CDN for utility classes -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN for interactive charts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        /* Import Google Font 'Inter' for consistent typography */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        /* Base body styles */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #F8F5EF; /* Warm Neutral Background */
             color: #333333;
         }
+        /* Main container for content, centered with max-width */
         .container {
             max-width: 1200px;
         }
-        /* Enhanced Section Header with new accent color */
+        /* Enhanced Section Header with a vibrant teal accent border */
         .section-header {
             border-left: 6px solid #00A896; /* Vibrant Teal Accent */
-            padding-left: 1.25rem;
-            font-size: 2.5rem; /* Slightly larger */
-            color: #222222; /* Darker text for contrast */
+            padding-left: 1.25rem; /* Padding to the left of the border */
+            font-size: 2.5rem; /* Slightly larger font size */
+            color: #222222; /* Darker text for better contrast */
         }
-        /* Refined Accordion Button and Content */
+        /* Refined Accordion Button styling */
         .accordion-button {
-            background-color: #EDEAE0; /* Secondary Neutral */
-            border-bottom: 1px solid #D5D2C8;
-            border-radius: 0.75rem; /* More rounded */
+            background-color: #EDEAE0; /* Secondary Neutral background */
+            border-bottom: 1px solid #D5D2C8; /* Subtle bottom border */
+            border-radius: 0.75rem; /* More rounded corners */
             padding: 1rem 1.5rem; /* Increased padding */
             font-size: 1.25rem; /* Slightly larger font */
-            font-weight: 700; /* Bolder */
-            color: #333333;
-            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
-            display: flex; /* Ensure flex behavior */
+            font-weight: 700; /* Bolder text */
+            color: #333333; /* Dark text */
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out; /* Smooth transitions for hover effects */
+            display: flex; /* Use flexbox for layout */
             justify-content: space-between; /* Pushes content and icon to ends */
             align-items: center; /* Vertically centers items */
             text-align: left; /* Keep text aligned left within the button */
         }
+        /* Accordion button hover state */
         .accordion-button:hover {
             background-color: #D5D2C8; /* Darker on hover */
-            transform: translateY(-1px);
+            transform: translateY(-1px); /* Slight lift effect */
         }
+        /* Accordion content area styling */
         .accordion-content {
-            background-color: #FFFFFF;
-            border-bottom: 1px solid #D5D2C8;
-            border-radius: 0 0 0.75rem 0.75rem; /* Match top radius */
+            background-color: #FFFFFF; /* White background */
+            border-bottom: 1px solid #D5D2C8; /* Subtle bottom border */
+            border-radius: 0 0 0.75rem 0.75rem; /* Match top radius of the button */
             padding: 1.5rem; /* More padding */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow */
         }
+        /* Chart container responsive styling */
         .chart-container {
             position: relative;
             width: 100%;
@@ -59,24 +68,26 @@
             margin-right: auto;
             overflow: hidden; /* Prevent overflow */
         }
-        @media (min-width: 640px) { /* sm */
+        /* Media queries for chart container height adjustment */
+        @media (min-width: 640px) { /* sm breakpoint */
             .chart-container {
                 height: 45vh; /* Increased height for sm screens */
                 max-height: 450px; /* Increased max height for sm screens */
             }
         }
-        @media (min-width: 768px) { /* md */
+        @media (min-width: 768px) { /* md breakpoint */
             .chart-container {
                 height: 40vh; /* Increased height for md screens */
                 max-height: 400px; /* Increased max height for md screens */
             }
         }
-        /* Active Navigation Item */
+        /* Active Navigation Item styling */
         .nav-item.active {
-            border-bottom: 3px solid #00A896; /* Vibrant Teal Accent */
-            font-weight: 700; /* Bolder */
-            color: #222222;
+            border-bottom: 3px solid #00A896; /* Vibrant Teal Accent border */
+            font-weight: 700; /* Bolder text */
+            color: #222222; /* Darker text */
         }
+        /* Fade-in animation for content sections */
         .fade-in {
             animation: fadeIn 0.5s ease-in-out;
         }
@@ -84,6 +95,7 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        /* Tooltip custom styles (though not explicitly used in this domain's content, kept for consistency) */
         .tooltip-custom-title {
             font-size: 0.9em;
             font-weight: bold;
@@ -92,37 +104,33 @@
         .tooltip-custom-body {
             font-size: 0.8em;
         }
-        /* Removed specific spin button styles as input type is now text */
-        
-        /* New styles for Domain 3 elements */
-
-        /* Interactive Cards (General) - Unified Styling */
-        .framework-card, .control-type-card, .training-method-card, .control-concept-card, .key-term-card { /* Added key-term-card */
-            background-color: #EDEAE0; /* Secondary Neutral */
-            border: 1px solid #D5D2C8;
+        /* General interactive card styling (Frameworks, Control Types, Training Methods, Control Concepts, Key Terms) */
+        .framework-card, .control-type-card, .training-method-card, .control-concept-card, .key-term-card {
+            background-color: #EDEAE0; /* Secondary Neutral background */
+            border: 1px solid #D5D2C8; /* Subtle border */
             padding: 1rem;
-            border-radius: 0.75rem; /* More rounded */
+            border-radius: 0.75rem; /* More rounded corners */
             cursor: pointer;
-            transition: all 0.2s ease-in-out;
-            flex: 1 1 calc(50% - 1rem); /* Two cards per row on larger screens */
+            transition: all 0.2s ease-in-out; /* Smooth transitions */
+            flex: 1 1 calc(50% - 1rem); /* Two cards per row on larger screens, accounting for gap */
             max-width: calc(50% - 1rem); /* Max width for two columns */
-            box-sizing: border-box;
+            box-sizing: border-box; /* Include padding and border in element's total width and height */
             text-align: left;
             font-weight: 600;
             color: #333333;
-            min-height: 100px;
+            min-height: 100px; /* Minimum height for cards */
             display: flex;
-            flex-direction: column;
+            flex-direction: column; /* Stack content vertically */
             justify-content: center; /* Centered vertically */
             align-items: center; /* Centered horizontally */
             box-shadow: 0 2px 5px rgba(0,0,0,0.08); /* Subtle initial shadow */
         }
-
-        .framework-card:hover, .control-type-card:hover, .training-method-card:hover, .control-concept-card:hover, .key-term-card:hover { /* Added key-term-card */
-            transform: translateY(-3px);
+        /* Hover state for all interactive cards */
+        .framework-card:hover, .control-type-card:hover, .training-method-card:hover, .control-concept-card:hover, .key-term-card:hover {
+            transform: translateY(-3px); /* Slight lift effect */
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* More pronounced shadow on hover */
         }
-        /* Active state for interactive cards */
+        /* Active state for all interactive cards and steps */
         .framework-card.active,
         .control-type-card.active,
         .training-method-card.active,
@@ -131,28 +139,27 @@
         .implementation-step-card.active,
         .third-party-step-card.active,
         .audience-circle.active,
-        .key-term-card.active { /* Added key-term-card */
+        .key-term-card.active {
             border-color: #00A896; /* Vibrant Teal border */
-            box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3); /* Teal glow */
+            box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3); /* Teal glow effect */
             background-color: #E0F7F5; /* Very light teal background */
         }
-
-        .framework-card .card-title, .control-type-card .card-title, .training-method-card .card-title, .control-concept-card .card-title, .key-term-card .card-title { /* Added key-term-card */
+        /* Title styling for all interactive cards */
+        .framework-card .card-title, .control-type-card .card-title, .training-method-card .card-title, .control-concept-card .card-title, .key-term-card .card-title {
             font-size: 1.15em; /* Slightly larger title */
             margin-bottom: 0.6rem;
             text-align: center;
             color: #004085; /* Dark blue for title for consistency */
         }
-
-        /* All description elements are hidden by default */
+        /* Description elements are hidden by default */
         .card-description, .step-description, .circle-description {
-            font-weight: 400; /* Regular font weight for description */
+            font-weight: 400; /* Regular font weight */
             font-size: 0.9em;
             color: #555555;
             margin-top: 0.5rem;
             display: none; /* Hidden by default */
         }
-        /* Show description when parent card is active */
+        /* Show description when parent card is active with fade-in animation */
         .framework-card.active .card-description,
         .control-type-card.active .card-description,
         .training-method-card.active .card-description,
@@ -161,13 +168,12 @@
         .implementation-step-card.active .step-description,
         .third-party-step-card.active .step-description,
         .audience-circle.active .circle-description,
-        .key-term-card.active .card-description { /* Added key-term-card */
+        .key-term-card.active .card-description {
             display: block;
             animation: fadeIn 0.5s ease-in-out;
         }
 
-
-        /* Information Classification Table */
+        /* Information Classification Table styling */
         .classification-table {
             width: 100%;
             max-width: 700px;
@@ -197,7 +203,7 @@
             font-style: italic;
         }
 
-        /* Policy Review Cycle Visual */
+        /* Policy Review Cycle Visual styling */
         .policy-cycle-container {
             display: flex;
             flex-direction: column;
@@ -235,10 +241,9 @@
             display: block;
             margin-bottom: 0.5rem;
         }
-        .policy-cycle-step .step-description { /* Added text-align: center for policy step descriptions */
-            text-align: center;
+        .policy-cycle-step .step-description {
+            text-align: center; /* Centered text for policy step descriptions */
         }
-
 
         /* Specific colors for policy cycle steps */
         .policy-cycle-step.step-1 { background-color: #E0F2F7; color: #004085; } /* Light Blue */
@@ -248,7 +253,7 @@
         .policy-cycle-step.step-5 { background-color: #F8D7DA; color: #721C24; } /* Light Red */
         .policy-cycle-step.step-6 { background-color: #D1ECF1; color: #0C5460; } /* Light Cyan */
 
-
+        /* Policy cycle arrows */
         .policy-cycle-arrow {
             font-size: 2.5em;
             color: #D5D2C8;
@@ -301,7 +306,6 @@
             font-size: 1.05em;
             margin-bottom: 0.5rem;
         }
-        /* .implementation-step-card .step-description is handled by general .step-description rule */
 
         /* Specific colors for implementation steps */
         .implementation-step-card.impl-step-1 { background-color: #F0F8FF; color: #001f3f; } /* Alice Blue */
@@ -309,7 +313,6 @@
         .implementation-step-card.impl-step-3 { background-color: #FAEBD7; color: #4B0082; } /* Antique White with Indigo */
         .implementation-step-card.impl-step-4 { background-color: #FFF0F5; color: #8B0000; } /* Lavender Blush with Dark Red */
         .implementation-step-card.impl-step-5 { background-color: #E0FFFF; color: #00008B; } /* Light Cyan with Dark Blue */
-
 
         /* Third-Party Risk Assessment Steps - Flowchart Style */
         .third-party-steps-container {
@@ -348,7 +351,6 @@
             font-size: 1.05em;
             margin-bottom: 0.5rem;
         }
-        /* .third-party-step-card .step-description is handled by general .step-description rule */
 
         /* Reporting Audience Rectangular Cards */
         .audience-grid-container {
@@ -393,7 +395,6 @@
             margin-bottom: 0.4rem;
             color: #004085; /* Dark blue for title */
         }
-        /* .audience-circle .circle-description is handled by general .circle-description rule */
 
         /* Specific colors for audience cards (overriding base .audience-circle background) */
         .audience-circle.executives { background-color: #A1C9CE; } /* Soft Blue */
@@ -406,7 +407,6 @@
             box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3);
             background-color: #E0F7F5;
         }
-
 
         /* Responsive Adjustments for new cards/elements */
         @media (max-width: 768px) {
@@ -445,58 +445,65 @@
             }
         }
 
-        /* Key Term Card Specific Styles */
+        /* Key Term Card Specific Styles (Matching Domain 2) */
         .key-term-card {
-            background-color: #EDEAE0; /* Grey background */
-            color: #333333;
+            background-color: #EDEAE0; /* Secondary Neutral */
             border: 1px solid #D5D2C8;
             padding: 1rem;
-            border-radius: 0.75rem;
+            border-radius: 0.75rem; /* More rounded */
             cursor: pointer;
             transition: all 0.2s ease-in-out;
             box-sizing: border-box;
+            text-align: center; /* Align text center for key terms */
             font-weight: 600;
-            min-height: 100px; /* Adjusted height for content */
+            color: #333333;
+            min-height: 100px; /* Consistent min-height */
             display: flex;
             flex-direction: column;
             justify-content: center; /* Centered vertically */
             align-items: center; /* Centered horizontally */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08); /* Subtle initial shadow */
+            flex-grow: 0; /* Prevent horizontal growth */
+            flex-shrink: 0; /* Prevent horizontal shrinking */
+            min-width: 150px; /* Fixed width from Domain 2 */
+            width: 150px; /* Fixed width from Domain 2 */
+            flex-basis: 150px; /* Ensure flex-basis matches width from Domain 2 */
         }
 
         .key-term-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* More pronounced shadow on hover */
         }
 
+        /* Active state for key-term-card (matching Domain 2 teal accent) */
         .key-term-card.active {
-            border-color: #004085; /* Dark blue border when active */
-            box-shadow: 0 4px 8px rgba(0, 64, 133, 0.3); /* Blue glow */
-            background-color: #E0F2F7; /* Lighter blue background when active */
+            border-color: #00A896; /* Vibrant Teal border */
+            box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3); /* Teal glow */
+            background-color: #E0F7F5; /* Very light teal background */
         }
 
         .key-term-card .card-title {
-            font-size: 0.85em; /* Larger title for key terms */
-            font-weight: 700;
-            color: #004085; /* Blue text for term */
-            margin-bottom: 0.8rem;
+            font-size: 1.15em; /* Matching D2 general card title size */
+            margin-bottom: 0.6rem;
             text-align: center;
+            color: #004085; /* Dark blue for title for consistency */
         }
 
         .key-term-card .card-description {
-            font-weight: 400;
-            font-size: 1em; /* Larger description font */
+            font-weight: 400; /* Regular font weight for description */
+            font-size: 0.9em; /* Matching D2 general card description size */
             color: #555555;
-            text-align: center; /* Centered text for description */
             margin-top: 0.5rem;
             display: none; /* Hidden by default */
+            text-align: center; /* Explicitly centered for key terms */
+            word-break: break-word; /* Ensure text breaks within the fixed width */
         }
         .key-term-card.active .card-description {
-            display: block; /* Show when active */
+            display: block;
             animation: fadeIn 0.5s ease-in-out;
         }
 
-        /* Responsive adjustment for key terms grid */
+        /* Responsive adjustment for key terms grid (matching Domain 2) */
         @media (max-width: 768px) {
             .key-terms .grid {
                 grid-template-columns: 1fr; /* Single column on mobile */
@@ -504,9 +511,13 @@
             .key-term-card {
                 flex: 1 1 100%;
                 max-width: 100%;
+                /* Remove fixed width on mobile to allow full width */
+                min-width: unset;
+                width: unset;
+                flex-basis: unset;
             }
         }
-           /* Adjusted for larger screens to maintain 6 columns for key terms */
+        /* Adjusted for larger screens to maintain 6 columns for key terms (matching Domain 2) */
         @media (min-width: 1024px) {
             #key-terms .grid {
                 grid-template-columns: repeat(6, 1fr); /* Six columns on large screens */
@@ -519,14 +530,15 @@
                 min-height: 180px; /* Increased min-height for more text */
             }
             .key-term-card .card-title {
-                font-size: 1em; /* Slightly smaller title for more space */
+                font-size: 1.15em; /* Consistent with general card title size */
             }
             .key-term-card .card-description {
-                font-size: 0.85em; /* Slightly smaller description for more space */
+                font-size: 0.9em; /* Consistent with general card description size */
             }
+        }
     </style>
 </head>
-<body>
+<body class="leading-relaxed">
     <div class="container mx-auto p-4 sm:p-6 lg:p-8">
         <header class="text-center py-8 bg-white rounded-lg shadow-md mb-8">
             <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-2">CISM Domain 3 Study Guide</h1>
@@ -684,7 +696,7 @@
                 <!-- Sub-Domain: Industry Standards and Frameworks for Information Security -->
                 <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
                     <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
-                        3. Information Security Program Resources (People, Tools, Technologies)
+                        3. Industry Standards and Frameworks for Information Security
                         <span class="accordion-icon text-2xl">+</span>
                     </button>
                     <div class="accordion-content hidden p-6">
@@ -1123,14 +1135,14 @@
     <script>
         // JS Variables for current state and base data
         const currentSection = {
-            id: 'program-development'
+            id: 'introduction' // Default to introduction section on load
         };
 
         // Data for Section A.1.a (Resource Allocation)
         const resourceAllocationData = {
             labels: ['People (Staffing)', 'Tools & Software', 'Training & Awareness', 'Compliance & Audit'],
             data: [40, 30, 15, 15], // Default percentages
-            colors: ['#A1C9CE', '#8FB8A1', '#FFD700', '#FF6384']
+            colors: ['#A1C9CE', '#8FB8A1', '#FFD700', '#FF6384'] // Colors for the bar chart
         };
 
         // Data for Section A.5.a/b (Program Metrics)
@@ -1161,7 +1173,6 @@
             }
         };
         const programMetricsLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
 
         // Data for Section B.1.a (Control Types)
         const controlTypeDescriptions = {
@@ -1295,7 +1306,7 @@
             }
         };
 
-        // NEW: Key Terms Data for Flip Cards
+        // Key Terms Data for Flip Cards
         const keyTermsData = [
             { term: "Information Security Program", definition: "A comprehensive set of policies, procedures, and controls designed to protect an organization's information assets." },
             { term: "Information Asset Classification", definition: "Categorizing information based on its sensitivity, value, and the impact its compromise would have on the business." },
@@ -1313,7 +1324,6 @@
             { term: "Service Level Agreement (SLA)", definition: "A contract between a service provider and a customer that specifies the level of service expected, including security expectations and performance metrics." },
             { term: "Security Awareness Training", definition: "Educational programs designed to inform employees about information security risks, policies, and best practices to foster a security-conscious culture." }
         ];
-
 
         let resourceAllocationChartInstance;
         let programMetricsChartInstance;
@@ -1440,22 +1450,16 @@
         // Resource Allocation Chart Logic (updated for interactive percentages)
         const updateResourceAllocationChart = () => {
             const totalBudgetInput = document.getElementById('totalBudgetInput');
-            const rawTotalBudget = totalBudgetInput.value.replace(/,/g, '');
+            const rawTotalBudget = totalBudgetInput.value.replace(/,/g, ''); // Remove commas for parsing
             let totalBudget = parseFloat(rawTotalBudget);
 
-            if (isNaN(totalBudget) || totalBudget <= 0) {
-                console.error('Please enter a valid positive number for the total budget.');
-                totalBudgetInput.value = '';
-                updateBarChart(resourceAllocationChartInstance, [0, 0, 0, 0]);
-                document.getElementById('peopleAmount').textContent = '0';
-                document.getElementById('toolsAmount').textContent = '0';
-                document.getElementById('trainingAmount').textContent = '0';
-                document.getElementById('complianceAmount').textContent = '0';
-                document.getElementById('allocationFeedback').textContent = 'Please enter a valid total budget.';
-                return;
+            if (isNaN(totalBudget) || totalBudget < 0) { // Allow 0 for budget for initial state or reset
+                console.error('Please enter a valid non-negative number for the total budget.');
+                totalBudget = 0; // Treat invalid input as 0 for calculation
+                totalBudgetInput.value = '0'; // Reset input display to 0
+            } else {
+                totalBudgetInput.value = totalBudget.toLocaleString('en-US'); // Format total budget input
             }
-
-            totalBudgetInput.value = totalBudget.toLocaleString('en-US'); // Format total budget input
 
             const peoplePercent = parseFloat(document.getElementById('peopleAllocation').value);
             const toolsPercent = parseFloat(document.getElementById('toolsAllocation').value);
@@ -1464,6 +1468,20 @@
 
             const sumPercentages = peoplePercent + toolsPercent + trainingPercent + compliancePercent;
             const feedbackElement = document.getElementById('allocationFeedback');
+
+            // Check if any percentage is NaN or negative before sum check
+            if (isNaN(peoplePercent) || isNaN(toolsPercent) || isNaN(trainingPercent) || isNaN(compliancePercent) ||
+                peoplePercent < 0 || toolsPercent < 0 || trainingPercent < 0 || compliancePercent < 0) {
+                feedbackElement.textContent = 'All percentages must be valid non-negative numbers.';
+                feedbackElement.classList.remove('text-green-600');
+                feedbackElement.classList.add('text-red-600');
+                updateBarChart(resourceAllocationChartInstance, [0, 0, 0, 0]); // Clear chart if invalid
+                document.getElementById('peopleAmount').textContent = '0';
+                document.getElementById('toolsAmount').textContent = '0';
+                document.getElementById('trainingAmount').textContent = '0';
+                document.getElementById('complianceAmount').textContent = '0';
+                return;
+            }
 
             if (sumPercentages !== 100) {
                 feedbackElement.textContent = `Percentages must sum to 100%. Current sum: ${sumPercentages}%`;
@@ -1475,10 +1493,10 @@
                 feedbackElement.classList.add('text-green-600');
             }
 
-            const peopleAmount = (totalBudget * (peoplePercent / 100)).toLocaleString('en-US');
-            const toolsAmount = (totalBudget * (toolsPercent / 100)).toLocaleString('en-US');
-            const trainingAmount = (totalBudget * (trainingPercent / 100)).toLocaleString('en-US');
-            const complianceAmount = (totalBudget * (compliancePercent / 100)).toLocaleString('en-US');
+            const peopleAmount = (totalBudget * (peoplePercent / 100)).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+            const toolsAmount = (totalBudget * (toolsPercent / 100)).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+            const trainingAmount = (totalBudget * (trainingPercent / 100)).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+            const complianceAmount = (totalBudget * (compliancePercent / 100)).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 
             document.getElementById('peopleAmount').textContent = peopleAmount;
             document.getElementById('toolsAmount').textContent = toolsAmount;
@@ -1492,6 +1510,7 @@
         // Function to render Key Terms cards (updated to expanding card style)
         const renderKeyTerms = () => {
             const keyTermsContainer = document.querySelector('#key-terms .grid');
+            if (!keyTermsContainer) return; // Exit if container not found
             keyTermsContainer.innerHTML = ''; // Clear existing cards
 
             keyTermsData.forEach((item, index) => {
@@ -1513,7 +1532,7 @@
                     // Close all other open cards and remove 'active' class
                     document.querySelectorAll('.key-term-card').forEach(otherCard => {
                         if (otherCard !== card) {
-                            otherCard.classList.remove('active');
+                            otherCard.classList.remove('active'); // Remove active class from card
                         }
                     });
 
@@ -1598,7 +1617,7 @@
 
             // Event listeners for budget allocation inputs
             document.getElementById('totalBudgetInput').addEventListener('input', updateResourceAllocationChart);
-            document.getElementById('totalBudgetInput').addEventListener('blur', updateResourceAllocationChart);
+            document.getElementById('totalBudgetInput').addEventListener('blur', updateResourceAllocationChart); // Update on blur too
             document.getElementById('peopleAllocation').addEventListener('input', updateResourceAllocationChart);
             document.getElementById('toolsAllocation').addEventListener('input', updateResourceAllocationChart);
             document.getElementById('trainingAllocation').addEventListener('input', updateResourceAllocationChart);
