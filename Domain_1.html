@@ -153,7 +153,43 @@
             min-width: 200px;
             width: 200px;
             flex-basis: 200px;
+            position: relative; /* Needed for positioning the pseudo-element */
+            overflow: hidden; /* Ensures pseudo-element stays within bounds */
+            /* Removed direct background-image properties from here */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            border: 1px solid #D5D2C8;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
         }
+
+        /* Pseudo-element for background image with opacity */
+        .legal-type-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.3; /* 30% opacity */
+            z-index: 1; /* Place behind content wrapper */
+        }
+
+        .legal-type-card.eu-bg::before {
+            background-image: url('uploaded:UE.png-e198d13b-b3e9-489f-a163-d85455edd9d2');
+        }
+        .legal-type-card.us-bg::before {
+            background-image: url('uploaded:USA.png-93dc6f7b-c4be-4fe9-9118-0782fbd9c6a9');
+        }
+        .legal-type-card.global-industry-bg::before {
+            background-image: url('uploaded:Industry.png-70659c48-56e3-4e19-b868-0c7c709bedbf');
+        }
+
         .contract-type-card {
             min-width: 200px;
             width: 200px;
@@ -470,14 +506,27 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.08); /* Keep the shadow */
         }
 
-        .legal-type-card.eu-bg {
-            background-image: url('https://placehold.co/200x200/0000FF/FFFFFF?text=EU'); /* Changed to Blue */
+        .legal-type-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.3; /* 30% opacity */
+            z-index: 1; /* Place behind content wrapper */
         }
-        .legal-type-card.us-bg {
-            background-image: url('https://placehold.co/200x200/FF0000/FFFFFF?text=USA'); /* Changed to Red */
+
+        .legal-type-card.eu-bg::before {
+            background-image: url('uploaded:UE.png-e198d13b-b3e9-489f-a163-d85455edd9d2');
         }
-        .legal-type-card.global-industry-bg {
-            background-image: url('https://placehold.co/200x200/FFFF00/333333?text=Industry'); /* Changed to Yellow */
+        .legal-type-card.us-bg::before {
+            background-image: url('uploaded:USA.png-93dc6f7b-c4be-4fe9-9118-0782fbd9c6a9');
+        }
+        .legal-type-card.global-industry-bg::before {
+            background-image: url('uploaded:Industry.png-70659c48-56e3-4e19-b868-0c7c709bedbf');
         }
 
         /* Overlay for opacity and text legibility */
@@ -569,12 +618,12 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
         .framework-step-node.active {
-            border-color: #00A896; /* Vibrant Teal border */
-            box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3); /* Teal glow */
-            background-color: #E0F7F5; /* Very light teal background */
-            max-height: 500px; /* Allow expansion to accommodate content */
+            border-color: #00A896;
+            box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3);
+            background-color: #E0F7F5;
+            max-height: 500px; /* Allow expansion */
             overflow: visible; /* Make content visible */
-            height: auto; /* Allow height to adjust dynamically */
+            height: auto; /* Adjust height dynamically */
         }
 
         .framework-step-node .node-title {
@@ -655,7 +704,7 @@
         }
         .maturity-level-card.active {
             border-color: #00A896;
-            box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3);
+            box-shadow: 0 44px 8px rgba(0, 168, 150, 0.3);
             background-color: #E0F7F5;
             max-height: 500px; /* Allow expansion */
             overflow: visible; /* Make content visible */
@@ -680,6 +729,20 @@
             height: 8px;
             border-top: 2px solid #D5D2C8;
             border-right: 2px solid #D5D2C8;
+        }
+
+        /* New styles for Risk Appetite cards to visualize progression */
+        .risk-appetite-card.risk-averse-bg {
+            background-color: #C8E6C9; /* Pale Green */
+        }
+        .risk-appetite-card.conservative-bg {
+            background-color: #FFECB3; /* Pale Yellow */
+        }
+        .risk-appetite-card.moderate-bg {
+            background-color: #FFD580; /* Light Orange */
+        }
+        .risk-appetite-card.risk-aggressive-bg {
+            background-color: #FFCDD2; /* Light Red */
         }
     </style>
 </head>
@@ -885,19 +948,19 @@
                         <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Determining risk appetite and tolerance</h4>
                         <p class="text-gray-600 mb-4">Understanding the organization's willingness to accept risk (risk appetite) and acceptable deviation (risk tolerance) is crucial for shaping the security strategy and prioritizing investments. Explore different risk appetites:</p>
                         <div class="flex flex-wrap justify-center gap-4 mb-6">
-                            <div class="risk-appetite-card" data-appetite-type="riskAverse">
+                            <div class="risk-appetite-card risk-averse-bg" data-appetite-type="riskAverse">
                                 <span class="card-title">Risk Averse</span>
                                 <div class="card-description hidden">Prefers to avoid risk as much as possible, even if it means missing potential opportunities. Focuses heavily on preventative controls and strict compliance.</div>
                             </div>
-                            <div class="risk-appetite-card" data-appetite-type="conservative">
+                            <div class="risk-appetite-card conservative-bg" data-appetite-type="conservative">
                                 <span class="card-title">Conservative</span>
                                 <div class="card-description hidden">Willing to accept a low level of risk, but generally prefers established, proven security measures. Prioritizes stability and minimizing potential losses.</div>
                             </div>
-                            <div class="risk-appetite-card" data-appetite-type="moderate">
+                            <div class="risk-appetite-card moderate-bg" data-appetite-type="moderate">
                                 <span class="card-title">Moderate</span>
                                 <div class="card-description hidden">Balances risk and reward, accepting a reasonable level of risk to achieve business objectives. Invests in security controls that provide a good return on investment.</div>
                             </div>
-                            <div class="risk-appetite-card" data-appetite-type="riskAggressive">
+                            <div class="risk-appetite-card risk-aggressive-bg" data-appetite-type="riskAggressive">
                                 <span class="card-title">Risk Aggressive</span>
                                 <div class="card-description hidden">Willing to take on higher levels of risk for potentially greater rewards, often seen in innovative or rapidly growing organizations. Focuses on rapid detection and response capabilities.</div>
                             </div>
@@ -956,7 +1019,7 @@
                             </div>
                             <div class="concept-card" data-concept="nist-csf">
                                 <span class="card-title">NIST CSF</span>
-                                <div class="card-description hidden"><strong>National Institute of Standards and Technology Cybersecurity Framework:</strong> A voluntary framework providing a common language for understanding, managing, and expressing cybersecurity risk. It consists of five core functions: Identify, Protect, Detect, Respond, and Recover, offering a flexible way to manage cybersecurity risk.</div>
+                                <div class="card-description hidden"><strong>National Institute of Standards and Technology Cybersecurity Framework:</strong> A voluntary framework providing a common language for understanding, managing, and expressing cybersecurity risk. It consists of five core functions: Identify, Protect, Detect, Respond, Recover, offering a flexible way to manage cybersecurity risk.</div>
                             </div>
                             <div class="concept-card" data-concept="itil">
                                 <span class="card-title">ITIL</span>
@@ -2077,7 +2140,7 @@
                         if (card.classList.contains('active') && descriptionDiv && keyTermsData[termIndex]) {
                             descriptionDiv.innerHTML = `<p>${keyTermsData[termIndex].definition}</p>`; // Set content
                         } else if (descriptionDiv) {
-                            descriptionDiv.innerHTML = ''; // Clear content if deactivating
+                            descriptionDiv.innerHTML = '';
                         }
                     });
                 });
