@@ -1474,25 +1474,16 @@
             // Risk Assessment Method Card Toggles
             document.querySelectorAll('.risk-method-card').forEach(card => {
                 card.addEventListener('click', () => {
-                    const descriptionDiv = card.querySelector('.card-description');
-                    const methodKey = card.dataset.method;
+                    const currentlyActive = card.classList.contains('active');
 
                     // Close all other open cards in this section
                     document.querySelectorAll('.risk-method-card').forEach(otherCard => {
-                        const otherDescriptionDiv = otherCard.querySelector('.card-description');
-                        if (otherCard !== card && !otherDescriptionDiv.classList.contains('hidden')) {
-                            otherCard.classList.remove('active');
-                        }
+                        otherCard.classList.remove('active');
                     });
 
-                    // Toggle the clicked card's active class
-                    card.classList.toggle('active');
-
-                    // If the card is now active, populate its description
-                    if (card.classList.contains('active') && descriptionDiv && riskMethodDescriptions[methodKey]) {
-                        descriptionDiv.innerHTML = `<p>${riskMethodDescriptions[methodKey]}</p>`; // Set content
-                    } else if (descriptionDiv) {
-                        descriptionDiv.innerHTML = ''; // Clear content if deactivating
+                    // If the card was not already active, activate it
+                    if (!currentlyActive) {
+                        card.classList.add('active');
                     }
                 });
             });
@@ -1500,25 +1491,16 @@
             // Risk Framework Card Toggles
             document.querySelectorAll('.risk-framework-card').forEach(card => {
                 card.addEventListener('click', () => {
-                    const descriptionDiv = card.querySelector('.card-description');
-                    const frameworkKey = card.dataset.framework;
-
+                    const currentlyActive = card.classList.contains('active');
+                    
                     // Close all other open cards
                     document.querySelectorAll('.risk-framework-card').forEach(otherCard => {
-                        const otherDescriptionDiv = otherCard.querySelector('.card-description');
-                        if (otherCard !== card && !otherDescriptionDiv.classList.contains('hidden')) {
-                            otherCard.classList.remove('active');
-                        }
+                        otherCard.classList.remove('active');
                     });
-
-                    // Toggle the clicked card's active class
-                    card.classList.toggle('active');
-
-                    // If the card is now active, populate its description
-                    if (card.classList.contains('active') && descriptionDiv && riskFrameworkDescriptions[frameworkKey]) {
-                        descriptionDiv.innerHTML = `<p>${riskFrameworkDescriptions[frameworkKey].description}</p>`; // Set content
-                    } else if (descriptionDiv) {
-                        descriptionDiv.innerHTML = ''; // Clear content if deactivating
+                    
+                    // If the card was not already active, activate it
+                    if (!currentlyActive) {
+                        card.classList.add('active');
                     }
                 });
             });
@@ -1527,25 +1509,16 @@
             // Risk Response Option Description Toggles
             document.querySelectorAll('.risk-response-card').forEach(card => {
                 card.addEventListener('click', () => {
-                    const descriptionDiv = card.querySelector('.card-description');
-                    const responseKey = card.dataset.response;
+                    const currentlyActive = card.classList.contains('active');
 
                     // Close all other open cards
                     document.querySelectorAll('.risk-response-card').forEach(otherCard => {
-                        const otherDescriptionDiv = otherCard.querySelector('.card-description');
-                        if (otherCard !== card && !otherDescriptionDiv.classList.contains('hidden')) {
-                            otherCard.classList.remove('active');
-                        }
+                        otherCard.classList.remove('active');
                     });
 
-                    // Toggle the clicked card's active class
-                    card.classList.toggle('active');
-
-                    // If the card is now active, populate its description
-                    if (card.classList.contains('active') && descriptionDiv && riskResponseDescriptions[responseKey]) {
-                        descriptionDiv.innerHTML = `<p>${riskResponseDescriptions[responseKey]}</p>`; // Set content
-                    } else if (descriptionDiv) {
-                        descriptionDiv.innerHTML = ''; // Clear content if deactivating
+                    // If the card was not already active, activate it
+                    if (!currentlyActive) {
+                        card.classList.add('active');
                     }
                 });
             });
@@ -1553,26 +1526,26 @@
             // Risk and Control Ownership Role Details
             document.querySelectorAll('.role-node').forEach(roleNode => {
                 roleNode.addEventListener('click', () => {
+                    const currentlyActive = roleNode.classList.contains('active');
                     const roleKey = roleNode.dataset.role;
                     const roleInfo = detailedRoleDescriptions[roleKey];
                     const roleDescriptionDiv = roleNode.querySelector('.role-description');
 
-                    // Close all other open role descriptions
+                    // Close all other open role descriptions and clear their content
                     document.querySelectorAll('.role-node').forEach(otherRoleNode => {
-                        const otherRoleDescriptionDiv = otherRoleNode.querySelector('.role-description');
-                        if (otherRoleNode !== roleNode && otherRoleDescriptionDiv && !otherRoleDescriptionDiv.classList.contains('hidden')) {
-                            otherRoleNode.classList.remove('active');
+                        otherRoleNode.classList.remove('active');
+                        const otherDesc = otherRoleNode.querySelector('.role-description');
+                        if (otherDesc) {
+                            otherDesc.innerHTML = '';
                         }
                     });
 
-                    // Toggle the clicked role's active class
-                    roleNode.classList.toggle('active');
-
-                    // If the role node is now active, populate its description
-                    if (roleNode.classList.contains('active') && roleDescriptionDiv && roleInfo) {
-                        roleDescriptionDiv.innerHTML = `<p>${roleInfo.description}</p>`; // Set content
-                    } else if (descriptionDiv) {
-                        roleDescriptionDiv.innerHTML = ''; // Clear content if deactivating
+                    // If the card was not already active, activate it and populate its content
+                    if (!currentlyActive) {
+                        roleNode.classList.add('active');
+                        if (roleDescriptionDiv && roleInfo) {
+                            roleDescriptionDiv.innerHTML = `<p>${roleInfo.description}</p>`;
+                        }
                     }
                 });
             });
@@ -1609,24 +1582,26 @@
                 // Add event listeners for key term cards
                 document.querySelectorAll('.key-term-card').forEach(card => {
                     card.addEventListener('click', () => {
+                        const currentlyActive = card.classList.contains('active');
                         const descriptionDiv = card.querySelector('.card-description');
                         const termIndex = parseInt(card.dataset.termKey);
 
                         // Close all other open cards and remove 'active' class
                         document.querySelectorAll('.key-term-card').forEach(otherCard => {
-                            if (otherCard !== card) {
-                                otherCard.classList.remove('active');
+                            otherCard.classList.remove('active');
+                            // Also clear the content to be safe
+                            const otherDesc = otherCard.querySelector('.card-description');
+                            if(otherDesc) {
+                                otherDesc.innerHTML = '';
                             }
                         });
-
-                        // Toggle the clicked card's active class
-                        card.classList.toggle('active');
-
-                        // If the card is now active, populate its description
-                        if (card.classList.contains('active') && descriptionDiv && keyTermsData[termIndex]) {
-                            descriptionDiv.innerHTML = `<p>${keyTermsData[termIndex].definition}</p>`; // Set content
-                        } else if (descriptionDiv) {
-                            descriptionDiv.innerHTML = ''; // Clear content if deactivating
+                        
+                        // If the card was not already active, activate it and populate
+                        if (!currentlyActive) {
+                            card.classList.add('active');
+                            if (descriptionDiv && keyTermsData[termIndex]) {
+                                descriptionDiv.innerHTML = `<p>${keyTermsData[termIndex].definition}</p>`;
+                            }
                         }
                     });
                 });
@@ -1641,53 +1616,48 @@
                     const impactNode = scenarioContainer.querySelector('.flow-node[data-node-type="impact"]');
                     const arrow2 = scenarioContainer.querySelector('.flow-arrow[data-arrow-id="1-2"]');
                     const vulnerabilityDescriptionDiv = vulnerabilityNode.querySelector('.node-description');
+                    const currentlyActive = vulnerabilityNode.classList.contains('active');
 
                     // Close all other scenarios
                     document.querySelectorAll('.flow-scenario').forEach(otherScenario => {
-                        if (otherScenario !== scenarioContainer) {
-                            otherScenario.querySelectorAll('.flow-node').forEach(node => {
-                                node.classList.remove('active');
-                                const desc = node.querySelector('.node-description');
-                                if (desc) desc.style.display = 'none';
-                            });
-                            otherScenario.querySelectorAll('.flow-arrow').forEach(arrow => arrow.classList.add('hidden'));
-                            otherScenario.querySelectorAll('.flow-node[data-node-type="threat"]').forEach(node => node.classList.add('hidden'));
-                            otherScenario.querySelectorAll('.flow-node[data-node-type="impact"]').forEach(node => node.classList.add('hidden'));
-                        }
+                        otherScenario.querySelectorAll('.flow-node').forEach(node => {
+                            node.classList.remove('active');
+                            const desc = node.querySelector('.node-description');
+                            if (desc) desc.style.display = 'none';
+                        });
+                        otherScenario.querySelectorAll('.flow-arrow').forEach(arrow => arrow.classList.add('hidden'));
+                        otherScenario.querySelectorAll('.flow-node[data-node-type="threat"]').forEach(node => node.classList.add('hidden'));
+                        otherScenario.querySelectorAll('.flow-node[data-node-type="impact"]').forEach(node => node.classList.add('hidden'));
                     });
 
-                    // Toggle current vulnerability node
-                    vulnerabilityNode.classList.toggle('active');
-
-                    if (vulnerabilityNode.classList.contains('active')) {
+                    // If the clicked node wasn't active, open this scenario
+                    if (!currentlyActive) {
+                        vulnerabilityNode.classList.add('active');
                         if (vulnerabilityDescriptionDiv) vulnerabilityDescriptionDiv.style.display = 'block';
                         if (threatNode) threatNode.classList.remove('hidden');
                         if (arrow1) arrow1.classList.remove('hidden');
-                    } else {
-                        if (vulnerabilityDescriptionDiv) vulnerabilityDescriptionDiv.style.display = 'none';
-                        if (threatNode) threatNode.classList.add('hidden');
-                        if (arrow1) arrow1.classList.add('hidden');
-                        if (impactNode) impactNode.classList.add('hidden');
-                        if (arrow2) arrow2.classList.add('hidden');
                     }
                 });
             });
 
             document.querySelectorAll('.flow-node[data-node-type="threat"]').forEach(threatNode => {
-                threatNode.addEventListener('click', () => {
+                threatNode.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevent the parent vulnerability node's click event from firing
                     const scenarioContainer = threatNode.closest('.flow-scenario');
                     const impactNode = scenarioContainer.querySelector('.flow-node[data-node-type="impact"]');
                     const arrow2 = scenarioContainer.querySelector('.flow-arrow[data-arrow-id="1-2"]');
                     const threatDescriptionDiv = threatNode.querySelector('.node-description');
+                    const currentlyActive = threatNode.classList.contains('active');
 
-                    // Close other impact nodes in the same scenario if open
-                    scenarioContainer.querySelectorAll('.flow-node[data-node-type="impact"]').forEach(node => {
-                        if (node !== impactNode) { // Only hide if it's a different impact node in the same scenario
+                    // Deactivate any other active nodes within the same scenario
+                    scenarioContainer.querySelectorAll('.flow-node').forEach(node => {
+                        if(node !== threatNode && node.dataset.nodeType !== 'vulnerability') {
                             node.classList.remove('active');
                             const desc = node.querySelector('.node-description');
                             if (desc) desc.style.display = 'none';
                         }
                     });
+
 
                     // Toggle current threat node
                     threatNode.classList.toggle('active');
@@ -1698,14 +1668,20 @@
                         if (arrow2) arrow2.classList.remove('hidden');
                     } else {
                         if (threatDescriptionDiv) threatDescriptionDiv.style.display = 'none';
-                        if (impactNode) impactNode.classList.add('hidden');
+                        if (impactNode) {
+                            impactNode.classList.add('hidden');
+                            impactNode.classList.remove('active');
+                            const impactDesc = impactNode.querySelector('.node-description');
+                            if(impactDesc) impactDesc.style.display = 'none';
+                        }
                         if (arrow2) arrow2.classList.add('hidden');
                     }
                 });
             });
 
             document.querySelectorAll('.flow-node[data-node-type="impact"]').forEach(impactNode => {
-                impactNode.addEventListener('click', () => {
+                impactNode.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevent parent click events
                     impactNode.classList.toggle('active');
                     const impactDescriptionDiv = impactNode.querySelector('.node-description');
                     if (impactNode.classList.contains('active')) {
@@ -1717,12 +1693,7 @@
             });
 
             // Initial state: hide all threat and impact nodes and arrows
-            document.querySelectorAll('.flow-node[data-node-type="threat"]').forEach(node => {
-                node.classList.add('hidden');
-                const desc = node.querySelector('.node-description');
-                if (desc) desc.style.display = 'none';
-            });
-            document.querySelectorAll('.flow-node[data-node-type="impact"]').forEach(node => {
+            document.querySelectorAll('.flow-node[data-node-type="threat"], .flow-node[data-node-type="impact"]').forEach(node => {
                 node.classList.add('hidden');
                 const desc = node.querySelector('.node-description');
                 if (desc) desc.style.display = 'none';
