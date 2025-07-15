@@ -1,1 +1,358 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CISM Interactive Study Guide (All Domains)</title>
+    <!-- Tailwind CSS CDN for utility classes -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN for interactive charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- MASTER STYLESHEET (Combined & Deduplicated from all 4 Domains) --- */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        /* --- BASE & LAYOUT --- */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F5EF; /* Warm Neutral Background */
+            color: #333333;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .section-header {
+            border-left: 6px solid #00A896; /* Vibrant Teal Accent */
+            padding-left: 1.25rem;
+            font-size: 2.2rem; /* Standardized size */
+            color: #222222; /* Darker text for contrast */
+        }
+
+        /* --- NAVIGATION --- */
+        .master-nav-item {
+            transition: all 0.2s ease-in-out;
+            text-align: left;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+        }
+        .master-nav-item.active {
+            background-color: #E0F7F5; /* Light Teal */
+            border-left: 4px solid #00A896;
+        }
+        .master-nav-item.active .domain-title {
+             color: #00796B;
+        }
+        .master-nav-item:not(.active):hover {
+            background-color: #e2e8f0; /* light gray hover */
+        }
+
+        .domain-nav-item { /* For intra-domain navigation */
+            transition: all 0.2s ease-in-out;
+        }
+        .domain-nav-item.active {
+            border-bottom: 3px solid #00A896;
+            font-weight: 700;
+            color: #222222;
+        }
+        
+        /* --- ACCORDIONS --- */
+        .accordion-button {
+            background-color: #EDEAE0;
+            border-bottom: 1px solid #D5D2C8;
+            border-radius: 0.75rem;
+            padding: 1rem 1.5rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #333333;
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            cursor: pointer;
+        }
+        .accordion-button:hover {
+            background-color: #D5D2C8;
+            transform: translateY(-1px);
+        }
+        .accordion-content {
+            background-color: #FFFFFF;
+            border: 1px solid #D5D2C8;
+            border-top: none;
+            border-radius: 0 0 0.75rem 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        /* --- INTERACTIVE CARDS (UNIFIED) --- */
+        .interactive-card {
+            background-color: #EDEAE0;
+            border: 1px solid #D5D2C8;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-sizing: border-box;
+            text-align: center;
+            font-weight: 600;
+            color: #333333;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+            max-height: 120px; /* Base max-height for transition */
+            overflow: hidden;
+        }
+        .interactive-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .interactive-card.active {
+            border-color: #00A896;
+            box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3);
+            background-color: #E0F7F5;
+            max-height: 1000px; /* Expand fully */
+        }
+        .interactive-card .card-title {
+            font-size: 1.1em;
+            margin-bottom: 0.6rem;
+            color: #004085;
+        }
+        .interactive-card .card-description {
+            font-weight: 400;
+            font-size: 0.9em;
+            color: #555555;
+            margin-top: 0.5rem;
+            display: none;
+            text-align: left;
+            word-break: break-word;
+        }
+        .interactive-card.active .card-description {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        /* --- CHARTS & VISUALIZATIONS --- */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 40vh;
+            margin: auto;
+        }
+        
+        /* --- FLOWCHARTS --- */
+        .flowchart-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: #F8F5EF;
+            border-radius: 0.75rem;
+            max-width: 450px;
+            margin: 1rem auto;
+        }
+        .flowchart-container .interactive-card {
+            width: 100%;
+            max-width: 400px;
+            background-color: #FFFFFF;
+        }
+        .flowchart-arrow {
+            font-size: 2em;
+            color: #D5D2C8;
+            line-height: 1;
+        }
+        
+        /* --- KEYFRAMES --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- RESPONSIVENESS --- */
+        @media (max-width: 768px) {
+            .flex-wrap > .interactive-card {
+                flex: 1 1 100%; /* Stack cards on mobile */
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body class="leading-relaxed">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <!-- MASTER HEADER -->
+        <header class="text-center py-6 bg-white rounded-lg shadow-lg mb-8">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-2">CISM Interactive Study Guide</h1>
+            <p class="text-xl sm:text-2xl text-gray-600">A Unified Guide to All Four Domains</p>
+        </header>
+
+        <!-- Main Content Layout (2-column on desktop, 1-column on mobile) -->
+        <div class="flex flex-col md:flex-row gap-8">
+            
+            <!-- Left Column: Master Navigation -->
+            <aside class="md:w-1/4 lg:w-1/5">
+                <nav id="master-navigation" class="bg-white p-4 rounded-lg shadow-md flex flex-col space-y-2 sticky top-4">
+                    <button class="master-nav-item text-gray-700 active" data-domain-target="domain-1">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-base domain-title">Domain 1</span>
+                            <span class="text-sm font-normal">Governance</span>
+                        </div>
+                    </button>
+                    <button class="master-nav-item text-gray-700" data-domain-target="domain-2">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-base domain-title">Domain 2</span>
+                            <span class="text-sm font-normal">Risk Management</span>
+                        </div>
+                    </button>
+                    <button class="master-nav-item text-gray-700" data-domain-target="domain-3">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-base domain-title">Domain 3</span>
+                            <span class="text-sm font-normal">Program Development</span>
+                        </div>
+                    </button>
+                    <button class="master-nav-item text-gray-700" data-domain-target="domain-4">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-base domain-title">Domain 4</span>
+                            <span class="text-sm font-normal">Incident Management</span>
+                        </div>
+                    </button>
+                </nav>
+            </aside>
+
+            <!-- Right Column: Main Content Area -->
+            <main class="flex-1">
+                <div id="domains-content-area">
+                    <!-- All domain content is now directly in the HTML below -->
+                    <!-- =============================================================================== -->
+                    <!-- == DOMAIN 1: INFORMATION SECURITY GOVERNANCE ================================== -->
+                    <!-- =============================================================================== -->
+                    <div id="domain-1" class="domain-content-section fade-in">
+                        <!-- Full HTML Content for Domain 1 -->
+                    </div>
+        
+                    <!-- =============================================================================== -->
+                    <!-- == DOMAIN 2: INFORMATION SECURITY RISK MANAGEMENT =============================== -->
+                    <!-- =============================================================================== -->
+                    <div id="domain-2" class="domain-content-section hidden">
+                        <!-- Full HTML Content for Domain 2 -->
+                    </div>
+        
+                    <!-- =============================================================================== -->
+                    <!-- == DOMAIN 3: INFORMATION SECURITY PROGRAM DEVELOPMENT ========================= -->
+                    <!-- =============================================================================== -->
+                    <div id="domain-3" class="domain-content-section hidden">
+                        <!-- Full HTML Content for Domain 3 -->
+                    </div>
+        
+                    <!-- =============================================================================== -->
+                    <!-- == DOMAIN 4: INCIDENT MANAGEMENT ============================================== -->
+                    <!-- =============================================================================== -->
+                    <div id="domain-4" class="domain-content-section hidden">
+                        <!-- Full HTML Content for Domain 4 -->
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <!-- MASTER FOOTER -->
+        <footer class="text-center py-6 mt-8 text-gray-500 text-sm">
+            <p>&copy; 2024 CISM Unified Study Guide. All rights reserved. For educational purposes only.</p>
+        </footer>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const masterNavButtons = document.querySelectorAll('#master-navigation .master-nav-item');
+        const domainContentSections = document.querySelectorAll('.domain-content-section');
+
+        // Function to set up event listeners for a given domain container
+        function setupDomain(domainContainer) {
+            if (!domainContainer || domainContainer.dataset.initialized === 'true') {
+                return; // Don't re-initialize
+            }
+
+            // Intra-domain navigation
+            const navButtons = domainContainer.querySelectorAll('.domain-nav-item');
+            const sections = domainContainer.querySelectorAll('.content-section');
+            
+            navButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    const targetId = button.dataset.target;
+                    sections.forEach(section => {
+                        section.classList.toggle('hidden', section.id !== targetId);
+                    });
+                });
+            });
+
+            // Accordion logic
+            domainContainer.querySelectorAll('.accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const icon = button.querySelector('.accordion-icon');
+                    content.classList.toggle('hidden');
+                    if (icon) {
+                        icon.textContent = content.classList.contains('hidden') ? '+' : '–';
+                    }
+                });
+            });
+
+            // Interactive Card Logic
+            domainContainer.querySelectorAll('.interactive-card').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const parentGroup = card.closest('[data-interactive-group]');
+                    const wasActive = card.classList.contains('active');
+                    
+                    if (parentGroup) {
+                       parentGroup.querySelectorAll('.interactive-card').forEach(c => c.classList.remove('active'));
+                    }
+
+                    if(!wasActive) {
+                        card.classList.add('active');
+                    }
+                });
+            });
+            
+            initializeDomainCharts(domainContainer);
+            domainContainer.dataset.initialized = 'true';
+        }
+
+        // Master navigation logic
+        masterNavButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                masterNavButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                const targetDomainId = button.dataset.domainTarget;
+                
+                domainContentSections.forEach(sec => {
+                    sec.classList.toggle('hidden', sec.id !== targetDomainId);
+                });
+
+                // Setup the newly visible domain
+                const targetContainer = document.getElementById(targetDomainId);
+                if(targetContainer) {
+                    setupDomain(targetContainer);
+                }
+            });
+        });
+
+        const chartInstances = {};
+        function initializeDomainCharts(domainContainer) {
+            // Placeholder for Chart.js initialization code
+        }
+        
+        // --- INITIAL LOAD ---
+        // Setup the default visible domain on page load
+        setupDomain(document.getElementById('domain-1'));
+    });
+    </script>
+</body>
+</html>
