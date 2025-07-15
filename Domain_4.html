@@ -128,7 +128,6 @@
         .eradication-step-card, .recovery-step-card { flex: 1 1 200px; max-width: 200px; }
         .comm-stakeholder-card { flex: 1 1 300px; max-width: 300px; }
         .containment-method-card { flex: 1 1 22%; max-width: 250px; } /* Ensures 4 cards per row */
-        .key-term-card { max-width: 150px; width: 100%; } /* Set max-width for key term cards */
         
         /* Flowchart styling */
         .flowchart-container {
@@ -187,7 +186,10 @@
             display: grid;
             gap: 1.5rem;
             grid-template-columns: repeat(1, 1fr); /* Default to 1 column */
-            justify-items: center;
+        }
+        .key-term-card {
+            max-width: 150px;
+            width: 100%;
         }
 
         /* Small screens (e.g., mobile) */
