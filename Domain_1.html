@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CISM 2024: Domain 1 - Information Security Governance (Interactive Study Guide)</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
@@ -13,17 +13,17 @@
             background-color: #F8F5EF; /* Warm Neutral Background */
             color: #333333;
         }
-        .container { 
+        .container {
             max-width: 1200px;
         }
-        /* Enhanced Section Header with new accent color from Domain 3 */
+        /* Enhanced Section Header with new accent color from Domain 2 */
         .section-header {
             border-left: 6px solid #00A896; /* Vibrant Teal Accent */
             padding-left: 1.25rem;
             font-size: 2.5rem; /* Slightly larger */
             color: #222222; /* Darker text for contrast */
         }
-        /* Refined Accordion Button and Content from Domain 3 */
+        /* Refined Accordion Button and Content from Domain 2 */
         .accordion-button {
             background-color: #EDEAE0; /* Secondary Neutral */
             border-bottom: 1px solid #D5D2C8;
@@ -49,7 +49,7 @@
             padding: 1.5rem; /* More padding */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow */
         }
-        /* Active Navigation Item from Domain 3 */
+        /* Active Navigation Item from Domain 2 */
         .nav-item.active {
             border-bottom: 3px solid #00A896; /* Vibrant Teal Accent */
             font-weight: 700; /* Bolder */
@@ -63,16 +63,16 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Unified Styles for Interactive Cards (Frameworks, Requirements, Key Terms) */
-        .concept-card, .requirement-card, .key-term-card, .change-management-card, .legal-type-card, .contract-type-card, .governance-structure-card, .risk-appetite-card, .business-driver-card, .framework-step-card, .maturity-level-card {
+        /* Unified Styles for Interactive Cards */
+        .concept-card, .requirement-card, .key-term-card, .change-management-card, .legal-type-card, .contract-type-card, .governance-structure-card, .risk-appetite-card, .business-driver-card, .framework-step-node, .maturity-level-card {
             background-color: #EDEAE0; /* Secondary Neutral */
             border: 1px solid #D5D2C8;
             padding: 1rem;
             border-radius: 0.75rem; /* More rounded */
             cursor: pointer;
-            transition: all 0.2s ease-in-out;
+            transition: all 0.3s ease-in-out;
             box-sizing: border-box;
-            text-align: left;
+            text-align: center;
             font-weight: 600;
             color: #333333;
             min-height: 100px;
@@ -83,28 +83,31 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.08); /* Subtle initial shadow */
             flex-grow: 0;
             flex-shrink: 0;
+            max-height: 100px; /* Set initial max-height for transition */
+            overflow: hidden; /* Hide overflow content */
         }
 
-        .concept-card:hover, .requirement-card:hover, .key-term-card:hover, .change-management-card:hover, .legal-type-card:hover, .contract-type-card:hover, .governance-structure-card:hover, .risk-appetite-card:hover, .business-driver-card:hover, .framework-step-card:hover, .maturity-level-card:hover {
+        .concept-card:hover, .requirement-card:hover, .key-term-card:hover, .change-management-card:hover, .legal-type-card:hover, .contract-type-card:hover, .governance-structure-card:hover, .risk-appetite-card:hover, .business-driver-card:hover, .framework-step-node:hover, .maturity-level-card:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* More pronounced shadow on hover */
         }
 
         /* Active state for all interactive cards */
-        .concept-card.active, .requirement-card.active, .key-term-card.active, .change-management-card.active, .legal-type-card.active, .contract-type-card.active, .governance-structure-card.active, .risk-appetite-card.active, .business-driver-card.active, .framework-step-card.active, .maturity-level-card.active {
+        .concept-card.active, .requirement-card.active, .key-term-card.active, .change-management-card.active, .legal-type-card.active, .contract-type-card.active, .governance-structure-card.active, .risk-appetite-card.active, .business-driver-card.active, .framework-step-node.active, .maturity-level-card.active {
             border-color: #00A896; /* Vibrant Teal border */
             box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3); /* Teal glow */
             background-color: #E0F7F5; /* Very light teal background */
+            max-height: 1000px; /* Set large max-height to allow full expansion */
         }
 
-        .concept-card .card-title, .requirement-card .card-title, .key-term-card .card-title, .change-management-card .card-title, .legal-type-card .card-title, .contract-type-card .card-title, .governance-structure-card .card-title, .risk-appetite-card .card-title, .business-driver-card .card-title, .framework-step-card .card-title, .maturity-level-card .card-title {
+        .concept-card .card-title, .requirement-card .card-title, .key-term-card .card-title, .change-management-card .card-title, .legal-type-card .card-title, .contract-type-card .card-title, .governance-structure-card .card-title, .risk-appetite-card .card-title, .business-driver-card .card-title, .framework-step-node .card-title, .maturity-level-card .card-title {
             font-size: 1.15em; /* Slightly larger title */
             margin-bottom: 0.6rem;
             text-align: center;
             color: #004085; /* Dark blue for title for consistency */
         }
 
-        .concept-card .card-description, .requirement-card .card-description, .key-term-card .card-description, .change-management-card .card-description, .legal-type-card .card-description, .contract-type-card .card-description, .governance-structure-card .card-description, .risk-appetite-card .card-description, .business-driver-card .card-description, .framework-step-card .card-description, .maturity-level-card .card-description {
+        .concept-card .card-description, .requirement-card .card-description, .key-term-card .card-description, .change-management-card .card-description, .legal-type-card .card-description, .contract-type-card .card-description, .governance-structure-card .card-description, .risk-appetite-card .card-description, .business-driver-card .card-description, .framework-step-node .card-description, .maturity-level-card .card-description {
             font-weight: 400; /* Regular font weight for description */
             font-size: 0.9em;
             color: #555555;
@@ -113,23 +116,18 @@
             text-align: left; /* Default text alignment for descriptions */
             word-break: break-word; /* Ensure text breaks within the fixed width */
         }
-        /* Specific override for key-term-card description text alignment */
-        .key-term-card .card-description {
+        /* Specific override for card description text alignment */
+        .key-term-card .card-description, .legal-type-card .card-description, .contract-type-card .card-description {
             text-align: center;
         }
 
-        .concept-card.active .card-description, .requirement-card.active .card-description, .key-term-card.active .card-description, .change-management-card.active .card-description, .legal-type-card.active .card-description, .contract-type-card.active .card-description, .governance-structure-card.active .card-description, .risk-appetite-card.active .card-description, .business-driver-card.active .card-description, .framework-step-card.active .card-description, .maturity-level-card.active .card-description {
+        .concept-card.active .card-description, .requirement-card.active .card-description, .key-term-card.active .card-description, .change-management-card.active .card-description, .legal-type-card.active .card-description, .contract-type-card.active .card-description, .governance-structure-card.active .card-description, .risk-appetite-card.active .card-description, .business-driver-card.active .card-description, .framework-step-node.active .card-description, .maturity-level-card.active .card-description {
             display: block;
             animation: fadeIn 0.5s ease-in-out;
         }
 
         /* Specific min-width and width for cards */
-        .concept-card {
-            min-width: 200px;
-            width: 200px;
-            flex-basis: 200px;
-        }
-        .requirement-card {
+        .concept-card, .requirement-card, .contract-type-card, .governance-structure-card, .business-driver-card {
             min-width: 200px;
             width: 200px;
             flex-basis: 200px;
@@ -153,9 +151,8 @@
             min-width: 200px;
             width: 200px;
             flex-basis: 200px;
-            position: relative; /* Needed for positioning the pseudo-element */
-            overflow: hidden; /* Ensures pseudo-element stays within bounds */
-            /* Removed direct background-image properties from here */
+            position: relative;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -181,98 +178,38 @@
         }
 
         .legal-type-card.eu-bg::before {
-            background-image: url('uploaded:UE.png-e198d13b-b3e9-489f-a163-d85455edd9d2');
+            background-image: url('https://storage.googleapis.com/gemini-prod-us-central1-gd-scratch-0/img/UE.png-e198d13b-b3e9-489f-a163-d85455edd9d2');
         }
         .legal-type-card.us-bg::before {
-            background-image: url('uploaded:USA.png-93dc6f7b-c4be-4fe9-9118-0782fbd9c6a9');
+            background-image: url('https://storage.googleapis.com/gemini-prod-us-central1-gd-scratch-0/img/USA.png-93dc6f7b-c4be-4fe9-9118-0782fbd9c6a9');
         }
         .legal-type-card.global-industry-bg::before {
-            background-image: url('uploaded:Industry.png-70659c48-56e3-4e19-b868-0c7c709bedbf');
+            background-image: url('https://storage.googleapis.com/gemini-prod-us-central1-gd-scratch-0/img/Industry.png-70659c48-56e3-4e19-b868-0c7c709bedbf');
         }
 
-        .contract-type-card {
-            min-width: 200px;
-            width: 200px;
-            flex-basis: 200px;
-        }
-        .governance-structure-card {
-            min-width: 200px;
-            width: 200px;
-            flex-basis: 200px;
-        }
         .risk-appetite-card {
             min-width: 180px;
             width: 180px;
             flex-basis: 180px;
         }
-        .business-driver-card {
-            min-width: 200px;
-            width: 200px;
-            flex-basis: 200px;
-        }
-        .framework-step-card {
-            min-width: 350px; /* Set min-width */
-            width: 350px; /* Set fixed width */
-            flex-basis: 350px; /* Set flex-basis to match width */
-            min-height: 100px; /* Set min-height */
-            max-height: 100px; /* Set max-height for collapsed state */
-            overflow: hidden; /* Hide overflow when collapsed */
-            background-color: #F0F8FF; /* Light blue for steps */
+        .framework-step-node {
+            min-width: 350px;
+            width: 350px;
+            flex-basis: 350px;
+            background-color: #F0F8FF;
             color: #001f3f;
-            display: flex; /* Ensure flexbox for content alignment */
-            flex-direction: column; /* Stack content vertically */
-            justify-content: center; /* Center content vertically */
-            align-items: center; /* Center content horizontally */
-            transition: all 0.3s ease-in-out; /* Smooth transition for all changes */
         }
-        .framework-step-card:hover {
+        .framework-step-node:hover {
             background-color: #DDEBF7;
         }
-        .framework-step-card.active {
-            border-color: #00A896; /* Vibrant Teal border */
-            box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3); /* Teal glow */
-            background-color: #E0F7F5; /* Very light teal background */
-            max-height: 500px; /* Allow expansion to accommodate content */
-            overflow: visible; /* Make content visible */
-            height: auto; /* Allow height to adjust dynamically */
-        }
+        
         .maturity-level-card {
-            min-width: 150px; /* Set min-width */
-            max-width: 150px; /* Set max-width */
-            width: 150px; /* Set fixed width */
-            flex-basis: 150px; /* Set flex-basis to match width */
-            min-height: 100px; /* Set min-height */
-            max-height: 100px; /* Set max-height for collapsed state */
-            overflow: hidden; /* Hide overflow when collapsed */
-            background-color: #EDEAE0; /* Default neutral for nodes */
-            color: #333333;
-            padding: 1rem 1.5rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            cursor: pointer;
-            transition: all 0.3s ease-in-out; /* Combined transitions */
-            font-weight: 600;
-            text-align: center; /* Center text horizontally */
-            display: flex;
-            flex-direction: column;
-            justify-content: center; /* Center content vertically */
-            align-items: center; /* Center content horizontally */
+            min-width: 150px;
+            max-width: 150px;
+            width: 150px;
+            flex-basis: 150px;
         }
-        .maturity-level-card:hover {
-            background-color: #D5D2C8;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-        }
-        .maturity-level-card.active {
-            border-color: #00A896;
-            box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3);
-            background-color: #E0F7F5;
-            max-height: 500px; /* Allow expansion */
-            overflow: visible; /* Make content visible */
-            height: auto; /* Adjust height dynamically */
-        }
-
-
+        
         /* Styles for Corporate Hierarchy Chart */
         .hierarchy-chart-container {
             display: flex;
@@ -305,7 +242,7 @@
         }
 
         .role-node:hover {
-            background-color: #D5D2C8; /* Darker neutral on hover */
+            background-color: #D5D2C8; /* Darker on hover */
             transform: translateY(-2px);
             box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
@@ -379,18 +316,7 @@
 
         /* Responsive Adjustments for new cards/elements */
         @media (max-width: 768px) {
-            .concept-card,
-            .requirement-card,
-            .key-term-card,
-            .change-management-card,
-            .legal-type-card,
-            .contract-type-card,
-            .governance-structure-card,
-            .risk-appetite-card,
-            .business-driver-card,
-            .framework-step-card,
-            .maturity-level-card,
-            .role-node { /* Apply to all interactive cards */
+            .concept-card, .requirement-card, .key-term-card, .change-management-card, .legal-type-card, .contract-type-card, .governance-structure-card, .risk-appetite-card, .business-driver-card, .framework-step-node, .maturity-level-card, .role-node { /* Apply to all interactive cards */
                 flex: 1 1 100%; /* Stack cards on medium screens */
                 max-width: 100%;
             }
@@ -409,21 +335,15 @@
         }
         /* Adjusted for larger screens to maintain 6 columns for key terms */
         @media (min-width: 1024px) {
-            #key-terms .grid {
-                grid-template-columns: repeat(6, 1fr); /* Six columns on large screens */
-                gap: 1.5rem; /* Ensure gap is consistent */
+            #key-terms-grid {
+                grid-template-columns: repeat(4, 1fr); 
             }
             .key-term-card {
-                /* Calculate width for 6 columns with gap-6 (1.5rem) */
-                flex: 1 1 calc((100% - (5 * 1.5rem)) / 6);
-                max-width: calc((100% - (5 * 1.5rem)) / 6);
-                min-height: 180px; /* Increased min-height for more text */
+                min-height: 120px;
+                max-height: 120px;
             }
-            .key-term-card .card-title {
-                font-size: 1em; /* Slightly smaller title for more space */
-            }
-            .key-term-card .card-description {
-                font-size: 0.85em; /* Slightly smaller description for more space */
+            .key-term-card.active {
+                max-height: 1000px; /* Ensure it can still expand */
             }
         }
         .chart-container {
@@ -490,45 +410,6 @@
             color: #555555;
             margin-top: 0.5rem;
         }
-        /* Specific styles for background images on legal-type-cards */
-        .legal-type-card {
-            position: relative; /* Needed for positioning the overlay */
-            overflow: hidden; /* Ensures overlay stays within bounds */
-            background-size: cover;
-            background-position: center;
-            display: flex; /* Use flexbox to center content */
-            flex-direction: column; /* Stack content vertically */
-            justify-content: center; /* Center content vertically */
-            align-items: center; /* Center content horizontally */
-            padding: 0; /* Remove padding from the outer card to let content-wrapper handle it */
-            border: 1px solid #D5D2C8; /* Keep the border */
-            border-radius: 0.75rem; /* Keep the border-radius */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.08); /* Keep the shadow */
-        }
-
-        .legal-type-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            opacity: 0.3; /* 30% opacity */
-            z-index: 1; /* Place behind content wrapper */
-        }
-
-        .legal-type-card.eu-bg::before {
-            background-image: url('uploaded:UE.png-e198d13b-b3e9-489f-a163-d85455edd9d2');
-        }
-        .legal-type-card.us-bg::before {
-            background-image: url('uploaded:USA.png-93dc6f7b-c4be-4fe9-9118-0782fbd9c6a9');
-        }
-        .legal-type-card.global-industry-bg::before {
-            background-image: url('uploaded:Industry.png-70659c48-56e3-4e19-b868-0c7c709bedbf');
-        }
-
         /* Overlay for opacity and text legibility */
         .legal-type-card .card-content-wrapper {
             position: relative; /* Establishes new stacking context for content */
@@ -555,23 +436,23 @@
         .chart-container-b1e {
             position: relative;
             width: 100%;
-            max-width: 900px; /* Increased max-width for charts */
-            height: 50vh; /* Increased height */
-            max-height: 500px; /* Increased max height */
+            max-width: 900px;
+            height: 60vh; /* Made bigger */
+            max-height: 600px; /* Made bigger */
             margin-left: auto;
             margin-right: auto;
-            overflow: hidden; /* Prevent overflow */
+            overflow: hidden;
         }
         @media (min-width: 640px) { /* sm */
             .chart-container-b1e {
-                height: 45vh; /* Increased height for sm screens */
-                max-height: 450px; /* Increased max height for sm screens */
+                height: 55vh;
+                max-height: 550px;
             }
         }
         @media (min-width: 768px) { /* md */
             .chart-container-b1e {
-                height: 40vh; /* Increased height for md screens */
-                max-height: 400px; /* Increased max height for md screens */
+                height: 50vh;
+                max-height: 500px;
             }
         }
 
@@ -586,44 +467,6 @@
             border-radius: 0.5rem;
             max-width: 400px; /* Constrain width for better layout */
             margin: 1rem auto; /* Center the chart */
-        }
-
-        .framework-step-node {
-            background-color: #EDEAE0; /* Default neutral for nodes */
-            color: #333333;
-            padding: 1rem 1.5rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            cursor: pointer;
-            transition: all 0.3s ease-in-out; /* Combined transitions */
-            font-weight: 600;
-            text-align: center;
-            min-width: 350px; /* Set min-width */
-            width: 350px; /* Set fixed width */
-            flex-basis: 350px; /* Set flex-basis to match width */
-            min-height: 100px; /* Set min-height */
-            max-height: 100px; /* Set max-height for collapsed state */
-            overflow: hidden; /* Hide overflow when collapsed */
-            background-color: #F0F8FF; /* Light blue for steps */
-            color: #001f3f;
-            display: flex; /* Ensure flexbox for content alignment */
-            flex-direction: column; /* Stack content vertically */
-            justify-content: center; /* Center content vertically */
-            align-items: center; /* Center content horizontally */
-        }
-
-        .framework-step-node:hover {
-            background-color: #D5D2C8; /* Darker neutral on hover */
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-        }
-        .framework-step-node.active {
-            border-color: #00A896;
-            box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3);
-            background-color: #E0F7F5;
-            max-height: 500px; /* Allow expansion */
-            overflow: visible; /* Make content visible */
-            height: auto; /* Adjust height dynamically */
         }
 
         .framework-step-node .node-title {
@@ -675,42 +518,6 @@
             -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
         }
 
-        .maturity-level-card {
-            min-width: 150px; /* Set min-width */
-            max-width: 150px; /* Set max-width */
-            width: 150px; /* Set fixed width */
-            flex-basis: 150px; /* Set flex-basis to match width */
-            min-height: 100px; /* Set min-height */
-            max-height: 100px; /* Set max-height for collapsed state */
-            overflow: hidden; /* Hide overflow when collapsed */
-            background-color: #EDEAE0; /* Default neutral for nodes */
-            color: #333333;
-            padding: 1rem 1.5rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            cursor: pointer;
-            transition: all 0.3s ease-in-out; /* Combined transitions */
-            font-weight: 600;
-            text-align: center; /* Center text horizontally */
-            display: flex;
-            flex-direction: column;
-            justify-content: center; /* Center content vertically */
-            align-items: center; /* Center content horizontally */
-        }
-        .maturity-level-card:hover {
-            background-color: #D5D2C8;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-        }
-        .maturity-level-card.active {
-            border-color: #00A896;
-            box-shadow: 0 44px 8px rgba(0, 168, 150, 0.3);
-            background-color: #E0F7F5;
-            max-height: 500px; /* Allow expansion */
-            overflow: visible; /* Make content visible */
-            height: auto; /* Adjust height dynamically */
-        }
-
         .maturity-arrow {
             width: 20px; /* Length of the horizontal arrow */
             height: 2px;
@@ -732,18 +539,15 @@
         }
 
         /* New styles for Risk Appetite cards to visualize progression */
-        .risk-appetite-card.risk-averse-bg {
-            background-color: #C8E6C9; /* Pale Green */
-        }
-        .risk-appetite-card.conservative-bg {
-            background-color: #FFECB3; /* Pale Yellow */
-        }
-        .risk-appetite-card.moderate-bg {
-            background-color: #FFD580; /* Light Orange */
-        }
-        .risk-appetite-card.risk-aggressive-bg {
-            background-color: #FFCDD2; /* Light Red */
-        }
+        .risk-appetite-card.risk-averse { background-color: #D4EDDA; color: #155724; }
+        .risk-appetite-card.risk-averse:hover { background-color: #C3E6CB; }
+        .risk-appetite-card.conservative { background-color: #E2F0D9; color: #385723; }
+        .risk-appetite-card.conservative:hover { background-color: #D2E5C8; }
+        .risk-appetite-card.moderate { background-color: #FFF3CD; color: #856404; }
+        .risk-appetite-card.moderate:hover { background-color: #FFECB3; }
+        .risk-appetite-card.risk-aggressive { background-color: #F8D7DA; color: #721C24; }
+        .risk-appetite-card.risk-aggressive:hover { background-color: #F5C6CB; }
+
     </style>
 </head>
 <body class="leading-relaxed">
@@ -811,19 +615,19 @@
                         <h4 class="text-lg font-semibold text-gray-700 mb-3 mt-6">d. Change management and resistance mitigation in security initiatives.</h4>
                         <p class="text-gray-600 mb-4">Implementing new security measures often encounters resistance. Effective change management involves early stakeholder engagement, clear communication of the "why," and providing adequate training and support to facilitate adoption. Click on each step to learn more:</p>
                         <div class="flex flex-wrap justify-center gap-4 mb-6">
-                            <div class="change-management-card" data-step="communicate">
+                            <div class="change-management-card" data-group="change-management" data-step="communicate">
                                 <span class="card-title">Communicate Early & Often</span>
                                 <div class="card-description hidden">Proactive and transparent communication about upcoming changes, their benefits, and potential impacts helps reduce uncertainty and build trust.</div>
                             </div>
-                            <div class="change-management-card" data-step="addressConcerns">
+                            <div class="change-management-card" data-group="change-management" data-step="addressConcerns">
                                 <span class="card-title">Address Concerns</span>
                                 <div class="card-description hidden">Establish channels for feedback and actively listen to and address employee concerns, fears, and questions about new security initiatives.</div>
                             </div>
-                            <div class="change-management-card" data-step="provideTraining">
+                            <div class="change-management-card" data-group="change-management" data-step="provideTraining">
                                 <span class="card-title">Provide Training & Support</span>
                                 <div class="card-description hidden">Offer comprehensive and accessible training, along with ongoing support, to ensure employees understand new security processes and tools.</div>
                             </div>
-                            <div class="change-management-card" data-step="celebrateSuccesses">
+                            <div class="change-management-card" data-group="change-management" data-step="celebrateSuccesses">
                                 <span class="card-title">Celebrate Successes</span>
                                 <div class="card-description hidden">Recognize and reward positive security behaviors and successful adoption of new measures to reinforce the desired culture and motivate continued compliance.</div>
                             </div>
@@ -842,38 +646,32 @@
                         <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Identification and interpretation of applicable laws and regulations</h4>
                         <p class="text-gray-600 mb-4">Organizations must identify all pertinent laws and regulations based on their operations, industry, and geography. Explore key regulations by region/type:</p>
                         <div class="flex flex-wrap justify-center gap-4 mb-6">
-                            <div class="legal-type-card eu-bg" data-legal-type="eu">
-                                <div class="card-content-wrapper">
-                                    <span class="card-title">European Union</span>
-                                    <div class="card-description hidden">Regulations like GDPR (General Data Protection Regulation) focus on data privacy and protection for individuals within the EU.</div>
-                                </div>
+                            <div class="legal-type-card" data-group="legal-type" data-legal-type="eu">
+                                <span class="card-title">European Union</span>
+                                <div class="card-description hidden">Regulations like GDPR (General Data Protection Regulation) focus on data privacy and protection for individuals within the EU.</div>
                             </div>
-                            <div class="legal-type-card us-bg" data-legal-type="us">
-                                <div class="card-content-wrapper">
-                                    <span class="card-title">USA (Federal & State)</span>
-                                    <div class="card-description hidden">Includes federal laws like HIPAA (Health Insurance Portability and Accountability Act) for healthcare data, and state-specific laws like CCPA (California Consumer Privacy Act).</div>
-                                </div>
+                            <div class="legal-type-card" data-group="legal-type" data-legal-type="us">
+                                <span class="card-title">USA (Federal & State)</span>
+                                <div class="card-description hidden">Includes federal laws like HIPAA (Health Insurance Portability and Accountability Act) for healthcare data, and state-specific laws like CCPA (California Consumer Privacy Act).</div>
                             </div>
-                            <div class="legal-type-card global-industry-bg" data-legal-type="globalIndustry">
-                                <div class="card-content-wrapper">
-                                    <span class="card-title">Global & Industry Specific</span>
-                                    <div class="card-description hidden">Beyond regional laws, organizations must comply with global standards (e.g., ISO 27001) and industry-specific mandates (e.g., PCI DSS for payment cards, NERC CIP for critical infrastructure).</div>
-                                </div>
+                            <div class="legal-type-card" data-group="legal-type" data-legal-type="globalIndustry">
+                                <span class="card-title">Global & Industry Specific</span>
+                                <div class="card-description hidden">Beyond regional laws, organizations must comply with global standards (e.g., ISO 27001) and industry-specific mandates (e.g., PCI DSS for payment cards, NERC CIP for critical infrastructure).</div>
                             </div>
                         </div>
 
                         <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Contractual obligations related to information security</h4>
                         <p class="text-gray-600 mb-4">Beyond laws, contracts impose specific security requirements. Click on a contract type to see typical security clauses:</p>
                         <div class="flex flex-wrap justify-center gap-4 mb-6">
-                            <div class="contract-type-card" data-contract-type="sla">
+                            <div class="contract-type-card" data-group="contract-type" data-contract-type="sla">
                                 <span class="card-title">Service Level Agreement (SLA)</span>
                                 <div class="card-description hidden">Defines the level of service expected from a vendor, including security performance metrics, incident response times, and data protection clauses.</div>
                             </div>
-                            <div class="contract-type-card" data-contract-type="baa">
+                            <div class="contract-type-card" data-group="contract-type" data-contract-type="baa">
                                 <span class="card-title">Business Associate Agreement (BAA)</span>
                                 <div class="card-description hidden">Required under HIPAA, this contract specifies how business associates (third-party service providers) will safeguard Protected Health Information (PHI) on behalf of a covered entity.</div>
                             </div>
-                            <div class="contract-type-card" data-contract-type="nda">
+                            <div class="contract-type-card" data-group="contract-type" data-contract-type="nda">
                                 <span class="card-title">Non-Disclosure Agreement (NDA)</span>
                                 <div class="card-description hidden">A legal contract that outlines confidential material, knowledge, or information that the parties wish to share with one another but restrict access to by third parties. It includes clauses on data protection and handling.</div>
                             </div>
@@ -902,15 +700,15 @@
                         <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Governance structures (centralized, decentralized, hybrid)</h4>
                         <p class="text-gray-600 mb-4">Organizations adopt different models for security governance. Explore the common structures below:</p>
                         <div class="flex flex-wrap justify-center gap-4 mb-6">
-                            <div class="governance-structure-card" data-structure-type="centralized">
+                            <div class="governance-structure-card" data-group="governance-structure" data-structure-type="centralized">
                                 <span class="card-title">Centralized</span>
                                 <div class="card-description hidden">Security decisions and control are concentrated in a single department or team (e.g., a dedicated CISO office). This provides consistency and strong oversight but can be less agile in large, diverse organizations.</div>
                             </div>
-                            <div class="governance-structure-card" data-structure-type="decentralized">
+                            <div class="governance-structure-card" data-group="governance-structure" data-structure-type="decentralized">
                                 <span class="card-title">Decentralized</span>
                                 <div class="card-description hidden">Security responsibilities are distributed across various business units or departments. This can promote agility and local ownership but may lead to inconsistencies and gaps without strong coordination.</div>
                             </div>
-                            <div class="governance-structure-card" data-structure-type="hybrid">
+                            <div class="governance-structure-card" data-group="governance-structure" data-structure-type="hybrid">
                                 <span class="card-title">Hybrid</span>
                                 <div class="card-description hidden">Combines elements of both centralized and decentralized models. A central security function sets overall strategy and standards, while business units handle day-to-day implementation and local adaptations. This aims to balance consistency with agility.</div>
                             </div>
@@ -948,19 +746,19 @@
                         <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Determining risk appetite and tolerance</h4>
                         <p class="text-gray-600 mb-4">Understanding the organization's willingness to accept risk (risk appetite) and acceptable deviation (risk tolerance) is crucial for shaping the security strategy and prioritizing investments. Explore different risk appetites:</p>
                         <div class="flex flex-wrap justify-center gap-4 mb-6">
-                            <div class="risk-appetite-card risk-averse-bg" data-appetite-type="riskAverse">
+                            <div class="risk-appetite-card risk-averse" data-group="risk-appetite" data-appetite-type="riskAverse">
                                 <span class="card-title">Risk Averse</span>
                                 <div class="card-description hidden">Prefers to avoid risk as much as possible, even if it means missing potential opportunities. Focuses heavily on preventative controls and strict compliance.</div>
                             </div>
-                            <div class="risk-appetite-card conservative-bg" data-appetite-type="conservative">
+                            <div class="risk-appetite-card conservative" data-group="risk-appetite" data-appetite-type="conservative">
                                 <span class="card-title">Conservative</span>
                                 <div class="card-description hidden">Willing to accept a low level of risk, but generally prefers established, proven security measures. Prioritizes stability and minimizing potential losses.</div>
                             </div>
-                            <div class="risk-appetite-card moderate-bg" data-appetite-type="moderate">
+                            <div class="risk-appetite-card moderate" data-group="risk-appetite" data-appetite-type="moderate">
                                 <span class="card-title">Moderate</span>
                                 <div class="card-description hidden">Balances risk and reward, accepting a reasonable level of risk to achieve business objectives. Invests in security controls that provide a good return on investment.</div>
                             </div>
-                            <div class="risk-appetite-card risk-aggressive-bg" data-appetite-type="riskAggressive">
+                            <div class="risk-appetite-card risk-aggressive" data-group="risk-appetite" data-appetite-type="riskAggressive">
                                 <span class="card-title">Risk Aggressive</span>
                                 <div class="card-description hidden">Willing to take on higher levels of risk for potentially greater rewards, often seen in innovative or rapidly growing organizations. Focuses on rapid detection and response capabilities.</div>
                             </div>
@@ -969,19 +767,19 @@
                         <h4 class="text-lg font-semibold text-gray-700 mb-3">d. Incorporating threat landscape and business drivers</h4>
                         <p class="text-gray-600 mb-4">The strategy must be dynamic, continuously adapting to evolving external threats (threat landscape) and internal business needs (business drivers) to remain relevant and effective. Map business drivers to security objective mapper:</p>
                         <div class="flex flex-wrap justify-center gap-4 mb-6">
-                            <div class="business-driver-card" data-driver-type="digitalTransformation">
+                            <div class="business-driver-card" data-group="business-driver" data-driver-type="digitalTransformation">
                                 <span class="card-title">Digital Transformation</span>
                                 <div class="card-description hidden">Security objectives align with securing new digital platforms, cloud environments, and data analytics initiatives. Focus on cloud security, data privacy, and secure development.</div>
                             </div>
-                            <div class="business-driver-card" data-driver-type="globalExpansion">
+                            <div class="business-driver-card" data-group="business-driver" data-driver-type="globalExpansion">
                                 <span class="card-title">Global Expansion</span>
                                 <div class="card-description hidden">Security objectives include understanding and complying with international regulations, securing global supply chains, and establishing consistent security policies across diverse geographies.</div>
                             </div>
-                            <div class="business-driver-card" data-driver-type="costOptimization">
+                            <div class="business-driver-card" data-group="business-driver" data-driver-type="costOptimization">
                                 <span class="card-title">Cost Optimization</span>
                                 <div class="card-description hidden">Security objectives focus on efficiency and cost-effectiveness of controls, leveraging automation, and optimizing security tool investments while maintaining an acceptable risk posture.</div>
                             </div>
-                            <div class="business-driver-card" data-driver-type="newProductLaunch">
+                            <div class="business-driver-card" data-group="business-driver" data-driver-type="newProductLaunch">
                                 <span class="card-title">New Product Launch</span>
                                 <div class="card-description hidden">Security objectives prioritize security-by-design, secure development lifecycle (SDLC), vulnerability testing, and ensuring product compliance with relevant security standards before release.</div>
                             </div>
@@ -1009,19 +807,19 @@
                     <div class="accordion-content hidden p-6">
                         <p class="text-gray-700 mb-4">Frameworks provide a structured approach to managing information security. Click on a card to learn more:</p>
                         <div class="flex flex-wrap justify-center gap-4 mb-6">
-                            <div class="concept-card" data-concept="cobit">
+                            <div class="concept-card" data-group="framework" data-concept="cobit">
                                 <span class="card-title">COBIT</span>
                                 <div class="card-description hidden"><strong>Control Objectives for Information and Related Technologies:</strong> A comprehensive framework for IT governance and management, providing a holistic approach to managing IT risks and ensuring IT alignment with business goals. It helps organizations create optimal value from IT by maintaining a balance between realizing benefits and optimizing risk levels and resource use.</div>
                             </div>
-                            <div class="concept-card" data-concept="iso27001">
+                            <div class="concept-card" data-group="framework" data-concept="iso27001">
                                 <span class="card-title">ISO/IEC 27001</span>
                                 <div class="card-description hidden"><strong>Information Security Management System (ISMS):</strong> An international standard that specifies requirements for establishing, implementing, maintaining, and continually improving an ISMS within the context of the organization's overall business risks. Certification to ISO 27001 demonstrates a systematic approach to managing sensitive company information.</div>
                             </div>
-                            <div class="concept-card" data-concept="nist-csf">
+                            <div class="concept-card" data-group="framework" data-concept="nist-csf">
                                 <span class="card-title">NIST CSF</span>
                                 <div class="card-description hidden"><strong>National Institute of Standards and Technology Cybersecurity Framework:</strong> A voluntary framework providing a common language for understanding, managing, and expressing cybersecurity risk. It consists of five core functions: Identify, Protect, Detect, Respond, Recover, offering a flexible way to manage cybersecurity risk.</div>
                             </div>
-                            <div class="concept-card" data-concept="itil">
+                            <div class="concept-card" data-group="framework" data-concept="itil">
                                 <span class="card-title">ITIL</span>
                                 <div class="card-description hidden"><strong>Information Technology Infrastructure Library:</strong> A framework for IT service management that describes processes, procedures, tasks, and checklists that are not organization-specific, used to establish a minimum level of competency. While not solely security-focused, it supports security processes.</div>
                             </div>
@@ -1033,29 +831,29 @@
                         <h5 class="text-md font-bold text-gray-800 mb-2">Framework Adoption Journey</h5>
                         <p class="text-gray-700 mb-4">Implementing a governance framework is a structured process. Click on each step to understand the typical activities involved:</p>
                         <div class="framework-journey-container">
-                            <div class="framework-step-node" data-step-id="step1">
-                                <span class="node-title">1. Define Scope & Objectives</span>
-                                <div class="node-description hidden">Clearly define the scope of the ISMS (Information Security Management System), identify organizational context, and establish the objectives and policies for information security. This aligns security with business goals.</div>
+                            <div class="framework-step-node" data-group="framework-step" data-step-id="step1">
+                                <span class="card-title">1. Define Scope & Objectives</span>
+                                <div class="card-description hidden">Clearly define the scope of the ISMS (Information Security Management System), identify organizational context, and establish the objectives and policies for information security. This aligns security with business goals.</div>
                             </div>
                             <div class="framework-arrow"></div>
-                            <div class="framework-step-node" data-step-id="step2">
-                                <span class="node-title">2. Assess Current State & Gaps</span>
-                                <div class="node-description hidden">Conduct a comprehensive assessment of the organization's current information security posture, identify existing controls, and pinpoint gaps against the chosen framework's requirements. This includes risk assessment.</div>
+                            <div class="framework-step-node" data-group="framework-step" data-step-id="step2">
+                                <span class="card-title">2. Assess Current State & Gaps</span>
+                                <div class="card-description hidden">Conduct a comprehensive assessment of the organization's current information security posture, identify existing controls, and pinpoint gaps against the chosen framework's requirements. This includes risk assessment.</div>
                             </div>
                             <div class="framework-arrow"></div>
-                            <div class="framework-step-node" data-step-id="step3">
-                                <span class="node-title">3. Design & Plan Controls</span>
-                                <div class="node-description hidden">Based on the risk assessment and identified gaps, design and plan the implementation of appropriate security controls. This involves selecting controls from the framework's annexes (e.g., ISO 27002) and developing a detailed implementation plan.</div>
+                            <div class="framework-step-node" data-group="framework-step" data-step-id="step3">
+                                <span class="card-title">3. Design & Plan Controls</span>
+                                <div class="card-description hidden">Based on the risk assessment and identified gaps, design and plan the implementation of appropriate security controls. This involves selecting controls from the framework's annexes (e.g., ISO 27002) and developing a detailed implementation plan.</div>
                             </div>
                             <div class="framework-arrow"></div>
-                            <div class="framework-step-node" data-step-id="step4">
-                                <span class="node-title">4. Implement Controls</span>
-                                <div class="node-description hidden">Execute the control implementation plan, deploying new security technologies, updating processes, and conducting necessary training. This phase focuses on putting the planned security measures into operation.</div>
+                            <div class="framework-step-node" data-group="framework-step" data-step-id="step4">
+                                <span class="card-title">4. Implement Controls</span>
+                                <div class="card-description hidden">Execute the control implementation plan, deploying new security technologies, updating processes, and conducting necessary training. This phase focuses on putting the planned security measures into operation.</div>
                             </div>
                             <div class="framework-arrow"></div>
-                            <div class="framework-step-node" data-step-id="step5">
-                                <span class="node-title">5. Monitor, Review & Improve</span>
-                                <div class="node-description hidden">Continuously monitor the effectiveness of implemented controls, conduct regular reviews and audits, and make necessary adjustments for continuous improvement. This ensures the ISMS remains effective and adapts to changes in the threat landscape or business environment.</div>
+                            <div class="framework-step-node" data-group="framework-step" data-step-id="step5">
+                                <span class="card-title">5. Monitor, Review & Improve</span>
+                                <div class="card-description hidden">Continuously monitor the effectiveness of implemented controls, conduct regular reviews and audits, and make necessary adjustments for continuous improvement. This ensures the ISMS remains effective and adapts to changes in the threat landscape or business environment.</div>
                             </div>
                         </div>
                     </div>
@@ -1111,7 +909,7 @@
 
                         <h4 class="text-lg font-semibold text-gray-700 mb-3">e. Defining and monitoring KPIs and KRIs to measure strategic performance</h4>
                         <p class="text-gray-600 mb-4">To ensure effectiveness, security performance is measured using Key Performance Indicators (KPIs) for current performance and Key Risk Indicators (KRIs) for anticipating future problems. Regular reporting provides insights to management.</p>
-                        <div class="chart-container-b1e mb-6">
+                        <div class="chart-container mb-6">
                             <canvas id="kriTrendChart"></canvas>
                         </div>
                         <div class="flex flex-wrap justify-center gap-4 mb-4">
@@ -1124,27 +922,27 @@
                         <h4 class="text-lg font-semibold text-gray-700 mb-3">f. Continuous improvement through maturity models (e.g., CMMI, PDCA)</h4>
                         <p class="text-gray-600 mb-4">Information security requires continuous improvement, often guided by maturity models like CMMI and iterative methodologies such as the Plan-Do-Check-Act (PDCA) cycle. Explore common maturity levels:</p>
                         <div class="maturity-model-container">
-                            <div class="maturity-level-card" data-maturity-level="initial">
+                            <div class="maturity-level-card" data-group="maturity-level" data-maturity-level="initial">
                                 <span class="card-title">Initial</span>
                                 <div class="card-description hidden">Processes are ad hoc and chaotic; success depends on individual effort. Security is reactive, with no standardized procedures.</div>
                             </div>
                             <div class="maturity-arrow"></div>
-                            <div class="maturity-level-card" data-maturity-level="managed">
+                            <div class="maturity-level-card" data-group="maturity-level" data-maturity-level="managed">
                                 <span class="card-title">Managed</span>
                                 <div class="card-description hidden">Processes are planned and executed in accordance with policies. Basic security controls are in place, but performance is not yet consistently measured.</div>
                             </div>
                             <div class="maturity-arrow"></div>
-                            <div class="maturity-level-card" data-maturity-level="defined">
+                            <div class="maturity-level-card" data-group="maturity-level" data-maturity-level="defined">
                                 <span class="card-title">Defined</span>
                                 <div class="card-description hidden">Processes are well-characterized and understood, described in standards, procedures, tools, and methods. Security is integrated into the organization's standard practices, and roles are clear.</div>
                             </div>
                             <div class="maturity-arrow"></div>
-                            <div class="maturity-level-card" data-maturity-level="quantitativelyManaged">
+                            <div class="maturity-level-card" data-group="maturity-level" data-maturity-level="quantitativelyManaged">
                                 <span class="card-title">Quantitatively Managed</span>
                                 <div class="card-description hidden">Processes are controlled using statistical and other quantitative techniques. Security performance is measured and controlled, allowing for data-driven decision-making.</div>
                             </div>
                             <div class="maturity-arrow"></div>
-                            <div class="maturity-level-card" data-maturity-level="optimizing">
+                            <div class="maturity-level-card" data-group="maturity-level" data-maturity-level="optimizing">
                                 <span class="card-title">Optimizing</span>
                                 <div class="card-description hidden">Continuous process improvement is enabled by quantitative feedback and innovative new ideas and technologies. Security is a proactive, strategic enabler for the business, constantly adapting to new threats and opportunities.</div>
                             </div>
@@ -1157,9 +955,63 @@
             <section id="key-terms" class="content-section hidden">
                 <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Key Terms</h2>
                 <p class="mb-8 text-gray-700">Test your knowledge of key terms in Information Security Governance with these interactive flashcards. Click on a card to reveal its definition.</p>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6">
-                    <!-- Key Terms will be populated here by JavaScript -->
+                <div id="key-terms-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="key-term-card" data-group="key-terms">
+                        <h3 class="card-title">Information Security Governance</h3>
+                        <div class="card-description"><p>The system by which an organization directs and controls information security activities to achieve its objectives.</p></div>
+                    </div>
+                    <div class="key-term-card" data-group="key-terms">
+                        <h3 class="card-title">Risk Appetite</h3>
+                        <div class="card-description"><p>The amount and type of risk that an organization is willing to take in order to meet its strategic objectives.</p></div>
+                    </div>
+                    <div class="key-term-card" data-group="key-terms">
+                        <h3 class="card-title">Organizational Culture</h3>
+                        <div class="card-description"><p>The shared values, beliefs, attitudes, and behaviors that characterize an organization and influence how information security is perceived and practiced.</p></div>
+                    </div>
+                    <div class="key-term-card" data-group="key-terms">
+                        <h3 class="card-title">Due Diligence</h3>
+                        <div class="card-description"><p>The exercise of reasonable care in the investigation of a matter before entering into an agreement or a transaction.</p></div>
+                    </div>
+                    <div class="key-term-card" data-group="key-terms">
+                        <h3 class="card-title">Due Care</h3>
+                        <div class="card-description"><p>The level of ordinary care that a reasonable and prudent person would exercise under the same or similar circumstances.</p></div>
+                    </div>
+                    <div class="key-term-card" data-group="key-terms">
+                        <h3 class="card-title">Information Security Strategy</h3>
+                        <div class="card-description"><p>A long-term plan that outlines the organization's approach to protecting its information assets, aligned with business objectives and risk appetite.</p></div>
+                    </div>
+                    <div class="key-term-card" data-group="key-terms">
+                        <h3 class="card-title">COBIT</h3>
+                        <div class="card-description"><p>A framework for enterprise IT governance and management, providing a holistic approach to managing IT risks and ensuring IT alignment with business goals.</p></div>
+                    </div>
+                    <div class="key-term-card" data-group="key-terms">
+                        <h3 class="card-title">ISO/IEC 27001</h3>
+                        <div class="card-description"><p>An international standard that provides requirements for establishing, implementing, maintaining, and continually improving an Information Security Management System (ISMS).</p></div>
+                    </div>
+                    <div class="key-term-card" data-group="key-terms">
+                        <h3 class="card-title">NIST Cybersecurity Framework (CSF)</h3>
+                        <div class="card-description"><p>A voluntary framework providing a common language for understanding, managing, and expressing cybersecurity risk, structured around five core functions: Identify, Protect, Detect, Respond, Recover.</p></div>
+                    </div>
+                    <div class="key-term-card" data-group="key-terms">
+                        <h3 class="card-title">Key Performance Indicator (KPI)</h3>
+                        <div class="card-description"><p>A measurable value that demonstrates how effectively a company is achieving key business objectives. In security, it measures the performance of security controls or processes.</p></div>
+                    </div>
+                    <div class="key-term-card" data-group="key-terms">
+                        <h3 class="card-title">Key Goal Indicator (KGI)</h3>
+                        <div class="card-description"><p>A metric that indicates whether a high-level goal is being achieved. In security, it measures the achievement of strategic information security objectives.</p></div>
+                    </div>
+                    <div class="key-term-card" data-group="key-terms">
+                        <h3 class="card-title">Business Case</h3>
+                        <div class="card-description"><p>A documented argument or justification for undertaking a project or initiative, including its financial and non-financial benefits, costs, and risks.</p></div>
+                    </div>
+                    <div class="key-term-card" data-group="key-terms">
+                        <h3 class="card-title">Legal & Regulatory Compliance</h3>
+                        <div class="card-description"><p>Adherence to laws, regulations, and industry standards that govern an organization's information handling and security practices (e.g., GDPR, HIPAA, SOX).</p></div>
+                    </div>
+                    <div class="key-term-card" data-group="key-terms">
+                        <h3 class="card-title">Information Asset</h3>
+                        <div class="card-description"><p>Any information or information system that has value to the organization, requiring protection (e.g., customer data, intellectual property, critical systems).</p></div>
+                    </div>
                 </div>
             </section>
 
@@ -1169,7 +1021,7 @@
                 <div class="p-6 bg-white rounded-lg shadow-md">
                     <p class="text-gray-700 mb-4">Domain 1: Information Security Governance is the foundational domain of the CISM certification, emphasizing the strategic leadership required to establish and maintain an effective information security program. It underscores that information security is not merely a technical function but a critical business imperative that must be seamlessly integrated into the enterprise's overall governance structure.</p>
                     <p class="text-gray-700 mb-4">This domain covers the critical aspects of understanding and influencing organizational culture to foster a security-aware environment. It highlights the necessity of identifying and adhering to a complex landscape of legal, regulatory, and contractual requirements, ensuring that the security strategy remains compliant and relevant. A key focus is on defining clear organizational structures, roles, and responsibilities, ensuring accountability from the board level down to individual end-users, and establishing robust reporting mechanisms.</p>
-                    <p class="text-700">Furthermore, Domain 1 delves into the strategic development of information security, emphasizing its alignment with business objectives. It introduces various governance frameworks and standards like COBIT, ISO/IEC 27001, and NIST CSF, which provide structured approaches to managing security. Finally, it addresses the practicalities of strategic planning, including budgeting, resource management, and developing compelling business cases to justify security investments, all while leveraging performance metrics to demonstrate the program's value and support continuous improvement.</p>
+                    <p class="text-gray-700">Furthermore, Domain 1 delves into the strategic development of information security, emphasizing its alignment with business objectives. It introduces various governance frameworks and standards like COBIT, ISO/IEC 27001, and NIST CSF, which provide structured approaches to managing security. Finally, it addresses the practicalities of strategic planning, including budgeting, resource management, and developing compelling business cases to justify security investments, all while leveraging performance metrics to demonstrate the program's value and support continuous improvement.</p>
                 </div>
             </section>
         </main>
@@ -1180,971 +1032,179 @@
     </div>
 
     <script>
-        // JS Variables for current state and base data
-        const currentSection = {
-            id: 'introduction' // Default to introduction
-        };
-
-        // Data for Organizational Culture Chart (A.1.a)
-        let securityCultureChartInstance;
-        const securityCultureData = {
-            labels: ['Vigilant & Proactive', 'Compliant (Policy-Driven)', 'Indifferent/Unaware', 'Resistant/Bypassing Controls'],
-            colors: ['#00A896', '#A1C9CE', '#FFD700', '#FF6384'],
-            strongCulture: {
-                data: [50, 30, 15, 5],
-                explanation: "This represents a strong security culture where a majority of employees are vigilant and proactive, actively contributing to security. Policies are mostly adhered to, and resistance is minimal."
-            },
-            weakCulture: {
-                data: [10, 20, 40, 30],
-                explanation: "This represents a weak security culture where a significant portion of employees are indifferent or actively resistant to security controls, leading to higher risks. Policies are often bypassed."
-            }
-        };
-
-        // Data for Leadership Engagement Slider (A.1.c)
-        const leadershipEngagementLevels = [
-            { value: 0, label: "Minimal Engagement", description: "Security is seen as an IT-only issue, with little to no strategic direction or support from leadership. Resources are scarce, and initiatives often fail due to lack of buy-in." },
-            { value: 25, label: "Basic Engagement", description: "Leadership provides some support, but it's often reactive or compliance-driven. Security is acknowledged but not fully integrated into business strategy. Resources are limited." },
-            { value: 50, label: "Moderate Engagement", description: "Policies are generally followed, but security may lack strong strategic momentum or innovation. Leadership understands the importance but may not actively champion initiatives." },
-            { value: 75, label: "Strong Engagement", description: "Leadership actively champions security, integrating it into business strategy and decision-making. Adequate resources are allocated, and security is seen as a competitive advantage. Proactive risk management is common." },
-            { value: 100, label: "Transformative Engagement", description: "Security is a core business value, driven by a highly engaged and visible leadership. Innovation in security is encouraged, and it's deeply embedded in the organizational DNA. Security is a key differentiator." }
-        ];
-
-        // Data for Change Management Cards (A.1.d)
-        const changeManagementSteps = {
-            communicate: {
-                title: "Communicate Early & Often",
-                description: "Proactive and transparent communication about upcoming changes, their benefits, and potential impacts helps reduce uncertainty and build trust. This includes explaining the 'why' behind security initiatives."
-            },
-            addressConcerns: {
-                title: "Address Concerns",
-                description: "Establish channels for feedback and actively listen to and address employee concerns, fears, and questions about new security initiatives. Empathy and clear explanations are key to mitigating resistance."
-            },
-            provideTraining: {
-                title: "Provide Training & Support",
-                description: "Offer comprehensive and accessible training, along with ongoing support, to ensure employees understand new security processes and tools. Practical, hands-on training can significantly improve adoption."
-            },
-            celebrateSuccesses: {
-                title: "Celebrate Successes",
-                description: "Recognize and reward positive security behaviors and successful adoption of new measures to reinforce the desired culture and motivate continued compliance. This builds a positive feedback loop."
-            }
-        };
-
-
-        // Data for Legal, Regulatory, and Contractual Requirements (Topic 1.1.2)
-        const legalTypeDescriptions = {
-            eu: {
-                title: "European Union Regulations",
-                description: "Regulations like GDPR (General Data Protection Regulation) focus on data privacy and protection for individuals within the EU. It mandates strict rules on data handling, consent, and breach notification, impacting any organization processing EU citizens' data."
-            },
-            us: {
-                title: "USA (Federal & State) Regulations",
-                description: "Includes federal laws like HIPAA (Health Insurance Portability and Accountability Act) for healthcare data, GLBA (Gramm-Leach-Bliley Act) for financial institutions, and state-specific laws like CCPA (California Consumer Privacy Act) for consumer privacy. Compliance varies by industry and state."
-            },
-            globalIndustry: {
-                title: "Global & Industry Specific Regulations",
-                description: "Beyond regional laws, organizations must comply with global standards (e.g., ISO 27001 for Information Security Management Systems) and industry-specific mandates (e.g., PCI DSS for payment card data security, NERC CIP for critical infrastructure protection in North America). These often have international reach."
-            }
-        };
-
-        const contractTypeDescriptions = {
-            sla: {
-                title: "Service Level Agreement (SLA)",
-                description: "Defines the level of service expected from a vendor, including security performance metrics, incident response times, and data protection clauses. It ensures that outsourced services meet agreed-upon security standards."
-            },
-            baa: {
-                title: "Business Associate Agreement (BAA)",
-                description: "Required under HIPAA, this contract specifies how business associates (third-party service providers handling Protected Health Information) will safeguard PHI on behalf of a covered entity. It outlines permissible uses and disclosures of PHI."
-            },
-            nda: {
-                title: "Non-Disclosure Agreement (NDA)",
-                description: "A legal contract that outlines confidential material, knowledge, or information that the parties wish to share with one another but restrict access to by third parties. It includes clauses on data protection and handling, ensuring confidentiality of shared sensitive information."
-            }
-        };
-
-        // Data for Information Security Governance Frameworks and Standards (Topic 1.2.2)
-        const conceptDescriptions = {
-            cobit: "<strong>Control Objectives for Information and Related Technologies:</strong> A comprehensive framework for IT governance and management, providing a holistic approach to managing IT risks and ensuring IT alignment with business goals. It helps organizations create optimal value from IT by maintaining a balance between realizing benefits and optimizing risk levels and resource use.",
-            iso27001: "<strong>Information Security Management System (ISMS):</strong> An international standard that specifies requirements for establishing, implementing, maintaining, and continually improving an ISMS within the context of the organization's overall business risks. Certification to ISO 27001 demonstrates a systematic approach to managing sensitive company information.",
-            "nist-csf": "<strong>National Institute of Standards and Technology Cybersecurity Framework:</strong> A voluntary framework providing a common language for understanding, managing, and expressing cybersecurity risk. It consists of five core functions: Identify, Protect, Detect, Respond, Recover, offering a flexible way to manage cybersecurity risk.",
-            itil: "<strong>Information Technology Infrastructure Library:</strong> A framework for IT service management that describes processes, procedures, tasks, and checklists that are not organization-specific, used to establish a minimum level of competency. While not solely security-focused, it supports security processes."
-        };
-
-        // Data for Key Terms
-        const keyTermsData = [
-            { term: "Information Security Governance", definition: "The system by which an organization directs and controls information security activities to achieve its objectives." },
-            { term: "Risk Appetite", definition: "The amount and type of risk that an organization is willing to take in order to meet its strategic objectives." },
-            { term: "Organizational Culture", definition: "The shared values, beliefs, attitudes, and behaviors that characterize an organization and influence how information security is perceived and practiced." },
-            { term: "Due Diligence", definition: "The exercise of reasonable care in the investigation of a matter before entering into an agreement or a transaction." },
-            { term: "Due Care", definition: "The level of ordinary care that a reasonable and prudent person would exercise under the same or similar circumstances." },
-            { term: "Information Security Strategy", definition: "A long-term plan that outlines the organization's approach to protecting its information assets, aligned with business objectives and risk appetite." },
-            { term: "COBIT", definition: "A framework for enterprise IT governance and management, providing a holistic approach to managing IT risks and ensuring IT alignment with business goals." },
-            { term: "ISO/IEC 27001", definition: "An international standard that provides requirements for establishing, implementing, maintaining, and continually improving an Information Security Management System (ISMS)." },
-            { term: "NIST Cybersecurity Framework (CSF)", definition: "A voluntary framework providing a common language for understanding, managing, and expressing cybersecurity risk, structured around five core functions: Identify, Protect, Detect, Respond, Recover." },
-            { term: "Key Performance Indicator (KPI)", definition: "A measurable value that demonstrates how effectively a company is achieving key business objectives. In security, it measures the performance of security controls or processes." },
-            { term: "Key Goal Indicator (KGI)", definition: "A metric that indicates whether a high-level goal is being achieved. In security, it measures the achievement of strategic information security objectives." },
-            { term: "Business Case", definition: "A documented argument or justification for undertaking a project or initiative, including its financial and non-financial benefits, costs, and risks." },
-            { term: "Legal & Regulatory Compliance", definition: "Adherence to laws, regulations, and industry standards that govern an organization's information handling and security practices (e.g., GDPR, HIPAA, SOX)." },
-            { term: "Information Asset", definition: "Any information or information system that has value to the organization, requiring protection (e.g., customer data, intellectual property, critical systems)." }
-        ];
-
-        // Data for Organizational Structures, Roles, and Responsibilities (Topic 1.1.3)
-        const detailedRoleDescriptions = {
-            board: {
-                title: "Board/Executive Management Responsibilities",
-                description: "The Board and Executive Management hold ultimate accountability for information security governance. Their responsibilities include defining the organization's overall risk appetite, approving major information security strategies and significant investments, and providing high-level oversight to ensure alignment with business objectives and regulatory requirements. They ensure adequate resources are allocated and monitor the overall effectiveness of the governance framework."
-            },
-            ciso: {
-                title: "CISO / Information Security Manager Responsibilities",
-                description: "The CISO (Chief Information Security Officer) or Information Security Manager is responsible for leading the development, implementation, and maintenance of the information security program. This includes advising senior leadership on governance matters, developing the information security strategy, ensuring compliance, managing security risks, and reporting on the overall security posture and effectiveness of controls."
-            },
-            dataOwners: {
-                title: "Data Owners / Business Unit Heads Responsibilities",
-                description: "Data Owners and Business Unit Heads are accountable for the security and integrity of information assets within their respective domains. They are responsible for classifying data, defining access requirements, making risk acceptance decisions for their data, and ensuring that information security policies are adhered to within their business processes. They collaborate with the CISO to align security practices with business needs."
-            },
-            itOps: {
-                title: "IT Operations / Security Teams Responsibilities",
-                description: "IT Operations and dedicated Security Teams are responsible for the technical implementation and operational maintenance of security controls and infrastructure. Their duties include implementing security policies, managing security tools, performing vulnerability management, responding to security incidents, and ensuring the secure operation of IT systems in alignment with the overall information security strategy and governance directives."
-            },
-            endUsers: {
-                title: "End User Responsibilities",
-                description: "Every end user plays a critical role in information security. Their responsibilities include adhering to security policies and procedures, practicing good security hygiene (e.g., strong passwords, identifying phishing), reporting suspicious activities, and protecting the information assets they interact with daily. Their compliance with security guidelines is essential for maintaining the organization's security posture."
-            }
-        };
-
-        // Data for Governance Structures (A.3.a)
-        const governanceStructureDescriptions = {
-            centralized: {
-                title: "Centralized Governance",
-                description: "Security decisions and control are concentrated in a single department or team (e.g., a dedicated CISO office). This provides consistency and strong oversight but can be less agile in large, diverse organizations."
-            },
-            decentralized: {
-                title: "Decentralized Governance",
-                description: "Security responsibilities are distributed across various business units or departments. This can promote agility and local ownership but may lead to inconsistencies and gaps without strong coordination."
-            },
-            hybrid: {
-                title: "Hybrid Governance",
-                description: "Combines elements of both centralized and decentralized models. A central security function sets overall strategy and standards, while business units handle day-to-day implementation and local adaptations. This aims to balance consistency with agility."
-            }
-        };
-
-        // Data for Risk Appetite Spectrum (B.1.c)
-        const riskAppetiteDescriptions = {
-            riskAverse: {
-                title: "Risk Averse",
-                description: "Prefers to avoid risk as much as possible, even if it means missing potential opportunities. Focuses heavily on preventative controls and strict compliance."
-            },
-            conservative: {
-                title: "Conservative",
-                description: "Willing to accept a low level of risk, but generally prefers established, proven security measures. Prioritizes stability and minimizing potential losses."
-            },
-            moderate: {
-                title: "Moderate",
-                description: "Balances risk and reward, accepting a reasonable level of risk to achieve business objectives. Invests in security controls that provide a good return on investment."
-            },
-            riskAggressive: {
-                title: "Risk Aggressive",
-                description: "Willing to take on higher levels of risk for potentially greater rewards, often seen in innovative or rapidly growing organizations. Focuses on rapid detection and response capabilities."
-            }
-        };
-
-        // Data for Business Driver to Security Objective Mapper (B.1.d)
-        const businessDriverDescriptions = {
-            digitalTransformation: {
-                title: "Digital Transformation",
-                description: "Security objectives align with securing new digital platforms, cloud environments, and data analytics initiatives. Focus on cloud security, data privacy, and secure development."
-            },
-            globalExpansion: {
-                title: "Global Expansion",
-                description: "Security objectives include understanding and complying with international regulations, securing global supply chains, and establishing consistent security policies across diverse geographies."
-            },
-            costOptimization: {
-                title: "Cost Optimization",
-                description: "Security objectives focus on efficiency and cost-effectiveness of controls, leveraging automation, and optimizing security tool investments while maintaining an acceptable risk posture."
-            },
-            newProductLaunch: {
-                title: "New Product Launch",
-                description: "Security objectives prioritize security-by-design, secure development lifecycle (SDLC), vulnerability testing, and ensuring product compliance with relevant security standards before release."
-            }
-        };
-
-        // Data for Prioritizing security initiatives based on business impact (B.1.e)
-        let securityInitiativesChartInstance;
-        const securityInitiativesData = {
-            labels: ['Data Protection Enhancement', 'Cloud Security Migration', 'Incident Response Plan', 'Security Awareness Program', 'Vendor Risk Management'],
-            colors: ['#A1C9CE', '#8FB8A1', '#FFD700', '#FF6384', '#6A5ACD'],
-            complianceDriven: {
-                data: [80, 60, 40, 70, 50], // Higher priority for compliance-related initiatives
-                explanation: "This view prioritizes security initiatives based on a compliance-driven approach. Initiatives directly addressing regulatory requirements or audit findings are given higher priority."
-            },
-            revenueDriven: {
-                data: [50, 75, 85, 30, 60], // Higher priority for revenue/innovation-related initiatives
-                explanation: "This view prioritizes security initiatives based on a revenue-driven approach. Initiatives that directly support new business opportunities, product launches, or market expansion are given higher priority."
-            }
-        };
-
-        // Data for Framework Adoption Journey (B.2.c)
-        const frameworkSteps = {
-            step1: {
-                title: "1. Define Scope & Objectives",
-                description: "Clearly define the scope of the ISMS (Information Security Management System), identify organizational context, and establish the objectives and policies for information security. This aligns security with business goals."
-            },
-            step2: {
-                title: "2. Assess Current State & Gaps",
-                description: "Conduct a comprehensive assessment of the organization's current information security posture, identify existing controls, and pinpoint gaps against the chosen framework's requirements. This includes risk assessment."
-            },
-            step3: {
-                title: "3. Design & Plan Controls",
-                description: "Based on the risk assessment and identified gaps, design and plan the implementation of appropriate security controls. This involves selecting controls from the framework's annexes (e.g., ISO 27002) and developing a detailed implementation plan."
-            },
-            step4: {
-                title: "4. Implement Controls",
-                description: "Execute the control implementation plan, deploying new security technologies, updating processes, and conducting necessary training. This phase focuses on putting the planned security measures into operation."
-            },
-            step5: {
-                title: "5. Monitor, Review & Improve",
-                description: "Continuously monitor the effectiveness of implemented controls, conduct regular reviews and audits, and make necessary adjustments for continuous improvement. This ensures the ISMS remains effective and adapts to changes in the threat landscape or business environment."
-            }
-        };
-
-        // Data for Budget Allocator (B.3.d)
-        let budgetChartInstance;
-        const budgetData = {
-            labels: ['Technology & Tools', 'Personnel & Staffing', 'Training & Awareness', 'Compliance & Audit'],
-            colors: ['#A1C9CE', '#FFD700', '#FF6384', '#8FB8A1'],
-            initial: {
-                data: [40, 35, 15, 10], // Default percentages
-                explanation: "This chart dynamically updates to show your budget allocation based on the percentages you enter. The total must equal 100%."
-            }
-        };
-
-        // Data for KRI Trend Chart (B.3.e)
-        let kriTrendChartInstance;
-        const kriTrendData = {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-            criticalVulnerabilities: {
-                label: 'Critical Vulnerabilities Detected (Count)',
-                data: [25, 22, 18, 15, 12, 10, 8, 7, 6, 5, 4, 3], // Simulating a decreasing trend
-                borderColor: '#DC3545', // Red
-                backgroundColor: 'rgba(220, 53, 69, 0.2)'
-            },
-            phishingAttempts: {
-                label: 'Phishing Attempts Reported (Count)',
-                data: [10, 12, 15, 13, 11, 9, 8, 10, 12, 11, 9, 7], // Simulating fluctuations
-                borderColor: '#FFD700', // Gold
-                backgroundColor: 'rgba(255, 215, 0, 0.2)'
-            },
-            failedAccess: {
-                label: 'Failed Access Attempts (Count)',
-                data: [50, 45, 40, 38, 35, 30, 28, 25, 22, 20, 18, 15], // Simulating decreasing trend
-                borderColor: '#004085', // Dark Blue
-                backgroundColor: 'rgba(0, 64, 133, 0.2)'
-            }
-        };
-
-        // Data for Maturity Levels (B.3.f)
-        const maturityLevelDescriptions = {
-            initial: {
-                title: "Initial",
-                description: "Processes are ad hoc and chaotic; success depends on individual effort. Security is reactive, with no standardized procedures or consistent outcomes."
-            },
-            managed: {
-                title: "Managed",
-                description: "Processes are planned and executed in accordance with policies. Basic security controls are in place, but performance is not yet consistently measured or optimized."
-            },
-            defined: {
-                title: "Defined",
-                description: "Processes are well-characterized and understood, described in standards, procedures, tools, and methods. Security is integrated into the organization's standard practices, and roles are clear."
-            },
-            quantitativelyManaged: {
-                title: "Quantitatively Managed",
-                description: "Processes are controlled using statistical and other quantitative techniques. Security performance is measured and controlled, allowing for data-driven decision-making and predictive analysis."
-            },
-            optimizing: {
-                title: "Optimizing",
-                description: "Continuous process improvement is enabled by quantitative feedback and innovative new ideas and technologies. Security is a proactive, strategic enabler for the business, constantly adapting to new threats and opportunities."
-            }
-        };
-
-
-        // Chart Initialization and Update Functions
-        const initSecurityCultureChart = () => {
-            const ctx = document.getElementById('securityCultureChart').getContext('2d');
-            securityCultureChartInstance = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: securityCultureData.labels,
-                    datasets: [{
-                        data: securityCultureData.strongCulture.data,
-                        backgroundColor: securityCultureData.colors,
-                        hoverOffset: 4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: {
-                                font: {
-                                    size: 12
-                                }
-                            }
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    let label = context.label || '';
-                                    if (label) {
-                                        label += ': ';
-                                    }
-                                    if (context.parsed) {
-                                        label += context.parsed + '%';
-                                    }
-                                    return label;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        };
-
-        const updateSecurityCultureChart = (cultureType) => {
-            if (securityCultureChartInstance) {
-                const data = securityCultureData[cultureType];
-                securityCultureChartInstance.data.datasets[0].data = data.data;
-                securityCultureChartInstance.update();
-                document.getElementById('culture-explanation').textContent = data.explanation;
-            }
-        };
-
-        const initSecurityInitiativesChart = () => {
-            const ctx = document.getElementById('securityInitiativesChart').getContext('2d');
-            securityInitiativesChartInstance = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: securityInitiativesData.labels,
-                    datasets: [{
-                        label: 'Priority Score',
-                        data: securityInitiativesData.complianceDriven.data,
-                        backgroundColor: securityInitiativesData.colors,
-                        borderColor: securityInitiativesData.colors.map(color => color.replace('0.2)', '1)')), // Solid border
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Priority Score'
-                            }
-                        },
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Security Initiative'
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: false // Hide dataset label as it's a single bar series
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return context.dataset.label + ': ' + context.parsed.y;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        };
-
-        const updateSecurityInitiativesChart = (priorityType) => {
-            if (securityInitiativesChartInstance) {
-                const data = securityInitiativesData[priorityType];
-                securityInitiativesChartInstance.data.datasets[0].data = data.data;
-                securityInitiativesChartInstance.update();
-                document.getElementById('priority-explanation').textContent = data.explanation;
-            }
-        };
-
-        const initBudgetChart = () => {
-            const ctx = document.getElementById('budgetChart').getContext('2d');
-            budgetChartInstance = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: budgetData.labels,
-                    datasets: [{
-                        data: budgetData.initial.data,
-                        backgroundColor: budgetData.colors,
-                        hoverOffset: 4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'right',
-                            labels: {
-                                font: {
-                                    size: 12
-                                }
-                            }
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    let label = context.label || '';
-                                    if (label) {
-                                        label += ': ';
-                                    }
-                                    if (context.parsed) {
-                                        label += context.parsed + '%';
-                                    }
-                                    return label;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        };
-
-        const updateBudgetChart = () => {
-            const totalBudgetInput = document.getElementById('totalBudget');
-            // Ensure totalBudgetInput exists before trying to access its value
-            const rawTotalBudget = totalBudgetInput ? totalBudgetInput.value.replace(/,/g, '') : '0';
-            let totalBudget = parseFloat(rawTotalBudget);
-
-            if (!isNaN(totalBudget)) {
-                // Format the input value immediately after parsing
-                if (totalBudgetInput) { // Check again before setting value
-                    totalBudgetInput.value = totalBudget.toLocaleString('en-US');
-                }
-            } else {
-                totalBudget = 0; // Treat invalid input as 0 for calculation
-            }
-
-            const techTools = parseFloat(document.getElementById('techToolsPct').value) || 0;
-            const personnelStaffing = parseFloat(document.getElementById('personnelStaffingPct').value) || 0;
-            const trainingAwareness = parseFloat(document.getElementById('trainingAwarenessPct').value) || 0;
-            const complianceAudit = parseFloat(document.getElementById('complianceAuditPct').value) || 0;
-
-            const totalPercentages = techTools + personnelStaffing + trainingAwareness + complianceAudit;
-
-            if (budgetChartInstance && totalPercentages === 100) {
-                budgetChartInstance.data.datasets[0].data = [techTools, personnelStaffing, trainingAwareness, complianceAudit];
-                budgetChartInstance.update();
-                document.getElementById('budget-explanation').textContent = "Adjust the percentages above. The total must equal 100%. The chart dynamically updates to show your budget allocation.";
-            } else if (totalPercentages !== 100) {
-                document.getElementById('budget-explanation').textContent = `Percentages must total 100%. Current total: ${totalPercentages}%.`;
-            }
-        };
-
-        const initKriTrendChart = () => {
-            const ctx = document.getElementById('kriTrendChart').getContext('2d');
-            kriTrendChartInstance = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: kriTrendData.labels,
-                    datasets: [{
-                        label: kriTrendData.criticalVulnerabilities.label,
-                        data: kriTrendData.criticalVulnerabilities.data,
-                        borderColor: kriTrendData.criticalVulnerabilities.borderColor,
-                        backgroundColor: kriTrendData.criticalVulnerabilities.backgroundColor,
-                        fill: true,
-                        tension: 0.3
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Count'
-                            }
-                        },
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Month'
-                            }
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            position: 'top'
-                        },
-                        tooltip: {
-                            callbacks: {
-                                title: function(context) {
-                                    return context[0].label;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        };
-
-        const updateKriTrendChart = (kriType) => {
-            if (kriTrendChartInstance) {
-                const data = kriTrendData[kriType];
-                kriTrendChartInstance.data.datasets[0].label = data.label;
-                kriTrendChartInstance.data.datasets[0].data = data.data;
-                kriTrendChartInstance.data.datasets[0].borderColor = data.borderColor;
-                kriTrendChartInstance.data.datasets[0].backgroundColor = data.backgroundColor;
-                kriTrendChartInstance.update();
-                document.getElementById('kri-explanation').textContent = `This line chart illustrates simulated trends for various Key Risk Indicators (KRIs) over time, helping to anticipate potential issues. Click a button to see its trend. Currently showing: ${data.label}.`;
-            }
-        };
-
-
-        // Event Listeners
         document.addEventListener('DOMContentLoaded', () => {
-            // Initial Chart Render
-            initSecurityCultureChart();
-            initSecurityInitiativesChart();
-            initBudgetChart(); // Initialize budget chart
-            initKriTrendChart(); // Initialize KRI trend chart
+            // --- BEHAVIOR SETUP ---
+            function setupCardToggles() {
+                const allCards = document.querySelectorAll('[data-group]');
+                allCards.forEach(card => {
+                    card.addEventListener('click', () => {
+                        const group = card.dataset.group;
+                        const isAlreadyActive = card.classList.contains('active');
 
-            // Initial budget chart update
-            updateBudgetChart();
+                        // Deactivate all cards in the same group
+                        document.querySelectorAll(`[data-group="${group}"]`).forEach(otherCard => {
+                            otherCard.classList.remove('active');
+                        });
 
+                        // Activate the clicked card if it wasn't already active
+                        if (!isAlreadyActive) {
+                            card.classList.add('active');
+                        }
+                    });
+                });
+            }
+
+            // --- INITIALIZATION ---
             // Navigation
             document.querySelectorAll('.nav-item').forEach(button => {
                 button.addEventListener('click', () => {
                     document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
                     button.classList.add('active');
-
-                    document.querySelectorAll('.content-section').forEach(section => {
-                        section.classList.add('hidden');
-                        section.classList.remove('fade-in');
-                    });
-
+                    document.querySelectorAll('.content-section').forEach(section => section.classList.add('hidden'));
                     const targetSection = document.getElementById(button.dataset.target);
                     targetSection.classList.remove('hidden');
                     targetSection.classList.add('fade-in');
-                    currentSection.id = button.dataset.target;
-
-                    // Specific rendering for Key Terms section if activated
-                    if (button.dataset.target === 'key-terms') {
-                        renderKeyTerms();
-                    }
                 });
             });
 
-            // Set the Introduction tab as active by default on load
-            const introButton = document.querySelector('.nav-item[data-target="introduction"]');
-            const introSection = document.getElementById('introduction');
-            if (introButton && introSection) {
-                introButton.classList.add('active');
-                introSection.classList.remove('hidden');
-                introSection.classList.add('fade-in');
-                currentSection.id = 'introduction';
-            }
+            // Set default view to Introduction
+            document.querySelector('.nav-item[data-target="introduction"]').classList.add('active');
+            document.getElementById('introduction').classList.remove('hidden');
 
-            // Accordion Functionality
+            // Accordion
             document.querySelectorAll('.accordion-button').forEach(button => {
                 button.addEventListener('click', () => {
                     const content = button.nextElementSibling;
                     const icon = button.querySelector('.accordion-icon');
-
-                    if (content.classList.contains('hidden')) {
-                        content.classList.remove('hidden');
-                        content.classList.add('fade-in');
-                        icon.textContent = '–';
-                    } else {
-                        content.classList.add('hidden');
-                        content.classList.remove('fade-in');
-                        icon.textContent = '+';
-                    }
+                    content.classList.toggle('hidden');
+                    icon.textContent = content.classList.contains('hidden') ? '+' : '–';
+                    content.classList.toggle('fade-in', !content.classList.contains('hidden'));
                 });
             });
-
-            // Security Culture Chart Buttons
+            
+            // Setup for all static card groups
+            setupCardToggles();
+            
+            // --- CHART & INTERACTIVE LOGIC ---
+            
+            // Security Culture Chart
+            const securityCultureData = {
+                strongCulture: { data: [50, 30, 15, 5], explanation: "This represents a strong security culture..." },
+                weakCulture: { data: [10, 20, 40, 30], explanation: "This represents a weak security culture..." }
+            };
+            const secCultureCtx = document.getElementById('securityCultureChart').getContext('2d');
+            const securityCultureChartInstance = new Chart(secCultureCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Vigilant & Proactive', 'Compliant', 'Indifferent', 'Resistant'],
+                    datasets: [{ data: securityCultureData.strongCulture.data, backgroundColor: ['#00A896', '#A1C9CE', '#FFD700', '#FF6384'], hoverOffset: 4 }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+            });
             document.querySelectorAll('[data-culture-type]').forEach(button => {
-                button.addEventListener('click', () => {
-                    updateSecurityCultureChart(button.dataset.cultureType);
+                button.addEventListener('click', e => {
+                    const type = e.currentTarget.dataset.cultureType;
+                    securityCultureChartInstance.data.datasets[0].data = securityCultureData[type].data;
+                    securityCultureChartInstance.update();
+                    document.getElementById('culture-explanation').textContent = securityCultureData[type].explanation;
                 });
             });
 
             // Leadership Engagement Slider
-            const leadershipEngagementSlider = document.getElementById('leadershipEngagement');
-            const engagementValueDisplay = document.getElementById('engagementValue');
-            const engagementDescriptionDisplay = document.getElementById('engagementDescription');
+            const leadershipEngagementLevels = [
+                { value: 0, label: "Minimal Engagement", description: "Security is seen as an IT-only issue..." },
+                { value: 25, label: "Basic Engagement", description: "Leadership provides some support, but it's often reactive..." },
+                { value: 50, label: "Moderate Engagement", description: "Policies are generally followed, but security may lack strong strategic momentum..." },
+                { value: 75, label: "Strong Engagement", description: "Leadership actively champions security, integrating it into business strategy..." },
+                { value: 100, label: "Transformative Engagement", description: "Security is a core business value, driven by a highly engaged leadership..." }
+            ];
+            document.getElementById('leadershipEngagement').addEventListener('input', e => {
+                const value = parseInt(e.target.value);
+                const level = leadershipEngagementLevels.find((l, i) => value >= l.value && (!leadershipEngagementLevels[i+1] || value < leadershipEngagementLevels[i+1].value)) || leadershipEngagementLevels[0];
+                document.getElementById('engagementValue').textContent = level.label;
+                document.getElementById('engagementDescription').textContent = level.description;
+            });
 
-            const updateEngagementDisplay = (value) => {
-                let level = leadershipEngagementLevels[0]; // Default to minimal
-                for (let i = 0; i < leadershipEngagementLevels.length; i++) {
-                    if (value >= leadershipEngagementLevels[i].value) {
-                        level = leadershipEngagementLevels[i];
-                    }
+            // Security Initiatives Chart
+            const securityInitiativesData = {
+                labels: [['Data Protection', 'Enhancement'], ['Cloud Security', 'Migration'], ['Incident Response', 'Plan'], ['Security Awareness', 'Program'], ['Vendor Risk', 'Management']],
+                colors: ['#A1C9CE', '#8FB8A1', '#FFD700', '#FF6384', '#6A5ACD'],
+                complianceDriven: { data: [80, 60, 40, 70, 50], explanation: "This view prioritizes initiatives based on compliance." },
+                revenueDriven: { data: [50, 75, 85, 30, 60], explanation: "This view prioritizes initiatives based on revenue." }
+            };
+            const secInitiativesCtx = document.getElementById('securityInitiativesChart').getContext('2d');
+            const securityInitiativesChartInstance = new Chart(secInitiativesCtx, {
+                type: 'bar',
+                data: {
+                    labels: securityInitiativesData.labels,
+                    datasets: [{ label: 'Priority Score', data: securityInitiativesData.complianceDriven.data, backgroundColor: securityInitiativesData.colors }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } }, plugins: { legend: { display: false } } }
+            });
+             document.querySelectorAll('[data-priority-type]').forEach(button => {
+                button.addEventListener('click', e => {
+                    const type = e.currentTarget.dataset.priorityType;
+                    securityInitiativesChartInstance.data.datasets[0].data = securityInitiativesData[type].data;
+                    securityInitiativesChartInstance.update();
+                    document.getElementById('priority-explanation').textContent = securityInitiativesData[type].explanation;
+                });
+            });
+
+            // Budget Allocator
+            const budgetChartCtx = document.getElementById('budgetChart').getContext('2d');
+            const budgetChartInstance = new Chart(budgetChartCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Technology & Tools', 'Personnel & Staffing', 'Training & Awareness', 'Compliance & Audit'],
+                    datasets: [{ data: [40, 35, 15, 10], backgroundColor: ['#A1C9CE', '#FFD700', '#FF6384', '#8FB8A1'], hoverOffset: 4 }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right' } } }
+            });
+            const budgetInputs = ['techToolsPct', 'personnelStaffingPct', 'trainingAwarenessPct', 'complianceAuditPct'];
+            const totalBudgetInput = document.getElementById('totalBudget');
+            const updateBudgetChart = () => {
+                const values = budgetInputs.map(id => parseFloat(document.getElementById(id).value) || 0);
+                const total = values.reduce((sum, v) => sum + v, 0);
+                budgetChartInstance.data.datasets[0].data = values;
+                budgetChartInstance.update();
+                const explanation = document.getElementById('budget-explanation');
+                if (Math.round(total) === 100) {
+                    explanation.textContent = "Adjust the percentages above. The total must equal 100%.";
+                    explanation.style.color = '#555555';
+                } else {
+                    explanation.textContent = `Percentages must total 100%. Current total: ${total}%.`;
+                    explanation.style.color = '#DC3545';
                 }
-                engagementValueDisplay.textContent = level.label;
-                engagementDescriptionDisplay.textContent = level.description;
             };
-
-            leadershipEngagementSlider.addEventListener('input', (event) => {
-                updateEngagementDisplay(parseInt(event.target.value));
+            totalBudgetInput.addEventListener('input', e => {
+                let value = e.target.value.replace(/,/g, '');
+                if (!isNaN(value) && value.length > 0) e.target.value = parseFloat(value).toLocaleString('en-US');
             });
-            // Initial update for slider
-            updateEngagementDisplay(parseInt(leadershipEngagementSlider.value));
+            budgetInputs.forEach(id => document.getElementById(id).addEventListener('input', updateBudgetChart));
+            updateBudgetChart();
 
-
-            // Change Management Cards
-            document.querySelectorAll('.change-management-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const descriptionDiv = card.querySelector('.card-description');
-                    const stepKey = card.dataset.step;
-
-                    // Close all other open cards
-                    document.querySelectorAll('.change-management-card').forEach(otherCard => {
-                        const otherDescriptionDiv = otherCard.querySelector('.card-description');
-                        if (otherCard !== card && !otherDescriptionDiv.classList.contains('hidden')) {
-                            otherCard.classList.remove('active');
-                        }
-                    });
-
-                    // Toggle the clicked card's active class
-                    card.classList.toggle('active');
-
-                    // If the card is now active, populate its description
-                    if (card.classList.contains('active') && descriptionDiv && changeManagementSteps[stepKey]) {
-                        descriptionDiv.innerHTML = `<p>${changeManagementSteps[stepKey].description}</p>`; // Set content
-                    } else if (descriptionDiv) {
-                        descriptionDiv.innerHTML = ''; // Clear content if deactivating
-                    }
-                });
+            // KRI Trend Chart
+            const kriTrendData = {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                criticalVulnerabilities: { label: 'Critical Vulnerabilities Detected', data: [25, 22, 18, 15, 12, 10, 8, 7, 6, 5, 4, 3], borderColor: '#DC3545', backgroundColor: 'rgba(220, 53, 69, 0.2)' },
+                phishingAttempts: { label: 'Phishing Attempts Reported', data: [10, 12, 15, 13, 11, 9, 8, 10, 12, 11, 9, 7], borderColor: '#FFD700', backgroundColor: 'rgba(255, 215, 0, 0.2)' },
+                failedAccess: { label: 'Failed Access Attempts', data: [50, 45, 40, 38, 35, 30, 28, 25, 22, 20, 18, 15], borderColor: '#004085', backgroundColor: 'rgba(0, 64, 133, 0.2)' }
+            };
+            const kriTrendCtx = document.getElementById('kriTrendChart').getContext('2d');
+            const kriTrendChartInstance = new Chart(kriTrendCtx, {
+                type: 'line',
+                data: { labels: kriTrendData.labels, datasets: [{ ...kriTrendData.criticalVulnerabilities, fill: true, tension: 0.3 }] },
+                options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true }, x: {} }, plugins: { legend: { position: 'top' } } }
             });
-
-
-            // Legal Type Cards (new interactive)
-            document.querySelectorAll('.legal-type-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const descriptionDiv = card.querySelector('.card-description');
-                    const legalTypeKey = card.dataset.legalType;
-
-                    // Close all other open cards in this section
-                    document.querySelectorAll('.legal-type-card').forEach(otherCard => {
-                        const otherDescriptionDiv = otherCard.querySelector('.card-description');
-                        if (otherCard !== card && !otherDescriptionDiv.classList.contains('hidden')) {
-                            otherCard.classList.remove('active');
-                        }
-                    });
-
-                    // Toggle the clicked card's active class
-                    card.classList.toggle('active');
-
-                    // If the card is now active, populate its description
-                    if (card.classList.contains('active') && descriptionDiv && legalTypeDescriptions[legalTypeKey]) {
-                        descriptionDiv.innerHTML = `<p>${legalTypeDescriptions[legalTypeKey].description}</p>`; // Set content
-                    } else if (descriptionDiv) {
-                        descriptionDiv.innerHTML = ''; // Clear content if deactivating
-                    }
-                });
-            });
-
-            // Contract Type Cards (new interactive)
-            document.querySelectorAll('.contract-type-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const descriptionDiv = card.querySelector('.card-description');
-                    const contractTypeKey = card.dataset.contractType;
-
-                    // Close all other open cards in this section
-                    document.querySelectorAll('.contract-type-card').forEach(otherCard => {
-                        const otherDescriptionDiv = otherCard.querySelector('.card-description');
-                        if (otherCard !== card && !otherDescriptionDiv.classList.contains('hidden')) {
-                            otherCard.classList.remove('active');
-                        }
-                    });
-
-                    // Toggle the clicked card's active class
-                    card.classList.toggle('active');
-
-                    // If the card is now active, populate its description
-                    if (card.classList.contains('active') && descriptionDiv && contractTypeDescriptions[contractTypeKey]) {
-                        descriptionDiv.innerHTML = `<p>${contractTypeDescriptions[contractTypeKey].description}</p>`; // Set content
-                    } else if (descriptionDiv) {
-                        descriptionDiv.innerHTML = ''; // Clear content if deactivating
-                    }
-                });
-            });
-
-
-            // Legal, Regulatory, and Contractual Requirements Card Toggles (requirement-card)
-            document.querySelectorAll('.requirement-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const descriptionDiv = card.querySelector('.card-description');
-                    const reqKey = card.dataset.req;
-
-                    // Close all other open cards in this section
-                    document.querySelectorAll('.requirement-card').forEach(otherCard => {
-                        const otherDescriptionDiv = otherCard.querySelector('.card-description');
-                        if (otherCard !== card && !otherDescriptionDiv.classList.contains('hidden')) {
-                            otherCard.classList.remove('active');
-                        }
-                    });
-
-                    // Toggle the clicked card's active class
-                    card.classList.toggle('active');
-
-                    // If the card is now active, populate its description
-                    if (card.classList.contains('active') && descriptionDiv && requirementDescriptions[reqKey]) {
-                        descriptionDiv.innerHTML = `<p>${requirementDescriptions[reqKey]}</p>`; // Set content
-                    } else if (descriptionDiv) {
-                        descriptionDiv.innerHTML = ''; // Clear content if deactivating
-                    }
-                });
-            });
-
-            // Information Security Governance Frameworks and Standards Card Toggles (concept-card)
-            document.querySelectorAll('.concept-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const descriptionDiv = card.querySelector('.card-description');
-                    const conceptKey = card.dataset.concept;
-
-                    // Close all other open cards in this section
-                    document.querySelectorAll('.concept-card').forEach(otherCard => {
-                        const otherDescriptionDiv = otherCard.querySelector('.card-description');
-                        if (otherCard !== card && !otherDescriptionDiv.classList.contains('hidden')) {
-                            otherCard.classList.remove('active');
-                        }
-                    });
-
-                    // Toggle the clicked card's active class
-                    card.classList.toggle('active');
-
-                    // If the card is now active, populate its description
-                    if (card.classList.contains('active') && descriptionDiv && conceptDescriptions[conceptKey]) {
-                        descriptionDiv.innerHTML = `<p>${conceptDescriptions[conceptKey]}</p>`; // Set content
-                    } else if (descriptionDiv) {
-                        descriptionDiv.innerHTML = ''; // Clear content if deactivating
-                    }
-                });
-            });
-
-            // Risk and Control Ownership Role Details (role-node)
-            document.querySelectorAll('.role-node').forEach(roleNode => {
-                roleNode.addEventListener('click', () => {
-                    const roleKey = roleNode.dataset.role;
-                    const roleInfo = detailedRoleDescriptions[roleKey];
-                    const roleDescriptionDiv = roleNode.querySelector('.role-description');
-
-                    // Close all other open role descriptions
-                    document.querySelectorAll('.role-node').forEach(otherRoleNode => {
-                        const otherRoleDescriptionDiv = otherRoleNode.querySelector('.role-description');
-                        if (otherRoleNode !== roleNode && otherRoleDescriptionDiv && !otherRoleDescriptionDiv.classList.contains('hidden')) {
-                            otherRoleNode.classList.remove('active');
-                        }
-                    });
-
-                    // Toggle the clicked role's active class
-                    roleNode.classList.toggle('active');
-
-                    // If the role node is now active, populate its description
-                    if (roleNode.classList.contains('active') && roleDescriptionDiv && roleInfo) {
-                        roleDescriptionDiv.innerHTML = `<p>${roleInfo.description}</p>`; // Set content
-                    } else if (roleDescriptionDiv) {
-                        roleDescriptionDiv.innerHTML = ''; // Clear content if deactivating
-                    }
-                });
-            });
-
-            // Governance Structure Cards (new interactive)
-            document.querySelectorAll('.governance-structure-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const descriptionDiv = card.querySelector('.card-description');
-                    const structureTypeKey = card.dataset.structureType;
-
-                    // Close all other open cards in this section
-                    document.querySelectorAll('.governance-structure-card').forEach(otherCard => {
-                        const otherDescriptionDiv = otherCard.querySelector('.card-description');
-                        if (otherCard !== card && !otherDescriptionDiv.classList.contains('hidden')) {
-                            otherCard.classList.remove('active');
-                        }
-                    });
-
-                    // Toggle the clicked card's active class
-                    card.classList.toggle('active');
-
-                    // If the card is now active, populate its description
-                    if (card.classList.contains('active') && descriptionDiv && governanceStructureDescriptions[structureTypeKey]) {
-                        descriptionDiv.innerHTML = `<p>${governanceStructureDescriptions[structureTypeKey].description}</p>`; // Set content
-                    } else if (descriptionDiv) {
-                        descriptionDiv.innerHTML = ''; // Clear content if deactivating
-                    }
-                });
-            });
-
-            // Risk Appetite Cards (new interactive)
-            document.querySelectorAll('.risk-appetite-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const descriptionDiv = card.querySelector('.card-description');
-                    const appetiteTypeKey = card.dataset.appetiteType;
-
-                    document.querySelectorAll('.risk-appetite-card').forEach(otherCard => {
-                        const otherDescriptionDiv = otherCard.querySelector('.card-description');
-                        if (otherCard !== card && !otherDescriptionDiv.classList.contains('hidden')) {
-                            otherCard.classList.remove('active');
-                        }
-                    });
-
-                    card.classList.toggle('active');
-
-                    if (card.classList.contains('active') && descriptionDiv && riskAppetiteDescriptions[appetiteTypeKey]) {
-                        descriptionDiv.innerHTML = `<p>${riskAppetiteDescriptions[appetiteTypeKey].description}</p>`;
-                    } else if (descriptionDiv) {
-                        descriptionDiv.innerHTML = '';
-                    }
-                });
-            });
-
-            // Business Driver Cards (new interactive)
-            document.querySelectorAll('.business-driver-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const descriptionDiv = card.querySelector('.card-description');
-                    const driverTypeKey = card.dataset.driverType;
-
-                    document.querySelectorAll('.business-driver-card').forEach(otherCard => {
-                        const otherDescriptionDiv = otherCard.querySelector('.card-description');
-                        if (otherCard !== card && !otherDescriptionDiv.classList.contains('hidden')) {
-                            otherCard.classList.remove('active');
-                        }
-                    });
-
-                    card.classList.toggle('active');
-
-                    if (card.classList.contains('active') && descriptionDiv && businessDriverDescriptions[driverTypeKey]) {
-                        descriptionDiv.innerHTML = `<p>${businessDriverDescriptions[driverTypeKey].description}</p>`;
-                    } else if (descriptionDiv) {
-                        descriptionDiv.innerHTML = '';
-                    }
-                });
-            });
-
-            // Security Initiatives Chart Buttons
-            document.querySelectorAll('[data-priority-type]').forEach(button => {
-                button.addEventListener('click', () => {
-                    updateSecurityInitiativesChart(button.dataset.priorityType);
-                });
-            });
-
-            // Budget Allocator Inputs
-            document.getElementById('totalBudget').addEventListener('input', updateBudgetChart);
-            document.getElementById('techToolsPct').addEventListener('input', updateBudgetChart);
-            document.getElementById('personnelStaffingPct').addEventListener('input', updateBudgetChart);
-            document.getElementById('trainingAwarenessPct').addEventListener('input', updateBudgetChart);
-            document.getElementById('complianceAuditPct').addEventListener('input', updateBudgetChart);
-
-            // KRI Trend Chart Buttons
             document.querySelectorAll('[data-kri-type]').forEach(button => {
-                button.addEventListener('click', () => {
-                    updateKriTrendChart(button.dataset.kriType);
+                button.addEventListener('click', e => {
+                    const data = kriTrendData[e.currentTarget.dataset.kriType];
+                    kriTrendChartInstance.data.datasets[0] = { ...data, fill: true, tension: 0.3 };
+                    kriTrendChartInstance.update();
+                    document.getElementById('kri-explanation').textContent = `Showing trend for: ${data.label}.`;
                 });
             });
 
-            // Maturity Level Cards
-            document.querySelectorAll('.maturity-level-card').forEach(card => {
-                card.addEventListener('click', () => {
-                    const descriptionDiv = card.querySelector('.card-description');
-                    const levelTypeKey = card.dataset.maturityLevel;
-
-                    document.querySelectorAll('.maturity-level-card').forEach(otherCard => {
-                        const otherDescriptionDiv = otherCard.querySelector('.card-description');
-                        if (otherCard !== card && !otherDescriptionDiv.classList.contains('hidden')) {
-                            otherCard.classList.remove('active');
-                        }
-                    });
-
-                    card.classList.toggle('active');
-
-                    if (card.classList.contains('active') && descriptionDiv && maturityLevelDescriptions[levelTypeKey]) {
-                        descriptionDiv.innerHTML = `<p>${maturityLevelDescriptions[levelTypeKey].description}</p>`;
-                    } else if (descriptionDiv) {
-                        descriptionDiv.innerHTML = '';
-                    }
-                });
-            });
-
-
-            // Framework Adoption Journey Nodes
-            document.querySelectorAll('.framework-step-node').forEach(node => {
-                node.addEventListener('click', () => {
-                    const descriptionDiv = node.querySelector('.node-description');
-                    const stepId = node.dataset.stepId;
-
-                    document.querySelectorAll('.framework-step-node').forEach(otherNode => {
-                        const otherDescriptionDiv = otherNode.querySelector('.node-description');
-                        if (otherNode !== node && !otherDescriptionDiv.classList.contains('hidden')) {
-                            otherNode.classList.remove('active');
-                        }
-                    });
-
-                    node.classList.toggle('active');
-
-                    if (node.classList.contains('active') && descriptionDiv && frameworkSteps[stepId]) {
-                        descriptionDiv.innerHTML = `<p>${frameworkSteps[stepId].description}</p>`;
-                    } else if (descriptionDiv) {
-                        descriptionDiv.innerHTML = '';
-                    }
-                });
-            });
-
-
-            // Function to render Key Terms cards
-            const renderKeyTerms = () => {
-                const keyTermsContainer = document.querySelector('#key-terms .grid');
-                if (!keyTermsContainer) return; // Exit if container not found
-                keyTermsContainer.innerHTML = ''; // Clear existing cards
-
-                keyTermsData.forEach((item, index) => {
-                    const cardHtml = `
-                        <div class="key-term-card" data-term-key="${index}">
-                            <h3 class="card-title">${item.term}</h3>
-                            <div class="card-description"></div>
-                        </div>
-                    `;
-                    keyTermsContainer.insertAdjacentHTML('beforeend', cardHtml);
-                });
-
-                // Add event listeners for key term cards
-                document.querySelectorAll('.key-term-card').forEach(card => {
-                    card.addEventListener('click', () => {
-                        const descriptionDiv = card.querySelector('.card-description');
-                        const termIndex = parseInt(card.dataset.termKey);
-
-                        // Close all other open cards and remove 'active' class
-                        document.querySelectorAll('.key-term-card').forEach(otherCard => {
-                            if (otherCard !== card) {
-                                otherCard.classList.remove('active');
-                            }
-                        });
-
-                        // Toggle the clicked card's active class
-                        card.classList.toggle('active');
-
-                        // If the card is now active, populate its description
-                        if (card.classList.contains('active') && descriptionDiv && keyTermsData[termIndex]) {
-                            descriptionDiv.innerHTML = `<p>${keyTermsData[termIndex].definition}</p>`; // Set content
-                        } else if (descriptionDiv) {
-                            descriptionDiv.innerHTML = '';
-                        }
-                    });
-                });
-            };
         });
     </script>
 </body>
