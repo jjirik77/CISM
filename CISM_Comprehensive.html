@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -198,7 +197,13 @@
             <!-- Left Column: Master Navigation -->
             <aside class="md:w-1/4 lg:w-1/5">
                 <nav id="master-navigation" class="bg-white p-4 rounded-lg shadow-md flex flex-col space-y-2 sticky top-4">
-                    <button class="master-nav-item text-gray-700 active" data-domain-target="domain-1">
+                    <button class="master-nav-item text-gray-700 active" data-domain-target="about-cism">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-base domain-title">About CISM</span>
+                            <span class="text-sm font-normal">Certification Overview</span>
+                        </div>
+                    </button>
+                    <button class="master-nav-item text-gray-700" data-domain-target="domain-1">
                         <div class="flex flex-col">
                             <span class="font-bold text-base domain-title">Domain 1</span>
                             <span class="text-sm font-normal">Governance</span>
@@ -222,6 +227,12 @@
                             <span class="text-sm font-normal">Incident Management</span>
                         </div>
                     </button>
+                    <button class="master-nav-item text-gray-700" data-domain-target="assessment">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-base domain-title">Assessment</span>
+                            <span class="text-sm font-normal">Test Your Knowledge</span>
+                        </div>
+                    </button>
                 </nav>
             </aside>
 
@@ -230,9 +241,25 @@
                 <div id="domains-content-area">
                     <!-- All domain content is now directly in the HTML below -->
                     <!-- =============================================================================== -->
+                    <!-- == ABOUT CISM ================================================================= -->
+                    <!-- =============================================================================== -->
+                    <div id="about-cism" class="domain-content-section fade-in">
+                        <header class="text-center pt-4 pb-8 mb-6">
+                            <h1 class="text-3xl font-bold text-gray-800 mb-1">About the CISM Certification</h1>
+                            <p class="text-lg text-gray-600">An Overview of the Certified Information Security Manager Credential</p>
+                        </header>
+                        <main class="domain-main-content">
+                            <section class="content-section fade-in p-6 bg-white rounded-lg shadow-md">
+                                <h2 class="text-2xl font-bold section-header text-gray-800 mb-6">What is CISM?</h2>
+                                <p>The Certified Information Security Manager (CISM) certification is a globally recognized credential for professionals who manage, design, oversee, and assess an enterprise's information security program. Offered by ISACA, CISM demonstrates expertise in information security governance, risk management, program development and management, and incident management.</p>
+                            </section>
+                        </main>
+                    </div>
+
+                    <!-- =============================================================================== -->
                     <!-- == DOMAIN 1: INFORMATION SECURITY GOVERNANCE ================================== -->
                     <!-- =============================================================================== -->
-                    <div id="domain-1" class="domain-content-section fade-in">
+                    <div id="domain-1" class="domain-content-section hidden">
                         <!-- Full HTML Content for Domain 1 -->
                     </div>
         
@@ -256,6 +283,22 @@
                     <div id="domain-4" class="domain-content-section hidden">
                         <!-- Full HTML Content for Domain 4 -->
                     </div>
+                    
+                    <!-- =============================================================================== -->
+                    <!-- == ASSESSMENT ================================================================= -->
+                    <!-- =============================================================================== -->
+                    <div id="assessment" class="domain-content-section hidden">
+                        <header class="text-center pt-4 pb-8 mb-6">
+                            <h1 class="text-3xl font-bold text-gray-800 mb-1">Knowledge Assessment</h1>
+                            <p class="text-lg text-gray-600">Test your understanding of the CISM domains.</p>
+                        </header>
+                        <main class="domain-main-content">
+                            <section class="content-section fade-in p-6 bg-white rounded-lg shadow-md">
+                                <h2 class="text-2xl font-bold section-header text-gray-800 mb-6">Practice Questions</h2>
+                                <p>This section will contain practice questions and quizzes to help you prepare for the CISM exam. Content is coming soon!</p>
+                            </section>
+                        </main>
+                    </div>
                 </div>
             </main>
         </div>
@@ -271,13 +314,11 @@
         const masterNavButtons = document.querySelectorAll('#master-navigation .master-nav-item');
         const domainContentSections = document.querySelectorAll('.domain-content-section');
 
-        // Function to set up event listeners for a given domain container
         function setupDomain(domainContainer) {
             if (!domainContainer || domainContainer.dataset.initialized === 'true') {
-                return; // Don't re-initialize
+                return;
             }
 
-            // Intra-domain navigation
             const navButtons = domainContainer.querySelectorAll('.domain-nav-item');
             const sections = domainContainer.querySelectorAll('.content-section');
             
@@ -292,7 +333,6 @@
                 });
             });
 
-            // Accordion logic
             domainContainer.querySelectorAll('.accordion-button').forEach(button => {
                 button.addEventListener('click', () => {
                     const content = button.nextElementSibling;
@@ -304,7 +344,6 @@
                 });
             });
 
-            // Interactive Card Logic
             domainContainer.querySelectorAll('.interactive-card').forEach(card => {
                 card.addEventListener('click', (e) => {
                     e.stopPropagation();
@@ -325,7 +364,6 @@
             domainContainer.dataset.initialized = 'true';
         }
 
-        // Master navigation logic
         masterNavButtons.forEach(button => {
             button.addEventListener('click', () => {
                 masterNavButtons.forEach(btn => btn.classList.remove('active'));
@@ -336,7 +374,6 @@
                     sec.classList.toggle('hidden', sec.id !== targetDomainId);
                 });
 
-                // Setup the newly visible domain
                 const targetContainer = document.getElementById(targetDomainId);
                 if(targetContainer) {
                     setupDomain(targetContainer);
@@ -349,9 +386,7 @@
             // Placeholder for Chart.js initialization code
         }
         
-        // --- INITIAL LOAD ---
-        // Setup the default visible domain on page load
-        setupDomain(document.getElementById('domain-1'));
+        setupDomain(document.getElementById('about-cism'));
     });
     </script>
 </body>
