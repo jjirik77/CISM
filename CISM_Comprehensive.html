@@ -305,7 +305,7 @@
                                                 <li><strong>Duration:</strong> 4 hours (240 minutes)</li>
                                                 <li><strong>Passing Score:</strong> 450 out of 800 (scaled score)</li>
                                             </ul>
-                                            <div id="domain-cards-container" class="flex flex-row flex-wrap justify-center gap-4 my-4">
+                                            <div id="domain-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 my-4">
                                                 <!-- Domain cards will be injected here by JS -->
                                             </div>
                                         </div>
@@ -577,7 +577,7 @@
                     container.innerHTML = ''; 
                     examDomainsData.forEach(domain => {
                         const cardHtml = `
-                            <div class="interactive-card" style="min-width: 200px;">
+                            <div class="interactive-card">
                                 <h3 class="card-title">${domain.title}</h3>
                                 <div class="card-description"><p>${domain.description}</p></div>
                             </div>
