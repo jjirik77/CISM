@@ -86,7 +86,7 @@
         }
 
         /* --- INTERACTIVE CARDS (UNIFIED) --- */
-        .interactive-card {
+        .interactive-card, .concept-card, .requirement-card, .key-term-card, .change-management-card, .legal-type-card, .contract-type-card, .governance-structure-card, .risk-appetite-card, .business-driver-card, .framework-step-node, .maturity-level-card {
             background-color: #EDEAE0;
             border: 1px solid #D5D2C8;
             padding: 1rem;
@@ -106,22 +106,22 @@
             max-height: 120px; /* Base max-height for transition */
             overflow: hidden;
         }
-        .interactive-card:hover {
+        .interactive-card:hover, .concept-card:hover, .requirement-card:hover, .key-term-card:hover, .change-management-card:hover, .legal-type-card:hover, .contract-type-card:hover, .governance-structure-card:hover, .risk-appetite-card:hover, .business-driver-card:hover, .framework-step-node:hover, .maturity-level-card:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
-        .interactive-card.active {
+        .interactive-card.active, .concept-card.active, .requirement-card.active, .key-term-card.active, .change-management-card.active, .legal-type-card.active, .contract-type-card.active, .governance-structure-card.active, .risk-appetite-card.active, .business-driver-card.active, .framework-step-node.active, .maturity-level-card.active {
             border-color: #00A896;
             box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3);
             background-color: #E0F7F5;
             max-height: 1000px; /* Expand fully */
         }
-        .interactive-card .card-title {
+        .card-title {
             font-size: 1.1em;
             margin-bottom: 0.6rem;
             color: #004085;
         }
-        .interactive-card .card-description {
+        .card-description {
             font-weight: 400;
             font-size: 0.9em;
             color: #555555;
@@ -130,7 +130,7 @@
             text-align: left;
             word-break: break-word;
         }
-        .interactive-card.active .card-description {
+        .active .card-description {
             display: block;
             animation: fadeIn 0.5s ease-in-out;
         }
@@ -139,46 +139,38 @@
         .styled-table {
             width: 100%;
             max-width: 600px;
-            margin: 1.5rem auto; /* Increased margin */
+            margin: 1.5rem auto;
             border-collapse: collapse;
-            font-size: 1rem; /* Slightly larger font for readability */
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* Subtle shadow for depth */
-            border-radius: 0.5rem; /* Rounded corners for the container */
-            overflow: hidden; /* To make border-radius work on table */
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border-radius: 0.5rem;
+            overflow: hidden;
         }
-
         .styled-table th, .styled-table td {
-            padding: 1rem 1.25rem; /* Generous padding */
+            padding: 1rem 1.25rem;
             text-align: left;
-            border: none; /* Remove all default borders */
-            border-bottom: 1px solid #e2e8f0; /* Light gray bottom border for rows */
+            border: none;
+            border-bottom: 1px solid #e2e8f0;
         }
-
         .styled-table th {
-            background-color: #f8fafc; /* Very light gray for header */
+            background-color: #f8fafc;
             font-weight: 700;
-            color: #334155; /* Darker, less harsh text color */
-            text-transform: uppercase; /* Uppercase headers */
-            letter-spacing: 0.05em; /* Spacing for headers */
+            color: #334155;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             font-size: 0.85rem;
         }
-
         .styled-table td {
             background-color: #FFFFFF;
-            color: #475569; /* Softer text color */
+            color: #475569;
         }
-
-        /* Remove bottom border from the last row in the body */
         .styled-table tbody tr:last-child td {
             border-bottom: none;
         }
-
         .styled-table .highlight {
-            font-weight: 700; /* Bolder for emphasis */
-            color: #00796B; /* Use the theme's accent color */
+            font-weight: 700;
+            color: #00796B;
         }
-
-        /* Add a specific class for the first column to make it stand out */
         .styled-table td:first-child, .styled-table th:first-child {
             font-weight: 600;
             color: #334155;
@@ -193,10 +185,51 @@
             animation: fadeIn 0.5s ease-in-out;
         }
 
+        /* --- DOMAIN 1 SPECIFIC STYLES --- */
+        .chart-container, .chart-container-b1e {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            overflow: hidden;
+        }
+        .chart-container { height: 40vh; }
+        .chart-container-b1e { height: 60vh; max-height: 600px; }
+
+        .slider-container {
+            width: 80%;
+            max-width: 500px;
+            margin: 2rem auto;
+            text-align: center;
+            background-color: #EDEAE0;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+        }
+        .slider-container input[type="range"] { width: 100%; }
+
+        .framework-journey-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: #F8F5EF;
+            border-radius: 0.5rem;
+            max-width: 400px;
+            margin: 1rem auto;
+        }
+        .framework-arrow {
+            width: 2px;
+            height: 2rem;
+            background-color: #D5D2C8;
+        }
+
         /* --- RESPONSIVENESS --- */
         @media (max-width: 768px) {
             .flex-wrap > .interactive-card {
-                flex: 1 1 100%; /* Stack cards on mobile */
+                flex: 1 1 100%;
                 max-width: 100%;
             }
         }
@@ -418,92 +451,185 @@
                                 </div>
                             </section>
                         </main>
-
-                        <footer class="text-center py-6 mt-8 text-gray-500 text-sm">
-                            <p>&copy; 2024 CISM Study Guide. All rights reserved. For educational purposes only.</p>
-                        </footer>
                     </div>
 
                     <!-- =============================================================================== -->
                     <!-- == DOMAIN 1: INFORMATION SECURITY GOVERNANCE ================================== -->
                     <!-- =============================================================================== -->
                     <div id="domain-1" class="domain-content-section hidden">
-                         <header class="text-center pt-4 pb-8 mb-6">
-                            <h1 class="text-3xl font-bold text-gray-800 mb-1">Domain 1: Information Security Governance</h1>
-                             <p class="text-lg text-gray-600">Establishing and maintaining the framework to align security with business objectives.</p>
+                        <header class="text-center py-8 bg-white rounded-lg shadow-md mb-8">
+                            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-2">CISM Domain 1 Study Guide</h1>
+                            <p class="text-xl sm:text-2xl text-gray-600">Information Security Governance</p>
+                            <p class="text-md text-gray-500 mt-2">Your Interactive Study Guide for Strategic Security Leadership</p>
                         </header>
-                        <main class="domain-main-content">
-                            <section class="content-section fade-in p-6 bg-white rounded-lg shadow-md">
-                                <p>This section will cover the core concepts of information security governance. Content is coming soon!</p>
+
+                        <nav class="bg-white p-4 rounded-lg shadow-md mb-8 flex justify-center sticky top-0 z-10 overflow-x-auto">
+                            <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200 active" data-target="introduction-d1">Introduction</button>
+                            <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="enterprise-governance-d1">Enterprise Governance</button>
+                            <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="info-sec-strategy-d1">InfoSec Strategy</button>
+                            <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="key-terms-d1">Key Terms</button>
+                            <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="domain-summary-d1">Domain Summary</button>
+                        </nav>
+
+                        <main>
+                            <!-- Introduction Section -->
+                            <section id="introduction-d1" class="content-section fade-in">
+                                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Introduction to CISM Domain 1</h2>
+                                <div class="p-6 bg-white rounded-lg shadow-md">
+                                    <p class="text-gray-700 mb-4">Welcome to the interactive study guide for CISM Domain 1: Information Security Governance. This domain is the foundational pillar of effective information security management, emphasizing the strategic alignment of security initiatives with overall business objectives. It's about establishing the framework, roles, and responsibilities that ensure information security is an integral part of the enterprise's governance structure.</p>
+                                    <p class="text-gray-700">As a Certified Information Security Manager, you are expected to understand how to develop, implement, and oversee an information security governance framework that not only protects information assets but also enables business operations and ensures compliance with legal, regulatory, and contractual requirements. This guide will help you explore the critical components of governance, from organizational culture to strategic planning and resource management.</p>
+                                </div>
+                            </section>
+
+                            <!-- Enterprise Governance Section -->
+                            <section id="enterprise-governance-d1" class="content-section hidden">
+                                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Section A: Enterprise Governance</h2>
+                                <p class="mb-8 text-gray-700">Enterprise governance provides the structure through which the objectives of the organization are set and pursued. Information security governance must be an integral part of this broader framework.</p>
+
+                                <!-- Accordions for Section A -->
+                                <div class="space-y-4">
+                                    <div class="bg-white rounded-lg shadow-md">
+                                        <button class="accordion-button w-full">1. Organizational Culture and its Impact<span class="accordion-icon text-2xl">+</span></button>
+                                        <div class="accordion-content hidden p-6">
+                                             <p class="text-gray-700 mb-4">Organizational culture significantly influences the effectiveness of information security. A strong security culture fosters proactive behavior and shared responsibility.</p>
+                                             <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Influence of corporate culture on security behaviors and decision-making.</h4>
+                                             <p class="text-gray-600 mb-4">Corporate culture profoundly shapes how individuals perceive and engage with security. It impacts risk appetite and influences security-related decisions. For instance, a culture prioritizing rapid innovation might accept higher security risks.</p>
+                                             <div class="chart-container mb-6"><canvas id="securityCultureChart"></canvas></div>
+                                             <div class="flex flex-wrap justify-center gap-4 mb-4">
+                                                 <button class="px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" style="background-color: #00A896; color: white;" data-culture-type="strongCulture">Strong Security Culture</button>
+                                                 <button class="px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" style="background-color: #DC3545; color: white;" data-culture-type="weakCulture">Weak Security Culture</button>
+                                             </div>
+                                             <div id="culture-explanation" class="text-gray-600 text-sm italic mt-2 text-center">This chart illustrates a simulated distribution of employee security behaviors based on the prevailing organizational culture. Use the buttons to see how culture can shift these behaviors.</div>
+                                             
+                                             <h4 class="text-lg font-semibold text-gray-700 mb-3 mt-6">b. Promoting a security-aware culture through leadership and communication.</h4>
+                                             <p class="text-gray-600 mb-4">Cultivating a security-aware culture requires continuous effort, driven by leadership and effective communication. This includes comprehensive security awareness programs, clear policies, and open communication channels to foster vigilance.</p>
+                                             
+                                             <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Tone at the top: executive sponsorship and support.</h4>
+                                             <p class="text-gray-600 mb-4">The commitment of senior management is paramount. Executive sponsorship ensures visible commitment, adequate resource allocation, and accountability for security across the organization.</p>
+                                             <div class="slider-container">
+                                                 <label for="leadershipEngagement" class="slider-label">Leadership Engagement Level</label>
+                                                 <input type="range" id="leadershipEngagement" min="0" max="100" value="50" step="1">
+                                                 <div class="slider-value" id="engagementValue">Moderate Engagement</div>
+                                                 <div class="slider-description" id="engagementDescription">Policies are generally followed, but security may lack strong strategic momentum or innovation.</div>
+                                             </div>
+                                             <p class="text-gray-600 text-sm italic mt-2 text-center">Adjust the slider to see how different levels of leadership engagement can influence the organizational security culture.</p>
+
+                                             <h4 class="text-lg font-semibold text-gray-700 mb-3 mt-6">d. Change management and resistance mitigation in security initiatives.</h4>
+                                             <p class="text-gray-600 mb-4">Implementing new security measures often encounters resistance. Effective change management involves early stakeholder engagement, clear communication of the "why," and providing adequate training and support to facilitate adoption. Click on each step to learn more:</p>
+                                             <div class="flex flex-wrap justify-center gap-4 mb-6" data-group="change-management">
+                                                 <div class="change-management-card"><span class="card-title">Communicate Early & Often</span><div class="card-description">Proactive and transparent communication about upcoming changes, their benefits, and potential impacts helps reduce uncertainty and build trust.</div></div>
+                                                 <div class="change-management-card"><span class="card-title">Address Concerns</span><div class="card-description">Establish channels for feedback and actively listen to and address employee concerns, fears, and questions about new security initiatives.</div></div>
+                                                 <div class="change-management-card"><span class="card-title">Provide Training & Support</span><div class="card-description">Offer comprehensive and accessible training, along with ongoing support, to ensure employees understand new security processes and tools.</div></div>
+                                                 <div class="change-management-card"><span class="card-title">Celebrate Successes</span><div class="card-description">Recognize and reward positive security behaviors and successful adoption of new measures to reinforce the desired culture and motivate continued compliance.</div></div>
+                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white rounded-lg shadow-md">
+                                        <button class="accordion-button w-full">2. Legal, Regulatory, and Contractual Requirements<span class="accordion-icon text-2xl">+</span></button>
+                                        <div class="accordion-content hidden p-6">
+                                            <p class="text-gray-700 mb-4">Information security governance must ensure compliance with a complex web of legal, regulatory, and contractual obligations.</p>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Identification and interpretation of applicable laws and regulations</h4>
+                                            <p class="text-gray-600 mb-4">Organizations must identify all pertinent laws and regulations based on their operations, industry, and geography. Explore key regulations by region/type:</p>
+                                            <div class="flex flex-wrap justify-center gap-4 mb-6" data-group="legal-type">
+                                                <div class="concept-card"> <span class="card-title">European Union</span><div class="card-description">Regulations like GDPR (General Data Protection Regulation) focus on data privacy and protection for individuals within the EU.</div></div>
+                                                <div class="concept-card"> <span class="card-title">USA (Federal & State)</span><div class="card-description">Includes federal laws like HIPAA (Health Insurance Portability and Accountability Act) for healthcare data, and state-specific laws like CCPA (California Consumer Privacy Act).</div></div>
+                                                <div class="concept-card"> <span class="card-title">Global & Industry Specific</span><div class="card-description">Beyond regional laws, organizations must comply with global standards (e.g., ISO 27001) and industry-specific mandates (e.g., PCI DSS for payment cards, NERC CIP for critical infrastructure).</div></div>
+                                            </div>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Contractual obligations related to information security</h4>
+                                            <p class="text-gray-600 mb-4">Beyond laws, contracts impose specific security requirements. Click on a contract type to see typical security clauses:</p>
+                                            <div class="flex flex-wrap justify-center gap-4 mb-6" data-group="contract-type">
+                                                <div class="concept-card"><span class="card-title">Service Level Agreement (SLA)</span><div class="card-description">Defines the level of service expected from a vendor, including security performance metrics, incident response times, and data protection clauses.</div></div>
+                                                <div class="concept-card"><span class="card-title">Business Associate Agreement (BAA)</span><div class="card-description">Required under HIPAA, this contract specifies how business associates (third-party service providers) will safeguard Protected Health Information (PHI) on behalf of a covered entity.</div></div>
+                                                <div class="concept-card"><span class="card-title">Non-Disclosure Agreement (NDA)</span><div class="card-description">A legal contract that outlines confidential material, knowledge, or information that the parties wish to share with one another but restrict access to by third parties. It includes clauses on data protection and handling.</div></div>
+                                            </div>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Security's role in legal compliance and audit readiness</h4>
+                                            <p class="text-gray-600 mb-4">Information security is central to achieving and demonstrating compliance. This involves establishing compliance programs, preparing for audits with robust documentation, and continuous monitoring of control effectiveness.</p>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">d. Data protection and privacy laws by region/jurisdiction</h4>
+                                            <p class="text-gray-600 mb-4">The global privacy landscape necessitates understanding specific laws across jurisdictions (e.g., GDPR in EU, CCPA in California), particularly for cross-border data transfers and implementing 'privacy by design' principles.</p>
+                                            <h4 class="text-lg font-semibold text-gray-700">e. Intellectual property rights, industry-specific mandates</h4>
+                                            <p class="text-gray-600">Protecting Intellectual property through security controls and adhering to industry-specific mandates (e.g., PCI DSS, NERC CIP) are critical for protecting assets and ensuring operational continuity within specific sectors.</p>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white rounded-lg shadow-md">
+                                        <button class="accordion-button w-full">3. Organizational Structures, Roles, and Responsibilities<span class="accordion-icon text-2xl">+</span></button>
+                                        <div class="accordion-content hidden p-6">
+                                            <p class="text-gray-700 mb-4">Effective Information security governance relies on clearly defined organizational structures, roles, and responsibilities. This clarity ensures accountability, prevents gaps, and facilitates efficient execution of security functions.</p>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Governance structures (centralized, decentralized, hybrid)</h4>
+                                            <p class="text-gray-600 mb-4">Organizations adopt different models for security governance. Explore the common structures below:</p>
+                                            <div class="flex flex-wrap justify-center gap-4 mb-6" data-group="governance-structure">
+                                                 <div class="concept-card"><span class="card-title">Centralized</span><div class="card-description">Security decisions and control are concentrated in a single department or team (e.g., a dedicated CISO office). This provides consistency and strong oversight but can be less agile in large, diverse organizations.</div></div>
+                                                 <div class="concept-card"><span class="card-title">Decentralized</span><div class="card-description">Security responsibilities are distributed across various business units or departments. This can promote agility and local ownership but may lead to inconsistencies and gaps without strong coordination.</div></div>
+                                                 <div class="concept-card"><span class="card-title">Hybrid</span><div class="card-description">Combines elements of both centralized and decentralized models. A central security function sets overall strategy and standards, while business units handle day-to-day implementation and local adaptations. This aims to balance consistency with agility.</div></div>
+                                            </div>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Defining roles and responsibilities: Board, Executive, CISO, Data Owners, Users</h4>
+                                            <p class="text-gray-600 mb-4">Clear role definitions are fundamental to accountability. Each level, from the Board with ultimate oversight to every user adhering to policies, plays a crucial part in the security posture.</p>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Segregation of duties (SoD), accountability, escalation paths</h4>
+                                            <p class="text-gray-600 mb-4">Implementing Segregation of Duties prevents a single point of control, reducing fraud and error. Clear accountability ensures ownership, while defined escalation paths enable timely incident and risk resolution.</p>
+                                            <h4 class="text-lg font-semibold text-gray-700">d. Security steering committees and governance forums</h4>
+                                            <p class="text-gray-600">Formal committees and forums provide structured decision-making and oversight, ensuring strategic direction and alignment with business objectives.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Information Security Strategy Section -->
+                            <section id="info-sec-strategy-d1" class="content-section hidden">
+                                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Section B: Information Security Strategy</h2>
+                                <p class="mb-8 text-gray-700">An information security strategy translates the organization's business objectives into actionable security goals and initiatives.</p>
+                                
+                                <div class="space-y-4">
+                                    <div class="bg-white rounded-lg shadow-md">
+                                        <button class="accordion-button w-full">1. Information Security Strategy Development<span class="accordion-icon text-2xl">+</span></button>
+                                        <div class="accordion-content hidden p-6">
+                                            <div class="chart-container-b1e mb-6"><canvas id="securityInitiativesChart"></canvas></div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white rounded-lg shadow-md">
+                                        <button class="accordion-button w-full">2. Frameworks and Standards<span class="accordion-icon text-2xl">+</span></button>
+                                        <div class="accordion-content hidden p-6">
+                                            <div class="framework-journey-container">
+                                                <!-- Framework journey steps will be rendered here -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white rounded-lg shadow-md">
+                                        <button class="accordion-button w-full">3. Strategic Planning<span class="accordion-icon text-2xl">+</span></button>
+                                        <div class="accordion-content hidden p-6">
+                                            <div class="chart-container mb-4"><canvas id="budgetChart"></canvas></div>
+                                            <div class="chart-container mb-6"><canvas id="kriTrendChart"></canvas></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Key Terms Section -->
+                            <section id="key-terms-d1" class="content-section hidden">
+                                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Key Terms</h2>
+                                <p class="mb-8 text-gray-700">Test your knowledge of key terms in Information Security Governance with these interactive flashcards. Click on a card to reveal its definition.</p>
+                                <div id="key-terms-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                                    <!-- Key terms cards will be populated here -->
+                                </div>
+                            </section>
+
+                            <!-- Domain Summary Section -->
+                            <section id="domain-summary-d1" class="content-section hidden">
+                                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Domain Summary</h2>
+                                <div class="p-6 bg-white rounded-lg shadow-md">
+                                    <p class="text-gray-700 mb-4">Domain 1: Information Security Governance is the foundational domain of the CISM certification... [Summary Text]</p>
+                                </div>
                             </section>
                         </main>
                     </div>
         
-                    <!-- =============================================================================== -->
-                    <!-- == DOMAIN 2: INFORMATION SECURITY RISK MANAGEMENT =============================== -->
-                    <!-- =============================================================================== -->
-                    <div id="domain-2" class="domain-content-section hidden">
-                        <header class="text-center pt-4 pb-8 mb-6">
-                            <h1 class="text-3xl font-bold text-gray-800 mb-1">Domain 2: Information Security Risk Management</h1>
-                            <p class="text-lg text-gray-600">Identifying, assessing, and mitigating risks to an acceptable level.</p>
-                        </header>
-                        <main class="domain-main-content">
-                            <section class="content-section fade-in p-6 bg-white rounded-lg shadow-md">
-                                <p>This section will delve into the processes and methodologies of risk management. Content is coming soon!</p>
-                            </section>
-                        </main>
-                    </div>
-        
-                    <!-- =============================================================================== -->
-                    <!-- == DOMAIN 3: INFORMATION SECURITY PROGRAM DEVELOPMENT ========================= -->
-                    <!-- =============================================================================== -->
-                    <div id="domain-3" class="domain-content-section hidden">
-                        <header class="text-center pt-4 pb-8 mb-6">
-                            <h1 class="text-3xl font-bold text-gray-800 mb-1">Domain 3: Information Security Program Development and Management</h1>
-                            <p class="text-lg text-gray-600">Creating and managing a security program that protects assets and enables the business.</p>
-                        </header>
-                        <main class="domain-main-content">
-                            <section class="content-section fade-in p-6 bg-white rounded-lg shadow-md">
-                                <p>This section will explain how to build and maintain an effective information security program. Content is coming soon!</p>
-                            </section>
-                        </main>
-                    </div>
-        
-                    <!-- =============================================================================== -->
-                    <!-- == DOMAIN 4: INCIDENT MANAGEMENT ============================================== -->
-                    <!-- =============================================================================== -->
-                    <div id="domain-4" class="domain-content-section hidden">
-                         <header class="text-center pt-4 pb-8 mb-6">
-                            <h1 class="text-3xl font-bold text-gray-800 mb-1">Domain 4: Information Security Incident Management</h1>
-                            <p class="text-lg text-gray-600">Developing and implementing a capability to respond to and recover from incidents.</p>
-                        </header>
-                        <main class="domain-main-content">
-                            <section class="content-section fade-in p-6 bg-white rounded-lg shadow-md">
-                                <p>This section will cover the full lifecycle of incident management, from preparation to post-incident review. Content is coming soon!</p>
-                            </section>
-                        </main>
-                    </div>
-                    
-                    <!-- =============================================================================== -->
-                    <!-- == ASSESSMENT ================================================================= -->
-                    <!-- =============================================================================== -->
-                    <div id="assessment" class="domain-content-section hidden">
-                        <header class="text-center pt-4 pb-8 mb-6">
-                            <h1 class="text-3xl font-bold text-gray-800 mb-1">Knowledge Assessment</h1>
-                            <p class="text-lg text-gray-600">Test your understanding of the CISM domains.</p>
-                        </header>
-                        <main class="domain-main-content">
-                            <section class="content-section fade-in p-6 bg-white rounded-lg shadow-md">
-                                <h2 class="text-2xl font-bold section-header text-gray-800 mb-6">Practice Questions</h2>
-                                <p>This section will contain practice questions and quizzes to help you prepare for the CISM exam. Content is coming soon!</p>
-                            </section>
-                        </main>
-                    </div>
+                    <!-- DOMAINS 2, 3, 4 AND ASSESSMENT (Unchanged) -->
+                    <div id="domain-2" class="domain-content-section hidden"><header class="text-center pt-4 pb-8 mb-6"><h1 class="text-3xl font-bold text-gray-800 mb-1">Domain 2: Information Security Risk Management</h1><p class="text-lg text-gray-600">Identifying, assessing, and mitigating risks to an acceptable level.</p></header><main class="domain-main-content"><section class="content-section fade-in p-6 bg-white rounded-lg shadow-md"><p>This section will delve into the processes and methodologies of risk management. Content is coming soon!</p></section></main></div>
+                    <div id="domain-3" class="domain-content-section hidden"><header class="text-center pt-4 pb-8 mb-6"><h1 class="text-3xl font-bold text-gray-800 mb-1">Domain 3: Information Security Program Development and Management</h1><p class="text-lg text-gray-600">Creating and managing a security program that protects assets and enables the business.</p></header><main class="domain-main-content"><section class="content-section fade-in p-6 bg-white rounded-lg shadow-md"><p>This section will explain how to build and maintain an effective information security program. Content is coming soon!</p></section></main></div>
+                    <div id="domain-4" class="domain-content-section hidden"><header class="text-center pt-4 pb-8 mb-6"><h1 class="text-3xl font-bold text-gray-800 mb-1">Domain 4: Information Security Incident Management</h1><p class="text-lg text-gray-600">Developing and implementing a capability to respond to and recover from incidents.</p></header><main class="domain-main-content"><section class="content-section fade-in p-6 bg-white rounded-lg shadow-md"><p>This section will cover the full lifecycle of incident management, from preparation to post-incident review. Content is coming soon!</p></section></main></div>
+                    <div id="assessment" class="domain-content-section hidden"><header class="text-center pt-4 pb-8 mb-6"><h1 class="text-3xl font-bold text-gray-800 mb-1">Knowledge Assessment</h1><p class="text-lg text-gray-600">Test your understanding of the CISM domains.</p></header><main class="domain-main-content"><section class="content-section fade-in p-6 bg-white rounded-lg shadow-md"><h2 class="text-2xl font-bold section-header text-gray-800 mb-6">Practice Questions</h2><p>This section will contain practice questions and quizzes to help you prepare for the CISM exam. Content is coming soon!</p></section></main></div>
                 </div>
             </main>
         </div>
 
-        <!-- MASTER FOOTER -->
         <footer class="text-center py-6 mt-8 text-gray-500 text-sm">
             <p>&copy; 2024 CISM Unified Study Guide. All rights reserved. For educational purposes only.</p>
         </footer>
@@ -522,9 +648,7 @@
                 
                 const targetDomainId = button.dataset.domainTarget;
                 
-                domainContentSections.forEach(sec => {
-                    sec.classList.add('hidden');
-                });
+                domainContentSections.forEach(sec => sec.classList.add('hidden'));
 
                 const targetContainer = document.getElementById(targetDomainId);
                 if (targetContainer) {
@@ -540,7 +664,7 @@
                 return;
             }
 
-            // --- Logic specific to the 'about-cism' section ---
+            // --- Logic specific to 'about-cism' section ---
             if (domainContainer.id === 'about-cism') {
                 const whyCismData = [
                     { title: "Leadership-Focused", description: "Emphasizes the strategic alignment of security initiatives with business goals, moving beyond purely technical skills to focus on governance and management." },
@@ -561,12 +685,7 @@
                     if (!container) return;
                     container.innerHTML = ''; 
                     whyCismData.forEach(item => {
-                        const cardHtml = `
-                            <div class="interactive-card">
-                                <h3 class="card-title">${item.title}</h3>
-                                <div class="card-description"><p>${item.description}</p></div>
-                            </div>
-                        `;
+                        const cardHtml = `<div class="interactive-card" data-group="why-cism"><h3 class="card-title">${item.title}</h3><div class="card-description"><p>${item.description}</p></div></div>`;
                         container.insertAdjacentHTML('beforeend', cardHtml);
                     });
                 };
@@ -576,12 +695,7 @@
                     if (!container) return;
                     container.innerHTML = ''; 
                     examDomainsData.forEach(domain => {
-                        const cardHtml = `
-                            <div class="interactive-card">
-                                <h3 class="card-title">${domain.title}</h3>
-                                <div class="card-description"><p>${domain.description}</p></div>
-                            </div>
-                        `;
+                        const cardHtml = `<div class="interactive-card" data-group="exam-domains"><h3 class="card-title">${domain.title}</h3><div class="card-description"><p>${domain.description}</p></div></div>`;
                         container.insertAdjacentHTML('beforeend', cardHtml);
                     });
                 };
@@ -590,7 +704,43 @@
                 renderExamDomainCards();
             }
 
-            // --- Intra-Domain Navigation (works for any domain with this structure) ---
+            // --- Logic specific to 'domain-1' ---
+            if (domainContainer.id === 'domain-1') {
+                // Security Culture Chart
+                const secCultureCtx = domainContainer.querySelector('#securityCultureChart')?.getContext('2d');
+                if (secCultureCtx) {
+                    const securityCultureChartInstance = new Chart(secCultureCtx, { type: 'doughnut', data: { labels: ['Vigilant & Proactive', 'Compliant', 'Indifferent', 'Resistant'], datasets: [{ data: [50, 30, 15, 5], backgroundColor: ['#00A896', '#A1C9CE', '#FFD700', '#FF6384'] }] }, options: { responsive: true, maintainAspectRatio: false } });
+                    domainContainer.querySelectorAll('[data-culture-type]').forEach(button => {
+                        button.addEventListener('click', e => {
+                            const type = e.currentTarget.dataset.cultureType;
+                            securityCultureChartInstance.data.datasets[0].data = type === 'strongCulture' ? [50, 30, 15, 5] : [10, 20, 40, 30];
+                            securityCultureChartInstance.update();
+                        });
+                    });
+                }
+
+                // Leadership Engagement Slider
+                const leadershipSlider = domainContainer.querySelector('#leadershipEngagement');
+                if (leadershipSlider) {
+                    const engagementValue = domainContainer.querySelector('#engagementValue');
+                    const engagementDescription = domainContainer.querySelector('#engagementDescription');
+                    const levels = [
+                        { value: 0, label: "Minimal Engagement", description: "Security is seen as an IT-only issue..." },
+                        { value: 25, label: "Basic Engagement", description: "Leadership provides some support, but it's often reactive..." },
+                        { value: 50, label: "Moderate Engagement", description: "Policies are generally followed, but security may lack strong strategic momentum..." },
+                        { value: 75, label: "Strong Engagement", description: "Leadership actively champions security, integrating it into business strategy..." },
+                        { value: 100, label: "Transformative Engagement", description: "Security is a core business value, driven by a highly engaged leadership..." }
+                    ];
+                    leadershipSlider.addEventListener('input', e => {
+                        const value = parseInt(e.target.value);
+                        const level = levels.find((l, i) => value >= l.value && (!levels[i+1] || value < levels[i+1].value)) || levels[0];
+                        engagementValue.textContent = level.label;
+                        engagementDescription.textContent = level.description;
+                    });
+                }
+            }
+
+            // --- Generic Handlers for the current domain ---
             const navButtons = domainContainer.querySelectorAll('.domain-nav-item');
             const sections = domainContainer.querySelectorAll('.content-section');
             
@@ -598,47 +748,34 @@
                 button.addEventListener('click', () => {
                     navButtons.forEach(btn => btn.classList.remove('active'));
                     button.classList.add('active');
-                    
                     const targetId = button.dataset.target;
-                    
                     sections.forEach(section => {
-                        const isTarget = section.id === targetId;
-                        section.classList.toggle('hidden', !isTarget);
-                        section.classList.toggle('fade-in', isTarget);
+                        section.classList.toggle('hidden', section.id !== targetId);
+                        section.classList.toggle('fade-in', section.id === targetId);
                     });
                 });
             });
+            const introButton = domainContainer.querySelector('.domain-nav-item[data-target^="introduction"]');
+            if (introButton) introButton.click();
 
-            // --- Accordion Handler ---
             domainContainer.querySelectorAll('.accordion-button').forEach(button => {
                 button.addEventListener('click', () => {
                     const content = button.nextElementSibling;
                     const icon = button.querySelector('.accordion-icon');
-                    const isHidden = content.classList.toggle('hidden');
-                    if (icon) {
-                        icon.textContent = isHidden ? '+' : '–';
-                    }
+                    content.classList.toggle('hidden');
+                    if (icon) icon.textContent = content.classList.contains('hidden') ? '+' : '–';
                 });
             });
 
-            // --- Scoped Interactive Card Handler ---
-            const cardGroups = domainContainer.querySelectorAll('#why-cism-cards-container, #domain-cards-container');
-            cardGroups.forEach(group => {
-                const cardsInGroup = group.querySelectorAll('.interactive-card');
-                cardsInGroup.forEach(card => {
-                    card.addEventListener('click', () => {
-                        const wasActive = card.classList.contains('active');
-                        // Deactivate all cards in this specific group
-                        cardsInGroup.forEach(c => c.classList.remove('active'));
-                        // Activate the clicked card if it wasn't already active
-                        if (!wasActive) {
-                            card.classList.add('active');
-                        }
-                    });
+            domainContainer.querySelectorAll('.interactive-card, .concept-card, .key-term-card, .change-management-card, .legal-type-card, .contract-type-card, .governance-structure-card').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    const groupContainer = e.currentTarget.closest('[data-group]') || e.currentTarget.parentElement;
+                    const wasActive = e.currentTarget.classList.contains('active');
+                    groupContainer.querySelectorAll('.interactive-card, .concept-card, .key-term-card, .change-management-card, .legal-type-card, .contract-type-card, .governance-structure-card').forEach(c => c.classList.remove('active'));
+                    if (!wasActive) e.currentTarget.classList.add('active');
                 });
             });
             
-            // Mark this domain as initialized to prevent re-attaching listeners
             domainContainer.dataset.initialized = 'true';
         }
 
