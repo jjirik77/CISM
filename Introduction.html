@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CISM Certification Overview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F5EF; /* Warm Neutral Background */
+            color: #333333;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        /* Enhanced Section Header with the established accent color */
+        .section-header {
+            border-left: 6px solid #00A896; /* Vibrant Teal Accent */
+            padding-left: 1.25rem;
+            font-size: 2.5rem;
+            color: #222222; /* Darker text for contrast */
+        }
+        /* Refined Accordion Button and Content styles */
+        .accordion-button {
+            background-color: #EDEAE0; /* Secondary Neutral */
+            border-bottom: 1px solid #D5D2C8;
+            border-radius: 0.75rem;
+            padding: 1rem 1.5rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #333333;
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+        }
+        .accordion-button:hover {
+            background-color: #D5D2C8; /* Darker on hover */
+            transform: translateY(-1px);
+        }
+        .accordion-content {
+            background-color: #FFFFFF;
+            border-bottom: 1px solid #D5D2C8;
+            border-radius: 0 0 0.75rem 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        /* Active Navigation Item style */
+        .nav-item.active {
+            border-bottom: 3px solid #00A896; /* Vibrant Teal Accent */
+            font-weight: 700;
+            color: #222222;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Unified Styles for Interactive Cards */
+        .interactive-card {
+            background-color: #EDEAE0; /* Secondary Neutral */
+            border: 1px solid #D5D2C8;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            text-align: center;
+            font-weight: 600;
+            color: #333333;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+        }
+        .interactive-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .interactive-card.active {
+            border-color: #00A896; /* Vibrant Teal border */
+            box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3); /* Teal glow */
+            background-color: #E0F7F5; /* Very light teal background */
+        }
+        .interactive-card .card-title {
+            font-size: 1.15em;
+            margin-bottom: 0.6rem;
+            color: #004085; /* Dark blue for title */
+        }
+        .interactive-card .card-description {
+            font-weight: 400;
+            font-size: 0.9em;
+            color: #555555;
+            margin-top: 0.5rem;
+            display: none; /* Hidden by default */
+            text-align: left;
+            word-break: break-word;
+        }
+        .interactive-card.active .card-description {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        /* Table Styles (for costs, fees, etc.) */
+        .styled-table {
+            width: 100%;
+            max-width: 600px;
+            margin: 1rem auto;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+        .styled-table th, .styled-table td {
+            border: 1px solid #D5D2C8;
+            padding: 0.8rem;
+            text-align: left;
+        }
+        .styled-table th {
+            background-color: #EDEAE0;
+            font-weight: 700;
+            color: #333333;
+        }
+        .styled-table td {
+            background-color: #FFFFFF;
+            color: #555555;
+        }
+        .styled-table .highlight {
+            font-weight: 600;
+            color: #004085;
+        }
+    </style>
+</head>
+<body class="leading-relaxed">
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <header class="text-center py-8 bg-white rounded-lg shadow-md mb-8">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-2">CISM Certification Overview</h1>
+            <p class="text-xl sm:text-2xl text-gray-600">Certified Information Security Manager</p>
+            <p class="text-md text-gray-500 mt-2">Your guide to the premier credential for information security leadership.</p>
+        </header>
+
+        <nav class="bg-white p-4 rounded-lg shadow-md mb-8 flex justify-center sticky top-0 z-10">
+            <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200 active" data-target="overview">Why CISM?</button>
+            <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="exam-details">Exam Details</button>
+            <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="maintenance">Maintenance</button>
+        </nav>
+
+        <main id="content-area">
+            <!-- Why CISM? Section -->
+            <section id="overview" class="content-section fade-in">
+                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Why Pursue the CISM Certification?</h2>
+                <div class="p-6 bg-white rounded-lg shadow-md mb-6">
+                    <p class="text-gray-700">The Certified Information Security Manager (CISM) certification, issued by ISACA, is a premier credential for professionals managing and overseeing information security systems in alignment with business goals. Focused on governance, risk management, and leadership, CISM is ideal for security managers, CISOs, and consultants who drive security strategies across the enterprise. Click on the cards below to explore the key benefits.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Cards will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Exam Details Section -->
+            <section id="exam-details" class="content-section hidden">
+                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">CISM Exam Details</h2>
+                <p class="mb-8 text-gray-700">Everything you need to know about the CISM exam, from its format and cost to the experience required and testing options.</p>
+
+                <!-- Accordion for Exam Details -->
+                <div class="space-y-4">
+                    <div class="bg-white rounded-lg shadow-md">
+                        <button class="accordion-button w-full">
+                            <span>Exam Format & Domains</span>
+                            <span class="accordion-icon text-2xl">+</span>
+                        </button>
+                        <div class="accordion-content hidden p-6">
+                            <ul class="list-disc list-inside text-gray-700 space-y-2">
+                                <li><strong>Format:</strong> 150 multiple-choice questions</li>
+                                <li><strong>Duration:</strong> 4 hours (240 minutes)</li>
+                                <li><strong>Passing Score:</strong> 450 out of 800 (scaled score)</li>
+                                <li><strong>Domains:</strong>
+                                    <ul class="list-disc list-inside ml-6 mt-2">
+                                        <li>Information Security Governance</li>
+                                        <li>Information Security Risk Management</li>
+                                        <li>Information Security Program Development and Management</li>
+                                        <li>Information Security Incident Management</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md">
+                        <button class="accordion-button w-full">
+                            <span>Cost of Certification</span>
+                            <span class="accordion-icon text-2xl">+</span>
+                        </button>
+                        <div class="accordion-content hidden p-6">
+                            <p class="text-gray-700 mb-4">The cost varies depending on your ISACA membership status. Members receive a significant discount on both the exam and annual maintenance fees.</p>
+                            <table class="styled-table">
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Exam Fee</th>
+                                        <th>Annual Maintenance Fee</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>ISACA Member</strong></td>
+                                        <td class="highlight">$575 USD</td>
+                                        <td class="highlight">$45 USD</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Non-Member</strong></td>
+                                        <td class="highlight">$760 USD</td>
+                                        <td class="highlight">$85 USD</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md">
+                        <button class="accordion-button w-full">
+                            <span>Experience & Membership Requirements</span>
+                            <span class="accordion-icon text-2xl">+</span>
+                        </button>
+                        <div class="accordion-content hidden p-6">
+                            <h4 class="text-lg font-semibold text-gray-800 mb-2">Experience Required</h4>
+                            <p class="text-gray-700 mb-4">A minimum of <strong>5 years</strong> of professional information security management work experience is required for certification.</p>
+                            <ul class="list-disc list-inside text-gray-700 space-y-2 mb-4">
+                                <li>3 of those years must be in at least 3 of the 4 CISM domains.</li>
+                                <li>Substitutions for up to 2 years of general experience are available based on qualifying certifications (like CISSP, CISA) or a postgraduate degree in a related field.</li>
+                            </ul>
+                             <h4 class="text-lg font-semibold text-gray-800 mb-2">ISACA Membership (Optional)</h4>
+                             <p class="text-gray-700">While not mandatory, ISACA membership offers significant benefits, including exam discounts, free webinars, access to research, and networking opportunities with a global community of professionals.</p>
+                        </div>
+                    </div>
+                     <div class="bg-white rounded-lg shadow-md">
+                        <button class="accordion-button w-full">
+                            <span>Where to Take the Exam</span>
+                            <span class="accordion-icon text-2xl">+</span>
+                        </button>
+                        <div class="accordion-content hidden p-6">
+                            <p class="text-gray-700 mb-4">ISACA offers flexible testing options to accommodate candidates worldwide. You can schedule your exam year-round through the official ISACA website.</p>
+                             <ul class="list-disc list-inside text-gray-700 space-y-3">
+                                <li>
+                                    <strong>Remote Proctored Online Exam:</strong> Take the exam from the comfort of your home or office. This option is available through both PSI and Pearson VUE platforms, monitored by a live proctor via webcam.
+                                </li>
+                                <li>
+                                    <strong>In-Person Testing Centers:</strong> For those who prefer a traditional testing environment, the exam is offered at Pearson VUE testing centers located globally.
+                                </li>
+                            </ul>
+                            <p class="mt-4 text-gray-600 text-sm italic">Visit <a href="https://www.isaca.org" target="_blank" class="text-blue-600 hover:underline">www.isaca.org</a> to find a testing center or schedule your remote exam.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Maintenance Section -->
+            <section id="maintenance" class="content-section hidden">
+                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Maintaining Your CISM Certification</h2>
+                <p class="mb-8 text-gray-700">Holding the CISM certification is an ongoing commitment to professional development. To maintain your credential, you must adhere to ISACA's requirements for continuing professional education (CPE) and professional conduct.</p>
+                <div class="p-6 bg-white rounded-lg shadow-md">
+                    <h4 class="text-xl font-bold text-gray-800 mb-4">CPE Requirements</h4>
+                    <p class="text-gray-700 mb-4">You must demonstrate your commitment to keeping your skills current by earning and reporting Continuing Professional Education (CPE) credits.</p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2 mb-6">
+                       <li>Earn a minimum of <strong>20 CPE credits annually</strong>.</li>
+                       <li>Earn a total of <strong>120 CPE credits over a 3-year reporting cycle</strong>.</li>
+                    </ul>
+
+                    <h4 class="text-xl font-bold text-gray-800 mb-4">Annual Maintenance Fee</h4>
+                    <p class="text-gray-700 mb-4">An annual fee is required to maintain your certification in good standing.</p>
+                     <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Annual Maintenance Fee</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>ISACA Member</strong></td>
+                                <td class="highlight">$45 USD</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Non-Member</strong></td>
+                                <td class="highlight">$85 USD</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                     <h4 class="text-xl font-bold text-gray-800 mt-6 mb-4">Other Requirements</h4>
+                     <ul class="list-disc list-inside text-gray-700 space-y-2">
+                       <li>Adhere to ISACA’s <strong>Code of Professional Ethics</strong>.</li>
+                       <li>Comply with the CISM <strong>Continuing Professional Education (CPE) Policy</strong> and reporting requirements.</li>
+                    </ul>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center py-6 mt-8 text-gray-500 text-sm">
+            <p>&copy; 2024 CISM Study Guide. All rights reserved. For educational purposes only.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- DATA ---
+            const whyCismData = [
+                {
+                    title: "Leadership-Focused",
+                    description: "Emphasizes the strategic alignment of security initiatives with business goals, moving beyond purely technical skills to focus on governance and management."
+                },
+                {
+                    title: "Career-Enhancing",
+                    description: "Qualifies you for high-level, influential roles like Information Security Manager, Risk Manager, and Chief Information Security Officer (CISO)."
+                },
+                {
+                    title: "Global Recognition",
+                    description: "Respected and accepted by organizations and governments worldwide as a standard of excellence for information security leadership."
+                },
+                {
+                    title: "Industry Relevance",
+                    description: "Designed around current, real-world challenges in governance, risk, program development, and incident management, ensuring your knowledge is up-to-date."
+                }
+            ];
+
+            // --- RENDER FUNCTIONS ---
+            const renderWhyCismCards = () => {
+                const container = document.querySelector('#overview .grid');
+                if (!container) return;
+                container.innerHTML = ''; // Clear existing cards
+
+                whyCismData.forEach(item => {
+                    const cardHtml = `
+                        <div class="interactive-card">
+                            <h3 class="card-title">${item.title}</h3>
+                            <div class="card-description"><p>${item.description}</p></div>
+                        </div>
+                    `;
+                    container.insertAdjacentHTML('beforeend', cardHtml);
+                });
+
+                // Add event listeners after rendering
+                addCardEventListeners();
+            };
+
+            // --- EVENT LISTENERS ---
+            const addCardEventListeners = () => {
+                document.querySelectorAll('.interactive-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        const wasActive = card.classList.contains('active');
+                        
+                        // Deactivate all other cards
+                        document.querySelectorAll('.interactive-card').forEach(otherCard => {
+                            otherCard.classList.remove('active');
+                        });
+
+                        // Activate the clicked card if it wasn't already active
+                        if (!wasActive) {
+                            card.classList.add('active');
+                        }
+                    });
+                });
+            };
+
+            // Navigation
+            document.querySelectorAll('.nav-item').forEach(button => {
+                button.addEventListener('click', () => {
+                    document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    document.querySelectorAll('.content-section').forEach(section => {
+                        section.classList.add('hidden');
+                        section.classList.remove('fade-in');
+                    });
+
+                    const targetSection = document.getElementById(button.dataset.target);
+                    targetSection.classList.remove('hidden');
+                    // Add a slight delay to allow the 'display' property to apply before animating
+                    setTimeout(() => targetSection.classList.add('fade-in'), 10); 
+                });
+            });
+
+            // Accordion Functionality
+            document.querySelectorAll('.accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const icon = button.querySelector('.accordion-icon');
+                    const isOpening = content.classList.contains('hidden');
+
+                    // Optional: Close all other accordions when one is opened
+                    // document.querySelectorAll('.accordion-content').forEach(c => {
+                    //     if (c !== content) {
+                    //         c.classList.add('hidden');
+                    //         c.previousElementSibling.querySelector('.accordion-icon').textContent = '+';
+                    //     }
+                    // });
+
+                    if (isOpening) {
+                        content.classList.remove('hidden');
+                        icon.textContent = '–';
+                    } else {
+                        content.classList.add('hidden');
+                        icon.textContent = '+';
+                    }
+                });
+            });
+
+            // --- INITIALIZATION ---
+            renderWhyCismCards();
+            
+            // Set the "Why CISM?" tab as active by default on load
+            const overviewButton = document.querySelector('.nav-item[data-target="overview"]');
+            const overviewSection = document.getElementById('overview');
+            if (overviewButton && overviewSection) {
+                overviewButton.classList.add('active');
+                overviewSection.classList.remove('hidden');
+                overviewSection.classList.add('fade-in');
+            }
+        });
+    </script>
+</body>
+</html>
