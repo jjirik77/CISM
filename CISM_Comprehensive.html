@@ -134,43 +134,63 @@
             display: block;
             animation: fadeIn 0.5s ease-in-out;
         }
-        
-        /* --- CHARTS & VISUALIZATIONS --- */
-        .chart-container {
-            position: relative;
+
+        /* --- Polished Table Styles --- */
+        .styled-table {
             width: 100%;
             max-width: 600px;
-            height: 40vh;
-            margin: auto;
+            margin: 1.5rem auto; /* Increased margin */
+            border-collapse: collapse;
+            font-size: 1rem; /* Slightly larger font for readability */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* Subtle shadow for depth */
+            border-radius: 0.5rem; /* Rounded corners for the container */
+            overflow: hidden; /* To make border-radius work on table */
         }
-        
-        /* --- FLOWCHARTS --- */
-        .flowchart-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background-color: #F8F5EF;
-            border-radius: 0.75rem;
-            max-width: 450px;
-            margin: 1rem auto;
+
+        .styled-table th, .styled-table td {
+            padding: 1rem 1.25rem; /* Generous padding */
+            text-align: left;
+            border: none; /* Remove all default borders */
+            border-bottom: 1px solid #e2e8f0; /* Light gray bottom border for rows */
         }
-        .flowchart-container .interactive-card {
-            width: 100%;
-            max-width: 400px;
+
+        .styled-table th {
+            background-color: #f8fafc; /* Very light gray for header */
+            font-weight: 700;
+            color: #334155; /* Darker, less harsh text color */
+            text-transform: uppercase; /* Uppercase headers */
+            letter-spacing: 0.05em; /* Spacing for headers */
+            font-size: 0.85rem;
+        }
+
+        .styled-table td {
             background-color: #FFFFFF;
+            color: #475569; /* Softer text color */
         }
-        .flowchart-arrow {
-            font-size: 2em;
-            color: #D5D2C8;
-            line-height: 1;
+
+        /* Remove bottom border from the last row in the body */
+        .styled-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .styled-table .highlight {
+            font-weight: 700; /* Bolder for emphasis */
+            color: #00796B; /* Use the theme's accent color */
+        }
+
+        /* Add a specific class for the first column to make it stand out */
+        .styled-table td:first-child, .styled-table th:first-child {
+            font-weight: 600;
+            color: #334155;
         }
         
         /* --- KEYFRAMES --- */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
         }
 
         /* --- RESPONSIVENESS --- */
@@ -239,40 +259,229 @@
             <!-- Right Column: Main Content Area -->
             <main class="flex-1">
                 <div id="domains-content-area">
-                    <!-- All domain content is now directly in the HTML below -->
                     <!-- =============================================================================== -->
                     <!-- == ABOUT CISM ================================================================= -->
                     <!-- =============================================================================== -->
                     <div id="about-cism" class="domain-content-section fade-in">
-                        <!-- Content Removed as per request -->
+                        <header class="text-center py-8 bg-white rounded-lg shadow-md mb-8">
+                            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-2">CISM Certification Overview</h1>
+                            <p class="text-xl sm:text-2xl text-gray-600">Certified Information Security Manager</p>
+                            <p class="text-md text-gray-500 mt-2">Your guide to the premier credential for information security leadership.</p>
+                        </header>
+
+                        <nav class="bg-white p-4 rounded-lg shadow-md mb-8 flex justify-center sticky top-0 z-10">
+                            <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200 active" data-target="overview">Why CISM?</button>
+                            <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="exam-details">Exam Details</button>
+                            <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="maintenance">Maintenance</button>
+                        </nav>
+
+                        <main id="content-area">
+                            <!-- Why CISM? Section -->
+                            <section id="overview" class="content-section fade-in">
+                                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Why Pursue the CISM Certification?</h2>
+                                <div class="p-6 bg-white rounded-lg shadow-md mb-6">
+                                    <p class="text-gray-700">The Certified Information Security Manager (CISM) certification, issued by ISACA, is a premier credential for professionals managing and overseeing information security systems in alignment with business goals. Focused on governance, risk management, and leadership, CISM is ideal for security managers, CISOs, and consultants who drive security strategies across the enterprise. Click on the cards below to explore the key benefits.</p>
+                                </div>
+                                <div id="why-cism-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                    <!-- Cards will be populated by JavaScript -->
+                                </div>
+                            </section>
+
+                            <!-- Exam Details Section -->
+                            <section id="exam-details" class="content-section hidden">
+                                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">CISM Exam Details</h2>
+                                <p class="mb-8 text-gray-700">Everything you need to know about the CISM exam, from its format and cost to the experience required and testing options.</p>
+
+                                <!-- Accordion for Exam Details -->
+                                <div class="space-y-4">
+                                    <div class="bg-white rounded-lg shadow-md">
+                                        <button class="accordion-button w-full">
+                                            <span>Exam Format & Domains</span>
+                                            <span class="accordion-icon text-2xl">+</span>
+                                        </button>
+                                        <div class="accordion-content hidden p-6">
+                                            <ul class="list-disc list-inside text-gray-700 space-y-2 mb-4">
+                                                <li><strong>Format:</strong> 150 multiple-choice questions</li>
+                                                <li><strong>Duration:</strong> 4 hours (240 minutes)</li>
+                                                <li><strong>Passing Score:</strong> 450 out of 800 (scaled score)</li>
+                                            </ul>
+                                            <div id="domain-cards-container" class="flex flex-row flex-wrap justify-center gap-4 my-4">
+                                                <!-- Domain cards will be injected here by JS -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white rounded-lg shadow-md">
+                                        <button class="accordion-button w-full">
+                                            <span>Cost of Certification</span>
+                                            <span class="accordion-icon text-2xl">+</span>
+                                        </button>
+                                        <div class="accordion-content hidden p-6">
+                                            <p class="text-gray-700 mb-4">The cost varies depending on your ISACA membership status. Members receive a significant discount on both the exam and annual maintenance fees.</p>
+                                            <table class="styled-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Category</th>
+                                                        <th>Exam Fee</th>
+                                                        <th>Annual Maintenance Fee</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><strong>ISACA Member</strong></td>
+                                                        <td class="highlight">$575 USD</td>
+                                                        <td class="highlight">$45 USD</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Non-Member</strong></td>
+                                                        <td class="highlight">$760 USD</td>
+                                                        <td class="highlight">$85 USD</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white rounded-lg shadow-md">
+                                        <button class="accordion-button w-full">
+                                            <span>Experience & Membership Requirements</span>
+                                            <span class="accordion-icon text-2xl">+</span>
+                                        </button>
+                                        <div class="accordion-content hidden p-6">
+                                            <h4 class="text-lg font-semibold text-gray-800 mb-2">Experience Required</h4>
+                                            <p class="text-gray-700 mb-4">A minimum of <strong>5 years</strong> of professional information security management work experience is required for certification.</p>
+                                            <ul class="list-disc list-inside text-gray-700 space-y-2 mb-4">
+                                                <li>3 of those years must be in at least 3 of the 4 CISM domains.</li>
+                                                <li>Substitutions for up to 2 years of general experience are available based on qualifying certifications (like CISSP, CISA) or a postgraduate degree in a related field.</li>
+                                            </ul>
+                                             <h4 class="text-lg font-semibold text-gray-800 mb-2">ISACA Membership (Optional)</h4>
+                                             <p class="text-gray-700">While not mandatory, ISACA membership offers significant benefits, including exam discounts, free webinars, access to research, and networking opportunities with a global community of professionals.</p>
+                                        </div>
+                                    </div>
+                                     <div class="bg-white rounded-lg shadow-md">
+                                        <button class="accordion-button w-full">
+                                            <span>Where to Take the Exam</span>
+                                            <span class="accordion-icon text-2xl">+</span>
+                                        </button>
+                                        <div class="accordion-content hidden p-6">
+                                            <p class="text-gray-700 mb-4">ISACA offers flexible testing options to accommodate candidates worldwide. You can schedule your exam year-round through the official ISACA website.</p>
+                                             <ul class="list-disc list-inside text-gray-700 space-y-3">
+                                                <li>
+                                                    <strong>Remote Proctored Online Exam:</strong> Take the exam from the comfort of your home or office. This option is available through both PSI and Pearson VUE platforms, monitored by a live proctor via webcam.
+                                                </li>
+                                                <li>
+                                                    <strong>In-Person Testing Centers:</strong> For those who prefer a traditional testing environment, the exam is offered at Pearson VUE testing centers located globally.
+                                                </li>
+                                            </ul>
+                                            <p class="mt-4 text-gray-600 text-sm italic">Visit <a href="https://www.isaca.org" target="_blank" class="text-blue-600 hover:underline">www.isaca.org</a> to find a testing center or schedule your remote exam.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <!-- Maintenance Section -->
+                            <section id="maintenance" class="content-section hidden">
+                                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Maintaining Your CISM Certification</h2>
+                                <p class="mb-8 text-gray-700">Holding the CISM certification is an ongoing commitment to professional development. To maintain your credential, you must adhere to ISACA's requirements for continuing professional education (CPE) and professional conduct.</p>
+                                <div class="p-6 bg-white rounded-lg shadow-md">
+                                    <h4 class="text-xl font-bold text-gray-800 mb-4">CPE Requirements</h4>
+                                    <p class="text-gray-700 mb-4">You must demonstrate your commitment to keeping your skills current by earning and reporting Continuing Professional Education (CPE) credits.</p>
+                                    <ul class="list-disc list-inside text-gray-700 space-y-2 mb-6">
+                                       <li>Earn a minimum of <strong>20 CPE credits annually</strong>.</li>
+                                       <li>Earn a total of <strong>120 CPE credits over a 3-year reporting cycle</strong>.</li>
+                                    </ul>
+
+                                    <h4 class="text-xl font-bold text-gray-800 mb-4">Annual Maintenance Fee</h4>
+                                    <p class="text-gray-700 mb-4">An annual fee is required to maintain your certification in good standing.</p>
+                                     <table class="styled-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Category</th>
+                                                <th>Annual Maintenance Fee</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>ISACA Member</strong></td>
+                                                <td class="highlight">$45 USD</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Non-Member</strong></td>
+                                                <td class="highlight">$85 USD</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                     <h4 class="text-xl font-bold text-gray-800 mt-6 mb-4">Other Requirements</h4>
+                                     <ul class="list-disc list-inside text-gray-700 space-y-2">
+                                        <li>Adhere to ISACA’s <strong>Code of Professional Ethics</strong>.</li>
+                                        <li>Comply with the CISM <strong>Continuing Professional Education (CPE) Policy</strong> and reporting requirements.</li>
+                                    </ul>
+                                </div>
+                            </section>
+                        </main>
+
+                        <footer class="text-center py-6 mt-8 text-gray-500 text-sm">
+                            <p>&copy; 2024 CISM Study Guide. All rights reserved. For educational purposes only.</p>
+                        </footer>
                     </div>
 
                     <!-- =============================================================================== -->
                     <!-- == DOMAIN 1: INFORMATION SECURITY GOVERNANCE ================================== -->
                     <!-- =============================================================================== -->
                     <div id="domain-1" class="domain-content-section hidden">
-                        <!-- Full HTML Content for Domain 1 -->
+                         <header class="text-center pt-4 pb-8 mb-6">
+                            <h1 class="text-3xl font-bold text-gray-800 mb-1">Domain 1: Information Security Governance</h1>
+                             <p class="text-lg text-gray-600">Establishing and maintaining the framework to align security with business objectives.</p>
+                        </header>
+                        <main class="domain-main-content">
+                            <section class="content-section fade-in p-6 bg-white rounded-lg shadow-md">
+                                <p>This section will cover the core concepts of information security governance. Content is coming soon!</p>
+                            </section>
+                        </main>
                     </div>
         
                     <!-- =============================================================================== -->
                     <!-- == DOMAIN 2: INFORMATION SECURITY RISK MANAGEMENT =============================== -->
                     <!-- =============================================================================== -->
                     <div id="domain-2" class="domain-content-section hidden">
-                        <!-- Full HTML Content for Domain 2 -->
+                        <header class="text-center pt-4 pb-8 mb-6">
+                            <h1 class="text-3xl font-bold text-gray-800 mb-1">Domain 2: Information Security Risk Management</h1>
+                            <p class="text-lg text-gray-600">Identifying, assessing, and mitigating risks to an acceptable level.</p>
+                        </header>
+                        <main class="domain-main-content">
+                            <section class="content-section fade-in p-6 bg-white rounded-lg shadow-md">
+                                <p>This section will delve into the processes and methodologies of risk management. Content is coming soon!</p>
+                            </section>
+                        </main>
                     </div>
         
                     <!-- =============================================================================== -->
                     <!-- == DOMAIN 3: INFORMATION SECURITY PROGRAM DEVELOPMENT ========================= -->
                     <!-- =============================================================================== -->
                     <div id="domain-3" class="domain-content-section hidden">
-                        <!-- Full HTML Content for Domain 3 -->
+                        <header class="text-center pt-4 pb-8 mb-6">
+                            <h1 class="text-3xl font-bold text-gray-800 mb-1">Domain 3: Information Security Program Development and Management</h1>
+                            <p class="text-lg text-gray-600">Creating and managing a security program that protects assets and enables the business.</p>
+                        </header>
+                        <main class="domain-main-content">
+                            <section class="content-section fade-in p-6 bg-white rounded-lg shadow-md">
+                                <p>This section will explain how to build and maintain an effective information security program. Content is coming soon!</p>
+                            </section>
+                        </main>
                     </div>
         
                     <!-- =============================================================================== -->
                     <!-- == DOMAIN 4: INCIDENT MANAGEMENT ============================================== -->
                     <!-- =============================================================================== -->
                     <div id="domain-4" class="domain-content-section hidden">
-                        <!-- Full HTML Content for Domain 4 -->
+                         <header class="text-center pt-4 pb-8 mb-6">
+                            <h1 class="text-3xl font-bold text-gray-800 mb-1">Domain 4: Information Security Incident Management</h1>
+                            <p class="text-lg text-gray-600">Developing and implementing a capability to respond to and recover from incidents.</p>
+                        </header>
+                        <main class="domain-main-content">
+                            <section class="content-section fade-in p-6 bg-white rounded-lg shadow-md">
+                                <p>This section will cover the full lifecycle of incident management, from preparation to post-incident review. Content is coming soon!</p>
+                            </section>
+                        </main>
                     </div>
                     
                     <!-- =============================================================================== -->
@@ -302,14 +511,86 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
+        // --- Master Navigation Handler ---
         const masterNavButtons = document.querySelectorAll('#master-navigation .master-nav-item');
         const domainContentSections = document.querySelectorAll('.domain-content-section');
 
+        masterNavButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                masterNavButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                
+                const targetDomainId = button.dataset.domainTarget;
+                
+                domainContentSections.forEach(sec => {
+                    sec.classList.add('hidden');
+                });
+
+                const targetContainer = document.getElementById(targetDomainId);
+                if (targetContainer) {
+                    targetContainer.classList.remove('hidden');
+                    setupDomain(targetContainer);
+                }
+            });
+        });
+
+        // --- Domain-Specific Setup Function ---
         function setupDomain(domainContainer) {
             if (!domainContainer || domainContainer.dataset.initialized === 'true') {
                 return;
             }
 
+            // --- Logic specific to the 'about-cism' section ---
+            if (domainContainer.id === 'about-cism') {
+                const whyCismData = [
+                    { title: "Leadership-Focused", description: "Emphasizes the strategic alignment of security initiatives with business goals, moving beyond purely technical skills to focus on governance and management." },
+                    { title: "Career-Enhancing", description: "Qualifies you for high-level, influential roles like Information Security Manager, Risk Manager, and Chief Information Security Officer (CISO)." },
+                    { title: "Global Recognition", description: "Respected and accepted by organizations and governments worldwide as a standard of excellence for information security leadership." },
+                    { title: "Industry Relevance", description: "Designed around current, real-world challenges in governance, risk, program development, and incident management, ensuring your knowledge is up-to-date." }
+                ];
+
+                const examDomainsData = [
+                    { title: "Domain 1: Governance", description: "Focuses on establishing and maintaining an information security governance framework and supporting processes to ensure that the information security strategy is aligned with organizational goals and objectives." },
+                    { title: "Domain 2: Risk Management", description: "Covers the management of information risk to an acceptable level based on the organization's risk appetite in order to meet organizational goals and objectives." },
+                    { title: "Domain 3: Program Development", description: "Deals with developing and maintaining an information security program that identifies, manages, and protects the organization's assets while aligning to the information security strategy." },
+                    { title: "Domain 4: Incident Management", description: "Pertains to planning, establishing, and managing the capability to detect, investigate, respond to, and recover from information security incidents to minimize business impact." }
+                ];
+
+                const renderWhyCismCards = () => {
+                    const container = domainContainer.querySelector('#why-cism-cards-container');
+                    if (!container) return;
+                    container.innerHTML = ''; 
+                    whyCismData.forEach(item => {
+                        const cardHtml = `
+                            <div class="interactive-card">
+                                <h3 class="card-title">${item.title}</h3>
+                                <div class="card-description"><p>${item.description}</p></div>
+                            </div>
+                        `;
+                        container.insertAdjacentHTML('beforeend', cardHtml);
+                    });
+                };
+
+                const renderExamDomainCards = () => {
+                    const container = domainContainer.querySelector('#domain-cards-container');
+                    if (!container) return;
+                    container.innerHTML = ''; 
+                    examDomainsData.forEach(domain => {
+                        const cardHtml = `
+                            <div class="interactive-card" style="min-width: 200px;">
+                                <h3 class="card-title">${domain.title}</h3>
+                                <div class="card-description"><p>${domain.description}</p></div>
+                            </div>
+                        `;
+                        container.insertAdjacentHTML('beforeend', cardHtml);
+                    });
+                };
+
+                renderWhyCismCards();
+                renderExamDomainCards();
+            }
+
+            // --- Intra-Domain Navigation (works for any domain with this structure) ---
             const navButtons = domainContainer.querySelectorAll('.domain-nav-item');
             const sections = domainContainer.querySelectorAll('.content-section');
             
@@ -317,67 +598,55 @@
                 button.addEventListener('click', () => {
                     navButtons.forEach(btn => btn.classList.remove('active'));
                     button.classList.add('active');
+                    
                     const targetId = button.dataset.target;
+                    
                     sections.forEach(section => {
-                        section.classList.toggle('hidden', section.id !== targetId);
+                        const isTarget = section.id === targetId;
+                        section.classList.toggle('hidden', !isTarget);
+                        section.classList.toggle('fade-in', isTarget);
                     });
                 });
             });
 
+            // --- Accordion Handler ---
             domainContainer.querySelectorAll('.accordion-button').forEach(button => {
                 button.addEventListener('click', () => {
                     const content = button.nextElementSibling;
                     const icon = button.querySelector('.accordion-icon');
-                    content.classList.toggle('hidden');
+                    const isHidden = content.classList.toggle('hidden');
                     if (icon) {
-                        icon.textContent = content.classList.contains('hidden') ? '+' : '–';
+                        icon.textContent = isHidden ? '+' : '–';
                     }
                 });
             });
 
-            domainContainer.querySelectorAll('.interactive-card').forEach(card => {
-                card.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const parentGroup = card.closest('[data-interactive-group]');
-                    const wasActive = card.classList.contains('active');
-                    
-                    if (parentGroup) {
-                       parentGroup.querySelectorAll('.interactive-card').forEach(c => c.classList.remove('active'));
-                    }
-
-                    if(!wasActive) {
-                        card.classList.add('active');
-                    }
+            // --- Scoped Interactive Card Handler ---
+            const cardGroups = domainContainer.querySelectorAll('#why-cism-cards-container, #domain-cards-container');
+            cardGroups.forEach(group => {
+                const cardsInGroup = group.querySelectorAll('.interactive-card');
+                cardsInGroup.forEach(card => {
+                    card.addEventListener('click', () => {
+                        const wasActive = card.classList.contains('active');
+                        // Deactivate all cards in this specific group
+                        cardsInGroup.forEach(c => c.classList.remove('active'));
+                        // Activate the clicked card if it wasn't already active
+                        if (!wasActive) {
+                            card.classList.add('active');
+                        }
+                    });
                 });
             });
             
-            initializeDomainCharts(domainContainer);
+            // Mark this domain as initialized to prevent re-attaching listeners
             domainContainer.dataset.initialized = 'true';
         }
 
-        masterNavButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                masterNavButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                const targetDomainId = button.dataset.domainTarget;
-                
-                domainContentSections.forEach(sec => {
-                    sec.classList.toggle('hidden', sec.id !== targetDomainId);
-                });
-
-                const targetContainer = document.getElementById(targetDomainId);
-                if(targetContainer) {
-                    setupDomain(targetContainer);
-                }
-            });
-        });
-
-        const chartInstances = {};
-        function initializeDomainCharts(domainContainer) {
-            // Placeholder for Chart.js initialization code
+        // --- Initial Setup ---
+        const initialDomain = document.getElementById('about-cism');
+        if (initialDomain) {
+            setupDomain(initialDomain);
         }
-        
-        setupDomain(document.getElementById('about-cism'));
     });
     </script>
 </body>
