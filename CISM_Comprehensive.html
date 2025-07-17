@@ -114,7 +114,7 @@
             border-color: #00A896;
             box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3);
             background-color: #E0F7F5;
-            max-height: 1000px; /* Expand fully */
+            max-height: 5000px; /* Set a very large max-height to ensure full expansion */
         }
         .card-title {
             font-size: 1.1em;
@@ -135,12 +135,23 @@
             animation: fadeIn 0.5s ease-in-out;
         }
 
-        /* --- Card Sizing for Domain 1, Section A --- */
-        #enterprise-governance-d1 .concept-card,
-        #enterprise-governance-d1 .change-management-card {
+        /* --- Card Sizing for Domain 1 --- */
+        #domain-1 .concept-card,
+        #domain-1 .change-management-card,
+        #domain-1 .risk-appetite-card,
+        #domain-1 .business-driver-card,
+        #domain-1 .maturity-level-card,
+        #domain-1 .key-term-card,
+        #domain-1 .legal-type-card,
+        #domain-1 .contract-type-card,
+        #domain-1 .governance-structure-card {
             max-width: 150px;
-            flex-basis: 150px;
-            flex-grow: 0;
+            width: 100%; /* Allow cards to fill grid cell */
+        }
+        
+        #domain-1 .framework-step-node {
+            min-width: 250px;
+            width: 250px;
         }
 
         /* --- Polished Table Styles --- */
@@ -234,7 +245,18 @@
             background-color: #D5D2C8;
         }
 
+        .maturity-arrow-right {
+            font-size: 2.5rem;
+            color: #b0bec5; /* A soft grey */
+            line-height: 1;
+        }
+
         /* --- RESPONSIVENESS --- */
+        @media (max-width: 1279px) { /* xl breakpoint in tailwind */
+            #info-sec-strategy-d1 .maturity-level-card {
+                margin-bottom: 1rem; /* Add space when they stack */
+            }
+        }
         @media (max-width: 768px) {
             .flex-wrap > .interactive-card {
                 flex: 1 1 100%;
@@ -474,7 +496,7 @@
                         <nav class="bg-white p-4 rounded-lg shadow-md mb-8 flex justify-center sticky top-0 z-10 overflow-x-auto">
                             <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200 active" data-target="introduction-d1">Introduction</button>
                             <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="enterprise-governance-d1">Enterprise Governance</button>
-                            <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="info-sec-strategy-d1">InfoSec Strategy</button>
+                            <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="info-sec-strategy-d1">Information Security Strategy</button>
                             <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="key-terms-d1">Key Terms</button>
                             <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="domain-summary-d1">Domain Summary</button>
                         </nav>
@@ -524,7 +546,7 @@
 
                                              <h4 class="text-lg font-semibold text-gray-700 mb-3 mt-6">d. Change management and resistance mitigation in security initiatives.</h4>
                                              <p class="text-gray-600 mb-4">Implementing new security measures often encounters resistance. Effective change management involves early stakeholder engagement, clear communication of the "why," and providing adequate training and support to facilitate adoption. Click on each step to learn more:</p>
-                                             <div class="flex flex-wrap justify-center gap-4 mb-6" data-group="change-management">
+                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-group="change-management">
                                                  <div class="change-management-card"><span class="card-title">Communicate Early & Often</span><div class="card-description">Proactive and transparent communication about upcoming changes, their benefits, and potential impacts helps reduce uncertainty and build trust.</div></div>
                                                  <div class="change-management-card"><span class="card-title">Address Concerns</span><div class="card-description">Establish channels for feedback and actively listen to and address employee concerns, fears, and questions about new security initiatives.</div></div>
                                                  <div class="change-management-card"><span class="card-title">Provide Training & Support</span><div class="card-description">Offer comprehensive and accessible training, along with ongoing support, to ensure employees understand new security processes and tools.</div></div>
@@ -538,14 +560,14 @@
                                             <p class="text-gray-700 mb-4">Information security governance must ensure compliance with a complex web of legal, regulatory, and contractual obligations.</p>
                                             <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Identification and interpretation of applicable laws and regulations</h4>
                                             <p class="text-gray-600 mb-4">Organizations must identify all pertinent laws and regulations based on their operations, industry, and geography. Explore key regulations by region/type:</p>
-                                            <div class="flex flex-wrap justify-center gap-4 mb-6" data-group="legal-type">
+                                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-group="legal-type">
                                                 <div class="concept-card"> <span class="card-title">European Union</span><div class="card-description">Regulations like GDPR (General Data Protection Regulation) focus on data privacy and protection for individuals within the EU.</div></div>
                                                 <div class="concept-card"> <span class="card-title">USA (Federal & State)</span><div class="card-description">Includes federal laws like HIPAA (Health Insurance Portability and Accountability Act) for healthcare data, and state-specific laws like CCPA (California Consumer Privacy Act).</div></div>
                                                 <div class="concept-card"> <span class="card-title">Global & Industry Specific</span><div class="card-description">Beyond regional laws, organizations must comply with global standards (e.g., ISO 27001) and industry-specific mandates (e.g., PCI DSS for payment cards, NERC CIP for critical infrastructure).</div></div>
                                             </div>
                                             <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Contractual obligations related to information security</h4>
                                             <p class="text-gray-600 mb-4">Beyond laws, contracts impose specific security requirements. Click on a contract type to see typical security clauses:</p>
-                                            <div class="flex flex-wrap justify-center gap-4 mb-6" data-group="contract-type">
+                                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-group="contract-type">
                                                 <div class="concept-card"><span class="card-title">Service Level Agreement (SLA)</span><div class="card-description">Defines the level of service expected from a vendor, including security performance metrics, incident response times, and data protection clauses.</div></div>
                                                 <div class="concept-card"><span class="card-title">Business Associate Agreement (BAA)</span><div class="card-description">Required under HIPAA, this contract specifies how business associates (third-party service providers) will safeguard Protected Health Information (PHI) on behalf of a covered entity.</div></div>
                                                 <div class="concept-card"><span class="card-title">Non-Disclosure Agreement (NDA)</span><div class="card-description">A legal contract that outlines confidential material, knowledge, or information that the parties wish to share with one another but restrict access to by third parties. It includes clauses on data protection and handling.</div></div>
@@ -564,7 +586,7 @@
                                             <p class="text-gray-700 mb-4">Effective Information security governance relies on clearly defined organizational structures, roles, and responsibilities. This clarity ensures accountability, prevents gaps, and facilitates efficient execution of security functions.</p>
                                             <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Governance structures (centralized, decentralized, hybrid)</h4>
                                             <p class="text-gray-600 mb-4">Organizations adopt different models for security governance. Explore the common structures below:</p>
-                                            <div class="flex flex-wrap justify-center gap-4 mb-6" data-group="governance-structure">
+                                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-group="governance-structure">
                                                  <div class="concept-card"><span class="card-title">Centralized</span><div class="card-description">Security decisions and control are concentrated in a single department or team (e.g., a dedicated CISO office). This provides consistency and strong oversight but can be less agile in large, diverse organizations.</div></div>
                                                  <div class="concept-card"><span class="card-title">Decentralized</span><div class="card-description">Security responsibilities are distributed across various business units or departments. This can promote agility and local ownership but may lead to inconsistencies and gaps without strong coordination.</div></div>
                                                  <div class="concept-card"><span class="card-title">Hybrid</span><div class="card-description">Combines elements of both centralized and decentralized models. A central security function sets overall strategy and standards, while business units handle day-to-day implementation and local adaptations. This aims to balance consistency with agility.</div></div>
@@ -589,22 +611,125 @@
                                     <div class="bg-white rounded-lg shadow-md">
                                         <button class="accordion-button w-full">1. Information Security Strategy Development<span class="accordion-icon text-2xl">+</span></button>
                                         <div class="accordion-content hidden p-6">
+                                            <p class="text-gray-700 mb-4">Developing a robust information security strategy requires a systematic approach.</p>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Alignment of security objectives with organizational goals</h4>
+                                            <p class="text-gray-600 mb-4">The cornerstone of any effective security strategy is its direct alignment with the organization's overarching business goals. Security should enable business objectives and manage risks effectively.</p>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Defining vision, mission, and guiding principles for the security program</h4>
+                                            <p class="text-gray-600 mb-4">Just like the broader organization, the security program needs clear vision, mission, and guiding principles to define its purpose and inform all security decisions and actions.</p>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Determining risk appetite and tolerance</h4>
+                                            <p class="text-gray-600 mb-4">Understanding the organization's willingness to accept risk (risk appetite) and acceptable deviation (risk tolerance) is crucial for shaping the security strategy and prioritizing investments. Explore different risk appetites:</p>
+                                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-group="risk-appetite">
+                                                <div class="risk-appetite-card"><span class="card-title">Risk Averse</span><div class="card-description">Prefers to avoid risk as much as possible, even if it means missing potential opportunities. Focuses heavily on preventative controls and strict compliance.</div></div>
+                                                <div class="risk-appetite-card"><span class="card-title">Conservative</span><div class="card-description">Willing to accept a low level of risk, but generally prefers established, proven security measures. Prioritizes stability and minimizing potential losses.</div></div>
+                                                <div class="risk-appetite-card"><span class="card-title">Moderate</span><div class="card-description">Balances risk and reward, accepting a reasonable level of risk to achieve business objectives. Invests in security controls that provide a good return on investment.</div></div>
+                                                <div class="risk-appetite-card"><span class="card-title">Risk Aggressive</span><div class="card-description">Willing to take on higher levels of risk for potentially greater rewards, often seen in innovative or rapidly growing organizations. Focuses on rapid detection and response capabilities.</div></div>
+                                            </div>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">d. Incorporating threat landscape and business drivers</h4>
+                                            <p class="text-gray-600 mb-4">The strategy must be dynamic, continuously adapting to evolving external threats (threat landscape) and internal business needs (business drivers) to remain relevant and effective. Map business drivers to security objective mapper:</p>
+                                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-group="business-driver">
+                                                <div class="business-driver-card"><span class="card-title">Digital Transformation</span><div class="card-description">Security objectives align with securing new digital platforms, cloud environments, and data analytics initiatives. Focus on cloud security, data privacy, and secure development.</div></div>
+                                                <div class="business-driver-card"><span class="card-title">Global Expansion</span><div class="card-description">Security objectives include understanding and complying with international regulations and securing global supply chains.</div></div>
+                                                <div class="business-driver-card"><span class="card-title">Cost Optimization</span><div class="card-description">Security objectives focus on efficiency and cost-effectiveness of controls while maintaining an acceptable risk posture.</div></div>
+                                                <div class="business-driver-card"><span class="card-title">New Product Launch</span><div class="card-description">Security objectives prioritize security-by-design, vulnerability testing, and ensuring product compliance before release.</div></div>
+                                            </div>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">e. Prioritizing security initiatives based on business impact</h4>
+                                            <p class="text-gray-600 mb-4">With limited resources, security initiatives must be prioritized based on their potential business impact, leveraging Business Impact Analysis (BIA) and cost-benefit analysis.</p>
                                             <div class="chart-container-b1e mb-6"><canvas id="securityInitiativesChart"></canvas></div>
+                                            <div class="flex flex-wrap justify-center gap-4 mb-4">
+                                                <button class="px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" style="background-color: #00A896; color: white;" data-priority-type="complianceDriven">Compliance-Driven</button>
+                                                <button class="px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" style="background-color: #FF6384; color: white;" data-priority-type="revenueDriven">Revenue-Driven</button>
+                                            </div>
+                                            <div id="priority-explanation" class="text-gray-600 text-sm italic mt-2 text-center">This chart simulates the prioritization of security initiatives. Use the buttons to see how priorities might shift based on different business drivers or strategic focuses.</div>
                                         </div>
                                     </div>
                                     <div class="bg-white rounded-lg shadow-md">
                                         <button class="accordion-button w-full">2. Frameworks and Standards<span class="accordion-icon text-2xl">+</span></button>
                                         <div class="accordion-content hidden p-6">
+                                            <p class="text-gray-700 mb-4">Frameworks provide a structured approach to managing information security. Click on a card to learn more:</p>
+                                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-group="framework">
+                                                <div class="concept-card"><span class="card-title">COBIT</span><div class="card-description"><strong>Control Objectives for Information and Related Technologies:</strong> A comprehensive framework for IT governance and management, providing a holistic approach to managing IT risks and ensuring IT alignment with business goals. It helps organizations create optimal value from IT by maintaining a balance between realizing benefits and optimizing risk levels and resource use.</div></div>
+                                                <div class="concept-card"><span class="card-title">ISO/IEC 27001</span><div class="card-description"><strong>Information Security Management System (ISMS):</strong> An international standard that specifies requirements for establishing, implementing, maintaining, and continually improving an ISMS within the context of the organization's overall business risks. Certification to ISO 27001 demonstrates a systematic approach to managing sensitive company information.</div></div>
+                                                <div class="concept-card"><span class="card-title">NIST CSF</span><div class="card-description"><strong>National Institute of Standards and Technology Cybersecurity Framework:</strong> A voluntary framework providing a common language for understanding, managing, and expressing cybersecurity risk. It consists of five core functions: Identify, Protect, Detect, Respond, Recover, offering a flexible way to manage cybersecurity risk.</div></div>
+                                                <div class="concept-card"><span class="card-title">ITIL</span><div class="card-description"><strong>Information Technology Infrastructure Library:</strong> A framework for IT service management that describes processes, procedures, tasks, and checklists that are not organization-specific, used to establish a minimum level of competency. While not solely security-focused, it supports security processes.</div></div>
+                                            </div>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Selection and Implementation:</h4>
+                                            <p class="text-gray-600 mb-4">Choosing the right framework depends on organizational context, industry, and regulatory landscape. Implementation involves adapting the framework's principles to the specific needs of the enterprise.</p>
+                                            <h4 class="text-lg font-semibold text-gray-700">c. Integrating governance frameworks into enterprise governance</h4>
+                                            <p class="text-gray-600 mb-4">Security frameworks must be integrated seamlessly into the broader enterprise governance structure through harmonization, consistent language, and a robust top-down/bottom-up communication flow.</p>
+                                            <h5 class="text-md font-bold text-gray-800 mb-2">Framework Adoption Journey</h5>
+                                            <p class="text-gray-700 mb-4">Implementing a governance framework is a structured process. Click on each step to understand the typical activities involved:</p>
                                             <div class="framework-journey-container">
-                                                <!-- Framework journey steps will be rendered here -->
+                                                <div class="framework-step-node" data-group="framework-step"><span class="card-title">1. Define Scope & Objectives</span><div class="card-description">Clearly define the scope of the ISMS and establish objectives.</div></div>
+                                                <div class="framework-arrow"></div>
+                                                <div class="framework-step-node" data-group="framework-step"><span class="card-title">2. Assess Current State & Gaps</span><div class="card-description">Conduct a gap analysis against the chosen framework.</div></div>
+                                                <div class="framework-arrow"></div>
+                                                <div class="framework-step-node" data-group="framework-step"><span class="card-title">3. Design & Plan Controls</span><div class="card-description">Design and plan the implementation of appropriate security controls.</div></div>
+                                                <div class="framework-arrow"></div>
+                                                <div class="framework-step-node" data-group="framework-step"><span class="card-title">4. Implement Controls</span><div class="card-description">Execute the control implementation plan.</div></div>
+                                                <div class="framework-arrow"></div>
+                                                <div class="framework-step-node" data-group="framework-step"><span class="card-title">5. Monitor, Review & Improve</span><div class="card-description">Continuously monitor, review, and improve the ISMS.</div></div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="bg-white rounded-lg shadow-md">
-                                        <button class="accordion-button w-full">3. Strategic Planning<span class="accordion-icon text-2xl">+</span></button>
+                                        <button class="accordion-button w-full">3. Strategic Planning (Budgets, Resources, Business Case)<span class="accordion-icon text-2xl">+</span></button>
                                         <div class="accordion-content hidden p-6">
-                                            <div class="chart-container mb-4"><canvas id="budgetChart"></canvas></div>
+                                            <p class="text-gray-700 mb-4">Effective strategic planning ensures that information security initiatives are adequately resourced and justified.</p>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Justification and strategic alignment of security investments</h4>
+                                            <p class="text-gray-600 mb-4">Strategic planning translates the security strategy into practical implementation, involving careful resource allocation, financial justification, and continuous performance measurement.</p>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Building multi-year information security roadmap</h4>
+                                            <p class="text-gray-600 mb-4">A security roadmap outlines the evolution of the security program over time, outlining phases to bridge the gap between the current and desired security states, while remaining flexible to adapt to changes.</p>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Developing a business case for security investments</h4>
+                                            <p class="text-gray-600 mb-4">A strong business case is essential for securing funding. It clearly articulates the problem, proposed solution, tangible and intangible benefits, costs, and the associated risks of not investing.</p>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">d. Budgeting, staffing, and resource allocation</h4>
+                                            <p class="text-gray-600 mb-4">Strategic planning includes developing annual and multi-year budgets, assessing staffing needs (internal, contractors, MSSPs), and prioritizing resource allocation based on the roadmap and risk priorities. Allocate a hypothetical security budget below:</p>
+                                            <div class="p-4 bg-gray-50 rounded-md shadow-sm mb-6">
+                                                <h5 class="text-md font-bold text-gray-800 mb-2">Security Budget Allocator</h5>
+                                                <label for="totalBudget" class="block text-gray-700 text-sm font-bold mb-1">Overall Budget ($):</label>
+                                                <input type="text" id="totalBudget" value="1,000,000" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 mb-4">
+                                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                                                    <div>
+                                                        <label for="techToolsPct" class="block text-gray-700 text-sm font-bold mb-1">Technology & Tools (%):</label>
+                                                        <input type="number" id="techToolsPct" value="40" min="0" max="100" step="1" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200">
+                                                    </div>
+                                                    <div>
+                                                        <label for="personnelStaffingPct" class="block text-gray-700 text-sm font-bold mb-1">Personnel & Staffing (%):</label>
+                                                        <input type="number" id="personnelStaffingPct" value="35" min="0" max="100" step="1" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200">
+                                                    </div>
+                                                    <div>
+                                                        <label for="trainingAwarenessPct" class="block text-gray-700 text-sm font-bold mb-1">Training & Awareness (%):</label>
+                                                        <input type="number" id="trainingAwarenessPct" value="15" min="0" max="100" step="1" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200">
+                                                    </div>
+                                                    <div>
+                                                        <label for="complianceAuditPct" class="block text-gray-700 text-sm font-bold mb-1">Compliance & Audit (%):</label>
+                                                        <input type="number" id="complianceAuditPct" value="10" min="0" max="100" step="1" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200">
+                                                    </div>
+                                                </div>
+                                                <div class="chart-container mb-4"><canvas id="budgetChart"></canvas></div>
+                                                <div id="budget-explanation" class="text-gray-600 text-sm italic mt-2 text-center">Adjust the percentages above. The total must equal 100%.</div>
+                                            </div>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">e. Defining and monitoring KPIs and KRIs to measure strategic performance</h4>
+                                            <p class="text-gray-600 mb-4">To ensure effectiveness, security performance is measured using Key Performance Indicators (KPIs) for current performance and Key Risk Indicators (KRIs) for anticipating future problems. Regular reporting provides insights to management.</p>
                                             <div class="chart-container mb-6"><canvas id="kriTrendChart"></canvas></div>
+                                            <div class="flex flex-wrap justify-center gap-4 mb-4">
+                                                <button class="px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" style="background-color: #DC3545; color: white;" data-kri-type="criticalVulnerabilities">Critical Vulnerabilities Detected</button>
+                                                <button class="px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" style="background-color: #FFD700; color: #333333;" data-kri-type="phishingAttempts">Phishing Attempts Reported</button>
+                                                <button class="px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" style="background-color: #004085; color: white;" data-kri-type="failedAccess">Failed Access Attempts</button>
+                                            </div>
+                                            <div id="kri-explanation" class="text-gray-600 text-sm italic mt-2 text-center">This line chart illustrates simulated trends for various Key Risk Indicators (KRIs) over time, helping to anticipate potential issues. Click a button to see its trend.</div>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">f. Continuous improvement through maturity models (e.g., CMMI, PDCA)</h4>
+                                            <p class="text-gray-600 mb-4">Information security requires continuous improvement, often guided by maturity models like CMMI and iterative methodologies such as the Plan-Do-Check-Act (PDCA) cycle. Explore common maturity levels:</p>
+                                            <div class="flex flex-wrap justify-center items-center gap-4" data-group="maturity-level">
+                                                <div class="maturity-level-card"><span class="card-title">Initial</span><div class="card-description">Processes are ad hoc and chaotic; success depends on individual effort. Security is reactive, with no standardized procedures.</div></div>
+                                                <span class="maturity-arrow-right">&rarr;</span>
+                                                <div class="maturity-level-card"><span class="card-title">Managed</span><div class="card-description">Processes are planned and executed in accordance with policies. Basic security controls are in place, but performance is not yet consistently measured.</div></div>
+                                                <span class="maturity-arrow-right">&rarr;</span>
+                                                <div class="maturity-level-card"><span class="card-title">Defined</span><div class="card-description">Processes are well-characterized and understood, described in standards, procedures, tools, and methods. Security is integrated into the organization's standard practices, and roles are clear.</div></div>
+                                                <span class="maturity-arrow-right">&rarr;</span>
+                                                <div class="maturity-level-card"><span class="card-title">Quantitatively Managed</span><div class="card-description">Processes are controlled using statistical and other quantitative techniques. Security performance is measured and controlled, allowing for data-driven decision-making.</div></div>
+                                                <span class="maturity-arrow-right">&rarr;</span>
+                                                <div class="maturity-level-card"><span class="card-title">Optimizing</span><div class="card-description">Continuous process improvement is enabled by quantitative feedback and innovative new ideas and technologies. Security is a proactive, strategic enabler for the business, constantly adapting to new threats and opportunities.</div></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -614,8 +739,21 @@
                             <section id="key-terms-d1" class="content-section hidden">
                                 <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Key Terms</h2>
                                 <p class="mb-8 text-gray-700">Test your knowledge of key terms in Information Security Governance with these interactive flashcards. Click on a card to reveal its definition.</p>
-                                <div id="key-terms-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                                    <!-- Key terms cards will be populated here -->
+                                <div id="key-terms-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" data-group="key-terms">
+                                    <div class="key-term-card"><h3 class="card-title">Information Security Governance</h3><div class="card-description"><p>The system by which an organization directs and controls information security activities to achieve its objectives.</p></div></div>
+                                    <div class="key-term-card"><h3 class="card-title">Risk Appetite</h3><div class="card-description"><p>The amount and type of risk that an organization is willing to take in order to meet its strategic objectives.</p></div></div>
+                                    <div class="key-term-card"><h3 class="card-title">Organizational Culture</h3><div class="card-description"><p>The shared values, beliefs, attitudes, and behaviors that characterize an organization and influence how information security is perceived and practiced.</p></div></div>
+                                    <div class="key-term-card"><h3 class="card-title">Due Diligence</h3><div class="card-description"><p>The exercise of reasonable care in the investigation of a matter before entering into an agreement or a transaction.</p></div></div>
+                                    <div class="key-term-card"><h3 class="card-title">Due Care</h3><div class="card-description"><p>The level of ordinary care that a reasonable and prudent person would exercise under the same or similar circumstances.</p></div></div>
+                                    <div class="key-term-card"><h3 class="card-title">Information Security Strategy</h3><div class="card-description"><p>A long-term plan that outlines the organization's approach to protecting its information assets, aligned with business objectives and risk appetite.</p></div></div>
+                                    <div class="key-term-card"><h3 class="card-title">COBIT</h3><div class="card-description"><p>A framework for enterprise IT governance and management, providing a holistic approach to managing IT risks and ensuring IT alignment with business goals.</p></div></div>
+                                    <div class="key-term-card"><h3 class="card-title">ISO/IEC 27001</h3><div class="card-description"><p>An international standard that provides requirements for establishing, implementing, maintaining, and continually improving an Information Security Management System (ISMS).</p></div></div>
+                                    <div class="key-term-card"><h3 class="card-title">NIST Cybersecurity Framework (CSF)</h3><div class="card-description"><p>A voluntary framework providing a common language for understanding, managing, and expressing cybersecurity risk, structured around five core functions: Identify, Protect, Detect, Respond, Recover.</p></div></div>
+                                    <div class="key-term-card"><h3 class="card-title">Key Performance Indicator (KPI)</h3><div class="card-description"><p>A measurable value that demonstrates how effectively a company is achieving key business objectives. In security, it measures the performance of security controls or processes.</p></div></div>
+                                    <div class="key-term-card"><h3 class="card-title">Key Goal Indicator (KGI)</h3><div class="card-description"><p>A metric that indicates whether a high-level goal is being achieved. In security, it measures the achievement of strategic information security objectives.</p></div></div>
+                                    <div class="key-term-card"><h3 class="card-title">Business Case</h3><div class="card-description"><p>A documented argument or justification for undertaking a project or initiative, including its financial and non-financial benefits, costs, and risks.</p></div></div>
+                                    <div class="key-term-card"><h3 class="card-title">Legal & Regulatory Compliance</h3><div class="card-description"><p>Adherence to laws, regulations, and industry standards that govern an organization's information handling and security practices (e.g., GDPR, HIPAA, SOX).</p></div></div>
+                                    <div class="key-term-card"><h3 class="card-title">Information Asset</h3><div class="card-description"><p>Any information or information system that has value to the organization, requiring protection (e.g., customer data, intellectual property, critical systems).</p></div></div>
                                 </div>
                             </section>
 
@@ -623,7 +761,9 @@
                             <section id="domain-summary-d1" class="content-section hidden">
                                 <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Domain Summary</h2>
                                 <div class="p-6 bg-white rounded-lg shadow-md">
-                                    <p class="text-gray-700 mb-4">Domain 1: Information Security Governance is the foundational domain of the CISM certification... [Summary Text]</p>
+                                    <p class="text-gray-700 mb-4">Domain 1: Information Security Governance is the foundational domain of the CISM certification, emphasizing the strategic leadership required to establish and maintain an effective information security program. It underscores that information security is not merely a technical function but a critical business imperative that must be seamlessly integrated into the enterprise's overall governance structure.</p>
+                                    <p class="text-gray-700 mb-4">This domain covers the critical aspects of understanding and influencing organizational culture to foster a security-aware environment. It highlights the necessity of identifying and adhering to a complex landscape of legal, regulatory, and contractual requirements, ensuring that the security strategy remains compliant and relevant. A key focus is on defining clear organizational structures, roles, and responsibilities, ensuring accountability from the board level down to individual end-users, and establishing robust reporting mechanisms.</p>
+                                    <p class="text-gray-700">Furthermore, Domain 1 delves into the strategic development of information security, emphasizing its alignment with business objectives. It introduces various governance frameworks and standards like COBIT, ISO/IEC 27001, and NIST CSF, which provide structured approaches to managing security. Finally, it addresses the practicalities of strategic planning, including budgeting, resource management, and developing compelling business cases to justify security investments, all while leveraging performance metrics to demonstrate the program's value and support continuous improvement.</p>
                                 </div>
                             </section>
                         </main>
@@ -746,6 +886,65 @@
                         engagementDescription.textContent = level.description;
                     });
                 }
+                
+                // Security Initiatives Chart
+                const secInitiativesCtx = domainContainer.querySelector('#securityInitiativesChart')?.getContext('2d');
+                if(secInitiativesCtx) {
+                    const securityInitiativesData = {
+                        labels: [['Data Protection', 'Enhancement'], ['Cloud Security', 'Migration'], ['Incident Response', 'Plan'], ['Security Awareness', 'Program'], ['Vendor Risk', 'Management']],
+                        complianceDriven: { data: [80, 60, 40, 70, 50] },
+                        revenueDriven: { data: [50, 75, 85, 30, 60] }
+                    };
+                    const securityInitiativesChartInstance = new Chart(secInitiativesCtx, {
+                        type: 'bar', data: { labels: securityInitiativesData.labels, datasets: [{ label: 'Priority Score', data: securityInitiativesData.complianceDriven.data, backgroundColor: ['#A1C9CE', '#8FB8A1', '#FFD700', '#FF6384', '#6A5ACD'] }] }, options: { responsive: true, maintainAspectRatio: false }
+                    });
+                    domainContainer.querySelectorAll('[data-priority-type]').forEach(button => {
+                        button.addEventListener('click', e => {
+                            const type = e.currentTarget.dataset.priorityType;
+                            securityInitiativesChartInstance.data.datasets[0].data = securityInitiativesData[type].data;
+                            securityInitiativesChartInstance.update();
+                        });
+                    });
+                }
+
+                // Budget Allocator
+                const budgetChartCtx = domainContainer.querySelector('#budgetChart')?.getContext('2d');
+                if(budgetChartCtx) {
+                    const budgetInputs = ['techToolsPct', 'personnelStaffingPct', 'trainingAwarenessPct', 'complianceAuditPct'];
+                    const totalBudgetInput = domainContainer.querySelector('#totalBudget');
+                    const budgetChartInstance = new Chart(budgetChartCtx, { type: 'doughnut', data: { labels: ['Technology & Tools', 'Personnel & Staffing', 'Training & Awareness', 'Compliance & Audit'], datasets: [{ data: [40, 35, 15, 10], backgroundColor: ['#A1C9CE', '#FFD700', '#FF6384', '#8FB8A1'] }] }, options: { responsive: true, maintainAspectRatio: false } });
+                    const updateBudgetChart = () => {
+                        const values = budgetInputs.map(id => parseFloat(domainContainer.querySelector(`#${id}`).value) || 0);
+                        budgetChartInstance.data.datasets[0].data = values;
+                        budgetChartInstance.update();
+                    };
+                    budgetInputs.forEach(id => domainContainer.querySelector(`#${id}`)?.addEventListener('input', updateBudgetChart));
+                    totalBudgetInput?.addEventListener('input', e => {
+                        let value = e.target.value.replace(/,/g, '');
+                        if (!isNaN(value) && value.length > 0) {
+                            e.target.value = parseFloat(value).toLocaleString('en-US');
+                        }
+                    });
+                }
+
+                // KRI Trend Chart
+                const kriTrendCtx = domainContainer.querySelector('#kriTrendChart')?.getContext('2d');
+                if(kriTrendCtx) {
+                    const kriTrendData = {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                        criticalVulnerabilities: { label: 'Critical Vulnerabilities Detected', data: [25, 22, 18, 15, 12, 10, 8, 7, 6, 5, 4, 3], borderColor: '#DC3545', backgroundColor: 'rgba(220, 53, 69, 0.2)' },
+                        phishingAttempts: { label: 'Phishing Attempts Reported', data: [10, 12, 15, 13, 11, 9, 8, 10, 12, 11, 9, 7], borderColor: '#FFD700', backgroundColor: 'rgba(255, 215, 0, 0.2)' },
+                        failedAccess: { label: 'Failed Access Attempts', data: [50, 45, 40, 38, 35, 30, 28, 25, 22, 20, 18, 15], borderColor: '#004085', backgroundColor: 'rgba(0, 64, 133, 0.2)' }
+                    };
+                    const kriTrendChartInstance = new Chart(kriTrendCtx, { type: 'line', data: { labels: kriTrendData.labels, datasets: [{ ...kriTrendData.criticalVulnerabilities, fill: true, tension: 0.3 }] }, options: { responsive: true, maintainAspectRatio: false } });
+                    domainContainer.querySelectorAll('[data-kri-type]').forEach(button => {
+                        button.addEventListener('click', e => {
+                            const data = kriTrendData[e.currentTarget.dataset.kriType];
+                            kriTrendChartInstance.data.datasets[0] = { ...data, fill: true, tension: 0.3 };
+                            kriTrendChartInstance.update();
+                        });
+                    });
+                }
             }
 
             // --- Generic Handlers for the current domain ---
@@ -775,11 +974,11 @@
                 });
             });
 
-            domainContainer.querySelectorAll('.interactive-card, .concept-card, .key-term-card, .change-management-card, .legal-type-card, .contract-type-card, .governance-structure-card').forEach(card => {
+            domainContainer.querySelectorAll('.interactive-card, .concept-card, .key-term-card, .change-management-card, .legal-type-card, .contract-type-card, .governance-structure-card, .risk-appetite-card, .business-driver-card, .framework-step-node, .maturity-level-card').forEach(card => {
                 card.addEventListener('click', (e) => {
                     const groupContainer = e.currentTarget.closest('[data-group]') || e.currentTarget.parentElement;
                     const wasActive = e.currentTarget.classList.contains('active');
-                    groupContainer.querySelectorAll('.interactive-card, .concept-card, .key-term-card, .change-management-card, .legal-type-card, .contract-type-card, .governance-structure-card').forEach(c => c.classList.remove('active'));
+                    groupContainer.querySelectorAll('.interactive-card, .concept-card, .key-term-card, .change-management-card, .legal-type-card, .contract-type-card, .governance-structure-card, .risk-appetite-card, .business-driver-card, .framework-step-node, .maturity-level-card').forEach(c => c.classList.remove('active'));
                     if (!wasActive) e.currentTarget.classList.add('active');
                 });
             });
