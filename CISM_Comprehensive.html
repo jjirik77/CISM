@@ -889,274 +889,276 @@
                                 <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Section A: Information Security Risk Assessment</h2>
                                 <p class="mb-8 text-gray-700">Information security risk assessment is the systematic process of identifying potential threats and vulnerabilities, analyzing their potential impact, and determining the likelihood of their occurrence. It's about understanding "what could go wrong" and "how bad it could be".</p>
 
-                                <!-- Sub-Domain: Emerging Risk and Threat Landscape -->
-                                <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
-                                    <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
-                                        1. Emerging Risk and Threat Landscape
-                                        <span class="accordion-icon text-2xl">+</span>
-                                    </button>
-                                    <div class="accordion-content hidden p-6">
-                                        <p class="text-gray-700 mb-4">The threat landscape is constantly evolving. As an information security manager, you must be vigilant and proactive in understanding new and evolving dangers.</p>
+                                <div class="space-y-4">
+                                    <!-- Sub-Domain: Emerging Risk and Threat Landscape -->
+                                    <div class="bg-white rounded-lg shadow-md">
+                                        <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                                            1. Emerging Risk and Threat Landscape
+                                            <span class="accordion-icon text-2xl">+</span>
+                                        </button>
+                                        <div class="accordion-content hidden p-6">
+                                            <p class="text-gray-700 mb-4">The threat landscape is constantly evolving. As an information security manager, you must be vigilant and proactive in understanding new and evolving dangers.</p>
 
-                                        <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Understand emerging and evolving threats (e.g., ransomware, insider threats, third-party risks).</h4>
-                                        <p class="text-gray-600 mb-4">Explore the common distribution of various emerging threats and how they impact organizations:</p>
-                                        <div class="chart-container mb-6">
-                                            <canvas id="threatDistributionChart"></canvas>
-                                        </div>
-                                        <div class="flex flex-wrap justify-center gap-4 mb-4">
-                                            <button class="toggle-chart-data btn-ransomware px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" data-chart-id="threatDistributionChart" data-data-set="ransomwareFocus">Ransomware</button>
-                                            <button class="toggle-chart-data btn-insider-threats px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" data-chart-id="threatDistributionChart" data-data-set="insiderFocus">Insider Threats</button>
-                                            <button class="toggle-chart-data btn-third-party-risks px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" data-chart-id="threatDistributionChart" data-data-set="thirdPartyFocus">Third-Party Risks</button>
-                                            <button class="toggle-chart-data btn-phishing px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" data-chart-id="threatDistributionChart" data-data-set="phishingFocus">Phishing</button>
-                                            <button class="toggle-chart-data btn-ddos px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" data-chart-id="threatDistributionChart" data-data-set="ddosFocus">DDoS</button>
-                                            <button class="toggle-chart-data btn-apt px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" data-chart-id="threatDistributionChart" data-data-set="aptFocus">APT</button>
-                                        </div>
-                                        <div id="threat-explanation" class="text-gray-600 text-sm italic mt-2 text-center">This chart illustrates a simulated distribution of common emerging threats. Use the buttons to view different focuses.</div>
-                                        
-                                        <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Monitor threat intelligence feeds and industry trend reports.</h4>
-                                        <p class="text-gray-600 mb-4">Threat intelligence helps organizations understand the "who, what, where, when, why, and how" of attacks, while industry reports provide broad trends for strategic planning.</p>
-
-                                        <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Analyze external drivers like regulatory shifts, geopolitical risks, and technological disruption.</h4>
-                                        <p class="text-gray-600">New regulations (e.g., updated data privacy laws), global events, and emerging technologies (e.g., AI, IoT) constantly introduce new security challenges and risks that must be analyzed.</p>
-                                    </div>
-                                </div>
-
-                                <!-- Sub-Domain: Vulnerability and Control Deficiency Analysis -->
-                                <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
-                                    <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
-                                        2. Vulnerability and Control Deficiency Analysis
-                                        <span class="accordion-icon text-2xl">+</span>
-                                    </button>
-                                    <div class="accordion-content hidden p-6">
-                                        <p class="text-gray-700 mb-4">Once threats are understood, the next step is to identify where an organization is susceptible to these threats.</p>
-
-                                        <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Identify and assess weaknesses in IT systems, processes, and controls.</h4>
-                                        <p class="text-gray-600 mb-4">This involves using various methods like vulnerability scanning, penetration testing, and security audits to pinpoint weaknesses.</p>
-
-                                        <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Determine exposure levels due to missing or ineffective controls.</h4>
-                                        <p class="text-gray-600 mb-4">A control might exist but be poorly designed or implemented, leading to increased exposure and higher potential impact.</p>
-
-                                        <h4 class="text-lg font-semibold text-gray-700">c. Map vulnerabilities to threats and evaluate potential impacts.</h4>
-                                        <p class="text-gray-600 mb-4">Understand which threats could exploit identified vulnerabilities and the potential impact on confidentiality, integrity, availability, and overall business operations. See the example mapping below:</p>
-                                        <div class="mb-6 p-4 bg-gray-50 rounded-md shadow-sm">
-                                            <h6 class="text-md font-semibold text-gray-700 mb-2 text-center">Sample Vulnerability-Threat-Impact Mapping</h6>
-                                            <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4 mt-4">
-                                                <!-- Scenario 1: Unpatched Web Server -->
-                                                <div class="flow-scenario" data-scenario-id="0">
-                                                    <div class="flow-node vulnerability-node" data-node-type="vulnerability">
-                                                        <span class="node-title">Unpatched Web Server</span>
-                                                        <div class="node-description hidden">Servers with outdated software or missing security patches are prime targets for attackers looking to exploit known weaknesses.</div>
-                                                    </div>
-                                                    <div class="flow-arrow hidden" data-arrow-id="0-1"></div>
-                                                    <div class="flow-node threat-node hidden" data-node-type="threat">
-                                                        <span class="node-title">Remote Code Execution (RCE)</span>
-                                                        <div class="node-description hidden">RCE allows an attacker to execute arbitrary code on a remote system, gaining full control. This is often achieved through exploiting software vulnerabilities.</div>
-                                                    </div>
-                                                    <div class="flow-arrow hidden" data-arrow-id="1-2"></div>
-                                                    <div class="flow-node impact-node hidden" data-node-type="impact">
-                                                        <span class="node-title">Data Breach, System Compromise</span>
-                                                        <div class="node-description hidden">Confidentiality, Integrity, Availability impact.</div>
-                                                    </div>
-                                                </div>
-                                                <!-- Scenario 2: Weak Employee Password Policy -->
-                                                <div class="flow-scenario" data-scenario-id="1">
-                                                    <div class="flow-node vulnerability-node" data-node-type="vulnerability">
-                                                        <span class="node-title">Weak Employee Password Policy</span>
-                                                        <div class="node-description hidden">Policies allowing simple, common, or reused passwords make accounts easy targets for automated guessing attacks.</div>
-                                                    </div>
-                                                    <div class="flow-arrow hidden" data-arrow-id="0-1"></div>
-                                                    <div class="flow-node threat-node hidden" data-node-type="threat">
-                                                        <span class="node-title">Brute-force/Credential Stuffing</span>
-                                                        <div class="node-description hidden">Brute-force attacks try many passwords until one works. Credential stuffing uses stolen username/password pairs from other breaches to try and log into new systems.</div>
-                                                    </div>
-                                                    <div class="flow-arrow hidden" data-arrow-id="1-2"></div>
-                                                    <div class="flow-node impact-node hidden" data-node-type="impact">
-                                                        <span class="node-title">Unauthorized Access</span>
-                                                        <div class="node-description hidden">Confidentiality, Integrity impact.</div>
-                                                    </div>
-                                                </div>
-                                                <!-- Scenario 3: Lack of Data Encryption at Rest -->
-                                                <div class="flow-scenario" data-scenario-id="2">
-                                                    <div class="flow-node vulnerability-node" data-node-type="vulnerability">
-                                                        <span class="node-title">Lack of Data Encryption at Rest</span>
-                                                        <div class="node-description hidden">Storing sensitive data on devices (laptops, servers, backups) without encryption means the data is readable if the device is lost or stolen.</div>
-                                                    </div>
-                                                    <div class="flow-arrow hidden" data-arrow-id="0-1"></div>
-                                                    <div class="flow-node threat-node hidden" data-node-type="threat">
-                                                        <span class="node-title">Physical Theft of Storage Device</span>
-                                                        <div class="node-description hidden">An attacker physically gains possession of a storage device containing unencrypted sensitive data.</div>
-                                                    </div>
-                                                    <div class="flow-arrow hidden" data-arrow-id="1-2"></div>
-                                                    <div class="flow-node impact-node hidden" data-node-type="impact">
-                                                        <span class="node-title">Data Exposure</span>
-                                                        <div class="node-description hidden">Confidentiality impact.</div>
-                                                    </div>
-                                                </div>
-                                                <!-- Scenario 4: Single Point of Failure in Network -->
-                                                <div class="flow-scenario" data-scenario-id="3">
-                                                    <div class="flow-node vulnerability-node" data-node-type="vulnerability">
-                                                        <span class="node-title">Single Point of Failure</span>
-                                                        <div class="node-description hidden">A critical component (e.g., a single router, server, or internet link) whose failure would bring down an entire system or service.</div>
-                                                    </div>
-                                                    <div class="flow-arrow hidden" data-arrow-id="0-1"></div>
-                                                    <div class="flow-node threat-node hidden" data-node-type="threat">
-                                                        <span class="node-title">Hardware Failure / DDoS</span>
-                                                        <div class="node-description hidden">Hardware failure is an accidental event. A DDoS attack is a malicious attempt to disrupt normal traffic of a targeted server, service or network by overwhelming the target or its surrounding infrastructure with a flood of Internet traffic.</div>
-                                                    </div>
-                                                    <div class="flow-arrow hidden" data-arrow-id="1-2"></div>
-                                                    <div class="flow-node impact-node hidden" data-node-type="impact">
-                                                        <span class="node-title">Service Outage, Business Disruption</span>
-                                                        <div class="node-description hidden">Availability impact.</div>
-                                                    </div>
-                                                </div>
-                                                <!-- Scenario 5: Insufficient Security Awareness Training -->
-                                                <div class="flow-scenario" data-scenario-id="4">
-                                                    <div class="flow-node vulnerability-node" data-node-type="vulnerability">
-                                                        <span class="node-title">Insufficient Awareness Training</span>
-                                                        <div class="node-description hidden">Employees who are not regularly trained on common attack vectors are more susceptible to falling for scams.</div>
-                                                    </div>
-                                                    <div class="flow-arrow hidden" data-arrow-id="0-1"></div>
-                                                    <div class="flow-node threat-node hidden" data-node-type="threat">
-                                                        <span class="node-title">Phishing / Social Engineering</span>
-                                                        <div class="node-description hidden">Phishing uses deceptive emails or messages. Social engineering manipulates people into performing actions or divulging confidential information.</div>
-                                                    </div>
-                                                    <div class="flow-arrow hidden" data-arrow-id="1-2"></div>
-                                                    <div class="flow-node impact-node hidden" data-node-type="impact">
-                                                        <span class="node-title">Credential Theft, Malware, Financial Fraud</span>
-                                                        <div class="node-description hidden">Confidentiality, Integrity, Financial impact.</div>
-                                                    </div>
-                                                </div>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Understand emerging and evolving threats (e.g., ransomware, insider threats, third-party risks).</h4>
+                                            <p class="text-gray-600 mb-4">Explore the common distribution of various emerging threats and how they impact organizations:</p>
+                                            <div class="chart-container mb-6">
+                                                <canvas id="threatDistributionChart"></canvas>
                                             </div>
-                                            <p class="text-gray-600 text-sm italic mt-2 text-center">Click on a card to see the potential impact of the vulnerability and threat combination.</p>
+                                            <div class="flex flex-wrap justify-center gap-4 mb-4">
+                                                <button class="toggle-chart-data btn-ransomware px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" data-chart-id="threatDistributionChart" data-data-set="ransomwareFocus">Ransomware</button>
+                                                <button class="toggle-chart-data btn-insider-threats px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" data-chart-id="threatDistributionChart" data-data-set="insiderFocus">Insider Threats</button>
+                                                <button class="toggle-chart-data btn-third-party-risks px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" data-chart-id="threatDistributionChart" data-data-set="thirdPartyFocus">Third-Party Risks</button>
+                                                <button class="toggle-chart-data btn-phishing px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" data-chart-id="threatDistributionChart" data-data-set="phishingFocus">Phishing</button>
+                                                <button class="toggle-chart-data btn-ddos px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" data-chart-id="threatDistributionChart" data-data-set="ddosFocus">DDoS</button>
+                                                <button class="toggle-chart-data btn-apt px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" data-chart-id="threatDistributionChart" data-data-set="aptFocus">APT</button>
+                                            </div>
+                                            <div id="threat-explanation" class="text-gray-600 text-sm italic mt-2 text-center">This chart illustrates a simulated distribution of common emerging threats. Use the buttons to view different focuses.</div>
+                                            
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Monitor threat intelligence feeds and industry trend reports.</h4>
+                                            <p class="text-gray-600 mb-4">Threat intelligence helps organizations understand the "who, what, where, when, why, and how" of attacks, while industry reports provide broad trends for strategic planning.</p>
+
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Analyze external drivers like regulatory shifts, geopolitical risks, and technological disruption.</h4>
+                                            <p class="text-gray-600">New regulations (e.g., updated data privacy laws), global events, and emerging technologies (e.g., AI, IoT) constantly introduce new security challenges and risks that must be analyzed.</p>
                                         </div>
                                     </div>
-                                </div>
 
-                                <!-- Sub-Domain: Risk Assessment and Analysis -->
-                                <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
-                                    <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
-                                        3. Risk Assessment and Analysis
-                                        <span class="accordion-icon text-2xl">+</span>
-                                    </button>
-                                    <div class="accordion-content hidden p-6">
-                                        <p class="text-gray-700 mb-4">This is where the identified threats, vulnerabilities, and impacts are formally analyzed to quantify or qualify the risk.</p>
+                                    <!-- Sub-Domain: Vulnerability and Control Deficiency Analysis -->
+                                    <div class="bg-white rounded-lg shadow-md">
+                                        <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                                            2. Vulnerability and Control Deficiency Analysis
+                                            <span class="accordion-icon text-2xl">+</span>
+                                        </button>
+                                        <div class="accordion-content hidden p-6">
+                                            <p class="text-gray-700 mb-4">Once threats are understood, the next step is to identify where an organization is susceptible to these threats.</p>
 
-                                        <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Apply qualitative, quantitative, and hybrid risk assessment methods.</h4>
-                                        <p class="text-gray-600 mb-4">Explore the characteristics of different risk assessment methods:</p>
-                                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6" data-group="risk-method">
-                                            <div class="risk-method-card qualitative" data-method="qualitative">
-                                                <span class="card-title">Qualitative</span>
-                                                <div class="card-description hidden">Uses descriptive terms (e.g., high, medium, low) for likelihood and impact. It's subjective but quick and often used for initial assessments or when precise data is unavailable. Good for prioritization.</div>
-                                            </div>
-                                            <div class="risk-method-card quantitative" data-method="quantitative">
-                                                <span class="card-title">Quantitative</span>
-                                                <div class="card-description hidden">Assigns numerical values (e.g., monetary cost, probability percentages) to likelihood and impact. It aims to provide a more objective and measurable view of risk. Useful for cost-benefit analysis (e.g., SLE, ARO, ALE).</div>
-                                            </div>
-                                            <div class="risk-method-card hybrid" data-method="hybrid">
-                                                <span class="card-title">Hybrid</span>
-                                                <div class="card-description hidden">Combines elements of both qualitative and quantitative approaches. Often, qualitative assessments are used to identify and prioritize risks, and then quantitative analysis is applied to the most critical risks for detailed analysis.</div>
-                                            </div>
-                                        </div>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Identify and assess weaknesses in IT systems, processes, and controls.</h4>
+                                            <p class="text-gray-600 mb-4">This involves using various methods like vulnerability scanning, penetration testing, and security audits to pinpoint weaknesses.</p>
 
-                                        <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Determine inherent and residual risk.</h4>
-                                        <p class="text-gray-600 mb-4"><strong>Inherent risk</strong> is the raw risk before controls. <strong>Residual risk</strong> is what remains after controls are applied.</p>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Determine exposure levels due to missing or ineffective controls.</h4>
+                                            <p class="text-gray-600 mb-4">A control might exist but be poorly designed or implemented, leading to increased exposure and higher potential impact.</p>
 
-                                        <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Use standardized risk frameworks (e.g., ISO/IEC 27005, NIST SP 800-30, FAIR, OCTAVE).</h4>
-                                        <p class="text-gray-600 mb-4">These frameworks provide structure and consistency for risk management processes. Click on a card to learn more:</p>
-                                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-group="risk-framework">
-                                            <div class="risk-framework-card" data-framework="iso27005">
-                                                <span class="card-title">ISO/IEC 27005</span>
-                                                <div class="card-description hidden">Provides guidelines for information security risk management. It supports the general concepts specified in ISO/IEC 27001 (for ISMS) and is designed to assist the satisfactory implementation of information security based on a risk management approach."</div>
-                                            </div>
-                                            <div class="risk-framework-card" data-framework="nist80030">
-                                                <span class="card-title">NIST SP 800-30</span>
-                                                <div class="card-description hidden">A guide for conducting risk assessments, developed by the National Institute of Standards and Technology (NIST). It provides a systematic approach to identifying, analyzing, and mitigating risks to information systems and organizations."</div>
-                                            </div>
-                                            <div class="risk-framework-card" data-framework="fair">
-                                                <span class="card-title">FAIR</span>
-                                                <div class="card-description hidden">A quantitative risk analysis model that focuses on understanding and measuring information risk in financial terms. It helps break down complex risk scenarios into measurable components, enabling more objective risk comparisons and cost-benefit analyses."</div>
-                                            </div>
-                                            <div class="risk-framework-card" data-framework="octave">
-                                                <span class="card-title">OCTAVE</span>
-                                                <div class="card-description hidden">A suite of methods that help organizations assess and manage information security risks. It emphasizes a self-directed approach where organizations identify and prioritize risks based on their own operational risk environment, involving key stakeholders from across the organization."</div>
-                                            </div>
-                                        </div>
-
-                                        <h4 class="text-lg font-semibold text-gray-700 mb-3">d. Evaluate risks based on likelihood and business impact.</h4>
-                                        <p class="text-gray-600 mb-4">Plotting likelihood against impact helps prioritize risks and align with the organization's risk appetite and tolerance.</p>
-
-                                        <h4 class="text-lg font-semibold text-gray-700 mb-3">e. Practical Risk Calculations</h4>
-                                        <p class="text-gray-600 mb-4">Understanding how to quantify risk is crucial for making informed decisions and justifying security investments.</p>
-
-                                        <div class="mb-6 p-4 bg-gray-50 rounded-md shadow-sm">
-                                            <h5 class="text-md font-bold text-gray-800 mb-2">Qualitative Risk Example (Risk Register Entry & Matrix)</h5>
-                                            <p class="text-gray-700 mb-2">Consider a "High" risk of a "Phishing Attack leading to Credential Theft" with a "Medium" likelihood and "High" impact. This would be documented in a risk register and can be visualized on a matrix:</p>
-                                            <ul class="list-disc list-inside text-gray-600 ml-4 mb-4">
-                                                <li><strong>Risk ID:</strong> R-001</li>
-                                                <li><strong>Risk Description:</strong> Phishing attack leading to credential theft.</li>
-                                                <li><strong>Inherent Risk:</strong> High</li>
-                                                <li><strong>Likelihood:</strong> Medium</li>
-                                                <li><strong>Impact:</strong> High (e.g., data breach, financial loss)</li>
-                                                <li><strong>Proposed Response:</strong> Mitigate (e.g., advanced email filtering, user training)</li>
-                                                <li><strong>Residual Risk:</strong> Medium (after controls)</li>
-                                            </ul>
-
-                                            <h6 class="text-md font-semibold text-gray-700 mb-2 text-center">Example Risk Matrix (Likelihood vs. Impact)</h6>
-                                            <table class="risk-matrix-table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Likelihood \ Impact</th>
-                                                        <th>Low</th>
-                                                        <th>Medium</th>
-                                                        <th>High</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>High</td>
-                                                        <td class="medium">Medium</td>
-                                                        <td class="high">High</td>
-                                                        <td class="critical">Critical</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Medium</td>
-                                                        <td class="low">Low</td>
-                                                        <td class="medium">Medium</td>
-                                                        <td class="high">High</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Low</td>
-                                                        <td class="low">Low</td>
-                                                        <td class="low">Low</td>
-                                                        <td class="medium">Medium</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                            <p class="text-gray-600 text-sm italic mt-2 text-center">In this matrix, our example risk (Medium Likelihood, High Impact) falls into the "High" category.</p>
-                                        </div>
-
-                                        <div class="mb-6 p-4 bg-gray-50 rounded-md shadow-sm">
-                                            <h5 class="text-md font-bold text-gray-800 mb-2">Quantitative Risk Calculation (ALE)</h5>
-                                            <p class="text-gray-700 mb-2">Calculate the Annualized Loss Expectancy (ALE) for a given asset:</p>
-                                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                                                <div>
-                                                    <label for="assetValue" class="block text-gray-700 text-sm font-bold mb-1">Asset Value (AV) ($):</label>
-                                                    <input type="text" id="assetValue" value="100,000" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200">
+                                            <h4 class="text-lg font-semibold text-gray-700">c. Map vulnerabilities to threats and evaluate potential impacts.</h4>
+                                            <p class="text-gray-600 mb-4">Understand which threats could exploit identified vulnerabilities and the potential impact on confidentiality, integrity, availability, and overall business operations. See the example mapping below:</p>
+                                            <div class="mb-6 p-4 bg-gray-50 rounded-md shadow-sm">
+                                                <h6 class="text-md font-semibold text-gray-700 mb-2 text-center">Sample Vulnerability-Threat-Impact Mapping</h6>
+                                                <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4 mt-4">
+                                                    <!-- Scenario 1: Unpatched Web Server -->
+                                                    <div class="flow-scenario" data-scenario-id="0">
+                                                        <div class="flow-node vulnerability-node" data-node-type="vulnerability">
+                                                            <span class="node-title">Unpatched Web Server</span>
+                                                            <div class="node-description hidden">Servers with outdated software or missing security patches are prime targets for attackers looking to exploit known weaknesses.</div>
+                                                        </div>
+                                                        <div class="flow-arrow hidden" data-arrow-id="0-1"></div>
+                                                        <div class="flow-node threat-node hidden" data-node-type="threat">
+                                                            <span class="node-title">Remote Code Execution (RCE)</span>
+                                                            <div class="node-description hidden">RCE allows an attacker to execute arbitrary code on a remote system, gaining full control. This is often achieved through exploiting software vulnerabilities.</div>
+                                                        </div>
+                                                        <div class="flow-arrow hidden" data-arrow-id="1-2"></div>
+                                                        <div class="flow-node impact-node hidden" data-node-type="impact">
+                                                            <span class="node-title">Data Breach, System Compromise</span>
+                                                            <div class="node-description hidden">Confidentiality, Integrity, Availability impact.</div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Scenario 2: Weak Employee Password Policy -->
+                                                    <div class="flow-scenario" data-scenario-id="1">
+                                                        <div class="flow-node vulnerability-node" data-node-type="vulnerability">
+                                                            <span class="node-title">Weak Employee Password Policy</span>
+                                                            <div class="node-description hidden">Policies allowing simple, common, or reused passwords make accounts easy targets for automated guessing attacks.</div>
+                                                        </div>
+                                                        <div class="flow-arrow hidden" data-arrow-id="0-1"></div>
+                                                        <div class="flow-node threat-node hidden" data-node-type="threat">
+                                                            <span class="node-title">Brute-force/Credential Stuffing</span>
+                                                            <div class="node-description hidden">Brute-force attacks try many passwords until one works. Credential stuffing uses stolen username/password pairs from other breaches to try and log into new systems.</div>
+                                                        </div>
+                                                        <div class="flow-arrow hidden" data-arrow-id="1-2"></div>
+                                                        <div class="flow-node impact-node hidden" data-node-type="impact">
+                                                            <span class="node-title">Unauthorized Access</span>
+                                                            <div class="node-description hidden">Confidentiality, Integrity impact.</div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Scenario 3: Lack of Data Encryption at Rest -->
+                                                    <div class="flow-scenario" data-scenario-id="2">
+                                                        <div class="flow-node vulnerability-node" data-node-type="vulnerability">
+                                                            <span class="node-title">Lack of Data Encryption at Rest</span>
+                                                            <div class="node-description hidden">Storing sensitive data on devices (laptops, servers, backups) without encryption means the data is readable if the device is lost or stolen.</div>
+                                                        </div>
+                                                        <div class="flow-arrow hidden" data-arrow-id="0-1"></div>
+                                                        <div class="flow-node threat-node hidden" data-node-type="threat">
+                                                            <span class="node-title">Physical Theft of Storage Device</span>
+                                                            <div class="node-description hidden">An attacker physically gains possession of a storage device containing unencrypted sensitive data.</div>
+                                                        </div>
+                                                        <div class="flow-arrow hidden" data-arrow-id="1-2"></div>
+                                                        <div class="flow-node impact-node hidden" data-node-type="impact">
+                                                            <span class="node-title">Data Exposure</span>
+                                                            <div class="node-description hidden">Confidentiality impact.</div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Scenario 4: Single Point of Failure in Network -->
+                                                    <div class="flow-scenario" data-scenario-id="3">
+                                                        <div class="flow-node vulnerability-node" data-node-type="vulnerability">
+                                                            <span class="node-title">Single Point of Failure</span>
+                                                            <div class="node-description hidden">A critical component (e.g., a single router, server, or internet link) whose failure would bring down an entire system or service.</div>
+                                                        </div>
+                                                        <div class="flow-arrow hidden" data-arrow-id="0-1"></div>
+                                                        <div class="flow-node threat-node hidden" data-node-type="threat">
+                                                            <span class="node-title">Hardware Failure / DDoS</span>
+                                                            <div class="node-description hidden">Hardware failure is an accidental event. A DDoS attack is a malicious attempt to disrupt normal traffic of a targeted server, service or network by overwhelming the target or its surrounding infrastructure with a flood of Internet traffic.</div>
+                                                        </div>
+                                                        <div class="flow-arrow hidden" data-arrow-id="1-2"></div>
+                                                        <div class="flow-node impact-node hidden" data-node-type="impact">
+                                                            <span class="node-title">Service Outage, Business Disruption</span>
+                                                            <div class="node-description hidden">Availability impact.</div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Scenario 5: Insufficient Security Awareness Training -->
+                                                    <div class="flow-scenario" data-scenario-id="4">
+                                                        <div class="flow-node vulnerability-node" data-node-type="vulnerability">
+                                                            <span class="node-title">Insufficient Awareness Training</span>
+                                                            <div class="node-description hidden">Employees who are not regularly trained on common attack vectors are more susceptible to falling for scams.</div>
+                                                        </div>
+                                                        <div class="flow-arrow hidden" data-arrow-id="0-1"></div>
+                                                        <div class="flow-node threat-node hidden" data-node-type="threat">
+                                                            <span class="node-title">Phishing / Social Engineering</span>
+                                                            <div class="node-description hidden">Phishing uses deceptive emails or messages. Social engineering manipulates people into performing actions or divulging confidential information.</div>
+                                                        </div>
+                                                        <div class="flow-arrow hidden" data-arrow-id="1-2"></div>
+                                                        <div class="flow-node impact-node hidden" data-node-type="impact">
+                                                            <span class="node-title">Credential Theft, Malware, Financial Fraud</span>
+                                                            <div class="node-description hidden">Confidentiality, Integrity, Financial impact.</div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div>
-                                                    <label for="exposureFactor" class="block text-gray-700 text-sm font-bold mb-1">Exposure Factor (EF) (% loss):</label>
-                                                    <input type="number" id="exposureFactor" value="0.75" min="0" max="1" step="0.01" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200">
+                                                <p class="text-gray-600 text-sm italic mt-2 text-center">Click on a card to see the potential impact of the vulnerability and threat combination.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Sub-Domain: Risk Assessment and Analysis -->
+                                    <div class="bg-white rounded-lg shadow-md">
+                                        <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                                            3. Risk Assessment and Analysis
+                                            <span class="accordion-icon text-2xl">+</span>
+                                        </button>
+                                        <div class="accordion-content hidden p-6">
+                                            <p class="text-gray-700 mb-4">This is where the identified threats, vulnerabilities, and impacts are formally analyzed to quantify or qualify the risk.</p>
+
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Apply qualitative, quantitative, and hybrid risk assessment methods.</h4>
+                                            <p class="text-gray-600 mb-4">Explore the characteristics of different risk assessment methods:</p>
+                                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6" data-group="risk-method">
+                                                <div class="risk-method-card qualitative" data-method="qualitative">
+                                                    <span class="card-title">Qualitative</span>
+                                                    <div class="card-description hidden">Uses descriptive terms (e.g., high, medium, low) for likelihood and impact. It's subjective but quick and often used for initial assessments or when precise data is unavailable. Good for prioritization.</div>
+                                                </div>
+                                                <div class="risk-method-card quantitative" data-method="quantitative">
+                                                    <span class="card-title">Quantitative</span>
+                                                    <div class="card-description hidden">Assigns numerical values (e.g., monetary cost, probability percentages) to likelihood and impact. It aims to provide a more objective and measurable view of risk. Useful for cost-benefit analysis (e.g., SLE, ARO, ALE).</div>
+                                                </div>
+                                                <div class="risk-method-card hybrid" data-method="hybrid">
+                                                    <span class="card-title">Hybrid</span>
+                                                    <div class="card-description hidden">Combines elements of both qualitative and quantitative approaches. Often, qualitative assessments are used to identify and prioritize risks, and then quantitative analysis is applied to the most critical risks for detailed analysis.</div>
                                                 </div>
                                             </div>
-                                            <p class="text-gray-700 mb-2"><strong>Single Loss Expectancy (SLE):</strong> $AV \times EF$</p>
-                                            <p class="text-lg font-semibold text-gray-800 mb-4">SLE: $<span id="sleResult"></span></p>
 
-                                            <label for="aro" class="block text-gray-700 text-sm font-bold mb-1">Annualized Rate of Occurrence (ARO) (times/year):</label>
-                                            <input type="number" id="aro" value="0.5" min="0" step="0.1" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 mb-4">
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Determine inherent and residual risk.</h4>
+                                            <p class="text-gray-600 mb-4"><strong>Inherent risk</strong> is the raw risk before controls. <strong>Residual risk</strong> is what remains after controls are applied.</p>
 
-                                            <p class="text-gray-700 mb-2"><strong>Annualized Loss Expectancy (ALE):</strong> $SLE \times ARO$</p>
-                                            <p class="text-lg font-semibold text-gray-800">ALE: $<span id="aleResult"></span></p>
-                                            <p class="text-gray-600 text-sm italic mt-2">Adjust the values above to see how SLE and ALE change. ARO of 0.5 means the event is expected to occur once every two years.</p>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Use standardized risk frameworks (e.g., ISO/IEC 27005, NIST SP 800-30, FAIR, OCTAVE).</h4>
+                                            <p class="text-gray-600 mb-4">These frameworks provide structure and consistency for risk management processes. Click on a card to learn more:</p>
+                                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-group="risk-framework">
+                                                <div class="risk-framework-card" data-framework="iso27005">
+                                                    <span class="card-title">ISO/IEC 27005</span>
+                                                    <div class="card-description hidden">Provides guidelines for information security risk management. It supports the general concepts specified in ISO/IEC 27001 (for ISMS) and is designed to assist the satisfactory implementation of information security based on a risk management approach."</div>
+                                                </div>
+                                                <div class="risk-framework-card" data-framework="nist80030">
+                                                    <span class="card-title">NIST SP 800-30</span>
+                                                    <div class="card-description hidden">A guide for conducting risk assessments, developed by the National Institute of Standards and Technology (NIST). It provides a systematic approach to identifying, analyzing, and mitigating risks to information systems and organizations."</div>
+                                                </div>
+                                                <div class="risk-framework-card" data-framework="fair">
+                                                    <span class="card-title">FAIR</span>
+                                                    <div class="card-description hidden">A quantitative risk analysis model that focuses on understanding and measuring information risk in financial terms. It helps break down complex risk scenarios into measurable components, enabling more objective risk comparisons and cost-benefit analyses."</div>
+                                                </div>
+                                                <div class="risk-framework-card" data-framework="octave">
+                                                    <span class="card-title">OCTAVE</span>
+                                                    <div class="card-description hidden">A suite of methods that help organizations assess and manage information security risks. It emphasizes a self-directed approach where organizations identify and prioritize risks based on their own operational risk environment, involving key stakeholders from across the organization."</div>
+                                                </div>
+                                            </div>
+
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">d. Evaluate risks based on likelihood and business impact.</h4>
+                                            <p class="text-gray-600 mb-4">Plotting likelihood against impact helps prioritize risks and align with the organization's risk appetite and tolerance.</p>
+
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">e. Practical Risk Calculations</h4>
+                                            <p class="text-gray-600 mb-4">Understanding how to quantify risk is crucial for making informed decisions and justifying security investments.</p>
+
+                                            <div class="mb-6 p-4 bg-gray-50 rounded-md shadow-sm">
+                                                <h5 class="text-md font-bold text-gray-800 mb-2">Qualitative Risk Example (Risk Register Entry & Matrix)</h5>
+                                                <p class="text-gray-700 mb-2">Consider a "High" risk of a "Phishing Attack leading to Credential Theft" with a "Medium" likelihood and "High" impact. This would be documented in a risk register and can be visualized on a matrix:</p>
+                                                <ul class="list-disc list-inside text-gray-600 ml-4 mb-4">
+                                                    <li><strong>Risk ID:</strong> R-001</li>
+                                                    <li><strong>Risk Description:</strong> Phishing attack leading to credential theft.</li>
+                                                    <li><strong>Inherent Risk:</strong> High</li>
+                                                    <li><strong>Likelihood:</strong> Medium</li>
+                                                    <li><strong>Impact:</strong> High (e.g., data breach, financial loss)</li>
+                                                    <li><strong>Proposed Response:</strong> Mitigate (e.g., advanced email filtering, user training)</li>
+                                                    <li><strong>Residual Risk:</strong> Medium (after controls)</li>
+                                                </ul>
+
+                                                <h6 class="text-md font-semibold text-gray-700 mb-2 text-center">Example Risk Matrix (Likelihood vs. Impact)</h6>
+                                                <table class="risk-matrix-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Likelihood \ Impact</th>
+                                                            <th>Low</th>
+                                                            <th>Medium</th>
+                                                            <th>High</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>High</td>
+                                                            <td class="medium">Medium</td>
+                                                            <td class="high">High</td>
+                                                            <td class="critical">Critical</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Medium</td>
+                                                            <td class="low">Low</td>
+                                                            <td class="medium">Medium</td>
+                                                            <td class="high">High</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Low</td>
+                                                            <td class="low">Low</td>
+                                                            <td class="low">Low</td>
+                                                            <td class="medium">Medium</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <p class="text-gray-600 text-sm italic mt-2 text-center">In this matrix, our example risk (Medium Likelihood, High Impact) falls into the "High" category.</p>
+                                            </div>
+
+                                            <div class="mb-6 p-4 bg-gray-50 rounded-md shadow-sm">
+                                                <h5 class="text-md font-bold text-gray-800 mb-2">Quantitative Risk Calculation (ALE)</h5>
+                                                <p class="text-gray-700 mb-2">Calculate the Annualized Loss Expectancy (ALE) for a given asset:</p>
+                                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                                                    <div>
+                                                        <label for="assetValue" class="block text-gray-700 text-sm font-bold mb-1">Asset Value (AV) ($):</label>
+                                                        <input type="text" id="assetValue" value="100,000" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200">
+                                                    </div>
+                                                    <div>
+                                                        <label for="exposureFactor" class="block text-gray-700 text-sm font-bold mb-1">Exposure Factor (EF) (% loss):</label>
+                                                        <input type="number" id="exposureFactor" value="0.75" min="0" max="1" step="0.01" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200">
+                                                    </div>
+                                                </div>
+                                                <p class="text-gray-700 mb-2"><strong>Single Loss Expectancy (SLE):</strong> $AV \times EF$</p>
+                                                <p class="text-lg font-semibold text-gray-800 mb-4">SLE: $<span id="sleResult"></span></p>
+
+                                                <label for="aro" class="block text-gray-700 text-sm font-bold mb-1">Annualized Rate of Occurrence (ARO) (times/year):</label>
+                                                <input type="number" id="aro" value="0.5" min="0" step="0.1" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 mb-4">
+
+                                                <p class="text-gray-700 mb-2"><strong>Annualized Loss Expectancy (ALE):</strong> $SLE \times ARO$</p>
+                                                <p class="text-lg font-semibold text-gray-800">ALE: $<span id="aleResult"></span></p>
+                                                <p class="text-gray-600 text-sm italic mt-2">Adjust the values above to see how SLE and ALE change. ARO of 0.5 means the event is expected to occur once every two years.</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1165,170 +1167,172 @@
                             <section id="risk-response-d2" class="content-section hidden">
                                 <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Section B: Information Security Risk Response</h2>
                                 <p class="mb-8 text-gray-700">Once risks have been assessed and analyzed, the next critical phase is to determine how to address them. This involves selecting and implementing appropriate risk treatment strategies.</p>
-                                <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
-                                    <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
-                                        1. Risk Treatment / Risk Response Options
-                                        <span class="accordion-icon text-2xl">+</span>
-                                    </button>
-                                    <div class="accordion-content hidden p-6">
-                                        <p class="text-gray-700 mb-4">There are generally four primary strategies for responding to identified risks.</p>
+                                <div class="space-y-4">
+                                    <div class="bg-white rounded-lg shadow-md">
+                                        <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                                            1. Risk Treatment / Risk Response Options
+                                            <span class="accordion-icon text-2xl">+</span>
+                                        </button>
+                                        <div class="accordion-content hidden p-6">
+                                            <p class="text-gray-700 mb-4">There are generally four primary strategies for responding to identified risks.</p>
 
-                                        <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Develop and apply appropriate response strategies:</h4>
-                                        <p class="text-gray-600 mb-4">Click on a card to learn about each strategy:</p>
-                                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-group="risk-response">
-                                            <div class="risk-response-card mitigate" data-response="mitigate">
-                                                <span class="card-title">Mitigate</span>
-                                                <div class="card-description hidden">Reduce the likelihood or impact of a risk through the implementation of security controls (e.g., firewalls, encryption, security awareness training). This is the most common response.</div>
-                                            </div>
-                                            <div class="risk-response-card transfer" data-response="transfer">
-                                                <span class="card-title">Transfer</span>
-                                                <div class="card-description hidden">Shift the financial or operational burden of a risk to a third party (e.g., purchasing cyber insurance, outsourcing to a vendor with strong security clauses).</div>
-                                            </div>
-                                            <div class="risk-response-card avoid" data-response="avoid">
-                                                <span class="card-title">Avoid</span>
-                                                <div class="card-description hidden">Eliminate the risk entirely by choosing not to engage in or ceasing an activity that gives rise to the risk (e.g., deciding not to store sensitive customer data, discontinuing an insecure legacy application).</div>
-                                            </div>
-                                            <div class="risk-response-card accept" data-response="accept">
-                                                <span class="card-title">Accept</span>
-                                                <div class="card-description hidden">Acknowledge the existence of a risk and decide to take no further action to mitigate it, usually because the cost of mitigation outweighs the potential impact, or the risk is below the organization's risk tolerance. Requires formal management approval.</div>
-                                            </div>
-                                        </div>
-                                        
-                                        <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Ensure treatment aligns with legal, regulatory, and business constraints.</h4>
-                                        <p class="text-gray-600 mb-4">Risk treatment decisions must comply with all applicable laws and regulations and support overall business objectives.</p>
-
-                                        <h4 class="text-lg font-semibold text-gray-700">c. Select controls using frameworks like ISO/IEC 27002 and NIST CSF.</h4>
-                                        <p class="text-gray-600">These frameworks provide a comprehensive set of generic information security controls and best practices for implementation.</p>
-                                    </div>
-                                </div>
-
-                                <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
-                                    <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
-                                        2. Risk and Control Ownership
-                                        <span class="accordion-icon text-2xl">+</span>
-                                    </button>
-                                    <div class="accordion-content hidden p-6">
-                                        <p class="text-gray-700 mb-4">Clear accountability is essential for effective risk management.</p>
-
-                                        <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Assign risk ownership to appropriate stakeholders (e.g., data owners, business units).</h4>
-                                        <p class="text-gray-600 mb-4">Risks belong to the business functions that generate or are most impacted by them, not solely to the security department.</p>
-
-                                        <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Establish accountability for control implementation and operation.</h4>
-                                        <p class="text-gray-600 mb-4">Individuals or teams responsible for the implementation and maintenance of specific security controls must be clearly defined.</p>
-
-                                        <h4 class="text-lg font-semibold text-gray-700">c. Define responsibilities in risk treatment plans and governance documentation.</h4>
-                                        <p class="text-gray-600 mb-4">Formal documentation like risk treatment plans and governance policies ensure that risk management is embedded into the organizational culture. Explore typical roles and their ownership responsibilities in the hierarchy below:</p>
-                                        <div class="mb-6 p-4 bg-gray-50 rounded-md shadow-sm">
-                                            <h6 class="text-md font-semibold text-gray-700 mb-4 text-center">Corporate Hierarchy: Risk and Control Ownership</h6>
-                                            <div class="hierarchy-chart-container" data-group="role-hierarchy">
-                                                <div class="role-node board" data-role="board">
-                                                    <span class="role-title">Board/Executive Management</span>
-                                                    <div class="role-description hidden"></div>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Develop and apply appropriate response strategies:</h4>
+                                            <p class="text-gray-600 mb-4">Click on a card to learn about each strategy:</p>
+                                            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-group="risk-response">
+                                                <div class="risk-response-card mitigate" data-response="mitigate">
+                                                    <span class="card-title">Mitigate</span>
+                                                    <div class="card-description hidden">Reduce the likelihood or impact of a risk through the implementation of security controls (e.g., firewalls, encryption, security awareness training). This is the most common response.</div>
                                                 </div>
-                                                <div class="hierarchy-line"></div>
-                                                <div class="role-node ciso" data-role="ciso">
-                                                    <span class="role-title">CISO / Information Security Manager</span>
-                                                    <div class="role-description hidden"></div>
+                                                <div class="risk-response-card transfer" data-response="transfer">
+                                                    <span class="card-title">Transfer</span>
+                                                    <div class="card-description hidden">Shift the financial or operational burden of a risk to a third party (e.g., purchasing cyber insurance, outsourcing to a vendor with strong security clauses).</div>
                                                 </div>
-                                                <div class="hierarchy-line"></div>
-                                                <div class="flex justify-center gap-8 w-full">
-                                                    <div class="role-node data-owners" data-role="dataOwners">
-                                                        <span class="role-title">Data Owners / Business Unit Heads</span>
-                                                        <div class="role-description hidden"></div>
-                                                    </div>
-                                                    <div class="role-node it-ops" data-role="itOps">
-                                                        <span class="role-title">IT Operations / Security Teams</span>
-                                                        <div class="role-description hidden"></div>
-                                                    </div>
+                                                <div class="risk-response-card avoid" data-response="avoid">
+                                                    <span class="card-title">Avoid</span>
+                                                    <div class="card-description hidden">Eliminate the risk entirely by choosing not to engage in or ceasing an activity that gives rise to the risk (e.g., deciding not to store sensitive customer data, discontinuing an insecure legacy application).</div>
                                                 </div>
-                                                <div class="hierarchy-line"></div>
-                                                <div class="role-node end-users" data-role="endUsers">
-                                                    <span class="role-title">End Users</span>
-                                                    <div class="role-description hidden"></div>
+                                                <div class="risk-response-card accept" data-response="accept">
+                                                    <span class="card-title">Accept</span>
+                                                    <div class="card-description hidden">Acknowledge the existence of a risk and decide to take no further action to mitigate it, usually because the cost of mitigation outweighs the potential impact, or the risk is below the organization's risk tolerance. Requires formal management approval.</div>
                                                 </div>
                                             </div>
-                                            <p class="text-gray-600 text-sm italic mt-2 text-center">Click on a role in the hierarchy above to see a detailed description of their responsibilities.</p>
+                                            
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Ensure treatment aligns with legal, regulatory, and business constraints.</h4>
+                                            <p class="text-gray-600 mb-4">Risk treatment decisions must comply with all applicable laws and regulations and support overall business objectives.</p>
+
+                                            <h4 class="text-lg font-semibold text-gray-700">c. Select controls using frameworks like ISO/IEC 27002 and NIST CSF.</h4>
+                                            <p class="text-gray-600">These frameworks provide a comprehensive set of generic information security controls and best practices for implementation.</p>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
-                                    <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
-                                        3. Risk Monitoring and Reporting
-                                        <span class="accordion-icon text-2xl">+</span>
-                                    </button>
-                                    <div class="accordion-content hidden p-6">
-                                        <p class="text-gray-700 mb-4">Risk management is not a one-time event; it's a continuous process that requires ongoing monitoring and communication.</p>
+                                    <div class="bg-white rounded-lg shadow-md">
+                                        <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                                            2. Risk and Control Ownership
+                                            <span class="accordion-icon text-2xl">+</span>
+                                        </button>
+                                        <div class="accordion-content hidden p-6">
+                                            <p class="text-gray-700 mb-4">Clear accountability is essential for effective risk management.</p>
 
-                                        <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Monitor key risk indicators (KRIs), control effectiveness, and residual risk levels.</h4>
-                                        <p class="text-gray-600 mb-4">Continuously track metrics that provide early warning signals of increasing risk exposure and assess the ongoing effectiveness of security controls.</p>
-                                        <div class="chart-container mb-6">
-                                            <canvas id="riskMonitoringKRIChart"></canvas>
-                                        </div>
-                                        <div class="mb-4">
-                                            <label for="riskMonitoringKRISelect" class="block text-gray-700 text-sm font-bold mb-2">Select KRI to view trend:</label>
-                                            <select id="riskMonitoringKRISelect" class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-200">
-                                                <option value="unpatchedSystems">Unpatched Critical Systems</option>
-                                                <option value="securityIncidents">Security Incidents Trend</option>
-                                                <option value="thirdPartyBreaches">Third-Party Breach Incidents</option>
-                                            </select>
-                                        </div>
-                                        <p class="text-gray-600 text-sm italic">This line chart illustrates simulated trends for various Key Risk Indicators (KRIs) related to risk monitoring. Select an KRI from the dropdown to see its trend.</p>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Assign risk ownership to appropriate stakeholders (e.g., data owners, business units).</h4>
+                                            <p class="text-gray-600 mb-4">Risks belong to the business functions that generate or are most impacted by them, not solely to the security department.</p>
 
-                                        <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Maintain and update the risk register.</h4>
-                                        <p class="text-gray-600 mb-4">The risk register is a living document that tracks all identified risks, their status, and assigned ownership.</p>
-                                        
-                                        <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Report risk trends and posture to leadership and boards using dashboards, scorecards, and executive summaries.</h4>
-                                        <p class="text-gray-600 mb-4">Tailor reports to the audience, providing high-level, strategic overviews for leadership to support informed decision-making. Below is a sample risk posture scorecard:</p>
-                                        <div class="mb-6 p-4 bg-gray-50 rounded-md shadow-sm">
-                                            <h6 class="text-md font-semibold text-gray-700 mb-2 text-center">Sample Quarterly Risk Posture Scorecard</h6>
-                                            <table class="risk-scorecard-table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Risk Area</th>
-                                                        <th>Current Level</th>
-                                                        <th>Trend</th>
-                                                        <th>Last Review</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td>Cyber Attack Surface</td>
-                                                        <td class="risk-level-medium">Medium</td>
-                                                        <td class="trend-stable">Stable</td>
-                                                        <td>Q2 2024</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Data Privacy Compliance</td>
-                                                        <td class="risk-level-low">Low</td>
-                                                        <td class="trend-down">Improving</td>
-                                                        <td>Q2 2024</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Third-Party Vendor Risk</td>
-                                                        <td class="risk-level-high">High</td>
-                                                        <td class="trend-up">Worsening</td>
-                                                        <td>Q2 2024</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Insider Threat</td>
-                                                        <td class="risk-level-medium">Medium</td>
-                                                        <td class="trend-stable">Stable</td>
-                                                        <td>Q2 2024</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Operational Resilience</td>
-                                                        <td class="risk-level-low">Low</td>
-                                                        <td class="trend-down">Improving</td>
-                                                        <td>Q2 2024</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                            <p class="text-gray-600 text-sm italic mt-2 text-center">This scorecard provides a high-level summary of key risk areas, their current status, and trend, ideal for executive reporting.</p>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Establish accountability for control implementation and operation.</h4>
+                                            <p class="text-gray-600 mb-4">Individuals or teams responsible for the implementation and maintenance of specific security controls must be clearly defined.</p>
+
+                                            <h4 class="text-lg font-semibold text-gray-700">c. Define responsibilities in risk treatment plans and governance documentation.</h4>
+                                            <p class="text-gray-600 mb-4">Formal documentation like risk treatment plans and governance policies ensure that risk management is embedded into the organizational culture. Explore typical roles and their ownership responsibilities in the hierarchy below:</p>
+                                            <div class="mb-6 p-4 bg-gray-50 rounded-md shadow-sm">
+                                                <h6 class="text-md font-semibold text-gray-700 mb-4 text-center">Corporate Hierarchy: Risk and Control Ownership</h6>
+                                                <div class="hierarchy-chart-container" data-group="role-hierarchy">
+                                                    <div class="role-node board" data-role="board">
+                                                        <span class="role-title">Board/Executive Management</span>
+                                                        <div class="role-description hidden"></div>
+                                                    </div>
+                                                    <div class="hierarchy-line"></div>
+                                                    <div class="role-node ciso" data-role="ciso">
+                                                        <span class="role-title">CISO / Information Security Manager</span>
+                                                        <div class="role-description hidden"></div>
+                                                    </div>
+                                                    <div class="hierarchy-line"></div>
+                                                    <div class="flex justify-center gap-8 w-full">
+                                                        <div class="role-node data-owners" data-role="dataOwners">
+                                                            <span class="role-title">Data Owners / Business Unit Heads</span>
+                                                            <div class="role-description hidden"></div>
+                                                        </div>
+                                                        <div class="role-node it-ops" data-role="itOps">
+                                                            <span class="role-title">IT Operations / Security Teams</span>
+                                                            <div class="role-description hidden"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="hierarchy-line"></div>
+                                                    <div class="role-node end-users" data-role="endUsers">
+                                                        <span class="role-title">End Users</span>
+                                                        <div class="role-description hidden"></div>
+                                                    </div>
+                                                </div>
+                                                <p class="text-gray-600 text-sm italic mt-2 text-center">Click on a role in the hierarchy above to see a detailed description of their responsibilities.</p>
+                                            </div>
                                         </div>
-                                        
-                                        <h4 class="text-lg font-semibold text-gray-700">d. Support continuous improvement in risk response and awareness.</h4>
-                                        <p class="text-gray-600">Establish feedback loops and ongoing security awareness programs to continuously enhance the organization's risk posture.</p>
+                                    </div>
+
+                                    <div class="bg-white rounded-lg shadow-md">
+                                        <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                                            3. Risk Monitoring and Reporting
+                                            <span class="accordion-icon text-2xl">+</span>
+                                        </button>
+                                        <div class="accordion-content hidden p-6">
+                                            <p class="text-gray-700 mb-4">Risk management is not a one-time event; it's a continuous process that requires ongoing monitoring and communication.</p>
+
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Monitor key risk indicators (KRIs), control effectiveness, and residual risk levels.</h4>
+                                            <p class="text-gray-600 mb-4">Continuously track metrics that provide early warning signals of increasing risk exposure and assess the ongoing effectiveness of security controls.</p>
+                                            <div class="chart-container mb-6">
+                                                <canvas id="riskMonitoringKRIChart"></canvas>
+                                            </div>
+                                            <div class="mb-4">
+                                                <label for="riskMonitoringKRISelect" class="block text-gray-700 text-sm font-bold mb-2">Select KRI to view trend:</label>
+                                                <select id="riskMonitoringKRISelect" class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-200">
+                                                    <option value="unpatchedSystems">Unpatched Critical Systems</option>
+                                                    <option value="securityIncidents">Security Incidents Trend</option>
+                                                    <option value="thirdPartyBreaches">Third-Party Breach Incidents</option>
+                                                </select>
+                                            </div>
+                                            <p class="text-gray-600 text-sm italic">This line chart illustrates simulated trends for various Key Risk Indicators (KRIs) related to risk monitoring. Select an KRI from the dropdown to see its trend.</p>
+
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Maintain and update the risk register.</h4>
+                                            <p class="text-gray-600 mb-4">The risk register is a living document that tracks all identified risks, their status, and assigned ownership.</p>
+                                            
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Report risk trends and posture to leadership and boards using dashboards, scorecards, and executive summaries.</h4>
+                                            <p class="text-gray-600 mb-4">Tailor reports to the audience, providing high-level, strategic overviews for leadership to support informed decision-making. Below is a sample risk posture scorecard:</p>
+                                            <div class="mb-6 p-4 bg-gray-50 rounded-md shadow-sm">
+                                                <h6 class="text-md font-semibold text-gray-700 mb-2 text-center">Sample Quarterly Risk Posture Scorecard</h6>
+                                                <table class="risk-scorecard-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Risk Area</th>
+                                                            <th>Current Level</th>
+                                                            <th>Trend</th>
+                                                            <th>Last Review</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Cyber Attack Surface</td>
+                                                            <td class="risk-level-medium">Medium</td>
+                                                            <td class="trend-stable">Stable</td>
+                                                            <td>Q2 2024</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Data Privacy Compliance</td>
+                                                            <td class="risk-level-low">Low</td>
+                                                            <td class="trend-down">Improving</td>
+                                                            <td>Q2 2024</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Third-Party Vendor Risk</td>
+                                                            <td class="risk-level-high">High</td>
+                                                            <td class="trend-up">Worsening</td>
+                                                            <td>Q2 2024</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Insider Threat</td>
+                                                            <td class="risk-level-medium">Medium</td>
+                                                            <td class="trend-stable">Stable</td>
+                                                            <td>Q2 2024</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Operational Resilience</td>
+                                                            <td class="risk-level-low">Low</td>
+                                                            <td class="trend-down">Improving</td>
+                                                            <td>Q2 2024</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <p class="text-gray-600 text-sm italic mt-2 text-center">This scorecard provides a high-level summary of key risk areas, their current status, and trend, ideal for executive reporting.</p>
+                                            </div>
+                                            
+                                            <h4 class="text-lg font-semibold text-gray-700">d. Support continuous improvement in risk response and awareness.</h4>
+                                            <p class="text-gray-600">Establish feedback loops and ongoing security awareness programs to continuously enhance the organization's risk posture.</p>
+                                        </div>
                                     </div>
                                 </div>
                             </section>
