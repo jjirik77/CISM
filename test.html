@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CISM Interactive Study Guide (All Domains)</title>
+    <!-- Tailwind CSS CDN for utility classes -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN for interactive charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* --- MASTER STYLESHEET --- */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F5EF;
+            color: #333333;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .section-header {
+            border-left: 6px solid #00A896;
+            padding-left: 1.25rem;
+            font-size: 2.2rem;
+            color: #222222;
+        }
+        .master-nav-item {
+            transition: all 0.2s ease-in-out;
+            text-align: left;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+        }
+        .master-nav-item.active {
+            background-color: #E0F7F5;
+            border-left: 4px solid #00A896;
+        }
+        .master-nav-item.active .domain-title {
+             color: #00796B;
+        }
+        .master-nav-item:not(.active):hover {
+            background-color: #e2e8f0;
+        }
+        .domain-nav-item {
+            transition: all 0.2s ease-in-out;
+        }
+        .domain-nav-item.active {
+            border-bottom: 3px solid #00A896;
+            font-weight: 700;
+            color: #222222;
+        }
+        .accordion-button {
+            background-color: #EDEAE0;
+            border-bottom: 1px solid #D5D2C8;
+            border-radius: 0.75rem;
+            padding: 1rem 1.5rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #333333;
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            cursor: pointer;
+        }
+        .accordion-button:hover {
+            background-color: #D5D2C8;
+            transform: translateY(-1px);
+        }
+        .accordion-content {
+            background-color: #FFFFFF;
+            border: 1px solid #D5D2C8;
+            border-top: none;
+            border-radius: 0 0 0.75rem 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+        .interactive-card {
+            background-color: #EDEAE0;
+            border: 1px solid #D5D2C8;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-sizing: border-box;
+            text-align: center;
+            font-weight: 600;
+            color: #333333;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+            max-height: 120px;
+            overflow: hidden;
+        }
+        .interactive-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .interactive-card.active {
+            border-color: #00A896;
+            box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3);
+            background-color: #E0F7F5;
+            max-height: 1000px;
+        }
+        .interactive-card .card-title {
+            font-size: 1.1em;
+            margin-bottom: 0.6rem;
+            color: #004085;
+        }
+        .interactive-card .card-description {
+            font-weight: 400;
+            font-size: 0.9em;
+            color: #555555;
+            margin-top: 0.5rem;
+            display: none;
+            text-align: left;
+            word-break: break-word;
+        }
+        .interactive-card.active .card-description {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 40vh;
+            margin: auto;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="leading-relaxed">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <header class="text-center py-6 bg-white rounded-lg shadow-lg mb-8">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-2">CISM Study Guide</h1>
+            <p class="text-xl sm:text-2xl text-gray-600">Comprehensive Interactive Educational Resource for CISM Certification Exam</p>
+        </header>
+
+        <div class="flex flex-col md:flex-row gap-8">
+            <aside class="md:w-1/4 lg:w-1/5">
+                <nav id="master-navigation" class="bg-white p-4 rounded-lg shadow-md flex flex-col space-y-2 sticky top-4">
+                    <button class="master-nav-item text-gray-700 active" data-content-source="introduction">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-base domain-title">CISM Introduction</span>
+                            <span class="text-sm font-normal">Certification Overview</span>
+                        </div>
+                    </button>
+                    <button class="master-nav-item text-gray-700" data-content-source="domain_1">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-base domain-title">Domain 1</span>
+                            <span class="text-sm font-normal">Governance</span>
+                        </div>
+                    </button>
+                    <button class="master-nav-item text-gray-700" data-content-source="domain_2">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-base domain-title">Domain 2</span>
+                            <span class="text-sm font-normal">Risk Management</span>
+                        </div>
+                    </button>
+                    <button class="master-nav-item text-gray-700" data-content-source="domain_3">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-base domain-title">Domain 3</span>
+                            <span class="text-sm font-normal">Program Development</span>
+                        </div>
+                    </button>
+                    <button class="master-nav-item text-gray-700" data-content-source="domain_4">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-base domain-title">Domain 4</span>
+                            <span class="text-sm font-normal">Incident Management</span>
+                        </div>
+                    </button>
+                    <button class="master-nav-item text-gray-700" data-content-source="assessment">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-base domain-title">Assessment</span>
+                            <span class="text-sm font-normal">Test Your Knowledge</span>
+                        </div>
+                    </button>
+                </nav>
+            </aside>
+
+            <main id="domains-content-area" class="flex-1">
+                <!-- Content will be loaded here dynamically -->
+            </main>
+        </div>
+
+        <footer class="text-center py-6 mt-8 text-gray-500 text-sm">
+            <p>&copy; 2024 CISM Unified Study Guide. All rights reserved. For educational purposes only.</p>
+        </footer>
+    </div>
+
+    <!-- =============================================================================== -->
+    <!-- == HTML TEMPLATES FOR DYNAMIC LOADING ========================================= -->
+    <!-- =============================================================================== -->
+    <template id="introduction-template">
+        <div class="space-y-6">
+            <header class="text-center py-6 bg-white rounded-lg shadow-md">
+                <h1 class="text-3xl font-bold text-gray-800 mb-1">About the CISM Certification</h1>
+                <p class="text-lg text-gray-600">An Overview of the Certified Information Security Manager Credential</p>
+            </header>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold section-header text-gray-800 mb-6">What is CISM?</h2>
+                <p>The Certified Information Security Manager (CISM) certification is a globally recognized credential for professionals who manage, design, oversee, and assess an enterprise's information security program. Offered by ISACA, CISM demonstrates expertise in information security governance, risk management, program development and management, and incident management.</p>
+            </div>
+        </div>
+    </template>
+
+    <template id="domain_1-template">
+        <div class="space-y-6">
+            <header class="text-center py-6 bg-white rounded-lg shadow-md">
+                <h1 class="text-3xl font-bold text-gray-800 mb-1">CISM Domain 1 Study Guide</h1>
+                <p class="text-lg text-gray-600">Information Security Governance</p>
+            </header>
+            <nav class="bg-white p-4 rounded-lg shadow-md flex flex-wrap justify-center sticky top-4 z-10 overflow-x-auto">
+                <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 active" data-target="d1-introduction">Introduction</button>
+                <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4" data-target="d1-enterprise-governance">Enterprise Governance</button>
+                <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4" data-target="d1-info-sec-strategy">InfoSec Strategy</button>
+                <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4" data-target="d1-key-terms">Key Terms</button>
+                <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4" data-target="d1-domain-summary">Domain Summary</button>
+            </nav>
+            <main class="domain-main-content bg-white p-6 rounded-lg shadow-md">
+                <section id="d1-introduction" class="content-section fade-in">
+                    <!-- Full D1 Intro Content -->
+                </section>
+                <section id="d1-enterprise-governance" class="content-section hidden">
+                    <!-- Full D1 Enterprise Governance Content -->
+                </section>
+                <section id="d1-info-sec-strategy" class="content-section hidden">
+                    <!-- Full D1 InfoSec Strategy Content -->
+                </section>
+                <section id="d1-key-terms" class="content-section hidden">
+                    <!-- Full D1 Key Terms Content -->
+                </section>
+                <section id="d1-domain-summary" class="content-section hidden">
+                    <!-- Full D1 Summary Content -->
+                </section>
+            </main>
+        </div>
+    </template>
+    
+    <template id="domain_2-template">
+        <!-- Full HTML for Domain 2, structured like Domain 1 above -->
+    </template>
+
+    <template id="domain_3-template">
+        <!-- Full HTML for Domain 3, structured like Domain 1 above -->
+    </template>
+
+    <template id="domain_4-template">
+        <!-- Full HTML for Domain 4, structured like Domain 1 above -->
+    </template>
+
+    <template id="assessment-template">
+        <div class="space-y-6">
+            <header class="text-center py-6 bg-white rounded-lg shadow-md">
+                <h1 class="text-3xl font-bold text-gray-800 mb-1">Knowledge Assessment</h1>
+                <p class="text-lg text-gray-600">Test your understanding of the CISM domains.</p>
+            </header>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h2 class="text-2xl font-bold section-header text-gray-800 mb-6">Practice Questions</h2>
+                <p>This section will contain practice questions and quizzes to help you prepare for the CISM exam. Content is coming soon!</p>
+            </div>
+        </div>
+    </template>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const domainsContentArea = document.getElementById('domains-content-area');
+        const masterNavButtons = document.querySelectorAll('#master-navigation .master-nav-item');
+
+        async function loadContent(source) {
+            const template = document.getElementById(`${source}-template`);
+            if (template) {
+                const content = template.innerHTML;
+                domainsContentArea.innerHTML = content;
+                setupDomainInteractiveElements(domainsContentArea);
+            } else {
+                domainsContentArea.innerHTML = `<p class="text-center text-red-500">Error: Content for "${source}" not found.</p>`;
+            }
+        }
+
+        function setupDomainInteractiveElements(container) {
+            if (!container) return;
+
+            const navButtons = container.querySelectorAll('.domain-nav-item');
+            const sections = container.querySelectorAll('.content-section');
+            
+            navButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    const targetId = button.dataset.target;
+                    sections.forEach(section => {
+                        section.classList.toggle('hidden', section.id !== targetId);
+                    });
+                });
+            });
+
+            container.querySelectorAll('.accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const icon = button.querySelector('.accordion-icon');
+                    content.classList.toggle('hidden');
+                    if (icon) {
+                        icon.textContent = content.classList.contains('hidden') ? '+' : '–';
+                    }
+                });
+            });
+
+            container.querySelectorAll('.interactive-card').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const parentGroup = card.closest('[data-interactive-group]');
+                    const wasActive = card.classList.contains('active');
+                    
+                    if (parentGroup) {
+                       parentGroup.querySelectorAll('.interactive-card').forEach(c => c.classList.remove('active'));
+                    }
+
+                    if(!wasActive) {
+                        card.classList.add('active');
+                    }
+                });
+            });
+            
+            initializeDomainCharts(container);
+        }
+
+        masterNavButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                masterNavButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                const contentSource = button.dataset.contentSource;
+                loadContent(contentSource);
+            });
+        });
+
+        const chartInstances = {};
+        function initializeDomainCharts(container) {
+            // Placeholder for Chart.js initialization code
+        }
+        
+        loadContent('introduction');
+    });
+    </script>
+</body>
+</html>
