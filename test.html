@@ -203,16 +203,265 @@
     <!-- == HTML TEMPLATES FOR DYNAMIC LOADING ========================================= -->
     <!-- =============================================================================== -->
     <template id="introduction-template">
-        <div class="space-y-6">
-            <header class="text-center py-6 bg-white rounded-lg shadow-md">
-                <h1 class="text-3xl font-bold text-gray-800 mb-1">About the CISM Certification</h1>
-                <p class="text-lg text-gray-600">An Overview of the Certified Information Security Manager Credential</p>
-            </header>
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <h2 class="text-2xl font-bold section-header text-gray-800 mb-6">What is CISM?</h2>
-                <p>The Certified Information Security Manager (CISM) certification is a globally recognized credential for professionals who manage, design, oversee, and assess an enterprise's information security program. Offered by ISACA, CISM demonstrates expertise in information security governance, risk management, program development and management, and incident management.</p>
+       <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+    <header class="text-center py-8 bg-white rounded-lg shadow-md mb-8">
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-2">CISM Domain 1 Study Guide</h1>
+        <p class="text-xl sm:text-2xl text-gray-600">Information Security Governance</p>
+        <p class="text-md text-gray-500 mt-2">Your Interactive Study Guide for Strategic Security Leadership</p>
+    </header>
+
+    <nav class="bg-white p-4 rounded-lg shadow-md mb-8 flex justify-center sticky top-0 z-10 overflow-x-auto">
+        <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200 active" data-target="introduction">Introduction</button>
+        <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="enterprise-governance">Enterprise Governance</button>
+        <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="info-sec-strategy">Information Security Strategy</button>
+        <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="key-terms">Key Terms</button>
+        <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="domain-summary">Domain Summary</button>
+    </nav>
+
+    <main id="content-area">
+        <!-- Introduction Section -->
+        <section id="introduction" class="content-section fade-in">
+            <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Introduction to CISM Domain 1</h2>
+            <div class="p-6 bg-white rounded-lg shadow-md">
+                <p class="text-gray-700 mb-4">Welcome to the interactive study guide for CISM Domain 1: Information Security Governance. This domain is the foundational pillar of effective information security management, emphasizing the strategic alignment of security initiatives with overall business objectives. It's about establishing the framework, roles, and responsibilities that ensure information security is an integral part of the enterprise's governance structure.</p>
+                <p class="text-gray-700">As a Certified Information Security Manager, you are expected to understand how to develop, implement, and oversee an information security governance framework that not only protects information assets but also enables business operations and ensures compliance with legal, regulatory, and contractual requirements. This guide will help you explore the critical components of governance, from organizational culture to strategic planning and resource management.</p>
             </div>
-        </div>
+        </section>
+
+        <!-- Enterprise Governance Section -->
+        <section id="enterprise-governance" class="content-section hidden">
+            <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Section A: Enterprise Governance</h2>
+            <p class="mb-8 text-gray-700">Enterprise governance provides the structure through which the objectives of the organization are set and pursued. Information security governance must be an integral part of this broader framework.</p>
+
+            <!-- Sub-Topic: Organizational Culture and its Impact on Information Security -->
+            <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
+                <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                    1. Organizational Culture and its Impact
+                    <span class="accordion-icon text-2xl">+</span>
+                </button>
+                <div class="accordion-content hidden p-6">
+                    <p class="text-gray-700 mb-4">Organizational culture significantly influences the effectiveness of information security. A strong security culture fosters proactive behavior and shared responsibility.</p>
+                    <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Influence of corporate culture on security behaviors and decision-making.</h4>
+                    <p class="text-gray-600 mb-4">Corporate culture profoundly shapes how individuals perceive and engage with security. It impacts risk appetite and influences security-related decisions. For instance, a culture prioritizing rapid innovation might accept higher security risks.</p>
+                    <div class="chart-container mb-6">
+                        <canvas id="securityCultureChart"></canvas>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-4 mb-4">
+                        <button class="px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" style="background-color: #00A896; color: white;" data-culture-type="strongCulture">Strong Security Culture</button>
+                        <button class="px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" style="background-color: #DC3545; color: white;" data-culture-type="weakCulture">Weak Security Culture</button>
+                    </div>
+                    <div id="culture-explanation" class="text-gray-600 text-sm italic mt-2 text-center">This chart illustrates a simulated distribution of employee security behaviors based on the prevailing organizational culture. Use the buttons to see how culture can shift these behaviors.</div>
+
+                    <h4 class="text-lg font-semibold text-gray-700 mb-3 mt-6">b. Promoting a security-aware culture through leadership and communication.</h4>
+                    <p class="text-gray-600 mb-4">Cultivating a security-aware culture requires continuous effort, driven by leadership and effective communication. This includes comprehensive security awareness programs, clear policies, and open communication channels to foster vigilance.</p>
+                    <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Tone at the top: executive sponsorship and support.</h4>
+                    <p class="text-gray-600 mb-4">The commitment of senior management is paramount. Executive sponsorship ensures visible commitment, adequate resource allocation, and accountability for security across the organization.</p>
+                    <div class="slider-container">
+                        <label for="leadershipEngagement" class="slider-label">Leadership Engagement Level</label>
+                        <input type="range" id="leadershipEngagement" min="0" max="100" value="50" step="1">
+                        <div class="slider-value" id="engagementValue">Moderate Engagement</div>
+                        <div class="slider-description" id="engagementDescription">Policies are generally followed, but security may lack strong strategic momentum or innovation.</div>
+                    </div>
+                    <p class="text-gray-600 text-sm italic mt-2 text-center">Adjust the slider to see how different levels of leadership engagement can influence the organizational security culture.</p>
+
+                    <h4 class="text-lg font-semibold text-gray-700 mb-3 mt-6">d. Change management and resistance mitigation in security initiatives.</h4>
+                    <p class="text-gray-600 mb-4">Implementing new security measures often encounters resistance. Effective change management involves early stakeholder engagement, clear communication of the "why," and providing adequate training and support to facilitate adoption. Click on each step to learn more:</p>
+                    <div class="flex flex-wrap justify-center gap-4 mb-6">
+                        <div class="change-management-card" data-group="change-management" data-step="communicate">
+                            <span class="card-title">Communicate Early & Often</span>
+                            <div class="card-description hidden">Proactive and transparent communication about upcoming changes, their benefits, and potential impacts helps reduce uncertainty and build trust.</div>
+                        </div>
+                        <div class="change-management-card" data-group="change-management" data-step="addressConcerns">
+                            <span class="card-title">Address Concerns</span>
+                            <div class="card-description hidden">Establish channels for feedback and actively listen to and address employee concerns, fears, and questions about new security initiatives.</div>
+                        </div>
+                        <div class="change-management-card" data-group="change-management" data-step="provideTraining">
+                            <span class="card-title">Provide Training & Support</span>
+                            <div class="card-description hidden">Offer comprehensive and accessible training, along with ongoing support, to ensure employees understand new security processes and tools.</div>
+                        </div>
+                        <div class="change-management-card" data-group="change-management" data-step="celebrateSuccesses">
+                            <span class="card-title">Celebrate Successes</span>
+                            <div class="card-description hidden">Recognize and reward positive security behaviors and successful adoption of new measures to reinforce the desired culture and motivate continued compliance.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sub-Topic: Legal, Regulatory, and Contractual Requirements -->
+            <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
+                <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                    2. Legal, Regulatory, and Contractual Requirements
+                    <span class="accordion-icon text-2xl">+</span>
+                </button>
+                <div class="accordion-content hidden p-6">
+                    <p class="text-gray-700 mb-4">Information security governance must ensure compliance with a complex web of legal, regulatory, and contractual obligations.</p>
+                    <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Identification and interpretation of applicable laws and regulations</h4>
+                    <p class="text-gray-600 mb-4">Organizations must identify all pertinent laws and regulations based on their operations, industry, and geography. Explore key regulations by region/type:</p>
+                    <div class="flex flex-wrap justify-center gap-4 mb-6">
+                        <div class="legal-type-card" data-group="legal-type" data-legal-type="eu">
+                            <span class="card-title">European Union</span>
+                            <div class="card-description hidden">Regulations like GDPR (General Data Protection Regulation) focus on data privacy and protection for individuals within the EU.</div>
+                        </div>
+                        <div class="legal-type-card" data-group="legal-type" data-legal-type="us">
+                            <span class="card-title">USA (Federal & State)</span>
+                            <div class="card-description hidden">Includes federal laws like HIPAA (Health Insurance Portability and Accountability Act) for healthcare data, and state-specific laws like CCPA (California Consumer Privacy Act).</div>
+                        </div>
+                        <div class="legal-type-card" data-group="legal-type" data-legal-type="globalIndustry">
+                            <span class="card-title">Global & Industry Specific</span>
+                            <div class="card-description hidden">Beyond regional laws, organizations must comply with global standards (e.g., ISO 27001) and industry-specific mandates (e.g., PCI DSS for payment cards, NERC CIP for critical infrastructure).</div>
+                        </div>
+                    </div>
+
+                    <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Contractual obligations related to information security</h4>
+                    <p class="text-gray-600 mb-4">Beyond laws, contracts impose specific security requirements. Click on a contract type to see typical security clauses:</p>
+                    <div class="flex flex-wrap justify-center gap-4 mb-6">
+                        <div class="contract-type-card" data-group="contract-type" data-contract-type="sla">
+                            <span class="card-title">Service Level Agreement (SLA)</span>
+                            <div class="card-description hidden">Defines the level of service expected from a vendor, including security performance metrics, incident response times, and data protection clauses.</div>
+                        </div>
+                        <div class="contract-type-card" data-group="contract-type" data-contract-type="baa">
+                            <span class="card-title">Business Associate Agreement (BAA)</span>
+                            <div class="card-description hidden">Required under HIPAA, this contract specifies how business associates (third-party service providers) will safeguard Protected Health Information (PHI) on behalf of a covered entity.</div>
+                        </div>
+                        <div class="contract-type-card" data-group="contract-type" data-contract-type="nda">
+                            <span class="card-title">Non-Disclosure Agreement (NDA)</span>
+                            <div class="card-description hidden">A legal contract that outlines confidential material, knowledge, or information that the parties wish to share with one another but restrict access to by third parties. It includes clauses on data protection and handling.</div>
+                        </div>
+                    </div>
+
+                    <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Security's role in legal compliance and audit readiness</h4>
+                    <p class="text-gray-600 mb-4">Information security is central to achieving and demonstrating compliance. This involves establishing compliance programs, preparing for audits with robust documentation, and continuous monitoring of control effectiveness.</p>
+
+                    <h4 class="text-lg font-semibold text-gray-700 mb-3">d. Data protection and privacy laws by region/jurisdiction</h4>
+                    <p class="text-gray-600 mb-4">The global privacy landscape necessitates understanding specific laws across jurisdictions (e.g., GDPR in EU, CCPA in California), particularly for cross-border data transfers and implementing 'privacy by design' principles.</p>
+
+                    <h4 class="text-lg font-semibold text-gray-700">e. Intellectual property rights, industry-specific mandates</h4>
+                    <p class="text-gray-600">Protecting Intellectual property through security controls and adhering to industry-specific mandates (e.g., PCI DSS, NERC CIP) are critical for protecting assets and ensuring operational continuity within specific sectors.</p>
+                </div>
+            </div>
+
+            <!-- Sub-Topic: Organizational Structures, Roles, and Responsibilities -->
+            <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
+                <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                    3. Organizational Structures, Roles, and Responsibilities
+                    <span class="accordion-icon text-2xl">+</span>
+                </button>
+                <div class="accordion-content hidden p-6">
+                    <p class="text-gray-700 mb-4">Effective Information security governance relies on clearly defined organizational structures, roles, and responsibilities. This clarity ensures accountability, prevents gaps, and facilitates efficient execution of security functions.</p>
+
+                    <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Governance structures (centralized, decentralized, hybrid)</h4>
+                    <p class="text-gray-600 mb-4">Organizations adopt different models for security governance. Explore the common structures below:</p>
+                    <div class="flex flex-wrap justify-center gap-4 mb-6">
+                        <div class="governance-structure-card" data-group="governance-structure" data-structure-type="centralized">
+                            <span class="card-title">Centralized</span>
+                            <div class="card-description hidden">Security decisions and control are concentrated in a single department or team (e.g., a dedicated CISO office). This provides consistency and strong oversight but can be less agile in large, diverse organizations.</div>
+                        </div>
+                        <div class="governance-structure-card" data-group="governance-structure" data-structure-type="decentralized">
+                            <span class="card-title">Decentralized</span>
+                            <div class="card-description hidden">Security responsibilities are distributed across various business units or departments. This can promote agility and local ownership but may lead to inconsistencies and gaps without strong coordination.</div>
+                        </div>
+                        <div class="governance-structure-card" data-group="governance-structure" data-structure-type="hybrid">
+                            <span class="card-title">Hybrid</span>
+                            <div class="card-description hidden">Combines elements of both centralized and decentralized models. A central security function sets overall strategy and standards, while business units handle day-to-day implementation and local adaptations. This aims to balance consistency with agility.</div>
+                        </div>
+                    </div>
+
+                    <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Defining roles and responsibilities: Board, Executive, CISO, Data Owners, Users</h4>
+                    <p class="text-gray-600 mb-4">Clear role definitions are fundamental to accountability. Each level, from the Board with ultimate oversight to every user adhering to policies, plays a crucial part in the security posture.</p>
+                    <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Segregation of duties (SoD), accountability, escalation paths</h4>
+                    <p class="text-gray-600 mb-4">Implementing Segregation of Duties prevents a single point of control, reducing fraud and error. Clear accountability ensures ownership, while defined escalation paths enable timely incident and risk resolution.</p>
+                    <h4 class="text-lg font-semibold text-gray-700">d. Security steering committees and governance forums</h4>
+                    <p class="text-gray-600">Formal committees and forums provide structured decision-making and oversight, ensuring strategic direction and alignment with business objectives.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Information Security Strategy Section -->
+        <section id="info-sec-strategy" class="content-section hidden">
+            <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Section B: Information Security Strategy</h2>
+            <p class="mb-8 text-gray-700">An information security strategy translates the organization's business objectives into actionable security goals and initiatives.</p>
+
+            <!-- Sub-Topic: Information Security Strategy Development -->
+            <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
+                <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                    1. Information Security Strategy Development
+                    <span class="accordion-icon text-2xl">+</span>
+                </button>
+                <div class="accordion-content hidden p-6">
+                    <p class="text-gray-700 mb-4">Developing a robust information security strategy requires a systematic approach.</p>
+                    <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Alignment of security objectives with organizational goals</h4>
+                    <p class="text-gray-600 mb-4">The cornerstone of any effective security strategy is its direct alignment with the organization's overarching business goals. Security should enable business objectives and manage risks effectively.</p>
+
+                    <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Defining vision, mission, and guiding principles for the security program</h4>
+                    <p class="text-gray-600 mb-4">Just like the broader organization, the security program needs clear vision, mission, and guiding principles to define its purpose and inform all security decisions and actions.</p>
+
+                    <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Determining risk appetite and tolerance</h4>
+                    <p class="text-gray-600 mb-4">Understanding the organization's willingness to accept risk (risk appetite) and acceptable deviation (risk tolerance) is crucial for shaping the security strategy and prioritizing investments. Explore different risk appetites:</p>
+                    <div class="flex flex-wrap justify-center gap-4 mb-6">
+                        <div class="risk-appetite-card risk-averse" data-group="risk-appetite" data-appetite-type="riskAverse">
+                            <span class="card-title">Risk Averse</span>
+                            <div class="card-description hidden">Prefers to avoid risk as much as possible, even if it means missing potential opportunities. Focuses heavily on preventative controls and strict compliance.</div>
+                        </div>
+                        <div class="risk-appetite-card conservative" data-group="risk-appetite" data-appetite-type="conservative">
+                            <span class="card-title">Conservative</span>
+                            <div class="card-description hidden">Willing to accept a low level of risk, but generally prefers established, proven security measures. Prioritizes stability and minimizing potential losses.</div>
+                        </div>
+                        <div class="risk-appetite-card moderate" data-group="risk-appetite" data-appetite-type="moderate">
+                            <span class="card-title">Moderate</span>
+                            <div class="card-description hidden">Balances risk and reward, accepting a reasonable level of risk to achieve business objectives. Invests in security controls that provide a good return on investment.</div>
+                        </div>
+                        <div class="risk-appetite-card risk-aggressive" data-group="risk-appetite" data-appetite-type="riskAggressive">
+                            <span class="card-title">Risk Aggressive</span>
+                            <div class="card-description hidden">Willing to take on higher levels of risk for potentially greater rewards, often seen in innovative or rapidly growing organizations. Focuses on rapid detection and response capabilities.</div>
+                        </div>
+                    </div>
+
+                    <h4 class="text-lg font-semibold text-gray-700 mb-3">d. Incorporating threat landscape and business drivers</h4>
+                    <p class="text-gray-600 mb-4">The strategy must be dynamic, continuously adapting to evolving external threats (threat landscape) and internal business needs (business drivers) to remain relevant and effective. Map business drivers to security objective mapper:</p>
+                    <div class="flex flex-wrap justify-center gap-4 mb-6">
+                        <div class="business-driver-card" data-group="business-driver" data-driver-type="digitalTransformation">
+                            <span class="card-title">Digital Transformation</span>
+                            <div class="card-description hidden">Security objectives align with securing new digital platforms, cloud environments, and data analytics initiatives. Focus on cloud security, data privacy, and secure development.</div>
+                        </div>
+                        <div class="business-driver-card" data-group="business-driver" data-driver-type="globalExpansion">
+                            <span class="card-title">Global Expansion</span>
+                            <div class="card-description hidden">Security objectives include understanding and complying with international regulations, securing global supply chains, and establishing consistent security policies across diverse geographies.</div>
+                        </div>
+                        <div class="business-driver-card" data-group="business-driver" data-driver-type="costOptimization">
+                            <span class="card-title">Cost Optimization</span>
+                            <div class="card-description hidden">Security objectives focus on efficiency and cost-effectiveness of controls, leveraging automation, and optimizing security tool investments while maintaining an acceptable risk posture.</div>
+                        </div>
+                        <div class="business-driver-card" data-group="business-driver" data-driver-type="newProductLaunch">
+                            <span class="card-title">New Product Launch</span>
+                            <div class="card-description hidden">Security objectives prioritize security-by-design, secure development lifecycle (SDLC), vulnerability testing, and ensuring product compliance with relevant security standards before release.</div>
+                        </div>
+                    </div>
+
+                    <h4 class="text-lg font-semibold text-gray-700 mb-3">e. Prioritizing security initiatives based on business impact</h4>
+                    <p class="text-gray-600 mb-4">With limited resources, security initiatives must be prioritized based on their potential business impact, leveraging Business Impact Analysis (BIA) and cost-benefit analysis.</p>
+                    <div class="chart-container-b1e mb-6">
+                        <canvas id="securityInitiativesChart"></canvas>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-4 mb-4">
+                        <button class="px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" style="background-color: #00A896; color: white;" data-priority-type="complianceDriven">Compliance-Driven</button>
+                        <button class="px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" style="background-color: #FF6384; color: white;" data-priority-type="revenueDriven">Revenue-Driven</button>
+                    </div>
+                    <div id="priority-explanation" class="text-gray-600 text-sm italic mt-2 text-center">This chart simulates the prioritization of security initiatives. Use the buttons to see how priorities might shift based on different business drivers or strategic focuses.</div>
+                </div>
+            </div>
+
+            <!-- Sub-Topic: Information Security Governance Frameworks and Standards -->
+            <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
+                <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                    2. Information Security Governance Frameworks and Standards
+                    <span class="accordion-icon text-2xl">+</span>
+                </button>
+                <div class="accordion-content hidden p-6">
+                    <p class="text-gray-700 mb-4">Frameworks provide a structured approach to managing information security. Click on a card to learn more:</p>
+                    <div class="flex flex-wrap justify-center gap-4 mb-6">
+                        <div class="concept-card" data-group="framework" data-concept="cobit">
+                            <span class="card-title">COBIT</span>
+                            <div class="card-description hidden"><strong>Control Objectives for Information and Related Technologies:</strong> A comprehensive framework for IT governance and management, providing a holistic approach to managing IT risks and ensuring
     </template>
 
     <template id="domain_1-template">
