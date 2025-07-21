@@ -1541,7 +1541,7 @@
                                     <div class="bg-white rounded-lg shadow-md">
                                         <button class="accordion-button w-full">5. Information Security Program Metrics<span class="accordion-icon text-2xl">+</span></button>
                                         <div class="accordion-content hidden p-6">
-                                            <p class="text-gray-700 mb-4">You can't manage what you can't measure. A robust metrics program is essential for demonstrating the effectiveness, efficiency, and value of the security program to stakeholders.</p>
+                                                                                       <p class="text-gray-600 mb-4">You can't manage what you can't measure. A robust metrics program is essential for demonstrating the effectiveness, efficiency, and value of the security program to stakeholders.</p>
                                             <table class="styled-table">
                                                 <thead>
                                                     <tr>
@@ -2285,4 +2285,157 @@
             else if (domainContainer.id === 'assessment') {
                 const quizQuestions = [
                     // Domain 1
-                    { domain: 1, question: "What is the PRIMARY objective of information security governance?", options: ["To implement security controls", "To ensure security aligns with business objectives", "To perform risk assessments", "To achieve compliance with all regulations"], answer: 1, explanation: "The primary goal of governance is strategic alignment. While implementing controls, performing assessments, and achiev
+                    { domain: 1, question: "What is the PRIMARY objective of information security governance?", options: ["To implement security controls", "To ensure security aligns with business objectives", "To perform risk assessments", "To achieve compliance with all regulations"], answer: 1, explanation: "The primary goal of governance is strategic alignment. While implementing controls, performing assessments, and achieving compliance are all important activities, they are all done in service of ensuring the security program supports the overall business goals." },
+                    { domain: 1, question: "Which of the following BEST describes the concept of 'due care'?", options: ["Conducting an investigation before a transaction", "Implementing controls to a reasonable standard", "Purchasing cyber insurance", "Following a specific security framework"], answer: 1, explanation: "'Due care' is about taking the reasonable steps and actions to protect assets, which translates to implementing and maintaining controls. 'Due diligence' is the investigation process (A)." },
+                    // Domain 2
+                    { domain: 2, question: "An organization decides not to launch a new mobile application in a high-risk region due to overwhelming security concerns. This is an example of which risk response strategy?", options: ["Mitigation", "Transfer", "Acceptance", "Avoidance"], answer: 3, explanation: "Risk avoidance is the strategy of choosing not to engage in an activity that would introduce unacceptable risk. By not launching the app, the organization is avoiding the associated risks entirely." },
+                    { domain: 2, question: "Calculating the Annualized Loss Expectancy (ALE) is a key component of which type of risk assessment?", options: ["Qualitative", "Hybrid", "Quantitative", "Ad-hoc"], answer: 2, explanation: "Quantitative risk assessment focuses on assigning monetary values to risk. The ALE, which calculates the expected financial loss per year, is a hallmark of this approach." },
+                    // Domain 3
+                    { domain: 3, question: "Which document in the security documentation hierarchy provides step-by-step instructions on how to perform a specific task?", options: ["Policy", "Standard", "Guideline", "Procedure"], answer: 3, explanation: "Procedures provide the detailed, step-by-step instructions for implementing policies and standards. Policies are high-level 'what', standards are mandatory 'how', and guidelines are recommended best practices." },
+                    { domain: 3, question: "A metric that provides an early warning of a potential security problem, such as a sudden spike in failed login attempts, is known as a:", options: ["Key Performance Indicator (KPI)", "Key Goal Indicator (KGI)", "Key Risk Indicator (KRI)", "Return on Investment (ROI)"], answer: 2, explanation: "Key Risk Indicators (KRIs) are forward-looking metrics designed to provide early warnings of increasing risk exposure, allowing for proactive intervention." },
+                    // Domain 4
+                    { domain: 4, question: "What is the PRIMARY goal of the 'Containment' phase in the incident response lifecycle?", options: ["To remove the attacker from the network", "To restore systems from backup", "To limit the scope and impact of the incident", "To perform a post-incident review"], answer: 2, explanation: "The immediate goal of containment is to stop the bleeding—to prevent the incident from spreading further and causing more damage. Eradication (A) and Recovery (B) come after containment." },
+                    { domain: 4, question: "A discussion-based exercise where team members walk through their roles and responsibilities in a simulated incident scenario is BEST described as a:", options: ["Full-scale simulation", "Functional drill", "Walkthrough", "Tabletop exercise"], answer: 3, explanation: "A tabletop exercise is specifically designed as a discussion-based activity to test decision-making processes and communication flows without involving actual technical systems." },
+                ];
+                let userAnswers = {};
+
+                const renderQuiz = () => {
+                    const quizContainer = domainContainer.querySelector('#quiz-container');
+                    const quizResults = domainContainer.querySelector('#quiz-results');
+                    if (!quizContainer || !quizResults) return;
+
+                    quizContainer.innerHTML = '';
+                    quizResults.classList.add('hidden');
+                    userAnswers = {};
+
+                    quizQuestions.forEach((q, index) => {
+                        const optionsHtml = q.options.map((opt, i) => 
+                            `<button class="quiz-option" data-question="${index}" data-option="${i}">${String.fromCharCode(65 + i)}. ${opt}</button>`
+                        ).join('');
+
+                        const questionHtml = `
+                            <div class="quiz-question-container" id="question-${index}">
+                                <p class="text-lg font-semibold mb-4"><strong>Question ${index + 1} (Domain ${q.domain}):</strong> ${q.question}</p>
+                                <div class="space-y-2">${optionsHtml}</div>
+                                <div class="quiz-feedback hidden mt-4"></div>
+                            </div>
+                        `;
+                        quizContainer.insertAdjacentHTML('beforeend', questionHtml);
+                    });
+
+                    quizContainer.addEventListener('click', handleOptionSelect);
+                };
+
+                const handleOptionSelect = (e) => {
+                    if (!e.target.matches('.quiz-option')) return;
+                    
+                    const questionIndex = parseInt(e.target.dataset.question);
+                    const optionIndex = parseInt(e.target.dataset.option);
+                    const questionData = quizQuestions[questionIndex];
+                    const questionContainer = domainContainer.querySelector(`#question-${questionIndex}`);
+
+                    // Store answer
+                    userAnswers[questionIndex] = optionIndex;
+
+                    // Update UI
+                    questionContainer.querySelectorAll('.quiz-option').forEach(btn => btn.classList.remove('selected'));
+                    e.target.classList.add('selected');
+
+                    // Check if all questions are answered
+                    if (Object.keys(userAnswers).length === quizQuestions.length) {
+                        showResults();
+                    }
+                };
+                
+                const showResults = () => {
+                    let score = 0;
+                    quizQuestions.forEach((q, index) => {
+                        const questionContainer = domainContainer.querySelector(`#question-${index}`);
+                        const feedbackContainer = questionContainer.querySelector('.quiz-feedback');
+                        const userAnswer = userAnswers[index];
+                        const isCorrect = userAnswer === q.answer;
+
+                        feedbackContainer.classList.remove('hidden', 'correct', 'incorrect');
+                        if (isCorrect) {
+                            score++;
+                            feedbackContainer.classList.add('correct');
+                            feedbackContainer.innerHTML = `<strong>Correct!</strong>`;
+                        } else {
+                            feedbackContainer.classList.add('incorrect');
+                            feedbackContainer.innerHTML = `
+                                <strong>Incorrect.</strong> The correct answer is ${String.fromCharCode(65 + q.answer)}.
+                                <p class="quiz-explanation">${q.explanation}</p>
+                            `;
+                        }
+                    });
+                    
+                    const quizResultsContainer = domainContainer.querySelector('#quiz-results');
+                    quizResultsContainer.querySelector('#quiz-score').textContent = `Your Score: ${score} out of ${quizQuestions.length}`;
+                    quizResultsContainer.querySelector('#quiz-summary').textContent = `You have completed the assessment. Review the explanations for any incorrect answers.`;
+                    quizResultsContainer.classList.remove('hidden');
+                    quizResultsContainer.scrollIntoView({ behavior: 'smooth' });
+
+                    domainContainer.querySelector('#quiz-container').removeEventListener('click', handleOptionSelect);
+                };
+
+                renderQuiz();
+                domainContainer.querySelector('#retake-quiz-btn')?.addEventListener('click', renderQuiz);
+            }
+
+            // --- Generic Handlers for the current domain ---
+            const navButtons = domainContainer.querySelectorAll('.domain-nav-item');
+            const sections = domainContainer.querySelectorAll('.content-section');
+            
+            navButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    navButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    const targetId = button.dataset.target;
+                    sections.forEach(section => {
+                        section.classList.toggle('hidden', section.id !== targetId);
+                        section.classList.toggle('fade-in', section.id === targetId);
+                    });
+                });
+            });
+            const introButton = domainContainer.querySelector('.domain-nav-item[data-target^="introduction"]');
+            if (introButton) introButton.click();
+
+            domainContainer.querySelectorAll('.accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const icon = button.querySelector('.accordion-icon');
+                    content.classList.toggle('hidden');
+                    if (icon) icon.textContent = content.classList.contains('hidden') ? '+' : '–';
+                });
+            });
+
+            domainContainer.querySelectorAll('[data-group]').forEach(groupContainer => {
+                groupContainer.addEventListener('click', (e) => {
+                    const card = e.target.closest('.interactive-card, .concept-card, .key-term-card, .change-management-card, .legal-type-card, .contract-type-card, .governance-structure-card, .risk-appetite-card, .business-driver-card, .framework-step-node, .maturity-level-card, .risk-framework-card, .risk-response-card, .risk-method-card, .vulnerability-scenario-card, .role-node, .incident-lifecycle-node');
+                    if (!card) return;
+
+                    const wasActive = card.classList.contains('active');
+                    
+                    // Deactivate all cards in the same group
+                    groupContainer.querySelectorAll('.interactive-card, .concept-card, .key-term-card, .change-management-card, .legal-type-card, .contract-type-card, .governance-structure-card, .risk-appetite-card, .business-driver-card, .framework-step-node, .maturity-level-card, .risk-framework-card, .risk-response-card, .risk-method-card, .vulnerability-scenario-card, .role-node, .incident-lifecycle-node').forEach(c => {
+                        c.classList.remove('active');
+                    });
+
+                    if (!wasActive) {
+                        card.classList.add('active');
+                    }
+                });
+            });
+            
+            domainContainer.dataset.initialized = 'true';
+        }
+
+        // --- Initial Setup ---
+        const initialDomain = document.getElementById('about-cism');
+        if (initialDomain) {
+            setupDomain(initialDomain);
+        }
+    });
+    </script>
+</body>
+</html>
