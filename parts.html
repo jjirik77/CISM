@@ -7,23 +7,23 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* --- MASTER STYLESHEET --- */
+        /* --- MASTER STYLESHEET (Combined & Deduplicated from all 4 Domains) --- */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
         
         /* --- BASE & LAYOUT --- */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #F8F5EF;
+            background-color: #F8F5EF; /* Warm Neutral Background */
             color: #333333;
         }
         .container {
             max-width: 1200px;
         }
         .section-header {
-            border-left: 6px solid #00A896;
+            border-left: 6px solid #00A896; /* Vibrant Teal Accent */
             padding-left: 1.25rem;
-            font-size: 2.2rem;
-            color: #222222;
+            font-size: 2.2rem; /* Standardized size */
+            color: #222222; /* Darker text for better contrast */
         }
 
         /* --- NAVIGATION --- */
@@ -35,16 +35,17 @@
             border-radius: 0.5rem;
         }
         .master-nav-item.active {
-            background-color: #E0F7F5;
+            background-color: #E0F7F5; /* Light Teal */
             border-left: 4px solid #00A896;
         }
         .master-nav-item.active .domain-title {
              color: #00796B;
         }
         .master-nav-item:not(.active):hover {
-            background-color: #e2e8f0;
+            background-color: #e2e8f0; /* light gray hover */
         }
-        .domain-nav-item {
+
+        .domain-nav-item { /* For intra-domain navigation */
             transition: all 0.2s ease-in-out;
         }
         .domain-nav-item.active {
@@ -83,7 +84,7 @@
         }
 
         /* --- INTERACTIVE CARDS (UNIFIED) --- */
-        .info-card, .interactive-card {
+        .info-card {
             background-color: #EDEAE0;
             border: 1px solid #D5D2C8;
             padding: 1rem;
@@ -100,18 +101,18 @@
             justify-content: center;
             align-items: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-            max-height: 120px; 
+            max-height: 120px; /* Base max-height for transition */
             overflow: hidden;
         }
-        .info-card:hover, .interactive-card:hover {
+        .info-card:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
-        .info-card.active, .interactive-card.active {
+        .info-card.active {
             border-color: #00A896;
             box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3);
             background-color: #E0F7F5;
-            max-height: 5000px;
+            max-height: 5000px; /* Set a very large max-height to ensure full expansion */
         }
         .card-title, .role-title, .node-title {
             font-size: 1.1em;
@@ -132,121 +133,224 @@
             animation: fadeIn 0.5s ease-in-out;
         }
         .key-term-card .card-description { text-align: center; }
+        .vulnerability-scenario-card .card-description { text-align: left; }
 
         /* --- Polished Table Styles --- */
         .styled-table {
-            width: 100%; max-width: 100%; margin: 1.5rem auto; border-collapse: collapse;
-            font-size: 1rem; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border-radius: 0.5rem; overflow: hidden;
+            width: 100%;
+            max-width: 100%;
+            margin: 1.5rem auto;
+            border-collapse: collapse;
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border-radius: 0.5rem;
+            overflow: hidden;
         }
         .styled-table th, .styled-table td {
-            padding: 1rem 1.25rem; text-align: left; border: none; border-bottom: 1px solid #e2e8f0;
+            padding: 1rem 1.25rem;
+            text-align: left;
+            border: none;
+            border-bottom: 1px solid #e2e8f0;
         }
         .styled-table th {
-            background-color: #f8fafc; font-weight: 700; color: #334155;
-            text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.85rem;
+            background-color: #f8fafc;
+            font-weight: 700;
+            color: #334155;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.85rem;
         }
-        .styled-table td { background-color: #FFFFFF; color: #475569; }
-        .styled-table tbody tr:last-child td { border-bottom: none; }
-        .styled-table .highlight { font-weight: 700; color: #00796B; }
-        .styled-table td:first-child, .styled-table th:first-child { font-weight: 600; color: #334155; }
+        .styled-table td {
+            background-color: #FFFFFF;
+            color: #475569;
+        }
+        .styled-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .styled-table .highlight {
+            font-weight: 700;
+            color: #00796B;
+        }
+        .styled-table td:first-child, .styled-table th:first-child {
+            font-weight: 600;
+            color: #334155;
+        }
         
         /* --- KEYFRAMES --- */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .fade-in { animation: fadeIn 0.5s ease-in-out; }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
 
         /* --- DOMAIN SPECIFIC STYLES --- */
         .chart-container {
-            position: relative; width: 100%; max-width: 900px; height: 50vh; max-height: 500px;
-            margin: auto; overflow: hidden;
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            height: 50vh;
+            max-height: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            overflow: hidden;
         }
         .slider-container {
-            width: 80%; max-width: 500px; margin: 2rem auto; text-align: center; background-color: #EDEAE0;
-            padding: 1.5rem; border-radius: 0.75rem; box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+            width: 80%;
+            max-width: 500px;
+            margin: 2rem auto;
+            text-align: center;
+            background-color: #EDEAE0;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
         }
         .slider-container input[type="range"] { width: 100%; }
 
-        .framework-journey-container, .hierarchy-chart-container, .incident-lifecycle-container, .flowchart-container {
-            display: flex; flex-direction: column; align-items: center; gap: 1rem;
-            padding: 1rem; background-color: #F8F5EF; border-radius: 0.5rem; max-width: 600px; margin: 1rem auto;
+        .framework-journey-container, .hierarchy-chart-container, .incident-lifecycle-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: #F8F5EF;
+            border-radius: 0.5rem;
+            max-width: 600px;
+            margin: 1rem auto;
         }
         .framework-arrow, .hierarchy-line, .incident-lifecycle-arrow {
-            width: 2px; height: 2rem; background-color: #D5D2C8;
+            width: 2px;
+            height: 2rem;
+            background-color: #D5D2C8;
         }
-        .maturity-arrow-right { font-size: 2.5rem; color: #b0bec5; line-height: 1; }
-        .risk-matrix-table th, .risk-matrix-table td {
-            border: 1px solid #D5D2C8; padding: 0.75rem; text-align: center; font-weight: 600;
+        
+        .maturity-arrow-right {
+            font-size: 2.5rem;
+            color: #b0bec5;
+            line-height: 1;
         }
-        .risk-matrix-table .low { background-color: #D4EDDA; color: #155724; }
-        .risk-matrix-table .medium { background-color: #FFF3CD; color: #856404; }
-        .risk-matrix-table .high { background-color: #F8D7DA; color: #721C24; }
-        .risk-matrix-table .critical { background-color: #DC3545; color: #FFFFFF; }
+
+        .risk-matrix-table, .risk-scorecard-table {
+            width: 100%;
+            max-width: 600px;
+            margin: 1rem auto;
+            border-collapse: collapse;
+        }
+        .risk-matrix-table th, .risk-matrix-table td, .risk-scorecard-table th, .risk-scorecard-table td {
+            border: 1px solid #D5D2C8;
+            padding: 0.75rem;
+            text-align: center;
+            font-weight: 600;
+        }
+        .risk-matrix-table th, .risk-scorecard-table th {
+            background-color: #EDEAE0;
+            color: #333333;
+        }
+        .risk-matrix-table td, .risk-scorecard-table td {
+            background-color: #FFFFFF;
+        }
+        .risk-matrix-table .low, .risk-scorecard-table .risk-level-low { background-color: #D4EDDA; color: #155724; }
+        .risk-matrix-table .medium, .risk-scorecard-table .risk-level-medium { background-color: #FFF3CD; color: #856404; }
+        .risk-matrix-table .high, .risk-scorecard-table .risk-level-high { background-color: #F8D7DA; color: #721C24; }
+        .risk-matrix-table .critical, .risk-scorecard-table .critical { background-color: #DC3545; color: #FFFFFF; }
+
+        .risk-response-card.mitigate { background-color: #D4EDDA; color: #155724; }
+        .risk-response-card.mitigate:hover { background-color: #C3E6CB; }
+        .risk-response-card.transfer { background-color: #CCE5FF; color: #004085; }
+        .risk-response-card.transfer:hover { background-color: #B8DAFF; }
+        .risk-response-card.avoid { background-color: #F8D7DA; color: #721C24; }
+        .risk-response-card.avoid:hover { background-color: #F5C6CB; }
+        .risk-response-card.accept { background-color: #FFF3CD; color: #856404; }
+        .risk-response-card.accept:hover { background-color: #FFECB3; }
+
+        .risk-method-card.qualitative { background-color: #F0F8FF; color: #001f3f; }
+        .risk-method-card.qualitative:hover { background-color: #E0F2FF; }
+        .risk-method-card.quantitative { background-color: #F5FFFA; color: #003300; }
+        .risk-method-card.quantitative:hover { background-color: #E6FFF2; }
+        .risk-method-card.hybrid { background-color: #FAEBD7; color: #4B0082; }
+        .risk-method-card.hybrid:hover { background-color: #F0DDC0; }
+
+        .btn-ransomware { background-color: #A1C9CE; color: #333333; }
+        .btn-ransomware:hover { background-color: #8FB8A1; }
+        .btn-insider-threats { background-color: #8FB8A1; color: #333333; }
+        .btn-insider-threats:hover { background-color: #6F9C7D; }
+        .btn-third-party-risks { background-color: #FFD700; color: #333333; }
+        .btn-third-party-risks:hover { background-color: #E0B800; }
+        .btn-phishing { background-color: #FF6384; color: #FFFFFF; }
+        .btn-phishing:hover { background-color: #E04B6D; }
+        .btn-ddos { background-color: #6A5ACD; color: #FFFFFF; }
+        .btn-ddos:hover { background-color: #5A4DAA; }
+        .btn-apt { background-color: #DAA520; color: #333333; }
+        .btn-apt:hover { background-color: #B8860B; }
+
+        .flow-scenario { display: flex; flex-direction: column; align-items: center; margin-bottom: 2rem; }
+        .flow-scenario .flow-node { max-width: 150px; }
+        .flow-arrow { width: 2px; height: 2rem; background-color: #D5D2C8; margin: 0.5rem 0; position: relative; }
+        .flow-arrow::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%) translateY(50%) rotate(135deg); width: 8px; height: 8px; border-top: 2px solid #D5D2C8; border-right: 2px solid #D5D2C8; }
+        .vulnerability-node { background-color: #F0F8FF; }
+        .vulnerability-node:hover { background-color: #DDEBF7; }
+        .threat-node { background-color: #FFF3CD; }
+        .threat-node:hover { background-color: #FFE699; }
+        .impact-node { background-color: #F8D7DA; }
+        .impact-node:hover { background-color: #F5C6CB; }
         
         /* --- QUIZ STYLES --- */
         .quiz-question-container {
-            background-color: #fff; padding: 2rem; margin-bottom: 1.5rem;
-            border-radius: 0.75rem; box-shadow: 0 4px 10px rgba(0,0,0,0.07);
+            background-color: #fff;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.07);
         }
         .quiz-option {
-            display: block; width: 100%; text-align: left; padding: 1rem; margin-bottom: 0.5rem;
-            border: 2px solid #e2e8f0; border-radius: 0.5rem; background-color: #f8fafc;
-            cursor: pointer; transition: all 0.2s ease-in-out;
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.5rem;
+            background-color: #f8fafc;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
         }
-        .quiz-option:hover { border-color: #00A896; background-color: #E0F7F5; }
-        .quiz-option.selected { border-color: #00796B; background-color: #B2DFDB; }
-        .quiz-feedback { margin-top: 1rem; padding: 1rem; border-radius: 0.5rem; font-weight: 600; }
-        .quiz-feedback.correct { background-color: #D4EDDA; color: #155724; border-left: 5px solid #28A745; }
-        .quiz-feedback.incorrect { background-color: #F8D7DA; color: #721C24; border-left: 5px solid #DC3545; }
-        .quiz-explanation { margin-top: 0.5rem; font-style: italic; color: #475569; }
+        .quiz-option:hover {
+            border-color: #00A896;
+            background-color: #E0F7F5;
+        }
+        .quiz-option.selected {
+            border-color: #00796B;
+            background-color: #B2DFDB;
+        }
+        .quiz-feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+        }
+        .quiz-feedback.correct {
+            background-color: #D4EDDA;
+            color: #155724;
+            border-left: 5px solid #28A745;
+        }
+        .quiz-feedback.incorrect {
+            background-color: #F8D7DA;
+            color: #721C24;
+            border-left: 5px solid #DC3545;
+        }
+        .quiz-explanation {
+            margin-top: 0.5rem;
+            font-style: italic;
+            color: #475569;
+        }
         #quiz-results {
-            background-color: #E0F7F5; border: 2px solid #00A896; padding: 2rem;
-            text-align: center; border-radius: 0.75rem;
+            background-color: #E0F7F5;
+            border: 2px solid #00A896;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 0.75rem;
         }
-
-        /* --- STYLES MERGED FROM DOMAIN 4 --- */
-        #domain-4 .section-header { font-size: 2.5rem; }
-        #domain-4 .nav-item.active { border-bottom: 3px solid #00A896; font-weight: 700; color: #222222; }
-        #domain-4 .interactive-card .card-title { font-size: 1.15em; }
-        
-        /* Specific Card Sizing */
-        .incident-plan-element-card, .comm-action-card, .drp-site-card, .post-incident-practice-card { flex: 1 1 300px; max-width: 300px; }
-        .response-method-card, .ir-method-card { flex: 1 1 200px; max-width: 200px; }
-        .dependency-card { flex: 1 1 350px; max-width: 350px; }
-        .bcp-element-card, .forensic-method-card { flex: 1 1 300px; max-width: 300px; }
-        .testing-type-card { flex: 1 1 250px; max-width: 250px; }
-        .eradication-step-card, .recovery-step-card { flex: 1 1 200px; max-width: 200px; }
-        .comm-stakeholder-card { flex: 1 1 300px; max-width: 300px; }
-        .containment-method-card { flex: 1 1 22%; max-width: 250px; }
-        
-        .flowchart-container { box-shadow: 0 4px 6px rgba(0,0,0,0.05); max-width: 400px;}
-        .flowchart-container .interactive-card { background-color: #FFFFFF; width: 100%; max-width: 350px;}
-        .flowchart-arrow { font-size: 2.5em; color: #D5D2C8; line-height: 1; }
-        
-        /* Incident Classification Card Styling */
-        .incident-classification-card {
-            text-align: left; max-height: 100px; overflow: hidden;
-            transition: max-height 0.5s ease-in-out;
-        }
-        .incident-classification-card.active {
-            max-height: 500px; filter: brightness(1.1); color: #333;
-        }
-        .incident-classification-card .card-title { text-align: left; }
-        .incident-classification-card .card-description { text-align: left; }
-        .incident-classification-card[data-classification="critical"] { background-color: #FF4D4D; color: white; }
-        .incident-classification-card[data-classification="high"] { background-color: #FFA500; color: white; }
-        .incident-classification-card[data-classification="medium"] { background-color: #FFD700; color: #333; }
-        .incident-classification-card[data-classification="low"] { background-color: #8BC34A; color: white; }
-        
-        #key-terms .grid {
-            display: grid; gap: 1.5rem; grid-template-columns: repeat(1, 1fr);
-        }
-        .key-term-card { max-width: 150px; width: 100%; }
-        @media (min-width: 640px) { #key-terms .grid { grid-template-columns: repeat(2, 1fr); } }
-        @media (min-width: 768px) { #key-terms .grid { grid-template-columns: repeat(3, 1fr); } }
-        @media (min-width: 1280px) { #key-terms .grid { grid-template-columns: repeat(6, 1fr); } }
-        #key-terms .interactive-card { min-height: 150px; }
     </style>
 </head>
 <body class="leading-relaxed">
@@ -258,24 +362,204 @@
         </header>
 
         <div class="flex flex-col md:flex-row gap-8">
+            
             <aside class="md:w-1/4 lg:w-1/5">
                 <nav id="master-navigation" class="bg-white p-4 rounded-lg shadow-md flex flex-col space-y-2 sticky top-4">
-                    <button class="master-nav-item text-gray-700 active" data-domain-target="about-cism"><div class="flex flex-col"><span class="font-bold text-base domain-title">CISM Introduction</span><span class="text-sm font-normal">Certification Overview</span></div></button>
-                    <button class="master-nav-item text-gray-700" data-domain-target="domain-1"><div class="flex flex-col"><span class="font-bold text-base domain-title">Domain 1</span><span class="text-sm font-normal">Governance</span></div></button>
-                    <button class="master-nav-item text-gray-700" data-domain-target="domain-2"><div class="flex flex-col"><span class="font-bold text-base domain-title">Domain 2</span><span class="text-sm font-normal">Risk Management</span></div></button>
-                    <button class="master-nav-item text-gray-700" data-domain-target="domain-3"><div class="flex flex-col"><span class="font-bold text-base domain-title">Domain 3</span><span class="text-sm font-normal">Program Development</span></div></button>
-                    <button class="master-nav-item text-gray-700" data-domain-target="domain-4"><div class="flex flex-col"><span class="font-bold text-base domain-title">Domain 4</span><span class="text-sm font-normal">Incident Management</span></div></button>
-                    <button class="master-nav-item text-gray-700" data-domain-target="assessment"><div class="flex flex-col"><span class="font-bold text-base domain-title">Assessment</span><span class="text-sm font-normal">Test Your Knowledge</span></div></button>
+                    <button class="master-nav-item text-gray-700 active" data-domain-target="about-cism">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-base domain-title">CISM Introduction</span>
+                            <span class="text-sm font-normal">Certification Overview</span>
+                        </div>
+                    </button>
+                    <button class="master-nav-item text-gray-700" data-domain-target="domain-1">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-base domain-title">Domain 1</span>
+                            <span class="text-sm font-normal">Governance</span>
+                        </div>
+                    </button>
+                    <button class="master-nav-item text-gray-700" data-domain-target="domain-2">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-base domain-title">Domain 2</span>
+                            <span class="text-sm font-normal">Risk Management</span>
+                        </div>
+                    </button>
+                    <button class="master-nav-item text-gray-700" data-domain-target="domain-3">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-base domain-title">Domain 3</span>
+                            <span class="text-sm font-normal">Program Development</span>
+                        </div>
+                    </button>
+                    <button class="master-nav-item text-gray-700" data-domain-target="domain-4">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-base domain-title">Domain 4</span>
+                            <span class="text-sm font-normal">Incident Management</span>
+                        </div>
+                    </button>
+                    <button class="master-nav-item text-gray-700" data-domain-target="assessment">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-base domain-title">Assessment</span>
+                            <span class="text-sm font-normal">Test Your Knowledge</span>
+                        </div>
+                    </button>
                 </nav>
             </aside>
 
             <main class="flex-1">
                 <div id="domains-content-area">
                     <div id="about-cism" class="domain-content-section fade-in">
-                        </div>
+                        <header class="text-center py-8 bg-white rounded-lg shadow-md mb-8">
+                            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-2">CISM Certification Overview</h1>
+                            <p class="text-xl sm:text-2xl text-gray-600">Certified Information Security Manager</p>
+                            <p class="text-md text-gray-500 mt-2">Your guide to the premier credential for information security leadership.</p>
+                        </header>
+
+                        <nav class="bg-white p-4 rounded-lg shadow-md mb-8 flex justify-center sticky top-0 z-10">
+                            <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200 active" data-target="overview">Why CISM?</button>
+                            <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="exam-details">Exam Details</button>
+                            <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="maintenance">Maintenance</button>
+                        </nav>
+
+                        <main id="content-area">
+                            <section id="overview" class="content-section fade-in">
+                                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Why Pursue the CISM Certification?</h2>
+                                <div class="p-6 bg-white rounded-lg shadow-md mb-6">
+                                    <p class="text-gray-700">The Certified Information Security Manager (CISM) certification, issued by ISACA, is a premier credential for professionals managing and overseeing information security systems in alignment with business goals. Focused on governance, risk management, and leadership, CISM is ideal for security managers, CISOs, and consultants who drive security strategies across the enterprise. Click on the cards below to explore the key benefits.</p>
+                                </div>
+                                <div id="why-cism-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" data-group="why-cism">
+                                    </div>
+                            </section>
+
+                            <section id="exam-details" class="content-section hidden">
+                                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">CISM Exam Details</h2>
+                                <p class="mb-8 text-gray-700">Everything you need to know about the CISM exam, from its format and cost to the experience required and testing options.</p>
+
+                                <div class="space-y-4">
+                                    <div class="bg-white rounded-lg shadow-md">
+                                        <button class="accordion-button w-full">
+                                            <span>Exam Format & Domains</span>
+                                            <span class="accordion-icon text-2xl">+</span>
+                                        </button>
+                                        <div class="accordion-content hidden p-6">
+                                            <ul class="list-disc list-inside text-gray-700 space-y-2 mb-4">
+                                                <li><strong>Format:</strong> 150 multiple-choice questions</li>
+                                                <li><strong>Duration:</strong> 4 hours (240 minutes)</li>
+                                                <li><strong>Passing Score:</strong> 450 out of 800 (scaled score)</li>
+                                            </ul>
+                                            <div id="domain-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 my-4" data-group="exam-domains">
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white rounded-lg shadow-md">
+                                        <button class="accordion-button w-full">
+                                            <span>Cost of Certification</span>
+                                            <span class="accordion-icon text-2xl">+</span>
+                                        </button>
+                                        <div class="accordion-content hidden p-6">
+                                            <p class="text-gray-700 mb-4">The cost varies depending on your ISACA membership status. Members receive a significant discount on both the exam and annual maintenance fees.</p>
+                                            <table class="styled-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Category</th>
+                                                        <th>Exam Fee</th>
+                                                        <th>Annual Maintenance Fee</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><strong>ISACA Member</strong></td>
+                                                        <td class="highlight">$575 USD</td>
+                                                        <td class="highlight">$45 USD</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Non-Member</strong></td>
+                                                        <td class="highlight">$760 USD</td>
+                                                        <td class="highlight">$85 USD</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white rounded-lg shadow-md">
+                                        <button class="accordion-button w-full">
+                                            <span>Experience & Membership Requirements</span>
+                                            <span class="accordion-icon text-2xl">+</span>
+                                        </button>
+                                        <div class="accordion-content hidden p-6">
+                                            <h4 class="text-lg font-semibold text-gray-800 mb-2">Experience Required</h4>
+                                            <p class="text-gray-700 mb-4">A minimum of <strong>5 years</strong> of professional information security management work experience is required for certification.</p>
+                                            <ul class="list-disc list-inside text-gray-700 space-y-2 mb-4">
+                                                <li>3 of those years must be in at least 3 of the 4 CISM domains.</li>
+                                                <li>Substitutions for up to 2 years of general experience are available based on qualifying certifications (like CISSP, CISA) or a postgraduate degree in a related field.</li>
+                                            </ul>
+                                             <h4 class="text-lg font-semibold text-gray-800 mb-2">ISACA Membership (Optional)</h4>
+                                             <p class="text-gray-700">While not mandatory, ISACA membership offers significant benefits, including exam discounts, free webinars, access to research, and networking opportunities with a global community of professionals.</p>
+                                        </div>
+                                    </div>
+                                     <div class="bg-white rounded-lg shadow-md">
+                                        <button class="accordion-button w-full">
+                                            <span>Where to Take the Exam</span>
+                                            <span class="accordion-icon text-2xl">+</span>
+                                        </button>
+                                        <div class="accordion-content hidden p-6">
+                                            <p class="text-gray-700 mb-4">ISACA offers flexible testing options to accommodate candidates worldwide. You can schedule your exam year-round through the official ISACA website.</p>
+                                             <ul class="list-disc list-inside text-gray-700 space-y-3">
+                                                 <li>
+                                                     <strong>Remote Proctored Online Exam:</strong> Take the exam from the comfort of your home or office. This option is available through both PSI and Pearson VUE platforms, monitored by a live proctor via webcam.
+                                                 </li>
+                                                 <li>
+                                                     <strong>In-Person Testing Centers:</strong> For those who prefer a traditional testing environment, the exam is offered at Pearson VUE testing centers located globally.
+                                                 </li>
+                                             </ul>
+                                            <p class="mt-4 text-gray-600 text-sm italic">Visit <a href="https://www.isaca.org" target="_blank" class="text-blue-600 hover:underline">www.isaca.org</a> to find a testing center or schedule your remote exam.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section id="maintenance" class="content-section hidden">
+                                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Maintaining Your CISM Certification</h2>
+                                <p class="mb-8 text-gray-700">Holding the CISM certification is an ongoing commitment to professional development. To maintain your credential, you must adhere to ISACA's requirements for continuing professional education (CPE) and professional conduct.</p>
+                                <div class="p-6 bg-white rounded-lg shadow-md">
+                                    <h4 class="text-xl font-bold text-gray-800 mb-4">CPE Requirements</h4>
+                                    <p class="text-gray-700 mb-4">You must demonstrate your commitment to keeping your skills current by earning and reporting Continuing Professional Education (CPE) credits.</p>
+                                    <ul class="list-disc list-inside text-gray-700 space-y-2 mb-6">
+                                       <li>Earn a minimum of <strong>20 CPE credits annually</strong>.</li>
+                                       <li>Earn a total of <strong>120 CPE credits over a 3-year reporting cycle</strong>.</li>
+                                    </ul>
+
+                                    <h4 class="text-xl font-bold text-gray-800 mb-4">Annual Maintenance Fee</h4>
+                                    <p class="text-gray-700 mb-4">An annual fee is required to maintain your certification in good standing.</p>
+                                    <table class="styled-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Category</th>
+                                                <th>Annual Maintenance Fee</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>ISACA Member</strong></td>
+                                                <td class="highlight">$45 USD</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Non-Member</strong></td>
+                                                <td class="highlight">$85 USD</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <h4 class="text-xl font-bold text-gray-800 mt-6 mb-4">Other Requirements</h4>
+                                    <ul class="list-disc list-inside text-gray-700 space-y-2">
+                                        <li>Adhere to ISACA’s <strong>Code of Professional Ethics</strong>.</li>
+                                        <li>Comply with the CISM <strong>Continuing Professional Education (CPE) Policy</strong> and reporting requirements.</li>
+                                    </ul>
+                                </div>
+                            </section>
+                        </main>
+                    </div>
 
                     <div id="domain-1" class="domain-content-section hidden">
-                         </div>
+                        </div>
         
                     <div id="domain-2" class="domain-content-section hidden">
                         </div>
@@ -284,34 +568,24 @@
                          </div>
 
                     <div id="domain-4" class="domain-content-section hidden">
-                        <header class="text-center py-8 bg-white rounded-lg shadow-md mb-8">
-                            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-2">CISM Domain 4 Study Guide</h1>
-                            <p class="text-xl sm:text-2xl text-gray-600">Incident Management</p>
-                            <p class="text-md text-gray-500 mt-2">Preparing For and Responding to Information Security Incidents</p>
-                        </header>
-                        <nav class="bg-white p-4 rounded-lg shadow-md mb-8 flex justify-center sticky top-0 z-10 overflow-x-auto">
-                            <button class="domain-nav-item nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200 active" data-target="introduction">Introduction</button>
-                            <button class="domain-nav-item nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="incident-readiness">Incident Readiness</button>
-                            <button class="domain-nav-item nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="incident-operations">Incident Operations</button>
-                            <button class="domain-nav-item nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="key-terms">Key Terms</button>
-                            <button class="domain-nav-item nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="domain-summary">Domain Summary</button>
-                        </nav>
-                        <main id="content-area">
-                            <section id="introduction" class="content-section fade-in">
-                                </section>
-                            <section id="incident-readiness" class="content-section hidden">
-                                </section>
-                            <section id="incident-operations" class="content-section hidden">
-                                 </section>
-                            <section id="key-terms" class="content-section hidden">
-                                </section>
-                            <section id="domain-summary" class="content-section hidden">
-                                </section>
-                        </main>
-                    </div>
+                        </div>
 
                     <div id="assessment" class="domain-content-section hidden">
-                         </div>
+                        <header class="text-center py-8 bg-white rounded-lg shadow-md mb-8">
+                            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-2">Knowledge Assessment</h1>
+                            <p class="text-xl sm:text-2xl text-gray-600">Test Your Understanding of the CISM Domains</p>
+                        </header>
+                        <main>
+                            <div id="quiz-container">
+                                </div>
+                            <div id="quiz-results" class="hidden mt-8">
+                                <h2 class="text-3xl font-bold text-gray-800 mb-4">Quiz Complete!</h2>
+                                <p id="quiz-score" class="text-2xl text-gray-700 mb-4"></p>
+                                <p id="quiz-summary" class="text-lg text-gray-600 mb-6"></p>
+                                <button id="retake-quiz-btn" class="px-6 py-3 bg-teal-600 text-white font-bold rounded-lg shadow-md hover:bg-teal-700 transition-colors">Retake Quiz</button>
+                            </div>
+                        </main>
+                    </div>
                 </div>
             </main>
         </div>
@@ -321,76 +595,175 @@
         </footer>
     </div>
 
-<script>
-    // --- Master Script for the Entire Study Guide ---
-    const CISM_DATA = { /* All data from baseline for D1, D2, D3, Assessment */ };
-    
-    function initDomain4(domainContainer) {
-        // Encapsulated, unchanged script from the new Domain 4 file starts here
-        const data = {
-            'plan-elements': {
-                scope: { description: "Defines what constitutes an 'information security incident'..." },
-                // ... all other data objects for D4
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // --- Centralized Data Store ---
+        const CISM_DATA = {
+            about: {
+                whyCism: [
+                    { title: "Leadership-Focused", description: "Emphasizes the strategic alignment of security initiatives with business goals, moving beyond purely technical skills to focus on governance and management." },
+                    { title: "Career-Enhancing", description: "Qualifies you for high-level, influential roles like Information Security Manager, Risk Manager, and Chief Information Security Officer (CISO)." },
+                    { title: "Global Recognition", description: "Respected and accepted by organizations and governments worldwide as a standard of excellence for information security leadership." },
+                    { title: "Industry Relevance", description: "Designed around current, real-world challenges in governance, risk, program development, and incident management, ensuring your knowledge is up-to-date." }
+                ],
+                examDomains: [
+                    { title: "Domain 1: Governance (17%)", description: "Focuses on establishing and maintaining an information security governance framework and supporting processes to ensure that the information security strategy is aligned with organizational goals and objectives." },
+                    { title: "Domain 2: Risk Management (20%)", description: "Covers the management of information risk to an acceptable level based on the organization's risk appetite in order to meet organizational goals and objectives." },
+                    { title: "Domain 3: Program Development (33%)", description: "Deals with developing and maintaining an information security program that identifies, manages, and protects the organization's assets while aligning to the information security strategy." },
+                    { title: "Domain 4: Incident Management (30%)", description: "Pertains to planning, establishing, and managing the capability to detect, investigate, respond to, and recover from information security incidents to minimize business impact." }
+                ]
             },
-            'key-terms': [
-                { term: "IRP", definition: "A documented set of procedures..." },
-                // ... all other key terms for D4
-            ]
+            domain1: {
+                keyTerms: [
+                    { term: "Information Security Governance", definition: "The system by which an organization directs and controls information security activities to achieve its objectives." },
+                    { term: "Risk Appetite", definition: "The amount and type of risk that an organization is willing to take in order to meet its strategic objectives." },
+                    // ... other key terms
+                ]
+            },
+            domain2: {
+                keyTerms: [
+                    { term: "Inherent Risk", definition: "The level of risk that exists before any controls or other mitigating factors are put in place. It's the raw risk." },
+                    { term: "Residual Risk", definition: "The level of risk that remains after controls have been implemented and account for their effectiveness. This is the risk that management accepts." },
+                    // ... other key terms
+                ],
+                detailedRoleDescriptions: {
+                    board: { description: "The Board and Executive Management hold ultimate accountability for information security risk..." },
+                    // ... other role descriptions
+                }
+            },
+            domain3: {
+                keyTerms: [
+                    { term: "Security Architecture", definition: "The design of security controls within an organization's IT infrastructure to protect its assets." },
+                    { term: "Defense-in-Depth", definition: "A security strategy that uses multiple layers of security controls to protect an asset." },
+                    // ... other key terms
+                ]
+            },
+            domain4: {
+                keyTerms: [
+                    { term: "Incident Response Plan (IRP)", definition: "A documented plan that outlines the procedures and responsibilities for responding to a security incident." },
+                    // ... placeholder for other key terms
+                ]
+            },
+            assessment: {
+                quizQuestions: [
+                    { domain: 1, question: "What is the PRIMARY objective of information security governance?", options: ["To implement security controls", "To ensure security aligns with business objectives", "To perform risk assessments", "To achieve compliance with all regulations"], answer: 1, explanation: "The primary goal of governance is strategic alignment..." },
+                    // ... other quiz questions
+                ]
+            }
         };
 
-        const navButtons = domainContainer.querySelectorAll('.nav-item');
-        const contentSections = domainContainer.querySelectorAll('.content-section');
-        navButtons.forEach(button => {
-            button.addEventListener('click', () => { /* ... unchanged nav logic ... */ });
-        });
-        domainContainer.querySelectorAll('.accordion-button').forEach(button => {
-            button.addEventListener('click', () => { /* ... unchanged accordion logic ... */ });
-        });
-        domainContainer.querySelectorAll('[data-interactive-group]').forEach(group => {
-            group.addEventListener('click', (e) => { /* ... unchanged interactive card logic ... */ });
-        });
-        function renderKeyTerms() {
-             const container = domainContainer.querySelector('#key-terms .grid');
-             if (container.children.length === 0) {
-                 data['key-terms'].forEach(item => {
-                     const card = document.createElement('div');
-                     card.className = 'interactive-card key-term-card';
-                     card.innerHTML = `<h3 class="card-title">${item.term}</h3><div class="card-description"><p>${item.definition}</p></div>`;
-                     container.appendChild(card);
-                 });
-             }
+        // --- Helper Functions ---
+        const createCardHTML = (item, type = 'info-card') => `<div class="${type} info-card"><h3 class="card-title">${item.title}</h3><div class="card-description"><p>${item.description}</p></div></div>`;
+        const createKeyTermCardHTML = (item) => `<div class="key-term-card info-card"><h3 class="card-title">${item.term}</h3><div class="card-description"><p>${item.definition}</p></div></div>`;
+        
+        function renderCards(containerSelector, data, cardCreator) {
+            const container = document.querySelector(containerSelector);
+            if (!container) return;
+            container.innerHTML = data.map(cardCreator).join('');
         }
-        // Encapsulated script logic ends here
-    }
 
-    // --- Master Controller ---
-    function setupDomain(domainId) {
-        const domainContainer = document.getElementById(domainId);
-        if (!domainContainer || domainContainer.dataset.initialized === 'true') return;
+        // --- Domain-Specific Initializers ---
+        function initAboutCism(domainContainer) {
+            renderCards('#why-cism-cards-container', CISM_DATA.about.whyCism, (item) => createCardHTML(item, 'interactive-card'));
+            renderCards('#domain-cards-container', CISM_DATA.about.examDomains, (item) => createCardHTML(item, 'interactive-card'));
+        }
 
-        // Simplified router
-        if (domainId === 'domain-4') {
-            initDomain4(domainContainer);
-        } else if (domainId === 'about-cism') {
-            // initAboutCism(domainContainer);
-        } // ... etc.
+        function initDomain1(domainContainer) {
+            // ... Full JS for Domain 1
+        }
 
-        domainContainer.dataset.initialized = 'true';
-    }
-    
-    document.getElementById('master-navigation').addEventListener('click', (e) => {
-        const targetButton = e.target.closest('.master-nav-item');
-        if (!targetButton) return;
-        document.querySelectorAll('#master-navigation .master-nav-item').forEach(btn => btn.classList.remove('active'));
-        targetButton.classList.add('active');
-        const targetDomainId = targetButton.dataset.domainTarget;
-        document.querySelectorAll('.domain-content-section').forEach(sec => sec.classList.add('hidden'));
-        document.getElementById(targetDomainId)?.classList.remove('hidden');
-        setupDomain(targetDomainId);
+        function initDomain2(domainContainer) {
+            // ... Full JS for Domain 2
+        }
+
+        function initDomain3(domainContainer) {
+            // ... Full JS for Domain 3
+        }
+
+        function initDomain4(domainContainer) {
+            // Placeholder for new JS
+        }
+        
+        function initAssessment(domainContainer) {
+            // ... Full JS for Quiz
+        }
+
+
+        // --- Master Controller ---
+        const mainContentArea = document.getElementById('domains-content-area');
+        const domainSections = document.querySelectorAll('.domain-content-section');
+
+        function setupDomain(domainId) {
+            const domainContainer = document.getElementById(domainId);
+            if (!domainContainer || domainContainer.dataset.initialized === 'true') return;
+
+            const initializers = {
+                'about-cism': initAboutCism,
+                'domain-1': initDomain1,
+                'domain-2': initDomain2,
+                'domain-3': initDomain3,
+                'domain-4': initDomain4,
+                'assessment': initAssessment
+            };
+            
+            if (initializers[domainId]) {
+                initializers[domainId](domainContainer);
+            }
+            
+            domainContainer.querySelectorAll('.domain-nav-item').forEach(button => {
+                button.addEventListener('click', () => {
+                    domainContainer.querySelectorAll('.domain-nav-item').forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    const targetId = button.dataset.target;
+                    domainContainer.querySelectorAll('.content-section').forEach(section => {
+                        section.classList.toggle('hidden', section.id !== targetId);
+                    });
+                });
+            });
+
+            domainContainer.dataset.initialized = 'true';
+        }
+        
+        // Master Navigation & Global Handlers
+        document.getElementById('master-navigation').addEventListener('click', (e) => {
+            const targetButton = e.target.closest('.master-nav-item');
+            if (!targetButton) return;
+            document.querySelectorAll('#master-navigation .master-nav-item').forEach(btn => btn.classList.remove('active'));
+            targetButton.classList.add('active');
+            
+            const targetDomainId = targetButton.dataset.domainTarget;
+            domainSections.forEach(sec => sec.classList.add('hidden'));
+            const targetContainer = document.getElementById(targetDomainId);
+            if (targetContainer) {
+                targetContainer.classList.remove('hidden');
+                setupDomain(targetDomainId);
+            }
+        });
+
+        mainContentArea.addEventListener('click', (e) => {
+            const accordionButton = e.target.closest('.accordion-button');
+            if (accordionButton) {
+                const content = accordionButton.nextElementSibling;
+                const icon = accordionButton.querySelector('.accordion-icon');
+                content.classList.toggle('hidden');
+                if (icon) icon.textContent = content.classList.contains('hidden') ? '+' : '–';
+            }
+
+            const card = e.target.closest('.info-card');
+            if (card) {
+                const group = card.closest('[data-group]');
+                if (group) {
+                    const wasActive = card.classList.contains('active');
+                    group.querySelectorAll('.info-card').forEach(c => c.classList.remove('active'));
+                    if (!wasActive) card.classList.add('active');
+                }
+            }
+        });
+
+        // Initial Setup
+        setupDomain('about-cism');
     });
-    
-    // Initial Load
-    setupDomain('about-cism');
-</script>
+    </script>
 </body>
 </html>
