@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CISM Interactive Study Guide (All Domains)</title>
-    <!-- Tailwind CSS CDN for utility classes -->
+    <title>CISM Interactive Study Guide (Domains 1-3 & Assessment)</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Chart.js CDN for interactive charts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         /* --- MASTER STYLESHEET (Combined & Deduplicated from all 4 Domains) --- */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
         
         /* --- BASE & LAYOUT --- */
         body {
@@ -85,8 +85,8 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
         }
 
-        /* --- INTERACTIVE CARDS (UNIFIED) --- */
-        .interactive-card, .concept-card, .requirement-card, .key-term-card, .change-management-card, .legal-type-card, .contract-type-card, .governance-structure-card, .risk-appetite-card, .business-driver-card, .framework-step-node, .maturity-level-card, .risk-framework-card, .risk-response-card, .risk-method-card, .vulnerability-scenario-card, .role-node, .flow-node, .incident-lifecycle-node {
+        /* --- INTERACTIVE CARDS (REFACTORED) --- */
+        .interactive-card {
             background-color: #EDEAE0;
             border: 1px solid #D5D2C8;
             padding: 1rem;
@@ -106,16 +106,17 @@
             max-height: 120px; /* Base max-height for transition */
             overflow: hidden;
         }
-        .interactive-card:hover, .concept-card:hover, .requirement-card:hover, .key-term-card:hover, .change-management-card:hover, .legal-type-card:hover, .contract-type-card:hover, .governance-structure-card:hover, .risk-appetite-card:hover, .business-driver-card:hover, .framework-step-node:hover, .maturity-level-card:hover, .risk-framework-card:hover, .risk-response-card:hover, .risk-method-card:hover, .vulnerability-scenario-card:hover, .role-node:hover, .flow-node:hover, .incident-lifecycle-node:hover {
+        .interactive-card:hover {
             transform: translateY(-3px);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
-        .interactive-card.active, .concept-card.active, .requirement-card.active, .key-term-card.active, .change-management-card.active, .legal-type-card.active, .contract-type-card.active, .governance-structure-card.active, .risk-appetite-card.active, .business-driver-card.active, .framework-step-node.active, .maturity-level-card.active, .risk-framework-card.active, .risk-response-card.active, .risk-method-card.active, .vulnerability-scenario-card.active, .role-node.active, .flow-node.active, .incident-lifecycle-node.active {
+        .interactive-card.active {
             border-color: #00A896;
             box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3);
             background-color: #E0F7F5;
             max-height: 5000px; /* Set a very large max-height to ensure full expansion */
         }
+        
         .card-title, .role-title, .node-title {
             font-size: 1.1em;
             margin-bottom: 0.6rem;
@@ -358,16 +359,13 @@
 <body class="leading-relaxed">
 
     <div class="container mx-auto p-4 sm:p-6 lg:p-8">
-        <!-- MASTER HEADER -->
         <header class="text-center py-6 bg-white rounded-lg shadow-lg mb-8">
             <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-2">CISM Study Guide</h1>
             <p class="text-xl sm:text-2xl text-gray-600">Comprehensive Interactive Educational Resource for CISM Certification Exam</p>
         </header>
 
-        <!-- Main Content Layout (2-column on desktop, 1-column on mobile) -->
         <div class="flex flex-col md:flex-row gap-8">
             
-            <!-- Left Column: Master Navigation -->
             <aside class="md:w-1/4 lg:w-1/5">
                 <nav id="master-navigation" class="bg-white p-4 rounded-lg shadow-md flex flex-col space-y-2 sticky top-4">
                     <button class="master-nav-item text-gray-700 active" data-domain-target="about-cism">
@@ -394,12 +392,6 @@
                             <span class="text-sm font-normal">Program Development</span>
                         </div>
                     </button>
-                    <button class="master-nav-item text-gray-700" data-domain-target="domain-4">
-                        <div class="flex flex-col">
-                            <span class="font-bold text-base domain-title">Domain 4</span>
-                            <span class="text-sm font-normal">Incident Management</span>
-                        </div>
-                    </button>
                     <button class="master-nav-item text-gray-700" data-domain-target="assessment">
                         <div class="flex flex-col">
                             <span class="font-bold text-base domain-title">Assessment</span>
@@ -409,12 +401,8 @@
                 </nav>
             </aside>
 
-            <!-- Right Column: Main Content Area -->
             <main class="flex-1">
                 <div id="domains-content-area">
-                    <!-- =============================================================================== -->
-                    <!-- == ABOUT CISM ================================================================= -->
-                    <!-- =============================================================================== -->
                     <div id="about-cism" class="domain-content-section fade-in">
                         <header class="text-center py-8 bg-white rounded-lg shadow-md mb-8">
                             <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-2">CISM Certification Overview</h1>
@@ -429,23 +417,19 @@
                         </nav>
 
                         <main id="content-area">
-                            <!-- Why CISM? Section -->
                             <section id="overview" class="content-section fade-in">
                                 <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Why Pursue the CISM Certification?</h2>
                                 <div class="p-6 bg-white rounded-lg shadow-md mb-6">
                                     <p class="text-gray-700">The Certified Information Security Manager (CISM) certification, issued by ISACA, is a premier credential for professionals managing and overseeing information security systems in alignment with business goals. Focused on governance, risk management, and leadership, CISM is ideal for security managers, CISOs, and consultants who drive security strategies across the enterprise. Click on the cards below to explore the key benefits.</p>
                                 </div>
                                 <div id="why-cism-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" data-group="why-cism">
-                                    <!-- Cards will be populated by JavaScript -->
-                                </div>
+                                    </div>
                             </section>
 
-                            <!-- Exam Details Section -->
                             <section id="exam-details" class="content-section hidden">
                                 <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">CISM Exam Details</h2>
                                 <p class="mb-8 text-gray-700">Everything you need to know about the CISM exam, from its format and cost to the experience required and testing options.</p>
 
-                                <!-- Accordion for Exam Details -->
                                 <div class="space-y-4">
                                     <div class="bg-white rounded-lg shadow-md">
                                         <button class="accordion-button w-full">
@@ -459,8 +443,7 @@
                                                 <li><strong>Passing Score:</strong> 450 out of 800 (scaled score)</li>
                                             </ul>
                                             <div id="domain-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 my-4" data-group="exam-domains">
-                                                <!-- Domain cards will be injected here by JS -->
-                                            </div>
+                                                </div>
                                         </div>
                                     </div>
                                     <div class="bg-white rounded-lg shadow-md">
@@ -530,7 +513,6 @@
                                 </div>
                             </section>
 
-                            <!-- Maintenance Section -->
                             <section id="maintenance" class="content-section hidden">
                                 <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Maintaining Your CISM Certification</h2>
                                 <p class="mb-8 text-gray-700">Holding the CISM certification is an ongoing commitment to professional development. To maintain your credential, you must adhere to ISACA's requirements for continuing professional education (CPE) and professional conduct.</p>
@@ -573,9 +555,6 @@
                         </main>
                     </div>
 
-                    <!-- =============================================================================== -->
-                    <!-- == DOMAIN 1: INFORMATION SECURITY GOVERNANCE ================================== -->
-                    <!-- =============================================================================== -->
                     <div id="domain-1" class="domain-content-section hidden">
                         <header class="text-center py-8 bg-white rounded-lg shadow-md mb-8">
                             <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-2">CISM Domain 1 Study Guide</h1>
@@ -592,7 +571,6 @@
                         </nav>
 
                         <main>
-                            <!-- Introduction Section -->
                             <section id="introduction-d1" class="content-section fade-in">
                                 <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Introduction to CISM Domain 1</h2>
                                 <div class="p-6 bg-white rounded-lg shadow-md">
@@ -601,12 +579,10 @@
                                 </div>
                             </section>
 
-                            <!-- Enterprise Governance Section -->
                             <section id="enterprise-governance-d1" class="content-section hidden">
                                 <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Section A: Enterprise Governance</h2>
                                 <p class="mb-8 text-gray-700">Enterprise governance provides the structure through which the objectives of the organization are set and pursued. Information security governance must be an integral part of this broader framework.</p>
 
-                                <!-- Accordions for Section A -->
                                 <div class="space-y-4">
                                     <div class="bg-white rounded-lg shadow-md">
                                         <button class="accordion-button w-full">1. Organizational Culture and its Impact<span class="accordion-icon text-2xl">+</span></button>
@@ -637,10 +613,10 @@
                                              <h4 class="text-lg font-semibold text-gray-700 mb-3 mt-6">d. Change management and resistance mitigation in security initiatives.</h4>
                                              <p class="text-gray-600 mb-4">Implementing new security measures often encounters resistance. Effective change management involves early stakeholder engagement, clear communication of the "why," and providing adequate training and support to facilitate adoption. Click on each step to learn more:</p>
                                              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-group="change-management">
-                                                 <div class="change-management-card"><span class="card-title">Communicate Early & Often</span><div class="card-description">Proactive and transparent communication about upcoming changes, their benefits, and potential impacts helps reduce uncertainty and build trust.</div></div>
-                                                 <div class="change-management-card"><span class="card-title">Address Concerns</span><div class="card-description">Establish channels for feedback and actively listen to and address employee concerns, fears, and questions about new security initiatives.</div></div>
-                                                 <div class="change-management-card"><span class="card-title">Provide Training & Support</span><div class="card-description">Offer comprehensive and accessible training, along with ongoing support, to ensure employees understand new security processes and tools.</div></div>
-                                                 <div class="change-management-card"><span class="card-title">Celebrate Successes</span><div class="card-description">Recognize and reward positive security behaviors and successful adoption of new measures to reinforce the desired culture and motivate continued compliance.</div></div>
+                                                 <div class="change-management-card interactive-card"><span class="card-title">Communicate Early & Often</span><div class="card-description">Proactive and transparent communication about upcoming changes, their benefits, and potential impacts helps reduce uncertainty and build trust.</div></div>
+                                                 <div class="change-management-card interactive-card"><span class="card-title">Address Concerns</span><div class="card-description">Establish channels for feedback and actively listen to and address employee concerns, fears, and questions about new security initiatives.</div></div>
+                                                 <div class="change-management-card interactive-card"><span class="card-title">Provide Training & Support</span><div class="card-description">Offer comprehensive and accessible training, along with ongoing support, to ensure employees understand new security processes and tools.</div></div>
+                                                 <div class="change-management-card interactive-card"><span class="card-title">Celebrate Successes</span><div class="card-description">Recognize and reward positive security behaviors and successful adoption of new measures to reinforce the desired culture and motivate continued compliance.</div></div>
                                              </div>
                                         </div>
                                     </div>
@@ -651,16 +627,16 @@
                                             <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Identification and interpretation of applicable laws and regulations</h4>
                                             <p class="text-gray-600 mb-4">Organizations must identify all pertinent laws and regulations based on their operations, industry, and geography. Explore key regulations by region/type:</p>
                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-group="legal-type">
-                                                <div class="concept-card"> <span class="card-title">European Union</span><div class="card-description">Regulations like GDPR (General Data Protection Regulation) focus on data privacy and protection for individuals within the EU.</div></div>
-                                                <div class="concept-card"> <span class="card-title">USA (Federal & State)</span><div class="card-description">Includes federal laws like HIPAA (Health Insurance Portability and Accountability Act) for healthcare data, and state-specific laws like CCPA (California Consumer Privacy Act).</div></div>
-                                                <div class="concept-card"> <span class="card-title">Global & Industry Specific</span><div class="card-description">Beyond regional laws, organizations must comply with global standards (e.g., ISO 27001) and industry-specific mandates (e.g., PCI DSS for payment cards, NERC CIP for critical infrastructure).</div></div>
+                                                <div class="concept-card interactive-card"> <span class="card-title">European Union</span><div class="card-description">Regulations like GDPR (General Data Protection Regulation) focus on data privacy and protection for individuals within the EU.</div></div>
+                                                <div class="concept-card interactive-card"> <span class="card-title">USA (Federal & State)</span><div class="card-description">Includes federal laws like HIPAA (Health Insurance Portability and Accountability Act) for healthcare data, and state-specific laws like CCPA (California Consumer Privacy Act).</div></div>
+                                                <div class="concept-card interactive-card"> <span class="card-title">Global & Industry Specific</span><div class="card-description">Beyond regional laws, organizations must comply with global standards (e.g., ISO 27001) and industry-specific mandates (e.g., PCI DSS for payment cards, NERC CIP for critical infrastructure).</div></div>
                                             </div>
                                             <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Contractual obligations related to information security</h4>
                                             <p class="text-gray-600 mb-4">Beyond laws, contracts impose specific security requirements. Click on a contract type to see typical security clauses:</p>
                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-group="contract-type">
-                                                <div class="concept-card"><span class="card-title">Service Level Agreement (SLA)</span><div class="card-description">Defines the level of service expected from a vendor, including security performance metrics, incident response times, and data protection clauses.</div></div>
-                                                <div class="concept-card"><span class="card-title">Business Associate Agreement (BAA)</span><div class="card-description">Required under HIPAA, this contract specifies how business associates (third-party service providers) will safeguard Protected Health Information (PHI) on behalf of a covered entity.</div></div>
-                                                <div class="concept-card"><span class="card-title">Non-Disclosure Agreement (NDA)</span><div class="card-description">A legal contract that outlines confidential material, knowledge, or information that the parties wish to share with one another but restrict access to by third parties. It includes clauses on data protection and handling.</div></div>
+                                                <div class="concept-card interactive-card"><span class="card-title">Service Level Agreement (SLA)</span><div class="card-description">Defines the level of service expected from a vendor, including security performance metrics, incident response times, and data protection clauses.</div></div>
+                                                <div class="concept-card interactive-card"><span class="card-title">Business Associate Agreement (BAA)</span><div class="card-description">Required under HIPAA, this contract specifies how business associates (third-party service providers) will safeguard Protected Health Information (PHI) on behalf of a covered entity.</div></div>
+                                                <div class="concept-card interactive-card"><span class="card-title">Non-Disclosure Agreement (NDA)</span><div class="card-description">A legal contract that outlines confidential material, knowledge, or information that the parties wish to share with one another but restrict access to by third parties. It includes clauses on data protection and handling.</div></div>
                                             </div>
                                             <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Security's role in legal compliance and audit readiness</h4>
                                             <p class="text-gray-600 mb-4">Information security is central to achieving and demonstrating compliance. This involves establishing compliance programs, preparing for audits with robust documentation, and continuous monitoring of control effectiveness.</p>
@@ -677,9 +653,9 @@
                                             <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Governance structures (centralized, decentralized, hybrid)</h4>
                                             <p class="text-gray-600 mb-4">Organizations adopt different models for security governance. Explore the common structures below:</p>
                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-group="governance-structure">
-                                                 <div class="concept-card"><span class="card-title">Centralized</span><div class="card-description">Security decisions and control are concentrated in a single department or team (e.g., a dedicated CISO office). This provides consistency and strong oversight but can be less agile in large, diverse organizations.</div></div>
-                                                 <div class="concept-card"><span class="card-title">Decentralized</span><div class="card-description">Security responsibilities are distributed across various business units or departments. This can promote agility and local ownership but may lead to inconsistencies and gaps without strong coordination.</div></div>
-                                                 <div class="concept-card"><span class="card-title">Hybrid</span><div class="card-description">Combines elements of both centralized and decentralized models. A central security function sets overall strategy and standards, while business units handle day-to-day implementation and local adaptations. This aims to balance consistency with agility.</div></div>
+                                                <div class="concept-card interactive-card"><span class="card-title">Centralized</span><div class="card-description">Security decisions and control are concentrated in a single department or team (e.g., a dedicated CISO office). This provides consistency and strong oversight but can be less agile in large, diverse organizations.</div></div>
+                                                <div class="concept-card interactive-card"><span class="card-title">Decentralized</span><div class="card-description">Security responsibilities are distributed across various business units or departments. This can promote agility and local ownership but may lead to inconsistencies and gaps without strong coordination.</div></div>
+                                                <div class="concept-card interactive-card"><span class="card-title">Hybrid</span><div class="card-description">Combines elements of both centralized and decentralized models. A central security function sets overall strategy and standards, while business units handle day-to-day implementation and local adaptations. This aims to balance consistency with agility.</div></div>
                                             </div>
                                             <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Defining roles and responsibilities: Board, Executive, CISO, Data Owners, Users</h4>
                                             <p class="text-gray-600 mb-4">Clear role definitions are fundamental to accountability. Each level, from the Board with ultimate oversight to every user adhering to policies, plays a crucial part in the security posture.</p>
@@ -692,7 +668,6 @@
                                 </div>
                             </section>
 
-                            <!-- Information Security Strategy Section -->
                             <section id="info-sec-strategy-d1" class="content-section hidden">
                                 <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Section B: Information Security Strategy</h2>
                                 <p class="mb-8 text-gray-700">An information security strategy translates the organization's business objectives into actionable security goals and initiatives.</p>
@@ -709,18 +684,18 @@
                                             <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Determining risk appetite and tolerance</h4>
                                             <p class="text-gray-600 mb-4">Understanding the organization's willingness to accept risk (risk appetite) and acceptable deviation (risk tolerance) is crucial for shaping the security strategy and prioritizing investments. Explore different risk appetites:</p>
                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-group="risk-appetite">
-                                                <div class="risk-appetite-card"><span class="card-title">Risk Averse</span><div class="card-description">Prefers to avoid risk as much as possible, even if it means missing potential opportunities. Focuses heavily on preventative controls and strict compliance.</div></div>
-                                                <div class="risk-appetite-card"><span class="card-title">Conservative</span><div class="card-description">Willing to accept a low level of risk, but generally prefers established, proven security measures. Prioritizes stability and minimizing potential losses.</div></div>
-                                                <div class="risk-appetite-card"><span class="card-title">Moderate</span><div class="card-description">Balances risk and reward, accepting a reasonable level of risk to achieve business objectives. Invests in security controls that provide a good return on investment.</div></div>
-                                                <div class="risk-appetite-card"><span class="card-title">Risk Aggressive</span><div class="card-description">Willing to take on higher levels of risk for potentially greater rewards, often seen in innovative or rapidly growing organizations. Focuses on rapid detection and response capabilities.</div></div>
+                                                <div class="risk-appetite-card interactive-card"><span class="card-title">Risk Averse</span><div class="card-description">Prefers to avoid risk as much as possible, even if it means missing potential opportunities. Focuses heavily on preventative controls and strict compliance.</div></div>
+                                                <div class="risk-appetite-card interactive-card"><span class="card-title">Conservative</span><div class="card-description">Willing to accept a low level of risk, but generally prefers established, proven security measures. Prioritizes stability and minimizing potential losses.</div></div>
+                                                <div class="risk-appetite-card interactive-card"><span class="card-title">Moderate</span><div class="card-description">Balances risk and reward, accepting a reasonable level of risk to achieve business objectives. Invests in security controls that provide a good return on investment.</div></div>
+                                                <div class="risk-appetite-card interactive-card"><span class="card-title">Risk Aggressive</span><div class="card-description">Willing to take on higher levels of risk for potentially greater rewards, often seen in innovative or rapidly growing organizations. Focuses on rapid detection and response capabilities.</div></div>
                                             </div>
                                             <h4 class="text-lg font-semibold text-gray-700 mb-3">d. Incorporating threat landscape and business drivers</h4>
                                             <p class="text-gray-600 mb-4">The strategy must be dynamic, continuously adapting to evolving external threats (threat landscape) and internal business needs (business drivers) to remain relevant and effective. Map business drivers to security objective mapper:</p>
                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-group="business-driver">
-                                                <div class="business-driver-card"><span class="card-title">Digital Transformation</span><div class="card-description">Security objectives align with securing new digital platforms, cloud environments, and data analytics initiatives. Focus on cloud security, data privacy, and secure development.</div></div>
-                                                <div class="business-driver-card"><span class="card-title">Global Expansion</span><div class="card-description">Security objectives include understanding and complying with international regulations and securing global supply chains.</div></div>
-                                                <div class="business-driver-card"><span class="card-title">Cost Optimization</span><div class="card-description">Security objectives focus on efficiency and cost-effectiveness of controls while maintaining an acceptable risk posture.</div></div>
-                                                <div class="business-driver-card"><span class="card-title">New Product Launch</span><div class="card-description">Security objectives prioritize security-by-design, vulnerability testing, and ensuring product compliance before release.</div></div>
+                                                <div class="business-driver-card interactive-card"><span class="card-title">Digital Transformation</span><div class="card-description">Security objectives align with securing new digital platforms, cloud environments, and data analytics initiatives. Focus on cloud security, data privacy, and secure development.</div></div>
+                                                <div class="business-driver-card interactive-card"><span class="card-title">Global Expansion</span><div class="card-description">Security objectives include understanding and complying with international regulations and securing global supply chains.</div></div>
+                                                <div class="business-driver-card interactive-card"><span class="card-title">Cost Optimization</span><div class="card-description">Security objectives focus on efficiency and cost-effectiveness of controls while maintaining an acceptable risk posture.</div></div>
+                                                <div class="business-driver-card interactive-card"><span class="card-title">New Product Launch</span><div class="card-description">Security objectives prioritize security-by-design, vulnerability testing, and ensuring product compliance before release.</div></div>
                                             </div>
                                             <h4 class="text-lg font-semibold text-gray-700 mb-3">e. Prioritizing security initiatives based on business impact</h4>
                                             <p class="text-gray-600 mb-4">With limited resources, security initiatives must be prioritized based on their potential business impact, leveraging Business Impact Analysis (BIA) and cost-benefit analysis.</p>
@@ -737,10 +712,10 @@
                                         <div class="accordion-content hidden p-6">
                                             <p class="text-gray-700 mb-4">Frameworks provide a structured approach to managing information security. Click on a card to learn more:</p>
                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-group="framework">
-                                                <div class="concept-card"><span class="card-title">COBIT</span><div class="card-description"><strong>Control Objectives for Information and Related Technologies:</strong> A comprehensive framework for IT governance and management, providing a holistic approach to managing IT risks and ensuring IT alignment with business goals. It helps organizations create optimal value from IT by maintaining a balance between realizing benefits and optimizing risk levels and resource use.</div></div>
-                                                <div class="concept-card"><span class="card-title">ISO/IEC 27001</span><div class="card-description"><strong>Information Security Management System (ISMS):</strong> An international standard that specifies requirements for establishing, implementing, maintaining, and continually improving an ISMS within the context of the organization's overall business risks. Certification to ISO 27001 demonstrates a systematic approach to managing sensitive company information.</div></div>
-                                                <div class="concept-card"><span class="card-title">NIST CSF</span><div class="card-description"><strong>National Institute of Standards and Technology Cybersecurity Framework:</strong> A voluntary framework providing a common language for understanding, managing, and expressing cybersecurity risk. It consists of five core functions: Identify, Protect, Detect, Respond, Recover, offering a flexible way to manage cybersecurity risk.</div></div>
-                                                <div class="concept-card"><span class="card-title">ITIL</span><div class="card-description"><strong>Information Technology Infrastructure Library:</strong> A framework for IT service management that describes processes, procedures, tasks, and checklists that are not organization-specific, used to establish a minimum level of competency. While not solely security-focused, it supports security processes.</div></div>
+                                                <div class="concept-card interactive-card"><span class="card-title">COBIT</span><div class="card-description"><strong>Control Objectives for Information and Related Technologies:</strong> A comprehensive framework for IT governance and management, providing a holistic approach to managing IT risks and ensuring IT alignment with business goals. It helps organizations create optimal value from IT by maintaining a balance between realizing benefits and optimizing risk levels and resource use.</div></div>
+                                                <div class="concept-card interactive-card"><span class="card-title">ISO/IEC 27001</span><div class="card-description"><strong>Information Security Management System (ISMS):</strong> An international standard that specifies requirements for establishing, implementing, maintaining, and continually improving an ISMS within the context of the organization's overall business risks. Certification to ISO 27001 demonstrates a systematic approach to managing sensitive company information.</div></div>
+                                                <div class="concept-card interactive-card"><span class="card-title">NIST CSF</span><div class="card-description"><strong>National Institute of Standards and Technology Cybersecurity Framework:</strong> A voluntary framework providing a common language for understanding, managing, and expressing cybersecurity risk. It consists of five core functions: Identify, Protect, Detect, Respond, Recover, offering a flexible way to manage cybersecurity risk.</div></div>
+                                                <div class="concept-card interactive-card"><span class="card-title">ITIL</span><div class="card-description"><strong>Information Technology Infrastructure Library:</strong> A framework for IT service management that describes processes, procedures, tasks, and checklists that are not organization-specific, used to establish a minimum level of competency. While not solely security-focused, it supports security processes.</div></div>
                                             </div>
                                             <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Selection and Implementation:</h4>
                                             <p class="text-gray-600 mb-4">Choosing the right framework depends on organizational context, industry, and regulatory landscape. Implementation involves adapting the framework's principles to the specific needs of the enterprise.</p>
@@ -748,15 +723,15 @@
                                             <p class="text-gray-600 mb-4">Security frameworks must be integrated seamlessly into the broader enterprise governance structure through harmonization, consistent language, and a robust top-down/bottom-up communication flow.</p>
                                             <h5 class="text-md font-bold text-gray-800 mb-2">Framework Adoption Journey</h5>
                                             <div class="framework-journey-container" data-group="framework-step">
-                                                <div class="framework-step-node"><span class="card-title">1. Define Scope & Objectives</span><div class="card-description">Clearly define the scope of the ISMS (Information Security Management System), identify organizational context, and establish the objectives and policies for information security. This aligns security with business goals.</div></div>
+                                                <div class="framework-step-node interactive-card"><span class="card-title">1. Define Scope & Objectives</span><div class="card-description">Clearly define the scope of the ISMS (Information Security Management System), identify organizational context, and establish the objectives and policies for information security. This aligns security with business goals.</div></div>
                                                 <div class="framework-arrow"></div>
-                                                <div class="framework-step-node"><span class="card-title">2. Assess Current State & Gaps</span><div class="card-description">Conduct a comprehensive assessment of the organization's current information security posture, identify existing controls, and pinpoint gaps against the chosen framework's requirements. This includes risk assessment.</div></div>
+                                                <div class="framework-step-node interactive-card"><span class="card-title">2. Assess Current State & Gaps</span><div class="card-description">Conduct a comprehensive assessment of the organization's current information security posture, identify existing controls, and pinpoint gaps against the chosen framework's requirements. This includes risk assessment.</div></div>
                                                 <div class="framework-arrow"></div>
-                                                <div class="framework-step-node"><span class="card-title">3. Design & Plan Controls</span><div class="card-description">Based on the risk assessment and identified gaps, design and plan the implementation of appropriate security controls. This involves selecting controls from the framework's annexes (e.g., ISO 27002) and developing a detailed implementation plan.</div></div>
+                                                <div class="framework-step-node interactive-card"><span class="card-title">3. Design & Plan Controls</span><div class="card-description">Based on the risk assessment and identified gaps, design and plan the implementation of appropriate security controls. This involves selecting controls from the framework's annexes (e.g., ISO 27002) and developing a detailed implementation plan.</div></div>
                                                 <div class="framework-arrow"></div>
-                                                <div class="framework-step-node"><span class="card-title">4. Implement Controls</span><div class="card-description">Execute the control implementation plan, deploying new security technologies, updating processes, and conducting necessary training. This phase focuses on putting the planned security measures into operation.</div></div>
+                                                <div class="framework-step-node interactive-card"><span class="card-title">4. Implement Controls</span><div class="card-description">Execute the control implementation plan, deploying new security technologies, updating processes, and conducting necessary training. This phase focuses on putting the planned security measures into operation.</div></div>
                                                 <div class="framework-arrow"></div>
-                                                <div class="framework-step-node"><span class="card-title">5. Monitor, Review & Improve</span><div class="card-description">Continuously monitor the effectiveness of implemented controls, conduct regular reviews and audits, and make necessary adjustments for continuous improvement. This ensures the ISMS remains effective and adapts to changes in the threat landscape or business environment.</div></div>
+                                                <div class="framework-step-node interactive-card"><span class="card-title">5. Monitor, Review & Improve</span><div class="card-description">Continuously monitor the effectiveness of implemented controls, conduct regular reviews and audits, and make necessary adjustments for continuous improvement. This ensures the ISMS remains effective and adapts to changes in the threat landscape or business environment.</div></div>
                                             </div>
                                         </div>
                                     </div>
@@ -809,44 +784,42 @@
                                             <h4 class="text-lg font-semibold text-gray-700 mb-3">f. Continuous improvement through maturity models (e.g., CMMI, PDCA)</h4>
                                             <p class="text-gray-600 mb-4">Information security requires continuous improvement, often guided by maturity models like CMMI and iterative methodologies such as the Plan-Do-Check-Act (PDCA) cycle. Explore common maturity levels:</p>
                                             <div class="flex flex-wrap justify-center items-center gap-4" data-group="maturity-level">
-                                                <div class="maturity-level-card"><span class="card-title">Initial</span><div class="card-description">Processes are ad hoc and chaotic; success depends on individual effort. Security is reactive, with no standardized procedures.</div></div>
+                                                <div class="maturity-level-card interactive-card"><span class="card-title">Initial</span><div class="card-description">Processes are ad hoc and chaotic; success depends on individual effort. Security is reactive, with no standardized procedures.</div></div>
                                                 <span class="maturity-arrow-right">&rarr;</span>
-                                                <div class="maturity-level-card"><span class="card-title">Managed</span><div class="card-description">Processes are planned and executed in accordance with policies. Basic security controls are in place, but performance is not yet consistently measured.</div></div>
+                                                <div class="maturity-level-card interactive-card"><span class="card-title">Managed</span><div class="card-description">Processes are planned and executed in accordance with policies. Basic security controls are in place, but performance is not yet consistently measured.</div></div>
                                                 <span class="maturity-arrow-right">&rarr;</span>
-                                                <div class="maturity-level-card"><span class="card-title">Defined</span><div class="card-description">Processes are well-characterized and understood, described in standards, procedures, tools, and methods. Security is integrated into the organization's standard practices, and roles are clear.</div></div>
+                                                <div class="maturity-level-card interactive-card"><span class="card-title">Defined</span><div class="card-description">Processes are well-characterized and understood, described in standards, procedures, tools, and methods. Security is integrated into the organization's standard practices, and roles are clear.</div></div>
                                                 <span class="maturity-arrow-right">&rarr;</span>
-                                                <div class="maturity-level-card"><span class="card-title">Quantitatively Managed</span><div class="card-description">Processes are controlled using statistical and other quantitative techniques. Security performance is measured and controlled, allowing for data-driven decision-making.</div></div>
+                                                <div class="maturity-level-card interactive-card"><span class="card-title">Quantitatively Managed</span><div class="card-description">Processes are controlled using statistical and other quantitative techniques. Security performance is measured and controlled, allowing for data-driven decision-making.</div></div>
                                                 <span class="maturity-arrow-right">&rarr;</span>
-                                                <div class="maturity-level-card"><span class="card-title">Optimizing</span><div class="card-description">Continuous process improvement is enabled by quantitative feedback and innovative new ideas and technologies. Security is a proactive, strategic enabler for the business, constantly adapting to new threats and opportunities.</div></div>
+                                                <div class="maturity-level-card interactive-card"><span class="card-title">Optimizing</span><div class="card-description">Continuous process improvement is enabled by quantitative feedback and innovative new ideas and technologies. Security is a proactive, strategic enabler for the business, constantly adapting to new threats and opportunities.</div></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </section>
 
-                            <!-- Key Terms Section -->
                             <section id="key-terms-d1" class="content-section hidden">
                                 <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Key Terms</h2>
                                 <p class="mb-8 text-gray-700">Test your knowledge of key terms in Information Security Governance with these interactive flashcards. Click on a card to reveal its definition.</p>
                                 <div id="key-terms-grid-d1" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" data-group="key-terms-d1">
-                                    <div class="key-term-card"><h3 class="card-title">Information Security Governance</h3><div class="card-description"><p>The system by which an organization directs and controls information security activities to achieve its objectives.</p></div></div>
-                                    <div class="key-term-card"><h3 class="card-title">Risk Appetite</h3><div class="card-description"><p>The amount and type of risk that an organization is willing to take in order to meet its strategic objectives.</p></div></div>
-                                    <div class="key-term-card"><h3 class="card-title">Organizational Culture</h3><div class="card-description"><p>The shared values, beliefs, attitudes, and behaviors that characterize an organization and influence how information security is perceived and practiced.</p></div></div>
-                                    <div class="key-term-card"><h3 class="card-title">Due Diligence</h3><div class="card-description"><p>The exercise of reasonable care in the investigation of a matter before entering into an agreement or a transaction.</p></div></div>
-                                    <div class="key-term-card"><h3 class="card-title">Due Care</h3><div class="card-description"><p>The level of ordinary care that a reasonable and prudent person would exercise under the same or similar circumstances.</p></div></div>
-                                    <div class="key-term-card"><h3 class="card-title">Information Security Strategy</h3><div class="card-description"><p>A long-term plan that outlines the organization's approach to protecting its information assets, aligned with business objectives and risk appetite.</p></div></div>
-                                    <div class="key-term-card"><h3 class="card-title">COBIT</h3><div class="card-description"><p>A framework for enterprise IT governance and management, providing a holistic approach to managing IT risks and ensuring IT alignment with business goals.</p></div></div>
-                                    <div class="key-term-card"><h3 class="card-title">ISO/IEC 27001</h3><div class="card-description"><p>An international standard that provides requirements for establishing, implementing, maintaining, and continually improving an Information Security Management System (ISMS).</p></div></div>
-                                    <div class="key-term-card"><h3 class="card-title">NIST Cybersecurity Framework (CSF)</h3><div class="card-description"><p>A voluntary framework providing a common language for understanding, managing, and expressing cybersecurity risk, structured around five core functions: Identify, Protect, Detect, Respond, Recover.</p></div></div>
-                                    <div class="key-term-card"><h3 class="card-title">Key Performance Indicator (KPI)</h3><div class="card-description"><p>A measurable value that demonstrates how effectively a company is achieving key business objectives. In security, it measures the performance of security controls or processes.</p></div></div>
-                                    <div class="key-term-card"><h3 class="card-title">Key Goal Indicator (KGI)</h3><div class="card-description"><p>A metric that indicates whether a high-level goal is being achieved. In security, it measures the achievement of strategic information security objectives.</p></div></div>
-                                    <div class="key-term-card"><h3 class="card-title">Business Case</h3><div class="card-description"><p>A documented argument or justification for undertaking a project or initiative, including its financial and non-financial benefits, costs, and risks.</p></div></div>
-                                    <div class="key-term-card"><h3 class="card-title">Legal & Regulatory Compliance</h3><div class="card-description"><p>Adherence to laws, regulations, and industry standards that govern an organization's information handling and security practices (e.g., GDPR, HIPAA, SOX).</p></div></div>
-                                    <div class="key-term-card"><h3 class="card-title">Information Asset</h3><div class="card-description"><p>Any information or information system that has value to the organization, requiring protection (e.g., customer data, intellectual property, critical systems).</p></div></div>
+                                    <div class="key-term-card interactive-card"><h3 class="card-title">Information Security Governance</h3><div class="card-description"><p>The system by which an organization directs and controls information security activities to achieve its objectives.</p></div></div>
+                                    <div class="key-term-card interactive-card"><h3 class="card-title">Risk Appetite</h3><div class="card-description"><p>The amount and type of risk that an organization is willing to take in order to meet its strategic objectives.</p></div></div>
+                                    <div class="key-term-card interactive-card"><h3 class="card-title">Organizational Culture</h3><div class="card-description"><p>The shared values, beliefs, attitudes, and behaviors that characterize an organization and influence how information security is perceived and practiced.</p></div></div>
+                                    <div class="key-term-card interactive-card"><h3 class="card-title">Due Diligence</h3><div class="card-description"><p>The exercise of reasonable care in the investigation of a matter before entering into an agreement or a transaction.</p></div></div>
+                                    <div class="key-term-card interactive-card"><h3 class="card-title">Due Care</h3><div class="card-description"><p>The level of ordinary care that a reasonable and prudent person would exercise under the same or similar circumstances.</p></div></div>
+                                    <div class="key-term-card interactive-card"><h3 class="card-title">Information Security Strategy</h3><div class="card-description"><p>A long-term plan that outlines the organization's approach to protecting its information assets, aligned with business objectives and risk appetite.</p></div></div>
+                                    <div class="key-term-card interactive-card"><h3 class="card-title">COBIT</h3><div class="card-description"><p>A framework for enterprise IT governance and management, providing a holistic approach to managing IT risks and ensuring IT alignment with business goals.</p></div></div>
+                                    <div class="key-term-card interactive-card"><h3 class="card-title">ISO/IEC 27001</h3><div class="card-description"><p>An international standard that provides requirements for establishing, implementing, maintaining, and continually improving an Information Security Management System (ISMS).</p></div></div>
+                                    <div class="key-term-card interactive-card"><h3 class="card-title">NIST Cybersecurity Framework (CSF)</h3><div class="card-description"><p>A voluntary framework providing a common language for understanding, managing, and expressing cybersecurity risk, structured around five core functions: Identify, Protect, Detect, Respond, Recover.</p></div></div>
+                                    <div class="key-term-card interactive-card"><h3 class="card-title">Key Performance Indicator (KPI)</h3><div class="card-description"><p>A measurable value that demonstrates how effectively a company is achieving key business objectives. In security, it measures the performance of security controls or processes.</p></div></div>
+                                    <div class="key-term-card interactive-card"><h3 class="card-title">Key Goal Indicator (KGI)</h3><div class="card-description"><p>A metric that indicates whether a high-level goal is being achieved. In security, it measures the achievement of strategic information security objectives.</p></div></div>
+                                    <div class="key-term-card interactive-card"><h3 class="card-title">Business Case</h3><div class="card-description"><p>A documented argument or justification for undertaking a project or initiative, including its financial and non-financial benefits, costs, and risks.</p></div></div>
+                                    <div class="key-term-card interactive-card"><h3 class="card-title">Legal & Regulatory Compliance</h3><div class="card-description"><p>Adherence to laws, regulations, and industry standards that govern an organization's information handling and security practices (e.g., GDPR, HIPAA, SOX).</p></div></div>
+                                    <div class="key-term-card interactive-card"><h3 class="card-title">Information Asset</h3><div class="card-description"><p>Any information or information system that has value to the organization, requiring protection (e.g., customer data, intellectual property, critical systems).</p></div></div>
                                 </div>
                             </section>
 
-                            <!-- Domain Summary Section -->
                             <section id="domain-summary-d1" class="content-section hidden">
                                 <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Domain Summary</h2>
                                 <div class="p-6 bg-white rounded-lg shadow-md">
@@ -858,9 +831,6 @@
                         </main>
                     </div>
         
-                    <!-- =============================================================================== -->
-                    <!-- == DOMAIN 2: INFORMATION SECURITY RISK MANAGEMENT =============================== -->
-                    <!-- =============================================================================== -->
                     <div id="domain-2" class="domain-content-section hidden">
                         <header class="text-center py-8 bg-white rounded-lg shadow-md mb-8">
                             <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-2">CISM Domain 2 Study Guide</h1>
@@ -890,7 +860,6 @@
                                 <p class="mb-8 text-gray-700">Information security risk assessment is the systematic process of identifying potential threats and vulnerabilities, analyzing their potential impact, and determining the likelihood of their occurrence. It's about understanding "what could go wrong" and "how bad it could be".</p>
 
                                 <div class="space-y-4">
-                                    <!-- Sub-Domain: Emerging Risk and Threat Landscape -->
                                     <div class="bg-white rounded-lg shadow-md">
                                         <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
                                             1. Emerging Risk and Threat Landscape
@@ -922,7 +891,6 @@
                                         </div>
                                     </div>
 
-                                    <!-- Sub-Domain: Vulnerability and Control Deficiency Analysis -->
                                     <div class="bg-white rounded-lg shadow-md">
                                         <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
                                             2. Vulnerability and Control Deficiency Analysis
@@ -942,87 +910,82 @@
                                             <div class="mb-6 p-4 bg-gray-50 rounded-md shadow-sm">
                                                 <h6 class="text-md font-semibold text-gray-700 mb-2 text-center">Sample Vulnerability-Threat-Impact Mapping</h6>
                                                 <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4 mt-4">
-                                                    <!-- Scenario 1: Unpatched Web Server -->
                                                     <div class="flow-scenario" data-scenario-id="0">
-                                                        <div class="flow-node vulnerability-node" data-node-type="vulnerability">
+                                                        <div class="flow-node vulnerability-node interactive-card" data-node-type="vulnerability">
                                                             <span class="node-title">Unpatched Web Server</span>
                                                             <div class="node-description hidden">Servers with outdated software or missing security patches are prime targets for attackers looking to exploit known weaknesses.</div>
                                                         </div>
                                                         <div class="flow-arrow hidden" data-arrow-id="0-1"></div>
-                                                        <div class="flow-node threat-node hidden" data-node-type="threat">
+                                                        <div class="flow-node threat-node hidden interactive-card" data-node-type="threat">
                                                             <span class="node-title">Remote Code Execution (RCE)</span>
                                                             <div class="node-description hidden">RCE allows an attacker to execute arbitrary code on a remote system, gaining full control. This is often achieved through exploiting software vulnerabilities.</div>
                                                         </div>
                                                         <div class="flow-arrow hidden" data-arrow-id="1-2"></div>
-                                                        <div class="flow-node impact-node hidden" data-node-type="impact">
+                                                        <div class="flow-node impact-node hidden interactive-card" data-node-type="impact">
                                                             <span class="node-title">Data Breach, System Compromise</span>
                                                             <div class="node-description hidden">Confidentiality, Integrity, Availability impact.</div>
                                                         </div>
                                                     </div>
-                                                    <!-- Scenario 2: Weak Employee Password Policy -->
                                                     <div class="flow-scenario" data-scenario-id="1">
-                                                        <div class="flow-node vulnerability-node" data-node-type="vulnerability">
+                                                        <div class="flow-node vulnerability-node interactive-card" data-node-type="vulnerability">
                                                             <span class="node-title">Weak Employee Password Policy</span>
                                                             <div class="node-description hidden">Policies allowing simple, common, or reused passwords make accounts easy targets for automated guessing attacks.</div>
                                                         </div>
                                                         <div class="flow-arrow hidden" data-arrow-id="0-1"></div>
-                                                        <div class="flow-node threat-node hidden" data-node-type="threat">
+                                                        <div class="flow-node threat-node hidden interactive-card" data-node-type="threat">
                                                             <span class="node-title">Brute-force/Credential Stuffing</span>
                                                             <div class="node-description hidden">Brute-force attacks try many passwords until one works. Credential stuffing uses stolen username/password pairs from other breaches to try and log into new systems.</div>
                                                         </div>
                                                         <div class="flow-arrow hidden" data-arrow-id="1-2"></div>
-                                                        <div class="flow-node impact-node hidden" data-node-type="impact">
+                                                        <div class="flow-node impact-node hidden interactive-card" data-node-type="impact">
                                                             <span class="node-title">Unauthorized Access</span>
                                                             <div class="node-description hidden">Confidentiality, Integrity impact.</div>
                                                         </div>
                                                     </div>
-                                                    <!-- Scenario 3: Lack of Data Encryption at Rest -->
                                                     <div class="flow-scenario" data-scenario-id="2">
-                                                        <div class="flow-node vulnerability-node" data-node-type="vulnerability">
+                                                        <div class="flow-node vulnerability-node interactive-card" data-node-type="vulnerability">
                                                             <span class="node-title">Lack of Data Encryption at Rest</span>
                                                             <div class="node-description hidden">Storing sensitive data on devices (laptops, servers, backups) without encryption means the data is readable if the device is lost or stolen.</div>
                                                         </div>
                                                         <div class="flow-arrow hidden" data-arrow-id="0-1"></div>
-                                                        <div class="flow-node threat-node hidden" data-node-type="threat">
+                                                        <div class="flow-node threat-node hidden interactive-card" data-node-type="threat">
                                                             <span class="node-title">Physical Theft of Storage Device</span>
                                                             <div class="node-description hidden">An attacker physically gains possession of a storage device containing unencrypted sensitive data.</div>
                                                         </div>
                                                         <div class="flow-arrow hidden" data-arrow-id="1-2"></div>
-                                                        <div class="flow-node impact-node hidden" data-node-type="impact">
+                                                        <div class="flow-node impact-node hidden interactive-card" data-node-type="impact">
                                                             <span class="node-title">Data Exposure</span>
                                                             <div class="node-description hidden">Confidentiality impact.</div>
                                                         </div>
                                                     </div>
-                                                    <!-- Scenario 4: Single Point of Failure in Network -->
                                                     <div class="flow-scenario" data-scenario-id="3">
-                                                        <div class="flow-node vulnerability-node" data-node-type="vulnerability">
+                                                        <div class="flow-node vulnerability-node interactive-card" data-node-type="vulnerability">
                                                             <span class="node-title">Single Point of Failure</span>
                                                             <div class="node-description hidden">A critical component (e.g., a single router, server, or internet link) whose failure would bring down an entire system or service.</div>
                                                         </div>
                                                         <div class="flow-arrow hidden" data-arrow-id="0-1"></div>
-                                                        <div class="flow-node threat-node hidden" data-node-type="threat">
+                                                        <div class="flow-node threat-node hidden interactive-card" data-node-type="threat">
                                                             <span class="node-title">Hardware Failure / DDoS</span>
                                                             <div class="node-description hidden">Hardware failure is an accidental event. A DDoS attack is a malicious attempt to disrupt normal traffic of a targeted server, service or network by overwhelming the target or its surrounding infrastructure with a flood of Internet traffic.</div>
                                                         </div>
                                                         <div class="flow-arrow hidden" data-arrow-id="1-2"></div>
-                                                        <div class="flow-node impact-node hidden" data-node-type="impact">
+                                                        <div class="flow-node impact-node hidden interactive-card" data-node-type="impact">
                                                             <span class="node-title">Service Outage, Business Disruption</span>
                                                             <div class="node-description hidden">Availability impact.</div>
                                                         </div>
                                                     </div>
-                                                    <!-- Scenario 5: Insufficient Security Awareness Training -->
                                                     <div class="flow-scenario" data-scenario-id="4">
-                                                        <div class="flow-node vulnerability-node" data-node-type="vulnerability">
+                                                        <div class="flow-node vulnerability-node interactive-card" data-node-type="vulnerability">
                                                             <span class="node-title">Insufficient Awareness Training</span>
                                                             <div class="node-description hidden">Employees who are not regularly trained on common attack vectors are more susceptible to falling for scams.</div>
                                                         </div>
                                                         <div class="flow-arrow hidden" data-arrow-id="0-1"></div>
-                                                        <div class="flow-node threat-node hidden" data-node-type="threat">
+                                                        <div class="flow-node threat-node hidden interactive-card" data-node-type="threat">
                                                             <span class="node-title">Phishing / Social Engineering</span>
                                                             <div class="node-description hidden">Phishing uses deceptive emails or messages. Social engineering manipulates people into performing actions or divulging confidential information.</div>
                                                         </div>
                                                         <div class="flow-arrow hidden" data-arrow-id="1-2"></div>
-                                                        <div class="flow-node impact-node hidden" data-node-type="impact">
+                                                        <div class="flow-node impact-node hidden interactive-card" data-node-type="impact">
                                                             <span class="node-title">Credential Theft, Malware, Financial Fraud</span>
                                                             <div class="node-description hidden">Confidentiality, Integrity, Financial impact.</div>
                                                         </div>
@@ -1033,7 +996,6 @@
                                         </div>
                                     </div>
 
-                                    <!-- Sub-Domain: Risk Assessment and Analysis -->
                                     <div class="bg-white rounded-lg shadow-md">
                                         <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
                                             3. Risk Assessment and Analysis
@@ -1045,15 +1007,15 @@
                                             <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Apply qualitative, quantitative, and hybrid risk assessment methods.</h4>
                                             <p class="text-gray-600 mb-4">Explore the characteristics of different risk assessment methods:</p>
                                             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6" data-group="risk-method">
-                                                <div class="risk-method-card qualitative" data-method="qualitative">
+                                                <div class="risk-method-card qualitative interactive-card" data-method="qualitative">
                                                     <span class="card-title">Qualitative</span>
                                                     <div class="card-description hidden">Uses descriptive terms (e.g., high, medium, low) for likelihood and impact. It's subjective but quick and often used for initial assessments or when precise data is unavailable. Good for prioritization.</div>
                                                 </div>
-                                                <div class="risk-method-card quantitative" data-method="quantitative">
+                                                <div class="risk-method-card quantitative interactive-card" data-method="quantitative">
                                                     <span class="card-title">Quantitative</span>
                                                     <div class="card-description hidden">Assigns numerical values (e.g., monetary cost, probability percentages) to likelihood and impact. It aims to provide a more objective and measurable view of risk. Useful for cost-benefit analysis (e.g., SLE, ARO, ALE).</div>
                                                 </div>
-                                                <div class="risk-method-card hybrid" data-method="hybrid">
+                                                <div class="risk-method-card hybrid interactive-card" data-method="hybrid">
                                                     <span class="card-title">Hybrid</span>
                                                     <div class="card-description hidden">Combines elements of both qualitative and quantitative approaches. Often, qualitative assessments are used to identify and prioritize risks, and then quantitative analysis is applied to the most critical risks for detailed analysis.</div>
                                                 </div>
@@ -1065,19 +1027,19 @@
                                             <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Use standardized risk frameworks (e.g., ISO/IEC 27005, NIST SP 800-30, FAIR, OCTAVE).</h4>
                                             <p class="text-gray-600 mb-4">These frameworks provide structure and consistency for risk management processes. Click on a card to learn more:</p>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-group="risk-framework">
-                                                <div class="risk-framework-card" data-framework="iso27005">
+                                                <div class="risk-framework-card interactive-card" data-framework="iso27005">
                                                     <span class="card-title">ISO/IEC 27005</span>
                                                     <div class="card-description hidden">Provides guidelines for information security risk management. It supports the general concepts specified in ISO/IEC 27001 (for ISMS) and is designed to assist the satisfactory implementation of information security based on a risk management approach."</div>
                                                 </div>
-                                                <div class="risk-framework-card" data-framework="nist80030">
+                                                <div class="risk-framework-card interactive-card" data-framework="nist80030">
                                                     <span class="card-title">NIST SP 800-30</span>
                                                     <div class="card-description hidden">A guide for conducting risk assessments, developed by the National Institute of Standards and Technology (NIST). It provides a systematic approach to identifying, analyzing, and mitigating risks to information systems and organizations."</div>
                                                 </div>
-                                                <div class="risk-framework-card" data-framework="fair">
+                                                <div class="risk-framework-card interactive-card" data-framework="fair">
                                                     <span class="card-title">FAIR</span>
                                                     <div class="card-description hidden">A quantitative risk analysis model that focuses on understanding and measuring information risk in financial terms. It helps break down complex risk scenarios into measurable components, enabling more objective risk comparisons and cost-benefit analyses."</div>
                                                 </div>
-                                                <div class="risk-framework-card" data-framework="octave">
+                                                <div class="risk-framework-card interactive-card" data-framework="octave">
                                                     <span class="card-title">OCTAVE</span>
                                                     <div class="card-description hidden">A suite of methods that help organizations assess and manage information security risks. It emphasizes a self-directed approach where organizations identify and prioritize risks based on their own operational risk environment, involving key stakeholders from across the organization."</div>
                                                 </div>
@@ -1179,19 +1141,19 @@
                                             <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Develop and apply appropriate response strategies:</h4>
                                             <p class="text-gray-600 mb-4">Click on a card to learn about each strategy:</p>
                                             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-group="risk-response">
-                                                <div class="risk-response-card mitigate" data-response="mitigate">
+                                                <div class="risk-response-card mitigate interactive-card" data-response="mitigate">
                                                     <span class="card-title">Mitigate</span>
                                                     <div class="card-description hidden">Reduce the likelihood or impact of a risk through the implementation of security controls (e.g., firewalls, encryption, security awareness training). This is the most common response.</div>
                                                 </div>
-                                                <div class="risk-response-card transfer" data-response="transfer">
+                                                <div class="risk-response-card transfer interactive-card" data-response="transfer">
                                                     <span class="card-title">Transfer</span>
                                                     <div class="card-description hidden">Shift the financial or operational burden of a risk to a third party (e.g., purchasing cyber insurance, outsourcing to a vendor with strong security clauses).</div>
                                                 </div>
-                                                <div class="risk-response-card avoid" data-response="avoid">
+                                                <div class="risk-response-card avoid interactive-card" data-response="avoid">
                                                     <span class="card-title">Avoid</span>
                                                     <div class="card-description hidden">Eliminate the risk entirely by choosing not to engage in or ceasing an activity that gives rise to the risk (e.g., deciding not to store sensitive customer data, discontinuing an insecure legacy application).</div>
                                                 </div>
-                                                <div class="risk-response-card accept" data-response="accept">
+                                                <div class="risk-response-card accept interactive-card" data-response="accept">
                                                     <span class="card-title">Accept</span>
                                                     <div class="card-description hidden">Acknowledge the existence of a risk and decide to take no further action to mitigate it, usually because the cost of mitigation outweighs the potential impact, or the risk is below the organization's risk tolerance. Requires formal management approval.</div>
                                                 </div>
@@ -1224,28 +1186,28 @@
                                             <div class="mb-6 p-4 bg-gray-50 rounded-md shadow-sm">
                                                 <h6 class="text-md font-semibold text-gray-700 mb-4 text-center">Corporate Hierarchy: Risk and Control Ownership</h6>
                                                 <div class="hierarchy-chart-container" data-group="role-hierarchy">
-                                                    <div class="role-node board" data-role="board">
+                                                    <div class="role-node board interactive-card" data-role="board">
                                                         <span class="role-title">Board/Executive Management</span>
                                                         <div class="role-description hidden"></div>
                                                     </div>
                                                     <div class="hierarchy-line"></div>
-                                                    <div class="role-node ciso" data-role="ciso">
+                                                    <div class="role-node ciso interactive-card" data-role="ciso">
                                                         <span class="role-title">CISO / Information Security Manager</span>
                                                         <div class="role-description hidden"></div>
                                                     </div>
                                                     <div class="hierarchy-line"></div>
                                                     <div class="flex justify-center gap-8 w-full">
-                                                        <div class="role-node data-owners" data-role="dataOwners">
+                                                        <div class="role-node data-owners interactive-card" data-role="dataOwners">
                                                             <span class="role-title">Data Owners / Business Unit Heads</span>
                                                             <div class="role-description hidden"></div>
                                                         </div>
-                                                        <div class="role-node it-ops" data-role="itOps">
+                                                        <div class="role-node it-ops interactive-card" data-role="itOps">
                                                             <span class="role-title">IT Operations / Security Teams</span>
                                                             <div class="role-description hidden"></div>
                                                         </div>
                                                     </div>
                                                     <div class="hierarchy-line"></div>
-                                                    <div class="role-node end-users" data-role="endUsers">
+                                                    <div class="role-node end-users interactive-card" data-role="endUsers">
                                                         <span class="role-title">End Users</span>
                                                         <div class="role-description hidden"></div>
                                                     </div>
@@ -1341,8 +1303,7 @@
                                 <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Key Terms</h2>
                                 <p class="mb-8 text-gray-700">Test your knowledge of key terms in Information Security Risk Management with these interactive flashcards. Click on a card to reveal its definition.</p>
                                 <div id="key-terms-grid-d2" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" data-group="key-terms-d2">
-                                    <!-- Key terms will be populated by JS -->
-                                </div>
+                                    </div>
                             </section>
 
                             <section id="domain-summary-d2" class="content-section hidden">
@@ -1356,9 +1317,6 @@
                         </main>
                     </div>
 
-                    <!-- =============================================================================== -->
-                    <!-- == DOMAIN 3: PROGRAM DEVELOPMENT & MANAGEMENT ================================= -->
-                    <!-- =============================================================================== -->
                     <div id="domain-3" class="domain-content-section hidden">
                         <header class="text-center py-8 bg-white rounded-lg shadow-md mb-8">
                             <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-2">CISM Domain 3 Study Guide</h1>
@@ -1502,12 +1460,12 @@
                                              <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Use frameworks such as ISO/IEC 27001, NIST CSF, COBIT, TOGAF, and SABSA.</h4>
                                              <p class="text-gray-600 mb-4">Each framework serves a distinct purpose, offering guidance for different aspects of information security management and governance. Click on a card to learn more about its primary use case:</p>
                                              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6" data-group="framework-d3-detailed">
-                                                <div class="concept-card"><span class="card-title">ISO/IEC 27001</span><div class="card-description">A family of standards that helps organizations keep information assets secure. ISO/IEC 27001 is the best-known standard providing requirements for an ISMS.</div></div>
-                                                <div class="concept-card"><span class="card-title">NIST CSF</span><div class="card-description">Provides a policy framework of computer security guidance for how private sector organizations can assess and improve their ability to prevent, detect, and respond to cyber attacks.</div></div>
-                                                <div class="concept-card"><span class="card-title">COBIT</span><div class="card-description">A comprehensive framework for the governance and management of enterprise IT that supports enterprise goal achievement.</div></div>
-                                                <div class="concept-card"><span class="card-title">TOGAF</span><div class="card-description">The Open Group Architecture Framework. A framework for enterprise architecture that provides a comprehensive approach for designing, planning, implementing, and governing an enterprise information architecture.</div></div>
-                                                <div class="concept-card"><span class="card-title">SABSA</span><div class="card-description">A framework for developing a risk-driven enterprise information security architecture and for delivering security infrastructure solutions.</div></div>
-                                            </div>
+                                                 <div class="concept-card interactive-card"><span class="card-title">ISO/IEC 27001</span><div class="card-description">A family of standards that helps organizations keep information assets secure. ISO/IEC 27001 is the best-known standard providing requirements for an ISMS.</div></div>
+                                                 <div class="concept-card interactive-card"><span class="card-title">NIST CSF</span><div class="card-description">Provides a policy framework of computer security guidance for how private sector organizations can assess and improve their ability to prevent, detect, and respond to cyber attacks.</div></div>
+                                                 <div class="concept-card interactive-card"><span class="card-title">COBIT</span><div class="card-description">A comprehensive framework for the governance and management of enterprise IT that supports enterprise goal achievement.</div></div>
+                                                 <div class="concept-card interactive-card"><span class="card-title">TOGAF</span><div class="card-description">The Open Group Architecture Framework. A framework for enterprise architecture that provides a comprehensive approach for designing, planning, implementing, and governing an enterprise information architecture.</div></div>
+                                                 <div class="concept-card interactive-card"><span class="card-title">SABSA</span><div class="card-description">A framework for developing a risk-driven enterprise information security architecture and for delivering security infrastructure solutions.</div></div>
+                                             </div>
                                             <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Align program practices with regulatory, business, and technical standards.</h4>
                                             <p class="text-gray-600 mb-4">A well-designed security program integrates legal mandates, industry best practices, and internal business requirements. This ensures compliance, relevance, and operational efficiency.</p>
                                             <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Map frameworks to enterprise and security objectives.</h4>
@@ -1521,17 +1479,17 @@
                                             <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Establish version control and review cycles.</h4>
                                             <p class="text-gray-600 mb-4">Security documentation is dynamic. Implementing version control ensures consistency and auditability, while regular review cycles (e.g., annually, or after significant changes) keep them current and effective. See the continuous policy review cycle below:</p>
                                             <div class="framework-journey-container my-6" data-group="policy-review-cycle">
-                                                <div class="framework-step-node" style="background-color: #cce7ff;"><span class="card-title">Develop/Update Policy</span><div class="card-description">Draft a new policy or revise an existing one based on new risks, technologies, or business requirements.</div></div>
+                                                <div class="framework-step-node interactive-card" style="background-color: #cce7ff;"><span class="card-title">Develop/Update Policy</span><div class="card-description">Draft a new policy or revise an existing one based on new risks, technologies, or business requirements.</div></div>
                                                 <div class="framework-arrow"></div>
-                                                <div class="framework-step-node" style="background-color: #d4edda;"><span class="card-title">Review & Approve</span><div class="card-description">Circulate the draft policy among key stakeholders (e.g., legal, HR, IT) and obtain formal approval from management.</div></div>
+                                                <div class="framework-step-node interactive-card" style="background-color: #d4edda;"><span class="card-title">Review & Approve</span><div class="card-description">Circulate the draft policy among key stakeholders (e.g., legal, HR, IT) and obtain formal approval from management.</div></div>
                                                 <div class="framework-arrow"></div>
-                                                <div class="framework-step-node" style="background-color: #fff3cd;"><span class="card-title">Communicate & Implement</span><div class="card-description">Disseminate the final policy to all relevant personnel and integrate it into operational procedures and training programs.</div></div>
+                                                <div class="framework-step-node interactive-card" style="background-color: #fff3cd;"><span class="card-title">Communicate & Implement</span><div class="card-description">Disseminate the final policy to all relevant personnel and integrate it into operational procedures and training programs.</div></div>
                                                 <div class="framework-arrow"></div>
-                                                <div class="framework-step-node" style="background-color: #e2d9f3;"><span class="card-title">Monitor & Enforce</span><div class="card-description">Use technical and administrative controls to monitor compliance with the policy and apply consistent enforcement actions for non-compliance.</div></div>
+                                                <div class="framework-step-node interactive-card" style="background-color: #e2d9f3;"><span class="card-title">Monitor & Enforce</span><div class="card-description">Use technical and administrative controls to monitor compliance with the policy and apply consistent enforcement actions for non-compliance.</div></div>
                                                 <div class="framework-arrow"></div>
-                                                <div class="framework-step-node" style="background-color: #f8d7da;"><span class="card-title">Audit & Assess Effectiveness</span><div class="card-description">Periodically conduct audits and assessments to verify that the policy is being followed and is effectively mitigating risk.</div></div>
+                                                <div class="framework-step-node interactive-card" style="background-color: #f8d7da;"><span class="card-title">Audit & Assess Effectiveness</span><div class="card-description">Periodically conduct audits and assessments to verify that the policy is being followed and is effectively mitigating risk.</div></div>
                                                 <div class="framework-arrow"></div>
-                                                <div class="framework-step-node" style="background-color: #d1ecf1;"><span class="card-title">Identify Gaps/Changes Needed</span><div class="card-description">Based on monitoring and audit results, identify any gaps or areas for improvement, which initiates the cycle again.</div></div>
+                                                <div class="framework-step-node interactive-card" style="background-color: #d1ecf1;"><span class="card-title">Identify Gaps/Changes Needed</span><div class="card-description">Based on monitoring and audit results, identify any gaps or areas for improvement, which initiates the cycle again.</div></div>
                                             </div>
                                             <p class="text-gray-600 text-sm italic text-center">Policies require a continuous lifecycle of development, approval, implementation, and review. Click on each step to learn more.</p>
                                             <h4 class="text-lg font-semibold text-gray-700 mb-3 mt-6">c. Ensure policies support compliance and are auditable.</h4>
@@ -1541,7 +1499,7 @@
                                     <div class="bg-white rounded-lg shadow-md">
                                         <button class="accordion-button w-full">5. Information Security Program Metrics<span class="accordion-icon text-2xl">+</span></button>
                                         <div class="accordion-content hidden p-6">
-                                                                                       <p class="text-gray-600 mb-4">You can't manage what you can't measure. A robust metrics program is essential for demonstrating the effectiveness, efficiency, and value of the security program to stakeholders.</p>
+                                            <p class="text-gray-700 mb-4">You can't manage what you can't measure. A robust metrics program is essential for demonstrating the effectiveness, efficiency, and value of the security program to stakeholders.</p>
                                             <table class="styled-table">
                                                 <thead>
                                                     <tr>
@@ -1598,10 +1556,10 @@
                                         <div class="accordion-content hidden p-6">
                                             <p class="text-gray-700 mb-4">Controls must be regularly tested to ensure they are effective and operating as designed. This is a critical part of the 'Check' phase in a Plan-Do-Check-Act (PDCA) cycle.</p>
                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" data-group="testing-methods-d3">
-                                                <div class="concept-card"><span class="card-title">Vulnerability Scans</span><div class="card-description">Automated tools that scan systems for known vulnerabilities.</div></div>
-                                                <div class="concept-card"><span class="card-title">Penetration Testing</span><div class="card-description">A simulated cyber attack against your computer system to check for exploitable vulnerabilities.</div></div>
-                                                <div class="concept-card"><span class="card-title">Security Audits</span><div class="card-description">A formal, systematic review of security policies, procedures, and controls against a defined standard.</div></div>
-                                                <div class="concept-card"><span class="card-title">Code Review</span><div class="card-description">Manual or automated review of source code to identify security flaws.</div></div>
+                                                <div class="concept-card interactive-card"><span class="card-title">Vulnerability Scans</span><div class="card-description">Automated tools that scan systems for known vulnerabilities.</div></div>
+                                                <div class="concept-card interactive-card"><span class="card-title">Penetration Testing</span><div class="card-description">A simulated cyber attack against your computer system to check for exploitable vulnerabilities.</div></div>
+                                                <div class="concept-card interactive-card"><span class="card-title">Security Audits</span><div class="card-description">A formal, systematic review of security policies, procedures, and controls against a defined standard.</div></div>
+                                                <div class="concept-card interactive-card"><span class="card-title">Code Review</span><div class="card-description">Manual or automated review of source code to identify security flaws.</div></div>
                                             </div>
                                         </div>
                                     </div>
@@ -1666,8 +1624,7 @@
                                 <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Key Terms</h2>
                                 <p class="mb-8 text-gray-700">Click on a card to reveal its definition.</p>
                                 <div id="key-terms-grid-d3" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" data-group="key-terms-d3">
-                                    <!-- Key terms populated by JS -->
-                                </div>
+                                    </div>
                             </section>
 
                             <section id="domain-summary-d3" class="content-section hidden">
@@ -1680,116 +1637,6 @@
                         </main>
                     </div>
 
-                    <!-- =============================================================================== -->
-                    <!-- == DOMAIN 4: INCIDENT MANAGEMENT ============================================== -->
-                    <!-- =============================================================================== -->
-                    <div id="domain-4" class="domain-content-section hidden">
-                        <header class="text-center py-8 bg-white rounded-lg shadow-md mb-8">
-                            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-2">CISM Domain 4 Study Guide</h1>
-                            <p class="text-xl sm:text-2xl text-gray-600">Information Security Incident Management</p>
-                            <p class="text-md text-gray-500 mt-2">Responding to and recovering from security events.</p>
-                        </header>
-
-                        <nav class="bg-white p-4 rounded-lg shadow-md mb-8 flex justify-center sticky top-0 z-10 overflow-x-auto">
-                            <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200 active" data-target="introduction-d4">Introduction</button>
-                            <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="incident-readiness-d4">Readiness & Planning</button>
-                            <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="incident-response-d4">Response & Recovery</button>
-                            <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="key-terms-d4">Key Terms</button>
-                            <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="domain-summary-d4">Domain Summary</button>
-                        </nav>
-
-                        <main>
-                            <section id="introduction-d4" class="content-section fade-in">
-                                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Introduction to CISM Domain 4</h2>
-                                <div class="p-6 bg-white rounded-lg shadow-md">
-                                    <p class="text-gray-700 mb-4">Welcome to Domain 4. No matter how robust a security program is, incidents are inevitable. This domain focuses on ensuring the organization is prepared to respond to and recover from security incidents in a way that minimizes business impact, cost, and reputational damage.</p>
-                                    <p class="text-gray-700">Effective incident management is about more than just technical response; it requires a well-defined plan, clear roles and responsibilities, and effective communication. This guide will walk you through the entire incident management lifecycle, from preparation and planning to post-incident analysis and program improvement. A mature incident management capability is a hallmark of a resilient organization.</p>
-                                </div>
-                            </section>
-
-                            <section id="incident-readiness-d4" class="content-section hidden">
-                                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Section A: Incident Management Readiness</h2>
-                                <div class="space-y-4">
-                                    <div class="bg-white rounded-lg shadow-md">
-                                        <button class="accordion-button w-full">1. The Incident Response Plan (IRP)<span class="accordion-icon text-2xl">+</span></button>
-                                        <div class="accordion-content hidden p-6">
-                                            <p class="text-gray-700 mb-4">The IRP is the formal, documented plan that guides an organization's response to security incidents.</p>
-                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">Key Components of an IRP:</h4>
-                                            <ul class="list-disc list-inside text-gray-700 space-y-2">
-                                                <li><strong>Mission, Strategy, and Goals:</strong> Defines the purpose and objectives of the incident response capability.</li>
-                                                <li><strong>Roles and Responsibilities:</strong> Establishes the Computer Incident Response Team (CIRT) and defines who does what during an incident.</li>
-                                                <li><strong>Incident Classification:</strong> Provides a system for categorizing incidents based on severity and impact to prioritize response efforts.</li>
-                                                <li><strong>Communication Plan:</strong> Outlines how, when, and with whom to communicate (e.g., stakeholders, legal, law enforcement, customers).</li>
-                                                <li><strong>Response Procedures:</strong> Details the technical steps for each phase of the incident lifecycle.</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="bg-white rounded-lg shadow-md">
-                                        <button class="accordion-button w-full">2. Business Impact Analysis (BIA) and BCP/DRP Integration<span class="accordion-icon text-2xl">+</span></button>
-                                        <div class="accordion-content hidden p-6">
-                                            <p class="text-gray-700 mb-4">Incident response must be integrated with broader business continuity and disaster recovery efforts.</p>
-                                            <ul class="list-disc list-inside text-gray-700 space-y-2">
-                                                <li><strong>Business Impact Analysis (BIA):</strong> Identifies critical business processes and the impact of a disruption to them. This helps prioritize incident response efforts.</li>
-                                                <li><strong>Integration with BCP/DRP:</strong> The Incident Response Plan (IRP) is a key input to the Business Continuity Plan (BCP) and Disaster Recovery Plan (DRP). A security incident can often be the trigger for activating these broader plans.</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="bg-white rounded-lg shadow-md">
-                                        <button class="accordion-button w-full">3. Testing and Training<span class="accordion-icon text-2xl">+</span></button>
-                                        <div class="accordion-content hidden p-6">
-                                            <p class="text-gray-700 mb-4">A plan is useless if it's not tested and if the team is not trained. Regular testing ensures the plan is effective and that the team is ready.</p>
-                                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" data-group="testing-types">
-                                                <div class="concept-card"><span class="card-title">Walkthroughs</span><div class="card-description">A team meeting where members verbally go through the steps of the IRP for a specific scenario to ensure it is understood.</div></div>
-                                                <div class="concept-card"><span class="card-title">Tabletop Exercises</span><div class="card-description">A discussion-based session where the team talks through their roles and responses to a simulated incident scenario. Excellent for testing decision-making processes.</div></div>
-                                                <div class="concept-card"><span class="card-title">Functional Drills</span><div class="card-description">A hands-on test of a specific function of the IRP, such as restoring a system from backup or failing over to a secondary site.</div></div>
-                                                <div class="concept-card"><span class="card-title">Full-Scale Simulations</span><div class="card-description">A comprehensive, realistic test that simulates a major incident, involving multiple teams and potentially external partners.</div></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </section>
-
-                            <section id="incident-response-d4" class="content-section hidden">
-                                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Section B: Incident Response and Recovery</h2>
-                                <p class="mb-8 text-gray-700">This section covers the core lifecycle of managing an active security incident, from initial detection to final lessons learned.</p>
-                                <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">The Incident Management Lifecycle</h3>
-                                <p class="text-gray-600 mb-6 text-center">Most incident response frameworks, like the one from NIST, follow a cyclical process. Click on each phase to learn more.</p>
-                                <div class="incident-lifecycle-container" data-group="incident-lifecycle">
-                                    <div class="incident-lifecycle-node"><span class="card-title">1. Preparation</span><div class="card-description">Establishing the tools, plans, and training needed to respond effectively before an incident occurs. This includes setting up the CIRT and having the IRP ready.</div></div>
-                                    <div class="incident-lifecycle-arrow"></div>
-                                    <div class="incident-lifecycle-node"><span class="card-title">2. Identification</span><div class="card-description">Detecting a deviation from normal operations and determining if it constitutes a security incident. This involves analyzing logs, alerts, and other data sources.</div></div>
-                                    <div class="incident-lifecycle-arrow"></div>
-                                    <div class="incident-lifecycle-node"><span class="card-title">3. Containment</span><div class="card-description">Taking immediate steps to limit the scope and impact of the incident. This could involve isolating affected systems or blocking malicious IP addresses.</div></div>
-                                    <div class="incident-lifecycle-arrow"></div>
-                                    <div class="incident-lifecycle-node"><span class="card-title">4. Eradication</span><div class="card-description">Removing the root cause of the incident and any malicious artifacts from the environment. This ensures the attacker cannot regain access.</div></div>
-                                    <div class="incident-lifecycle-arrow"></div>
-                                    <div class="incident-lifecycle-node"><span class="card-title">5. Recovery</span><div class="card-description">Restoring systems to normal operation and validating that they are secure. This phase often involves close coordination with IT operations and business units.</div></div>
-                                    <div class="incident-lifecycle-arrow"></div>
-                                    <div class="incident-lifecycle-node"><span class="card-title">6. Lessons Learned</span><div class="card-description">Conducting a post-incident review to identify what went well, what didn't, and what can be improved. The findings are used to update the IRP and the overall security program.</div></div>
-                                </div>
-                            </section>
-
-                            <section id="key-terms-d4" class="content-section hidden">
-                                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Key Terms</h2>
-                                <p class="mb-8 text-gray-700">Click on a card to reveal its definition.</p>
-                                <div id="key-terms-grid-d4" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" data-group="key-terms-d4">
-                                    <!-- Key terms populated by JS -->
-                                </div>
-                            </section>
-
-                            <section id="domain-summary-d4" class="content-section hidden">
-                                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Domain Summary</h2>
-                                <div class="p-6 bg-white rounded-lg shadow-md">
-                                    <p class="text-gray-700 mb-4">Domain 4 addresses the critical capability of managing information security incidents. It recognizes that prevention alone is insufficient and that a mature organization must be prepared to respond to and recover from security events effectively. The foundation of this capability is a well-documented and regularly tested Incident Response Plan (IRP), which defines roles, responsibilities, and procedures.</p>
-                                    <p class="text-gray-700">The domain emphasizes the importance of readiness, which includes integrating incident response with business continuity and disaster recovery planning, informed by a Business Impact Analysis (BIA). It also highlights the need for a trained and tested Computer Incident Response Team (CIRT). The core of the domain is the incident management lifecycle: Preparation, Identification, Containment, Eradication, Recovery, and Lessons Learned. This structured approach ensures that incidents are handled consistently, minimizing business impact and facilitating a swift return to normal operations. Finally, the post-incident "Lessons Learned" phase is crucial for driving continuous improvement, feeding insights back into the security program and strengthening the organization's resilience over time.</p>
-                                </div>
-                            </section>
-                        </main>
-                    </div>
-
-                    <!-- =============================================================================== -->
-                    <!-- == KNOWLEDGE ASSESSMENT ======================================================= -->
-                    <!-- =============================================================================== -->
                     <div id="assessment" class="domain-content-section hidden">
                         <header class="text-center py-8 bg-white rounded-lg shadow-md mb-8">
                             <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-2">Knowledge Assessment</h1>
@@ -1797,8 +1644,7 @@
                         </header>
                         <main>
                             <div id="quiz-container">
-                                <!-- Quiz questions will be injected here -->
-                            </div>
+                                </div>
                             <div id="quiz-results" class="hidden mt-8">
                                 <h2 class="text-3xl font-bold text-gray-800 mb-4">Quiz Complete!</h2>
                                 <p id="quiz-score" class="text-2xl text-gray-700 mb-4"></p>
@@ -1817,6 +1663,98 @@
     </div>
 
     <script>
+    // =================================================================================
+    // == CENTRALIZED APPLICATION DATA STORE
+    // =================================================================================
+    const APP_DATA = {
+        aboutCism: {
+            whyCism: [
+                { title: "Leadership-Focused", description: "Emphasizes the strategic alignment of security initiatives with business goals, moving beyond purely technical skills to focus on governance and management." },
+                { title: "Career-Enhancing", description: "Qualifies you for high-level, influential roles like Information Security Manager, Risk Manager, and Chief Information Security Officer (CISO)." },
+                { title: "Global Recognition", description: "Respected and accepted by organizations and governments worldwide as a standard of excellence for information security leadership." },
+                { title: "Industry Relevance", description: "Designed around current, real-world challenges in governance, risk, program development, and incident management, ensuring your knowledge is up-to-date." }
+            ],
+            examDomains: [
+                { title: "Domain 1: Governance (17%)", description: "Focuses on establishing and maintaining an information security governance framework and supporting processes to ensure that the information security strategy is aligned with organizational goals and objectives." },
+                { title: "Domain 2: Risk Management (20%)", description: "Covers the management of information risk to an acceptable level based on the organization's risk appetite in order to meet organizational goals and objectives." },
+                { title: "Domain 3: Program Development (33%)", description: "Deals with developing and maintaining an information security program that identifies, manages, and protects the organization's assets while aligning to the information security strategy." },
+                { title: "Domain 4: Incident Management (30%)", description: "Pertains to planning, establishing, and managing the capability to detect, investigate, respond to, and recover from information security incidents to minimize business impact." }
+            ]
+        },
+        domain2: {
+            keyTerms: [
+                { term: "Inherent Risk", definition: "The level of risk that exists before any controls or other mitigating factors are put in place. It's the raw risk." },
+                { term: "Residual Risk", definition: "The level of risk that remains after controls have been implemented and account for their effectiveness. This is the risk that management accepts." },
+                { term: "Risk Appetite", definition: "The amount of risk an organization is willing to take to achieve its objectives. It's a high-level strategic statement." },
+                { term: "Risk Tolerance", definition: "The acceptable deviation from the risk appetite. It sets specific thresholds for different types of risks." },
+                { term: "Qualitative Risk Assessment", definition: "Uses descriptive terms (e.g., high, medium, low) to define likelihood and impact. It's subjective but quick and often used for initial assessments." },
+                { term: "Quantitative Risk Assessment", definition: "Assigns numerical values (e.g., monetary cost, probability percentages) to likelihood and impact. It aims to provide a more objective and measurable view of risk (e.g., ALE, SLE, ARO)." },
+                { term: "Annualized Loss Expectancy (ALE)", definition: "The expected monetary loss for an asset due to a risk over a one-year period. Calculated as Single Loss Expectancy (SLE) multiplied by Annualized Rate of Occurrence (ARO)." },
+                { term: "Single Loss Expectancy (SLE)", definition: "The monetary loss expected each time a risk event occurs. Calculated as Asset Value (AV) multiplied by Exposure Factor (EF)." },
+                { term: "Annualized Rate of Occurrence (ARO)", definition: "The estimated frequency at which a threat event is expected to occur within a one-year period." },
+                { term: "Risk Mitigation", definition: "Reducing the likelihood or impact of a risk through the implementation of security controls." },
+                { term: "Risk Transfer", definition: "Shifting the financial or operational burden of a risk to a third party, often through insurance or contractual agreements." },
+                { term: "Risk Avoidance", definition: "Eliminating the risk entirely by choosing not to engage in or ceasing an activity that gives rise to the risk." },
+                { term: "Risk Acceptance", definition: "Acknowledging the existence of a risk and deciding to take no further action to mitigate it, usually with formal management approval." },
+                { term: "Key Risk Indicator (KRI)", definition: "Metrics that provide an early warning signal of increasing risk exposure, helping in proactive risk management." },
+                { term: "Risk Register", definition: "A central repository for all identified risks, including their description, ownership, assessment, and treatment status." }
+            ],
+            roleDescriptions: {
+                board: "The Board and Executive Management hold ultimate accountability for information security risk. They are responsible for setting the organization's risk appetite, ensuring adequate resources are allocated, and providing oversight to the entire security program.",
+                ciso: "The CISO (Chief Information Security Officer) or Information Security Manager is responsible for the strategic direction and day-to-day management of the security program. They oversee risk assessments, control implementation, and report the risk posture to the board.",
+                dataOwners: "Data Owners and Business Unit Heads are accountable for the risks associated with the information assets within their purview. They are responsible for classifying data, defining access rights, and accepting risk on behalf of their department.",
+                itOps: "IT Operations and dedicated Security Teams are primarily responsible for the technical implementation, operation, and maintenance of security controls. They are the 'control operators' who manage firewalls, patching, monitoring tools, etc.",
+                endUsers: "Every end user in the organization plays a vital role in information security. They have a responsibility to comply with security policies, report suspicious activity, and act as the first line of defense against threats like phishing."
+            }
+        },
+        domain3: {
+            keyTerms: [
+                { term: "Security Architecture", definition: "The design of security controls within an organization's IT infrastructure. It defines how controls are positioned and how they relate to each other to protect assets." },
+                { term: "Policy", definition: "A high-level statement from management that outlines the organization's position on a specific security issue (e.g., Acceptable Use Policy)." },
+                { term: "Standard", definition: "A mandatory requirement that establishes specific, uniform actions or rules (e.g., 'All passwords must be at least 12 characters long')." },
+                { term: "Procedure", definition: "A detailed, step-by-step set of instructions to perform a specific task (e.g., procedure for onboarding a new employee)." },
+                { term: "Guideline", definition: "A recommended, non-mandatory action or suggestion to help comply with policies and standards (e.g., 'It is recommended to use a passphrase for your password')." },
+                { term: "Compensating Control", definition: "An alternative control that is put in place when a primary control cannot be implemented or is not feasible." },
+                { term: "Defense in Depth", definition: "A security strategy that uses multiple layers of security controls to protect an asset. If one layer fails, another is there to stop the attack." },
+                { term: "Security Metrics", definition: "Measurable data points used to track and assess the performance and effectiveness of the information security program (e.g., KPIs, KRIs, KGIs)." }
+            ]
+        },
+        assessment: {
+            quiz: [
+                { question: "What is the PRIMARY goal of information security governance?", options: ["To implement security controls", "To align security with business objectives", "To perform risk assessments", "To respond to incidents"], answer: "To align security with business objectives", explanation: "Governance (Domain 1) is fundamentally about ensuring that security efforts support and enable the business's strategic goals." },
+                { question: "An organization decides to purchase cyber insurance to cover potential losses from a ransomware attack. This is an example of which risk response strategy?", options: ["Mitigation", "Avoidance", "Transfer", "Acceptance"], answer: "Transfer", explanation: "Risk transfer (Domain 2) involves shifting the financial burden of a risk to a third party, such as an insurance company." },
+                { question: "Which of the following is a detailed, step-by-step instruction for performing a specific task?", options: ["Policy", "Standard", "Guideline", "Procedure"], answer: "Procedure", explanation: "A procedure (Domain 3) provides the detailed 'how-to' steps for implementing policies and standards." },
+                { question: "During which phase of the incident response lifecycle would you isolate an infected server from the network?", options: ["Identification", "Containment", "Eradication", "Recovery"], answer: "Containment", explanation: "Containment focuses on taking immediate action to prevent an incident from spreading and causing further damage." },
+                { question: "Calculating the Annualized Loss Expectancy (ALE) is a key activity in which type of risk assessment?", options: ["Qualitative", "Quantitative", "Hybrid", "Ad-hoc"], answer: "Quantitative", explanation: "Quantitative risk assessment (Domain 2) uses numerical and monetary values (like ALE) to measure risk, unlike qualitative assessment which uses descriptive terms." }
+            ]
+        }
+    };
+
+
+    // =================================================================================
+    // == REUSABLE HELPER FUNCTIONS
+    // =================================================================================
+    
+    /**
+     * Renders a grid of interactive cards into a container.
+     * @param {string} containerSelector - The CSS selector for the container element.
+     * @param {Array<Object>} cardData - An array of objects, each with a title/term and description/definition.
+     * @param {string} cardClass - The base CSS class for the card.
+     * @param {string} groupName - The data-group attribute value for managing active states.
+     */
+    function renderCardGrid(containerSelector, cardData, cardClass, groupName) {
+        const container = document.querySelector(containerSelector);
+        if (!container) return;
+
+        container.innerHTML = cardData.map(item => `
+            <div class="${cardClass} interactive-card" data-group="${groupName}">
+                <h3 class="card-title">${item.title || item.term}</h3>
+                <div class="card-description"><p>${item.description || item.definition}</p></div>
+            </div>
+        `).join('');
+    }
+
+
     document.addEventListener('DOMContentLoaded', () => {
         // --- Master Navigation Handler ---
         const masterNavButtons = document.querySelectorAll('#master-navigation .master-nav-item');
@@ -1834,62 +1772,84 @@
                 const targetContainer = document.getElementById(targetDomainId);
                 if (targetContainer) {
                     targetContainer.classList.remove('hidden');
+                    // Initialize the domain-specific JS if it hasn't been already
                     setupDomain(targetContainer);
                 }
             });
         });
 
+        // --- Generic Accordion Handler ---
+        document.body.addEventListener('click', function(e) {
+            if (e.target.matches('.accordion-button') || e.target.closest('.accordion-button')) {
+                const button = e.target.closest('.accordion-button');
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('.accordion-icon');
+                
+                content.classList.toggle('hidden');
+                if (content.classList.contains('hidden')) {
+                    icon.textContent = '+';
+                } else {
+                    icon.textContent = '-';
+                }
+            }
+        });
+
+        // --- Generic Interactive Card Handler ---
+        document.body.addEventListener('click', function(e) {
+            const card = e.target.closest('.interactive-card[data-group]');
+            if (card) {
+                const group = card.dataset.group;
+                // Deactivate other cards in the same group
+                document.querySelectorAll(`.interactive-card[data-group="${group}"].active`).forEach(activeCard => {
+                    if (activeCard !== card) {
+                        activeCard.classList.remove('active');
+                    }
+                });
+                // Toggle the clicked card
+                card.classList.toggle('active');
+            }
+        });
+        
         // --- Domain-Specific Setup Function ---
         function setupDomain(domainContainer) {
+            // Prevent re-initialization
             if (!domainContainer || domainContainer.dataset.initialized === 'true') {
                 return;
             }
+            domainContainer.dataset.initialized = 'true';
+
+            // --- Intra-Domain Navigation ---
+            const domainNavButtons = domainContainer.querySelectorAll('.domain-nav-item');
+            const contentSections = domainContainer.querySelectorAll('main > .content-section');
+            
+            domainNavButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    domainNavButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    const targetId = button.dataset.target;
+                    contentSections.forEach(section => {
+                        if (section.id === targetId) {
+                            section.classList.remove('hidden');
+                            section.classList.add('fade-in');
+                        } else {
+                            section.classList.add('hidden');
+                        }
+                    });
+                });
+            });
 
             // --- Logic specific to 'about-cism' section ---
             if (domainContainer.id === 'about-cism') {
-                const whyCismData = [
-                    { title: "Leadership-Focused", description: "Emphasizes the strategic alignment of security initiatives with business goals, moving beyond purely technical skills to focus on governance and management." },
-                    { title: "Career-Enhancing", description: "Qualifies you for high-level, influential roles like Information Security Manager, Risk Manager, and Chief Information Security Officer (CISO)." },
-                    { title: "Global Recognition", description: "Respected and accepted by organizations and governments worldwide as a standard of excellence for information security leadership." },
-                    { title: "Industry Relevance", description: "Designed around current, real-world challenges in governance, risk, program development, and incident management, ensuring your knowledge is up-to-date." }
-                ];
-
-                const examDomainsData = [
-                    { title: "Domain 1: Governance (17%)", description: "Focuses on establishing and maintaining an information security governance framework and supporting processes to ensure that the information security strategy is aligned with organizational goals and objectives." },
-                    { title: "Domain 2: Risk Management (20%)", description: "Covers the management of information risk to an acceptable level based on the organization's risk appetite in order to meet organizational goals and objectives." },
-                    { title: "Domain 3: Program Development (33%)", description: "Deals with developing and maintaining an information security program that identifies, manages, and protects the organization's assets while aligning to the information security strategy." },
-                    { title: "Domain 4: Incident Management (30%)", description: "Pertains to planning, establishing, and managing the capability to detect, investigate, respond to, and recover from information security incidents to minimize business impact." }
-                ];
-
-                const renderWhyCismCards = () => {
-                    const container = domainContainer.querySelector('#why-cism-cards-container');
-                    if (!container) return;
-                    container.innerHTML = ''; 
-                    whyCismData.forEach(item => {
-                        const cardHtml = `<div class="interactive-card"><h3 class="card-title">${item.title}</h3><div class="card-description"><p>${item.description}</p></div></div>`;
-                        container.insertAdjacentHTML('beforeend', cardHtml);
-                    });
-                };
-
-                const renderExamDomainCards = () => {
-                    const container = domainContainer.querySelector('#domain-cards-container');
-                    if (!container) return;
-                    container.innerHTML = ''; 
-                    examDomainsData.forEach(domain => {
-                        const cardHtml = `<div class="interactive-card"><h3 class="card-title">${domain.title}</h3><div class="card-description"><p>${domain.description}</p></div></div>`;
-                        container.insertAdjacentHTML('beforeend', cardHtml);
-                    });
-                };
-
-                renderWhyCismCards();
-                renderExamDomainCards();
+                renderCardGrid('#why-cism-cards-container', APP_DATA.aboutCism.whyCism, '', 'why-cism');
+                renderCardGrid('#domain-cards-container', APP_DATA.aboutCism.examDomains, '', 'exam-domains');
             }
 
             // --- Logic specific to 'domain-1' ---
             if (domainContainer.id === 'domain-1') {
                 // Security Culture Chart
                 const secCultureCtx = domainContainer.querySelector('#securityCultureChart')?.getContext('2d');
-                if (secCultureCtx) {
+                if (secCultureCtx && !Chart.getChart(secCultureCtx)) {
                     const securityCultureChartInstance = new Chart(secCultureCtx, { type: 'doughnut', data: { labels: ['Vigilant & Proactive', 'Compliant', 'Indifferent', 'Resistant'], datasets: [{ data: [50, 30, 15, 5], backgroundColor: ['#00A896', '#A1C9CE', '#FFD700', '#FF6384'] }] }, options: { responsive: true, maintainAspectRatio: false } });
                     domainContainer.querySelectorAll('[data-culture-type]').forEach(button => {
                         button.addEventListener('click', e => {
@@ -1922,7 +1882,7 @@
                 
                 // Security Initiatives Chart
                 const secInitiativesCtx = domainContainer.querySelector('#securityInitiativesChart')?.getContext('2d');
-                if(secInitiativesCtx) {
+                if(secInitiativesCtx && !Chart.getChart(secInitiativesCtx)) {
                     const securityInitiativesData = {
                         labels: [['Data Protection', 'Enhancement'], ['Cloud Security', 'Migration'], ['Incident Response', 'Plan'], ['Security Awareness', 'Program'], ['Vendor Risk', 'Management']],
                         complianceDriven: { data: [80, 60, 40, 70, 50] },
@@ -1942,9 +1902,8 @@
 
                 // Budget Allocator
                 const budgetChartCtx = domainContainer.querySelector('#budgetChart')?.getContext('2d');
-                if(budgetChartCtx) {
+                if(budgetChartCtx && !Chart.getChart(budgetChartCtx)) {
                     const budgetInputs = ['techToolsPct', 'personnelStaffingPct', 'trainingAwarenessPct', 'complianceAuditPct'];
-                    const totalBudgetInput = domainContainer.querySelector('#totalBudget');
                     const budgetChartInstance = new Chart(budgetChartCtx, { type: 'doughnut', data: { labels: ['Technology & Tools', 'Personnel & Staffing', 'Training & Awareness', 'Compliance & Audit'], datasets: [{ data: [40, 35, 15, 10], backgroundColor: ['#A1C9CE', '#FFD700', '#FF6384', '#8FB8A1'] }] }, options: { responsive: true, maintainAspectRatio: false } });
                     const updateBudgetChart = () => {
                         const values = budgetInputs.map(id => parseFloat(domainContainer.querySelector(`#${id}`).value) || 0);
@@ -1952,17 +1911,11 @@
                         budgetChartInstance.update();
                     };
                     budgetInputs.forEach(id => domainContainer.querySelector(`#${id}`)?.addEventListener('input', updateBudgetChart));
-                    totalBudgetInput?.addEventListener('input', e => {
-                        let value = e.target.value.replace(/,/g, '');
-                        if (!isNaN(value) && value.length > 0) {
-                            e.target.value = parseFloat(value).toLocaleString('en-US');
-                        }
-                    });
                 }
 
                 // KRI Trend Chart
                 const kriTrendCtx = domainContainer.querySelector('#kriTrendChart')?.getContext('2d');
-                if(kriTrendCtx) {
+                if(kriTrendCtx && !Chart.getChart(kriTrendCtx)) {
                     const kriTrendData = {
                         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                         criticalVulnerabilities: { label: 'Critical Vulnerabilities Detected', data: [25, 22, 18, 15, 12, 10, 8, 7, 6, 5, 4, 3], borderColor: '#DC3545', backgroundColor: 'rgba(220, 53, 69, 0.2)' },
@@ -1985,455 +1938,241 @@
                 const threatDistributionData = {
                     threatOrder: ['Ransomware', 'Insider Threats', 'Third-Party Risks', 'Phishing', 'DDoS', 'APT'],
                     threatColors: ['#A1C9CE', '#8FB8A1', '#FFD700', '#FF6384', '#6A5ACD', '#DAA520'],
-                    overall: { data: [25, 15, 20, 20, 10, 10], explanation: `This chart shows the overall distribution of common emerging threats...`},
-                    ransomwareFocus: { data: [40, 10, 15, 15, 10, 10], explanation: `This view highlights a scenario where Ransomware is a primary concern...` },
-                    insiderFocus: { data: [10, 40, 15, 15, 10, 10], explanation: `This view emphasizes Insider Threats...` },
-                    thirdPartyFocus: { data: [15, 10, 40, 15, 10, 10], explanation: `This view emphasizes Third-Party Risks...` },
-                    phishingFocus: { data: [15, 10, 10, 40, 10, 15], explanation: `This view emphasizes Phishing attacks...` },
-                    ddosFocus: { data: [10, 10, 15, 15, 40, 10], explanation: `This view emphasizes DDoS attacks...` },
-                    aptFocus: { data: [10, 10, 15, 15, 10, 40], explanation: `This view emphasizes APTs...` }
-                };
-                const detailedRoleDescriptions = {
-                    board: { description: "The Board and Executive Management hold ultimate accountability for information security risk. They are responsible for setting the organization's risk appetite, ensuring adequate resources are allocated, and providing oversight to the entire security program." },
-                    ciso: { description: "The CISO (Chief Information Security Officer) or Information Security Manager is responsible for the strategic direction and day-to-day management of the security program. They oversee risk assessments, control implementation, and report the risk posture to the board." },
-                    dataOwners: { description: "Data Owners and Business Unit Heads are accountable for the risks associated with the information assets within their purview. They are responsible for classifying data, defining access rights, and accepting risk on behalf of their department." },
-                    itOps: { description: "IT Operations and dedicated Security Teams are primarily responsible for the technical implementation, operation, and maintenance of security controls. They are the 'control operators' who manage firewalls, patching, monitoring tools, etc." },
-                    endUsers: { description: "Every end user in the organization plays a vital role in information security. They have a responsibility to comply with security policies, report suspicious activity, and act as the first line of defense against threats like phishing." }
+                    overall: { data: [25, 15, 20, 20, 10, 10]},
+                    ransomwareFocus: { data: [40, 10, 15, 15, 10, 10]},
+                    insiderFocus: { data: [10, 40, 15, 15, 10, 10]},
+                    thirdPartyFocus: { data: [15, 10, 40, 15, 10, 10]},
+                    phishingFocus: { data: [15, 10, 10, 40, 10, 15]},
+                    ddosFocus: { data: [10, 10, 15, 15, 40, 10]},
+                    aptFocus: { data: [10, 10, 15, 15, 10, 40]}
                 };
                 const riskMonitoringKRITrendData = {
-                    unpatchedSystems: { label: 'Unpatched Critical Systems (Count)', data: [15, 12, 10, 8, 7, 6, 5, 4, 3, 2, 1, 1], borderColor: '#FF6384', backgroundColor: 'rgba(255, 99, 132, 0.2)' },
-                    securityIncidents: { label: 'Security Incidents Reported (Monthly)', data: [5, 7, 6, 8, 9, 7, 6, 5, 4, 3, 2, 2], borderColor: '#A1C9CE', backgroundColor: 'rgba(161, 201, 206, 0.2)' },
-                    thirdPartyBreaches: { label: 'Third-Party Breach Incidents (Quarterly)', data: [2, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0], borderColor: '#8FB8A1', backgroundColor: 'rgba(143, 184, 161, 0.2)' }
+                    labels: ['Q1', 'Q2', 'Q3', 'Q4'],
+                    unpatchedSystems: { label: 'Unpatched Critical Systems (Count)', data: [15, 10, 7, 3], borderColor: '#FF6384', backgroundColor: 'rgba(255, 99, 132, 0.2)' },
+                    securityIncidents: { label: 'Security Incidents Reported (Trend)', data: [5, 8, 6, 4], borderColor: '#A1C9CE', backgroundColor: 'rgba(161, 201, 206, 0.2)' },
+                    thirdPartyBreaches: { label: 'Third-Party Breach Incidents', data: [2, 1, 3, 1], borderColor: '#8FB8A1', backgroundColor: 'rgba(143, 184, 161, 0.2)' }
                 };
-                const keyTermsData = [
-                    { term: "Inherent Risk", definition: "The level of risk that exists before any controls or other mitigating factors are put in place. It's the raw risk." },
-                    { term: "Residual Risk", definition: "The level of risk that remains after controls have been implemented and account for their effectiveness. This is the risk that management accepts." },
-                    { term: "Risk Appetite", definition: "The amount of risk an organization is willing to take to achieve its objectives. It's a high-level strategic statement." },
-                    { term: "Risk Tolerance", definition: "The acceptable deviation from the risk appetite. It sets specific thresholds for different types of risks." },
-                    { term: "Qualitative Risk Assessment", definition: "Uses descriptive terms (e.g., high, medium, low) to define likelihood and impact. It's subjective but quick and often used for initial assessments." },
-                    { term: "Quantitative Risk Assessment", definition: "Assigns numerical values (e.g., monetary cost, probability percentages) to likelihood and impact. It aims to provide a more objective and measurable view of risk (e.g., ALE, SLE, ARO)." },
-                    { term: "Annualized Loss Expectancy (ALE)", definition: "The expected monetary loss for an asset due to a risk over a one-year period. Calculated as Single Loss Expectancy (SLE) multiplied by Annualized Rate of Occurrence (ARO)." },
-                    { term: "Single Loss Expectancy (SLE)", definition: "The monetary loss expected each time a risk event occurs. Calculated as Asset Value (AV) multiplied by Exposure Factor (EF)." },
-                    { term: "Annualized Rate of Occurrence (ARO)", definition: "The estimated frequency at which a threat event is expected to occur within a one-year period." },
-                    { term: "Risk Mitigation", definition: "Reducing the likelihood or impact of a risk through the implementation of security controls." },
-                    { term: "Risk Transfer", definition: "Shifting the financial or operational burden of a risk to a third party, often through insurance or contractual agreements." },
-                    { term: "Risk Avoidance", definition: "Eliminating the risk entirely by choosing not to engage in or ceasing an activity that gives rise to the risk." },
-                    { term: "Risk Acceptance", definition: "Acknowledging the existence of a risk and deciding to take no further action to mitigate it, usually with formal management approval." },
-                    { term: "Key Risk Indicator (KRI)", definition: "Metrics that provide an early warning signal of increasing risk exposure, helping in proactive risk management." },
-                    { term: "Risk Register", definition: "A central repository for all identified risks, including their description, ownership, assessment, and treatment status." }
-                ];
-
-                let threatDistributionChartInstance, riskMonitoringKRIChartInstance;
 
                 const calculateQuantitativeRisk = () => {
                     const assetValueInput = domainContainer.querySelector('#assetValue');
-                    if (!assetValueInput) return;
+                    const exposureFactorInput = domainContainer.querySelector('#exposureFactor');
+                    const aroInput = domainContainer.querySelector('#aro');
+                    if (!assetValueInput || !exposureFactorInput || !aroInput) return;
+
                     const rawAssetValue = assetValueInput.value.replace(/,/g, '');
                     let assetValue = parseFloat(rawAssetValue);
-                    const exposureFactor = parseFloat(domainContainer.querySelector('#exposureFactor').value);
-                    const aro = parseFloat(domainContainer.querySelector('#aro').value);
-                    let sle = 0, ale = 0;
-                    if (!isNaN(assetValue)) assetValueInput.value = assetValue.toLocaleString('en-US');
-                    else assetValue = 0;
-                    if (!isNaN(assetValue) && !isNaN(exposureFactor)) sle = assetValue * exposureFactor;
-                    if (!isNaN(sle) && !isNaN(aro)) ale = sle * aro;
+                    const exposureFactor = parseFloat(exposureFactorInput.value);
+                    const aro = parseFloat(aroInput.value);
+                    
+                    if (!isNaN(assetValue)) assetValueInput.value = assetValue.toLocaleString('en-US'); else assetValue = 0;
+                    
+                    const sle = !isNaN(assetValue) && !isNaN(exposureFactor) ? assetValue * exposureFactor : 0;
+                    const ale = !isNaN(sle) && !isNaN(aro) ? sle * aro : 0;
+
                     domainContainer.querySelector('#sleResult').textContent = sle.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
                     domainContainer.querySelector('#aleResult').textContent = ale.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
                 };
 
-                const renderKeyTerms = () => {
-                    const container = domainContainer.querySelector('#key-terms-grid-d2');
-                    if (!container) return;
-                    container.innerHTML = '';
-                    keyTermsData.forEach((item, index) => {
-                        const cardHtml = `<div class="key-term-card" data-term-key="${index}"><h3 class="card-title">${item.term}</h3><div class="card-description"><p>${item.definition}</p></div></div>`;
-                        container.insertAdjacentHTML('beforeend', cardHtml);
-                    });
-                };
-                
-                renderKeyTerms();
-                calculateQuantitativeRisk();
-
                 const threatCtx = domainContainer.querySelector('#threatDistributionChart')?.getContext('2d');
                 if (threatCtx && !Chart.getChart(threatCtx)) {
-                    threatDistributionChartInstance = new Chart(threatCtx, { type: 'doughnut', data: { labels: threatDistributionData.threatOrder, datasets: [{ data: threatDistributionData.overall.data, backgroundColor: threatDistributionData.threatColors }] }, options: { responsive: true, maintainAspectRatio: false } });
+                    const threatDistributionChartInstance = new Chart(threatCtx, { type: 'doughnut', data: { labels: threatDistributionData.threatOrder, datasets: [{ data: threatDistributionData.overall.data, backgroundColor: threatDistributionData.threatColors }] }, options: { responsive: true, maintainAspectRatio: false } });
+                    domainContainer.querySelectorAll('.toggle-chart-data').forEach(button => {
+                        button.addEventListener('click', (e) => {
+                            const dataSetKey = e.currentTarget.dataset.dataSet;
+                            threatDistributionChartInstance.data.datasets[0].data = threatDistributionData[dataSetKey].data;
+                            threatDistributionChartInstance.update();
+                        });
+                    });
                 }
 
                 const kriCtx = domainContainer.querySelector('#riskMonitoringKRIChart')?.getContext('2d');
                 if (kriCtx && !Chart.getChart(kriCtx)) {
-                    riskMonitoringKRIChartInstance = new Chart(kriCtx, { type: 'line', data: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], datasets: [{ ...riskMonitoringKRITrendData.unpatchedSystems, fill: true, tension: 0.3 }] }, options: { responsive: true, maintainAspectRatio: false } });
+                    const riskMonitoringKRIChartInstance = new Chart(kriCtx, { type: 'line', data: { labels: riskMonitoringKRITrendData.labels, datasets: [{ ...riskMonitoringKRITrendData.unpatchedSystems, fill: true, tension: 0.3 }] }, options: { responsive: true, maintainAspectRatio: false } });
+                    domainContainer.querySelector('#riskMonitoringKRISelect')?.addEventListener('change', e => {
+                        const selectedData = riskMonitoringKRITrendData[e.target.value];
+                        riskMonitoringKRIChartInstance.data.datasets[0] = { ...selectedData, fill: true, tension: 0.3 };
+                        riskMonitoringKRIChartInstance.update();
+                    });
                 }
-
-                domainContainer.querySelectorAll('.toggle-chart-data').forEach(button => {
-                    button.addEventListener('click', () => {
-                        const dataSetKey = button.dataset.dataSet;
-                        const data = threatDistributionData[dataSetKey];
-                        if (threatDistributionChartInstance && data) {
-                            threatDistributionChartInstance.data.datasets[0].data = data.data;
-                            threatDistributionChartInstance.update();
-                            domainContainer.querySelector('#threat-explanation').textContent = data.explanation;
+                
+                domainContainer.querySelectorAll('.flow-node').forEach(node => {
+                    node.addEventListener('click', () => {
+                        const scenario = node.closest('.flow-scenario');
+                        // No need for separate data-group, the interactive-card handler will manage active state
+                        if(node.classList.contains('active')) {
+                            const type = node.dataset.nodeType;
+                            if(type === 'vulnerability') {
+                                scenario.querySelector('[data-node-type="threat"]').classList.remove('hidden');
+                                scenario.querySelector('[data-arrow-id="0-1"]').classList.remove('hidden');
+                            } else if (type === 'threat') {
+                                scenario.querySelector('[data-node-type="impact"]').classList.remove('hidden');
+                                scenario.querySelector('[data-arrow-id="1-2"]').classList.remove('hidden');
+                            }
                         }
                     });
                 });
 
-                domainContainer.querySelector('#riskMonitoringKRISelect')?.addEventListener('change', (e) => {
-                    const selectedKRI = e.target.value;
-                    const data = riskMonitoringKRITrendData[selectedKRI];
-                    if (riskMonitoringKRIChartInstance && data) {
-                        riskMonitoringKRIChartInstance.data.datasets[0] = { ...data, fill: true, tension: 0.3 };
-                        riskMonitoringKRIChartInstance.update();
-                    }
+                domainContainer.querySelectorAll('.role-node').forEach(node => {
+                    node.addEventListener('click', () => {
+                        const role = node.dataset.role;
+                        const descriptionDiv = node.querySelector('.role-description');
+                        // Use the interactive-card handler for toggling active
+                        if (node.classList.contains('active')) {
+                            descriptionDiv.textContent = APP_DATA.domain2.roleDescriptions[role];
+                        }
+                    });
                 });
 
                 domainContainer.querySelectorAll('#assetValue, #exposureFactor, #aro').forEach(input => {
                     input.addEventListener('input', calculateQuantitativeRisk);
                 });
 
-                domainContainer.querySelectorAll('.role-node').forEach(node => {
-                    node.addEventListener('click', () => {
-                        const roleKey = node.dataset.role;
-                        const desc = detailedRoleDescriptions[roleKey]?.description || '';
-                        node.querySelector('.role-description').innerHTML = `<p>${desc}</p>`;
-                    });
-                });
-                
-                domainContainer.querySelectorAll('.flow-node[data-node-type="vulnerability"]').forEach(vulnerabilityNode => {
-                    vulnerabilityNode.addEventListener('click', () => {
-                        const scenarioContainer = vulnerabilityNode.closest('.flow-scenario');
-                        const currentlyActive = vulnerabilityNode.classList.contains('active');
-                        
-                        domainContainer.querySelectorAll('.flow-scenario').forEach(sc => {
-                            sc.querySelectorAll('.flow-node').forEach(n => n.classList.remove('active'));
-                            sc.querySelectorAll('.flow-arrow, .flow-node[data-node-type=\'threat\'], .flow-node[data-node-type=\'impact\']').forEach(el => el.classList.add('hidden'));
-                        });
-
-                        if (!currentlyActive) {
-                            vulnerabilityNode.classList.add('active');
-                            scenarioContainer.querySelector('.flow-arrow[data-arrow-id="0-1"]')?.classList.remove('hidden');
-                            scenarioContainer.querySelector('.flow-node[data-node-type="threat"]')?.classList.remove('hidden');
-                        }
-                    });
-                });
-
-                domainContainer.querySelectorAll('.flow-node[data-node-type="threat"]').forEach(threatNode => {
-                    threatNode.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        const scenarioContainer = threatNode.closest('.flow-scenario');
-                        const currentlyActive = threatNode.classList.contains('active');
-
-                        if (currentlyActive) {
-                             threatNode.classList.remove('active');
-                             scenarioContainer.querySelector('.flow-arrow[data-arrow-id="1-2"]')?.classList.add('hidden');
-                             const impactNode = scenarioContainer.querySelector('.flow-node[data-node-type="impact"]');
-                             impactNode?.classList.add('hidden');
-                             impactNode?.classList.remove('active');
-                        } else {
-                            threatNode.classList.add('active');
-                            scenarioContainer.querySelector('.flow-arrow[data-arrow-id="1-2"]')?.classList.remove('hidden');
-                            scenarioContainer.querySelector('.flow-node[data-node-type="impact"]')?.classList.remove('hidden');
-                        }
-                    });
-                });
-                 domainContainer.querySelectorAll('.flow-node[data-node-type="impact"]').forEach(impactNode => {
-                    impactNode.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        impactNode.classList.toggle('active');
-                    });
-                });
+                renderCardGrid('#key-terms-grid-d2', APP_DATA.domain2.keyTerms, 'key-term-card', 'key-terms-d2');
+                calculateQuantitativeRisk();
             }
 
             // --- Logic specific to 'domain-3' ---
             else if (domainContainer.id === 'domain-3') {
-                const keyTerms = [
-                    { term: "Security Architecture", definition: "The design of security controls within an organization's IT infrastructure to protect its assets. It defines how controls are positioned and how they relate to each other." },
-                    { term: "Defense-in-Depth", definition: "A security strategy that uses multiple layers of security controls to protect an asset. If one layer fails, another is in place to stop an attack." },
-                    { term: "Security Policy", definition: "A high-level document, approved by senior management, that defines an organization's overall stance on information security." },
-                    { term: "Security Standard", definition: "A mandatory rule that specifies the use of certain technologies or configurations to support a policy." },
-                    { term: "Business Impact Analysis (BIA)", definition: "A process to identify critical business functions and determine the potential impact of a disruption to those functions." },
-                    { term: "Security Awareness Training", definition: "A formal program to educate employees about security threats and their responsibilities in protecting the organization's assets." },
-                    { term: "Key Performance Indicator (KPI)", definition: "A metric that measures the performance and effectiveness of a security control or process (e.g., percentage of systems patched within 30 days)." },
-                    { term: "Identity and Access Management (IAM)", definition: "The framework of policies and technologies for ensuring that the right users have the appropriate access to technology resources." }
-                ];
-                const container = domainContainer.querySelector('#key-terms-grid-d3');
-                if (container && container.children.length === 0) {
-                    container.innerHTML = keyTerms.map(item => 
-                        `<div class="key-term-card"><h3 class="card-title">${item.term}</h3><div class="card-description"><p>${item.definition}</p></div></div>`
-                    ).join('');
-                }
+                renderCardGrid('#key-terms-grid-d3', APP_DATA.domain3.keyTerms, 'key-term-card', 'key-terms-d3');
 
-                // D3 Budget Allocator Logic
-                const totalBudgetInputD3 = domainContainer.querySelector('#totalBudgetD3');
-                const peoplePctInput = domainContainer.querySelector('#peoplePct');
-                const toolsPctInput = domainContainer.querySelector('#toolsPct');
-                const trainingPctInput = domainContainer.querySelector('#trainingPct');
-                const compliancePctInput = domainContainer.querySelector('#compliancePct');
-                const budgetInputsD3 = [peoplePctInput, toolsPctInput, trainingPctInput, compliancePctInput];
-                
                 const d3BudgetCtx = domainContainer.querySelector('#d3BudgetChart')?.getContext('2d');
-                let d3BudgetChartInstance;
-
                 if (d3BudgetCtx && !Chart.getChart(d3BudgetCtx)) {
-                    d3BudgetChartInstance = new Chart(d3BudgetCtx, {
-                        type: 'bar',
+                    const budgetInputs = ['peoplePct', 'toolsPct', 'trainingPct', 'compliancePct'];
+                    const budgetChartInstance = new Chart(d3BudgetCtx, {
+                        type: 'doughnut',
                         data: {
-                            labels: ['People (Staffing)', 'Tools & Software', 'Training & Awareness', 'Compliance & Audit'],
+                            labels: ['People', 'Tools & Software', 'Training & Awareness', 'Compliance & Audit'],
                             datasets: [{
-                                label: 'Percentage of Budget',
                                 data: [40, 30, 15, 15],
-                                backgroundColor: ['#A1C9CE', '#8FB8A1', '#FFD700', '#FF6384'],
-                                borderColor: ['#A1C9CE', '#8FB8A1', '#FFD700', '#FF6384'],
-                                borderWidth: 1
+                                backgroundColor: ['#00A896', '#FF6384', '#FFD700', '#6A5ACD']
                             }]
                         },
-                        options: {
-                            indexAxis: 'y',
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            scales: {
-                                x: {
-                                    beginAtZero: true,
-                                    max: 100,
-                                    title: {
-                                        display: true,
-                                        text: 'Percentage of Budget'
-                                    }
-                                }
-                            },
-                            plugins: {
-                                legend: {
-                                    display: false
-                                }
-                            }
-                        }
+                        options: { responsive: true, maintainAspectRatio: false }
                     });
-                }
 
-                const updateD3Budget = () => {
-                    if (!totalBudgetInputD3 || budgetInputsD3.some(input => !input)) return;
+                    const updateD3Budget = () => {
+                        const totalBudget = parseFloat(domainContainer.querySelector('#totalBudgetD3').value.replace(/,/g, '')) || 0;
+                        let totalPct = 0;
+                        const values = budgetInputs.map(id => {
+                            const input = domainContainer.querySelector(`#${id}`);
+                            const pct = parseFloat(input.value) || 0;
+                            totalPct += pct;
+                            const dollarValue = (totalBudget * pct / 100);
+                            domainContainer.querySelector(`#${id.replace('Pct', 'Value')}`).textContent = `$${dollarValue.toLocaleString('en-US')}`;
+                            return pct;
+                        });
 
-                    let totalBudget = parseFloat(totalBudgetInputD3.value.replace(/,/g, '')) || 0;
-                    const percentages = {
-                        people: parseFloat(peoplePctInput.value) || 0,
-                        tools: parseFloat(toolsPctInput.value) || 0,
-                        training: parseFloat(trainingPctInput.value) || 0,
-                        compliance: parseFloat(compliancePctInput.value) || 0,
+                        budgetChartInstance.data.datasets[0].data = values;
+                        budgetChartInstance.update();
+
+                        const feedbackEl = domainContainer.querySelector('#allocation-feedback');
+                        if (totalPct !== 100) {
+                            feedbackEl.textContent = `Total is ${totalPct}%. Please adjust to 100%.`;
+                            feedbackEl.className = 'text-center font-bold mb-4 text-red-600';
+                        } else {
+                            feedbackEl.textContent = 'Total: 100%';
+                            feedbackEl.className = 'text-center font-bold mb-4 text-green-600';
+                        }
                     };
 
-                    const totalPct = percentages.people + percentages.tools + percentages.training + percentages.compliance;
-                    const feedbackEl = domainContainer.querySelector('#allocation-feedback');
-
-                    if (feedbackEl) {
-                        if (totalPct === 100) {
-                            feedbackEl.textContent = 'Allocation valid!';
-                            feedbackEl.style.color = 'green';
-                        } else {
-                            feedbackEl.textContent = `Total percentage is ${totalPct}%. It must be 100%.`;
-                            feedbackEl.style.color = 'red';
-                        }
-                    }
-
-                    domainContainer.querySelector('#peopleValue').textContent = '$' + (totalBudget * (percentages.people / 100)).toLocaleString('en-US');
-                    domainContainer.querySelector('#toolsValue').textContent = '$' + (totalBudget * (percentages.tools / 100)).toLocaleString('en-US');
-                    domainContainer.querySelector('#trainingValue').textContent = '$' + (totalBudget * (percentages.training / 100)).toLocaleString('en-US');
-                    domainContainer.querySelector('#complianceValue').textContent = '$' + (totalBudget * (percentages.compliance / 100)).toLocaleString('en-US');
-                    
-                    if (d3BudgetChartInstance) {
-                        d3BudgetChartInstance.data.datasets[0].data = [percentages.people, percentages.tools, percentages.training, percentages.compliance];
-                        d3BudgetChartInstance.update();
-                    }
-                };
-
-                totalBudgetInputD3?.addEventListener('input', (e) => {
-                    let value = e.target.value.replace(/,/g, '');
-                    if (!isNaN(value) && value.length > 0) {
-                        e.target.value = parseFloat(value).toLocaleString('en-US');
-                    }
-                    updateD3Budget();
-                });
-
-                budgetInputsD3.forEach(input => {
-                    input?.addEventListener('input', updateD3Budget);
-                });
-
-                // Initial call if the elements exist
-                if (domainContainer.querySelector('#totalBudgetD3')) {
-                    updateD3Budget();
+                    domainContainer.querySelectorAll('.budget-pct-input, #totalBudgetD3').forEach(input => {
+                        input.addEventListener('input', updateD3Budget);
+                    });
+                    updateD3Budget(); // Initial call
                 }
             }
 
-            // --- Logic specific to 'domain-4' ---
-            else if (domainContainer.id === 'domain-4') {
-                const keyTerms = [
-                    { term: "Incident Response Plan (IRP)", definition: "A documented plan that outlines the procedures and responsibilities for responding to a security incident." },
-                    { term: "CIRT / CSIRT", definition: "Computer Incident Response Team / Computer Security Incident Response Team. A dedicated group responsible for responding to security incidents." },
-                    { term: "Containment", definition: "The phase of incident response focused on limiting the scope and impact of an incident to prevent further damage." },
-                    { term: "Eradication", definition: "The phase of incident response where the root cause of the incident and all malicious artifacts are removed from the environment." },
-                    { term: "Recovery", definition: "The phase of incident response where systems are restored to normal operation after an incident has been contained and eradicated." },
-                    { term: "Recovery Time Objective (RTO)", definition: "The maximum acceptable amount of time that a system or business process can be down after a disaster or failure." },
-                    { term: "Recovery Point Objective (RPO)", definition: "The maximum acceptable amount of data loss, measured in time. It defines the point in time to which data must be restored." },
-                    { term: "Chain of Custody", definition: "A documented record of the handling and storage of evidence from the time it is collected until it is presented in court, ensuring its integrity." }
-                ];
-                const container = domainContainer.querySelector('#key-terms-grid-d4');
-                if (container && container.children.length === 0) {
-                    container.innerHTML = keyTerms.map(item => 
-                        `<div class="key-term-card"><h3 class="card-title">${item.term}</h3><div class="card-description"><p>${item.definition}</p></div></div>`
-                    ).join('');
-                }
-            }
-
-            // --- Logic specific to 'assessment' ---
+            // --- Logic specific to 'assessment' section ---
             else if (domainContainer.id === 'assessment') {
-                const quizQuestions = [
-                    // Domain 1
-                    { domain: 1, question: "What is the PRIMARY objective of information security governance?", options: ["To implement security controls", "To ensure security aligns with business objectives", "To perform risk assessments", "To achieve compliance with all regulations"], answer: 1, explanation: "The primary goal of governance is strategic alignment. While implementing controls, performing assessments, and achieving compliance are all important activities, they are all done in service of ensuring the security program supports the overall business goals." },
-                    { domain: 1, question: "Which of the following BEST describes the concept of 'due care'?", options: ["Conducting an investigation before a transaction", "Implementing controls to a reasonable standard", "Purchasing cyber insurance", "Following a specific security framework"], answer: 1, explanation: "'Due care' is about taking the reasonable steps and actions to protect assets, which translates to implementing and maintaining controls. 'Due diligence' is the investigation process (A)." },
-                    // Domain 2
-                    { domain: 2, question: "An organization decides not to launch a new mobile application in a high-risk region due to overwhelming security concerns. This is an example of which risk response strategy?", options: ["Mitigation", "Transfer", "Acceptance", "Avoidance"], answer: 3, explanation: "Risk avoidance is the strategy of choosing not to engage in an activity that would introduce unacceptable risk. By not launching the app, the organization is avoiding the associated risks entirely." },
-                    { domain: 2, question: "Calculating the Annualized Loss Expectancy (ALE) is a key component of which type of risk assessment?", options: ["Qualitative", "Hybrid", "Quantitative", "Ad-hoc"], answer: 2, explanation: "Quantitative risk assessment focuses on assigning monetary values to risk. The ALE, which calculates the expected financial loss per year, is a hallmark of this approach." },
-                    // Domain 3
-                    { domain: 3, question: "Which document in the security documentation hierarchy provides step-by-step instructions on how to perform a specific task?", options: ["Policy", "Standard", "Guideline", "Procedure"], answer: 3, explanation: "Procedures provide the detailed, step-by-step instructions for implementing policies and standards. Policies are high-level 'what', standards are mandatory 'how', and guidelines are recommended best practices." },
-                    { domain: 3, question: "A metric that provides an early warning of a potential security problem, such as a sudden spike in failed login attempts, is known as a:", options: ["Key Performance Indicator (KPI)", "Key Goal Indicator (KGI)", "Key Risk Indicator (KRI)", "Return on Investment (ROI)"], answer: 2, explanation: "Key Risk Indicators (KRIs) are forward-looking metrics designed to provide early warnings of increasing risk exposure, allowing for proactive intervention." },
-                    // Domain 4
-                    { domain: 4, question: "What is the PRIMARY goal of the 'Containment' phase in the incident response lifecycle?", options: ["To remove the attacker from the network", "To restore systems from backup", "To limit the scope and impact of the incident", "To perform a post-incident review"], answer: 2, explanation: "The immediate goal of containment is to stop the bleeding—to prevent the incident from spreading further and causing more damage. Eradication (A) and Recovery (B) come after containment." },
-                    { domain: 4, question: "A discussion-based exercise where team members walk through their roles and responsibilities in a simulated incident scenario is BEST described as a:", options: ["Full-scale simulation", "Functional drill", "Walkthrough", "Tabletop exercise"], answer: 3, explanation: "A tabletop exercise is specifically designed as a discussion-based activity to test decision-making processes and communication flows without involving actual technical systems." },
-                ];
-                let userAnswers = {};
+                const quizData = APP_DATA.assessment.quiz;
+                let currentAnswers = {};
+                let score = 0;
 
-                const renderQuiz = () => {
+                const loadQuiz = () => {
                     const quizContainer = domainContainer.querySelector('#quiz-container');
                     const quizResults = domainContainer.querySelector('#quiz-results');
                     if (!quizContainer || !quizResults) return;
 
                     quizContainer.innerHTML = '';
                     quizResults.classList.add('hidden');
-                    userAnswers = {};
+                    quizContainer.classList.remove('hidden');
+                    currentAnswers = {};
+                    score = 0;
 
-                    quizQuestions.forEach((q, index) => {
-                        const optionsHtml = q.options.map((opt, i) => 
-                            `<button class="quiz-option" data-question="${index}" data-option="${i}">${String.fromCharCode(65 + i)}. ${opt}</button>`
+                    quizData.forEach((q, index) => {
+                        const optionsHtml = q.options.map(opt => 
+                            `<button class="quiz-option" data-question-index="${index}" data-option-value="${opt}">${opt}</button>`
                         ).join('');
 
                         const questionHtml = `
                             <div class="quiz-question-container" id="question-${index}">
-                                <p class="text-lg font-semibold mb-4"><strong>Question ${index + 1} (Domain ${q.domain}):</strong> ${q.question}</p>
-                                <div class="space-y-2">${optionsHtml}</div>
-                                <div class="quiz-feedback hidden mt-4"></div>
+                                <h3 class="text-xl font-bold mb-4">Question ${index + 1}: ${q.question}</h3>
+                                <div class="options-container">${optionsHtml}</div>
+                                <div class="quiz-feedback hidden"></div>
                             </div>
                         `;
                         quizContainer.insertAdjacentHTML('beforeend', questionHtml);
                     });
 
-                    quizContainer.addEventListener('click', handleOptionSelect);
+                    quizContainer.insertAdjacentHTML('beforeend', `<button id="submit-quiz-btn" class="mt-6 w-full px-6 py-3 bg-teal-600 text-white font-bold rounded-lg shadow-md hover:bg-teal-700 transition-colors">Submit Answers</button>`);
                 };
 
-                const handleOptionSelect = (e) => {
-                    if (!e.target.matches('.quiz-option')) return;
-                    
-                    const questionIndex = parseInt(e.target.dataset.question);
-                    const optionIndex = parseInt(e.target.dataset.option);
-                    const questionData = quizQuestions[questionIndex];
-                    const questionContainer = domainContainer.querySelector(`#question-${questionIndex}`);
+                domainContainer.addEventListener('click', e => {
+                    if (e.target.matches('.quiz-option')) {
+                        const questionIndex = e.target.dataset.questionIndex;
+                        const selectedValue = e.target.dataset.optionValue;
+                        
+                        currentAnswers[questionIndex] = selectedValue;
 
-                    // Store answer
-                    userAnswers[questionIndex] = optionIndex;
-
-                    // Update UI
-                    questionContainer.querySelectorAll('.quiz-option').forEach(btn => btn.classList.remove('selected'));
-                    e.target.classList.add('selected');
-
-                    // Check if all questions are answered
-                    if (Object.keys(userAnswers).length === quizQuestions.length) {
-                        showResults();
+                        const options = domainContainer.querySelectorAll(`[data-question-index="${questionIndex}"]`);
+                        options.forEach(opt => opt.classList.remove('selected'));
+                        e.target.classList.add('selected');
                     }
-                };
-                
-                const showResults = () => {
-                    let score = 0;
-                    quizQuestions.forEach((q, index) => {
-                        const questionContainer = domainContainer.querySelector(`#question-${index}`);
-                        const feedbackContainer = questionContainer.querySelector('.quiz-feedback');
-                        const userAnswer = userAnswers[index];
-                        const isCorrect = userAnswer === q.answer;
 
-                        feedbackContainer.classList.remove('hidden', 'correct', 'incorrect');
-                        if (isCorrect) {
-                            score++;
-                            feedbackContainer.classList.add('correct');
-                            feedbackContainer.innerHTML = `<strong>Correct!</strong>`;
-                        } else {
-                            feedbackContainer.classList.add('incorrect');
-                            feedbackContainer.innerHTML = `
-                                <strong>Incorrect.</strong> The correct answer is ${String.fromCharCode(65 + q.answer)}.
-                                <p class="quiz-explanation">${q.explanation}</p>
-                            `;
-                        }
-                    });
-                    
-                    const quizResultsContainer = domainContainer.querySelector('#quiz-results');
-                    quizResultsContainer.querySelector('#quiz-score').textContent = `Your Score: ${score} out of ${quizQuestions.length}`;
-                    quizResultsContainer.querySelector('#quiz-summary').textContent = `You have completed the assessment. Review the explanations for any incorrect answers.`;
-                    quizResultsContainer.classList.remove('hidden');
-                    quizResultsContainer.scrollIntoView({ behavior: 'smooth' });
+                    if (e.target.id === 'submit-quiz-btn') {
+                        score = 0;
+                        quizData.forEach((q, index) => {
+                            const feedbackEl = domainContainer.querySelector(`#question-${index} .quiz-feedback`);
+                            feedbackEl.classList.remove('hidden', 'correct', 'incorrect');
+                            feedbackEl.innerHTML = '';
 
-                    domainContainer.querySelector('#quiz-container').removeEventListener('click', handleOptionSelect);
-                };
+                            if (currentAnswers[index]) {
+                                if (currentAnswers[index] === q.answer) {
+                                    score++;
+                                    feedbackEl.classList.add('correct');
+                                    feedbackEl.innerHTML = `<strong>Correct!</strong> <p class="quiz-explanation">${q.explanation}</p>`;
+                                } else {
+                                    feedbackEl.classList.add('incorrect');
+                                    feedbackEl.innerHTML = `<strong>Incorrect.</strong> The correct answer is "${q.answer}". <p class="quiz-explanation">${q.explanation}</p>`;
+                                }
+                            } else {
+                                feedbackEl.classList.add('incorrect');
+                                feedbackEl.innerHTML = `<strong>Not Answered.</strong> The correct answer is "${q.answer}". <p class="quiz-explanation">${q.explanation}</p>`;
+                            }
+                        });
 
-                renderQuiz();
-                domainContainer.querySelector('#retake-quiz-btn')?.addEventListener('click', renderQuiz);
+                        // Show results
+                        domainContainer.querySelector('#quiz-score').textContent = `Your Score: ${score} out of ${quizData.length}`;
+                        let summaryText = score === quizData.length ? "Excellent! You have a strong grasp of the material." : "Good effort! Review the explanations to improve your understanding.";
+                        domainContainer.querySelector('#quiz-summary').textContent = summaryText;
+                        domainContainer.querySelector('#quiz-results').classList.remove('hidden');
+                        e.target.classList.add('hidden'); // Hide submit button
+                    }
+
+                    if (e.target.id === 'retake-quiz-btn') {
+                        loadQuiz();
+                    }
+                });
+
+                loadQuiz();
             }
-
-            // --- Generic Handlers for the current domain ---
-            const navButtons = domainContainer.querySelectorAll('.domain-nav-item');
-            const sections = domainContainer.querySelectorAll('.content-section');
-            
-            navButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    navButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
-                    const targetId = button.dataset.target;
-                    sections.forEach(section => {
-                        section.classList.toggle('hidden', section.id !== targetId);
-                        section.classList.toggle('fade-in', section.id === targetId);
-                    });
-                });
-            });
-            const introButton = domainContainer.querySelector('.domain-nav-item[data-target^="introduction"]');
-            if (introButton) introButton.click();
-
-            domainContainer.querySelectorAll('.accordion-button').forEach(button => {
-                button.addEventListener('click', () => {
-                    const content = button.nextElementSibling;
-                    const icon = button.querySelector('.accordion-icon');
-                    content.classList.toggle('hidden');
-                    if (icon) icon.textContent = content.classList.contains('hidden') ? '+' : '–';
-                });
-            });
-
-            domainContainer.querySelectorAll('[data-group]').forEach(groupContainer => {
-                groupContainer.addEventListener('click', (e) => {
-                    const card = e.target.closest('.interactive-card, .concept-card, .key-term-card, .change-management-card, .legal-type-card, .contract-type-card, .governance-structure-card, .risk-appetite-card, .business-driver-card, .framework-step-node, .maturity-level-card, .risk-framework-card, .risk-response-card, .risk-method-card, .vulnerability-scenario-card, .role-node, .incident-lifecycle-node');
-                    if (!card) return;
-
-                    const wasActive = card.classList.contains('active');
-                    
-                    // Deactivate all cards in the same group
-                    groupContainer.querySelectorAll('.interactive-card, .concept-card, .key-term-card, .change-management-card, .legal-type-card, .contract-type-card, .governance-structure-card, .risk-appetite-card, .business-driver-card, .framework-step-node, .maturity-level-card, .risk-framework-card, .risk-response-card, .risk-method-card, .vulnerability-scenario-card, .role-node, .incident-lifecycle-node').forEach(c => {
-                        c.classList.remove('active');
-                    });
-
-                    if (!wasActive) {
-                        card.classList.add('active');
-                    }
-                });
-            });
-            
-            domainContainer.dataset.initialized = 'true';
         }
 
         // --- Initial Setup ---
-        const initialDomain = document.getElementById('about-cism');
-        if (initialDomain) {
-            setupDomain(initialDomain);
+        // Find the initially active domain and set it up
+        const initialActiveDomain = document.querySelector('.domain-content-section:not(.hidden)');
+        if (initialActiveDomain) {
+            setupDomain(initialActiveDomain);
         }
     });
     </script>
