@@ -212,11 +212,12 @@
             top: -2px;
             font-size: 1.5em;
         }
-        .content-body ul ul {
+        
+        .accordion-content ul ul {
              margin-top: 15px;
              margin-bottom: 15px;
         }
-        .content-body ul ul li::before {
+        .accordion-content ul ul li::before {
              content: '▪';
              font-size: 1em;
              top: 2px;
@@ -224,7 +225,7 @@
 
 
         /* CARDS REDESIGN (Glassmorphism & Interactive) */
-        .feature-cards, .ethics-cards, .cpe-cards {
+        .feature-cards, .ethics-cards, .cpe-cards, .domain-cards {
             display: flex;
             flex-wrap: wrap;
             gap: 25px;
@@ -336,7 +337,7 @@
             color: var(--text-secondary);
         }
         .accordion-item.open .accordion-content {
-            max-height: 500px; /* Adjust if content is longer */
+            max-height: 1000px; /* Increased height for accordion */
             padding: 0 20px 20px 20px;
         }
         .accordion-content ul {
@@ -471,15 +472,27 @@
                                         <li><strong>Format:</strong> 150 multiple-choice questions</li>
                                         <li><strong>Duration:</strong> 4 hours (240 minutes)</li>
                                         <li><strong>Passing Score:</strong> 450 out of 800 (scaled score)</li>
-                                        <li><strong>Domains:</strong>
-                                            <ul>
-                                                <li>Information Security Governance</li>
-                                                <li>Information Security Risk Management</li>
-                                                <li>Information Security Program Development and Management</li>
-                                                <li>Information Security Incident Management</li>
-                                            </ul>
-                                        </li>
                                     </ul>
+                                    <h5 style="text-align:center; margin-top: 30px; color: var(--text-primary);">Exam Domains</h5>
+                                    <p style="text-align:center; font-size: 1em; margin-bottom: 20px;">Click each domain to learn more about its focus area.</p>
+                                    <div class="domain-cards">
+                                        <div class="card">
+                                            <h5>Domain 1: Governance</h5>
+                                            <p>Establish and maintain an information security governance framework and supporting processes to ensure alignment with organizational goals.</p>
+                                        </div>
+                                        <div class="card">
+                                            <h5>Domain 2: Risk Management</h5>
+                                            <p>Manage information risk to an acceptable level based on the organization's risk appetite to meet its goals and objectives.</p>
+                                        </div>
+                                        <div class="card">
+                                            <h5>Domain 3: Program Development</h5>
+                                            <p>Develop and maintain an information security program that identifies, manages, and protects the organization’s assets.</p>
+                                        </div>
+                                        <div class="card">
+                                            <h5>Domain 4: Incident Management</h5>
+                                            <p>Plan, establish, and manage the capability to detect, investigate, respond to, and recover from information security incidents.</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -636,7 +649,7 @@
                     const isAlreadyOpen = this.classList.contains('open');
                     
                     // Find the parent container to close only sibling cards
-                    const parentContainer = this.closest('.feature-cards, .ethics-cards, .cpe-cards');
+                    const parentContainer = this.closest('.feature-cards, .ethics-cards, .cpe-cards, .domain-cards');
                     if (parentContainer) {
                         parentContainer.querySelectorAll('.card').forEach(c => c.classList.remove('open'));
                     }
