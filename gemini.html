@@ -3,195 +3,239 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CISM Study Guide</title>
+    <title>CISM Study Guide - Designer Edition</title>
     <style>
         /* Global Styles & Font Import */
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
         :root {
-            --primary-blue: #007bff;
-            --light-blue: #e7f5ff;
-            --border-color: #dee2e6;
-            --background-color: #f8f9fa;
-            --text-color: #495057;
-            --heading-color: #212529;
-            --white: #ffffff;
+            --dark-navy-bg: #101727;
+            --surface-color: #1a233b;
+            --accent-glow: #00bfff; /* Deep Sky Blue */
+            --accent-hover: #ffffff;
+            --text-primary: #f0f4f8;
+            --text-secondary: #a0aec0;
+            --border-color: #2d3748;
+            --shadow-color: rgba(0, 191, 255, 0.1);
+            --transition-fast: all 0.2s ease-in-out;
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--background-color);
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-navy-bg);
             margin: 0;
-            padding: 20px;
-            color: var(--text-color);
+            padding: 30px;
+            color: var(--text-primary);
+            line-height: 1.6;
         }
 
         .study-guide-container {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: auto;
+            background-color: var(--dark-navy-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            overflow: hidden;
         }
 
         /* Header Section */
         header {
             text-align: center;
-            padding: 10px 0 30px 0;
+            padding: 40px 30px;
+            background: linear-gradient(180deg, var(--surface-color), var(--dark-navy-bg));
             border-bottom: 1px solid var(--border-color);
-            margin-bottom: 25px;
         }
 
         header h1 {
-            color: var(--heading-color);
             margin: 0;
-            font-size: 1.5em;
-            font-weight: 500;
+            font-size: 2.5em;
+            font-weight: 700;
+            letter-spacing: -1px;
+            color: var(--text-primary);
         }
 
         header p {
-            margin: 5px 0 0 0;
-            font-size: 1em;
+            margin: 10px 0 0 0;
+            font-size: 1.1em;
+            color: var(--text-secondary);
         }
 
         /* Main Layout (Sidebar + Content) */
         .main-layout {
             display: flex;
-            gap: 25px;
         }
 
         /* Sidebar Navigation */
         .sidebar {
-            flex: 0 0 250px;
+            flex: 0 0 280px;
+            border-right: 1px solid var(--border-color);
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
         }
 
         .nav-item {
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 8px;
+            padding: 18px 25px;
+            margin: 0 15px 5px 15px;
             cursor: pointer;
-            transition: background-color 0.2s ease-in-out;
+            transition: var(--transition-fast);
+            border-left: 4px solid transparent;
+            border-radius: 8px;
         }
 
         .nav-item strong {
             display: block;
-            color: var(--heading-color);
+            color: var(--text-primary);
             font-size: 1em;
-            font-weight: 500;
+            font-weight: 600;
+            margin-bottom: 3px;
         }
 
         .nav-item span {
-            font-size: 0.85em;
+            font-size: 0.9em;
+            color: var(--text-secondary);
         }
 
         .nav-item.active {
-            background-color: var(--light-blue);
-            border-left: 4px solid var(--primary-blue);
-            padding-left: 11px; /* Adjust for border */
+            background-color: var(--surface-color);
+            border-left-color: var(--accent-glow);
         }
         
-        .nav-item.active strong, .nav-item.active span {
-            color: var(--primary-blue);
+        .nav-item.active strong {
+            color: var(--accent-glow);
         }
 
         .nav-item:not(.active):hover {
-            background-color: #e9ecef;
+            background-color: rgba(255,255,255,0.05);
         }
 
         /* Content Area */
         .content-area {
             flex-grow: 1;
-            background-color: var(--white);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 30px;
+            padding: 40px;
         }
 
         .content-header h2 {
-            font-size: 2em;
-            color: var(--heading-color);
-            margin: 0;
+            font-size: 2.8em;
+            margin: 0 0 8px 0;
+            font-weight: 700;
+            letter-spacing: -1.5px;
         }
-        
-        .content-header h3 {
-            font-size: 1.2em;
+
+        .content-header h3, .content-header p {
+            color: var(--text-secondary);
             font-weight: 400;
-            margin: 5px 0 0 0;
         }
-        
-        .content-header p {
-            margin-top: 5px;
-        }
-        
-        /* Tabs */
+
+        /* TABS REDESIGN */
         .tabs {
             display: flex;
-            gap: 30px;
-            margin-top: 30px;
-            border-bottom: 1px solid var(--border-color);
+            gap: 10px;
+            margin: 40px 0;
+            background-color: var(--surface-color);
+            padding: 8px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
         }
 
         .tab {
-            padding: 0 5px 15px 5px;
+            flex: 1;
+            padding: 12px 15px;
             cursor: pointer;
-            color: var(--text-color);
-            font-weight: 500;
-            border-bottom: 3px solid transparent;
-            margin-bottom: -2px; /* Overlap border */
+            color: var(--text-secondary);
+            font-weight: 600;
+            border-radius: 8px;
+            text-align: center;
+            transition: var(--transition-fast);
         }
-        
+
         .tab.active {
-            color: var(--primary-blue);
-            border-bottom-color: var(--primary-blue);
+            color: var(--dark-navy-bg);
+            background-color: var(--accent-glow);
+            box-shadow: 0 0 15px var(--shadow-color);
+        }
+
+        .tab:not(.active):hover {
+            color: var(--text-primary);
+            background-color: rgba(255,255,255,0.05);
         }
 
         /* Main Content Body */
-        .content-body {
-            margin-top: 30px;
-        }
-
         .content-body h4 {
-            font-size: 1.5em;
-            color: var(--heading-color);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .content-body h4::before {
-            content: '';
-            display: block;
-            width: 5px;
-            height: 28px;
-            background-color: var(--primary-blue);
-            border-radius: 2px;
+            font-size: 1.8em;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
         }
 
         .content-body p {
-            line-height: 1.6;
-            margin-bottom: 30px;
+            font-size: 1.1em;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
         }
 
-        /* Feature Cards */
+        /* CARDS REDESIGN (Glassmorphism) */
         .feature-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
         }
 
         .card {
-            background-color: var(--background-color);
-            padding: 20px;
-            text-align: center;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: box-shadow 0.2s, transform 0.2s;
+            background: rgba(45, 55, 72, 0.4); /* Semi-transparent background */
+            backdrop-filter: blur(10px); /* The frosted glass effect */
+            -webkit-backdrop-filter: blur(10px); /* For Safari */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 25px;
+            transition: var(--transition-fast);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--shadow-color) 0%, transparent 40%);
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+            transform: scale(0.5);
         }
 
         .card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            border-color: rgba(0, 191, 255, 0.5);
         }
 
+        .card:hover::before {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .card h5 {
+            font-size: 1.2em;
+            color: var(--accent-glow);
+            margin: 0 0 10px 0;
+            font-weight: 600;
+            position: relative; /* To stay above the pseudo-element */
+        }
+
+        .card p {
+            font-size: 0.95em;
+            color: var(--text-secondary);
+            margin-bottom: 0;
+            line-height: 1.6;
+            position: relative;
+        }
     </style>
 </head>
 <body>
@@ -230,9 +274,8 @@
                 <div class="content-header">
                     <h2>CISM Certification Overview</h2>
                     <h3>Certified Information Security Manager</h3>
-                    <p>Your guide to the premier credential for information security leadership.</p>
                 </div>
-                
+
                 <div class="tabs">
                     <div class="tab active">Why CISM?</div>
                     <div class="tab">Exam Details</div>
@@ -241,13 +284,25 @@
 
                 <div class="content-body">
                     <h4>Why Pursue the CISM Certification?</h4>
-                    <p>The Certified Information Security Manager (CISM) certification, issued by ISACA, is a premier credential for professionals managing and overseeing information security systems in alignment with business goals. Focused on governance, risk management, and leadership, CISM is ideal for security managers, CISOs, and consultants who drive security strategies across the enterprise. Click on the cards below to explore the key benefits.</p>
+                    <p>The Certified Information Security Manager (CISM) certification, issued by ISACA, is a premier credential for professionals managing and overseeing information security systems in alignment with business goals. Explore the key benefits below.</p>
 
                     <div class="feature-cards">
-                        <div class="card">Leadership-Focused</div>
-                        <div class="card">Career-Enhancing</div>
-                        <div class="card">Global Recognition</div>
-                        <div class="card">Industry Relevance</div>
+                        <div class="card">
+                            <h5>Leadership-Focused</h5>
+                            <p>Develop and enhance your skills in leading information security teams and initiatives.</p>
+                        </div>
+                        <div class="card">
+                            <h5>Career-Enhancing</h5>
+                            <p>Boost your professional credibility and open doors to advanced roles in the cybersecurity field.</p>
+                        </div>
+                        <div class="card">
+                            <h5>Global Recognition</h5>
+                            <p>Gain a globally recognized certification that validates your expertise to employers worldwide.</p>
+                        </div>
+                        <div class="card">
+                            <h5>Industry Relevance</h5>
+                            <p>Stay current with the latest trends and best practices in information security management.</p>
+                        </div>
                     </div>
                 </div>
             </section>
