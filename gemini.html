@@ -24,14 +24,15 @@
             font-family: 'Inter', sans-serif;
             background-color: var(--dark-navy-bg);
             margin: 0;
-            padding: 30px;
+            padding: 0; /* Removed padding to allow full width */
             color: var(--text-primary);
             line-height: 1.6;
         }
 
         .study-guide-container {
-            max-width: 1300px;
-            margin: auto;
+            width: 100%; /* Changed from max-width to fill the window */
+            min-height: 100vh;
+            box-sizing: border-box; /* Ensures padding is included in width */
             background-color: var(--dark-navy-bg);
             border: 1px solid var(--border-color);
             border-radius: 16px;
@@ -222,25 +223,21 @@
 
 
         /* CARDS REDESIGN (Glassmorphism & Interactive) */
-        .feature-cards, .ethics-cards {
+        .feature-cards, .ethics-cards, .cpe-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         }
-        .ethics-cards {
-            grid-template-columns: repeat(4, 1fr);
+        
+        .cpe-cards {
+            justify-content: center;
         }
-        .ethics-cards .card:nth-child(5),
-        .ethics-cards .card:nth-child(6),
-        .ethics-cards .card:nth-child(7) {
-            grid-column: span 1;
-        }
-        /* Center the last row of 3 cards */
-        .ethics-cards .card:nth-child(5) {
-            grid-column-start: 1;
-        }
-        @media (min-width: 1100px) {
-             .ethics-cards .card:nth-child(5) {
+
+        @media (min-width: 992px) {
+            .ethics-cards {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            .ethics-cards .card:nth-child(5) {
                 grid-column-start: 2;
             }
         }
@@ -257,7 +254,6 @@
             position: relative;
             overflow: hidden;
             cursor: pointer;
-            min-width: 200px; /* Min width as requested */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -309,7 +305,7 @@
         }
 
         .card.open p {
-            max-height: 150px; /* Increased height for ethics text */
+            max-height: 250px; /* Increased height for all card content */
             opacity: 1;
             margin-top: 10px;
         }
@@ -570,12 +566,18 @@
                         <div class="maintenance-section">
                             <h5>CPE Requirements</h5>
                             <p>You must demonstrate your commitment to keeping your skills current by earning and reporting Continuing Professional Education (CPE) credits.</p>
-                            <ul>
-                                <li>Earn a minimum of <strong>20 CPE credits annually</strong>.</li>
-                                <li>Earn a total of <strong>120 CPE credits over a 3-year reporting cycle</strong>.</li>
-                            </ul>
+                            <div class="cpe-cards">
+                                <div class="card">
+                                    <h5>Yearly CPE Requirements</h5>
+                                    <p>Earn a minimum of 20 CPE credits annually.</p>
+                                </div>
+                                <div class="card">
+                                    <h5>Cycle CPE Requirements</h5>
+                                    <p>Earn a total of 120 CPE credits over a 3-year reporting cycle.</p>
+                                </div>
+                            </div>
 
-                            <h5>Annual Maintenance Fee</h5>
+                            <h5 style="margin-top: 40px;">Annual Maintenance Fee</h5>
                             <p>An annual fee is required to maintain your certification in good standing.</p>
                             <table class="cost-table">
                                 <thead>
@@ -596,7 +598,7 @@
                                 </tbody>
                             </table>
 
-                            <h5 style="margin-top: 30px;">Code of Professional Ethics</h5>
+                            <h5 style="margin-top: 40px;">Code of Professional Ethics</h5>
                             <p>Adherence to the ISACA Code of Professional Ethics is mandatory. Click each principle to learn more.</p>
                             <div class="ethics-cards">
                                 <div class="card">
@@ -645,7 +647,7 @@
                     const isAlreadyOpen = this.classList.contains('open');
                     
                     // Find the parent container to close only sibling cards
-                    const parentContainer = this.closest('.feature-cards, .ethics-cards');
+                    const parentContainer = this.closest('.feature-cards, .ethics-cards, .cpe-cards');
                     if (parentContainer) {
                         parentContainer.querySelectorAll('.card').forEach(c => c.classList.remove('open'));
                     }
