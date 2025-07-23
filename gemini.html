@@ -3,714 +3,256 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate CISM Certification Study Guide</title>
+    <title>CISM Study Guide</title>
     <style>
+        /* Global Styles & Font Import */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
         :root {
-            --primary-color: #003366; /* ISACA Blue */
-            --secondary-color: #0073e6;
-            --accent-color: #f0ad4e;
-            --light-gray: #f4f4f4;
-            --dark-gray: #333;
-            --success-color: #5cb85c;
-            --danger-color: #d9534f;
-            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --primary-blue: #007bff;
+            --light-blue: #e7f5ff;
+            --border-color: #dee2e6;
+            --background-color: #f8f9fa;
+            --text-color: #495057;
+            --heading-color: #212529;
+            --white: #ffffff;
         }
+
         body {
-            font-family: var(--font-family);
-            line-height: 1.6;
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
             margin: 0;
-            padding: 0;
-            background-color: var(--light-gray);
-            color: var(--dark-gray);
+            padding: 20px;
+            color: var(--text-color);
         }
-        .container {
-            width: 90%;
+
+        .study-guide-container {
             max-width: 1200px;
             margin: auto;
-            overflow: hidden;
-            padding: 0 20px;
         }
+
+        /* Header Section */
         header {
-            background: var(--primary-color);
-            color: #fff;
-            padding: 1rem 0;
             text-align: center;
-            border-bottom: 5px solid var(--accent-color);
+            padding: 10px 0 30px 0;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 25px;
         }
+
         header h1 {
+            color: var(--heading-color);
             margin: 0;
-            font-size: 2.5em;
-        }
-        nav {
-            background: #444;
-            color: #fff;
-            padding: 0.5rem;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        nav ul {
-            padding: 0;
-            margin: 0;
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        nav ul li {
-            margin: 5px 15px;
-        }
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 5px 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-        nav ul li a:hover, .nav-active {
-            background-color: var(--secondary-color);
-        }
-        .section {
-            padding: 20px;
-            margin-bottom: 20px;
-            background: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-        }
-        h2 {
-            color: var(--primary-color);
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 10px;
-        }
-        h3 {
-            color: var(--secondary-color);
-        }
-        ul.domain-topics {
-            list-style-type: disc;
-            margin-left: 20px;
-        }
-        ul.domain-topics li {
-            margin-bottom: 10px;
-        }
-        .cost-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        .cost-table th, .cost-table td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-        .cost-table th {
-            background-color: var(--primary-color);
-            color: white;
-        }
-        .quiz-container, .simulation-container {
-            margin-top: 20px;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #f9f9f9;
-        }
-        .btn {
-            display: inline-block;
-            background: var(--secondary-color);
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 1em;
-            text-decoration: none;
-            margin-top: 10px;
-            transition: background-color 0.3s;
-        }
-        .btn:hover {
-            background: var(--primary-color);
-        }
-        .btn-start-sim {
-            background-color: var(--accent-color);
-        }
-        .btn-start-sim:hover {
-            background-color: #d89635;
-        }
-        input[type="number"] {
-            padding: 8px;
-            width: 80px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-        .question {
-            margin-bottom: 20px;
-            padding: 15px;
-            background: #fff;
-            border-left: 5px solid var(--secondary-color);
-        }
-        .options label {
-            display: block;
-            margin: 5px 0;
-            padding: 10px;
-            background: #f0f0f0;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .options label:hover {
-            background: #e0e0e0;
-        }
-        .options input[type="radio"] {
-            margin-right: 10px;
-        }
-        .feedback {
-            margin-top: 10px;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .feedback.correct {
-            background-color: #dff0d8;
-            color: #3c763d;
-            border: 1px solid #d6e9c6;
-        }
-        .feedback.incorrect {
-            background-color: #f2dede;
-            color: #a94442;
-            border: 1px solid #ebccd1;
-        }
-        #simulation-timer {
-            position: fixed;
-            top: 80px;
-            right: 20px;
-            background: var(--accent-color);
-            color: var(--primary-color);
-            padding: 15px 25px;
-            border-radius: 8px;
             font-size: 1.5em;
-            font-weight: bold;
-            box-shadow: 0 0 15px rgba(0,0,0,0.2);
-            display: none;
+            font-weight: 500;
         }
-        .results-container {
-            padding: 20px;
-            background: #fff;
+
+        header p {
+            margin: 5px 0 0 0;
+            font-size: 1em;
+        }
+
+        /* Main Layout (Sidebar + Content) */
+        .main-layout {
+            display: flex;
+            gap: 25px;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            flex: 0 0 250px;
+        }
+
+        .nav-item {
+            padding: 15px;
+            margin-bottom: 10px;
             border-radius: 8px;
-            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
         }
-        .results-container h2 {
-            font-size: 2.5em;
+
+        .nav-item strong {
+            display: block;
+            color: var(--heading-color);
+            font-size: 1em;
+            font-weight: 500;
         }
-        .results-container p {
+
+        .nav-item span {
+            font-size: 0.85em;
+        }
+
+        .nav-item.active {
+            background-color: var(--light-blue);
+            border-left: 4px solid var(--primary-blue);
+            padding-left: 11px; /* Adjust for border */
+        }
+        
+        .nav-item.active strong, .nav-item.active span {
+            color: var(--primary-blue);
+        }
+
+        .nav-item:not(.active):hover {
+            background-color: #e9ecef;
+        }
+
+        /* Content Area */
+        .content-area {
+            flex-grow: 1;
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+        }
+
+        .content-header h2 {
+            font-size: 2em;
+            color: var(--heading-color);
+            margin: 0;
+        }
+        
+        .content-header h3 {
             font-size: 1.2em;
+            font-weight: 400;
+            margin: 5px 0 0 0;
         }
-        .review-question {
-            text-align: left;
-            margin-top: 15px;
-            border-top: 1px solid #ccc;
-            padding-top: 15px;
+        
+        .content-header p {
+            margin-top: 5px;
         }
-        .correct-answer {
-            color: var(--success-color);
-            font-weight: bold;
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 30px;
+            margin-top: 30px;
+            border-bottom: 1px solid var(--border-color);
         }
-        .user-answer.incorrect {
-            color: var(--danger-color);
-            text-decoration: line-through;
+
+        .tab {
+            padding: 0 5px 15px 5px;
+            cursor: pointer;
+            color: var(--text-color);
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px; /* Overlap border */
         }
+        
+        .tab.active {
+            color: var(--primary-blue);
+            border-bottom-color: var(--primary-blue);
+        }
+
+        /* Main Content Body */
+        .content-body {
+            margin-top: 30px;
+        }
+
+        .content-body h4 {
+            font-size: 1.5em;
+            color: var(--heading-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content-body h4::before {
+            content: '';
+            display: block;
+            width: 5px;
+            height: 28px;
+            background-color: var(--primary-blue);
+            border-radius: 2px;
+        }
+
+        .content-body p {
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* Feature Cards */
+        .feature-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .card {
+            background-color: var(--background-color);
+            padding: 20px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="container">
-            <h1>Ultimate CISM Study Guide</h1>
-            <p>Your Comprehensive Resource for the Certified Information Security Manager Exam</p>
-        </div>
-    </header>
+    <div class="study-guide-container">
+        <header>
+            <h1>CISM Study Guide</h1>
+            <p>Comprehensive Interactive Educational Resource for CISM Certification Exam</p>
+        </header>
 
-    <nav id="navbar">
-        <ul>
-            <li><a href="#intro">Introduction</a></li>
-            <li><a href="#domain1">Domain 1</a></li>
-            <li><a href="#domain2">Domain 2</a></li>
-            <li><a href="#domain3">Domain 3</a></li>
-            <li><a href="#domain4">Domain 4</a></li>
-            <li><a href="#simulation">Exam Simulation</a></li>
-        </ul>
-    </nav>
+        <main class="main-layout">
+            <aside class="sidebar">
+                <div class="nav-item active">
+                    <strong>CISM Introduction</strong>
+                    <span>Certification Overview</span>
+                </div>
+                <div class="nav-item">
+                    <strong>Domain 1</strong>
+                    <span>Governance</span>
+                </div>
+                <div class="nav-item">
+                    <strong>Domain 2</strong>
+                    <span>Risk Management</span>
+                </div>
+                <div class="nav-item">
+                    <strong>Domain 3</strong>
+                    <span>Program Development</span>
+                </div>
+                <div class="nav-item">
+                    <strong>Assessment</strong>
+                    <span>Test Your Knowledge</span>
+                </div>
+            </aside>
 
-    <div class="container">
-        <section id="intro" class="section">
-            <h2>Introduction to the CISM Certification</h2>
-            <p>The Certified Information Security Manager (CISM) certification, offered by ISACA, is a globally recognized credential for professionals who design, build, and manage enterprise information security programs. It confirms expertise in information security governance, risk management, and incident management.</p>
+            <section class="content-area">
+                <div class="content-header">
+                    <h2>CISM Certification Overview</h2>
+                    <h3>Certified Information Security Manager</h3>
+                    <p>Your guide to the premier credential for information security leadership.</p>
+                </div>
+                
+                <div class="tabs">
+                    <div class="tab active">Why CISM?</div>
+                    <div class="tab">Exam Details</div>
+                    <div class="tab">Maintenance</div>
+                </div>
 
-            <h3>Exam Format</h3>
-            <ul>
-                <li><strong>Number of Questions:</strong> 150 multiple-choice questions</li>
-                <li><strong>Exam Duration:</strong> 4 hours (240 minutes)</li>
-                <li><strong>Scoring:</strong> Scaled score from 200 to 800. A passing score of 450 is required.</li>
-                <li><strong>Delivery:</strong> Computer-based testing (CBT) at PSI testing centers worldwide or as a remotely proctored exam.</li>
-            </ul>
+                <div class="content-body">
+                    <h4>Why Pursue the CISM Certification?</h4>
+                    <p>The Certified Information Security Manager (CISM) certification, issued by ISACA, is a premier credential for professionals managing and overseeing information security systems in alignment with business goals. Focused on governance, risk management, and leadership, CISM is ideal for security managers, CISOs, and consultants who drive security strategies across the enterprise. Click on the cards below to explore the key benefits.</p>
 
-            <h3>Experience Requirements</h3>
-            <p>To become certified, candidates must pass the CISM exam and submit an application demonstrating a minimum of <strong>five years</strong> of work experience in information security. Three of those five years must be in at least three of the four CISM domains as a manager.</p>
-            <p>Certain security-related certifications or a master's degree in a relevant field can substitute for one or two years of the required experience.</p>
-
-            <h3>Certification Costs (as of late 2024/early 2025)</h3>
-            <p>Costs can vary. Always check the official ISACA website for the most current pricing.</p>
-            <table class="cost-table">
-                <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>ISACA Member Price</th>
-                        <th>Non-Member Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>CISM Exam Registration</td>
-                        <td>$575 USD</td>
-                        <td>$760 USD</td>
-                    </tr>
-                    <tr>
-                        <td>ISACA Membership (Optional, but provides discount)</td>
-                        <td colspan="2">Varies by chapter, approx. $135 USD + new member fee</td>
-                    </tr>
-                    <tr>
-                        <td>Application Processing Fee</td>
-                        <td colspan="2">$50 USD (paid after passing the exam)</td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h3>Maintenance Requirements</h3>
-            <p>To maintain your CISM certification, you must:</p>
-            <ul>
-                <li>Pay an annual maintenance fee to ISACA.</li>
-                <li>Adhere to ISACA's Code of Professional Ethics.</li>
-                <li>Earn and report a minimum of <strong>20 Continuing Professional Education (CPE)</strong> hours annually.</li>
-                <li>Earn and report a minimum of <strong>120 CPE hours</strong> over a three-year reporting period.</li>
-            </ul>
-        </section>
-
-        <section id="domain1" class="section">
-            <h2>Domain 1: Information Security Governance (17%)</h2>
-            <p>This domain focuses on establishing and maintaining an information security governance framework and supporting processes to ensure that the information security strategy is aligned with organizational goals and objectives.</p>
-            
-            <h3>Task Statements:</h3>
-            <ul class="domain-topics">
-                <li>Establish and/or maintain an information security strategy in alignment with organizational goals and objectives.</li>
-                <li>Establish and/or maintain an information security governance framework to guide activities that support the information security strategy.</li>
-                <li>Integrate information security governance into corporate governance.</li>
-                <li>Establish and maintain information security policies, standards, procedures and guidelines to support the information security strategy.</li>
-                <li>Identify internal and external influencing factors to the organization.</li>
-                <li>Obtain commitment from senior leadership and support from other stakeholders.</li>
-                <li>Define and communicate the roles and responsibilities of information security throughout the organization.</li>
-                <li>Establish, monitor, evaluate and report metrics.</li>
-            </ul>
-
-            <div class="quiz-container">
-                <h3>Domain 1 Practice Quiz</h3>
-                <p>Select the number of questions and start the quiz.</p>
-                <label for="num-questions-d1">Number of questions:</label>
-                <input type="number" id="num-questions-d1" value="5" min="1" max="10">
-                <button class="btn" onclick="startQuiz('d1')">Start Quiz</button>
-                <div id="quiz-d1"></div>
-                <div id="results-d1"></div>
-            </div>
-        </section>
-
-        <section id="domain2" class="section">
-            <h2>Domain 2: Information Security Risk Management (20%)</h2>
-            <p>This domain covers the management of information risk to an acceptable level based on the organization's risk appetite to meet its goals and objectives.</p>
-
-            <h3>Task Statements:</h3>
-            <ul class="domain-topics">
-                <li>Establish and/or maintain a process for information asset classification to ensure that measures taken to protect assets are proportional to their business value.</li>
-                <li>Identify legal, regulatory, organizational and other requirements to manage the risk of noncompliance.</li>
-                <li>Ensure that risk assessments, vulnerability assessments and threat analyses are conducted consistently, and at planned intervals, to identify and assess risk to the organization's information.</li>
-                <li>Identify, recommend or implement appropriate risk treatment/response options to manage risk to acceptable levels.</li>
-                <li>Determine the probability and impact of adverse events to the organization.</li>
-                <li>Identify, and communicate, the potential for residual risk.</li>
-                <li>Report noncompliance and other changes in information risk to appropriate management.</li>
-            </ul>
-            
-            <div class="quiz-container">
-                <h3>Domain 2 Practice Quiz</h3>
-                <p>Select the number of questions and start the quiz.</p>
-                <label for="num-questions-d2">Number of questions:</label>
-                <input type="number" id="num-questions-d2" value="5" min="1" max="10">
-                <button class="btn" onclick="startQuiz('d2')">Start Quiz</button>
-                <div id="quiz-d2"></div>
-                <div id="results-d2"></div>
-            </div>
-        </section>
-        
-        <section id="domain3" class="section">
-            <h2>Domain 3: Information Security Program Development and Management (33%)</h2>
-            <p>This domain is focused on developing and maintaining an information security program that identifies, manages, and protects the organization's assets while aligning with business goals.</p>
-
-            <h3>Task Statements:</h3>
-            <ul class="domain-topics">
-                <li>Establish and/or maintain the information security program in alignment with the information security strategy.</li>
-                <li>Ensure alignment between the information security program and other business functions.</li>
-                <li>Identify, acquire and manage requirements for internal and external resources to execute the information security program.</li>
-                <li>Establish and maintain information security architectures.</li>
-                <li>Establish, communicate and maintain organizational information security standards, procedures, and guidelines.</li>
-                <li>Establish and maintain a program for information security awareness and training.</li>
-                <li>Integrate information security requirements into organizational processes.</li>
-                <li>Integrate information security requirements into contracts and third-party management processes.</li>
-                <li>Establish, monitor and periodically report program management and operational metrics.</li>
-            </ul>
-
-            <div class="quiz-container">
-                <h3>Domain 3 Practice Quiz</h3>
-                <p>Select the number of questions and start the quiz.</p>
-                <label for="num-questions-d3">Number of questions:</label>
-                <input type="number" id="num-questions-d3" value="5" min="1" max="10">
-                <button class="btn" onclick="startQuiz('d3')">Start Quiz</button>
-                <div id="quiz-d3"></div>
-                <div id="results-d3"></div>
-            </div>
-        </section>
-
-        <section id="domain4" class="section">
-            <h2>Domain 4: Information Security Incident Management (30%)</h2>
-            <p>This domain covers the establishment and management of capabilities to detect, investigate, respond to, and recover from information security incidents to minimize business impact.</p>
-            
-            <h3>Task Statements:</h3>
-            <ul class="domain-topics">
-                <li>Establish and maintain an organizational definition of, and severity hierarchy for, information security incidents.</li>
-                <li>Establish and maintain an incident response plan.</li>
-                <li>Develop and implement processes to ensure the timely identification of information security incidents.</li>
-                <li>Establish and maintain processes to investigate and document information security incidents.</li>
-                <li>Establish and maintain incident notification and escalation processes.</li>
-                <li>Organize, train and equip teams to respond to information security incidents.</li>
-                <li>Test and review the incident response plan periodically.</li>
-                <li>Establish and maintain communication plans and processes.</li>
-                <li>Conduct post-incident reviews.</li>
-                <li>Establish and maintain integration among the incident response plan, disaster recovery plan and business continuity plan.</li>
-            </ul>
-
-            <div class="quiz-container">
-                <h3>Domain 4 Practice Quiz</h3>
-                <p>Select the number of questions and start the quiz.</p>
-                <label for="num-questions-d4">Number of questions:</label>
-                <input type="number" id="num-questions-d4" value="5" min="1" max="10">
-                <button class="btn" onclick="startQuiz('d4')">Start Quiz</button>
-                <div id="quiz-d4"></div>
-                <div id="results-d4"></div>
-            </div>
-        </section>
-
-        <section id="simulation" class="section">
-            <h2>Full CISM Exam Simulation</h2>
-            <p>Test your knowledge with a full-length simulated exam. The simulation mirrors the official exam's structure and timing.</p>
-            <div class="simulation-container" id="simulation-start-container">
-                <h3>Simulation Details</h3>
-                <ul>
-                    <li><strong>Number of Questions:</strong> 150</li>
-                    <li><strong>Time Limit:</strong> 4 Hours (240 Minutes)</li>
-                    <li><strong>Passing Score:</strong> A scaled score of 450/800 is required on the real exam. This simulation will show your raw percentage. Aim for 75% or higher.</li>
-                </ul>
-                <p>Click the button below to begin. A timer will appear and the test will start immediately. Ensure you have allotted enough time to complete it.</p>
-                <button class="btn btn-start-sim" onclick="startSimulation()">Start Full Exam Simulation</button>
-            </div>
-            <div id="simulation-quiz-area" style="display:none;"></div>
-            <div id="simulation-results-area"></div>
-            <div id="simulation-timer"></div>
-        </section>
+                    <div class="feature-cards">
+                        <div class="card">Leadership-Focused</div>
+                        <div class="card">Career-Enhancing</div>
+                        <div class="card">Global Recognition</div>
+                        <div class="card">Industry Relevance</div>
+                    </div>
+                </div>
+            </section>
+        </main>
     </div>
-
-<script>
-// --- DATABASE OF QUESTIONS --- //
-const questionBank = {
-    d1: [
-        { q: "What is the PRIMARY objective of information security governance?", a: "To align information security with business objectives.", o: ["To implement security controls.", "To perform risk assessments.", "To respond to security incidents."], r: "The main goal of governance is strategic alignment to ensure security efforts support the business mission." },
-        { q: "Who is ultimately responsible for information security within an organization?", a: "Senior Management/The Board of Directors", o: ["The CISO", "The IT Department", "All employees"], r: "Senior management holds ultimate responsibility and liability for protecting the organization's assets." },
-        { q: "Which of the following is the MOST important element for the successful implementation of an information security governance framework?", a: "Senior management commitment", o: ["A comprehensive set of policies", "Advanced security technology", "A skilled security team"], r: "Without commitment and tone-at-the-top from senior management, any governance initiative is likely to fail due to lack of resources and authority." },
-        { q: "A security policy should be BEST described as:", a: "A high-level statement of management's intent.", o: ["A detailed step-by-step guide for a task.", "A technical configuration setting.", "A recommendation or suggestion."], r: "Policies are formal, high-level documents that state the organization's position and intent on security." },
-        { q: "Key Performance Indicators (KPIs) for an information security program should be:", a: "Aligned with business goals.", o: ["Purely technical in nature.", "Focused only on the number of blocked attacks.", "Difficult to measure."], r: "KPIs are most effective when they demonstrate how the security program is helping the business achieve its strategic goals." },
-        { q: "What is the purpose of defining security roles and responsibilities?", a: "To ensure accountability.", o: ["To satisfy audit requirements.", "To increase the security budget.", "To choose a firewall vendor."], r: "Clearly defined roles and responsibilities ensure that someone is accountable for every security function, preventing gaps in protection." },
-        { q: "An organization's corporate governance structure has been updated. What is the MOST important action for the CISM to take?", a: "Review and align the security governance framework.", o: ["Immediately request a larger budget.", "Hire more security analysts.", "Purchase a new SIEM tool."], r: "Information security governance must be integrated with and support overall corporate governance. Any change in corporate governance requires a review of the security framework to ensure continued alignment." },
-        { q: "Which of the following would BEST demonstrate the effectiveness of an information security program to the board of directors?", a: "Metrics showing a reduction in business impact from security incidents.", o: ["A report listing the number of viruses blocked.", "A list of all security technologies deployed.", "A detailed technical audit report."], r: "The board is most concerned with business outcomes. Demonstrating a reduction in financial or operational impact from incidents directly translates security efforts into business value." },
-        { q: "The development of a security strategy should begin with:", a: "Understanding the organization's business objectives.", o: ["Conducting a vulnerability scan.", "Selecting security controls.", "Writing security procedures."], r: "A security strategy cannot be effective unless it is based on a thorough understanding of what the business is trying to achieve." },
-        { q: "What is a security 'standard' in the context of a governance framework?", a: "A mandatory rule that supports a policy.", o: ["A high-level statement of intent.", "A discretionary recommendation.", "A step-by-step implementation guide."], r: "Standards provide the mandatory rules and baselines that must be followed to comply with a policy (e.g., 'All servers must use 128-bit encryption')." }
-    ],
-    d2: [
-        { q: "What is the first step in the information risk management process?", a: "Identification of assets and their value.", o: ["Implementation of controls.", "Risk mitigation.", "Risk monitoring."], r: "You cannot protect what you don't know you have. The first step is to identify assets and understand their value to the business to prioritize protection efforts." },
-        { q: "Risk acceptance should be formally documented and approved by:", a: "Management with the appropriate level of authority.", o: ["The security analyst.", "The help desk.", "The external auditor."], r: "Accepting risk means understanding the potential consequences and making a business decision. This decision must be made and approved by management who has the authority to accept that level of risk on behalf of the organization." },
-        { q: "A qualitative risk assessment uses:", a: "Descriptive terms like High, Medium, and Low.", o: ["Specific monetary values.", "Complex mathematical formulas.", "Annual Loss Expectancy (ALE)."], r: "Qualitative assessment uses subjective, descriptive scales to rate probability and impact, making it quicker but less precise than quantitative analysis." },
-        { q: "What is residual risk?", a: "The risk that remains after controls are implemented.", o: ["The risk before any controls are applied.", "The total amount of risk identified.", "The risk transferred to an insurance company."], r: "No set of controls is perfect. Residual risk is the level of risk that the organization accepts as a cost of doing business after mitigating a risk." },
-        { q: "Purchasing cybersecurity insurance is an example of which risk response strategy?", a: "Risk transference", o: ["Risk avoidance", "Risk mitigation", "Risk acceptance"], r: "Insurance transfers the financial impact of a potential risk to a third party (the insurance company)." },
-        { q: "An organization decides not to launch a new online service in a high-risk country. This is an example of:", a: "Risk avoidance", o: ["Risk mitigation", "Risk acceptance", "Risk transference"], r: "Risk avoidance involves changing business plans or processes to completely eliminate a specific risk." },
-        { q: "The formula for Annualized Loss Expectancy (ALE) is:", a: "Single Loss Expectancy (SLE) * Annualized Rate of Occurrence (ARO)", o: ["Asset Value (AV) / Exposure Factor (EF)", "Threat * Vulnerability", "SLE + ARO"], r: "ALE = SLE x ARO. This formula is the cornerstone of quantitative risk analysis, used to put a dollar value on a risk." },
-        { q: "The PRIMARY purpose of information asset classification is to:", a: "Determine the level of protection required for the asset.", o: ["Calculate the exact monetary value of the asset.", "Create an inventory for accounting purposes.", "Identify the asset's physical location."], r: "Classification (e.g., Public, Confidential, Secret) is done to ensure that security controls are applied commensurate with the asset's value and sensitivity." },
-        { q: "A vulnerability is best described as a:", a: "Weakness that can be exploited.", o: ["Potential for harm.", "Person or event that can cause harm.", "Malicious software."], r: "A vulnerability is a flaw or weakness in a system, process, or control that could be exploited by a threat." },
-        { q: "In risk management, a 'threat' is:", a: "Anything that can exploit a vulnerability and cause harm.", o: ["A flaw in a system.", "The likelihood of an attack.", "The impact of a loss."], r: "A threat is the agent or event (e.g., a hacker, a flood, a virus) that could trigger a negative event by exploiting a vulnerability." }
-    ],
-    d3: [
-        { q: "Which of the following is the MOST critical success factor for an information security awareness program?", a: "Relevance to the audience's daily tasks.", o: ["Using fear-based messaging.", "Making the training annual and mandatory.", "Covering a wide variety of technical topics."], r: "If employees cannot see how the security training applies directly to their job and helps them, they are unlikely to retain or apply the knowledge." },
-        { q: "When developing an information security architecture, the security manager's FIRST step should be to:", a: "Understand the business processes and objectives.", o: ["Select specific security vendors and products.", "Design the network topology.", "Implement encryption everywhere."], r: "The security architecture must enable and support the business. Understanding business requirements is the foundational first step." },
-        { q: "What is the primary purpose of integrating security requirements into the system development life cycle (SDLC)?", a: "To make security more cost-effective and efficient.", o: ["To satisfy compliance requirements.", "To slow down the development process.", "To give the security team more control."], r: "Building security in from the beginning ('Shift Left') is far cheaper and more effective than trying to bolt it on after a system is already built." },
-        { q: "A security baseline provides:", a: "A consistent minimum level of security for all systems.", o: ["A high-level statement of management intent.", "A list of all potential risks.", "A plan for responding to incidents."], r: "A baseline (e.g., a standard configuration for a Windows server) ensures that all systems of a certain type have a consistent and documented minimum security posture." },
-        { q: "The CISM needs to ensure that a new cloud service provider meets the organization's security requirements. The BEST way to do this is to:", a: "Include specific security requirements in the contract and verify compliance.", o: ["Trust the provider's marketing materials.", "Assume the provider is secure because they are a large company.", "Perform a penetration test without permission."], r: "Contractual agreements create a legally binding obligation. These agreements should include the right to audit and verify that the provider is meeting the specified security controls." },
-        { q: "Metrics used to measure the effectiveness of the security program should be:", a: "Actionable and tied to program goals.", o: ["Complex and difficult for others to understand.", "Focused only on the number of security staff.", "Reported only to the IT department."], r: "Good metrics provide insight that leads to decisions and actions. They must be clearly linked to the goals of the security program and the business." },
-        { q: "An organization is considering outsourcing its payroll processing. What is the MOST important security concern for the CISM?", a: "Ensuring the provider can adequately protect the sensitive employee data.", o: ["The cost of the outsourcing contract.", "The location of the provider's data center.", "The provider's company size."], r: "The primary concern is the confidentiality, integrity, and availability of the organization's sensitive data, which is now being handled by a third party." },
-        { q: "What is a security champion program?", a: "A program that embeds security-minded individuals within business and IT teams.", o: ["An annual award for the best security employee.", "A marketing campaign for the security department.", "A list of certified security professionals."], r: "Security champions act as an extension of the security team, promoting awareness and good practices within their own departments, which helps to scale the security program's reach." },
-        { q: "The PRIMARY goal of information security program management is to:", a: "Manage risks to an acceptable level.", o: ["Eliminate all risks.", "Purchase the latest technology.", "Achieve 100% compliance."], r: "The overarching goal of the entire security program is to identify, assess, and manage information risks in line with the organization's risk appetite." },
-        { q: "When communicating the security program's status to business leaders, it is MOST effective to:", a: "Use business-centric language and focus on risk reduction.", o: ["Provide highly technical details and vulnerability counts.", "Present a list of all security products owned.", "Focus on the security team's daily activities."], r: "Business leaders think in terms of risk, cost, and business enablement. Communication must be framed in a way that is meaningful to them." }
-    ],
-    d4: [
-        { q: "What should be the first step in responding to a newly discovered security incident?", a: "Containment", o: ["Eradication", "Recovery", "Investigation"], r: "The immediate first priority is to stop the bleeding. Contain the incident to prevent it from spreading and causing further damage." },
-        { q: "The PRIMARY purpose of an incident response plan (IRP) is to:", a: "Provide a structured approach to minimize the impact of an incident.", o: ["Guarantee that incidents will not occur.", "Discipline employees who cause incidents.", "Satisfy a single audit requirement."], r: "An IRP ensures a coordinated, efficient, and structured response to an incident, with the goal of minimizing damage, downtime, and cost." },
-        { q: "During which phase of incident response would you rebuild a compromised server?", a: "Eradication and Recovery", o: ["Detection and Analysis", "Containment", "Post-Incident Activity"], r: "Rebuilding the server is part of eradicating the threat actor's presence and recovering normal business operations." },
-        { q: "An incident response team should be composed of:", a: "Cross-functional members from IT, legal, HR, and communications.", o: ["Only senior security engineers.", "Only external consultants.", "Only the IT help desk."], r: "Incidents have legal, HR, and public relations implications beyond the technical aspects. A cross-functional team is essential for a holistic response." },
-        { q: "What is the MOST important outcome of a post-incident review (lessons learned) meeting?", a: "Identifying actionable improvements for the future.", o: ["Assigning blame for the incident.", "Calculating the exact financial loss.", "Completing the required paperwork."], r: "The goal of the review is not to blame, but to learn. Identifying and implementing improvements to people, processes, and technology is the most valuable outcome." },
-        { q: "An organization's business continuity plan (BCP) and disaster recovery (DR) plan should be:", a: "Integrated with the incident response plan.", o: ["Kept completely separate from the IRP.", "Developed only by the finance department.", "Activated for every minor security event."], r: "A significant security incident can easily escalate into a disaster that requires activation of BCP/DR plans. These plans must be aligned and integrated to ensure a smooth transition if needed." },
-        { q: "Which of the following is the BEST way to test the effectiveness of an incident response plan?", a: "Conducting a full-scale simulation with a mock incident.", o: ["Having the team read the plan once a year.", "A simple checklist audit.", "A tabletop exercise for managers only."], r: "A full simulation, even if it's a functional drill, actively tests the team's ability to execute the plan under pressure, revealing weaknesses in a way that passive reviews cannot." },
-        { q: "Evidence handling during a forensic investigation is critical to maintain the:", a: "Chain of custody.", o: ["Mean time to recover.", "Annualized loss expectancy.", "Security baseline."], r: "The chain of custody is a chronological documentation trail showing the seizure, custody, control, transfer, analysis, and disposition of evidence. Breaking it can make the evidence inadmissible in court." },
-        { q: "A user reports a suspicious email. The security team analyzes it and determines it is a phishing attempt. This process is part of which incident management phase?", a: "Detection and Analysis", o: ["Containment", "Recovery", "Preparation"], r: "This phase involves identifying potential incidents, analyzing the available data to confirm if it is a real incident, and determining its scope and severity." },
-        { q: "An organization has defined that any incident resulting in data loss for more than 100 customers must be reported to the CEO within one hour. This is an example of an:", a: "Escalation procedure.", o: ["Eradication step.", "Recovery Time Objective (RTO).", "Asset classification policy."], r: "Escalation procedures define the thresholds and pathways for notifying higher levels of management as an incident's severity increases." }
-    ]
-};
-
-// --- QUIZ AND SIMULATION LOGIC --- //
-let simulationAnswers = {};
-let simulationInterval;
-
-// Fisher-Yates Shuffle algorithm for randomizing questions
-function shuffle(array) {
-    let currentIndex = array.length, randomIndex;
-    while (currentIndex != 0) {
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
-        [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
-    }
-    return array;
-}
-
-function startQuiz(domain) {
-    const numQuestions = parseInt(document.getElementById(`num-questions-${domain}`).value);
-    const quizContainer = document.getElementById(`quiz-${domain}`);
-    const resultsContainer = document.getElementById(`results-${domain}`);
-    quizContainer.innerHTML = '';
-    resultsContainer.innerHTML = '';
-
-    let questions = shuffle([...questionBank[domain]]).slice(0, numQuestions);
-
-    questions.forEach((q, index) => {
-        const questionElement = document.createElement('div');
-        questionElement.className = 'question';
-
-        const questionText = document.createElement('p');
-        questionText.innerHTML = `<strong>${index + 1}. ${q.q}</strong>`;
-        questionElement.appendChild(questionText);
-
-        const options = shuffle([...q.o, q.a]);
-        const optionsContainer = document.createElement('div');
-        optionsContainer.className = 'options';
-        options.forEach(option => {
-            const label = document.createElement('label');
-            const radio = document.createElement('input');
-            radio.type = 'radio';
-            radio.name = `${domain}-q${index}`;
-            radio.value = option;
-            label.appendChild(radio);
-            label.appendChild(document.createTextNode(option));
-            optionsContainer.appendChild(label);
-        });
-        questionElement.appendChild(optionsContainer);
-        const feedbackElement = document.createElement('div');
-        feedbackElement.id = `feedback-${domain}-q${index}`;
-        feedbackElement.className = 'feedback';
-        questionElement.appendChild(feedbackElement);
-
-        quizContainer.appendChild(questionElement);
-    });
-
-    const submitButton = document.createElement('button');
-    submitButton.className = 'btn';
-    submitButton.textContent = 'Submit Quiz';
-    submitButton.onclick = () => checkQuiz(domain, questions);
-    quizContainer.appendChild(submitButton);
-}
-
-function checkQuiz(domain, questions) {
-    let score = 0;
-    questions.forEach((q, index) => {
-        const feedbackElement = document.getElementById(`feedback-${domain}-q${index}`);
-        const selectedOption = document.querySelector(`input[name="${domain}-q${index}"]:checked`);
-
-        if (selectedOption) {
-            if (selectedOption.value === q.a) {
-                score++;
-                feedbackElement.innerHTML = `<strong>Correct!</strong> ${q.r}`;
-                feedbackElement.className = 'feedback correct';
-            } else {
-                feedbackElement.innerHTML = `<strong>Incorrect.</strong> The correct answer is "<strong>${q.a}</strong>". ${q.r}`;
-                feedbackElement.className = 'feedback incorrect';
-            }
-        } else {
-            feedbackElement.innerHTML = `<strong>Not Answered.</strong> The correct answer is "<strong>${q.a}</strong>". ${q.r}`;
-            feedbackElement.className = 'feedback incorrect';
-        }
-    });
-
-    const resultsContainer = document.getElementById(`results-${domain}`);
-    resultsContainer.innerHTML = `<h3>Quiz Complete!</h3><p>You scored ${score} out of ${questions.length}.</p>`;
-    window.scrollTo({ top: resultsContainer.offsetTop - 100, behavior: 'smooth' });
-}
-
-function startSimulation() {
-    document.getElementById('simulation-start-container').style.display = 'none';
-    const quizArea = document.getElementById('simulation-quiz-area');
-    quizArea.style.display = 'block';
-    simulationAnswers = {};
-
-    const allQuestions = [...questionBank.d1, ...questionBank.d2, ...questionBank.d3, ...questionBank.d4];
-    // For a real 150-question exam, you'd need a larger bank. We'll use all we have here (40 questions).
-    // In a production version, you would replace 40 with 150 and ensure the bank is large enough.
-    const examQuestions = shuffle(allQuestions); // We'll use all 40 in our bank for this demo. To make it 150, you'd need to add more questions.
-    
-    // Official CISM question count is 150
-    const questionCount = 150;
-    const questionsForSimulation = [];
-    
-    // We'll cycle through our bank to get to 150 questions for the simulation feel.
-    for (let i = 0; i < questionCount; i++) {
-        questionsForSimulation.push(examQuestions[i % examQuestions.length]);
-    }
-
-
-    quizArea.innerHTML = '<h2>CISM Exam Simulation</h2>';
-    
-    questionsForSimulation.forEach((q, index) => {
-        const questionElement = document.createElement('div');
-        questionElement.className = 'question';
-        questionElement.id = `sim-q-${index}`;
-
-        const questionText = document.createElement('p');
-        questionText.innerHTML = `<strong>${index + 1}. ${q.q}</strong>`;
-        questionElement.appendChild(questionText);
-
-        const options = shuffle([...q.o, q.a]);
-        const optionsContainer = document.createElement('div');
-        optionsContainer.className = 'options';
-        options.forEach(option => {
-            const label = document.createElement('label');
-            const radio = document.createElement('input');
-            radio.type = 'radio';
-            radio.name = `sim-q${index}`;
-            radio.value = option;
-            radio.onclick = () => { simulationAnswers[index] = { question: q, selected: option }; };
-            label.appendChild(radio);
-            label.appendChild(document.createTextNode(option));
-            optionsContainer.appendChild(label);
-        });
-        questionElement.appendChild(optionsContainer);
-        quizArea.appendChild(questionElement);
-    });
-
-    const submitButton = document.createElement('button');
-    submitButton.className = 'btn';
-    submitButton.textContent = 'Finish and Grade Exam';
-    submitButton.onclick = () => endSimulation(questionsForSimulation);
-    quizArea.appendChild(submitButton);
-
-    startTimer(240 * 60); // 240 minutes
-    window.scrollTo({ top: document.getElementById('simulation').offsetTop, behavior: 'smooth' });
-}
-
-function startTimer(duration) {
-    const timerElement = document.getElementById('simulation-timer');
-    timerElement.style.display = 'block';
-    let timer = duration;
-    simulationInterval = setInterval(() => {
-        let hours = parseInt(timer / 3600, 10);
-        let minutes = parseInt((timer % 3600) / 60, 10);
-        let seconds = parseInt(timer % 60, 10);
-
-        hours = hours < 10 ? "0" + hours : hours;
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-
-        timerElement.textContent = `${hours}:${minutes}:${seconds}`;
-
-        if (--timer < 0) {
-            clearInterval(simulationInterval);
-            timerElement.textContent = "Time's Up!";
-            // Auto-submit when time is up. We need to pass the questions array.
-            // A bit tricky as it's not in scope. A better design might use a global var for the sim questions.
-            // For now, we just indicate time is up. The user must manually submit.
-            // A robust solution would pass the questions object to the timer function.
-        }
-    }, 1000);
-}
-
-function endSimulation(questions) {
-    clearInterval(simulationInterval);
-    document.getElementById('simulation-timer').style.display = 'none';
-    document.getElementById('simulation-quiz-area').style.display = 'none';
-
-    let score = 0;
-    for (let i = 0; i < questions.length; i++) {
-        if (simulationAnswers[i] && simulationAnswers[i].selected === simulationAnswers[i].question.a) {
-            score++;
-        }
-    }
-
-    const percentage = ((score / questions.length) * 100).toFixed(2);
-    const resultsArea = document.getElementById('simulation-results-area');
-    resultsArea.innerHTML = `
-        <div class="results-container">
-            <h2>Simulation Complete</h2>
-            <p>You scored ${score} out of ${questions.length} (${percentage}%)</p>
-            <p>${percentage >= 75 ? "Congratulations! This is a strong score." : "You may need some more review. Keep studying!"}</p>
-            <h3>Answer Review</h3>
-        </div>
-    `;
-
-    questions.forEach((q, index) => {
-        const reviewElement = document.createElement('div');
-        reviewElement.className = 'review-question';
-        let userAnswer = simulationAnswers[index] ? simulationAnswers[index].selected : "Not Answered";
-        let isCorrect = userAnswer === q.a;
-
-        reviewElement.innerHTML = `
-            <p><strong>Question ${index + 1}:</strong> ${q.q}</p>
-            <p><strong>Your Answer:</strong> <span class="user-answer ${isCorrect ? 'correct' : 'incorrect'}">${userAnswer}</span></p>
-            ${!isCorrect ? `<p><strong class="correct-answer">Correct Answer:</strong> ${q.a}</p>` : ''}
-            <p><em><strong>Rationale:</strong> ${q.r}</em></p>
-        `;
-        resultsArea.appendChild(reviewElement);
-    });
-
-    window.scrollTo({ top: document.getElementById('simulation-results-area').offsetTop - 100, behavior: 'smooth' });
-}
-
-// Active Nav Link Scrolling
-window.addEventListener('scroll', () => {
-    const sections = document.querySelectorAll('.section');
-    const navLinks = document.querySelectorAll('nav a');
-    let current = '';
-
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        if (pageYOffset >= sectionTop - 100) {
-            current = section.getAttribute('id');
-        }
-    });
-
-    navLinks.forEach(link => {
-        link.classList.remove('nav-active');
-        if (link.getAttribute('href').includes(current)) {
-            link.classList.add('nav-active');
-        }
-    });
-});
-
-
-</script>
 
 </body>
 </html>
