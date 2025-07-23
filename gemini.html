@@ -17,7 +17,7 @@
             --text-secondary: #a0aec0;
             --border-color: #2d3748;
             --shadow-color: rgba(0, 191, 255, 0.1);
-            --transition-fast: all 0.2s ease-in-out;
+            --transition-fast: all 0.3s ease-in-out; /* Adjusted for smoother accordion */
         }
 
         body {
@@ -178,23 +178,25 @@
             margin-bottom: 40px;
         }
 
-        /* CARDS REDESIGN (Glassmorphism) */
+        /* CARDS REDESIGN (Glassmorphism & Interactive) */
         .feature-cards {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 25px;
         }
 
         .card {
-            background: rgba(45, 55, 72, 0.4); /* Semi-transparent background */
-            backdrop-filter: blur(10px); /* The frosted glass effect */
-            -webkit-backdrop-filter: blur(10px); /* For Safari */
+            background: rgba(45, 55, 72, 0.4);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 12px;
             padding: 25px;
             transition: var(--transition-fast);
             position: relative;
             overflow: hidden;
+            cursor: pointer;
+            max-width: 200px; /* Max width as requested */
         }
         
         .card::before {
@@ -226,15 +228,26 @@
             color: var(--accent-glow);
             margin: 0 0 10px 0;
             font-weight: 600;
-            position: relative; /* To stay above the pseudo-element */
+            position: relative;
         }
 
         .card p {
             font-size: 0.95em;
             color: var(--text-secondary);
-            margin-bottom: 0;
+            margin: 0;
             line-height: 1.6;
             position: relative;
+            max-height: 0; /* Hidden by default */
+            opacity: 0; /* Hidden by default */
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, opacity 0.4s ease-out, margin-top 0.4s ease-out;
+        }
+
+        /* Style for the open card's paragraph */
+        .card.open p {
+            max-height: 100px; /* Adjust as needed for content length */
+            opacity: 1;
+            margin-top: 10px; /* Add space when open */
         }
     </style>
 </head>
@@ -308,6 +321,31 @@
             </section>
         </main>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.feature-cards .card');
+
+            cards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Check if the clicked card is already open
+                    const isAlreadyOpen = this.classList.contains('open');
+
+                    // First, close all other cards
+                    cards.forEach(c => {
+                        c.classList.remove('open');
+                    });
+
+                    // If the clicked card was not already open, open it.
+                    // This creates the toggle effect: clicking an open card closes it,
+                    // and clicking a new card closes the old one before opening the new one.
+                    if (!isAlreadyOpen) {
+                        this.classList.add('open');
+                    }
+                });
+            });
+        });
+    </script>
 
 </body>
 </html>
