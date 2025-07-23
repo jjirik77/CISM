@@ -226,10 +226,9 @@
 
         /* CARDS REDESIGN (Glassmorphism & Interactive) */
         .feature-cards, .ethics-cards, .cpe-cards, .domain-cards {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
             gap: 25px;
-            justify-content: center;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
         }
 
         .card {
@@ -247,7 +246,6 @@
             flex-direction: column;
             justify-content: center;
             text-align: center;
-            flex: 0 1 220px; /* Flex properties for sizing */
         }
         
         .card::before {
