@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CISM Certification Overview</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Global Styles & Font Import */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --dark-navy-bg: #0a101f;
+            --surface-color: #10192b;
+            --accent-glow: #00bfff; /* Deep Sky Blue */
+            --accent-hover: #ffffff;
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --border-color: #2d3748;
+            --shadow-color: rgba(0, 191, 255, 0.1);
+            --transition-fast: all 0.3s ease-in-out;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-navy-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+        }
+
+        /* Header */
+        header.main-header {
+            background: linear-gradient(180deg, var(--surface-color), var(--dark-navy-bg));
+            border-bottom: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+        }
+
+        /* Main Content Area & Sections */
+        main {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            overflow: hidden;
+            padding: 1.5rem;
+        }
+        
+        /* Section Header */
+        .section-header {
+            border-left: 6px solid var(--accent-glow);
+            padding-left: 1.25rem;
+            font-size: 2.5rem;
+            color: var(--text-primary);
+        }
+        
+        /* Navigation Tabs */
+        .nav-item {
+            border: 2px solid transparent;
+            border-radius: 0.5rem;
+            transition: var(--transition-fast);
+            position: relative;
+            overflow: hidden;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+        .nav-item:not(.active):hover {
+            border-color: var(--accent-glow);
+            background-color: rgba(0, 191, 255, 0.05);
+            color: var(--text-primary);
+        }
+        .nav-item.active {
+            background-color: var(--accent-glow);
+            color: var(--dark-navy-bg);
+            font-weight: 700;
+            box-shadow: 0 0 20px var(--shadow-color);
+        }
+
+        /* Fade-in Animation */
+        .fade-in {
+            animation: fadeIn 0.6s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Interactive Cards & Domain Buttons */
+        .interactive-card, .domain-button {
+            background: rgba(10, 16, 31, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            transition: var(--transition-fast);
+            padding: 1.5rem;
+            cursor: pointer;
+            text-align: center;
+        }
+        .interactive-card:hover, .domain-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            border-color: var(--accent-glow);
+        }
+        .interactive-card.active, .domain-button.active {
+            border-color: var(--accent-glow);
+            box-shadow: 0 0 20px var(--shadow-color);
+            background-color: rgba(0, 191, 255, 0.1);
+        }
+        .interactive-card .card-title, .domain-button .card-title {
+            font-size: 1.25em;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            color: var(--accent-glow);
+            text-align: center; /* Ensures all card titles are centered */
+        }
+        .interactive-card .card-description, .domain-button .card-description {
+            font-weight: 400;
+            font-size: 0.95em;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+            display: none;
+            text-align: left;
+        }
+        .interactive-card.active .card-description, .domain-button.active .card-description {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .domain-button {
+            padding: 1rem;
+        }
+        .domain-button .card-title {
+             font-size: 1.1em;
+        }
+        
+        /* Accordion Styles */
+        .accordion-button {
+            background-color: var(--dark-navy-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            padding: 1rem 1.5rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            transition: var(--transition-fast);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+        }
+        .accordion-button:hover {
+            border-color: var(--accent-glow);
+            background-color: rgba(0, 191, 255, 0.05);
+        }
+        .accordion-content {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            border-top: none;
+            border-radius: 0 0 0.75rem 0.75rem;
+            padding: 1.5rem;
+            margin-top: -0.75rem;
+        }
+
+        /* Table Styles */
+        .styled-table {
+            width: 100%;
+            max-width: 600px;
+            margin: 1rem auto;
+            border-collapse: collapse;
+            font-size: 0.9em;
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            overflow: hidden;
+        }
+        .styled-table th, .styled-table td {
+            border: 1px solid var(--border-color);
+            padding: 0.8rem 1rem;
+            text-align: left;
+        }
+        .styled-table th {
+            background-color: var(--dark-navy-bg);
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .styled-table td {
+            background-color: var(--surface-color);
+            color: var(--text-secondary);
+        }
+        .styled-table .highlight {
+            font-weight: 700;
+            color: var(--accent-glow);
+        }
+        
+        /* General content box */
+        .content-box {
+             background-color: rgba(10, 16, 31, 0.5);
+             border: 1px solid var(--border-color);
+             border-radius: 0.75rem;
+             padding: 1.5rem;
+        }
+    </style>
+</head>
+<body class="leading-relaxed">
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <header class="main-header text-center py-8 mb-8">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-2 tracking-tight">CISM Certification Overview</h1>
+            <p class="text-xl sm:text-2xl text-gray-400">Certified Information Security Manager</p>
+            <p class="text-md text-gray-500 mt-2">Your guide to the premier credential for information security leadership.</p>
+        </header>
+
+        <nav class="p-2 rounded-lg mb-8 flex flex-wrap justify-center sticky top-0 z-10 gap-2 sm:gap-4 bg-black/20 backdrop-blur-sm border border-gray-700/50">
+            <button class="nav-item px-4 py-2 text-lg active" data-target="overview">Why CISM?</button>
+            <button class="nav-item px-4 py-2 text-lg" data-target="exam-details">Exam Details</button>
+            <button class="nav-item px-4 py-2 text-lg" data-target="maintenance">Maintenance</button>
+        </nav>
+
+        <main id="content-area">
+            <!-- Why CISM? Section -->
+            <section id="overview" class="content-section fade-in">
+                <h2 class="text-3xl font-bold section-header mb-6">Why Pursue the CISM Certification?</h2>
+                <div class="content-box mb-6">
+                    <p class="text-gray-300">The Certified Information Security Manager (CISM) certification, issued by ISACA, is a premier credential for professionals managing and overseeing information security systems in alignment with business goals. Focused on governance, risk management, and leadership, CISM is ideal for security managers, CISOs, and consultants who drive security strategies across the enterprise. Click on the cards below to explore the key benefits.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="why-cism-cards-container">
+                    <!-- Cards will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <!-- Exam Details Section -->
+            <section id="exam-details" class="content-section hidden">
+                <h2 class="text-3xl font-bold section-header mb-6">CISM Exam Details</h2>
+                <p class="mb-8 text-gray-300">Everything you need to know about the CISM exam, from its format and cost to the experience required and testing options.</p>
+
+                <!-- Accordion for Exam Details -->
+                <div class="space-y-4">
+                    <div>
+                        <button class="accordion-button w-full">
+                            <span>Exam Format & Domains</span>
+                            <span class="accordion-icon text-2xl">+</span>
+                        </button>
+                        <div class="accordion-content hidden">
+                            <ul class="list-disc list-inside text-gray-300 space-y-2">
+                                <li><strong>Format:</strong> 150 multiple-choice questions</li>
+                                <li><strong>Duration:</strong> 4 hours (240 minutes)</li>
+                                <li><strong>Passing Score:</strong> 450 out of 800 (scaled score)</li>
+                            </ul>
+                            <h4 class="text-lg font-semibold text-white mt-6 mb-4">Exam Domains (Click to Expand)</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="exam-domains-container">
+                                <!-- Domain buttons will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="accordion-button w-full">
+                            <span>Cost of Certification</span>
+                            <span class="accordion-icon text-2xl">+</span>
+                        </button>
+                        <div class="accordion-content hidden">
+                            <p class="text-gray-300 mb-4">The cost varies depending on your ISACA membership status. Members receive a significant discount on both the exam and annual maintenance fees.</p>
+                            <table class="styled-table">
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Exam Fee</th>
+                                        <th>Annual Maintenance Fee</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>ISACA Member</strong></td>
+                                        <td class="highlight">$575 USD</td>
+                                        <td class="highlight">$45 USD</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Non-Member</strong></td>
+                                        <td class="highlight">$760 USD</td>
+                                        <td class="highlight">$85 USD</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="accordion-button w-full">
+                            <span>Experience & Membership Requirements</span>
+                            <span class="accordion-icon text-2xl">+</span>
+                        </button>
+                        <div class="accordion-content hidden">
+                            <h4 class="text-lg font-semibold text-white mb-2">Experience Required</h4>
+                            <p class="text-gray-300 mb-4">A minimum of <strong>5 years</strong> of professional information security management work experience is required for certification.</p>
+                            <ul class="list-disc list-inside text-gray-300 space-y-2 mb-4">
+                                <li>3 of those years must be in at least 3 of the 4 CISM domains.</li>
+                                <li>Substitutions for up to 2 years of general experience are available based on qualifying certifications (like CISSP, CISA) or a postgraduate degree in a related field.</li>
+                            </ul>
+                             <h4 class="text-lg font-semibold text-white mb-2">ISACA Membership (Optional)</h4>
+                             <p class="text-gray-300">While not mandatory, ISACA membership offers significant benefits, including exam discounts, free webinars, access to research, and networking opportunities with a global community of professionals.</p>
+                        </div>
+                    </div>
+                     <div>
+                        <button class="accordion-button w-full">
+                            <span>Where to Take the Exam</span>
+                            <span class="accordion-icon text-2xl">+</span>
+                        </button>
+                        <div class="accordion-content hidden">
+                            <p class="text-gray-300 mb-4">ISACA offers flexible testing options to accommodate candidates worldwide. You can schedule your exam year-round through the official ISACA website.</p>
+                             <ul class="list-disc list-inside text-gray-300 space-y-3">
+                                <li>
+                                    <strong>Remote Proctored Online Exam:</strong> Take the exam from the comfort of your home or office. This option is available through both PSI and Pearson VUE platforms, monitored by a live proctor via webcam.
+                                </li>
+                                <li>
+                                    <strong>In-Person Testing Centers:</strong> For those who prefer a traditional testing environment, the exam is offered at Pearson VUE testing centers located globally.
+                                </li>
+                            </ul>
+                            <p class="mt-4 text-gray-400 text-sm italic">Visit <a href="https://www.isaca.org" target="_blank" class="text-blue-400 hover:underline">www.isaca.org</a> to find a testing center or schedule your remote exam.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Maintenance Section -->
+            <section id="maintenance" class="content-section hidden">
+                <h2 class="text-3xl font-bold section-header mb-6">Maintaining Your CISM Certification</h2>
+                <p class="mb-8 text-gray-300">Holding the CISM certification is an ongoing commitment to professional development. To maintain your credential, you must adhere to ISACA's requirements for continuing professional education (CPE) and professional conduct.</p>
+                <div class="content-box">
+                    <h4 class="text-xl font-bold text-white mb-4">CPE Requirements (Click to Expand)</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8" id="cpe-requirements-container">
+                        <!-- CPE cards will be populated by JavaScript -->
+                    </div>
+
+                    <h4 class="text-xl font-bold text-white mt-8 mb-4">Code of Professional Ethics (Click to Expand)</h4>
+                    <p class="text-gray-400 mb-4">All members and certification holders must adhere to ISACA’s Code of Professional Ethics. Failure to comply can result in an investigation and disciplinary measures.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="code-of-ethics-container">
+                        <!-- Ethics cards will be populated by JavaScript -->
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center py-6 mt-8 text-gray-500 text-sm">
+            <p>&copy; 2024 CISM Study Guide. All rights reserved. For educational purposes only.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- DATA ---
+            const whyCismData = [
+                {
+                    title: "Leadership-Focused",
+                    description: "Emphasizes the strategic alignment of security initiatives with business goals, moving beyond purely technical skills to focus on governance and management."
+                },
+                {
+                    title: "Career-Enhancing",
+                    description: "Qualifies you for high-level, influential roles like Information Security Manager, Risk Manager, and Chief Information Security Officer (CISO)."
+                },
+                {
+                    title: "Global Recognition",
+                    description: "Respected and accepted by organizations and governments worldwide as a standard of excellence for information security leadership."
+                },
+                {
+                    title: "Industry Relevance",
+                    description: "Designed around current, real-world challenges in governance, risk, program development, and incident management, ensuring your knowledge is up-to-date."
+                }
+            ];
+
+            const examDomainData = [
+                {
+                    title: "InfoSec Governance",
+                    weight: "17%",
+                    description: "Establish and/or maintain an information security governance framework and supporting processes to ensure that the information security strategy is aligned with organizational goals and objectives."
+                },
+                {
+                    title: "InfoSec Risk Management",
+                    weight: "20%",
+                    description: "Manage information risk to an acceptable level based on risk appetite in order to meet organizational goals and objectives."
+                },
+                {
+                    title: "InfoSec Program Development & Management",
+                    weight: "33%",
+                    description: "Develop and maintain an information security program that identifies, manages, and protects the organization’s assets while aligning to information security strategy and business goals."
+                },
+                {
+                    title: "InfoSec Incident Management",
+                    weight: "30%",
+                    description: "Plan, establish, and manage the capability to detect, investigate, respond to, and recover from information security incidents to minimize business impact."
+                }
+            ];
+
+            const cpeRequirementsData = [
+                {
+                    title: "Yearly Requirements",
+                    description: "You must earn and report a minimum of <strong>20</strong> Continuing Professional Education (CPE) credits annually."
+                },
+                {
+                    title: "Cycle Requirements",
+                    description: "You must earn and report a total of <strong>120</strong> Continuing Professional Education (CPE) credits over a 3-year reporting cycle."
+                }
+            ];
+
+            const codeOfEthicsData = [
+                {
+                    title: "1. Support Standards",
+                    description: "Support the implementation of, and encourage compliance with, appropriate standards and procedures for the effective governance and management of enterprise information systems and technology."
+                },
+                {
+                    title: "2. Professional Conduct",
+                    description: "Perform their duties with objectivity, due diligence and professional care, in accordance with professional standards."
+                },
+                {
+                    title: "3. Serve Stakeholders",
+                    description: "Serve in the interest of stakeholders in a lawful and honest manner, while maintaining high standards of conduct and character, and not discrediting their profession or the Association."
+                },
+                {
+                    title: "4. Maintain Confidentiality",
+                    description: "Maintain the privacy and confidentiality of information obtained in the course of their activities unless disclosure is required by legal authority. Such information shall not be used for personal benefit or released to inappropriate parties."
+                },
+                {
+                    title: "5. Maintain Competency",
+                    description: "Maintain competency in their respective fields and agree to undertake only those activities they can reasonably expect to complete with the necessary skills, knowledge and competence."
+                },
+                {
+                    title: "6. Disclose Facts",
+                    description: "Inform appropriate parties of the results of work performed including the disclosure of all significant facts known to them that, if not disclosed, may distort the reporting of the results."
+                },
+                {
+                    title: "7. Support Education",
+                    description: "Support the professional education of stakeholders in enhancing their understanding of the governance and management of enterprise information systems and technology."
+                }
+            ];
+
+            // --- RENDER FUNCTIONS ---
+            const renderWhyCismCards = () => {
+                const container = document.getElementById('why-cism-cards-container');
+                if (!container) return;
+                container.innerHTML = whyCismData.map(item => `
+                    <div class="interactive-card">
+                        <h3 class="card-title">${item.title}</h3>
+                        <div class="card-description"><p>${item.description}</p></div>
+                    </div>
+                `).join('');
+                addInteractiveCardListeners('#why-cism-cards-container .interactive-card');
+            };
+
+            const renderExamDomains = () => {
+                const container = document.getElementById('exam-domains-container');
+                if (!container) return;
+                container.innerHTML = examDomainData.map(item => `
+                    <div class="domain-button">
+                        <h3 class="card-title">${item.title} (${item.weight})</h3>
+                        <div class="card-description"><p>${item.description}</p></div>
+                    </div>
+                `).join('');
+                addInteractiveCardListeners('#exam-domains-container .domain-button');
+            };
+            
+            const renderCpeRequirements = () => {
+                const container = document.getElementById('cpe-requirements-container');
+                if (!container) return;
+                container.innerHTML = cpeRequirementsData.map(item => `
+                    <div class="domain-button">
+                        <h3 class="card-title">${item.title}</h3>
+                        <div class="card-description"><p>${item.description}</p></div>
+                    </div>
+                `).join('');
+                addInteractiveCardListeners('#cpe-requirements-container .domain-button');
+            };
+
+            const renderCodeOfEthics = () => {
+                const container = document.getElementById('code-of-ethics-container');
+                if (!container) return;
+                container.innerHTML = codeOfEthicsData.map(item => `
+                    <div class="domain-button">
+                        <h3 class="card-title">${item.title}</h3>
+                        <div class="card-description"><p>${item.description}</p></div>
+                    </div>
+                `).join('');
+                addInteractiveCardListeners('#code-of-ethics-container .domain-button');
+            };
+
+            // --- EVENT LISTENERS ---
+            const addInteractiveCardListeners = (selector) => {
+                const cards = document.querySelectorAll(selector);
+                cards.forEach(card => {
+                    card.addEventListener('click', () => {
+                        const wasActive = card.classList.contains('active');
+                        // Deactivate all other cards within the same group
+                        const parent = card.parentElement;
+                        parent.querySelectorAll(selector).forEach(otherCard => {
+                            otherCard.classList.remove('active');
+                        });
+                        // Activate the clicked card if it wasn't already active
+                        if (!wasActive) {
+                            card.classList.add('active');
+                        }
+                    });
+                });
+            };
+
+            // Navigation
+            document.querySelectorAll('.nav-item').forEach(button => {
+                button.addEventListener('click', () => {
+                    document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    document.querySelectorAll('.content-section').forEach(section => {
+                        section.classList.add('hidden');
+                        section.classList.remove('fade-in');
+                    });
+
+                    const targetSection = document.getElementById(button.dataset.target);
+                    targetSection.classList.remove('hidden');
+                    // Add a slight delay to allow the 'display' property to apply before animating
+                    setTimeout(() => targetSection.classList.add('fade-in'), 10); 
+                });
+            });
+
+            // Accordion Functionality
+            document.querySelectorAll('.accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const icon = button.querySelector('.accordion-icon');
+                    const isOpening = content.classList.contains('hidden');
+
+                    if (isOpening) {
+                        content.classList.remove('hidden');
+                        icon.textContent = '–';
+                    } else {
+                        content.classList.add('hidden');
+                        icon.textContent = '+';
+                    }
+                });
+            });
+
+            // --- INITIALIZATION ---
+            renderWhyCismCards();
+            renderExamDomains();
+            renderCpeRequirements();
+            renderCodeOfEthics();
+            
+            // Set the "Why CISM?" tab as active by default on load
+            const overviewButton = document.querySelector('.nav-item[data-target="overview"]');
+            const overviewSection = document.getElementById('overview');
+            if (overviewButton && overviewSection) {
+                overviewButton.classList.add('active');
+                overviewSection.classList.remove('hidden');
+                overviewSection.classList.add('fade-in');
+            }
+        });
+    </script>
+</body>
+</html>
