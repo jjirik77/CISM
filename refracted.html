@@ -1,512 +1,754 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CISM Interactive Study Guide (Domains 1-3 & Assessment)</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* --- MASTER STYLESHEET (Combined & Deduplicated from all 4 Domains) --- */
-        
-        /* --- BASE & LAYOUT --- */
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #F8F5EF; /* Warm Neutral Background */
-            color: #333333;
-        }
-        .container {
-            max-width: 1200px;
-        }
-        .section-header {
-            border-left: 6px solid #00A896; /* Vibrant Teal Accent */
-            padding-left: 1.25rem;
-            font-size: 2.2rem; /* Standardized size */
-            color: #222222; /* Darker text for contrast */
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CISM Interactive Study Guide (Domains 1-3 & Assessment)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- MASTER STYLESHEET (Combined & Deduplicated from all 4 Domains) --- */
+        
+        /* --- BASE & LAYOUT --- */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F5EF; /* Warm Neutral Background */
+            color: #333333;
+        }
+        .container {
+            max-width: 1200px;
+        }
+        .section-header {
+            border-left: 6px solid #00A896; /* Vibrant Teal Accent */
+            padding-left: 1.25rem;
+            font-size: 2.2rem; /* Standardized size */
+            color: #222222; /* Darker text for contrast */
+        }
+
+        /* --- NAVIGATION --- */
+        .master-nav-item {
+            transition: all 0.2s ease-in-out;
+            text-align: left;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+        }
+        .master-nav-item.active {
+            background-color: #E0F7F5; /* Light Teal */
+            border-left: 4px solid #00A896;
+        }
+        .master-nav-item.active .domain-title {
+             color: #00796B;
+        }
+        .master-nav-item:not(.active):hover {
+            background-color: #e2e8f0; /* light gray hover */
+        }
+
+        .domain-nav-item { /* For intra-domain navigation */
+            transition: all 0.2s ease-in-out;
+        }
+        .domain-nav-item.active {
+            border-bottom: 3px solid #00A896;
+            font-weight: 700;
+            color: #222222;
+        }
+        
+        /* --- ACCORDIONS --- */
+        .accordion-button {
+            background-color: #EDEAE0;
+            border-bottom: 1px solid #D5D2C8;
+            border-radius: 0.75rem;
+            padding: 1rem 1.5rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #333333;
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            cursor: pointer;
+        }
+        .accordion-button:hover {
+            background-color: #D5D2C8;
+            transform: translateY(-1px);
+        }
+        .accordion-content {
+            background-color: #FFFFFF;
+            border: 1px solid #D5D2C8;
+            border-top: none;
+            border-radius: 0 0 0.75rem 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        /* --- INTERACTIVE CARDS (REFACTORED) --- */
+        .interactive-card {
+            background-color: #EDEAE0;
+            border: 1px solid #D5D2C8;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            box-sizing: border-box;
+            text-align: center;
+            font-weight: 600;
+            color: #333333;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+            max-height: 120px; /* Base max-height for transition */
+            overflow: hidden;
+        }
+        .interactive-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        .interactive-card.active {
+            border-color: #00A896;
+            box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3);
+            background-color: #E0F7F5;
+            max-height: 5000px; /* Set a very large max-height to ensure full expansion */
+        }
+        
+        .card-title, .role-title, .node-title {
+            font-size: 1.1em;
+            margin-bottom: 0.6rem;
+            color: #004085;
+        }
+        .card-description, .role-description, .node-description {
+            font-weight: 400;
+            font-size: 0.9em;
+            color: #555555;
+            margin-top: 0.5rem;
+            display: none;
+            text-align: left;
+            word-break: break-word;
+        }
+        .interactive-card.active .card-description, .interactive-card.active .role-description, .interactive-card.active .node-description {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .key-term-card .card-description { text-align: center; }
+        .vulnerability-scenario-card .card-description { text-align: left; }
+
+        /* --- Polished Table Styles --- */
+        .styled-table {
+            width: 100%;
+            max-width: 100%;
+            margin: 1.5rem auto;
+            border-collapse: collapse;
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        .styled-table th, .styled-table td {
+            padding: 1rem 1.25rem;
+            text-align: left;
+            border: none;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .styled-table th {
+            background-color: #f8fafc;
+            font-weight: 700;
+            color: #334155;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.85rem;
+        }
+        .styled-table td {
+            background-color: #FFFFFF;
+            color: #475569;
+        }
+        .styled-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .styled-table .highlight {
+            font-weight: 700;
+            color: #00796B;
+        }
+        .styled-table td:first-child, .styled-table th:first-child {
+            font-weight: 600;
+            color: #334155;
+        }
+        
+        /* --- KEYFRAMES --- */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        /* --- DOMAIN SPECIFIC STYLES --- */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            height: 50vh;
+            max-height: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            overflow: hidden;
+        }
+        .slider-container {
+            width: 80%;
+            max-width: 500px;
+            margin: 2rem auto;
+            text-align: center;
+            background-color: #EDEAE0;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+        }
+        .slider-container input[type="range"] { width: 100%; }
+
+        .framework-journey-container, .hierarchy-chart-container, .incident-lifecycle-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background-color: #F8F5EF;
+            border-radius: 0.5rem;
+            max-width: 600px;
+            margin: 1rem auto;
+        }
+        .framework-arrow, .hierarchy-line, .incident-lifecycle-arrow {
+            width: 2px;
+            height: 2rem;
+            background-color: #D5D2C8;
+        }
+        
+        .maturity-arrow-right {
+            font-size: 2.5rem;
+            color: #b0bec5;
+            line-height: 1;
+        }
+
+        .risk-matrix-table, .risk-scorecard-table {
+            width: 100%;
+            max-width: 600px;
+            margin: 1rem auto;
+            border-collapse: collapse;
+        }
+        .risk-matrix-table th, .risk-matrix-table td, .risk-scorecard-table th, .risk-scorecard-table td {
+            border: 1px solid #D5D2C8;
+            padding: 0.75rem;
+            text-align: center;
+            font-weight: 600;
+        }
+        .risk-matrix-table th, .risk-scorecard-table th {
+            background-color: #EDEAE0;
+            color: #333333;
+        }
+        .risk-matrix-table td, .risk-scorecard-table td {
+            background-color: #FFFFFF;
+        }
+        .risk-matrix-table .low, .risk-scorecard-table .risk-level-low { background-color: #D4EDDA; color: #155724; }
+        .risk-matrix-table .medium, .risk-scorecard-table .risk-level-medium { background-color: #FFF3CD; color: #856404; }
+        .risk-matrix-table .high, .risk-scorecard-table .risk-level-high { background-color: #F8D7DA; color: #721C24; }
+        .risk-matrix-table .critical, .risk-scorecard-table .critical { background-color: #DC3545; color: #FFFFFF; }
+
+        .risk-response-card.mitigate { background-color: #D4EDDA; color: #155724; }
+        .risk-response-card.mitigate:hover { background-color: #C3E6CB; }
+        .risk-response-card.transfer { background-color: #CCE5FF; color: #004085; }
+        .risk-response-card.transfer:hover { background-color: #B8DAFF; }
+        .risk-response-card.avoid { background-color: #F8D7DA; color: #721C24; }
+        .risk-response-card.avoid:hover { background-color: #F5C6CB; }
+        .risk-response-card.accept { background-color: #FFF3CD; color: #856404; }
+        .risk-response-card.accept:hover { background-color: #FFECB3; }
+
+        .risk-method-card.qualitative { background-color: #F0F8FF; color: #001f3f; }
+        .risk-method-card.qualitative:hover { background-color: #E0F2FF; }
+        .risk-method-card.quantitative { background-color: #F5FFFA; color: #003300; }
+        .risk-method-card.quantitative:hover { background-color: #E6FFF2; }
+        .risk-method-card.hybrid { background-color: #FAEBD7; color: #4B0082; }
+        .risk-method-card.hybrid:hover { background-color: #F0DDC0; }
+
+        .btn-ransomware { background-color: #A1C9CE; color: #333333; }
+        .btn-ransomware:hover { background-color: #8FB8A1; }
+        .btn-insider-threats { background-color: #8FB8A1; color: #333333; }
+        .btn-insider-threats:hover { background-color: #6F9C7D; }
+        .btn-third-party-risks { background-color: #FFD700; color: #333333; }
+        .btn-third-party-risks:hover { background-color: #E0B800; }
+        .btn-phishing { background-color: #FF6384; color: #FFFFFF; }
+        .btn-phishing:hover { background-color: #E04B6D; }
+        .btn-ddos { background-color: #6A5ACD; color: #FFFFFF; }
+        .btn-ddos:hover { background-color: #5A4DAA; }
+        .btn-apt { background-color: #DAA520; color: #333333; }
+        .btn-apt:hover { background-color: #B8860B; }
+
+        .flow-scenario { display: flex; flex-direction: column; align-items: center; margin-bottom: 2rem; }
+        .flow-scenario .flow-node { max-width: 150px; }
+        .flow-arrow { width: 2px; height: 2rem; background-color: #D5D2C8; margin: 0.5rem 0; position: relative; }
+        .flow-arrow::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%) translateY(50%) rotate(135deg); width: 8px; height: 8px; border-top: 2px solid #D5D2C8; border-right: 2px solid #D5D2C8; }
+        .vulnerability-node { background-color: #F0F8FF; }
+        .vulnerability-node:hover { background-color: #DDEBF7; }
+        .threat-node { background-color: #FFF3CD; }
+        .threat-node:hover { background-color: #FFE699; }
+        .impact-node { background-color: #F8D7DA; }
+        .impact-node:hover { background-color: #F5C6CB; }
+        
+        /* --- CSS for Domain 3, Section A.4 Buttons --- */
+        #domain3 #section-a4 button {
+            min-width: 250px;
         }
 
-        /* --- NAVIGATION --- */
-        .master-nav-item {
-            transition: all 0.2s ease-in-out;
-            text-align: left;
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border-radius: 0.5rem;
-        }
-        .master-nav-item.active {
-            background-color: #E0F7F5; /* Light Teal */
-            border-left: 4px solid #00A896;
-        }
-        .master-nav-item.active .domain-title {
-             color: #00796B;
-        }
-        .master-nav-item:not(.active):hover {
-            background-color: #e2e8f0; /* light gray hover */
-        }
-
-        .domain-nav-item { /* For intra-domain navigation */
-            transition: all 0.2s ease-in-out;
-        }
-        .domain-nav-item.active {
-            border-bottom: 3px solid #00A896;
-            font-weight: 700;
-            color: #222222;
-        }
-        
-        /* --- ACCORDIONS --- */
-        .accordion-button {
-            background-color: #EDEAE0;
-            border-bottom: 1px solid #D5D2C8;
-            border-radius: 0.75rem;
-            padding: 1rem 1.5rem;
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #333333;
-            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            text-align: left;
-            cursor: pointer;
-        }
-        .accordion-button:hover {
-            background-color: #D5D2C8;
-            transform: translateY(-1px);
-        }
-        .accordion-content {
-            background-color: #FFFFFF;
-            border: 1px solid #D5D2C8;
-            border-top: none;
-            border-radius: 0 0 0.75rem 0.75rem;
-            padding: 1.5rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-        }
-
-        /* --- INTERACTIVE CARDS (REFACTORED) --- */
-        .interactive-card {
-            background-color: #EDEAE0;
-            border: 1px solid #D5D2C8;
-            padding: 1rem;
-            border-radius: 0.75rem;
-            cursor: pointer;
-            transition: all 0.3s ease-in-out;
-            box-sizing: border-box;
-            text-align: center;
-            font-weight: 600;
-            color: #333333;
-            min-height: 100px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-            max-height: 120px; /* Base max-height for transition */
-            overflow: hidden;
-        }
-        .interactive-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-        .interactive-card.active {
-            border-color: #00A896;
-            box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3);
-            background-color: #E0F7F5;
-            max-height: 5000px; /* Set a very large max-height to ensure full expansion */
-        }
-        
-        .card-title, .role-title, .node-title {
-            font-size: 1.1em;
-            margin-bottom: 0.6rem;
-            color: #004085;
-        }
-        .card-description, .role-description, .node-description {
-            font-weight: 400;
-            font-size: 0.9em;
-            color: #555555;
-            margin-top: 0.5rem;
-            display: none;
-            text-align: left;
-            word-break: break-word;
-        }
-        .interactive-card.active .card-description, .interactive-card.active .role-description, .interactive-card.active .node-description {
-            display: block;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-        .key-term-card .card-description { text-align: center; }
-        .vulnerability-scenario-card .card-description { text-align: left; }
-
-        /* --- Polished Table Styles --- */
-        .styled-table {
-            width: 100%;
-            max-width: 100%;
-            margin: 1.5rem auto;
-            border-collapse: collapse;
-            font-size: 1rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            border-radius: 0.5rem;
-            overflow: hidden;
-        }
-        .styled-table th, .styled-table td {
-            padding: 1rem 1.25rem;
-            text-align: left;
-            border: none;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        .styled-table th {
-            background-color: #f8fafc;
-            font-weight: 700;
-            color: #334155;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-size: 0.85rem;
-        }
-        .styled-table td {
-            background-color: #FFFFFF;
-            color: #475569;
-        }
-        .styled-table tbody tr:last-child td {
-            border-bottom: none;
-        }
-        .styled-table .highlight {
-            font-weight: 700;
-            color: #00796B;
-        }
-        .styled-table td:first-child, .styled-table th:first-child {
-            font-weight: 600;
-            color: #334155;
-        }
-        
-        /* --- KEYFRAMES --- */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .fade-in {
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        /* --- DOMAIN SPECIFIC STYLES --- */
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 900px;
-            height: 50vh;
-            max-height: 500px;
-            margin-left: auto;
-            margin-right: auto;
-            overflow: hidden;
-        }
-        .slider-container {
-            width: 80%;
-            max-width: 500px;
-            margin: 2rem auto;
-            text-align: center;
-            background-color: #EDEAE0;
-            padding: 1.5rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-        }
-        .slider-container input[type="range"] { width: 100%; }
-
-        .framework-journey-container, .hierarchy-chart-container, .incident-lifecycle-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background-color: #F8F5EF;
-            border-radius: 0.5rem;
-            max-width: 600px;
-            margin: 1rem auto;
-        }
-        .framework-arrow, .hierarchy-line, .incident-lifecycle-arrow {
-            width: 2px;
-            height: 2rem;
-            background-color: #D5D2C8;
-        }
-        
-        .maturity-arrow-right {
-            font-size: 2.5rem;
-            color: #b0bec5;
-            line-height: 1;
-        }
-
-        .risk-matrix-table, .risk-scorecard-table {
-            width: 100%;
-            max-width: 600px;
-            margin: 1rem auto;
-            border-collapse: collapse;
-        }
-        .risk-matrix-table th, .risk-matrix-table td, .risk-scorecard-table th, .risk-scorecard-table td {
-            border: 1px solid #D5D2C8;
-            padding: 0.75rem;
-            text-align: center;
-            font-weight: 600;
-        }
-        .risk-matrix-table th, .risk-scorecard-table th {
-            background-color: #EDEAE0;
-            color: #333333;
-        }
-        .risk-matrix-table td, .risk-scorecard-table td {
-            background-color: #FFFFFF;
-        }
-        .risk-matrix-table .low, .risk-scorecard-table .risk-level-low { background-color: #D4EDDA; color: #155724; }
-        .risk-matrix-table .medium, .risk-scorecard-table .risk-level-medium { background-color: #FFF3CD; color: #856404; }
-        .risk-matrix-table .high, .risk-scorecard-table .risk-level-high { background-color: #F8D7DA; color: #721C24; }
-        .risk-matrix-table .critical, .risk-scorecard-table .critical { background-color: #DC3545; color: #FFFFFF; }
-
-        .risk-response-card.mitigate { background-color: #D4EDDA; color: #155724; }
-        .risk-response-card.mitigate:hover { background-color: #C3E6CB; }
-        .risk-response-card.transfer { background-color: #CCE5FF; color: #004085; }
-        .risk-response-card.transfer:hover { background-color: #B8DAFF; }
-        .risk-response-card.avoid { background-color: #F8D7DA; color: #721C24; }
-        .risk-response-card.avoid:hover { background-color: #F5C6CB; }
-        .risk-response-card.accept { background-color: #FFF3CD; color: #856404; }
-        .risk-response-card.accept:hover { background-color: #FFECB3; }
-
-        .risk-method-card.qualitative { background-color: #F0F8FF; color: #001f3f; }
-        .risk-method-card.qualitative:hover { background-color: #E0F2FF; }
-        .risk-method-card.quantitative { background-color: #F5FFFA; color: #003300; }
-        .risk-method-card.quantitative:hover { background-color: #E6FFF2; }
-        .risk-method-card.hybrid { background-color: #FAEBD7; color: #4B0082; }
-        .risk-method-card.hybrid:hover { background-color: #F0DDC0; }
-
-        .btn-ransomware { background-color: #A1C9CE; color: #333333; }
-        .btn-ransomware:hover { background-color: #8FB8A1; }
-        .btn-insider-threats { background-color: #8FB8A1; color: #333333; }
-        .btn-insider-threats:hover { background-color: #6F9C7D; }
-        .btn-third-party-risks { background-color: #FFD700; color: #333333; }
-        .btn-third-party-risks:hover { background-color: #E0B800; }
-        .btn-phishing { background-color: #FF6384; color: #FFFFFF; }
-        .btn-phishing:hover { background-color: #E04B6D; }
-        .btn-ddos { background-color: #6A5ACD; color: #FFFFFF; }
-        .btn-ddos:hover { background-color: #5A4DAA; }
-        .btn-apt { background-color: #DAA520; color: #333333; }
-        .btn-apt:hover { background-color: #B8860B; }
-
-        .flow-scenario { display: flex; flex-direction: column; align-items: center; margin-bottom: 2rem; }
-        .flow-scenario .flow-node { max-width: 150px; }
-        .flow-arrow { width: 2px; height: 2rem; background-color: #D5D2C8; margin: 0.5rem 0; position: relative; }
-        .flow-arrow::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%) translateY(50%) rotate(135deg); width: 8px; height: 8px; border-top: 2px solid #D5D2C8; border-right: 2px solid #D5D2C8; }
-        .vulnerability-node { background-color: #F0F8FF; }
-        .vulnerability-node:hover { background-color: #DDEBF7; }
-        .threat-node { background-color: #FFF3CD; }
-        .threat-node:hover { background-color: #FFE699; }
-        .impact-node { background-color: #F8D7DA; }
-        .impact-node:hover { background-color: #F5C6CB; }
-        
-        /* --- QUIZ STYLES --- */
-        .quiz-question-container {
-            background-color: #fff;
-            padding: 2rem;
-            margin-bottom: 1.5rem;
-            border-radius: 0.75rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.07);
-        }
-        .quiz-option {
-            display: block;
-            width: 100%;
-            text-align: left;
-            padding: 1rem;
-            margin-bottom: 0.5rem;
-            border: 2px solid #e2e8f0;
-            border-radius: 0.5rem;
-            background-color: #f8fafc;
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-        }
-        .quiz-option:hover {
-            border-color: #00A896;
-            background-color: #E0F7F5;
-        }
-        .quiz-option.selected {
-            border-color: #00796B;
-            background-color: #B2DFDB;
-        }
-        .quiz-feedback {
-            margin-top: 1rem;
-            padding: 1rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-        }
-        .quiz-feedback.correct {
-            background-color: #D4EDDA;
-            color: #155724;
-            border-left: 5px solid #28A745;
-        }
-        .quiz-feedback.incorrect {
-            background-color: #F8D7DA;
-            color: #721C24;
-            border-left: 5px solid #DC3545;
-        }
-        .quiz-explanation {
-            margin-top: 0.5rem;
-            font-style: italic;
-            color: #475569;
-        }
-        #quiz-results {
-            background-color: #E0F7F5;
-            border: 2px solid #00A896;
-            padding: 2rem;
-            text-align: center;
-            border-radius: 0.75rem;
-        }
-    </style>
+        /* --- QUIZ STYLES --- */
+        .quiz-question-container {
+            background-color: #fff;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.07);
+        }
+        .quiz-option {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 0.5rem;
+            background-color: #f8fafc;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        .quiz-option:hover {
+            border-color: #00A896;
+            background-color: #E0F7F5;
+        }
+        .quiz-option.selected {
+            border-color: #00796B;
+            background-color: #B2DFDB;
+        }
+        .quiz-feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+        }
+        .quiz-feedback.correct {
+            background-color: #D4EDDA;
+            color: #155724;
+            border-left: 5px solid #28A745;
+        }
+        .quiz-feedback.incorrect {
+            background-color: #F8D7DA;
+            color: #721C24;
+            border-left: 5px solid #DC3545;
+        }
+        .quiz-explanation {
+            margin-top: 0.5rem;
+            font-style: italic;
+            color: #475569;
+        }
+        #quiz-results {
+            background-color: #E0F7F5;
+            border: 2px solid #00A896;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 0.75rem;
+        }
+    </style>
 </head>
 <body class="leading-relaxed">
 
-    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
-        <header class="text-center py-6 bg-white rounded-lg shadow-lg mb-8">
-            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-2">CISM Study Guide</h1>
-            <p class="text-xl sm:text-2xl text-gray-600">Comprehensive Interactive Educational Resource for CISM Certification Exam</p>
-        </header>
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <header class="text-center py-6 bg-white rounded-lg shadow-lg mb-8">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-2">CISM Study Guide</h1>
+            <p class="text-xl sm:text-2xl text-gray-600">Comprehensive Interactive Educational Resource for CISM Certification Exam</p>
+        </header>
 
-        <div class="flex flex-col md:flex-row gap-8">
-            
-            <aside class="md:w-1/4 lg:w-1/5">
-                <nav id="master-navigation" class="bg-white p-4 rounded-lg shadow-md flex flex-col space-y-2 sticky top-4">
-                    <button class="master-nav-item text-gray-700 active" data-domain-target="about-cism">
-                        <div class="flex flex-col">
-                            <span class="font-bold text-base domain-title">CISM Introduction</span>
-                            <span class="text-sm font-normal">Certification Overview</span>
-                        </div>
-                    </button>
-                    <button class="master-nav-item text-gray-700" data-domain-target="domain-1">
-                        <div class="flex flex-col">
-                            <span class="font-bold text-base domain-title">Domain 1</span>
-                            <span class="text-sm font-normal">Governance</span>
-                        </div>
-                    </button>
-                    <button class="master-nav-item text-gray-700" data-domain-target="domain-2">
-                        <div class="flex flex-col">
-                            <span class="font-bold text-base domain-title">Domain 2</span>
-                            <span class="text-sm font-normal">Risk Management</span>
-                        </div>
-                    </button>
-                    <button class="master-nav-item text-gray-700" data-domain-target="domain-3">
-                        <div class="flex flex-col">
-                            <span class="font-bold text-base domain-title">Domain 3</span>
-                            <span class="text-sm font-normal">Program Development</span>
-                        </div>
-                    </button>
-                    <button class="master-nav-item text-gray-700" data-domain-target="assessment">
-                        <div class="flex flex-col">
-                            <span class="font-bold text-base domain-title">Assessment</span>
-                            <span class="text-sm font-normal">Test Your Knowledge</span>
-                        </div>
-                    </button>
-                </nav>
-            </aside>
+        <div class="flex flex-col md:flex-row gap-8">
+            
+            <aside class="md:w-1/4 lg:w-1/5">
+                <nav id="master-navigation" class="bg-white p-4 rounded-lg shadow-md flex flex-col space-y-2 sticky top-4">
+                    <button class="master-nav-item text-gray-700 active" data-domain-target="about-cism">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-base domain-title">CISM Introduction</span>
+                            <span class="text-sm font-normal">Certification Overview</span>
+                        </div>
+                    </button>
+                    <button class="master-nav-item text-gray-700" data-domain-target="domain-1">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-base domain-title">Domain 1</span>
+                            <span class="text-sm font-normal">Governance</span>
+                        </div>
+                    </button>
+                    <button class="master-nav-item text-gray-700" data-domain-target="domain-2">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-base domain-title">Domain 2</span>
+                            <span class="text-sm font-normal">Risk Management</span>
+                        </div>
+                    </button>
+                    <button class="master-nav-item text-gray-700" data-domain-target="domain-3">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-base domain-title">Domain 3</span>
+                            <span class="text-sm font-normal">Program Development</span>
+                        </div>
+                    </button>
+                    <button class="master-nav-item text-gray-700" data-domain-target="assessment">
+                        <div class="flex flex-col">
+                            <span class="font-bold text-base domain-title">Assessment</span>
+                            <span class="text-sm font-normal">Test Your Knowledge</span>
+                        </div>
+                    </button>
+                </nav>
+            </aside>
 
-            <main class="flex-1">
-                <div id="domains-content-area">
-                    <div id="about-cism" class="domain-content-section fade-in">
-                        <header class="text-center py-8 bg-white rounded-lg shadow-md mb-8">
-                            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-2">CISM Certification Overview</h1>
-                            <p class="text-xl sm:text-2xl text-gray-600">Certified Information Security Manager</p>
-                            <p class="text-md text-gray-500 mt-2">Your guide to the premier credential for information security leadership.</p>
-                        </header>
+            <main class="flex-1">
+                <div id="domains-content-area">
+                    <div id="about-cism" class="domain-content-section fade-in">
+                        <header class="text-center py-8 bg-white rounded-lg shadow-md mb-8">
+                            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-2">CISM Certification Overview</h1>
+                            <p class="text-xl sm:text-2xl text-gray-600">Certified Information Security Manager</p>
+                            <p class="text-md text-gray-500 mt-2">Your guide to the premier credential for information security leadership.</p>
+                        </header>
 
-                        <nav class="bg-white p-4 rounded-lg shadow-md mb-8 flex justify-center sticky top-0 z-10">
-                            <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200 active" data-target="overview">Why CISM?</button>
-                            <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="exam-details">Exam Details</button>
-                            <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="maintenance">Maintenance</button>
-                        </nav>
+                        <nav class="bg-white p-4 rounded-lg shadow-md mb-8 flex justify-center sticky top-0 z-10">
+                            <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200 active" data-target="overview">Why CISM?</button>
+                            <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="exam-details">Exam Details</button>
+                            <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="maintenance">Maintenance</button>
+                        </nav>
 
-                        <main id="content-area">
-                            <section id="overview" class="content-section fade-in">
-                                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Why Pursue the CISM Certification?</h2>
-                                <div class="p-6 bg-white rounded-lg shadow-md mb-6">
-                                    <p class="text-gray-700">The Certified Information Security Manager (CISM) certification, issued by ISACA, is a premier credential for professionals managing and overseeing information security systems in alignment with business goals. Focused on governance, risk management, and leadership, CISM is ideal for security managers, CISOs, and consultants who drive security strategies across the enterprise. Click on the cards below to explore the key benefits.</p>
-                                </div>
-                                <div id="why-cism-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                                    </div>
-                            </section>
+                        <main id="content-area">
+                            <section id="overview" class="content-section fade-in">
+                                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Why Pursue the CISM Certification?</h2>
+                                <div class="p-6 bg-white rounded-lg shadow-md mb-6">
+                                    <p class="text-gray-700">The Certified Information Security Manager (CISM) certification, issued by ISACA, is a premier credential for professionals managing and overseeing information security systems in alignment with business goals. Focused on governance, risk management, and leadership, CISM is ideal for security managers, CISOs, and consultants who drive security strategies across the enterprise. Click on the cards below to explore the key benefits.</p>
+                                </div>
+                                <div id="why-cism-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                    </div>
+                            </section>
 
-                            <section id="exam-details" class="content-section hidden">
-                                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">CISM Exam Details</h2>
-                                <p class="mb-8 text-gray-700">Everything you need to know about the CISM exam, from its format and cost to the experience required and testing options.</p>
+                            <section id="exam-details" class="content-section hidden">
+                                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">CISM Exam Details</h2>
+                                <p class="mb-8 text-gray-700">Everything you need to know about the CISM exam, from its format and cost to the experience required and testing options.</p>
 
-                                <div class="space-y-4">
-                                    <div class="bg-white rounded-lg shadow-md">
-                                        <button class="accordion-button w-full">
-                                            <span>Exam Format & Domains</span>
-                                            <span class="accordion-icon text-2xl">+</span>
-                                        </button>
-                                        <div class="accordion-content hidden p-6">
-                                            <ul class="list-disc list-inside text-gray-700 space-y-2 mb-4">
-                                                <li><strong>Format:</strong> 150 multiple-choice questions</li>
-                                                <li><strong>Duration:</strong> 4 hours (240 minutes)</li>
-                                                <li><strong>Passing Score:</strong> 450 out of 800 (scaled score)</li>
-                                            </ul>
-                                            <div id="domain-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 my-4">
-                                                </div>
-                                        </div>
-                                    </div>
-                                    <div class="bg-white rounded-lg shadow-md">
-                                        <button class="accordion-button w-full">
-                                            <span>Cost of Certification</span>
-                                            <span class="accordion-icon text-2xl">+</span>
-                                        </button>
-                                        <div class="accordion-content hidden p-6">
-                                            <p class="text-gray-700 mb-4">The cost varies depending on your ISACA membership status. Members receive a significant discount on both the exam and annual maintenance fees.</p>
-                                            <table class="styled-table">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Category</th>
-                                                        <th>Exam Fee</th>
-                                                        <th>Annual Maintenance Fee</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr>
-                                                        <td><strong>ISACA Member</strong></td>
-                                                        <td class="highlight">$575 USD</td>
-                                                        <td class="highlight">$45 USD</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td><strong>Non-Member</strong></td>
-                                                        <td class="highlight">$760 USD</td>
-                                                        <td class="highlight">$85 USD</td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                    <div class="bg-white rounded-lg shadow-md">
-                                        <button class="accordion-button w-full">
-                                            <span>Experience & Membership Requirements</span>
-                                            <span class="accordion-icon text-2xl">+</span>
-                                        </button>
-                                        <div class="accordion-content hidden p-6">
-                                            <h4 class="text-lg font-semibold text-gray-800 mb-2">Experience Required</h4>
-                                            <p class="text-gray-700 mb-4">A minimum of <strong>5 years</strong> of professional information security management work experience is required for certification.</p>
-                                            <ul class="list-disc list-inside text-gray-700 space-y-2 mb-4">
-                                                <li>3 of those years must be in at least 3 of the 4 CISM domains.</li>
-                                                <li>Substitutions for up to 2 years of general experience are available based on qualifying certifications (like CISSP, CISA) or a postgraduate degree in a related field.</li>
-                                            </ul>
-                                             <h4 class="text-lg font-semibold text-gray-800 mb-2">ISACA Membership (Optional)</h4>
-                                             <p class="text-gray-700">While not mandatory, ISACA membership offers significant benefits, including exam discounts, free webinars, access to research, and networking opportunities with a global community of professionals.</p>
-                                        </div>
-                                    </div>
-                                     <div class="bg-white rounded-lg shadow-md">
-                                        <button class="accordion-button w-full">
-                                            <span>Where to Take the Exam</span>
-                                            <span class="accordion-icon text-2xl">+</span>
-                                        </button>
-                                        <div class="accordion-content hidden p-6">
-                                            <p class="text-gray-700 mb-4">ISACA offers flexible testing options to accommodate candidates worldwide. You can schedule your exam year-round through the official ISACA website.</p>
-                                             <ul class="list-disc list-inside text-gray-700 space-y-3">
-                                                 <li>
-                                                     <strong>Remote Proctored Online Exam:</strong> Take the exam from the comfort of your home or office. This option is available through both PSI and Pearson VUE platforms, monitored by a live proctor via webcam.
-                                                 </li>
-                                                 <li>
-                                                     <strong>In-Person Testing Centers:</strong> For those who prefer a traditional testing environment, the exam is offered at Pearson VUE testing centers located globally.
-                                                 </li>
-                                             </ul>
+                                <div class="space-y-4">
+                                    <div class="bg-white rounded-lg shadow-md">
+                                        <button class="accordion-button w-full">
+                                            <span>Exam Format & Domains</span>
+                                            <span class="accordion-icon text-2xl">+</span>
+                                        </button>
+                                        <div class="accordion-content hidden p-6">
+                                            <ul class="list-disc list-inside text-gray-700 space-y-2 mb-4">
+                                                <li><strong>Format:</strong> 150 multiple-choice questions</li>
+                                                <li><strong>Duration:</strong> 4 hours (240 minutes)</li>
+                                                <li><strong>Passing Score:</strong> 450 out of 800 (scaled score)</li>
+                                            </ul>
+                                            <div id="domain-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 my-4">
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white rounded-lg shadow-md">
+                                        <button class="accordion-button w-full">
+                                            <span>Cost of Certification</span>
+                                            <span class="accordion-icon text-2xl">+</span>
+                                        </button>
+                                        <div class="accordion-content hidden p-6">
+                                            <p class="text-gray-700 mb-4">The cost varies depending on your ISACA membership status. Members receive a significant discount on both the exam and annual maintenance fees.</p>
+                                            <table class="styled-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Category</th>
+                                                        <th>Exam Fee</th>
+                                                        <th>Annual Maintenance Fee</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><strong>ISACA Member</strong></td>
+                                                        <td class="highlight">$575 USD</td>
+                                                        <td class="highlight">$45 USD</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td><strong>Non-Member</strong></td>
+                                                        <td class="highlight">$760 USD</td>
+                                                        <td class="highlight">$85 USD</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white rounded-lg shadow-md">
+                                        <button class="accordion-button w-full">
+                                            <span>Experience & Membership Requirements</span>
+                                            <span class="accordion-icon text-2xl">+</span>
+                                        </button>
+                                        <div class="accordion-content hidden p-6">
+                                            <h4 class="text-lg font-semibold text-gray-800 mb-2">Experience Required</h4>
+                                            <p class="text-gray-700 mb-4">A minimum of <strong>5 years</strong> of professional information security management work experience is required for certification.</p>
+                                            <ul class="list-disc list-inside text-gray-700 space-y-2 mb-4">
+                                                <li>3 of those years must be in at least 3 of the 4 CISM domains.</li>
+                                                <li>Substitutions for up to 2 years of general experience are available based on qualifying certifications (like CISSP, CISA) or a postgraduate degree in a related field.</li>
+                                            </ul>
+                                             <h4 class="text-lg font-semibold text-gray-800 mb-2">ISACA Membership (Optional)</h4>
+                                             <p class="text-gray-700">While not mandatory, ISACA membership offers significant benefits, including exam discounts, free webinars, access to research, and networking opportunities with a global community of professionals.</p>
+                                        </div>
+                                    </div>
+                                     <div class="bg-white rounded-lg shadow-md">
+                                        <button class="accordion-button w-full">
+                                            <span>Where to Take the Exam</span>
+                                            <span class="accordion-icon text-2xl">+</span>
+                                        </button>
+                                        <div class="accordion-content hidden p-6">
+                                            <p class="text-gray-700 mb-4">ISACA offers flexible testing options to accommodate candidates worldwide. You can schedule your exam year-round through the official ISACA website.</p>
+                                             <ul class="list-disc list-inside text-gray-700 space-y-3">
+                                                 <li>
+                                                     <strong>Remote Proctored Online Exam:</strong> Take the exam from the comfort of your home or office. This option is available through both PSI and Pearson VUE platforms, monitored by a live proctor via webcam.
+                                                 </li>
+                                                 <li>
+                                                     <strong>In-Person Testing Centers:</strong> For those who prefer a traditional testing environment, the exam is offered at Pearson VUE testing centers located globally.
+                                                 </li>
+                                             </ul>
+                                            <p class="mt-4 text-gray-600 text-sm italic">Visit <a href="https://www.isaca.org" target="_blank" class="text-blue-600 hover:underline">www.isaca.org</a> to find a testing center or schedule your remote exam.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section id="maintenance" class="content-section hidden">
+                                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Maintaining Your CISM Certification</h2>
+                                <p class="mb-8 text-gray-700">Holding the CISM certification is an ongoing commitment to professional development. To maintain your credential, you must adhere to ISACA's requirements for continuing professional education (CPE) and professional conduct.</p>
+                                <div class="p-6 bg-white rounded-lg shadow-md">
+                                    <h4 class="text-xl font-bold text-gray-800 mb-4">CPE Requirements</h4>
+                                    <p class="text-gray-700 mb-4">You must demonstrate your commitment to keeping your skills current by earning and reporting Continuing Professional Education (CPE) credits.</p>
+                                    <ul class="list-disc list-inside text-gray-700 space-y-2 mb-6">
+                                       <li>Earn a minimum of <strong>20 CPE credits annually</strong>.</li>
+                                       <li>Earn a total of <strong>120 CPE credits over a 3-year reporting cycle</strong>.</li>
+                                    </ul>
+
+                                    <h4 class="text-xl font-bold text-gray-800 mb-4">Annual Maintenance Fee</h4>
+                                    <p class="text-gray-700 mb-4">An annual fee is required to maintain your certification in good standing.</p>
+                                     <table class="styled-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Category</th>
+                                                <th>Annual Maintenance Fee</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>ISACA Member</strong></td>
+                                                <td class="highlight">$45 USD</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Non-Member</strong></td>
+                                                <td class="highlight">$85 USD</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                     <h4 class="text-xl font-bold text-gray-800 mt-6 mb-4">Other Requirements</h4>
+                                     <ul class="list-disc list-inside text-gray-700 space-y-2">
+                                         <li>Adhere to ISACA’s <strong>Code of Professional Ethics</strong>.</li>
+                                         <li>Comply with the CISM <strong>Continuing Professional Education (CPE) Policy</strong> and reporting requirements.</li>
+                                     </ul>
+                                </div>
+                            </section>
+                        </main>
+                    </div>
+
+                    <div id="domain-1" class="domain-content-section hidden">
+                        <header class="text-center py-8 bg-white rounded-lg shadow-md mb-8">
+                            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-2">CISM Domain 1 Study Guide</h1>
+                            <p class="text-xl sm:text-2xl text-gray-600">Information Security Governance</p>
+                            <p class="text-md text-gray-500 mt-2">Your Interactive Study Guide for Strategic Security Leadership</p>
+                        </header>
+
+                        <nav class="bg-white p-4 rounded-lg shadow-md mb-8 flex justify-center sticky top-0 z-10 overflow-x-auto">
+                            <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200 active" data-target="introduction-d1">Introduction</button>
+                            <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="enterprise-governance-d1">Enterprise Governance</button>
+                            <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="info-sec-strategy-d1">Information Security Strategy</button>
+                            <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="key-terms-d1">Key Terms</button>
+                            <button class="domain-nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="domain-summary-d1">Domain Summary</button>
+                        </nav>
+
+                        <main>
+                            <section id="introduction-d1" class="content-section fade-in">
+                                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Introduction to CISM Domain 1</h2>
+                                <div class="p-6 bg-white rounded-lg shadow-md">
+                                    <p class="text-gray-700 mb-4">Welcome to the interactive study guide for CISM Domain 1: Information Security Governance. This domain is the foundational pillar of effective information security management, emphasizing the strategic alignment of security initiatives with overall business objectives. It's about establishing the framework, roles, and responsibilities that ensure information security is an integral part of the enterprise's governance structure.</p>
+                                    <p class="text-gray-700">As a Certified Information Security Manager, you are expected to understand how to develop, implement, and oversee an information security governance framework that not only protects information assets but also enables business operations and ensures compliance with legal, regulatory, and contractual requirements. This guide will help you explore the critical components of governance, from organizational culture to strategic planning and resource management.</p>
+                                </div>
+                            </section>
+
+                            <section id="enterprise-governance-d1" class="content-section hidden">
+                                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Section A: Enterprise Governance</h2>
+                                <p class="mb-8 text-gray-700">Enterprise governance provides the structure through which the objectives of the organization are set and pursued. Information security governance must be an integral part of this broader framework.</p>
+
+                                <div class="space-y-4">
+                                    <div class="bg-white rounded-lg shadow-md">
+                                        <button class="accordion-button w-full">1. Organizational Culture and its Impact<span class="accordion-icon text-2xl">+</span></button>
+                                        <div class="accordion-content hidden p-6">
+                                             <p class="text-gray-700 mb-4">Organizational culture significantly influences the effectiveness of information security. A strong security culture fosters proactive behavior and shared responsibility.</p>
+                                             <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Influence of corporate culture on security behaviors and decision-making.</h4>
+                                             <p class="text-gray-600 mb-4">Corporate culture profoundly shapes how individuals perceive and engage with security. It impacts risk appetite and influences security-related decisions. For instance, a culture prioritizing rapid innovation might accept higher security risks.</p>
+                                             <div class="chart-container mb-6"><canvas id="securityCultureChart"></canvas></div>
+                                             <div class="flex flex-wrap justify-center gap-4 mb-4">
+                                                 <button class="px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" style="background-color: #00A896; color: white;" data-culture-type="strongCulture">Strong Security Culture</button>
+                                                 <button class="px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" style="background-color: #DC3545; color: white;" data-culture-type="weakCulture">Weak Security Culture</button>
+                                             </div>
+                                             <div id="culture-explanation" class="text-gray-600 text-sm italic mt-2 text-center">This chart illustrates a simulated distribution of employee security behaviors based on the prevailing organizational culture. Use the buttons to see how culture can shift these behaviors.</div>
+                                            
+                                             <h4 class="text-lg font-semibold text-gray-700 mb-3 mt-6">b. Promoting a security-aware culture through leadership and communication.</h4>
+                                             <p class="text-gray-600 mb-4">Cultivating a security-aware culture requires continuous effort, driven by leadership and effective communication. This includes comprehensive security awareness programs, clear policies, and open communication channels to foster vigilance.</p>
+                                            
+                                             <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Tone at the top: executive sponsorship and support.</h4>
+                                             <p class="text-gray-600 mb-4">The commitment of senior management is paramount. Executive sponsorship ensures visible commitment, adequate resource allocation, and accountability for security across the organization.</p>
+                                             <div class="slider-container">
+                                                 <label for="leadershipEngagement" class="slider-label">Leadership Engagement Level</label>
+                                                 <input type="range" id="leadershipEngagement" min="0" max="100" value="50" step="1">
+                                                 <div class="slider-value" id="engagementValue">Moderate Engagement</div>
+                                                 <div class="slider-description" id="engagementDescription">Policies are generally followed, but security may lack strong strategic momentum or innovation.</div>
+                                             </div>
+                                             <p class="text-gray-600 text-sm italic mt-2 text-center">Adjust the slider to see how different levels of leadership engagement can influence the organizational security culture.</p>
+
+                                             <h4 class="text-lg font-semibold text-gray-700 mb-3 mt-6">d. Change management and resistance mitigation in security initiatives.</h4>
+                                             <p class="text-gray-600 mb-4">Implementing new security measures often encounters resistance. Effective change management involves early stakeholder engagement, clear communication of the "why," and providing adequate training and support to facilitate adoption. Click on each step to learn more:</p>
+                                             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-group="change-management">
+                                                 <div class="change-management-card interactive-card"><span class="card-title">Communicate Early & Often</span><div class="card-description">Proactive and transparent communication about upcoming changes, their benefits, and potential impacts helps reduce uncertainty and build trust.</div></div>
+                                                 <div class="change-management-card interactive-card"><span class="card-title">Address Concerns</span><div class="card-description">Establish channels for feedback and actively listen to and address employee concerns, fears, and questions about new security initiatives.</div></div>
+                                                 <div class="change-management-card interactive-card"><span class="card-title">Provide Training & Support</span><div class="card-description">Offer comprehensive and accessible training, along with ongoing support, to ensure employees understand new security processes and tools.</div></div>
+                                                 <div class="change-management-card interactive-card"><span class="card-title">Celebrate Successes</span><div class="card-description">Recognize and reward positive security behaviors and successful adoption of new measures to reinforce the desired culture and motivate continued compliance.</div></div>
+                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white rounded-lg shadow-md">
+                                        <button class="accordion-button w-full">2. Legal, Regulatory, and Contractual Requirements<span class="accordion-icon text-2xl">+</span></button>
+                                        <div class="accordion-content hidden p-6">
+                                            <p class="text-gray-700 mb-4">Information security governance must ensure compliance with a complex web of legal, regulatory, and contractual obligations.</p>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Identification and interpretation of applicable laws and regulations</h4>
+                                            <p class="text-gray-600 mb-4">Organizations must identify all pertinent laws and regulations based on their operations, industry, and geography. Explore key regulations by region/type:</p>
+                                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-group="legal-type">
+                                                <div class="concept-card interactive-card"> <span class="card-title">European Union</span><div class="card-description">Regulations like GDPR (General Data Protection Regulation) focus on data privacy and protection for individuals within the EU.</div></div>
+                                                <div class="concept-card interactive-card"> <span class="card-title">USA (Federal & State)</span><div class="card-description">Includes federal laws like HIPAA (Health Insurance Portability and Accountability Act) for healthcare data, and state-specific laws like CCPA (California Consumer Privacy Act).</div></div>
+                                                <div class="concept-card interactive-card"> <span class="card-title">Global & Industry Specific</span><div class="card-description">Beyond regional laws, organizations must comply with global standards (e.g., ISO 27001) and industry-specific mandates (e.g., PCI DSS for payment cards, NERC CIP for critical infrastructure).</div></div>
+                                            </div>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Contractual obligations related to information security</h4>
+                                            <p class="text-gray-600 mb-4">Beyond laws, contracts impose specific security requirements. Click on a contract type to see typical security clauses:</p>
+                                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-group="contract-type">
+                                                <div class="concept-card interactive-card"><span class="card-title">Service Level Agreement (SLA)</span><div class="card-description">Defines the level of service expected from a vendor, including security performance metrics, incident response times, and data protection clauses.</div></div>
+                                                <div class="concept-card interactive-card"><span class="card-title">Business Associate Agreement (BAA)</span><div class="card-description">Required under HIPAA, this contract specifies how business associates (third-party service providers) will safeguard Protected Health Information (PHI) on behalf of a covered entity.</div></div>
+                                                <div class="concept-card interactive-card"><span class="card-title">Non-Disclosure Agreement (NDA)</span><div class="card-description">A legal contract that outlines confidential material, knowledge, or information that the parties wish to share with one another but restrict access to by third parties. It includes clauses on data protection and handling.</div></div>
+                                            </div>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Security's role in legal compliance and audit readiness</h4>
+                                            <p class="text-gray-600 mb-4">Information security is central to achieving and demonstrating compliance. This involves establishing compliance programs, preparing for audits with robust documentation, and continuous monitoring of control effectiveness.</p>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">d. Data protection and privacy laws by region/jurisdiction</h4>
+                                            <p class="text-gray-600 mb-4">The global privacy landscape necessitates understanding specific laws across jurisdictions (e.g., GDPR in EU, CCPA in California), particularly for cross-border data transfers and implementing 'privacy by design' principles.</p>
+                                            <h4 class="text-lg font-semibold text-gray-700">e. Intellectual property rights, industry-specific mandates</h4>
+                                            <p class="text-gray-600">Protecting Intellectual property through security controls and adhering to industry-specific mandates (e.g., PCI DSS, NERC CIP) are critical for protecting assets and ensuring operational continuity within specific sectors.</p>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white rounded-lg shadow-md">
+                                        <button class="accordion-button w-full">3. Organizational Structures, Roles, and Responsibilities<span class="accordion-icon text-2xl">+</span></button>
+                                        <div class="accordion-content hidden p-6">
+                                            <p class="text-gray-700 mb-4">Effective Information security governance relies on clearly defined organizational structures, roles, and responsibilities. This clarity ensures accountability, prevents gaps, and facilitates efficient execution of security functions.</p>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Governance structures (centralized, decentralized, hybrid)</h4>
+                                            <p class="text-gray-600 mb-4">Organizations adopt different models for security governance. Explore the common structures below:</p>
+                                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-group="governance-structure">
+                                                <div class="concept-card interactive-card"><span class="card-title">Centralized</span><div class="card-description">Security decisions and control are concentrated in a single department or team (e.g., a dedicated CISO office). This provides consistency and strong oversight but can be less agile in large, diverse organizations.</div></div>
+                                                <div class="concept-card interactive-card"><span class="card-title">Decentralized</span><div class="card-description">Security responsibilities are distributed across various business units or departments. This can promote agility and local ownership but may lead to inconsistencies and gaps without strong coordination.</div></div>
+                                                <div class="concept-card interactive-card"><span class="card-title">Hybrid</span><div class="card-description">Combines elements of both centralized and decentralized models. A central security function sets overall strategy and standards, while business units handle day-to-day implementation and local adaptations. This aims to balance consistency with agility.</div></div>
+                                            </div>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Defining roles and responsibilities: Board, Executive, CISO, Data Owners, Users</h4>
+                                            <p class="text-gray-600 mb-4">Clear role definitions are fundamental to accountability. Each level, from the Board with ultimate oversight to every user adhering to policies, plays a crucial part in the security posture.</p>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Segregation of duties (SoD), accountability, escalation paths</h4>
+                                            <p class="text-gray-600 mb-4">Implementing Segregation of Duties prevents a single point of control, reducing fraud and error. Clear accountability ensures ownership, while defined escalation paths enable timely incident and risk resolution.</p>
+                                            <h4 class="text-lg font-semibold text-gray-700">d. Security steering committees and governance forums</h4>
+                                            <p class="text-gray-600">Formal committees and forums provide structured decision-making and oversight, ensuring strategic direction and alignment with business objectives.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section id="info-sec-strategy-d1" class="content-section hidden">
+                                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Section B: Information Security Strategy</h2>
+                                <p class="mb-8 text-gray-700">An information security strategy translates the organization's business objectives into actionable security goals and initiatives.</p>
+                                
+                                <div class="space-y-4">
+                                    <div class="bg-white rounded-lg shadow-md">
+                                        <button class="accordion-button w-full">1. Information Security Strategy Development<span class="accordion-icon text-2xl">+</span></button>
+                                        <div class="accordion-content hidden p-6">
+                                            <p class="text-gray-700 mb-4">Developing a robust information security strategy requires a systematic approach.</p>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Alignment of security objectives with organizational goals</h4>
+                                            <p class="text-gray-600 mb-4">The cornerstone of any effective security strategy is its direct alignment with the organization's overarching business goals. Security should enable business objectives and manage risks effectively.</p>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Defining vision, mission, and guiding principles for the security program</h4>
+                                            <p class="text-gray-600 mb-4">Just like the broader organization, the security program needs clear vision, mission, and guiding principles to define its purpose and inform all security decisions and actions.</p>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Determining risk appetite and tolerance</h4>
+                                            <p class="text-gray-600 mb-4">Understanding the organization's willingness to accept risk (risk appetite) and acceptable deviation (risk tolerance) is crucial for shaping the security strategy and prioritizing investments. Explore different risk appetites:</p>
+                                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-group="risk-appetite">
+                                                <div class="risk-appetite-card interactive-card"><span class="card-title">Risk Averse</span><div class="card-description">Prefers to avoid risk as much as possible, even if it means missing potential opportunities. Focuses heavily on preventative controls and strict compliance.</div></div>
+                                                <div class="risk-appetite-card interactive-card"><span class="card-title">Conservative</span><div class="card-description">Willing to accept a low level of risk, but generally prefers established, proven security measures. Prioritizes stability and minimizing potential losses.</div></div>
+                                                <div class="risk-appetite-card interactive-card"><span class="card-title">Moderate</span><div class="card-description">Balances risk and reward, accepting a reasonable level of risk to achieve business objectives. Invests in security controls that provide a good return on investment.</div></div>
+                                                <div class="risk-appetite-card interactive-card"><span class="card-title">Risk Aggressive</span><div class="card-description">Willing to take on higher levels of risk for potentially greater rewards, often seen in innovative or rapidly growing organizations. Focuses on rapid detection and response capabilities.</div></div>
+                                            </div>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">d. Incorporating threat landscape and business drivers</h4>
+                                            <p class="text-gray-600 mb-4">The strategy must be dynamic, continuously adapting to evolving external threats (threat landscape) and internal business needs (business drivers) to remain relevant and effective. Map business drivers to security objective mapper:</p>
+                                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-group="business-driver">
+                                                <div class="business-driver-card interactive-card"><span class="card-title">Digital Transformation</span><div class="card-description">Security objectives align with securing new digital platforms, cloud environments, and data analytics initiatives. Focus on cloud security, data privacy, and secure development.</div></div>
+                                                <div class="business-driver-card interactive-card"><span class="card-title">Global Expansion</span><div class="card-description">Security objectives include understanding and complying with international regulations and securing global supply chains.</div></div>
+                                                <div class="business-driver-card interactive-card"><span class="card-title">Cost Optimization</span><div class="card-description">Security objectives focus on efficiency and cost-effectiveness of controls while maintaining an acceptable risk posture.</div></div>
+                                                <div class="business-driver-card interactive-card"><span class="card-title">New Product Launch</span><div class="card-description">Security objectives prioritize security-by-design, vulnerability testing, and ensuring product compliance before release.</div></div>
+                                            </div>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">e. Prioritizing security initiatives based on business impact</h4>
+                                            <p class="text-gray-600 mb-4">With limited resources, security initiatives must be prioritized based on their potential business impact, leveraging Business Impact Analysis (BIA) and cost-benefit analysis.</p>
+                                            <div class="chart-container-b1e mb-6"><canvas id="securityInitiativesChart"></canvas></div>
+                                            <div class="flex flex-wrap justify-center gap-4 mb-4">
+                                                <button class="px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" style="background-color: #00A896; color: white;" data-priority-type="complianceDriven">Compliance-Driven</button>
+                                                <button class="px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" style="background-color: #FF6384; color: white;" data-priority-type="revenueDriven">Revenue-Driven</button>
+                                            </div>
+                                            <div id="priority-explanation" class="text-gray-600 text-sm italic mt-2 text-center">This chart simulates the prioritization of security initiatives. Use the buttons to see how priorities might shift based on different business drivers or strategic focuses.</div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white rounded-lg shadow-md">
+                                        <button class="accordion-button w-full">2. Frameworks and Standards<span class="accordion-icon text-2xl">+</span></button>
+                                        <div class="accordion-content hidden p-6">
+                                            <p class="text-gray-700 mb-4">Frameworks provide a structured approach to managing information security. Click on a card to learn more:</p>
+                                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6" data-group="framework">
+                                                <div class="concept-card interactive-card"><span class="card-title">COBIT</span><div class="card-description"><strong>Control Objectives for Information and Related Technologies:</strong> A comprehensive framework for IT governance and management, providing a holistic approach to managing IT risks and ensuring IT alignment with business goals. It helps organizations create optimal value from IT by maintaining a balance between realizing benefits and optimizing risk levels and resource use.</div></div>
+                                                <div class="concept-card interactive-card"><span class="card-title">ISO/IEC 27001</span><div class="card-description"><strong>Information Security Management System (ISMS):</strong> An international standard that specifies requirements for establishing, implementing, maintaining, and continually improving an ISMS within the context of the organization's overall business risks. Certification to ISO 27001 demonstrates a systematic approach to managing sensitive company information.</div></div>
+                                                <div class="concept-card interactive-card"><span class="card-title">NIST CSF</span><div class="card-description"><strong>National Institute of Standards and Technology Cybersecurity Framework:</strong> A voluntary framework providing a common language for understanding, managing, and expressing cybersecurity risk. It consists of five core functions: Identify, Protect, Detect, Respond, Recover, offering a flexible way to manage cybersecurity risk.</div></div>
+                                                <div class="concept-card interactive-card"><span class="card-title">ITIL</span><div class="card-description"><strong>Information Technology Infrastructure Library:</strong> A framework for IT service management that describes processes, procedures, tasks, and checklists that are not organization-specific, used to establish a minimum level of competency. While not solely security-focused, it supports security processes.</div></div>
+                                            </div>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Selection and Implementation:</h4>
+                                            <p class="text-gray-600 mb-4">Choosing the right framework depends on organizational context, industry, and regulatory landscape. Implementation involves adapting the framework's principles to the specific needs of the enterprise.</p>
+                                            <h4 class="text-lg font-semibold text-gray-700">c. Integrating governance frameworks into enterprise governance</h4>
+                                            <p class="text-gray-600 mb-4">Security frameworks must be integrated seamlessly into the broader enterprise governance structure through harmonization, consistent language, and a robust top-down/bottom-up communication flow.</p>
+                                            <h5 class="text-md font-bold text-gray-800 mb-2">Framework Adoption Journey</h5>
+                                            <div class="framework-journey-container" data-group="framework-step">
+                                                <div class="framework-step-node interactive-card"><span class="card-title">1. Define Scope & Objectives</span><div class="card-description">Clearly define the scope of the ISMS (Information Security Management System), identify organizational context, and establish the objectives and policies for information security. This aligns security with business goals.</div></div>
+                                                <div class="framework-arrow"></div>
+                                                <div class="framework-step-node interactive-card"><span class="card-title">2. Assess Current State & Gaps</span><div class="card-description">Conduct a comprehensive assessment of the organization's current information security posture, identify existing controls, and pinpoint gaps against the chosen framework's requirements. This includes risk assessment.</div></div>
+                                                <div class="framework-arrow"></div>
+                                                <div class="framework-step-node interactive-card"><span class="card-title">3. Design & Plan Controls</span><div class="card-description">Based on the risk assessment and identified gaps, design and plan the implementation of appropriate security controls. This involves selecting controls from the framework's annexes (e.g., ISO 27002) and developing a detailed implementation plan.</div></div>
+                                                <div class="framework-arrow"></div>
+                                                <div class="framework-step-node interactive-card"><span class="card-title">4. Implement Controls</span><div class="card-description">Execute the control implementation plan, deploying new security technologies, updating processes, and conducting necessary training. This phase focuses on putting the planned security measures into operation.</div></div>
+                                                <div class="framework-arrow"></div>
+                                                <div class="framework-step-node interactive-card"><span class="card-title">5. Monitor, Review & Improve</span><div class="card-description">Continuously monitor the effectiveness of implemented controls, conduct regular reviews and audits, and make necessary adjustments for continuous improvement. This ensures the ISMS remains effective and adapts to changes in the threat landscape or business environment.</div></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white rounded-lg shadow-md">
+                                        <button class="accordion-button w-full">3. Strategic Planning (Budgets, Resources, Business Case)<span class="accordion-icon text-2xl">+</span></button>
+                                        <div class="accordion-content hidden p-6">
+                                            <p class="text-gray-700 mb-4">Effective strategic planning ensures that information security initiatives are adequately resourced and justified.</p>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Justification and strategic alignment of security investments</h4>
+                                            <p class="text-gray-600 mb-4">Strategic planning translates the security strategy into practical implementation, involving careful resource allocation, financial justification, and continuous performance measurement.</p>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Building multi-year information security roadmap</h4>
+                                            <p class="text-gray-600 mb-4">A security roadmap outlines the evolution of the security program over time, outlining phases to bridge the gap between the current and desired security states, while remaining flexible to adapt to changes.</p>
+                                            <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Developing a business case for security investments</h4>
                                             <p class="mt-4 text-gray-600 text-sm italic">Visit <a href="https://www.isaca.org" target="_blank" class="text-blue-600 hover:underline">www.isaca.org</a> to find a testing center or schedule your remote exam.</p>
                                         </div>
                                     </div>
