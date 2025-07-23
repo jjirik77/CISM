@@ -115,6 +115,7 @@
         .content-area {
             flex-grow: 1;
             padding: 40px;
+            overflow-x: hidden;
         }
 
         .content-header {
@@ -224,24 +225,11 @@
 
         /* CARDS REDESIGN (Glassmorphism & Interactive) */
         .feature-cards, .ethics-cards, .cpe-cards {
-            display: grid;
+            display: flex;
+            flex-wrap: wrap;
             gap: 25px;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        }
-        
-        .cpe-cards {
             justify-content: center;
         }
-
-        @media (min-width: 992px) {
-            .ethics-cards {
-                grid-template-columns: repeat(4, 1fr);
-            }
-            .ethics-cards .card:nth-child(5) {
-                grid-column-start: 2;
-            }
-        }
-
 
         .card {
             background: rgba(45, 55, 72, 0.4);
@@ -258,6 +246,7 @@
             flex-direction: column;
             justify-content: center;
             text-align: center;
+            flex: 0 1 220px; /* Flex properties for sizing */
         }
         
         .card::before {
