@@ -3,83 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CISM 2024: Assessment Interactive Module</title>
+    <title>CISM 2024: Assessment Interactive</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* Scoped Styles for Embeddable Assessment Module */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-        
-        #assessment-module-container {
+        body {
             font-family: 'Inter', sans-serif;
             background-color: #F8F5EF; /* Warm Neutral Background */
             color: #333333;
-            padding: 1rem;
-            border-radius: 0.75rem;
-            border: 1px solid #D5D2C8;
         }
-
-        #assessment-module-container .section-header {
+        .container {
+            max-width: 1200px;
+        }
+        .section-header {
             border-left: 6px solid #00A896; /* Vibrant Teal Accent */
             padding-left: 1.25rem;
             font-size: 2.5rem;
             color: #222222;
         }
-
-        #assessment-module-container .fade-in {
+        .assessment-tab {
+            border: 2px solid transparent;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        .assessment-tab:not(.active):hover {
+            border-color: #00A896;
+            background-color: #f0fdfa;
+        }
+        .assessment-tab.active {
+            background-color: #00A896;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-color: #00A896;
+        }
+        .fade-in {
             animation: fadeIn 0.5s ease-in-out;
         }
-
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        #assessment-module-container .assessment-tab {
-            transition: background-color 0.2s, color 0.2s;
-        }
-
-        #assessment-module-container .assessment-tab.active {
-            background-color: #00A896;
-            color: white;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        #assessment-module-container .assessment-card {
+        .assessment-card {
             background-color: #FFFFFF;
             border-radius: 0.75rem;
-            border: 1px solid #E0E0E0; /* Added a light border */
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08); /* Increased shadow */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
             transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
         }
-
-        #assessment-module-container .assessment-card:hover {
-            transform: translateY(-4px); /* Increased lift */
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.12); /* Increased shadow on hover */
+        .assessment-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
         }
-
-        #assessment-module-container .btn-primary {
+        .btn-primary {
             background-color: #00A896;
             color: white;
             font-weight: 600;
             padding: 0.75rem 1.5rem;
             border-radius: 0.5rem;
             transition: background-color 0.2s;
+            cursor: pointer;
         }
-
-        #assessment-module-container .btn-primary:hover {
+        .btn-primary:hover {
             background-color: #008778;
         }
-
-        #assessment-module-container .btn-danger {
+        .btn-primary:disabled {
+            background-color: #a0a0a0;
+            cursor: not-allowed;
+        }
+        .btn-danger {
             background-color: #DC3545;
             color: white;
         }
-
-        #assessment-module-container .btn-danger:hover {
+        .btn-danger:hover {
             background-color: #c82333;
         }
-
-        #assessment-module-container .btn-secondary {
+        .btn-secondary {
             background-color: #EDEAE0;
             color: #333333;
             font-weight: 600;
@@ -87,54 +84,44 @@
             border-radius: 0.5rem;
             transition: background-color 0.2s;
         }
-
-        #assessment-module-container .btn-secondary:hover {
+        .btn-secondary:hover {
             background-color: #D5D2C8;
         }
-
-        #assessment-module-container .answer-option {
+        .answer-option {
             border: 2px solid #EDEAE0;
             border-radius: 0.5rem;
             padding: 1rem;
             cursor: pointer;
             transition: border-color 0.2s, background-color 0.2s;
         }
-
-        #assessment-module-container .answer-option:hover {
+        .answer-option:hover {
             border-color: #00A896;
         }
-
-        #assessment-module-container .answer-option.selected {
+        .answer-option.selected {
             background-color: #E0F7F5;
             border-color: #00A896;
         }
-
-        #assessment-module-container .answer-option.correct {
+        .answer-option.correct {
             background-color: #D4EDDA;
             border-color: #155724;
         }
-
-        #assessment-module-container .answer-option.incorrect {
+        .answer-option.incorrect {
             background-color: #F8D7DA;
             border-color: #721C24;
         }
-
-        #assessment-module-container .progress-bar-container {
+        .progress-bar-container {
             background-color: #EDEAE0;
             border-radius: 9999px;
             height: 10px;
             width: 100%;
             overflow: hidden;
         }
-
-        #assessment-module-container .progress-bar {
+        .progress-bar {
             background-color: #00A896;
             height: 100%;
             transition: width 0.3s ease-in-out;
         }
-
-        /* Custom Modal Styles */
-        #assessment-module-container .modal-overlay {
+        .modal-overlay {
             position: fixed;
             inset: 0;
             background-color: rgba(0, 0, 0, 0.6);
@@ -143,8 +130,7 @@
             align-items: center;
             justify-content: center;
         }
-
-        #assessment-module-container .modal-content {
+        .modal-content {
             background-color: white;
             padding: 2rem;
             border-radius: 0.75rem;
@@ -153,59 +139,52 @@
             max-width: 400px;
             width: 90%;
         }
-        
-        /* Hide number input arrows */
-        #assessment-module-container input[type="number"]::-webkit-inner-spin-button,
-        #assessment-module-container input[type="number"]::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
+        .custom-number-input {
+            width: 80px;
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            border: 2px solid #EDEAE0;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: bold;
         }
-
-        #assessment-module-container input[type="number"] {
-            -moz-appearance: textfield;
+        .custom-number-input:focus {
+            outline: none;
+            border-color: #00A896;
         }
     </style>
 </head>
-<body>
-
-    <!-- Start of Embeddable Module -->
-    <div id="assessment-module-container">
+<body class="leading-relaxed">
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
         <header class="text-center py-8 bg-white rounded-lg shadow-md mb-8">
             <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-2">CISM Assessment Center</h1>
             <p class="text-xl sm:text-2xl text-gray-600">Test Your Knowledge and Prepare for the Exam</p>
         </header>
 
-        <main id="assessment-main-content">
-            <!-- Assessment Setup View -->
+        <main id="assessment-container">
             <div id="assessment-setup">
-                <nav class="bg-white p-4 rounded-lg shadow-md mb-8 flex flex-wrap justify-center sticky top-0 z-10">
-                    <button class="assessment-tab px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200 active" data-target="domain-1">Domain 1</button>
-                    <button class="assessment-tab px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="domain-2">Domain 2</button>
-                    <button class="assessment-tab px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="domain-3">Domain 3</button>
-                    <button class="assessment-tab px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="domain-4">Domain 4</button>
-                    <button class="assessment-tab px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="simulated-exam">Simulated Exam</button>
+                <nav class="bg-white p-4 rounded-lg shadow-md mb-8 flex flex-wrap justify-center sticky top-0 z-10 gap-2 sm:gap-0">
+                    <button class="assessment-tab px-4 py-2 text-lg font-medium text-gray-700 mx-2 sm:mx-4 active" data-target="domain-1">Domain 1</button>
+                    <button class="assessment-tab px-4 py-2 text-lg font-medium text-gray-700 mx-2 sm:mx-4" data-target="domain-2">Domain 2</button>
+                    <button class="assessment-tab px-4 py-2 text-lg font-medium text-gray-700 mx-2 sm:mx-4" data-target="domain-3">Domain 3</button>
+                    <button class="assessment-tab px-4 py-2 text-lg font-medium text-gray-700 mx-2 sm:mx-4" data-target="domain-4">Domain 4</button>
+                    <button class="assessment-tab px-4 py-2 text-lg font-medium text-gray-700 mx-2 sm:mx-4" data-target="simulated-exam">Simulated Exam</button>
                 </nav>
-
-                <div id="assessment-options-area" class="fade-in">
-                    <!-- Domain-specific options will be injected here -->
-                </div>
+                <div id="assessment-options-area" class="fade-in"></div>
             </div>
 
-            <!-- Assessment In-Progress View -->
             <div id="assessment-in-progress" class="hidden">
                 <div class="bg-white p-6 sm:p-8 rounded-lg shadow-md">
                     <div class="flex justify-between items-center mb-4">
-                        <h2 id="question-counter" class="text-xl font-bold text-gray-800">Question 1 of 10</h2>
+                        <h2 id="question-counter" class="text-xl font-bold text-gray-800"></h2>
                         <div id="timer-display" class="text-xl font-bold text-gray-800 hidden">4:00:00</div>
                         <button id="quit-assessment-btn" class="btn-secondary text-sm px-3 py-1">Quit</button>
                     </div>
                     <div class="progress-bar-container mb-6">
-                        <div id="progress-bar" class="progress-bar" style="width: 10%;"></div>
+                        <div id="progress-bar" class="progress-bar" style="width: 0%;"></div>
                     </div>
-                    <p id="question-text" class="text-lg text-gray-700 mb-6">This is where the question text will appear.</p>
-                    <div id="answer-options" class="space-y-4">
-                        <!-- Answer options will be injected here -->
-                    </div>
+                    <p id="question-text" class="text-lg text-gray-700 mb-6"></p>
+                    <div id="answer-options" class="space-y-4"></div>
                     <div class="flex justify-between mt-8">
                         <button id="prev-question-btn" class="btn-secondary">Previous</button>
                         <button id="next-question-btn" class="btn-primary">Next</button>
@@ -214,16 +193,13 @@
                 </div>
             </div>
 
-            <!-- Assessment Results View -->
             <div id="assessment-results" class="hidden">
                 <div class="bg-white p-6 sm:p-8 rounded-lg shadow-md text-center">
                     <h2 class="text-3xl font-bold section-header text-gray-800 mb-4 inline-block">Assessment Complete!</h2>
                     <p class="text-xl text-gray-600 mb-2">Here's how you did:</p>
-                    <p id="final-score" class="text-6xl font-extrabold text-gray-800 my-4">85%</p>
-                    <p id="score-details" class="text-lg text-gray-700 mb-6">You answered 17 out of 20 questions correctly.</p>
-                    <div id="results-breakdown" class="mb-8 text-left max-w-md mx-auto">
-                        <!-- Results breakdown will be injected here -->
-                    </div>
+                    <p id="final-score" class="text-6xl font-extrabold text-gray-800 my-4"></p>
+                    <p id="score-details" class="text-lg text-gray-700 mb-6"></p>
+                    <div id="results-breakdown" class="mb-8 text-left max-w-md mx-auto"></div>
                     <div class="flex justify-center gap-4">
                         <button id="review-answers-btn" class="btn-secondary">Review Answers</button>
                         <button id="restart-assessment-btn" class="btn-primary">Try Again</button>
@@ -231,35 +207,27 @@
                 </div>
             </div>
             
-            <!-- Assessment Review View -->
-            <div id="assessment-review" class="hidden">
-                 <!-- Review content will be dynamically generated here -->
-            </div>
+            <div id="assessment-review" class="hidden"></div>
         </main>
 
         <footer class="text-center py-6 mt-8 text-gray-500 text-sm">
             <p>&copy; 2024 CISM Study Guide. All rights reserved. For educational purposes only.</p>
         </footer>
+    </div>
 
-        <!-- Quit Confirmation Modal -->
-        <div id="quit-modal" class="modal-overlay hidden">
-            <div class="modal-content fade-in">
-                <h3 class="text-xl font-bold mb-4">Are you sure?</h3>
-                <p class="text-gray-600 mb-6">Your progress on this assessment will be lost.</p>
-                <div class="flex justify-center gap-4">
-                    <button id="cancel-quit-btn" class="btn-secondary">Cancel</button>
-                    <button id="confirm-quit-btn" class="btn-primary btn-danger">Yes, Quit</button>
-                </div>
+    <div id="quit-modal" class="modal-overlay hidden">
+        <div class="modal-content fade-in">
+            <h3 class="text-xl font-bold mb-4">Are you sure?</h3>
+            <p class="text-gray-600 mb-6">Your progress on this assessment will be lost.</p>
+            <div class="flex justify-center gap-4">
+                <button id="cancel-quit-btn" class="btn-secondary">Cancel</button>
+                <button id="confirm-quit-btn" class="btn-primary btn-danger">Yes, Quit</button>
             </div>
         </div>
     </div>
-    <!-- End of Embeddable Module -->
 
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const moduleContainer = document.getElementById('assessment-module-container');
-        if (!moduleContainer) return; // Stop if the container is not found
-
         // --- DATA ---
         const questionBank = {
             'domain-1': [
@@ -273,26 +241,26 @@
                 { question: "An organization's risk appetite is BEST defined as:", answers: ["The amount of loss experienced in a year", "The budget allocated for security controls", "The amount of risk the organization is willing to accept to achieve its objectives", "The number of open vulnerabilities on a scan report"], correct: 2, explanation: "Risk appetite is a high-level, strategic statement from senior management that defines the level of risk the organization is willing to pursue or tolerate in its activities." },
                 { question: "Which role is responsible for classifying data and determining appropriate access controls?", answers: ["Data custodian", "Data user", "Data owner", "Data processor"], correct: 2, explanation: "The data owner, typically a senior business manager, is accountable for the data and is responsible for making key decisions about its classification and protection, including who is authorized to access it." },
                 { question: "The PRIMARY benefit of a well-defined information security architecture is:", answers: ["It allows for faster software development", "It reduces the need for user training", "It ensures consistent and cost-effective implementation of security controls", "It guarantees compliance with all international laws"], correct: 2, explanation: "A security architecture provides a blueprint for how controls are designed and integrated, which leads to consistency, avoids redundant or conflicting controls, and ensures that security is implemented in a cost-effective manner that aligns with the overall strategy." },
-                { question: "Which of the following BEST describes the role of a steering committee for information security?", answers: ["To perform daily security operations", "To provide high-level direction and oversight for the security program", "To conduct penetration tests", "To respond to security incidents"], correct: 1, explanation: "A steering committee, composed of senior business leaders, provides strategic guidance, ensures alignment with business goals, and oversees the information security program, rather than managing its day-to-day operations." },
-                { question: "A key purpose of information security metrics is to:", answers: ["Justify the purchase of new security tools", "Communicate the effectiveness of the security program to stakeholders", "Identify individuals who violate security policy", "Replace the need for security audits"], correct: 1, explanation: "Metrics provide quantifiable data that demonstrates the performance and value of the security program, enabling informed decision-making and clear communication with management and other stakeholders." },
-                { question: "Which of the following is a primary driver for developing an information security strategy?", answers: ["A recent security breach at a competitor", "The personal preferences of the CISO", "The organization's business objectives and risk tolerance", "The availability of a new security technology"], correct: 2, explanation: "An effective security strategy must be driven by the needs of the business. It should be designed to support business objectives while managing risks to an acceptable level as defined by the organization's risk tolerance." },
-                { question: "What is the main advantage of using a top-down approach to information security governance?", answers: ["It is faster to implement than a bottom-up approach", "It ensures that security initiatives have support from senior leadership", "It focuses on technical controls first", "It is less expensive"], correct: 1, explanation: "The top-down approach starts with senior management defining policies and strategy, which ensures that the security program has the necessary authority, resources, and alignment with business goals from the outset." },
-                { question: "A company's security policy states that all sensitive data must be encrypted. This is an example of what type of control?", answers: ["Corrective", "Detective", "Preventive", "Compensating"], correct: 2, explanation: "A preventive control is designed to stop an undesirable event from occurring. Requiring encryption is a preventive measure intended to prevent unauthorized access to sensitive data." },
-                { question: "Due care and due diligence are legal concepts related to liability. What is the difference between them?", answers: ["There is no difference", "Due care is implementing controls; due diligence is verifying those controls are effective", "Due diligence is for managers; due care is for technical staff", "Due care is about policies; due diligence is about procedures"], correct: 1, explanation: "Due care refers to the act of behaving as a reasonable person would (e.g., implementing a firewall). Due diligence is the follow-up action to ensure that this reasonable level of care is maintained (e.g., regularly reviewing firewall rules and logs)." },
-                { question: "Which of the following is the MOST important component of an effective security awareness program?", answers: ["Using highly technical jargon", "Making the training as long as possible", "Regular reinforcement and relevance to users' roles", "A difficult final exam"], correct: 2, explanation: "For a security awareness program to be effective, it must be ongoing and provide information that is directly relevant to an employee's daily tasks. One-time training is quickly forgotten." },
-                { question: "The purpose of a security policy is to:", answers: ["Provide a detailed step-by-step guide for a technical task", "Communicate management's intent and high-level requirements for security", "List all approved software for the organization", "Document the results of a risk assessment"], correct: 1, explanation: "A policy is a high-level document that sets the tone and direction for security. It is a formal statement from management that defines the organization's security goals and requirements." },
-                { question: "Which of the following would be considered a 'standard' in a security documentation hierarchy?", answers: ["A document stating that all employees must protect company data", "A document specifying that all servers must run a specific version of an operating system", "A document outlining the steps to report a phishing email", "A document defining the company's overall risk appetite"], correct: 1, explanation: "Standards provide mandatory, specific requirements for technologies, configurations, and processes to ensure consistency and enforce the rules set in policies. Specifying an OS version is a classic example of a standard." },
-                { question: "The concept of 'tone at the top' refers to:", answers: ["The volume of the security alarm system", "The encryption algorithm used for communications", "The ethical climate and security commitment demonstrated by senior leadership", "The font size used in security policies"], correct: 2, explanation: "'Tone at the top' is a critical governance concept. It means that senior leadership must visibly and consistently demonstrate their commitment to security and ethical behavior, which sets the cultural expectation for the rest of the organization." },
-                { question: "An information security program should be based on:", answers: ["The latest technology trends", "A framework that aligns with the organization's goals", "The CISO's previous experience", "The number of security incidents"], correct: 1, explanation: "An effective security program is not arbitrary; it's built upon a structured framework (like ISO 27001 or NIST CSF) that is chosen and adapted to align with the specific goals, risks, and culture of the organization." },
-                { question: "What is the purpose of a RACI chart in security governance?", answers: ["To calculate risk scores", "To define the roles and responsibilities of individuals for tasks and decisions", "To track the budget for security projects", "To list the approved software vendors"], correct: 1, explanation: "A RACI (Responsible, Accountable, Consulted, Informed) chart is a matrix used to clarify and define the roles and responsibilities of different people in completing tasks and making decisions, which is crucial for clear governance." },
-                { question: "Which of the following is the BEST example of a compensating control?", answers: ["A firewall blocking malicious traffic", "Regular review of system logs on a server that cannot have antivirus installed", "Encrypting a hard drive", "A strong password policy"], correct: 1, explanation: "A compensating control is a substitute control used when a primary control cannot be implemented. If antivirus (a primary control) cannot be installed, enhanced log review compensates for that gap by providing a detective capability." },
-                { question: "The MOST important reason to classify data is to:", answers: ["Determine the appropriate level of protection required", "Know how much storage space is needed", "Make it easier to share with third parties", "Comply with a single, specific regulation"], correct: 0, explanation: "Data classification is the foundation for data protection. By understanding the sensitivity and criticality of data, an organization can apply the necessary and cost-effective level of security controls." },
-                { question: "A security champion program is designed to:", answers: ["Replace the need for a dedicated security team", "Identify the best security professional in the company", "Embed security awareness and expertise within business units", "Manage the security budget"], correct: 2, explanation: "A security champion program trains and empowers individuals within different business departments to act as local security advocates and points of contact, helping to improve the security culture and practices throughout the organization." },
-                { question: "Which of the following is a key element of a security policy?", answers: ["A list of all IP addresses on the network", "The brand names of all security tools", "A statement of management's intent and support for security", "The CISO's home phone number"], correct: 2, explanation: "A security policy is a high-level document that must clearly state management's intent, goals, and commitment to information security, giving it the authority it needs to be effective." },
-                { question: "The PRIMARY goal of continuous monitoring is to:", answers: ["Generate daily reports for auditors", "Maintain ongoing awareness of the organization's security posture", "Catch employees who are misusing company assets", "Justify an increase in the security budget"], correct: 1, explanation: "Continuous monitoring provides real-time or near-real-time visibility into the security state of systems and the effectiveness of controls, allowing for a proactive approach to risk management rather than relying on point-in-time assessments." },
-                { question: "An organization's culture is a critical factor for the success of a security program because:", answers: ["It is not a critical factor", "A strong security culture encourages employees to make security-conscious decisions", "It determines which firewall to buy", "It is the only thing auditors look at"], correct: 1, explanation: "Technology and policies can fail, but a strong security culture, where employees instinctively consider security in their daily actions, provides a powerful and resilient layer of defense." },
-                { question: "What is the purpose of a baseline in security management?", answers: ["To provide a minimum level of security for all systems", "To describe the most advanced security configuration possible", "To list all security incidents that have occurred", "To act as a guide for physical security only"], correct: 0, explanation: "A security baseline establishes a standard, minimum level of security that all systems of a certain type must adhere to, ensuring a consistent and manageable security posture across the enterprise." },
-                { question: "The MOST effective way to gain senior management support for a security initiative is to:", answers: ["Use highly technical language to demonstrate expertise", "Present the initiative in terms of business benefits and risk reduction", "Compare the budget to that of a competitor", "Threaten to resign if the initiative is not approved"], correct: 1, explanation: "Senior management is focused on business objectives. To gain their support, security managers must articulate how a security initiative will help the business succeed, for example, by reducing the risk of financial loss, protecting brand reputation, or enabling new business opportunities." },
+                { question: "What is the purpose of an information security steering committee?", answers: ["To perform daily security operations", "To provide senior management oversight and guidance for the security program", "To develop and test new security software", "To conduct forensic investigations after a breach"], correct: 1, explanation: "The steering committee, composed of senior leaders from across the business, ensures the security program has resources, authority, and is aligned with business goals." },
+                { question: "Which of the following BEST describes the concept of 'due care'?", answers: ["Following laws and regulations", "Taking the reasonable steps to protect assets that a prudent person would", "Purchasing cybersecurity insurance", "Implementing the most expensive security controls"], correct: 1, explanation: "Due care is the operational aspect of due diligence. It's about taking the necessary, reasonable actions to protect the organization's assets." },
+                { question: "An information security policy is an example of which type of control?", answers: ["Physical", "Technical", "Administrative", "Corrective"], correct: 2, explanation: "Policies, standards, procedures, and guidelines are all forms of administrative (or managerial) controls that direct human behavior." },
+                { question: "Which of the following is the MOST important factor for the success of an information security program?", answers: ["The size of the security budget", "The number of security certifications held by staff", "The visible support of senior management", "The complexity of the implemented technology"], correct: 2, explanation: "Without clear and visible support from the top, a security program will struggle to get the funding, resources, and organizational buy-in needed to be effective." },
+                { question: "The primary output of the security governance process should be:", answers: ["A list of approved software", "A set of detailed technical configurations", "A security strategy that supports business objectives", "A daily report of security alerts"], correct: 2, explanation: "Governance is about strategy. Its main output is a high-level security strategy that is integrated with the business's overall strategy." },
+                { question: "What is the BEST way to ensure a new business acquisition is integrated securely?", answers: ["Isolate the new company's network permanently", "Force the new company to adopt all existing security policies immediately", "Perform a security due diligence review as part of the acquisition process", "Wait until after the acquisition is complete to assess security risks"], correct: 2, explanation: "Security due diligence should be part of the M&A process to identify risks early, understand the security posture of the acquired entity, and plan for integration." },
+                { question: "A set of specific, mandatory rules for technology use is known as a:", answers: ["Policy", "Guideline", "Standard", "Procedure"], correct: 2, explanation: "Standards are compulsory and provide specific details on what is required to support a policy. For example, a policy might require encryption, while a standard specifies AES-256 as the required algorithm." },
+                { question: "Which of the following metrics would be MOST useful for a Board of Directors?", answers: ["Number of firewall rules updated last week", "Percentage of systems patched within 30 days", "Trend of key risk indicators (KRIs) over time", "CPU utilization on the SIEM server"], correct: 2, explanation: "The Board is concerned with high-level risk. KRIs that are tied to business impact and show trends over time provide the strategic insight they need, unlike operational or technical metrics." },
+                { question: "The main reason for data classification is to:", answers: ["Determine the level of security controls required to protect the data", "Make data easier to find for employees", "Comply with data storage size limits", "Track the age of data"], correct: 0, explanation: "Data classification is the process of categorizing data based on its sensitivity and criticality to determine the appropriate level of protection it needs." },
+                { question: "Which of the following is a governance function?", answers: ["Configuring a firewall", "Resetting a user's password", "Prioritizing security investments", "Analyzing malware"], correct: 2, explanation: "Governance deals with strategic decisions, such as allocating resources and prioritizing investments, to ensure alignment with business goals. The other options are operational tasks." },
+                { question: "What is 'due diligence' in the context of information security?", answers: ["The act of investigating and understanding risks before committing to a course of action", "The day-to-day maintenance of security controls", "A type of security audit", "A legal requirement to report all breaches within 24 hours"], correct: 0, explanation: "Due diligence is the research and investigation part of risk management, ensuring that decisions are informed and prudent. Due care is the implementation of those decisions." },
+                { question: "The purpose of a security charter is to:", answers: ["List all security controls in the organization", "Grant authority and state the mission and scope of the information security program", "Define the steps for responding to a security incident", "Provide a tutorial on how to use security software"], correct: 1, explanation: "A security charter is a high-level document from senior management that formally establishes the security program and gives the CISO the authority to run it." },
+                { question: "Which of the following provides the BEST framework for enterprise IT governance?", answers: ["ISO 27001", "NIST Cybersecurity Framework", "COBIT", "ITIL"], correct: 2, explanation: "While the others are excellent security frameworks, COBIT is specifically designed as a comprehensive framework for the governance and management of enterprise IT." },
+                { question: "A key principle of information security governance is:", answers: ["Technology-driven decision making", "Accountability", "Decentralized control", "Profit maximization"], correct: 1, explanation: "A core tenet of any governance system is establishing clear accountability, ensuring that someone is ultimately answerable for the outcomes of the security program." },
+                { question: "When developing security policies, it is MOST important that they are:", answers: ["As technically detailed as possible", "Enforceable", "Written by the legal department", "Published on the company's external website"], correct: 1, explanation: "A policy that cannot be enforced is useless. Policies must be practical, and the organization must have the will and the means to ensure compliance." },
+                { question: "What is the primary risk of not having an effective security governance structure?", answers: ["The security budget will be too high", "Security efforts may be misaligned with business objectives", "The company will not be ableto hire qualified security staff", "Too many security audits will be required"], correct: 1, explanation: "Without governance, the security program can become a purely technical function, disconnected from business needs, leading to wasted resources and inadequate protection of key assets." },
+                { question: "Which of the following is the BEST example of a preventive administrative control?", answers: ["An intrusion detection system (IDS)", "A firewall", "Security awareness training", "A data backup"], correct: 2, explanation: "Security awareness training is administrative (people-focused) and preventive because it aims to stop security incidents from happening by teaching good behavior." },
+                { question: "The relationship between a policy, a standard, and a guideline is:", answers: ["They are all mandatory", "A standard and guideline implement a policy", "A policy implements a standard", "A guideline is mandatory, but a standard is optional"], correct: 1, explanation: "Policies are high-level statements. Standards are mandatory rules that support policies. Guidelines are recommended, non-mandatory best practices." },
+                { question: "Who should be the primary audience for a set of security metrics on program effectiveness?", answers: ["External auditors", "End users", "Senior management", "The incident response team"], correct: 2, explanation: "Metrics on program effectiveness are used to justify the program's existence and value, making senior management the most important audience for this information." },
+                { question: "An organization's culture is a key factor in the success of its security program. This is PRIMARILY because:", answers: ["A strong security culture can reduce the need for technical controls", "The culture influences employee behavior and compliance with policies", "A weak culture makes it hard to get budget for security tools", "Auditors give higher scores to companies with good security cultures"], correct: 1, explanation: "Culture shapes how people act when no one is watching. A strong security culture means employees are more likely to make secure choices naturally, reinforcing the entire program." }
             ],
             'domain-2': [
                 { question: "What is the formula for calculating Annualized Loss Expectancy (ALE)?", answers: ["SLE / ARO", "AV * EF", "SLE * ARO", "AV - SLE"], correct: 2, explanation: "ALE is calculated by multiplying the Single Loss Expectancy (SLE) by the Annualized Rate of Occurrence (ARO). It represents the expected monetary loss for an asset over a one-year period." },
@@ -305,58 +273,58 @@
                 { question: "A key benefit of using a standardized risk management framework like NIST SP 800-30 is that it:", answers: ["Guarantees the organization will not have a security breach", "Provides a structured and repeatable process for assessing risk", "Eliminates the need for security expertise", "Is the only framework accepted by auditors"], correct: 1, explanation: "Standardized frameworks provide a consistent methodology and vocabulary for risk management, which makes the process structured, repeatable, and easier to communicate across the organization." },
                 { question: "The difference between a vulnerability and a threat is that:", answers: ["A threat is a weakness, and a vulnerability is the actor that exploits it", "A vulnerability is a weakness, and a threat is the actor or event that could exploit it", "They are the same thing", "A vulnerability is caused by a threat"], correct: 1, explanation: "A vulnerability is an internal weakness or flaw in a system or process. A threat is an external entity or event (like a hacker or a natural disaster) that has the potential to exploit that vulnerability." },
                 { question: "When developing risk scenarios, the MOST important factor to consider is:", answers: ["The technical complexity of the attack", "The likelihood of a zero-day exploit being used", "The potential business impact", "The cost of the asset being targeted"], correct: 2, explanation: "While all factors are relevant, risk management is primarily concerned with protecting the business. Therefore, understanding the potential business impact of a risk scenario is the most critical factor for prioritization and decision-making." },
-                { question: "A qualitative risk assessment is generally more ______ than a quantitative assessment.", answers: ["Subjective", "Expensive", "Time-consuming", "Accurate"], correct: 0, explanation: "Qualitative risk assessment relies on descriptive terms (high, medium, low) and expert judgment, making it inherently subjective compared to the numerical calculations of a quantitative assessment." },
-                { question: "What is the primary purpose of a risk register?", answers: ["To track the security budget", "To list all of the organization's assets", "To serve as a central repository for all identified risks and their statuses", "To document the incident response plan"], correct: 2, explanation: "A risk register is a fundamental tool in risk management used to document and track risks, including their description, impact, likelihood, owner, and treatment plan, throughout their lifecycle." },
-                { question: "The risk of a key supplier going out of business is an example of what kind of risk?", answers: ["Technical risk", "Operational risk", "Strategic risk", "Third-party risk"], correct: 3, explanation: "This is a classic example of third-party risk (or supply chain risk), where the actions or failures of an external entity can directly impact the organization." },
-                { question: "Implementing a new firewall is an example of which risk response strategy?", answers: ["Avoidance", "Transfer", "Mitigation", "Acceptance"], correct: 2, explanation: "Risk mitigation involves taking action to reduce the likelihood or impact of a risk. A firewall is a security control implemented to mitigate the risk of unauthorized network access." },
-                { question: "A risk assessment should be performed:", answers: ["Only once when a system is first deployed", "Only when an auditor requires it", "On a regular, periodic basis and when significant changes occur", "Only after a major security incident"], correct: 2, explanation: "Risk management is a continuous process. Assessments need to be done periodically (e.g., annually) and must also be triggered by significant changes to the environment, such as new technology, new business processes, or an evolving threat landscape." },
-                { question: "If the Asset Value (AV) is $100,000 and the Exposure Factor (EF) is 25%, what is the Single Loss Expectancy (SLE)?", answers: ["$400,000", "$2,500", "$25,000", "$75,000"], correct: 2, explanation: "The formula for SLE is AV * EF. In this case, $100,000 * 0.25 = $25,000." },
-                { question: "What is the primary goal of control monitoring?", answers: ["To ensure that security controls are operating as intended and remain effective over time", "To replace manual controls with automated ones", "To punish employees who bypass controls", "To reduce the number of controls in place"], correct: 0, explanation: "Control monitoring is the ongoing process of assessing the effectiveness of security controls to ensure they are working correctly and continue to be appropriate as the risk landscape changes." },
-                { question: "A company decides not to launch a new mobile application because the security risks associated with customer data are too high. This is an example of risk:", answers: ["Mitigation", "Avoidance", "Transfer", "Acceptance"], correct: 1, explanation: "Risk avoidance is the strategy of eliminating the risk by deciding not to engage in the activity that creates the risk. In this case, the company avoids the risk by not launching the app." },
-                { question: "A Key Risk Indicator (KRI) is a metric that:", answers: ["Measures the financial loss from a past incident", "Provides an early warning of a potential increase in risk", "Counts the number of security policies in place", "Tracks the completion of security awareness training"], correct: 1, explanation: "KRIs are predictive metrics designed to provide early signals that a risk may be emerging or increasing, allowing management to take proactive action before a loss event occurs. An example is a sudden spike in login failures." },
-                { question: "The output of the risk assessment process is a critical input for the ______ process.", answers: ["Risk treatment", "Software development", "Hiring", "Marketing"], correct: 0, explanation: "Once risks have been identified and analyzed in the assessment phase, the results are used to inform the risk treatment (or risk response) process, where decisions are made on how to address each identified risk." },
-                { question: "Threat modeling is typically performed during which phase of a system's lifecycle?", answers: ["Decommissioning", "Operation", "Design and Development", "Testing"], correct: 2, explanation: "Threat modeling is most effective when performed early in the lifecycle, during the design and development phase. This allows security considerations to be built into the system from the beginning, which is more effective and less costly than adding them later." },
-                { question: "What is the primary difference between a risk assessment and a vulnerability assessment?", answers: ["A vulnerability assessment focuses only on external threats", "A risk assessment considers threats, vulnerabilities, and business impact, while a vulnerability assessment focuses only on identifying weaknesses", "They are the same thing", "A risk assessment is performed by auditors, while a vulnerability assessment is performed by developers"], correct: 1, explanation: "A vulnerability assessment is a component of a risk assessment. It is the technical process of finding weaknesses. A risk assessment is a broader management process that takes those vulnerabilities, considers the threats that could exploit them, and evaluates the potential business impact." },
-                { question: "If the SLE for a server failure is $50,000 and it is expected to happen once every five years, what is the ALE?", answers: ["$250,000", "$50,000", "$10,000", "$5,000"], correct: 2, explanation: "The Annualized Rate of Occurrence (ARO) is 1/5, or 0.2. The formula for ALE is SLE * ARO. Therefore, $50,000 * 0.2 = $10,000." },
-                { question: "The process of identifying and documenting the security controls of a third-party vendor is known as:", answers: ["Vendor risk management", "Contract negotiation", "Service level agreement", "Onboarding"], correct: 0, explanation: "Vendor risk management (or third-party risk management) is the comprehensive process of identifying, assessing, and mitigating the risks associated with outsourcing services or sharing data with external partners." },
-                { question: "A risk matrix is used in qualitative risk assessment to:", answers: ["Calculate the exact financial cost of a risk", "Prioritize risks based on their likelihood and impact levels", "List all of the company's assets", "Track the progress of risk mitigation efforts"], correct: 1, explanation: "A risk matrix (or heat map) is a visual tool that plots the likelihood of a risk against its potential impact, allowing risks to be categorized (e.g., as low, medium, high) and prioritized for treatment." },
-                { question: "Which of the following is the BEST source of information for identifying new and emerging threats?", answers: ["The company's internal help desk tickets", "Threat intelligence feeds and industry reports", "The marketing department's customer surveys", "The minutes from the last board meeting"], correct: 1, explanation: "Threat intelligence feeds (from government agencies, security vendors, and information sharing groups) are specifically designed to provide timely and actionable information about the latest threats, attack techniques, and threat actors." },
-                { question: "The primary purpose of a cost-benefit analysis for a security control is to:", answers: ["Ensure the control is the most technically advanced option available", "Determine if the cost of the control is justified by the amount of risk it reduces", "Prove that the control will stop all possible attacks", "Satisfy a request from the sales team"], correct: 1, explanation: "A cost-benefit analysis is a fundamental step in risk treatment. It compares the cost of implementing a control (the 'cost') with the reduction in the ALE (the 'benefit') to ensure that security investments are financially sound." },
-                { question: "What is the term for a threat that is initiated by an employee or other trusted insider?", answers: ["An advanced persistent threat (APT)", "A zero-day threat", "An insider threat", "A supply chain threat"], correct: 2, explanation: "An insider threat is a security risk that originates from within the organization, such as from a current or former employee, contractor, or business partner who has or had authorized access to the organization's network, systems, or data." },
-                { question: "A company decides to continue using an old, unsupported operating system for a critical application because the cost of upgrading is prohibitive. This is an example of:", answers: ["Risk mitigation", "Risk avoidance", "Risk acceptance", "Risk transfer"], correct: 2, explanation: "This is a classic example of risk acceptance. The company is aware of the risks associated with the unsupported OS but has made a conscious, formal decision (based on cost) to accept that risk rather than mitigate it." },
-                { question: "The likelihood of a threat exploiting a vulnerability is a key component in determining:", answers: ["The asset value", "The overall risk", "The cost of the control", "The recovery time objective"], correct: 1, explanation: "Risk is often defined as the intersection of a threat, a vulnerability, and the potential impact. The likelihood (or probability) of the threat successfully exploiting the vulnerability is a critical factor in calculating the level of risk." },
+                { question: "A qualitative risk assessment uses:", answers: ["Monetary values", "Descriptive scales like High, Medium, and Low", "Complex mathematical formulas", "Historical incident data only"], correct: 1, explanation: "Qualitative risk assessment relies on subjective judgment and descriptive scales to rate the likelihood and impact of risks, making it faster but less precise than quantitative analysis." },
+                { question: "The value of a control is BEST determined by:", answers: ["How much it cost to purchase", "How much it reduces risk", "How popular the control is in the industry", "How easy it is to implement"], correct: 1, explanation: "The purpose of a control is to mitigate risk. Therefore, its value is measured by how effectively it reduces the likelihood or impact of a risk, bringing the residual risk to an acceptable level." },
+                { question: "Which of the following is an example of risk avoidance?", answers: ["Implementing a firewall to block malicious traffic", "Buying insurance to cover losses from a data breach", "Deciding not to launch a new online service in a high-risk country", "Accepting the findings of a penetration test without taking action"], correct: 2, explanation: "Risk avoidance means ceasing or deciding not to start an activity that would introduce the risk. In this case, the organization avoids the risk by not conducting business in that environment." },
+                { question: "A risk register is BEST described as:", answers: ["A list of all organizational assets", "A document detailing the company's insurance policies", "A centralized document for tracking and monitoring identified risks", "A log of all security incidents"], correct: 2, explanation: "The risk register is a key tool in risk management used to document details about each identified risk, including its description, impact, likelihood, owner, and current status." },
+                { question: "The Single Loss Expectancy (SLE) for a server valued at $50,000, where a power surge would destroy 25% of its components, is:", answers: ["$50,000", "$12,500", "$25,000", "$1,250"], correct: 1, explanation: "SLE is calculated as Asset Value (AV) * Exposure Factor (EF). In this case, $50,000 * 0.25 = $12,500." },
+                { question: "What is the primary purpose of a control gap analysis?", answers: ["To identify missing or inadequately implemented security controls", "To calculate the ROI of the security program", "To choose a new security vendor", "To satisfy all legal requirements"], correct: 0, explanation: "A control gap analysis compares the existing set of controls against a desired state (e.g., a security framework like ISO 27001) to identify where gaps in protection exist." },
+                { question: "Threat modeling is typically performed during which phase of a system's life cycle?", answers: ["Retirement", "Operations and Maintenance", "Design and Development", "Disposal"], correct: 2, explanation: "Threat modeling is most effective and cost-efficient when performed early in the SDLC, during the design phase, so that security can be built in, not bolted on." },
+                { question: "An organization decides to continue using an old legacy system because the cost to replace it is too high. This is an example of:", answers: ["Risk transfer", "Risk mitigation", "Risk avoidance", "Risk acceptance"], correct: 3, explanation: "By acknowledging the risks associated with the legacy system but choosing not to replace it (the control), management is formally or informally accepting those risks." },
+                { question: "Which of the following is a primary input to the risk management process?", answers: ["The results of the latest security audit", "The organization's business objectives", "The number of active security incidents", "The security team's budget"], correct: 1, explanation: "Risk management cannot be done in a vacuum. It must be informed by the organization's strategic goals and objectives to ensure that it protects what is most important to the business." },
+                { "question": "The Annualized Rate of Occurrence (ARO) is defined as:", "answers": ["The total financial loss from a single event", "The time it takes to recover from an event", "The estimated frequency at which a threat is expected to occur in a year", "The percentage of an asset's value lost in an event"], "correct": 2, "explanation": "ARO is a key component of quantitative risk analysis that estimates how many times a specific threat event is likely to happen over a one-year period." },
+                { "question": "Which of the following is the MOST significant challenge in quantitative risk analysis?", "answers": ["It is too fast to be thorough", "It requires complex software", "Assigning credible monetary values to assets and impacts can be difficult", "It does not consider the likelihood of a threat"], "correct": 2, "explanation": "The primary difficulty in quantitative risk analysis is the subjectivity and challenge involved in accurately assigning dollar values to intangible assets (like reputation) and potential impacts." },
+                { "question": "A countermeasure is another term for a:", "answers": ["Threat", "Vulnerability", "Risk", "Control"], "correct": 3, "explanation": "A countermeasure, safeguard, or control are all terms for the actions, devices, or procedures used to reduce risk by mitigating threats and vulnerabilities." },
+                { "question": "The process of identifying the assets, threats, and vulnerabilities that make up an organization's IT environment is known as:", "answers": ["Risk identification", "Risk calculation", "Risk transfer", "Risk monitoring"], "correct": 0, "explanation": "Risk identification is the first phase of the risk management lifecycle and involves creating an inventory of risks that could affect the organization." },
+                { "question": "A supply chain risk assessment would be MOST concerned with:", "answers": ["The security posture of third-party vendors and suppliers", "The physical security of the organization's main office", "The patching level of internal employee workstations", "The company's social media policy"], "correct": 0, "explanation": "Supply chain risk management focuses on identifying and mitigating risks that arise from dependencies on external entities, such as suppliers, vendors, and partners." },
+                { "question": "What is the primary goal of risk treatment?", "answers": ["To identify all possible risks", "To modify risk to a level that is acceptable to management", "To create a complete list of all organizational assets", "To purchase insurance for all identified risks"], "correct": 1, "explanation": "Risk treatment (or risk response) is the process of selecting and implementing controls to modify the identified risks to align with the organization's risk appetite." },
+                { "question": "A vulnerability scan report shows 500 open vulnerabilities. What is the BEST next step for the information security manager?", "answers": ["Immediately patch all 500 vulnerabilities", "Accept all the risks identified in the report", "Prioritize the vulnerabilities based on business impact and exploitability", "Purchase a new vulnerability scanner"], "correct": 2, "explanation": "It is rarely feasible to fix everything at once. The most effective approach is to prioritize remediation efforts based on the actual risk each vulnerability poses to the business." },
+                { "question": "The term 'threat actor' refers to:", "answers": ["A type of security software", "A weakness in a computer system", "The person or entity that initiates a threat", "A security control"], "correct": 2, "explanation": "A threat actor (or threat agent) is the character who carries out the threat, such as a disgruntled employee, a cybercriminal group, or a nation-state." },
+                { "question": "Which of the following is an example of a qualitative risk impact?", "answers": ["A loss of $1 million in sales", "A 20% reduction in stock price", "Damage to the organization's reputation", "A fine of $500,000 from a regulator"], "correct": 2, "explanation": "Reputational damage is an intangible impact that is difficult to measure in precise monetary terms, making it a qualitative assessment. The other options are quantitative." },
+                { "question": "Risk aggregation is the process of:", "answers": ["Combining multiple smaller risks into a consolidated view to understand the overall risk posture", "Assigning a single risk to each business unit", "Ignoring small risks to focus on larger ones", "Transferring all risks to a single third party"], "correct": 0, "explanation": "Risk aggregation provides a 'big picture' view by rolling up individual risks to understand the organization's cumulative risk exposure, which might be greater than the sum of its parts." },
+                { "question": "A control's effectiveness is a measure of:", "answers": ["How much the control cost", "How well the control reduces risk", "How many people are needed to manage the control", "The age of the control"], "correct": 1, "explanation": "The effectiveness of a control is determined by its ability to perform its intended function—reducing the likelihood and/or impact of a specific risk." }
             ],
             'domain-3': [
                 { question: "What is the primary purpose of a Security Operations Center (SOC)?", answers: ["To develop security policies", "To conduct security awareness training", "To monitor, detect, analyze, and respond to cybersecurity incidents", "To manage the security budget"], correct: 2, explanation: "A SOC is a centralized unit that deals with security issues on an organizational and technical level, focusing on the real-time monitoring and handling of security incidents." },
                 { question: "Which of the following is a key component of an Incident Response Plan (IRP)?", answers: ["A list of all company assets", "The marketing department's contact list", "Communication protocols for stakeholders", "The company's mission statement"], correct: 2, explanation: "A critical part of any IRP is defining clear communication protocols to ensure that all relevant stakeholders (internal and external) are informed appropriately during an incident." },
                 { question: "The main goal of a security awareness program is to:", answers: ["Ensure everyone in IT is a security expert", "Fulfill a compliance requirement", "Influence user behavior to reduce security risk", "Teach users how to write secure code"], correct: 2, explanation: "While compliance is a benefit, the primary goal is to change how users think about and act on security, making them a strong first line of defense and reducing human-related risks like falling for phishing scams." },
-                { question: "Which of the following is the BEST metric to measure the effectiveness of a security awareness program?", answers: ["The number of people who completed the training", "The cost of the training program", "A reduction in the number of user-reported security incidents", "Positive feedback from employees about the training"], correct: 2, explanation: "The ultimate goal is behavior change that reduces risk. A decrease in successful phishing attacks or an increase in users correctly reporting suspicious emails is a direct measure of the program's impact on reducing risk." },
+                { question: "Which of the following is the BEST metric to measure the effectiveness of a security awareness program?", answers: ["The number of people who completed the training", "The cost of the training program", "A reduction in successful phishing attacks or increase in reporting", "Positive feedback from employees about the training"], correct: 2, explanation: "The ultimate goal is behavior change that reduces risk. A decrease in successful phishing attacks or an increase in users correctly reporting suspicious emails is a direct measure of the program's impact on reducing risk." },
                 { question: "What is the primary purpose of patch management?", answers: ["To add new features to software", "To reduce the attack surface by remediating known vulnerabilities", "To ensure all software is from the same vendor", "To monitor system performance"], correct: 1, explanation: "Patch management is a critical security process focused on identifying, testing, and deploying software updates (patches) to fix vulnerabilities that could otherwise be exploited by attackers." },
                 { question: "In the context of identity and access management, the principle of 'least privilege' means:", answers: ["All users should have administrator rights", "Users should only be granted the minimum level of access necessary to perform their job functions", "Access should be granted based on seniority", "Users can choose their own access rights"], correct: 1, explanation: "Least privilege is a foundational security principle that limits user access rights to the bare minimum permissions they need to do their job. This minimizes the damage that can be done if an account is compromised." },
                 { question: "What is the function of a Security Information and Event Management (SIEM) system?", answers: ["To automatically block all incoming network traffic", "To manage user passwords and access credentials", "To aggregate and analyze log data from multiple sources to identify security threats", "To encrypt all data on the network"], correct: 2, explanation: "A SIEM system is a powerful tool that collects security-related data from across the IT environment (e.g., firewalls, servers, applications) and uses correlation and analysis to detect potential threats and facilitate incident response." },
                 { question: "When an organization outsources a service to a third-party vendor, who is ultimately accountable for the security of the data?", answers: ["The third-party vendor", "The organization", "The cloud provider", "The end users"], correct: 1, explanation: "An organization can delegate responsibility for security tasks, but it cannot outsource accountability. The organization that owns the data is always ultimately accountable for its protection, regardless of where it is stored or processed." },
                 { question: "The purpose of performing a gap analysis against a security framework like ISO 27001 is to:", answers: ["Identify all potential threats to the organization", "Determine the difference between the current state of security controls and the framework's requirements", "Calculate the ROI of the security program", "Choose which vendor to purchase security tools from"], correct: 1, explanation: "A gap analysis is a formal review that compares an organization's existing security posture and controls against the requirements of a specific framework or standard to identify areas that are missing or need improvement." },
                 { question: "Which of the following is the MOST secure method for multi-factor authentication (MFA)?", answers: ["Email-based one-time password", "SMS-based one-time password", "A push notification to a mobile app", "A FIDO2-compliant hardware security key"], correct: 3, explanation: "Hardware security keys (like a YubiKey) are considered the gold standard for MFA because they are resistant to phishing and man-in-the-middle attacks, unlike SMS or email, which can be intercepted." },
-                { question: "What is the primary objective of change management in an IT environment?", answers: ["To ensure all changes are implemented as quickly as possible", "To prevent all changes to production systems", "To ensure that changes are authorized, tested, and documented to minimize risk", "To track the cost of all IT changes"], correct: 2, explanation: "Change management is a formal process designed to manage the risk associated with changes to IT systems. It ensures that every change is properly reviewed, approved, tested, and documented to prevent unintended outages or security vulnerabilities." },
-                { question: "A penetration test is BEST described as a:", answers: ["Tool that automatically finds all vulnerabilities", "Method for testing the incident response plan", "Simulated cyber attack intended to identify and exploit vulnerabilities", "Review of security policies and procedures"], correct: 2, explanation: "A penetration test is an authorized, simulated attack on a computer system, performed to evaluate the security of the system by actively exploiting its weaknesses." },
-                { question: "The main reason for segregating duties is to:", answers: ["Make processes more efficient", "Reduce the opportunity for a single individual to commit fraud or a malicious act", "Ensure that everyone knows how to do every job", "Lower the cost of training"], correct: 1, explanation: "Segregation of duties is a key internal control that prevents a single person from having the ability to both perpetrate and conceal fraud or an error. For example, the person who approves payments should not also be the person who issues them." },
-                { question: "Which of the following is a primary benefit of data classification?", answers: ["It makes all data available to all employees", "It allows for the application of appropriate, cost-effective security controls", "It eliminates the need for backups", "It guarantees compliance with all regulations"], correct: 1, explanation: "By classifying data based on its sensitivity and criticality, an organization can apply the right level of security controls, avoiding the cost of over-protecting non-sensitive data and ensuring that the most valuable data gets the strongest protection." },
-                { question: "In a public key infrastructure (PKI), what is the purpose of a Certificate Authority (CA)?", answers: ["To create the public and private keys for users", "To encrypt and decrypt messages", "To digitally sign and issue certificates, vouching for the identity of the certificate holder", "To store all the private keys in a secure location"], correct: 2, explanation: "The Certificate Authority is the trusted third party in a PKI system. Its primary role is to verify the identity of an entity (like a user or a website) and issue a digital certificate that binds that identity to a public key." },
-                { question: "A vulnerability scan report shows a critical vulnerability on a server. What should be the security manager's FIRST step?", answers: ["Immediately shut down the server", "Purchase a new security tool", "Validate the finding and assess its business impact", "Ignore the finding if it is the first time it has appeared"], correct: 2, explanation: "Not all findings from automated scanners are true positives or represent a real risk in a specific environment. The first step is always to validate the vulnerability and then assess its potential impact on the business to determine the appropriate priority and response." },
-                { question: "What is the purpose of an exit interview from a security perspective?", answers: ["To convince the employee to stay", "To ensure the return of all company assets and the termination of access rights", "To gather feedback on the company's cafeteria", "To offer the employee a severance package"], correct: 1, explanation: "From a security standpoint, the offboarding process is critical. An exit interview helps ensure that all assets (laptops, badges) are returned and, most importantly, that all of the employee's logical access to systems and data is revoked in a timely manner." },
-                { question: "Which of the following is the MOST important factor for the success of an information security program?", answers: ["The size of the security budget", "The number of security certifications held by the staff", "The visible support and commitment of senior management", "The brand of the firewall being used"], correct: 2, explanation: "Without the clear and visible support of senior leadership (the 'tone at the top'), a security program will struggle to get the necessary resources, authority, and cultural adoption to be truly effective." },
-                { question: "The process of hardening a server involves:", answers: ["Placing it in a physically secure data center", "Reducing its attack surface by disabling unnecessary services and accounts", "Installing antivirus software", "Backing up its data"], correct: 1, explanation: "Hardening is the process of securing a system by minimizing its surface of vulnerability. This typically involves removing non-essential software, disabling unused services, and configuring security settings to be as restrictive as possible." },
-                { question: "What is the primary security concern with 'shadow IT'?", answers: ["It is always more expensive than approved IT solutions", "It introduces systems and services that are not managed or secured by the IT department", "It is difficult for users to learn", "It is usually against the law"], correct: 1, explanation: "Shadow IT refers to technology used within an organization without the knowledge or approval of the IT department. This creates significant risk because these systems are not subject to the organization's security policies, monitoring, or controls." },
-                { question: "Which of the following BEST describes a defense-in-depth strategy?", answers: ["Using only one very strong security control", "Implementing security controls only at the network perimeter", "Layering multiple, different security controls to protect an asset", "Focusing exclusively on physical security"], correct: 2, explanation: "Defense-in-depth is the concept of protecting a system with a series of different defensive mechanisms. If one layer fails, another layer is already in place to thwart an attack." },
-                { question: "The process of periodically reviewing user access rights to ensure they are still appropriate is known as:", answers: ["Access control", "Onboarding", "Access recertification", "Authentication"], correct: 2, explanation: "Access recertification (or attestation) is a crucial process where a user's manager or the data owner periodically reviews and re-approves their access rights to ensure they are still necessary for their job role, enforcing the principle of least privilege over time." },
-                { question: "What is the primary purpose of network segmentation?", answers: ["To make the network faster", "To limit the impact of a security breach by isolating parts of the network", "To make it easier to assign IP addresses", "To reduce the cost of network hardware"], correct: 1, explanation: "Network segmentation involves dividing a network into smaller, isolated sub-networks. This contains threats, so if one segment is compromised, the attacker cannot easily move to other parts of the network." },
-                { question: "Which of the following is a key activity in managing third-party security?", answers: ["Ignoring the vendor's security practices", "Conducting due diligence and regular security assessments of the vendor", "Assuming the vendor is secure because they are a large company", "Only signing one-year contracts"], correct: 1, explanation: "Effective third-party risk management requires performing initial due diligence to assess a vendor's security posture before signing a contract, and then conducting ongoing monitoring and assessments to ensure they remain secure throughout the relationship." },
-                { question: "The 'AAA' in security stands for:", answers: ["Access, Authorization, and Administration", "Authentication, Authorization, and Accounting", "Audit, Assessment, and Analysis", "Asset, Attack, and Attacker"], correct: 1, explanation: "AAA is a fundamental framework for controlling access to resources. Authentication verifies who a user is, Authorization determines what they are allowed to do, and Accounting logs what they did." },
-                { question: "What is the main purpose of a data loss prevention (DLP) system?", answers: ["To back up data in case of a disaster", "To encrypt all data on the network", "To identify, monitor, and protect sensitive data from being exfiltrated", "To detect malware on endpoints"], correct: 2, explanation: "DLP solutions are designed to enforce policies and prevent sensitive information (like credit card numbers or intellectual property) from leaving the organization's control, whether accidentally or maliciously." },
-                { question: "A security architecture principle that advocates for simple and easy-to-understand designs is known as:", answers: ["Open design", "Economy of mechanism", "Fail-safe defaults", "Complete mediation"], correct: 1, explanation: "The principle of 'economy of mechanism' states that security mechanisms should be kept as simple and small as possible. Complex designs are harder to test, maintain, and prove secure." },
-                { question: "Which of the following is the BEST way to handle sensitive data on a laptop that is being disposed of?", answers: ["Deleting the files", "Reformatting the hard drive", "Physically destroying the hard drive", "Donating the laptop to a charity"], correct: 2, explanation: "For highly sensitive data, physical destruction (e.g., shredding, degaussing) is the only method that provides 100% assurance that the data cannot be recovered. Deleting files and reformatting can often be reversed with forensic tools." },
-                { question: "The purpose of a service level agreement (SLA) in the context of security is to:", answers: ["Define the specific, measurable security commitments of a service provider", "List all the employees at the service provider", "Guarantee 100% uptime", "Provide a discount on services"], correct: 0, explanation: "An SLA is a contractual commitment that defines the level of service a provider will deliver. From a security perspective, it should include specific, measurable metrics for things like uptime, incident response times, and patching timelines." },
-                { question: "What is the MOST important reason for an organization to have a formal software development lifecycle (SDLC)?", answers: ["To ensure that all projects are completed on time", "To integrate security into every phase of development", "To allow developers to choose their own programming languages", "To reduce the amount of code that needs to be written"], correct: 1, explanation: "A secure SDLC involves building security into the entire development process, from requirements gathering and design to testing and deployment. This 'shift-left' approach is far more effective and less costly than trying to add security on at the end." },
+                { question: "A security architecture provides a 'blueprint' for:", answers: ["The physical layout of the data center", "The reporting structure of the security team", "The consistent and coordinated deployment of security controls", "The company's annual financial report"], correct: 2, explanation: "A security architecture is a conceptual design that defines how security controls are positioned and related to each other to protect the organization's assets in a coherent way." },
+                { question: "The process of periodically reviewing user access rights to ensure they are still appropriate is called:", answers: ["Access logging", "Identity proofing", "Access recertification or review", "Password rotation"], correct: 2, explanation: "Access recertification is a critical administrative control where a user's manager or data owner periodically reviews and re-approves their access rights, preventing 'privilege creep'." },
+                { question: "Which of the following is the BEST way to manage the security of a new cloud-based application?", answers: ["Trust the cloud provider to handle all security", "Apply the same security controls used for on-premise applications without modification", "Perform a risk assessment and tailor controls to the cloud environment", "Block all access to the application until it can be moved on-premise"], correct: 2, explanation: "Cloud environments have a shared responsibility model and unique risks. A risk assessment is necessary to understand these risks and implement appropriate controls, rather than simply lifting and shifting on-premise security measures." },
+                { question: "The main purpose of a change management process is to:", answers: ["Ensure all changes are made as quickly as possible", "Prevent any changes from being made to production systems", "Ensure that changes are properly authorized, tested, and documented to reduce risk", "Allow developers to deploy code whenever they want"], correct: 2, explanation: "Change management provides a structured process to control changes to the IT environment, preventing unauthorized or untested changes from causing outages or security vulnerabilities." },
+                { question: "What is the primary goal of vulnerability management?", answers: ["To identify and remediate weaknesses before they can be exploited", "To respond to active security incidents", "To create security policies for the organization", "To purchase cybersecurity insurance"], correct: 0, explanation: "Vulnerability management is a proactive, cyclical process of identifying, classifying, remediating, and mitigating vulnerabilities in systems." },
+                { question: "Which of the following is a key activity in vendor risk management?", answers: ["Paying vendor invoices on time", "Conducting due diligence and ongoing monitoring of a vendor's security posture", "Negotiating the lowest possible price for a service", "Inviting vendor representatives to company parties"], correct: 1, explanation: "Vendor risk management involves assessing the security of third parties both before signing a contract (due diligence) and throughout the relationship (ongoing monitoring)." },
+                { question: "An Intrusion Prevention System (IPS) is what type of control?", answers: ["Detective", "Corrective", "Preventive", "Administrative"], correct: 2, explanation: "An IPS is a preventive technical control because it actively blocks suspicious network traffic in real-time to stop an attack from succeeding." },
+                { question: "The concept of 'defense in depth' refers to:", answers: ["Using only the strongest single security control available", "Focusing all security efforts on protecting the network perimeter", "Implementing multiple layers of different security controls", "Encrypting all data twice"], correct: 2, explanation: "Defense in depth is a security strategy that uses multiple, layered security controls (e.g., firewall, IPS, anti-malware, user training) so that if one layer fails, another may stop the attack." },
+                { question: "What is the MOST important consideration when creating a data retention policy?", answers: ["The cost of data storage", "The desire of employees to keep all data forever", "Legal, regulatory, and business requirements", "The speed of the backup system"], correct: 2, explanation: "Data retention schedules are primarily driven by legal and regulatory compliance obligations, as well as specific business needs. Retaining data too long can increase risk and cost." },
+                { question: "Which of the following is the BEST way to secure data in a development and test environment?", answers: ["Use live production data to ensure realism", "Anonymize or mask production data before using it in test environments", "Do not perform any testing to avoid data exposure", "Allow developers to use their own personal data for testing"], correct: 1, explanation: "Using live production data in lower environments is extremely risky. The best practice is to use realistic but non-sensitive test data, often created by anonymizing or masking a copy of production data." },
+                { question: "The 'separation of duties' principle is designed to:", answers: ["Ensure that all IT staff are cross-trained in different roles", "Prevent a single individual from being able to carry out a fraudulent or malicious act alone", "Reduce the number of employees required to run the IT department", "Encourage collaboration between the development and operations teams"], correct: 1, explanation: "Separation of duties is a classic internal control that requires more than one person to complete a critical task, making it much more difficult to commit fraud." },
+                { question: "Which security model focuses on preventing conflicts of interest?", answers: ["Bell-LaPadula", "Biba", "Clark-Wilson", "Brewer and Nash (Chinese Wall)"], correct: 3, explanation: "The Brewer and Nash model, also known as the Chinese Wall model, is specifically designed to prevent conflicts of interest by dynamically controlling access based on a user's previous actions." },
+                { question: "A configuration management database (CMDB) is a key enabler for:", answers: ["Effective change and incident management", "Writing marketing copy", "Processing payroll", "Negotiating office lease agreements"], correct: 0, explanation: "A CMDB tracks all the hardware, software, and their relationships (configuration items). This information is vital for understanding the impact of a change or the scope of an incident." },
+                { question: "The primary benefit of implementing an Identity and Access Management (IAM) solution is:", answers: ["Increased security and operational efficiency", "It allows the company to eliminate all passwords", "It satisfies all requirements for all security audits", "It makes the network run faster"], correct: 0, explanation: "IAM solutions improve security by enforcing policies like least privilege and MFA, and they improve efficiency by automating processes like user onboarding and offboarding." },
+                { question: "Which of the following is the MOST important reason to have a formal security program?", answers: ["To provide a structured and coordinated approach to managing security risk", "To give the CISO something to do", "To be able to blame someone when a breach occurs", "To ensure the company buys the latest security gadgets"], correct: 0, explanation: "A formal program moves an organization from a reactive, ad-hoc approach to a proactive, strategic, and coordinated method for managing information security risk across the enterprise." },
+                { question: "What is the 'principle of non-repudiation'?", answers: ["The principle that a user cannot deny having performed an action", "The principle that all data must be kept secret", "The principle that data must be available when needed", "The principle that systems must be easy to use"], correct: 0, explanation: "Non-repudiation provides proof of the origin and integrity of data. It ensures that a party to a transaction cannot later deny having received a transaction or that they were the one who sent it, often through the use of digital signatures." },
+                { question: "Hardening a system involves:", answers: ["Increasing its physical durability", "Reducing its attack surface by disabling unnecessary services and accounts", "Backing up its data", "Moving it to a more secure physical location"], correct: 1, explanation: "System hardening is the process of securing a system by minimizing its surface of vulnerability. This includes removing unneeded software, disabling default accounts, and configuring security settings." },
+                { question: "The Biba integrity model is primarily concerned with preventing:", answers: ["Unauthorized disclosure of information", "Unauthorized modification of information", "Denial of service attacks", "Conflicts of interest"], correct: 1, explanation: "Biba is an integrity model summarized as 'no read down, no write up.' It is focused on preventing data from being corrupted by users with a lower integrity level." },
+                { question: "What is the BEST way to evaluate the security of a potential software-as-a-service (SaaS) provider?", answers: ["Read their marketing brochure", "Ask them if they are secure", "Review their third-party audit reports (e.g., SOC 2) and conduct a risk assessment", "Assume they are secure if they are a large, well-known company"], correct: 2, explanation: "Trust but verify. The most prudent approach is to perform due diligence by reviewing independent audit reports and conducting your own risk assessment based on the data you intend to entrust to them." },
+                { question: "A key performance indicator (KPI) for a patch management program would be:", answers: ["The number of patches released by Microsoft each month", "The average time taken to deploy critical security patches", "The total cost of the vulnerability scanning tool", "The number of people on the patch management team"], correct: 1, explanation: "A good KPI measures performance and effectiveness. The time-to-patch metric directly measures how well the program is performing its core function of remediating vulnerabilities in a timely manner." }
             ],
             'domain-4': [
                 { question: "In the context of Business Continuity Planning (BCP), what does Recovery Time Objective (RTO) define?", answers: ["The amount of data that can be lost", "The time it takes to write the BCP plan", "The target time within which a business process must be restored after a disaster", "The time it takes to detect an incident"], correct: 2, explanation: "RTO is a critical metric in BCP that defines the maximum acceptable downtime for a business process before significant negative impacts occur." },
@@ -369,26 +337,26 @@
                 { question: "After a security incident has been resolved, what is the MOST important activity to perform?", answers: ["Blame the responsible party", "Delete all logs related to the incident", "Conduct a lessons-learned review", "Immediately purchase a new security tool"], correct: 2, explanation: "The post-incident activity, or lessons-learned phase, is crucial for continuous improvement. It involves analyzing what happened, what worked, what didn't, and how the incident response process can be improved for the future." },
                 { question: "Which of the following is the BEST way to test the effectiveness of a Disaster Recovery Plan?", answers: ["A tabletop exercise where the team discusses the plan", "A full-scale simulation that includes a failover to the alternate site", "A checklist review of the plan's contents", "Sending the plan to an auditor for review"], correct: 1, explanation: "While all are valid testing methods, a full-scale simulation provides the most realistic and comprehensive test of the DR plan's effectiveness, as it actually performs the recovery procedures and validates the capabilities of the alternate site." },
                 { question: "The concept of 'chain of custody' is most critical when dealing with:", answers: ["Employee training records", "Financial reports", "Evidence handling during a forensic investigation", "Vendor contracts"], correct: 2, explanation: "Chain of custody is a formal, documented process that shows the chronological history of how evidence was collected, handled, transferred, and stored. Maintaining this chain is essential to ensure the integrity of the evidence and its admissibility in legal proceedings." },
-                { question: "What is the primary goal of the 'Containment' phase in incident response?", answers: ["To determine the root cause of the incident", "To completely remove the threat from the environment", "To prevent the incident from causing further damage", "To restore normal operations"], correct: 2, explanation: "The immediate goal of containment is to stop the bleeding. It focuses on isolating the affected systems and preventing the incident from spreading and causing more harm to the organization." },
-                { question: "A 'warm site' for disaster recovery is a location that has:", answers: ["Only basic office space", "All necessary hardware and data, ready for immediate failover", "Network connectivity and hardware, but requires software and data to be restored", "No equipment at all"], correct: 2, explanation: "A warm site is a compromise between a hot site and a cold site. It has the infrastructure (power, cooling, network) and hardware in place, but the most recent data and software must be loaded from backups, resulting in a longer recovery time than a hot site." },
-                { question: "During a security incident, what should be the incident response team's highest priority?", answers: ["Preserving evidence for law enforcement", "Restoring services as quickly as possible", "Protecting human life and safety", "Communicating with the media"], correct: 2, explanation: "While all other items are important, the absolute, non-negotiable top priority during any incident or disaster is the safety and well-being of people." },
-                { question: "Which of the following is an example of a 'tabletop' exercise?", answers: ["Failing over the entire data center to the DR site", "Restoring a single server from backup", "A discussion-based session where the team walks through the steps of a simulated incident", "A training course on how to use a fire extinguisher"], correct: 2, explanation: "A tabletop exercise is a meeting-based activity where team members review and discuss their roles and responsibilities in a particular emergency scenario without performing any actual technical actions. It's a great way to identify gaps in the plan." },
-                { question: "The main purpose of forensic analysis after an incident is to:", answers: ["Determine who to fire", "Understand the root cause, scope, and methodology of the attack", "Quickly delete all malicious files", "Calculate the financial cost of the incident"], correct: 1, explanation: "Digital forensics is the process of investigating the incident to determine exactly what happened, how the attacker got in, what they did, and what data was affected. This information is crucial for proper remediation and future prevention." },
-                { question: "What is the primary difference between an 'event' and an 'incident'?", answers: ["An event is malicious, while an incident is accidental", "An event is any observable occurrence in a system; an incident is an event that negatively impacts the business", "There is no difference", "An incident is a type of event that only affects servers"], correct: 1, explanation: "Systems generate thousands of 'events' every day (e.g., a user logging in). An 'incident' is a specific type of event, or a series of events, that has been identified as a security violation or a threat to business operations." },
-                { question: "An organization's ability to withstand a disruptive event is known as:", answers: ["Risk appetite", "Resilience", "Forensics", "Vulnerability"], correct: 1, explanation: "Resilience is the capacity of an organization to endure and recover from deliberate attacks, accidents, or naturally occurring threats or incidents. It encompasses both business continuity and disaster recovery." },
-                { question: "What is the MOST critical element for a successful Business Continuity Plan?", answers: ["The latest backup technology", "A detailed technical recovery guide for every system", "Support and approval from senior management", "A dedicated disaster recovery data center"], correct: 2, explanation: "Like any major strategic initiative, a BCP will fail without the buy-in, support, and resources that only senior management can provide. Their commitment is essential for the plan to be developed, tested, and maintained effectively." },
-                { question: "During a disaster recovery test, the team discovers that a critical application cannot be restored within its RTO. What is the BEST course of action?", answers: ["Ignore the finding and hope it doesn't happen in a real disaster", "Modify the RTO to match what was achieved in the test", "Document the finding and develop a remediation plan to address the gap", "Blame the application vendor"], correct: 2, explanation: "The purpose of testing is to find and fix problems. The correct response is to formally document the gap between the required RTO and the tested capability, and then create a plan to fix the underlying issues so the RTO can be met in the future." },
-                { question: "Why is it important to have a formal communications plan as part of incident management?", answers: ["To ensure that accurate and consistent information is shared with the correct stakeholders at the right time", "To prevent employees from using social media", "To write a press release before the incident is understood", "To satisfy a single audit requirement"], correct: 0, explanation: "During a crisis, misinformation can spread quickly. A communications plan ensures that all stakeholders (employees, customers, regulators, media) receive timely, accurate, and consistent updates, which helps to manage panic and maintain trust." },
-                { question: "In incident response, what is the primary goal of the 'Eradication' phase?", answers: ["To remove the root cause of the incident and all malicious artifacts from the environment", "To isolate the affected systems from the network", "To notify law enforcement about the breach", "To conduct a lessons-learned meeting"], correct: 0, explanation: "Eradication is the phase where the incident response team actively removes the attacker's presence from the environment. This includes deleting malware, disabling breached user accounts, and fixing the exploited vulnerabilities." },
-                { question: "A 'cold site' is a disaster recovery location that provides:", answers: ["A fully functional data center ready for immediate use", "Basic infrastructure like power, cooling, and space, but no IT hardware", "A mobile trailer with some networking equipment", "An exact replica of the primary site, including real-time data synchronization"], correct: 1, explanation: "A cold site is the most basic and least expensive type of recovery site. It offers the physical space and environmental controls, but the organization must bring in and configure its own hardware and restore its own data, resulting in the longest recovery time." },
-                { question: "Which of the following determines the order in which systems should be recovered after a disaster?", answers: ["The Business Impact Analysis (BIA)", "The threat assessment", "The vulnerability scan report", "The IT department's budget"], correct: 0, explanation: "The BIA is the foundational document that identifies and prioritizes critical business processes. The recovery order of IT systems should directly support the recovery order of the business processes they enable, as determined by the BIA." },
-                { question: "The process of securely preserving information from electronic devices in a way that is admissible in court is known as:", answers: ["Data backup", "E-discovery", "Data archiving", "System imaging"], correct: 1, explanation: "E-discovery (electronic discovery) is the process of identifying, collecting, and producing electronically stored information (ESI) in response to a legal request or investigation. It requires a formal, defensible process to ensure evidence integrity." },
-                { question: "What is the primary purpose of an emergency operations center (EOC)?", answers: ["To store backup tapes", "To serve as a central command and control facility during an emergency", "To house the primary data center", "To provide temporary office space for all employees"], correct: 1, explanation: "An EOC is a physical or virtual location where leaders and response teams can gather during a crisis to coordinate response and recovery efforts, manage communications, and make strategic decisions." },
-                { question: "Which of the following is the BEST description of a 'full interruption' test for a DR plan?", answers: ["A discussion about the plan in a conference room", "Restoring a few non-critical files from backup", "Shutting down the primary data center and failing over all operations to the recovery site", "A review of the plan's documentation for errors"], correct: 2, explanation: "A full interruption test is the most comprehensive and highest-fidelity type of DR test. It involves a real-world shutdown of primary systems and a complete failover to the disaster recovery site to validate the plan's effectiveness under realistic conditions." },
-                { question: "In the context of incident response, what is a 'playbook'?", answers: ["The main incident response plan document", "A detailed, step-by-step guide for responding to a specific type of incident", "The contact list for the incident response team", "The report created after an incident is over"], correct: 1, explanation: "An incident response playbook provides a checklist-style, step-by-step set of instructions tailored to a specific type of incident, such as a ransomware attack or a data breach. It allows the team to respond more quickly and consistently." },
-                { question: "The 'Recovery' phase of the incident response lifecycle focuses on:", answers: ["Identifying the attacker", "Isolating the affected systems", "Carefully restoring systems to normal operation and monitoring for re-infection", "Writing the final incident report"], correct: 2, explanation: "The recovery phase involves the methodical process of bringing affected systems back online, ensuring they are clean and secure, and then monitoring them closely to confirm that the threat has been fully eradicated and the systems are stable." },
-                { question: "What is the primary security risk associated with a 'bring your own device' (BYOD) policy?", answers: ["Employees will be less productive", "The organization loses control over the security of the device and the data on it", "The cost of mobile data plans will increase", "Employees will install unapproved games"], correct: 1, explanation: "The main challenge with BYOD is that the organization does not own the device, making it difficult to enforce security policies, install security software, and protect corporate data that is stored on or accessed by the personal device." },
-                { question: "A post-incident review should be conducted in a way that is:", answers: ["Focused on assigning blame to the responsible individual", "Blameless and focused on process and technology improvement", "Kept secret from everyone except senior management", "As short as possible"], correct: 1, explanation: "For a lessons-learned review to be effective, it must be conducted in a blameless environment where team members feel safe to discuss what went wrong without fear of punishment. The goal is to identify and fix weaknesses in processes and technology, not to blame individuals." },
+                { question: "Which of the following is an example of a 'cold site'?", answers: ["A fully mirrored data center ready for immediate failover", "An office space with desks and phones but no IT equipment", "A data center with power, cooling, and network circuits, but no servers", "A mobile recovery trailer"], correct: 2, explanation: "A cold site is the least expensive option. It provides the basic infrastructure (space, power, cooling), but the organization must bring in its own hardware and software, leading to a long recovery time." },
+                { question: "The 'eradication' phase of incident response involves:", answers: ["Removing the root cause of the incident and any malicious artifacts", "Notifying law enforcement about the incident", "Restoring systems from clean backups", "Isolating the affected systems from the network"], correct: 0, explanation: "Eradication is the step where the threat is actively removed from the environment, for example, by deleting malware, disabling breached user accounts, and patching vulnerabilities." },
+                { question: "A 'checklist review' is a type of BCP/DR test where:", answers: ["A full failover to the alternate site is performed", "Team members verbally walk through their roles and responsibilities in a simulated scenario", "The plan documents are distributed to team members for their review and feedback", "A specific system is restored from a backup"], correct: 2, explanation: "A checklist review is the simplest type of test, where team members read through the plan to ensure it is up-to-date and accurate without any active simulation." },
+                { question: "What is the primary goal of the 'containment' phase in incident response?", answers: ["To remove the attacker from the network", "To prevent the incident from causing further damage", "To understand the root cause of the incident", "To restore normal business operations"], correct: 1, explanation: "The immediate goal of containment is to stop the bleeding. It's about limiting the scope and magnitude of the incident, often by isolating affected systems." },
+                { question: "The Maximum Tolerable Downtime (MTD) is identified during which process?", answers: ["Incident Response", "Business Impact Analysis (BIA)", "Vulnerability Assessment", "Threat Modeling"], correct: 1, explanation: "The MTD, which is a key input for setting the RTO, is determined during the BIA when the business evaluates how long it can survive without a specific process." },
+                { question: "A 'warm site' provides which of the following?", answers: ["Only basic power and cooling", "A fully operational and staffed data center", "Hardware and network connectivity, but software and data need to be restored", "A subscription service for hardware on demand"], correct: 2, explanation: "A warm site is a compromise between hot and cold sites. It has the hardware ready to go, but the most recent data and potentially some software configurations need to be loaded, resulting in more recovery time than a hot site." },
+                { question: "Which of the following is the MOST important component of an incident response team (IRT)?", answers: ["Having the latest forensic software", "Clear roles, responsibilities, and authority", "A dedicated budget for buying new tools", "A direct reporting line to the CEO"], correct: 1, explanation: "During the chaos of an incident, a clear command structure is paramount. Everyone on the team needs to know their role and have the authority to execute it without confusion or delay." },
+                { question: "The process of returning a system and business operations to a normal state after an incident is known as:", answers: ["Detection", "Analysis", "Eradication", "Recovery"], correct: 3, explanation: "The recovery phase involves carefully bringing the restored systems back online, monitoring for any residual issues, and formally closing the incident." },
+                { question: "Why is it critical to document all actions taken during an incident response?", answers: ["To create a report for the marketing team", "To support post-incident reviews and potential legal action", "To justify the salaries of the incident response team", "To ensure the incident is never discussed again"], correct: 1, explanation: "Thorough documentation is vital for the 'lessons learned' review to improve future responses. It also creates an evidentiary trail that may be required for legal or regulatory proceedings." },
+                { question: "A tabletop exercise is a good way to test:", answers: ["The technical functionality of backup systems", "The decision-making and communication processes of the response team", "The speed of network failover to a hot site", "The effectiveness of an anti-malware solution"], correct: 1, explanation: "Tabletop exercises are discussion-based sessions where the team talks through a simulated scenario. They are excellent for testing the 'human' elements of a plan, such as communication, coordination, and decision-making, without the cost and risk of a full technical test." },
+                { question: "The 'declaration of disaster' is a critical step because it:", answers: ["Formally activates the disaster recovery plan and authorizes the use of resources", "Notifies the public that the company has been breached", "Automatically restores all systems from backup", "Is required before the company can contact law enforcement"], correct: 0, explanation: "The declaration is a formal trigger point, usually made by senior management, that officially moves the organization from normal operations into a disaster recovery mode, freeing up the necessary funds and personnel." },
+                { question: "What is the primary purpose of having an alternate processing site?", answers: ["To have a place for extra employees to work", "To ensure business can continue if the primary site is unavailable", "To get a discount on business insurance", "To store old paper records"], correct: 1, explanation: "The entire purpose of a DR site (hot, warm, or cold) is to provide a location where critical business and IT operations can be resumed if the main facility is destroyed or inaccessible." },
+                { question: "In digital forensics, what is 'data volatility'?", answers: ["The likelihood of data being encrypted", "The tendency of data to change or be lost when a system is powered down", "The physical size of the data storage medium", "The monetary value of the data"], correct: 1, explanation: "Data volatility refers to how long-lasting data is. Data in RAM is highly volatile (it disappears on shutdown), while data on a hard drive is non-volatile. Forensics investigators must collect evidence in order from most to least volatile." },
+                { question: "Which of the following should be a key goal of the post-incident review meeting?", answers: ["To assign blame for the incident", "To identify opportunities for improvement in a blame-free manner", "To calculate the exact financial cost of the incident", "To finalize the press release about the incident"], correct: 1, explanation: "A successful lessons-learned session requires an environment of trust where people can speak openly about what went wrong without fear of punishment. The goal is process improvement, not assigning blame." },
+                { question: "A reciprocal agreement for disaster recovery is generally considered risky PRIMARILY because:", answers: ["The other company might be a competitor", "It is difficult to enforce and the other company may not have resources available in a real disaster", "It is the most expensive type of alternate site", "It requires a full-time staff to maintain the agreement"], correct: 1, explanation: "Reciprocal agreements are often informal and hard to enforce. When a disaster strikes, the partner organization will be focused on its own survival and may not have the capacity or willingness to help, making it an unreliable option." },
+                { question: "The first action an incident responder should take upon discovering a compromised system is to:", answers: ["Wipe the system and reinstall the OS", "Follow the procedures in the incident response plan", "Unplug the system from the network immediately", "Call the CEO"], correct: 1, explanation: "While unplugging the system might seem right, it could destroy volatile evidence. The correct first step is always to follow the pre-approved, documented procedures in the IRP, which will guide the responder on the proper steps for containment and evidence preservation." },
+                { question: "The main output of a Business Impact Analysis (BIA) is a list of:", answers: ["All company employees and their contact information", "All potential security vulnerabilities", "Prioritized critical business processes and their recovery requirements (RTO/RPO)", "Approved hardware and software vendors"], correct: 2, explanation: "The BIA's core purpose is to identify what is most important to the business and how quickly it needs to be recovered after a disruption. This information is the foundation for the entire BCP/DR strategy." },
+                { question: "What is the primary risk of not testing a disaster recovery plan?", answers: ["The plan will not receive approval from auditors", "The plan is likely to fail during a real disaster", "The company will not be able to get cybersecurity insurance", "Employees will not know the plan exists"], correct: 1, explanation: "A plan that has not been tested is just a collection of untested assumptions. Testing is the only way to find flaws in the plan and ensure the technology and people can perform as expected under pressure." },
+                { question: "Which of the following is an example of an out-of-band communication method for an incident response team?", answers: ["The company's primary email system", "A conference call using the corporate VoIP phone system", "A group chat on a public social media platform", "A pre-established phone bridge hosted by a third-party provider"], correct: 3, explanation: "Out-of-band communication uses a channel that is separate from the company's primary, potentially compromised network. This ensures the team can communicate securely even if corporate email or phones are down." },
+                { question: "The final step in a digital forensics process is typically:", answers: ["Evidence collection", "Analysis", "Presentation and reporting", "Containment"], correct: 2, explanation: "After evidence has been collected, preserved, and analyzed, the findings must be documented and presented in a clear, concise report that can be understood by management, legal teams, or a court." }
             ],
         };
 
@@ -400,34 +368,33 @@
             'domain-4': { title: "Domain 4: Incident Management", weight: 30 },
             'simulated-exam': { title: "Simulated Exam", totalQuestions: 150 }
         };
-        let currentAssessment = { timerInterval: null };
 
-        // --- DOM ELEMENTS (Scoped to the module) ---
-        const setupView = moduleContainer.querySelector('#assessment-setup');
-        const inProgressView = moduleContainer.querySelector('#assessment-in-progress');
-        const resultsView = moduleContainer.querySelector('#assessment-results');
-        const reviewView = moduleContainer.querySelector('#assessment-review');
-        const optionsArea = moduleContainer.querySelector('#assessment-options-area');
-        const tabs = moduleContainer.querySelectorAll('.assessment-tab');
-        const questionCounter = moduleContainer.querySelector('#question-counter');
-        const progressBar = moduleContainer.querySelector('#progress-bar');
-        const questionText = moduleContainer.querySelector('#question-text');
-        const answerOptionsContainer = moduleContainer.querySelector('#answer-options');
-        const prevBtn = moduleContainer.querySelector('#prev-question-btn');
-        const nextBtn = moduleContainer.querySelector('#next-question-btn');
-        const submitBtn = moduleContainer.querySelector('#submit-assessment-btn');
-        const quitBtn = moduleContainer.querySelector('#quit-assessment-btn');
-        const timerDisplay = moduleContainer.querySelector('#timer-display');
-        const finalScoreEl = moduleContainer.querySelector('#final-score');
-        const scoreDetailsEl = moduleContainer.querySelector('#score-details');
-        const resultsBreakdownEl = moduleContainer.querySelector('#results-breakdown');
-        const reviewAnswersBtn = moduleContainer.querySelector('#review-answers-btn');
-        const restartAssessmentBtn = moduleContainer.querySelector('#restart-assessment-btn');
-        const quitModal = moduleContainer.querySelector('#quit-modal');
-        const confirmQuitBtn = moduleContainer.querySelector('#confirm-quit-btn');
-        const cancelQuitBtn = moduleContainer.querySelector('#cancel-quit-btn');
+        let currentAssessment = { questions: [], userAnswers: [], currentQuestionIndex: 0, startTime: null, assessmentType: null, timerInterval: null };
 
-        // --- FUNCTIONS ---
+        const setupView = document.getElementById('assessment-setup');
+        const inProgressView = document.getElementById('assessment-in-progress');
+        const resultsView = document.getElementById('assessment-results');
+        const reviewView = document.getElementById('assessment-review');
+        const optionsArea = document.getElementById('assessment-options-area');
+        const tabs = document.querySelectorAll('.assessment-tab');
+        const questionCounter = document.getElementById('question-counter');
+        const progressBar = document.getElementById('progress-bar');
+        const questionText = document.getElementById('question-text');
+        const answerOptionsContainer = document.getElementById('answer-options');
+        const prevBtn = document.getElementById('prev-question-btn');
+        const nextBtn = document.getElementById('next-question-btn');
+        const submitBtn = document.getElementById('submit-assessment-btn');
+        const quitBtn = document.getElementById('quit-assessment-btn');
+        const timerDisplay = document.getElementById('timer-display');
+        const finalScoreEl = document.getElementById('final-score');
+        const scoreDetailsEl = document.getElementById('score-details');
+        const resultsBreakdownEl = document.getElementById('results-breakdown');
+        const reviewAnswersBtn = document.getElementById('review-answers-btn');
+        const restartAssessmentBtn = document.getElementById('restart-assessment-btn');
+        const quitModal = document.getElementById('quit-modal');
+        const confirmQuitBtn = document.getElementById('confirm-quit-btn');
+        const cancelQuitBtn = document.getElementById('cancel-quit-btn');
+
         function showView(viewToShow) {
             [setupView, inProgressView, resultsView, reviewView].forEach(v => v.classList.add('hidden'));
             viewToShow.classList.remove('hidden');
@@ -436,22 +403,60 @@
 
         function renderOptions(target) {
             const details = domainDetails[target];
+            const maxQuestions = questionBank[target]?.length || 0;
             let content = '';
+
             if (target === 'simulated-exam') {
-                content = `<div class="assessment-card p-6 sm:p-8 text-center"><h3 class="text-2xl font-bold text-gray-800 mb-2">${details.title}</h3><p class="text-gray-600 mb-4">This is a full-length simulated exam with ${details.totalQuestions} questions, weighted according to the official CISM exam outline.</p><ul class="text-left max-w-sm mx-auto list-disc list-inside mb-6"><li>Domain 1: ${Math.round(details.totalQuestions * domainWeights['domain-1'])} questions</li><li>Domain 2: ${Math.round(details.totalQuestions * domainWeights['domain-2'])} questions</li><li>Domain 3: ${Math.round(details.totalQuestions * domainWeights['domain-3'])} questions</li><li>Domain 4: ${Math.round(details.totalQuestions * domainWeights['domain-4'])} questions</li></ul><button class="btn-primary start-assessment-btn" data-type="simulated">Start Simulated Exam</button></div>`;
+                content = `
+                    <div class="assessment-card p-6 sm:p-8 text-center">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">${details.title}</h3>
+                        <p class="text-gray-600 mb-4">This is a full-length simulated exam with ${details.totalQuestions} questions, weighted according to the official CISM exam outline.</p>
+                        <ul class="text-left max-w-sm mx-auto list-disc list-inside mb-6">
+                            <li>Domain 1: ${Math.round(details.totalQuestions * domainWeights['domain-1'])} questions</li>
+                            <li>Domain 2: ${Math.round(details.totalQuestions * domainWeights['domain-2'])} questions</li>
+                            <li>Domain 3: ${Math.round(details.totalQuestions * domainWeights['domain-3'])} questions</li>
+                            <li>Domain 4: ${Math.round(details.totalQuestions * domainWeights['domain-4'])} questions</li>
+                        </ul>
+                        <button class="btn-primary start-assessment-btn" data-type="simulated">Start Simulated Exam</button>
+                    </div>`;
             } else {
-                const maxQuestions = 30; // Set max to 30 as requested
                 const weightedQuestions = Math.round(150 * domainWeights[target]);
-                content = `<div class="assessment-card p-6 sm:p-8 text-center"><h3 class="text-2xl font-bold text-gray-800 mb-2">${details.title}</h3><p class="text-gray-600 mb-6">Choose how you want to test your knowledge for this domain.</p><div class="grid grid-cols-1 md:grid-cols-2 gap-8"><div class="p-6 bg-gray-50 rounded-lg"><h4 class="text-xl font-semibold mb-3">Practice Quiz</h4><p class="text-sm text-gray-600 mb-4">Enter the number of questions you want to answer.</p><input type="number" id="question-count-input" class="w-full p-2 border border-gray-300 rounded-md mb-4 text-center" min="1" max="${maxQuestions}" value="10" placeholder="e.g., 10"><button class="btn-primary start-assessment-btn" data-type="custom" data-domain="${target}">Start Practice Quiz</button></div><div class="p-6 bg-gray-50 rounded-lg flex flex-col justify-between"><div><h4 class="text-xl font-semibold mb-3">Weighted Quiz</h4><p class="text-sm text-gray-600 mb-4">Take a quiz weighted like the real exam (${details.weight}% of 150 questions).</p><p class="text-2xl font-bold text-gray-800 mb-4">${weightedQuestions} Questions</p></div><button class="btn-primary start-assessment-btn" data-type="weighted" data-domain="${target}" data-count="${weightedQuestions}">Start Weighted Quiz</button></div></div></div>`;
+                content = `
+                    <div class="assessment-card p-6 sm:p-8 text-center">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">${details.title}</h3>
+                        <p class="text-gray-600 mb-6">Choose how you want to test your knowledge for this domain.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div class="p-6 bg-gray-50 rounded-lg flex flex-col justify-between">
+                                <div>
+                                    <h4 class="text-xl font-semibold mb-3">Practice Quiz</h4>
+                                    <p class="text-sm text-gray-600 mb-4">Enter the number of questions you want to practice (max ${maxQuestions}).</p>
+                                    <input type="number" id="custom-question-count" class="custom-number-input mb-4" value="30" min="1" max="${maxQuestions}">
+                                </div>
+                                <button class="btn-primary start-assessment-btn" data-type="custom" data-domain="${target}">Start Practice Quiz</button>
+                            </div>
+                            <div class="p-6 bg-gray-50 rounded-lg flex flex-col justify-between">
+                                <div>
+                                    <h4 class="text-xl font-semibold mb-3">Weighted Quiz</h4>
+                                    <p class="text-sm text-gray-600 mb-4">Take a quiz weighted like the real exam (${details.weight}% of 150 questions).</p>
+                                    <p class="text-2xl font-bold text-gray-800 mb-4">${weightedQuestions} Questions</p>
+                                </div>
+                                <button class="btn-primary start-assessment-btn" data-type="weighted" data-domain="${target}" data-count="${weightedQuestions}">Start Weighted Quiz</button>
+                            </div>
+                        </div>
+                    </div>`;
             }
             optionsArea.innerHTML = content;
         }
 
+        function handleTabClick(e) {
+            tabs.forEach(tab => tab.classList.remove('active'));
+            e.target.classList.add('active');
+            renderOptions(e.target.dataset.target);
+        }
+
         function stopTimer() {
-            if (currentAssessment.timerInterval) {
-                clearInterval(currentAssessment.timerInterval);
-                currentAssessment.timerInterval = null;
-            }
+            if (currentAssessment.timerInterval) clearInterval(currentAssessment.timerInterval);
+            currentAssessment.timerInterval = null;
             timerDisplay.classList.add('hidden');
         }
 
@@ -461,11 +466,11 @@
             const endTime = new Date().getTime() + duration;
             timerDisplay.classList.remove('hidden');
             currentAssessment.timerInterval = setInterval(() => {
-                const distance = endTime - new Date().getTime();
+                const now = new Date().getTime();
+                const distance = endTime - now;
                 if (distance < 0) {
                     stopTimer();
                     timerDisplay.textContent = "0:00:00";
-                    alert("Time's up! The exam will now be submitted.");
                     submitAssessment();
                     return;
                 }
@@ -477,38 +482,24 @@
         }
 
         function startAssessment(questions, type) {
-            currentAssessment = {
-                questions: questions,
-                userAnswers: new Array(questions.length).fill(null),
-                currentQuestionIndex: 0,
-                startTime: new Date(),
-                assessmentType: type,
-                timerInterval: currentAssessment.timerInterval
-            };
+            currentAssessment = { ...currentAssessment, questions, userAnswers: new Array(questions.length).fill(null), currentQuestionIndex: 0, startTime: new Date(), assessmentType: type };
             if (type === 'simulated') startTimer(); else stopTimer();
             displayQuestion();
             showView(inProgressView);
         }
 
         function displayQuestion() {
-            const qData = currentAssessment.questions[currentAssessment.currentQuestionIndex];
+            const q = currentAssessment.questions[currentAssessment.currentQuestionIndex];
             const qNum = currentAssessment.currentQuestionIndex + 1;
             const total = currentAssessment.questions.length;
             questionCounter.textContent = `Question ${qNum} of ${total}`;
             progressBar.style.width = `${(qNum / total) * 100}%`;
-            questionText.textContent = qData.question;
-            answerOptionsContainer.innerHTML = '';
-            qData.answers.forEach((answer, index) => {
-                const option = document.createElement('div');
-                option.className = 'answer-option';
-                option.textContent = answer;
-                option.dataset.index = index;
-                if (currentAssessment.userAnswers[currentAssessment.currentQuestionIndex] === index) {
-                    option.classList.add('selected');
-                }
-                option.addEventListener('click', () => selectAnswer(index));
-                answerOptionsContainer.appendChild(option);
-            });
+            questionText.textContent = q.question;
+            answerOptionsContainer.innerHTML = q.answers.map((answer, index) => {
+                const isSelected = currentAssessment.userAnswers[currentAssessment.currentQuestionIndex] === index;
+                return `<div class="answer-option ${isSelected ? 'selected' : ''}" data-index="${index}">${answer}</div>`;
+            }).join('');
+            answerOptionsContainer.querySelectorAll('.answer-option').forEach(opt => opt.addEventListener('click', () => selectAnswer(parseInt(opt.dataset.index))));
             prevBtn.classList.toggle('hidden', currentAssessment.currentQuestionIndex === 0);
             nextBtn.classList.toggle('hidden', qNum === total);
             submitBtn.classList.toggle('hidden', qNum !== total);
@@ -516,8 +507,12 @@
 
         function selectAnswer(index) {
             currentAssessment.userAnswers[currentAssessment.currentQuestionIndex] = index;
-            moduleContainer.querySelectorAll('.answer-option').forEach(opt => opt.classList.remove('selected'));
-            moduleContainer.querySelector(`.answer-option[data-index='${index}']`).classList.add('selected');
+            displayQuestion();
+        }
+
+        function changeQuestion(direction) {
+            currentAssessment.currentQuestionIndex += direction;
+            displayQuestion();
         }
 
         function submitAssessment() {
@@ -537,94 +532,90 @@
             const score = totalQuestions > 0 ? Math.round((correctCount / totalQuestions) * 100) : 0;
             finalScoreEl.textContent = `${score}%`;
             scoreDetailsEl.textContent = `You answered ${correctCount} out of ${totalQuestions} questions correctly.`;
-            resultsBreakdownEl.innerHTML = '';
-            for (const domainKey in breakdown) {
+            resultsBreakdownEl.innerHTML = Object.keys(breakdown).map(domainKey => {
                 const domainData = breakdown[domainKey];
                 const domainScore = domainData.total > 0 ? Math.round((domainData.correct / domainData.total) * 100) : 0;
                 const title = domainDetails[domainKey]?.title || 'Overall';
-                resultsBreakdownEl.innerHTML += `<div class="flex justify-between items-center mb-2"><span class="text-gray-700">${title}</span><span class="font-bold text-gray-800">${domainScore}% (${domainData.correct}/${domainData.total})</span></div>`;
-            }
+                return `<div class="flex justify-between items-center mb-2">
+                    <span class="text-gray-700">${title}</span>
+                    <span class="font-bold text-gray-800">${domainScore}% (${domainData.correct}/${domainData.total})</span>
+                </div>`;
+            }).join('');
             showView(resultsView);
         }
-
+        
         function reviewAnswers() {
-            reviewView.innerHTML = '';
-            const container = document.createElement('div');
-            container.className = 'bg-white p-6 sm:p-8 rounded-lg shadow-md';
-            let reviewContent = `<h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Review Answers</h2>`;
-            currentAssessment.questions.forEach((q, index) => {
-                const userAnswer = currentAssessment.userAnswers[index];
-                const isCorrect = userAnswer === q.correct;
-                reviewContent += `<div class="mb-8 pb-4 border-b border-gray-200"><p class="font-bold text-gray-800 mb-2">Question ${index + 1}: ${q.question}</p><div class="space-y-2">${q.answers.map((answer, ansIndex) => { let classes = 'answer-option p-3'; if (ansIndex === q.correct) classes += ' correct'; else if (ansIndex === userAnswer && !isCorrect) classes += ' incorrect'; return `<div class="${classes}">${answer}</div>`; }).join('')}</div>${userAnswer !== null && !isCorrect ? `<p class="mt-3 text-sm text-blue-800 bg-blue-100 p-2 rounded-md"><strong>Your Answer:</strong> ${q.answers[userAnswer]}</p>` : ''}<p class="mt-3 text-sm text-green-800 bg-green-100 p-2 rounded-md"><strong>Explanation:</strong> ${q.explanation}</p></div>`;
-            });
-            reviewContent += `<div class="text-center mt-8"><button id="back-to-results-btn" class="btn-primary">Back to Results</button></div>`;
-            container.innerHTML = reviewContent;
-            reviewView.appendChild(container);
+            reviewView.innerHTML = `<div class="bg-white p-6 sm:p-8 rounded-lg shadow-md">
+                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Review Answers</h2>
+                ${currentAssessment.questions.map((q, index) => {
+                    const userAnswer = currentAssessment.userAnswers[index];
+                    const isCorrect = userAnswer === q.correct;
+                    return `<div class="mb-8 pb-4 border-b border-gray-200">
+                        <p class="font-bold text-gray-800 mb-2">Question ${index + 1}: ${q.question}</p>
+                        <div class="space-y-2">${q.answers.map((answer, ansIndex) => {
+                            let classes = 'answer-option p-3';
+                            if (ansIndex === q.correct) classes += ' correct';
+                            else if (ansIndex === userAnswer) classes += ' incorrect';
+                            return `<div class="${classes}">${answer}</div>`;
+                        }).join('')}</div>
+                        ${userAnswer !== null && !isCorrect ? `<p class="mt-3 text-sm text-blue-800 bg-blue-100 p-2 rounded-md"><strong>Your Answer:</strong> ${q.answers[userAnswer]}</p>` : ''}
+                        <p class="mt-3 text-sm text-green-800 bg-green-100 p-2 rounded-md"><strong>Explanation:</strong> ${q.explanation}</p>
+                    </div>`;
+                }).join('')}
+                <div class="text-center mt-8"><button id="back-to-results-btn" class="btn-primary">Back to Results</button></div>
+            </div>`;
             showView(reviewView);
-            moduleContainer.querySelector('#back-to-results-btn').addEventListener('click', () => showView(resultsView));
+            document.getElementById('back-to-results-btn').addEventListener('click', () => showView(resultsView));
         }
 
         function getQuestionsForAssessment(type, domain, count) {
-            let questions = [];
             if (type === 'simulated') {
-                for (const dKey in domainWeights) {
-                    const numQuestions = Math.round(150 * domainWeights[dKey]);
+                return Object.keys(domainWeights).flatMap(dKey => {
+                    const num = Math.round(150 * domainWeights[dKey]);
                     const domainQs = [...questionBank[dKey]].map(q => ({...q, domain: dKey}));
-                    questions.push(...(domainQs.sort(() => 0.5 - Math.random()).slice(0, numQuestions)));
-                }
+                    return domainQs.sort(() => 0.5 - Math.random()).slice(0, num);
+                });
             } else {
-                const numQuestions = (type === 'custom') ? moduleContainer.querySelector('#question-count-input').value : count;
-                const domainQs = [...questionBank[domain]].map(q => ({...q, domain: domain}));
-                questions = domainQs.sort(() => 0.5 - Math.random()).slice(0, numQuestions);
+                const domainQs = [...questionBank[domain]].map(q => ({...q, domain}));
+                return domainQs.sort(() => 0.5 - Math.random()).slice(0, count);
             }
-            return questions;
         }
 
-        // --- EVENT LISTENERS ---
-        tabs.forEach(tab => tab.addEventListener('click', (e) => {
-            tabs.forEach(t => t.classList.remove('active'));
-            e.target.classList.add('active');
-            renderOptions(e.target.dataset.target);
-        }));
-
+        tabs.forEach(tab => tab.addEventListener('click', handleTabClick));
         optionsArea.addEventListener('click', (e) => {
             const button = e.target.closest('.start-assessment-btn');
-            if (button) {
-                const { type, domain, count } = button.dataset;
-                const questions = getQuestionsForAssessment(type, domain, parseInt(count));
-                if (questions.length > 0) {
-                    startAssessment(questions, type);
+            if (!button) return;
+            const { type, domain } = button.dataset;
+            let count = parseInt(button.dataset.count);
+            if (type === 'custom') {
+                const countInput = document.getElementById('custom-question-count');
+                const max = parseInt(countInput.max);
+                const val = parseInt(countInput.value);
+                if (val > 0 && val <= max) {
+                    count = val;
                 } else {
-                    alert('Please enter a valid number of questions.');
+                    alert(`Please enter a number between 1 and ${max}.`);
+                    return;
                 }
             }
+            const questions = getQuestionsForAssessment(type, domain, count);
+            if (questions.length > 0) startAssessment(questions, type);
+            else alert('Not enough questions in the bank for this selection.');
         });
 
         nextBtn.addEventListener('click', () => changeQuestion(1));
         prevBtn.addEventListener('click', () => changeQuestion(-1));
         submitBtn.addEventListener('click', submitAssessment);
-        
-        quitBtn.addEventListener('click', () => {
-            quitModal.classList.remove('hidden');
-        });
-
-        cancelQuitBtn.addEventListener('click', () => {
-            quitModal.classList.add('hidden');
-        });
-
+        quitBtn.addEventListener('click', () => quitModal.classList.remove('hidden'));
+        cancelQuitBtn.addEventListener('click', () => quitModal.classList.add('hidden'));
         confirmQuitBtn.addEventListener('click', () => {
             stopTimer();
             quitModal.classList.add('hidden');
             showView(setupView);
         });
-        
         reviewAnswersBtn.addEventListener('click', reviewAnswers);
-        restartAssessmentBtn.addEventListener('click', () => {
-             // Re-run the same assessment
-             startAssessment(currentAssessment.questions, currentAssessment.assessmentType);
-        });
+        restartAssessmentBtn.addEventListener('click', () => startAssessment(currentAssessment.questions, currentAssessment.assessmentType));
 
-        // --- INITIALIZATION ---
         renderOptions('domain-1');
     });
     </script>
