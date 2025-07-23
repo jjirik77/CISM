@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CISM Study Guide - Designer Edition</title>
+    <style>
+        /* Global Styles & Font Import */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        :root {
+            --dark-navy-bg: #101727;
+            --surface-color: #1a233b;
+            --accent-glow: #00bfff; /* Deep Sky Blue */
+            --accent-hover: #ffffff;
+            --text-primary: #f0f4f8;
+            --text-secondary: #a0aec0;
+            --border-color: #2d3748;
+            --shadow-color: rgba(0, 191, 255, 0.1);
+            --success-color: #28a745;
+            --danger-color: #dc3545;
+            --transition-fast: all 0.3s ease-in-out;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-navy-bg);
+            margin: 0;
+            padding: 0; /* Removed padding to allow full width */
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .study-guide-container {
+            width: 100%; /* Changed from max-width to fill the window */
+            min-height: 100vh;
+            box-sizing: border-box; /* Ensures padding is included in width */
+            background-color: var(--dark-navy-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        /* Header Section */
+        header {
+            text-align: center;
+            padding: 40px 30px;
+            background: linear-gradient(180deg, var(--surface-color), var(--dark-navy-bg));
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 700;
+            letter-spacing: -1px;
+            color: var(--text-primary);
+        }
+
+        header p {
+            margin: 10px 0 0 0;
+            font-size: 1.1em;
+            color: var(--text-secondary);
+        }
+
+        /* Main Layout (Sidebar + Content) */
+        .main-layout {
+            display: flex;
+            height: calc(100vh - 145px); /* Adjust based on header height */
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            flex: 0 0 280px;
+            border-right: 1px solid var(--border-color);
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-item {
+            padding: 18px 25px;
+            margin: 0 15px 5px 15px;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            border-left: 4px solid transparent;
+            border-radius: 8px;
+        }
+
+        .nav-item strong {
+            display: block;
+            color: var(--text-primary);
+            font-size: 1em;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .nav-item span {
+            font-size: 0.9em;
+            color: var(--text-secondary);
+        }
+
+        .nav-item.active {
+            background-color: var(--surface-color);
+            border-left-color: var(--accent-glow);
+        }
+        
+        .nav-item.active strong {
+            color: var(--accent-glow);
+        }
+
+        .nav-item:not(.active):hover {
+            background-color: rgba(255,255,255,0.05);
+        }
+
+        /* Content Area */
+        .page-content {
+            display: none;
+        }
+        .page-content.active {
+            display: block;
+        }
+
+        .content-area {
+            flex-grow: 1;
+            padding: 0; /* Remove padding for iframe */
+            overflow-y: auto;
+            height: 100%;
+        }
+        
+        #iframe-content {
+            padding: 0;
+            height: 100%;
+        }
+
+        #content-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background-color: #fff; /* A fallback background for the iframe */
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="study-guide-container">
+        <header>
+            <h1>CISM Study Guide</h1>
+            <p>Comprehensive Interactive Educational Resource for CISM Certification Exam</p>
+        </header>
+
+        <main class="main-layout">
+            <aside class="sidebar">
+                <div class="nav-item active" data-page="introduction">
+                    <strong>CISM Introduction</strong>
+                    <span>Certification Overview</span>
+                </div>
+                <div class="nav-item" data-page="domain1">
+                    <strong>Domain 1</strong>
+                    <span>Governance</span>
+                </div>
+                <div class="nav-item" data-page="domain2">
+                    <strong>Domain 2</strong>
+                    <span>Risk Management</span>
+                </div>
+                <div class="nav-item" data-page="domain3">
+                    <strong>Domain 3</strong>
+                    <span>Program Development</span>
+                </div>
+                <div class="nav-item" data-page="assessment">
+                    <strong>Assessment</strong>
+                    <span>Test Your Knowledge</span>
+                </div>
+            </aside>
+
+            <section class="content-area">
+                <div id="iframe-content" class="page-content active">
+                    <iframe id="content-iframe" src="" title="Study Guide Content"></iframe>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            const urlMap = {
+                'introduction': 'https://www.isaca.org/credentialing/cism',
+                'domain1': 'https://www.isaca.org/resources/cism-exam-content-outline',
+                'domain2': 'https://www.isaca.org/resources/cism-exam-content-outline',
+                'domain3': 'https://www.isaca.org/resources/cism-exam-content-outline',
+                'assessment': 'https://jjirik77.github.io/CISM/assess_blue.html'
+            };
+
+            // --- DOM ELEMENTS ---
+            const navItems = document.querySelectorAll('.sidebar .nav-item');
+            const contentIframe = document.getElementById('content-iframe');
+
+            // --- PAGE NAVIGATION LOGIC ---
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    navItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const targetPageId = this.getAttribute('data-page');
+                    
+                    if (urlMap[targetPageId]) {
+                        contentIframe.src = urlMap[targetPageId];
+                    }
+                });
+            });
+            
+            // Set initial iframe content
+            contentIframe.src = urlMap['introduction'];
+
+        });
+    </script>
+
+</body>
+</html>
