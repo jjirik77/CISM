@@ -197,6 +197,11 @@
             overflow: hidden;
             cursor: pointer;
             max-width: 200px; /* Max width as requested */
+            /* Centering styles */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
         }
         
         .card::before {
@@ -226,7 +231,7 @@
         .card h5 {
             font-size: 1.2em;
             color: var(--accent-glow);
-            margin: 0 0 10px 0;
+            margin: 0;
             font-weight: 600;
             position: relative;
         }
