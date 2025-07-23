@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CISM Certification Overview</title>
+    <title>CISM Certification Overview - Designer Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Global Styles & Font Import */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&display=swap');
 
         :root {
             --dark-navy-bg: #0a101f;
@@ -18,14 +19,30 @@
             --text-secondary: #94a3b8;
             --border-color: #2d3748;
             --shadow-color: rgba(0, 191, 255, 0.1);
+            --shadow-color-hover: rgba(0, 191, 255, 0.3);
             --transition-fast: all 0.3s ease-in-out;
         }
 
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--dark-navy-bg);
+            background-image: radial-gradient(circle at top, #10192b, var(--dark-navy-bg));
             color: var(--text-primary);
             line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('https://www.transparenttextures.com/patterns/subtle-noise.png');
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: -1;
         }
         
         .container {
@@ -34,9 +51,41 @@
 
         /* Header */
         header.main-header {
-            background: linear-gradient(180deg, var(--surface-color), var(--dark-navy-bg));
+            background: linear-gradient(180deg, var(--surface-color), #0a101fcc);
             border-bottom: 1px solid var(--border-color);
             border-radius: 0.75rem;
+            position: relative;
+        }
+        
+        .header-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 400px;
+            height: 200px;
+            background: var(--accent-glow);
+            border-radius: 50%;
+            filter: blur(100px);
+            transform: translate(-50%, -50%);
+            opacity: 0.1;
+            animation: pulseGlow 8s infinite alternate;
+            z-index: 0;
+        }
+
+        @keyframes pulseGlow {
+            from { opacity: 0.05; transform: translate(-50%, -50%) scale(0.8); }
+            to { opacity: 0.15; transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        header.main-header .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        header.main-header h1 {
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 15px rgba(0, 191, 255, 0.2);
         }
 
         /* Main Content Area & Sections */
@@ -46,7 +95,7 @@
             border-radius: 16px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.3);
             overflow: hidden;
-            padding: 1.5rem;
+            padding: 2rem;
         }
         
         /* Section Header */
@@ -54,6 +103,8 @@
             border-left: 6px solid var(--accent-glow);
             padding-left: 1.25rem;
             font-size: 2.5rem;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 0.5px;
             color: var(--text-primary);
         }
         
@@ -79,13 +130,13 @@
             box-shadow: 0 0 20px var(--shadow-color);
         }
 
-        /* Fade-in Animation */
+        /* Enhanced Fade-in Animation */
         .fade-in {
-            animation: fadeIn 0.6s ease-in-out;
+            animation: enhancedFadeIn 0.7s ease-out;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes enhancedFadeIn {
+            from { opacity: 0; transform: translateY(25px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         /* Interactive Cards & Domain Buttons */
@@ -99,21 +150,26 @@
             text-align: center;
         }
         .interactive-card:hover, .domain-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4), 0 0 25px var(--shadow-color-hover);
             border-color: var(--accent-glow);
         }
         .interactive-card.active, .domain-button.active {
             border-color: var(--accent-glow);
-            box-shadow: 0 0 20px var(--shadow-color);
+            box-shadow: 0 0 25px var(--shadow-color-hover);
             background-color: rgba(0, 191, 255, 0.1);
+            transform: scale(1.02);
         }
         .interactive-card .card-title, .domain-button .card-title {
             font-size: 1.25em;
             font-weight: 700;
             margin-bottom: 0.6rem;
             color: var(--accent-glow);
-            text-align: center; /* Ensures all card titles are centered */
+            text-align: center;
+            transition: var(--transition-fast);
+        }
+        .interactive-card:hover .card-title, .domain-button:hover .card-title {
+            text-shadow: 0 0 8px var(--accent-glow);
         }
         .interactive-card .card-description, .domain-button .card-description {
             font-weight: 400;
@@ -125,7 +181,7 @@
         }
         .interactive-card.active .card-description, .domain-button.active .card-description {
             display: block;
-            animation: fadeIn 0.5s ease-in-out;
+            animation: enhancedFadeIn 0.5s ease-in-out;
         }
         .domain-button {
             padding: 1rem;
@@ -152,6 +208,12 @@
         .accordion-button:hover {
             border-color: var(--accent-glow);
             background-color: rgba(0, 191, 255, 0.05);
+        }
+        .accordion-icon {
+            transition: transform 0.3s ease-in-out;
+        }
+        .accordion-button.open .accordion-icon {
+            transform: rotate(45deg);
         }
         .accordion-content {
             background-color: transparent;
@@ -202,14 +264,17 @@
     </style>
 </head>
 <body class="leading-relaxed">
-    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
-        <header class="main-header text-center py-8 mb-8">
-            <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-2 tracking-tight">CISM Certification Overview</h1>
-            <p class="text-xl sm:text-2xl text-gray-400">Certified Information Security Manager</p>
-            <p class="text-md text-gray-500 mt-2">Your guide to the premier credential for information security leadership.</p>
+    <div class="container mx-auto p-4 sm:p-6 lg:p-12">
+        <header class="main-header text-center py-10 mb-10 overflow-hidden">
+            <div class="header-glow"></div>
+            <div class="header-content">
+                <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-2">CISM Certification Overview</h1>
+                <p class="text-xl sm:text-2xl text-gray-400">Certified Information Security Manager</p>
+                <p class="text-md text-gray-500 mt-2">Your guide to the premier credential for information security leadership.</p>
+            </div>
         </header>
 
-        <nav class="p-2 rounded-lg mb-8 flex flex-wrap justify-center sticky top-0 z-10 gap-2 sm:gap-4 bg-black/20 backdrop-blur-sm border border-gray-700/50">
+        <nav class="p-2 rounded-lg mb-10 flex flex-wrap justify-center sticky top-4 z-10 gap-2 sm:gap-4 bg-black/30 backdrop-blur-sm border border-gray-700/50">
             <button class="nav-item px-4 py-2 text-lg active" data-target="overview">Why CISM?</button>
             <button class="nav-item px-4 py-2 text-lg" data-target="exam-details">Exam Details</button>
             <button class="nav-item px-4 py-2 text-lg" data-target="maintenance">Maintenance</button>
@@ -218,8 +283,8 @@
         <main id="content-area">
             <!-- Why CISM? Section -->
             <section id="overview" class="content-section fade-in">
-                <h2 class="text-3xl font-bold section-header mb-6">Why Pursue the CISM Certification?</h2>
-                <div class="content-box mb-6">
+                <h2 class="text-3xl font-bold section-header mb-8">Why Pursue CISM?</h2>
+                <div class="content-box mb-8">
                     <p class="text-gray-300">The Certified Information Security Manager (CISM) certification, issued by ISACA, is a premier credential for professionals managing and overseeing information security systems in alignment with business goals. Focused on governance, risk management, and leadership, CISM is ideal for security managers, CISOs, and consultants who drive security strategies across the enterprise. Click on the cards below to explore the key benefits.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="why-cism-cards-container">
@@ -229,7 +294,7 @@
 
             <!-- Exam Details Section -->
             <section id="exam-details" class="content-section hidden">
-                <h2 class="text-3xl font-bold section-header mb-6">CISM Exam Details</h2>
+                <h2 class="text-3xl font-bold section-header mb-8">Exam Details</h2>
                 <p class="mb-8 text-gray-300">Everything you need to know about the CISM exam, from its format and cost to the experience required and testing options.</p>
 
                 <!-- Accordion for Exam Details -->
@@ -320,7 +385,7 @@
 
             <!-- Maintenance Section -->
             <section id="maintenance" class="content-section hidden">
-                <h2 class="text-3xl font-bold section-header mb-6">Maintaining Your CISM Certification</h2>
+                <h2 class="text-3xl font-bold section-header mb-8">Maintaining Your Certification</h2>
                 <p class="mb-8 text-gray-300">Holding the CISM certification is an ongoing commitment to professional development. To maintain your credential, you must adhere to ISACA's requirements for continuing professional education (CPE) and professional conduct.</p>
                 <div class="content-box">
                     <h4 class="text-xl font-bold text-white mb-4">CPE Requirements (Click to Expand)</h4>
@@ -337,7 +402,7 @@
             </section>
         </main>
 
-        <footer class="text-center py-6 mt-8 text-gray-500 text-sm">
+        <footer class="text-center py-8 mt-10 text-gray-500 text-sm">
             <p>&copy; 2024 CISM Study Guide. All rights reserved. For educational purposes only.</p>
         </footer>
     </div>
@@ -519,15 +584,16 @@
             document.querySelectorAll('.accordion-button').forEach(button => {
                 button.addEventListener('click', () => {
                     const content = button.nextElementSibling;
-                    const icon = button.querySelector('.accordion-icon');
                     const isOpening = content.classList.contains('hidden');
 
                     if (isOpening) {
                         content.classList.remove('hidden');
-                        icon.textContent = '–';
+                        button.classList.add('open');
+                        button.querySelector('.accordion-icon').textContent = '–';
                     } else {
                         content.classList.add('hidden');
-                        icon.textContent = '+';
+                        button.classList.remove('open');
+                        button.querySelector('.accordion-icon').textContent = '+';
                     }
                 });
             });
