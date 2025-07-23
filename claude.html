@@ -11,974 +11,1411 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary-blue: #2563eb;
+            --primary-dark: #1e40af;
+            --primary-light: #3b82f6;
+            --accent-purple: #7c3aed;
+            --accent-cyan: #06b6d4;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --text-light: #9ca3af;
+            --surface-white: #ffffff;
+            --surface-gray: #f8fafc;
+            --surface-light: #f1f5f9;
+            --border-light: #e2e8f0;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
             line-height: 1.6;
-            color: #333;
+            color: var(--text-primary);
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            font-size: 16px;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-            color: white;
-        }
-
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-        }
-
-        .header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-
-        .main-nav {
+        .app-container {
             display: flex;
-            justify-content: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            gap: 10px;
+            min-height: 100vh;
+            max-width: 1440px;
+            margin: 0 auto;
+            background: var(--surface-white);
+            box-shadow: var(--shadow-xl);
         }
 
-        .nav-btn {
-            background: rgba(255,255,255,0.2);
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 280px;
+            background: var(--surface-white);
+            border-right: 1px solid var(--border-light);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        .sidebar-header {
+            padding: 32px 24px 24px;
+            border-bottom: 1px solid var(--border-light);
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple));
             color: white;
-            border: 2px solid rgba(255,255,255,0.3);
-            padding: 12px 24px;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: -0.025em;
+        }
+
+        .tagline {
+            font-size: 14px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .nav-menu {
+            flex: 1;
+            padding: 24px 0;
+        }
+
+        .nav-item {
+            margin: 0 16px 8px;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            background: var(--surface-light);
+            color: var(--primary-blue);
+            transform: translateX(4px);
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple));
+            color: white;
+            box-shadow: var(--shadow-md);
+        }
+
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            opacity: 0.8;
+        }
+
+        .nav-label {
+            flex: 1;
+        }
+
+        .nav-subtitle {
+            font-size: 12px;
+            opacity: 0.7;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .nav-badge {
+            background: var(--accent-cyan);
+            color: white;
+            font-size: 11px;
             font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 20px;
+            margin-left: auto;
         }
 
-        .nav-btn:hover, .nav-btn.active {
-            background: rgba(255,255,255,0.3);
-            border-color: rgba(255,255,255,0.5);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        /* Main Content Area */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
         }
 
-        .content-area {
-            background: rgba(255,255,255,0.95);
-            border-radius: 15px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            backdrop-filter: blur(10px);
+        .content-header {
+            background: var(--surface-white);
+            border-bottom: 1px solid var(--border-light);
+            padding: 24px 32px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            letter-spacing: -0.025em;
+        }
+
+        .page-subtitle {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        .content-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 32px;
+            background: var(--surface-gray);
         }
 
         .section {
             display: none;
+            animation: fadeInUp 0.4s ease-out;
         }
 
         .section.active {
             display: block;
-            animation: fadeIn 0.5s ease-in;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .section h2 {
-            color: #4a5568;
+        /* Cards and Components */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple));
+            border-radius: 20px;
+            padding: 48px;
+            color: white;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            pointer-events: none;
+        }
+
+        .hero-title {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.025em;
+            position: relative;
+        }
+
+        .hero-description {
+            font-size: 18px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+        }
+
+        .stat-card {
+            background: var(--surface-white);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--primary-blue);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+            margin: 32px 0;
+        }
+
+        .feature-card {
+            background: var(--surface-white);
+            border-radius: 16px;
+            padding: 32px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--accent-purple));
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             margin-bottom: 20px;
-            font-size: 2rem;
-            border-bottom: 3px solid #667eea;
-            padding-bottom: 10px;
+            font-size: 24px;
         }
 
-        .section h3 {
-            color: #2d3748;
-            margin: 25px 0 15px 0;
-            font-size: 1.4rem;
+        .feature-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--text-primary);
+        }
+
+        .feature-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
         }
 
         .domain-card {
-            background: linear-gradient(135deg, #f7fafc, #edf2f7);
-            border-left: 5px solid #667eea;
-            padding: 20px;
-            margin: 20px 0;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
+            background: var(--surface-white);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 24px 0;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
         .domain-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
 
         .domain-header {
             display: flex;
-            justify-content: between;
             align-items: center;
-            margin-bottom: 15px;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 16px;
         }
 
         .domain-title {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: #2d3748;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
         }
 
         .domain-weight {
-            background: #667eea;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple));
             color: white;
-            padding: 5px 12px;
+            padding: 8px 16px;
             border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: bold;
+            font-weight: 600;
+            font-size: 14px;
         }
 
         .subdomain {
-            background: white;
-            margin: 10px 0;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
+            background: var(--surface-gray);
+            margin: 20px 0;
+            padding: 24px;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-blue);
         }
 
-        .subdomain h4 {
-            color: #4a5568;
-            margin-bottom: 10px;
-            font-size: 1.1rem;
+        .subdomain-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 16px;
         }
 
-        .subdomain ul {
-            list-style-type: none;
-            padding-left: 0;
+        .topic-list {
+            list-style: none;
+            padding: 0;
         }
 
-        .subdomain li {
-            padding: 5px 0;
-            padding-left: 20px;
+        .topic-item {
+            padding: 8px 0;
+            color: var(--text-secondary);
             position: relative;
+            padding-left: 24px;
         }
 
-        .subdomain li:before {
-            content: "→";
+        .topic-item::before {
+            content: '→';
             position: absolute;
             left: 0;
-            color: #667eea;
+            color: var(--primary-blue);
             font-weight: bold;
         }
 
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(124, 58, 237, 0.05));
+            border: 1px solid rgba(37, 99, 235, 0.2);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 24px 0;
         }
 
-        .info-card {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            border-top: 4px solid #667eea;
-        }
-
-        .info-card h4 {
-            color: #2d3748;
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-        }
-
+        /* Quiz Styles */
         .quiz-container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
         .quiz-setup {
+            background: var(--surface-white);
+            border-radius: 16px;
+            padding: 40px;
             text-align: center;
-            margin-bottom: 30px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
         }
 
-        .quiz-setup select, .quiz-setup button {
-            margin: 10px;
-            padding: 12px 20px;
-            border: 2px solid #667eea;
+        .setup-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 32px;
+            color: var(--text-primary);
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+            text-align: left;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .form-select, .form-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--border-light);
             border-radius: 8px;
-            font-size: 1rem;
+            font-size: 16px;
+            transition: border-color 0.2s ease;
         }
 
-        .quiz-setup button {
-            background: #667eea;
+        .form-select:focus, .form-input:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            justify-content: center;
+            margin: 24px 0;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--primary-blue);
+        }
+
+        .primary-btn {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple));
             color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
         }
 
-        .quiz-setup button:hover {
-            background: #5a67d8;
+        .primary-btn:hover {
             transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
         }
 
         .question-card {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            margin: 20px 0;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            border: 1px solid #e2e8f0;
+            background: var(--surface-white);
+            border-radius: 16px;
+            padding: 32px;
+            margin: 24px 0;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
         }
 
         .question-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 16px;
         }
 
         .question-number {
-            background: #667eea;
+            background: var(--primary-blue);
             color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-weight: bold;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 14px;
         }
 
         .timer {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #e53e3e;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--error);
+            font-family: 'Monaco', 'Menlo', monospace;
         }
 
         .question-text {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            line-height: 1.8;
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 32px;
+            color: var(--text-primary);
         }
 
-        .options {
+        .options-list {
             list-style: none;
+            padding: 0;
         }
 
         .option {
-            background: #f7fafc;
-            margin: 10px 0;
-            padding: 15px;
-            border-radius: 8px;
+            background: var(--surface-gray);
+            margin: 12px 0;
+            padding: 20px;
+            border-radius: 12px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             border: 2px solid transparent;
+            font-size: 16px;
         }
 
         .option:hover {
-            background: #edf2f7;
-            border-color: #cbd5e0;
+            background: var(--surface-light);
+            border-color: var(--border-light);
         }
 
         .option.selected {
-            background: #e6fffa;
-            border-color: #38b2ac;
+            background: rgba(37, 99, 235, 0.1);
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
         }
 
         .option.correct {
-            background: #f0fff4;
-            border-color: #38a169;
+            background: rgba(16, 185, 129, 0.1);
+            border-color: var(--success);
+            color: var(--success);
         }
 
         .option.incorrect {
-            background: #fed7d7;
-            border-color: #e53e3e;
+            background: rgba(239, 68, 68, 0.1);
+            border-color: var(--error);
+            color: var(--error);
         }
 
         .quiz-controls {
-            text-align: center;
-            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin: 32px 0;
+            flex-wrap: wrap;
         }
 
         .quiz-btn {
-            background: #667eea;
-            color: white;
-            border: none;
+            background: var(--surface-white);
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
             padding: 12px 24px;
-            margin: 0 10px;
             border-radius: 8px;
+            font-weight: 600;
             cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
         }
 
-        .quiz-btn:hover {
-            background: #5a67d8;
-            transform: translateY(-2px);
+        .quiz-btn:hover:not(:disabled) {
+            background: var(--primary-blue);
+            color: white;
         }
 
         .quiz-btn:disabled {
-            background: #a0aec0;
+            opacity: 0.5;
             cursor: not-allowed;
-            transform: none;
-        }
-
-        .results {
-            text-align: center;
-            padding: 30px;
-            background: linear-gradient(135deg, #f0fff4, #c6f6d5);
-            border-radius: 12px;
-            margin: 20px 0;
-        }
-
-        .score {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #2f855a;
-            margin-bottom: 10px;
         }
 
         .progress-bar {
-            background: #e2e8f0;
-            height: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
+            background: var(--border-light);
+            height: 8px;
+            border-radius: 4px;
+            margin: 24px 0;
             overflow: hidden;
         }
 
         .progress-fill {
-            background: linear-gradient(90deg, #667eea, #764ba2);
+            background: linear-gradient(90deg, var(--primary-blue), var(--accent-purple));
             height: 100%;
-            border-radius: 10px;
+            border-radius: 4px;
             transition: width 0.3s ease;
         }
 
-        .highlight {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
+        .results-card {
+            background: var(--surface-white);
+            border-radius: 16px;
+            padding: 48px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
         }
 
-        .alert {
-            background: #d4edda;
-            border: 1px solid #c3e6cb;
-            color: #155724;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
+        .final-score {
+            font-size: 64px;
+            font-weight: 800;
+            color: var(--success);
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--success), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .warning {
-            background: #f8d7da;
-            border: 1px solid #f5c6cb;
-            color: #721c24;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
+        .score-message {
+            font-size: 20px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
         }
 
-        .responsive-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-
-        .responsive-table th,
-        .responsive-table td {
-            border: 1px solid #e2e8f0;
-            padding: 12px;
+        .domain-breakdown {
             text-align: left;
+            background: var(--surface-gray);
+            border-radius: 12px;
+            padding: 24px;
+            margin: 32px 0;
         }
 
-        .responsive-table th {
-            background: #667eea;
-            color: white;
-            font-weight: bold;
-        }
-
-        .responsive-table tr:nth-child(even) {
-            background: #f8f9fa;
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .app-container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                order: 2;
+                border-right: none;
+                border-top: 1px solid var(--border-light);
+            }
+            
+            .nav-menu {
+                display: flex;
+                overflow-x: auto;
+                padding: 16px;
+            }
+            
+            .nav-item {
+                flex-shrink: 0;
+                margin: 0 8px 0 0;
+            }
         }
 
         @media (max-width: 768px) {
-            .container {
-                padding: 10px;
+            .content-body {
+                padding: 20px;
             }
             
-            .header h1 {
-                font-size: 2rem;
+            .hero-section {
+                padding: 32px 24px;
             }
             
-            .main-nav {
-                flex-direction: column;
-                align-items: center;
+            .hero-title {
+                font-size: 32px;
             }
             
-            .nav-btn {
-                width: 200px;
-                text-align: center;
-            }
-            
-            .info-grid {
+            .feature-grid,
+            .stats-grid {
                 grid-template-columns: 1fr;
             }
             
             .domain-header {
                 flex-direction: column;
-                gap: 10px;
                 text-align: center;
             }
             
             .question-header {
                 flex-direction: column;
-                gap: 10px;
                 text-align: center;
             }
+        }
+
+        /* Dark mode support */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --text-primary: #f9fafb;
+                --text-secondary: #d1d5db;
+                --surface-white: #1f2937;
+                --surface-gray: #111827;
+                --border-light: #374151;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--surface-gray);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-light);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-light);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <h1>🛡️ CISM Certification Study Guide</h1>
-            <p>Comprehensive Interactive Guide for Certified Information Security Manager</p>
-        </header>
-
-        <nav class="main-nav">
-            <button class="nav-btn active" onclick="showSection('introduction')">Introduction</button>
-            <button class="nav-btn" onclick="showSection('domain1')">Domain 1</button>
-            <button class="nav-btn" onclick="showSection('domain2')">Domain 2</button>
-            <button class="nav-btn" onclick="showSection('domain3')">Domain 3</button>
-            <button class="nav-btn" onclick="showSection('domain4')">Domain 4</button>
-            <button class="nav-btn" onclick="showSection('assessment')">Assessment</button>
-        </nav>
-
-        <main class="content-area">
-            <!-- Introduction Section -->
-            <section id="introduction" class="section active">
-                <h2>CISM Certification Overview</h2>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">🛡️ CISM Study Guide</div>
+                <div class="tagline">Interactive Learning Platform</div>
+            </div>
+            
+            <nav class="nav-menu">
+                <div class="nav-item">
+                    <a href="#" class="nav-link active" onclick="showSection('introduction')">
+                        <div class="nav-icon">📋</div>
+                        <div class="nav-label">
+                            CISM Introduction
+                            <span class="nav-subtitle">Certification Overview</span>
+                        </div>
+                    </a>
+                </div>
                 
-                <div class="alert">
-                    <strong>Latest Update:</strong> This guide reflects the current CISM exam content outline as of 2025, with no major updates since June 2022.
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="showSection('domain1')">
+                        <div class="nav-icon">🏛️</div>
+                        <div class="nav-label">
+                            Domain 1
+                            <span class="nav-subtitle">Governance</span>
+                        </div>
+                        <div class="nav-badge">17%</div>
+                    </a>
                 </div>
-
-                <h3>📋 Exam Format</h3>
-                <div class="info-grid">
-                    <div class="info-card">
-                        <h4>Exam Structure</h4>
-                        <ul>
-                            <li><strong>Questions:</strong> 150 multiple-choice questions</li>
-                            <li><strong>Duration:</strong> 4 hours</li>
-                            <li><strong>Format:</strong> Computer-based testing</li>
-                            <li><strong>Delivery:</strong> PSI testing centers worldwide or remote proctoring</li>
-                        </ul>
-                    </div>
-                    <div class="info-card">
-                        <h4>Scoring</h4>
-                        <ul>
-                            <li><strong>Scale:</strong> 200-800 points</li>
-                            <li><strong>Passing Score:</strong> 450 points</li>
-                            <li><strong>Languages:</strong> English, Chinese Simplified, Japanese, Spanish</li>
-                            <li><strong>Results:</strong> Preliminary score on-screen, official results within 10 business days</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <h3>💼 Experience Requirements</h3>
-                <div class="highlight">
-                    <strong>Minimum Requirements:</strong>
-                    <ul>
-                        <li>5 years of professional information security work experience within 10 years before application</li>
-                        <li>3 years must be in information security management</li>
-                        <li>Experience must cover at least 3 of the 4 CISM domains</li>
-                        <li>Adherence to ISACA's Code of Professional Ethics</li>
-                    </ul>
-                </div>
-
-                <div class="info-card">
-                    <h4>Experience Waivers Available</h4>
-                    <ul>
-                        <li>Up to 2 years waived for relevant certifications (CISSP, CISA, PMP)</li>
-                        <li>Up to 2 years waived for relevant post-graduate degree</li>
-                        <li>CISA holders receive 2-year general information security waiver</li>
-                    </ul>
-                </div>
-
-                <h3>💰 Cost Breakdown (2025)</h3>
-                <table class="responsive-table">
-                    <thead>
-                        <tr>
-                            <th>Item</th>
-                            <th>ISACA Member</th>
-                            <th>Non-Member</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Exam Fee</td>
-                            <td>$575</td>
-                            <td>$760</td>
-                        </tr>
-                        <tr>
-                            <td>Application Processing Fee</td>
-                            <td>$50</td>
-                            <td>$50</td>
-                        </tr>
-                        <tr>
-                            <td>Annual Maintenance Fee</td>
-                            <td>$45</td>
-                            <td>$85</td>
-                        </tr>
-                        <tr>
-                            <td>ISACA Membership (Optional)</td>
-                            <td>$145 (first year)</td>
-                            <td>-</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <h3>🔄 Maintenance Requirements</h3>
-                <div class="info-grid">
-                    <div class="info-card">
-                        <h4>Continuing Professional Education (CPE)</h4>
-                        <ul>
-                            <li><strong>Annual:</strong> Minimum 20 CPE hours</li>
-                            <li><strong>3-Year Cycle:</strong> Total 120 CPE hours</li>
-                            <li><strong>Activities:</strong> Training, conferences, professional development</li>
-                            <li><strong>Reporting:</strong> Must report annually by January 1st</li>
-                        </ul>
-                    </div>
-                    <div class="info-card">
-                        <h4>Renewal Process</h4>
-                        <ul>
-                            <li><strong>Cycle:</strong> Every 3 years</li>
-                            <li><strong>Fee:</strong> Annual maintenance fee required</li>
-                            <li><strong>Audit:</strong> Random CPE audits conducted</li>
-                            <li><strong>Reinstatement:</strong> $50 fee if certification lapses</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="warning">
-                    <strong>Important:</strong> You can take the exam without meeting experience requirements, but must gain required experience within 5 years to obtain certification.
-                </div>
-            </section>
-
-            <!-- Domain 1 Section -->
-            <section id="domain1" class="section">
-                <h2>Domain 1: Information Security Governance</h2>
                 
-                <div class="domain-card">
-                    <div class="domain-header">
-                        <div class="domain-title">Information Security Governance</div>
-                        <div class="domain-weight">17% of Exam</div>
-                    </div>
-                    <p>This domain focuses on developing, maintaining, and managing information security governance frameworks aligned with organizational objectives.</p>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="showSection('domain2')">
+                        <div class="nav-icon">⚠️</div>
+                        <div class="nav-label">
+                            Domain 2
+                            <span class="nav-subtitle">Risk Management</span>
+                        </div>
+                        <div class="nav-badge">20%</div>
+                    </a>
                 </div>
-
-                <h3>📊 Domain Overview</h3>
-                <p>Information Security Governance ensures that security strategies align with business objectives and comply with applicable laws and regulations. It provides direction for cybersecurity activities and ensures organizational security objectives are effectively met.</p>
-
-                <h3>🎯 Sub-domains and Topics</h3>
                 
-                <div class="subdomain">
-                    <h4>A. Enterprise Governance</h4>
-                    <ul>
-                        <li><strong>Organizational Culture:</strong> Understanding how culture impacts security strategy implementation</li>
-                        <li><strong>Legal, Regulatory and Contractual Requirements:</strong> Compliance with laws, regulations, and contractual obligations</li>
-                        <li><strong>Organizational Structures, Roles and Responsibilities:</strong> Defining clear security roles and accountability</li>
-                        <li><strong>Enterprise Risk Management Integration:</strong> Aligning security governance with overall risk management</li>
-                        <li><strong>Board and Executive Engagement:</strong> Securing leadership commitment and oversight</li>
-                    </ul>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="showSection('domain3')">
+                        <div class="nav-icon">🔧</div>
+                        <div class="nav-label">
+                            Domain 3
+                            <span class="nav-subtitle">Program Development</span>
+                        </div>
+                        <div class="nav-badge">33%</div>
+                    </a>
                 </div>
-
-                <div class="subdomain">
-                    <h4>B. Information Security Strategy</h4>
-                    <ul>
-                        <li><strong>Information Security Strategy Development:</strong> Creating comprehensive security strategies</li>
-                        <li><strong>Information Governance Frameworks and Standards:</strong> Implementing frameworks like ISO 27001, NIST, COBIT</li>
-                        <li><strong>Strategic Planning:</strong> Budget allocation, resource planning, and business case development</li>
-                        <li><strong>Performance Measurement:</strong> Defining KPIs and metrics for governance effectiveness</li>
-                        <li><strong>Stakeholder Communication:</strong> Reporting and communicating governance activities</li>
-                    </ul>
-                </div>
-
-                <h3>🎯 Key Supporting Tasks</h3>
-                <div class="highlight">
-                    <ul>
-                        <li>Identify internal and external influences on information security strategy</li>
-                        <li>Establish and maintain information security strategy aligned with organizational goals</li>
-                        <li>Establish and maintain information security governance framework</li>
-                        <li>Integrate information security governance into corporate governance</li>
-                        <li>Establish and maintain information security policies</li>
-                        <li>Develop business cases to support information security investments</li>
-                        <li>Gain ongoing commitment from senior leadership and stakeholders</li>
-                    </ul>
-                </div>
-
-                <h3>📚 Study Focus Areas</h3>
-                <div class="info-grid">
-                    <div class="info-card">
-                        <h4>Governance Frameworks</h4>
-                        <ul>
-                            <li>ISO 27001/27002</li>
-                            <li>NIST Cybersecurity Framework</li>
-                            <li>COBIT 2019</li>
-                            <li>PCI DSS</li>
-                            <li>HIPAA</li>
-                        </ul>
-                    </div>
-                    <div class="info-card">
-                        <h4>Key Concepts</h4>
-                        <ul>
-                            <li>Governance vs. Management</li>
-                            <li>Risk appetite and tolerance</li>
-                            <li>Board oversight responsibilities</li>
-                            <li>Compliance management</li>
-                            <li>Strategic alignment</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Domain 2 Section -->
-            <section id="domain2" class="section">
-                <h2>Domain 2: Information Security Risk Management</h2>
                 
-                <div class="domain-card">
-                    <div class="domain-header">
-                        <div class="domain-title">Information Security Risk Management</div>
-                        <div class="domain-weight">20% of Exam</div>
-                    </div>
-                    <p>This domain empowers you to analyze and identify potential information security risks, threats, and vulnerabilities, providing comprehensive risk management capabilities.</p>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="showSection('domain4')">
+                        <div class="nav-icon">🚨</div>
+                        <div class="nav-label">
+                            Domain 4
+                            <span class="nav-subtitle">Incident Management</span>
+                        </div>
+                        <div class="nav-badge">30%</div>
+                    </a>
                 </div>
-
-                <h3>📊 Domain Overview</h3>
-                <p>Information Security Risk Management focuses on identifying, assessing, and treating information security risks to acceptable levels based on organizational risk appetite. It encompasses both strategic and operational risk management activities.</p>
-
-                <h3>🎯 Sub-domains and Topics</h3>
                 
-                <div class="subdomain">
-                    <h4>A. Information Security Risk Assessment</h4>
-                    <ul>
-                        <li><strong>Emerging Risk and Threat Landscape:</strong> Identifying new and evolving threats and vulnerabilities</li>
-                        <li><strong>Vulnerability and Control Deficiency Analysis:</strong> Systematic identification and analysis of weaknesses</li>
-                        <li><strong>Risk Assessment and Analysis:</strong> Quantitative and qualitative risk assessment methodologies</li>
-                        <li><strong>Risk Identification Techniques:</strong> Asset-based, threat-based, and vulnerability-based approaches</li>
-                        <li><strong>Business Impact Analysis:</strong> Understanding potential impacts of security incidents</li>
-                    </ul>
+                <div class="nav-item">
+                    <a href="#" class="nav-link" onclick="showSection('assessment')">
+                        <div class="nav-icon">✅</div>
+                        <div class="nav-label">
+                            Assessment
+                            <span class="nav-subtitle">Test Your Knowledge</span>
+                        </div>
+                    </a>
                 </div>
+            </nav>
+        </aside>
 
-                <div class="subdomain">
-                    <h4>B. Information Security Risk Response</h4>
-                    <ul>
-                        <li><strong>Risk Treatment/Risk Response Options:</strong> Accept, avoid, transfer, or mitigate risk strategies</li>
-                        <li><strong>Risk and Control Ownership:</strong> Defining clear accountability for risk management</li>
-                        <li><strong>Risk Monitoring and Reporting:</strong> Continuous monitoring and stakeholder communication</li>
-                        <li><strong>Risk Appetite and Tolerance:</strong> Defining acceptable levels of risk</li>
-                        <li><strong>Control Selection and Implementation:</strong> Choosing appropriate risk treatment measures</li>
-                    </ul>
-                </div>
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h1 class="page-title" id="pageTitle">CISM Certification Overview</h1>
+                <p class="page-subtitle" id="pageSubtitle">Certified Information Security Manager</p>
+            </header>
 
-                <h3>🎯 Key Supporting Tasks</h3>
-                <div class="highlight">
-                    <ul>
-                        <li>Participate in and oversee risk identification, assessment, and treatment processes</li>
-                        <li>Participate in and oversee vulnerability assessment and threat analysis</li>
-                        <li>Identify and implement appropriate risk treatment options</li>
-                        <li>Determine effectiveness of information security controls</li>
-                        <li>Facilitate integration of information risk management into business processes</li>
-                        <li>Monitor for factors requiring risk reassessment</li>
-                        <li>Report on information security risk to key stakeholders</li>
-                    </ul>
-                </div>
-
-                <h3>📚 Study Focus Areas</h3>
-                <div class="info-grid">
-                    <div class="info-card">
-                        <h4>Risk Assessment Methods</h4>
-                        <ul>
-                            <li>Qualitative risk assessment</li>
-                            <li>Quantitative risk assessment</li>
-                            <li>FAIR (Factor Analysis of Information Risk)</li>
-                            <li>OCTAVE methodology</li>
-                            <li>NIST Risk Management Framework</li>
-                        </ul>
+            <div class="content-body">
+                <!-- Introduction Section -->
+                <section id="introduction" class="section active">
+                    <div class="hero-section">
+                        <h1 class="hero-title">Why Pursue the CISM Certification?</h1>
+                        <p class="hero-description">
+                            The Certified Information Security Manager (CISM) certification, issued by ISACA, is a premier credential for 
+                            professionals managing and overseeing information security systems in alignment with business goals. Focused on 
+                            governance, risk management, and leadership, CISM is ideal for security managers, CISOs, and consultants who drive 
+                            security strategies across the enterprise.
+                        </p>
                     </div>
-                    <div class="info-card">
-                        <h4>Key Metrics</h4>
-                        <ul>
-                            <li>Risk register components</li>
-                            <li>Risk appetite statements</li>
-                            <li>Key Risk Indicators (KRIs)</li>
-                            <li>Recovery Time Objective (RTO)</li>
-                            <li>Recovery Point Objective (RPO)</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
 
-            <!-- Domain 3 Section -->
-            <section id="domain3" class="section">
-                <h2>Domain 3: Information Security Program</h2>
-                
-                <div class="domain-card">
-                    <div class="domain-header">
-                        <div class="domain-title">Information Security Program Development and Management</div>
-                        <div class="domain-weight">33% of Exam</div>
-                    </div>
-                    <p>This domain covers implementing information security strategies and developing comprehensive security programs, guidelines, procedures, and metrics.</p>
-                </div>
-
-                <h3>📊 Domain Overview</h3>
-                <p>Information Security Program Management focuses on translating security strategy into operational reality through program development, implementation, and management. This is the highest-weighted domain in the CISM exam.</p>
-
-                <h3>🎯 Sub-domains and Topics</h3>
-                
-                <div class="subdomain">
-                    <h4>A. Information Security Program Development</h4>
-                    <ul>
-                        <li><strong>Information Security Program Resources:</strong> People, tools, technologies, and budget allocation</li>
-                        <li><strong>Information Asset Identification and Classification:</strong> Data classification schemes and asset inventory</li>
-                        <li><strong>Industry Standards and Frameworks:</strong> Implementation of security frameworks and standards</li>
-                        <li><strong>Information Security Policies, Procedures and Guidelines:</strong> Development and maintenance of security documentation</li>
-                        <li><strong>Information Security Program Metrics:</strong> KPIs and measurement frameworks</li>
-                    </ul>
-                </div>
-
-                <div class="subdomain">
-                    <h4>B. Information Security Program Management</h4>
-                    <ul>
-                        <li><strong>Information Security Control Design and Selection:</strong> Choosing and designing appropriate controls</li>
-                        <li><strong>Information Security Control Implementation and Integration:</strong> Deploying controls across the organization</li>
-                        <li><strong>Information Security Control Testing and Evaluation:</strong> Assessing control effectiveness</li>
-                        <li><strong>Information Security Awareness and Training:</strong> Education programs and culture development</li>
-                        <li><strong>Management of External Services:</strong> Third-party, fourth-party, and vendor management</li>
-                        <li><strong>Information Security Program Communications and Reporting:</strong> Stakeholder communication and reporting</li>
-                    </ul>
-                </div>
-
-                <h3>🎯 Key Supporting Tasks</h3>
-                <div class="highlight">
-                    <ul>
-                        <li>Establish and maintain information security program aligned with strategy</li>
-                        <li>Align information security program with operational objectives</li>
-                        <li>Establish and maintain information security processes and resources</li>
-                        <li>Establish, communicate, and maintain organizational security documentation</li>
-                        <li>Establish, promote, and maintain awareness and training programs</li>
-                        <li>Integrate security requirements into organizational processes</li>
-                        <li>Integrate security requirements into external party contracts</li>
-                        <li>Monitor external parties' adherence to security requirements</li>
-                        <li>Define and monitor management and operational metrics</li>
-                    </ul>
-                </div>
-
-                <h3>📚 Study Focus Areas</h3>
-                <div class="info-grid">
-                    <div class="info-card">
-                        <h4>Program Components</h4>
-                        <ul>
-                            <li>Security architecture design</li>
-                            <li>Control frameworks (NIST, ISO 27002)</li>
-                            <li>Security awareness programs</li>
-                            <li>Vendor management programs</li>
-                            <li>Security metrics and KPIs</li>
-                            <li>Compliance monitoring</li>
-                        </ul>
-                    </div>
-                    <div class="info-card">
-                        <h4>Implementation Areas</h4>
-                        <ul>
-                            <li>Access control systems</li>
-                            <li>Security monitoring and logging</li>
-                            <li>Incident response procedures</li>
-                            <li>Business continuity planning</li>
-                            <li>Third-party risk management</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Domain 4 Section -->
-            <section id="domain4" class="section">
-                <h2>Domain 4: Incident Management</h2>
-                
-                <div class="domain-card">
-                    <div class="domain-header">
-                        <div class="domain-title">Information Security Incident Management</div>
-                        <div class="domain-weight">30% of Exam</div>
-                    </div>
-                    <p>This domain provides comprehensive training in incident management, including preparedness, response, recovery, and continuous improvement.</p>
-                </div>
-
-                <h3>📊 Domain Overview</h3>
-                <p>Information Security Incident Management encompasses all activities related to preparing for, responding to, and recovering from security incidents. It ensures organizational resilience and continuous improvement of security posture.</p>
-
-                <h3>🎯 Sub-domains and Topics</h3>
-                
-                <div class="subdomain">
-                    <h4>A. Incident Management Readiness</h4>
-                    <ul>
-                        <li><strong>Incident Response Plan:</strong> Comprehensive planning for incident response activities</li>
-                        <li><strong>Business Impact Analysis (BIA):</strong> Understanding critical business functions and dependencies</li>
-                        <li><strong>Business Continuity Plan (BCP):</strong> Ensuring business operations continue during incidents</li>
-                        <li><strong>Disaster Recovery Plan (DRP):</strong> Restoring IT systems and operations after incidents</li>
-                        <li><strong>Incident Classification/Categorization:</strong> Systematic approach to incident triage and prioritization</li>
-                        <li><strong>Incident Management Training, Testing and Evaluation:</strong> Preparedness through exercises and training</li>
-                    </ul>
-                </div>
-
-                <div class="subdomain">
-                    <h4>B. Incident Management Operations</h4>
-                    <ul>
-                        <li><strong>Incident Management Tools and Techniques:</strong> Technology and methodologies for incident response</li>
-                        <li><strong>Incident Investigation and Evaluation:</strong> Forensic analysis and evidence preservation</li>
-                        <li><strong>Incident Containment Methods:</strong> Strategies to limit incident impact and spread</li>
-                        <li><strong>Incident Response Communications:</strong> Internal and external communication protocols</li>
-                        <li><strong>Incident Eradication and Recovery:</strong> Removing threats and restoring normal operations</li>
-                        <li><strong>Post-Incident Review Practices:</strong> Lessons learned and continuous improvement</li>
-                    </ul>
-                </div>
-
-                <h3>🎯 Key Supporting Tasks</h3>
-                <div class="highlight">
-                    <ul>
-                        <li>Establish and maintain incident response plan aligned with BCP and DRP</li>
-                        <li>Establish and maintain incident classification and categorization process</li>
-                        <li>Develop processes for timely identification of security incidents</li>
-                        <li>Establish processes to investigate and document incidents per legal requirements</li>
-                        <li>Establish incident handling processes including containment and recovery</li>
-                        <li>Organize, train, equip, and assign responsibilities to incident response teams</li>
-                        <li>Establish incident communication plans for internal and external parties</li>
-                        <li>Evaluate incident management plans through testing and exercises</li>
-                        <li>Conduct post-incident reviews for continuous improvement</li>
-                    </ul>
-                </div>
-
-                <h3>📚 Study Focus Areas</h3>
-                <div class="info-grid">
-                    <div class="info-card">
-                        <h4>Incident Response Framework</h4>
-                        <ul>
-                            <li>NIST Incident Response Framework</li>
-                            <li>SANS Incident Response Process</li>
-                            <li>ISO 27035 Incident Management</li>
-                            <li>ENISA Incident Response Guidelines</li>
-                            <li>Industry-specific frameworks</li>
-                        </ul>
-                    </div>
-                    <div class="info-card">
-                        <h4>Recovery Metrics</h4>
-                        <ul>
-                            <li>Recovery Time Objective (RTO)</li>
-                            <li>Recovery Point Objective (RPO)</li>
-                            <li>Mean Time to Recovery (MTTR)</li>
-                            <li>Maximum Tolerable Downtime (MTD)</li>
-                            <li>Work Recovery Time (WRT)</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Assessment Section -->
-            <section id="assessment" class="section">
-                <h2>Assessment Center</h2>
-                
-                <div class="quiz-container">
-                    <div class="quiz-setup" id="quizSetup">
-                        <h3>Practice Quiz Configuration</h3>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">🎯</div>
+                            <h3 class="feature-title">Leadership-Focused</h3>
+                            <p class="feature-description">
+                                Develops strategic thinking and leadership skills essential for information security management roles, 
+                                focusing on governance and business alignment.
+                            </p>
+                        </div>
                         
-                        <div style="margin: 20px 0;">
-                            <label for="domainSelect">Select Domain:</label>
-                            <select id="domainSelect">
-                                <option value="all">Official CISM Simulation (150 questions)</option>
-                                <option value="domain1">Domain 1 - Information Security Governance</option>
-                                <option value="domain2">Domain 2 - Information Security Risk Management</option>
-                                <option value="domain3">Domain 3 - Information Security Program</option>
-                                <option value="domain4">Domain 4 - Incident Management</option>
-                                <option value="mixed">Mixed Domains Practice</option>
-                            </select>
+                        <div class="feature-card">
+                            <div class="feature-icon">📈</div>
+                            <h3 class="feature-title">Career-Enhancing</h3>
+                            <p class="feature-description">
+                                Average salary of $156,420 annually with opportunities for CISO roles. 90% of certification holders 
+                                renew their credentials, demonstrating lasting value.
+                            </p>
                         </div>
-
-                        <div style="margin: 20px 0;" id="questionCountDiv">
-                            <label for="questionCount">Number of Questions:</label>
-                            <select id="questionCount">
-                                <option value="5">5 Questions</option>
-                                <option value="10">10 Questions</option>
-                                <option value="15">15 Questions</option>
-                                <option value="20" selected>20 Questions</option>
-                                <option value="25">25 Questions</option>
-                                <option value="30">30 Questions</option>
-                            </select>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">🌍</div>
+                            <h3 class="feature-title">Global Recognition</h3>
+                            <p class="feature-description">
+                                Recognized in 180+ countries by top employers like Deloitte, EY, Accenture, and Cisco. 
+                                Over 45,000 professionals have earned this prestigious certification.
+                            </p>
                         </div>
-
-                        <div style="margin: 20px 0;">
-                            <label for="timerEnabled">Enable Timer:</label>
-                            <input type="checkbox" id="timerEnabled" checked>
-                            <span style="margin-left: 10px; font-size: 0.9rem; color: #666;">
-                                (Official exam: 4 hours for 150 questions = 1.6 minutes per question)
-                            </span>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">🔄</div>
+                            <h3 class="feature-title">Industry Relevance</h3>
+                            <p class="feature-description">
+                                Continuously updated to address emerging threats including AI, blockchain, and cloud security. 
+                                Covers latest frameworks and industry best practices.
+                            </p>
                         </div>
-
-                        <button onclick="startQuiz()">Start Quiz</button>
                     </div>
 
-                    <div id="quizArea" style="display: none;">
-                        <div class="question-card">
-                            <div class="question-header">
-                                <div class="question-number" id="questionNumber">Question 1 of 20</div>
-                                <div class="timer" id="timer">02:00</div>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number">150</div>
+                            <div class="stat-label">Exam Questions</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">4</div>
+                            <div class="stat-label">Hours Duration</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">450</div>
+                            <div class="stat-label">Passing Score</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number">5</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                    </div>
+
+                    <div class="domain-card">
+                        <h3 style="font-size: 24px; margin-bottom: 20px;">📊 Exam Format & Requirements</h3>
+                        
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <h4 class="feature-title">Exam Structure</h4>
+                                <ul style="list-style: none; padding: 0;">
+                                    <li><strong>Questions:</strong> 150 multiple-choice</li>
+                                    <li><strong>Duration:</strong> 4 hours</li>
+                                    <li><strong>Format:</strong> Computer-based</li>
+                                    <li><strong>Delivery:</strong> PSI centers or remote</li>
+                                    <li><strong>Languages:</strong> English, Chinese, Japanese, Spanish</li>
+                                </ul>
                             </div>
                             
-                            <div class="question-text" id="questionText">
-                                Loading question...
+                            <div class="feature-card">
+                                <h4 class="feature-title">Experience Requirements</h4>
+                                <ul style="list-style: none; padding: 0;">
+                                    <li><strong>Total:</strong> 5 years professional experience</li>
+                                    <li><strong>Management:</strong> 3 years in security management</li>
+                                    <li><strong>Domains:</strong> Cover at least 3 of 4 domains</li>
+                                    <li><strong>Waivers:</strong> Up to 2 years for degrees/certs</li>
+                                    <li><strong>Ethics:</strong> Adhere to ISACA Code</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="domain-card">
+                        <h3 style="font-size: 24px; margin-bottom: 20px;">💰 Cost Breakdown (2025)</h3>
+                        
+                        <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                            <thead>
+                                <tr style="background: var(--surface-gray);">
+                                    <th style="padding: 12px; text-align: left; border: 1px solid var(--border-light);">Item</th>
+                                    <th style="padding: 12px; text-align: center; border: 1px solid var(--border-light);">ISACA Member</th>
+                                    <th style="padding: 12px; text-align: center; border: 1px solid var(--border-light);">Non-Member</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding: 12px; border: 1px solid var(--border-light);">Exam Fee</td>
+                                    <td style="padding: 12px; text-align: center; border: 1px solid var(--border-light); color: var(--success); font-weight: 600;">$575</td>
+                                    <td style="padding: 12px; text-align: center; border: 1px solid var(--border-light);">$760</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 12px; border: 1px solid var(--border-light);">Application Processing</td>
+                                    <td style="padding: 12px; text-align: center; border: 1px solid var(--border-light);">$50</td>
+                                    <td style="padding: 12px; text-align: center; border: 1px solid var(--border-light);">$50</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 12px; border: 1px solid var(--border-light);">Annual Maintenance</td>
+                                    <td style="padding: 12px; text-align: center; border: 1px solid var(--border-light); color: var(--success); font-weight: 600;">$45</td>
+                                    <td style="padding: 12px; text-align: center; border: 1px solid var(--border-light);">$85</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 12px; border: 1px solid var(--border-light);">ISACA Membership</td>
+                                    <td style="padding: 12px; text-align: center; border: 1px solid var(--border-light);">$145 (first year)</td>
+                                    <td style="padding: 12px; text-align: center; border: 1px solid var(--border-light);">-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="domain-card">
+                        <h3 style="font-size: 24px; margin-bottom: 20px;">🔄 Maintenance Requirements</h3>
+                        
+                        <div class="feature-grid">
+                            <div class="feature-card">
+                                <h4 class="feature-title">Continuing Professional Education</h4>
+                                <ul style="list-style: none; padding: 0;">
+                                    <li><strong>Annual:</strong> Minimum 20 CPE hours</li>
+                                    <li><strong>3-Year Cycle:</strong> Total 120 CPE hours</li>
+                                    <li><strong>Activities:</strong> Training, conferences, development</li>
+                                    <li><strong>Reporting:</strong> By January 1st annually</li>
+                                </ul>
                             </div>
                             
-                            <ul class="options" id="optionsList">
-                                <!-- Options will be populated by JavaScript -->
+                            <div class="feature-card">
+                                <h4 class="feature-title">Renewal Process</h4>
+                                <ul style="list-style: none; padding: 0;">
+                                    <li><strong>Cycle:</strong> Every 3 years</li>
+                                    <li><strong>Audit:</strong> Random CPE audits</li>
+                                    <li><strong>Reinstatement:</strong> $50 fee if lapsed</li>
+                                    <li><strong>Status:</strong> Non-practicing option available</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="highlight-box">
+                            <strong>💡 Pro Tip:</strong> You can take the exam without meeting experience requirements, but must gain required experience within 5 years to obtain certification.
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Domain 1 Section -->
+                <section id="domain1" class="section">
+                    <div class="domain-card">
+                        <div class="domain-header">
+                            <h2 class="domain-title">Information Security Governance</h2>
+                            <div class="domain-weight">17% of Exam</div>
+                        </div>
+                        <p style="color: var(--text-secondary); font-size: 16px;">
+                            This domain focuses on developing, maintaining, and managing information security governance frameworks aligned with organizational objectives and business strategy.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3 class="feature-title">📊 Domain Overview</h3>
+                        <p class="feature-description">
+                            Information Security Governance ensures that security strategies align with business objectives and comply with applicable laws and regulations. It provides strategic direction for cybersecurity activities and ensures organizational security objectives are effectively met through proper oversight and accountability.
+                        </p>
+                    </div>
+
+                    <div class="domain-card">
+                        <h3 style="font-size: 20px; margin-bottom: 24px;">🎯 Sub-domains and Topics</h3>
+                        
+                        <div class="subdomain">
+                            <h4 class="subdomain-title">A. Enterprise Governance</h4>
+                            <ul class="topic-list">
+                                <li class="topic-item"><strong>Organizational Culture:</strong> Understanding how culture impacts security strategy implementation and adoption</li>
+                                <li class="topic-item"><strong>Legal, Regulatory and Contractual Requirements:</strong> Compliance with laws, regulations, and contractual obligations</li>
+                                <li class="topic-item"><strong>Organizational Structures, Roles and Responsibilities:</strong> Defining clear security roles and accountability frameworks</li>
+                                <li class="topic-item"><strong>Enterprise Risk Management Integration:</strong> Aligning security governance with overall enterprise risk management</li>
+                                <li class="topic-item"><strong>Board and Executive Engagement:</strong> Securing leadership commitment and providing proper oversight</li>
                             </ul>
                         </div>
 
-                        <div class="quiz-controls">
-                            <button class="quiz-btn" onclick="previousQuestion()" id="prevBtn" disabled>Previous</button>
-                            <button class="quiz-btn" onclick="nextQuestion()" id="nextBtn">Next</button>
-                            <button class="quiz-btn" onclick="finishQuiz()" id="finishBtn" style="display: none;">Finish Quiz</button>
-                        </div>
-
-                        <div class="progress-bar">
-                            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                        <div class="subdomain">
+                            <h4 class="subdomain-title">B. Information Security Strategy</h4>
+                            <ul class="topic-list">
+                                <li class="topic-item"><strong>Information Security Strategy Development:</strong> Creating comprehensive security strategies aligned with business objectives</li>
+                                <li class="topic-item"><strong>Information Governance Frameworks and Standards:</strong> Implementing frameworks like ISO 27001, NIST, COBIT</li>
+                                <li class="topic-item"><strong>Strategic Planning:</strong> Budget allocation, resource planning, and business case development</li>
+                                <li class="topic-item"><strong>Performance Measurement:</strong> Defining KPIs and metrics for governance effectiveness</li>
+                                <li class="topic-item"><strong>Stakeholder Communication:</strong> Reporting and communicating governance activities and outcomes</li>
+                            </ul>
                         </div>
                     </div>
 
-                    <div id="results" style="display: none;">
-                        <div class="results">
-                            <div class="score" id="finalScore">0%</div>
-                            <div id="scoreMessage">Assessment Complete</div>
-                            <div id="domainBreakdown"></div>
+                    <div class="highlight-box">
+                        <h4 style="margin-bottom: 16px;">🎯 Key Supporting Tasks</h4>
+                        <ul class="topic-list">
+                            <li class="topic-item">Identify internal and external influences on information security strategy</li>
+                            <li class="topic-item">Establish and maintain information security strategy aligned with organizational goals</li>
+                            <li class="topic-item">Establish and maintain information security governance framework</li>
+                            <li class="topic-item">Integrate information security governance into corporate governance</li>
+                            <li class="topic-item">Establish and maintain information security policies</li>
+                            <li class="topic-item">Develop business cases to support information security investments</li>
+                            <li class="topic-item">Gain ongoing commitment from senior leadership and stakeholders</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h4 class="feature-title">📚 Governance Frameworks</h4>
+                            <ul style="list-style: none; padding: 0;">
+                                <li>• ISO 27001/27002</li>
+                                <li>• NIST Cybersecurity Framework</li>
+                                <li>• COBIT 2019</li>
+                                <li>• PCI DSS</li>
+                                <li>• HIPAA/SOX</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <h4 class="feature-title">🔑 Key Concepts</h4>
+                            <ul style="list-style: none; padding: 0;">
+                                <li>• Governance vs. Management</li>
+                                <li>• Risk appetite and tolerance</li>
+                                <li>• Board oversight responsibilities</li>
+                                <li>• Compliance management</li>
+                                <li>• Strategic alignment</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Domain 2 Section -->
+                <section id="domain2" class="section">
+                    <div class="domain-card">
+                        <div class="domain-header">
+                            <h2 class="domain-title">Information Security Risk Management</h2>
+                            <div class="domain-weight">20% of Exam</div>
+                        </div>
+                        <p style="color: var(--text-secondary); font-size: 16px;">
+                            This domain empowers you to analyze and identify potential information security risks, threats, and vulnerabilities, providing comprehensive risk management capabilities for organizational protection.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3 class="feature-title">📊 Domain Overview</h3>
+                        <p class="feature-description">
+                            Information Security Risk Management focuses on identifying, assessing, and treating information security risks to acceptable levels based on organizational risk appetite. It encompasses both strategic and operational risk management activities, ensuring comprehensive protection of organizational assets.
+                        </p>
+                    </div>
+
+                    <div class="domain-card">
+                        <h3 style="font-size: 20px; margin-bottom: 24px;">🎯 Sub-domains and Topics</h3>
+                        
+                        <div class="subdomain">
+                            <h4 class="subdomain-title">A. Information Security Risk Assessment</h4>
+                            <ul class="topic-list">
+                                <li class="topic-item"><strong>Emerging Risk and Threat Landscape:</strong> Identifying new and evolving threats and vulnerabilities</li>
+                                <li class="topic-item"><strong>Vulnerability and Control Deficiency Analysis:</strong> Systematic identification and analysis of weaknesses</li>
+                                <li class="topic-item"><strong>Risk Assessment and Analysis:</strong> Quantitative and qualitative risk assessment methodologies</li>
+                                <li class="topic-item"><strong>Risk Identification Techniques:</strong> Asset-based, threat-based, and vulnerability-based approaches</li>
+                                <li class="topic-item"><strong>Business Impact Analysis:</strong> Understanding potential impacts of security incidents on operations</li>
+                            </ul>
+                        </div>
+
+                        <div class="subdomain">
+                            <h4 class="subdomain-title">B. Information Security Risk Response</h4>
+                            <ul class="topic-list">
+                                <li class="topic-item"><strong>Risk Treatment/Risk Response Options:</strong> Accept, avoid, transfer, or mitigate risk strategies</li>
+                                <li class="topic-item"><strong>Risk and Control Ownership:</strong> Defining clear accountability for risk management activities</li>
+                                <li class="topic-item"><strong>Risk Monitoring and Reporting:</strong> Continuous monitoring and stakeholder communication processes</li>
+                                <li class="topic-item"><strong>Risk Appetite and Tolerance:</strong> Defining and communicating acceptable levels of risk</li>
+                                <li class="topic-item"><strong>Control Selection and Implementation:</strong> Choosing and deploying appropriate risk treatment measures</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4 style="margin-bottom: 16px;">🎯 Key Supporting Tasks</h4>
+                        <ul class="topic-list">
+                            <li class="topic-item">Participate in and oversee risk identification, assessment, and treatment processes</li>
+                            <li class="topic-item">Participate in and oversee vulnerability assessment and threat analysis</li>
+                            <li class="topic-item">Identify and implement appropriate risk treatment options</li>
+                            <li class="topic-item">Determine effectiveness of information security controls</li>
+                            <li class="topic-item">Facilitate integration of information risk management into business processes</li>
+                            <li class="topic-item">Monitor for factors requiring risk reassessment</li>
+                            <li class="topic-item">Report on information security risk to key stakeholders</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h4 class="feature-title">📊 Risk Assessment Methods</h4>
+                            <ul style="list-style: none; padding: 0;">
+                                <li>• Qualitative risk assessment</li>
+                                <li>• Quantitative risk assessment</li>
+                                <li>• FAIR methodology</li>
+                                <li>• OCTAVE approach</li>
+                                <li>• NIST Risk Management Framework</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <h4 class="feature-title">📈 Key Metrics</h4>
+                            <ul style="list-style: none; padding: 0;">
+                                <li>• Risk register components</li>
+                                <li>• Risk appetite statements</li>
+                                <li>• Key Risk Indicators (KRIs)</li>
+                                <li>• Recovery Time Objective (RTO)</li>
+                                <li>• Recovery Point Objective (RPO)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Domain 3 Section -->
+                <section id="domain3" class="section">
+                    <div class="domain-card">
+                        <div class="domain-header">
+                            <h2 class="domain-title">Information Security Program</h2>
+                            <div class="domain-weight">33% of Exam</div>
+                        </div>
+                        <p style="color: var(--text-secondary); font-size: 16px;">
+                            This domain covers implementing information security strategies and developing comprehensive security programs, guidelines, procedures, and metrics. This is the highest-weighted domain in the CISM exam.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3 class="feature-title">📊 Domain Overview</h3>
+                        <p class="feature-description">
+                            Information Security Program Management focuses on translating security strategy into operational reality through program development, implementation, and management. It encompasses the practical aspects of building and maintaining effective security programs that deliver measurable results.
+                        </p>
+                    </div>
+
+                    <div class="domain-card">
+                        <h3 style="font-size: 20px; margin-bottom: 24px;">🎯 Sub-domains and Topics</h3>
+                        
+                        <div class="subdomain">
+                            <h4 class="subdomain-title">A. Information Security Program Development</h4>
+                            <ul class="topic-list">
+                                <li class="topic-item"><strong>Information Security Program Resources:</strong> People, tools, technologies, and budget allocation strategies</li>
+                                <li class="topic-item"><strong>Information Asset Identification and Classification:</strong> Data classification schemes and comprehensive asset inventory</li>
+                                <li class="topic-item"><strong>Industry Standards and Frameworks:</strong> Implementation of security frameworks and standards</li>
+                                <li class="topic-item"><strong>Information Security Policies, Procedures and Guidelines:</strong> Development and maintenance of security documentation</li>
+                                <li class="topic-item"><strong>Information Security Program Metrics:</strong> KPIs and measurement frameworks for program effectiveness</li>
+                            </ul>
+                        </div>
+
+                        <div class="subdomain">
+                            <h4 class="subdomain-title">B. Information Security Program Management</h4>
+                            <ul class="topic-list">
+                                <li class="topic-item"><strong>Information Security Control Design and Selection:</strong> Choosing and designing appropriate security controls</li>
+                                <li class="topic-item"><strong>Information Security Control Implementation and Integration:</strong> Deploying controls across the organization</li>
+                                <li class="topic-item"><strong>Information Security Control Testing and Evaluation:</strong> Assessing control effectiveness and performance</li>
+                                <li class="topic-item"><strong>Information Security Awareness and Training:</strong> Education programs and security culture development</li>
+                                <li class="topic-item"><strong>Management of External Services:</strong> Third-party, fourth-party, and vendor risk management</li>
+                                <li class="topic-item"><strong>Information Security Program Communications and Reporting:</strong> Stakeholder communication and reporting frameworks</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4 style="margin-bottom: 16px;">🎯 Key Supporting Tasks</h4>
+                        <ul class="topic-list">
+                            <li class="topic-item">Establish and maintain information security program aligned with strategy</li>
+                            <li class="topic-item">Align information security program with operational objectives</li>
+                            <li class="topic-item">Establish and maintain information security processes and resources</li>
+                            <li class="topic-item">Establish, communicate, and maintain organizational security documentation</li>
+                            <li class="topic-item">Establish, promote, and maintain awareness and training programs</li>
+                            <li class="topic-item">Integrate security requirements into organizational processes</li>
+                            <li class="topic-item">Integrate security requirements into external party contracts</li>
+                            <li class="topic-item">Monitor external parties' adherence to security requirements</li>
+                            <li class="topic-item">Define and monitor management and operational metrics</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h4 class="feature-title">🛠️ Program Components</h4>
+                            <ul style="list-style: none; padding: 0;">
+                                <li>• Security architecture design</li>
+                                <li>• Control frameworks (NIST, ISO 27002)</li>
+                                <li>• Security awareness programs</li>
+                                <li>• Vendor management programs</li>
+                                <li>• Security metrics and KPIs</li>
+                                <li>• Compliance monitoring</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <h4 class="feature-title">⚙️ Implementation Areas</h4>
+                            <ul style="list-style: none; padding: 0;">
+                                <li>• Access control systems</li>
+                                <li>• Security monitoring and logging</li>
+                                <li>• Incident response procedures</li>
+                                <li>• Business continuity planning</li>
+                                <li>• Third-party risk management</li>
+                                <li>• Security control testing</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Domain 4 Section -->
+                <section id="domain4" class="section">
+                    <div class="domain-card">
+                        <div class="domain-header">
+                            <h2 class="domain-title">Information Security Incident Management</h2>
+                            <div class="domain-weight">30% of Exam</div>
+                        </div>
+                        <p style="color: var(--text-secondary); font-size: 16px;">
+                            This domain provides comprehensive training in incident management, including preparedness, response, recovery, and continuous improvement processes for organizational resilience.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3 class="feature-title">📊 Domain Overview</h3>
+                        <p class="feature-description">
+                            Information Security Incident Management encompasses all activities related to preparing for, responding to, and recovering from security incidents. It ensures organizational resilience through effective incident response capabilities and continuous improvement of security posture.
+                        </p>
+                    </div>
+
+                    <div class="domain-card">
+                        <h3 style="font-size: 20px; margin-bottom: 24px;">🎯 Sub-domains and Topics</h3>
+                        
+                        <div class="subdomain">
+                            <h4 class="subdomain-title">A. Incident Management Readiness</h4>
+                            <ul class="topic-list">
+                                <li class="topic-item"><strong>Incident Response Plan:</strong> Comprehensive planning for incident response activities and procedures</li>
+                                <li class="topic-item"><strong>Business Impact Analysis (BIA):</strong> Understanding critical business functions and dependencies</li>
+                                <li class="topic-item"><strong>Business Continuity Plan (BCP):</strong> Ensuring business operations continue during and after incidents</li>
+                                <li class="topic-item"><strong>Disaster Recovery Plan (DRP):</strong> Restoring IT systems and operations after incidents</li>
+                                <li class="topic-item"><strong>Incident Classification/Categorization:</strong> Systematic approach to incident triage and prioritization</li>
+                                <li class="topic-item"><strong>Incident Management Training, Testing and Evaluation:</strong> Preparedness through exercises and training programs</li>
+                            </ul>
+                        </div>
+
+                        <div class="subdomain">
+                            <h4 class="subdomain-title">B. Incident Management Operations</h4>
+                            <ul class="topic-list">
+                                <li class="topic-item"><strong>Incident Management Tools and Techniques:</strong> Technology and methodologies for effective incident response</li>
+                                <li class="topic-item"><strong>Incident Investigation and Evaluation:</strong> Forensic analysis and evidence preservation procedures</li>
+                                <li class="topic-item"><strong>Incident Containment Methods:</strong> Strategies to limit incident impact and prevent spread</li>
+                                <li class="topic-item"><strong>Incident Response Communications:</strong> Internal and external communication protocols and procedures</li>
+                                <li class="topic-item"><strong>Incident Eradication and Recovery:</strong> Removing threats and restoring normal business operations</li>
+                                <li class="topic-item"><strong>Post-Incident Review Practices:</strong> Lessons learned and continuous improvement processes</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4 style="margin-bottom: 16px;">🎯 Key Supporting Tasks</h4>
+                        <ul class="topic-list">
+                            <li class="topic-item">Establish and maintain incident response plan aligned with BCP and DRP</li>
+                            <li class="topic-item">Establish and maintain incident classification and categorization process</li>
+                            <li class="topic-item">Develop processes for timely identification of security incidents</li>
+                            <li class="topic-item">Establish processes to investigate and document incidents per legal requirements</li>
+                            <li class="topic-item">Establish incident handling processes including containment and recovery</li>
+                            <li class="topic-item">Organize, train, equip, and assign responsibilities to incident response teams</li>
+                            <li class="topic-item">Establish incident communication plans for internal and external parties</li>
+                            <li class="topic-item">Evaluate incident management plans through testing and exercises</li>
+                            <li class="topic-item">Conduct post-incident reviews for continuous improvement</li>
+                        </ul>
+                    </div>
+
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h4 class="feature-title">📋 Response Frameworks</h4>
+                            <ul style="list-style: none; padding: 0;">
+                                <li>• NIST Incident Response Framework</li>
+                                <li>• SANS Incident Response Process</li>
+                                <li>• ISO 27035 Incident Management</li>
+                                <li>• ENISA Guidelines</li>
+                                <li>• Industry-specific frameworks</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <h4 class="feature-title">⏱️ Recovery Metrics</h4>
+                            <ul style="list-style: none; padding: 0;">
+                                <li>• Recovery Time Objective (RTO)</li>
+                                <li>• Recovery Point Objective (RPO)</li>
+                                <li>• Mean Time to Recovery (MTTR)</li>
+                                <li>• Maximum Tolerable Downtime (MTD)</li>
+                                <li>• Work Recovery Time (WRT)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Assessment Section -->
+                <section id="assessment" class="section">
+                    <div class="quiz-container">
+                        <div id="quizSetup" class="quiz-setup">
+                            <h2 class="setup-title">Interactive Assessment Center</h2>
                             
-                            <div style="margin-top: 20px;">
-                                <button class="quiz-btn" onclick="reviewAnswers()">Review Answers</button>
-                                <button class="quiz-btn" onclick="restartQuiz()">Start New Quiz</button>
+                            <div class="form-group">
+                                <label class="form-label" for="domainSelect">Select Assessment Type:</label>
+                                <select id="domainSelect" class="form-select">
+                                    <option value="all">🎯 Official CISM Simulation (150 questions)</option>
+                                    <option value="domain1">🏛️ Domain 1 - Information Security Governance</option>
+                                    <option value="domain2">⚠️ Domain 2 - Information Security Risk Management</option>
+                                    <option value="domain3">🔧 Domain 3 - Information Security Program</option>
+                                    <option value="domain4">🚨 Domain 4 - Incident Management</option>
+                                    <option value="mixed">🔀 Mixed Domains Practice</option>
+                                </select>
+                            </div>
+
+                            <div id="questionCountDiv" class="form-group">
+                                <label class="form-label" for="questionCount">Number of Questions:</label>
+                                <select id="questionCount" class="form-select">
+                                    <option value="5">5 Questions</option>
+                                    <option value="10">10 Questions</option>
+                                    <option value="15">15 Questions</option>
+                                    <option value="20" selected>20 Questions</option>
+                                    <option value="25">25 Questions</option>
+                                    <option value="30">30 Questions</option>
+                                </select>
+                            </div>
+
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="timerEnabled" checked>
+                                <label for="timerEnabled" class="form-label">Enable Timer (Official exam: 1.6 minutes per question)</label>
+                            </div>
+
+                            <button class="primary-btn" onclick="startQuiz()">🚀 Start Assessment</button>
+                        </div>
+
+                        <div id="quizArea" style="display: none;">
+                            <div class="question-card">
+                                <div class="question-header">
+                                    <div class="question-number" id="questionNumber">Question 1 of 20</div>
+                                    <div class="timer" id="timer">02:00</div>
+                                </div>
+                                
+                                <div class="question-text" id="questionText">Loading question...</div>
+                                
+                                <ul class="options-list" id="optionsList">
+                                    <!-- Options populated by JavaScript -->
+                                </ul>
+                            </div>
+
+                            <div class="quiz-controls">
+                                <button class="quiz-btn" onclick="previousQuestion()" id="prevBtn" disabled>⬅️ Previous</button>
+                                <button class="quiz-btn" onclick="nextQuestion()" id="nextBtn">Next ➡️</button>
+                                <button class="quiz-btn" onclick="finishQuiz()" id="finishBtn" style="display: none;">🏁 Finish Assessment</button>
+                            </div>
+
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <div id="results" style="display: none;">
+                            <div class="results-card">
+                                <div class="final-score" id="finalScore">0%</div>
+                                <div class="score-message" id="scoreMessage">Assessment Complete</div>
+                                <div class="domain-breakdown" id="domainBreakdown"></div>
+                                
+                                <div style="margin-top: 32px;">
+                                    <button class="primary-btn" onclick="reviewAnswers()" style="margin: 0 8px;">📝 Review Answers</button>
+                                    <button class="quiz-btn" onclick="restartQuiz()" style="margin: 0 8px;">🔄 New Assessment</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="reviewArea" style="display: none;">
+                            <h3 style="text-align: center; margin-bottom: 32px;">📋 Answer Review</h3>
+                            <div id="reviewContent"></div>
+                            <div style="text-align: center; margin-top: 32px;">
+                                <button class="quiz-btn" onclick="backToResults()" style="margin: 0 8px;">⬅️ Back to Results</button>
+                                <button class="primary-btn" onclick="restartQuiz()" style="margin: 0 8px;">🔄 New Assessment</button>
                             </div>
                         </div>
                     </div>
-
-                    <div id="reviewArea" style="display: none;">
-                        <h3>Answer Review</h3>
-                        <div id="reviewContent">
-                            <!-- Review content will be populated by JavaScript -->
-                        </div>
-                        <div style="text-align: center; margin-top: 20px;">
-                            <button class="quiz-btn" onclick="backToResults()">Back to Results</button>
-                            <button class="quiz-btn" onclick="restartQuiz()">Start New Quiz</button>
-                        </div>
-                    </div>
-                </div>
-            </section>
+                </section>
+            </div>
         </main>
     </div>
 
@@ -989,15 +1426,48 @@
             const sections = document.querySelectorAll('.section');
             sections.forEach(section => section.classList.remove('active'));
             
-            // Remove active class from all nav buttons
-            const navBtns = document.querySelectorAll('.nav-btn');
-            navBtns.forEach(btn => btn.classList.remove('active'));
+            // Remove active class from all nav links
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => link.classList.remove('active'));
             
             // Show selected section
             document.getElementById(sectionId).classList.add('active');
             
-            // Add active class to clicked nav button
-            event.target.classList.add('active');
+            // Add active class to clicked nav link
+            event.target.closest('.nav-link').classList.add('active');
+            
+            // Update page title and subtitle
+            const titles = {
+                introduction: {
+                    title: 'CISM Certification Overview',
+                    subtitle: 'Certified Information Security Manager'
+                },
+                domain1: {
+                    title: 'Domain 1: Information Security Governance',
+                    subtitle: '17% of Exam Weight'
+                },
+                domain2: {
+                    title: 'Domain 2: Information Security Risk Management',
+                    subtitle: '20% of Exam Weight'
+                },
+                domain3: {
+                    title: 'Domain 3: Information Security Program',
+                    subtitle: '33% of Exam Weight'
+                },
+                domain4: {
+                    title: 'Domain 4: Information Security Incident Management',
+                    subtitle: '30% of Exam Weight'
+                },
+                assessment: {
+                    title: 'Assessment Center',
+                    subtitle: 'Test Your Knowledge and Exam Readiness'
+                }
+            };
+            
+            if (titles[sectionId]) {
+                document.getElementById('pageTitle').textContent = titles[sectionId].title;
+                document.getElementById('pageSubtitle').textContent = titles[sectionId].subtitle;
+            }
         }
 
         // Quiz functionality
@@ -1011,13 +1481,13 @@
             timePerQuestion: 96 // seconds (1.6 minutes)
         };
 
-        // Sample question bank
+        // Sample question bank with comprehensive questions
         const questionBank = {
             domain1: [
                 {
                     question: "Which of the following is the PRIMARY responsibility of information security governance?",
                     options: [
-                        "Implementing technical controls",
+                        "Implementing technical security controls",
                         "Ensuring alignment between security strategy and business objectives",
                         "Conducting vulnerability assessments",
                         "Managing security incidents"
@@ -1417,9 +1887,9 @@
                     `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
                 
                 if (timeLeft <= 30) {
-                    document.getElementById('timer').style.color = '#e53e3e';
+                    document.getElementById('timer').style.color = 'var(--error)';
                 } else {
-                    document.getElementById('timer').style.color = '#2d3748';
+                    document.getElementById('timer').style.color = 'var(--text-primary)';
                 }
                 
                 timeLeft--;
@@ -1456,7 +1926,12 @@
 
         function calculateResults() {
             let correct = 0;
-            const domainResults = { domain1: { correct: 0, total: 0 }, domain2: { correct: 0, total: 0 }, domain3: { correct: 0, total: 0 }, domain4: { correct: 0, total: 0 } };
+            const domainResults = { 
+                domain1: { correct: 0, total: 0 }, 
+                domain2: { correct: 0, total: 0 }, 
+                domain3: { correct: 0, total: 0 }, 
+                domain4: { correct: 0, total: 0 } 
+            };
 
             currentQuiz.questions.forEach((question, index) => {
                 const userAnswer = currentQuiz.answers[index];
@@ -1496,24 +1971,25 @@
             
             let message = '';
             if (results.percentage >= 90) {
-                message = 'Excellent! You\'re well prepared for the CISM exam.';
+                message = '🎉 Excellent! You\'re well prepared for the CISM exam.';
             } else if (results.percentage >= 80) {
-                message = 'Good performance! Continue studying to improve your readiness.';
+                message = '👍 Good performance! Continue studying to improve your readiness.';
             } else if (results.percentage >= 70) {
-                message = 'Passing score, but more study is recommended.';
+                message = '✅ Passing score, but more study is recommended.';
             } else {
-                message = 'More study is needed before taking the actual exam.';
+                message = '📚 More study is needed before taking the actual exam.';
             }
             
             document.getElementById('scoreMessage').textContent = message;
 
             // Display domain breakdown
-            let breakdown = '<h4>Domain Performance:</h4>';
+            let breakdown = '<h4>📊 Domain Performance:</h4>';
             Object.entries(results.domainResults).forEach(([domain, result]) => {
                 if (result.total > 0) {
                     const domainPercentage = Math.round((result.correct / result.total) * 100);
                     const domainName = getDomainName(domain);
-                    breakdown += `<p><strong>${domainName}:</strong> ${result.correct}/${result.total} (${domainPercentage}%)</p>`;
+                    const icon = getDomainIcon(domain);
+                    breakdown += `<p><strong>${icon} ${domainName}:</strong> ${result.correct}/${result.total} (${domainPercentage}%)</p>`;
                 }
             });
             
@@ -1530,6 +2006,16 @@
             return names[domain] || domain;
         }
 
+        function getDomainIcon(domain) {
+            const icons = {
+                domain1: '🏛️',
+                domain2: '⚠️',
+                domain3: '🔧',
+                domain4: '🚨'
+            };
+            return icons[domain] || '📋';
+        }
+
         function reviewAnswers() {
             let reviewHTML = '';
             
@@ -1542,14 +2028,14 @@
                     <div class="question-card">
                         <div class="question-header">
                             <div class="question-number">Question ${questionNumber}</div>
-                            <div style="color: ${isCorrect ? '#38a169' : '#e53e3e'}; font-weight: bold;">
-                                ${isCorrect ? '✓ Correct' : '✗ Incorrect'}
+                            <div style="color: ${isCorrect ? 'var(--success)' : 'var(--error)'}; font-weight: bold;">
+                                ${isCorrect ? '✅ Correct' : '❌ Incorrect'}
                             </div>
                         </div>
                         
                         <div class="question-text">${question.question}</div>
                         
-                        <ul class="options">
+                        <ul class="options-list">
                 `;
                 
                 question.options.forEach((option, optIndex) => {
@@ -1565,8 +2051,8 @@
                     reviewHTML += `
                         <li class="${optionClass}">
                             ${String.fromCharCode(65 + optIndex)}. ${option}
-                            ${optIndex === question.correct ? ' ✓' : ''}
-                            ${optIndex === userAnswer && userAnswer !== question.correct ? ' ✗' : ''}
+                            ${optIndex === question.correct ? ' ✅' : ''}
+                            ${optIndex === userAnswer && userAnswer !== question.correct ? ' ❌' : ''}
                         </li>
                     `;
                 });
@@ -1574,8 +2060,8 @@
                 reviewHTML += `
                         </ul>
                         
-                        <div class="highlight">
-                            <strong>Explanation:</strong> ${question.explanation}
+                        <div class="highlight-box">
+                            <strong>💡 Explanation:</strong> ${question.explanation}
                         </div>
                     </div>
                 `;
@@ -1619,7 +2105,10 @@
         }
 
         // Handle domain selection change to show/hide question count for official simulation
-        document.getElementById('domainSelect').addEventListener('change', function() {
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('domainSelect').addEventListener('change', function() {
+                updateQuestionCountOptions();
+            });
             updateQuestionCountOptions();
         });
 
@@ -1643,11 +2132,6 @@
                 `;
             }
         }
-
-        // Initialize the question count options on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            updateQuestionCountOptions();
-        });
 
         // Add keyboard navigation
         document.addEventListener('keydown', function(event) {
