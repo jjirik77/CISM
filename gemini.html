@@ -116,6 +116,10 @@
             padding: 40px;
         }
 
+        .content-header {
+            text-align: center; /* Center content header */
+        }
+
         .content-header h2 {
             font-size: 2.8em;
             margin: 0 0 8px 0;
@@ -176,6 +180,7 @@
             margin-bottom: 25px;
             padding-bottom: 15px;
             border-bottom: 1px solid var(--border-color);
+            text-align: center; /* Center section titles */
         }
 
         .content-body p {
@@ -188,18 +193,58 @@
         .content-body ul {
             padding-left: 20px;
             margin-bottom: 40px;
+            list-style-type: none;
         }
         .content-body li {
             margin-bottom: 10px;
             color: var(--text-secondary);
+            position: relative;
+            padding-left: 25px;
+        }
+        .content-body li::before {
+            content: '›';
+            color: var(--accent-glow);
+            font-weight: 700;
+            position: absolute;
+            left: 0;
+            top: -2px;
+            font-size: 1.5em;
+        }
+        .content-body ul ul {
+             margin-top: 15px;
+             margin-bottom: 15px;
+        }
+        .content-body ul ul li::before {
+             content: '▪';
+             font-size: 1em;
+             top: 2px;
         }
 
+
         /* CARDS REDESIGN (Glassmorphism & Interactive) */
-        .feature-cards {
+        .feature-cards, .ethics-cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 25px;
         }
+        .ethics-cards {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        .ethics-cards .card:nth-child(5),
+        .ethics-cards .card:nth-child(6),
+        .ethics-cards .card:nth-child(7) {
+            grid-column: span 1;
+        }
+        /* Center the last row of 3 cards */
+        .ethics-cards .card:nth-child(5) {
+            grid-column-start: 1;
+        }
+        @media (min-width: 1100px) {
+             .ethics-cards .card:nth-child(5) {
+                grid-column-start: 2;
+            }
+        }
+
 
         .card {
             background: rgba(45, 55, 72, 0.4);
@@ -212,7 +257,7 @@
             position: relative;
             overflow: hidden;
             cursor: pointer;
-            max-width: 200px;
+            min-width: 200px; /* Min width as requested */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -264,7 +309,7 @@
         }
 
         .card.open p {
-            max-height: 100px;
+            max-height: 150px; /* Increased height for ethics text */
             opacity: 1;
             margin-top: 10px;
         }
@@ -349,6 +394,7 @@
             color: var(--text-primary);
             font-weight: 600;
             margin: 0 0 15px 0;
+            text-align: center; /* Center maintenance sub-headers */
         }
 
 
@@ -390,6 +436,7 @@
                 <div class="content-header">
                     <h2>CISM Certification Overview</h2>
                     <h3>Certified Information Security Manager</h3>
+                    <p>Your guide to the premier credential for information security leadership.</p>
                 </div>
 
                 <div class="tabs">
@@ -401,7 +448,7 @@
                 <div class="tab-content active" id="why-cism">
                     <div class="content-body">
                         <h4>Why Pursue the CISM Certification?</h4>
-                        <p>The Certified Information Security Manager (CISM) certification, issued by ISACA, is a premier credential for professionals managing and overseeing information security systems in alignment with business goals. Explore the key benefits below.</p>
+                        <p>The Certified Information Security Manager (CISM) certification, issued by ISACA, is a premier credential for professionals managing and overseeing information security systems in alignment with business goals. Focused on governance, risk management, and leadership, CISM is ideal for security managers, CISOs, and consultants who drive security strategies across the enterprise. Click on the cards below to explore the key benefits.</p>
                         <div class="feature-cards">
                             <div class="card">
                                 <h5>Leadership-Focused</h5>
@@ -549,11 +596,38 @@
                                 </tbody>
                             </table>
 
-                            <h5 style="margin-top: 30px;">Other Requirements</h5>
-                            <ul>
-                                <li>Adhere to ISACA's <strong>Code of Professional Ethics</strong>.</li>
-                                <li>Comply with the CISM <strong>Continuing Professional Education (CPE) Policy</strong> and reporting requirements.</li>
-                            </ul>
+                            <h5 style="margin-top: 30px;">Code of Professional Ethics</h5>
+                            <p>Adherence to the ISACA Code of Professional Ethics is mandatory. Click each principle to learn more.</p>
+                            <div class="ethics-cards">
+                                <div class="card">
+                                    <h5>Principle 1</h5>
+                                    <p>Support the implementation of, and encourage compliance with, appropriate standards and procedures for information systems.</p>
+                                </div>
+                                <div class="card">
+                                    <h5>Principle 2</h5>
+                                    <p>Perform duties with objectivity, due diligence, and professional care, in accordance with professional standards.</p>
+                                </div>
+                                <div class="card">
+                                    <h5>Principle 3</h5>
+                                    <p>Serve the interest of stakeholders in a lawful and honest manner, while maintaining high standards of conduct.</p>
+                                </div>
+                                <div class="card">
+                                    <h5>Principle 4</h5>
+                                    <p>Maintain the privacy and confidentiality of information obtained in the course of your duties unless disclosure is required by law.</p>
+                                </div>
+                                <div class="card">
+                                    <h5>Principle 5</h5>
+                                    <p>Maintain competency in respective fields and agree to undertake only those activities that can be reasonably expected to be completed with professional competence.</p>
+                                </div>
+                                <div class="card">
+                                    <h5>Principle 6</h5>
+                                    <p>Inform appropriate parties of the results of work performed, including the disclosure of all significant facts that, if not disclosed, may distort the reporting of results.</p>
+                                </div>
+                                <div class="card">
+                                    <h5>Principle 7</h5>
+                                    <p>Support the professional education of stakeholders in enhancing their understanding of the governance and management of enterprise information systems.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -564,12 +638,18 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Interactive Cards Logic
-            const cards = document.querySelectorAll('.feature-cards .card');
-            cards.forEach(card => {
+            // Interactive Cards Logic (for all cards)
+            const allCards = document.querySelectorAll('.card');
+            allCards.forEach(card => {
                 card.addEventListener('click', function() {
                     const isAlreadyOpen = this.classList.contains('open');
-                    cards.forEach(c => c.classList.remove('open'));
+                    
+                    // Find the parent container to close only sibling cards
+                    const parentContainer = this.closest('.feature-cards, .ethics-cards');
+                    if (parentContainer) {
+                        parentContainer.querySelectorAll('.card').forEach(c => c.classList.remove('open'));
+                    }
+
                     if (!isAlreadyOpen) {
                         this.classList.add('open');
                     }
@@ -599,8 +679,6 @@
             accordionItems.forEach(item => {
                 const header = item.querySelector('.accordion-header');
                 header.addEventListener('click', function() {
-                    // This allows multiple accordions to be open at once.
-                    // To only allow one, you would first loop through all items and remove 'open'.
                     item.classList.toggle('open');
                 });
             });
