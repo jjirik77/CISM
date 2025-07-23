@@ -1,4 +1,589 @@
-<!DOCTYPE html>
+<!-- Domain 1 Section -->
+                <section id="domain1" class="section">
+                    <div class="domain-card">
+                        <div class="domain-header">
+                            <h2 class="domain-title">Information Security Governance</h2>
+                            <div class="domain-weight">17% of Exam</div>
+                        </div>
+                        <p style="color: var(--text-secondary); font-size: 16px;">
+                            This domain focuses on developing, maintaining, and managing information security governance frameworks aligned with organizational objectives and business strategy. Information security governance is the foundation that ensures security initiatives support business goals and regulatory compliance.
+                        </p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3 class="feature-title">📊 Domain Overview & Strategic Importance</h3>
+                        <p class="feature-description">
+                            Information Security Governance sits at the intersection of business strategy and security execution. It establishes the framework through which organizations direct and control their information security efforts. As a CISM professional, you must understand how to translate business objectives into security strategies and ensure that security investments deliver measurable value to the organization.
+                        </p>
+                        
+                        <div style="margin: 24px 0;">
+                            <h4 style="margin-bottom: 16px;">🎯 Why Governance Matters</h4>
+                            <div class="highlight-box">
+                                <ul class="topic-list">
+                                    <li class="topic-item"><strong>Business Alignment:</strong> Ensures security efforts directly support business objectives and organizational strategy</li>
+                                    <li class="topic-item"><strong>Resource Optimization:</strong> Provides framework for efficient allocation of security investments and resources</li>
+                                    <li class="topic-item"><strong>Risk Management:</strong> Establishes systematic approach to identifying, assessing, and managing information security risks</li>
+                                    <li class="topic-item"><strong>Stakeholder Confidence:</strong> Demonstrates due diligence and builds trust with customers, partners, and regulators</li>
+                                    <li class="topic-item"><strong>Competitive Advantage:</strong> Well-governed security programs can differentiate organizations in the marketplace</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Governance Maturity Assessment Tool -->
+                    <div class="domain-card">
+                        <h3 style="font-size: 20px; margin-bottom: 24px;">🔍 Interactive Governance Maturity Assessment</h3>
+                        <p style="margin-bottom: 20px;">Assess your organization's governance maturity level across key dimensions:</p>
+                        
+                        <div id="maturityAssessment" style="margin: 24px 0;">
+                            <div style="margin-bottom: 20px;">
+                                <label style="font-weight: 600; display: block; margin-bottom: 8px;">1. Board and Executive Engagement:</label>
+                                <select class="form-select" data-dimension="board">
+                                    <option value="1">Minimal - Ad hoc security discussions</option>
+                                    <option value="2">Basic - Quarterly security updates</option>
+                                    <option value="3">Developing - Regular reporting with KPIs</option>
+                                    <option value="4">Advanced - Strategic security oversight</option>
+                                    <option value="5">Optimized - Security integral to all decisions</option>
+                                </select>
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <label style="font-weight: 600; display: block; margin-bottom: 8px;">2. Policy and Standards Framework:</label>
+                                <select class="form-select" data-dimension="policy">
+                                    <option value="1">Basic - Few informal policies</option>
+                                    <option value="2">Developing - Basic policy suite</option>
+                                    <option value="3">Defined - Comprehensive policies</option>
+                                    <option value="4">Managed - Regularly updated policies</option>
+                                    <option value="5">Optimized - Dynamic, risk-based policies</option>
+                                </select>
+                            </div>
+                            
+                            <div style="margin-bottom: 20px;">
+                                <label style="font-weight: 600; display: block; margin-bottom: 8px;">3. Risk Management Integration:</label>
+                                <select class="form-select" data-dimension="risk">
+                                    <option value="1">Siloed - Security risks managed separately</option>
+                                    <option value="2">Basic - Some integration with ERM</option>
+                                    <option value="3">Developing - Regular risk reporting</option>
+                                    <option value="4">Integrated - Full ERM integration</option>
+                                    <option value="5">Advanced - Predictive risk management</option>
+                                </select>
+                            </div>
+                            
+                            <button onclick="calculateMaturity()" class="primary-btn" style="margin-top: 16px;">📊 Calculate Maturity Level</button>
+                            
+                            <div id="maturityResult" style="display: none; margin-top: 24px; padding: 20px; background: var(--surface-gray); border-radius: 12px;">
+                                <h4 style="margin-bottom: 12px;">Your Governance Maturity Score:</h4>
+                                <div id="maturityScore" style="font-size: 24px; font-weight: bold; color: var(--primary-blue);"></div>
+                                <div id="maturityLevel" style="margin-top: 8px; font-weight: 600;"></div>
+                                <div id="maturityRecommendations" style="margin-top: 16px;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comprehensive Sub-domains Content -->
+                    <div class="domain-card">
+                        <h3 style="font-size: 20px; margin-bottom: 24px;">🎯 Detailed Sub-domains and Topics</h3>
+                        
+                        <div class="subdomain">
+                            <h4 class="subdomain-title">A. Enterprise Governance</h4>
+                            <p style="margin-bottom: 16px; color: var(--text-secondary);">
+                                Enterprise governance provides the foundation for all information security activities. It establishes the organizational context, culture, and structure within which security operates.
+                            </p>
+                            
+                            <!-- Organizational Culture -->
+                            <div style="margin: 20px 0; padding: 20px; background: var(--surface-white); border-radius: 8px; border-left: 4px solid var(--primary-blue);">
+                                <h5 style="font-weight: 600; margin-bottom: 12px;">🏢 Organizational Culture</h5>
+                                <p style="margin-bottom: 12px;">
+                                    Organizational culture significantly impacts security strategy implementation and adoption. Understanding and working with cultural factors is essential for successful security governance.
+                                </p>
+                                
+                                <div style="margin: 16px 0;">
+                                    <strong>Key Cultural Factors:</strong>
+                                    <ul class="topic-list" style="margin-top: 8px;">
+                                        <li class="topic-item"><strong>Risk Tolerance:</strong> Organization's appetite for risk affects security investment decisions and control implementation</li>
+                                        <li class="topic-item"><strong>Communication Styles:</strong> Formal vs. informal communication patterns influence security messaging and policy adoption</li>
+                                        <li class="topic-item"><strong>Decision-Making Processes:</strong> Centralized vs. decentralized decision-making affects security authority and accountability</li>
+                                        <li class="topic-item"><strong>Change Management:</strong> Organizational readiness for change impacts security transformation initiatives</li>
+                                        <li class="topic-item"><strong>Innovation vs. Control:</strong> Balance between encouraging innovation and maintaining security controls</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="highlight-box">
+                                    <strong>💡 CISM Insight:</strong> Successful CISMs adapt their governance approach to align with organizational culture rather than fighting against it. This includes tailoring communication styles, risk assessment approaches, and control implementation strategies to fit the cultural context.
+                                </div>
+                            </div>
+
+                            <!-- Legal, Regulatory and Contractual Requirements -->
+                            <div style="margin: 20px 0; padding: 20px; background: var(--surface-white); border-radius: 8px; border-left: 4px solid var(--accent-purple);">
+                                <h5 style="font-weight: 600; margin-bottom: 12px;">⚖️ Legal, Regulatory and Contractual Requirements</h5>
+                                <p style="margin-bottom: 12px;">
+                                    Organizations must navigate complex landscapes of legal, regulatory, and contractual obligations that impact information security governance decisions.
+                                </p>
+                                
+                                <!-- Interactive Compliance Matrix -->
+                                <div style="margin: 16px 0;">
+                                    <strong>Compliance Requirements by Industry:</strong>
+                                    <table style="width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px;">
+                                        <thead>
+                                            <tr style="background: var(--surface-gray);">
+                                                <th style="padding: 10px; text-align: left; border: 1px solid var(--border-light);">Industry</th>
+                                                <th style="padding: 10px; text-align: left; border: 1px solid var(--border-light);">Primary Regulations</th>
+                                                <th style="padding: 10px; text-align: left; border: 1px solid var(--border-light);">Key Focus Areas</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding: 10px; border: 1px solid var(--border-light);"><strong>Financial Services</strong></td>
+                                                <td style="padding: 10px; border: 1px solid var(--border-light);">SOX, GLBA, PCI DSS, FFIEC</td>
+                                                <td style="padding: 10px; border: 1px solid var(--border-light);">Financial data protection, fraud prevention</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 10px; border: 1px solid var(--border-light);"><strong>Healthcare</strong></td>
+                                                <td style="padding: 10px; border: 1px solid var(--border-light);">HIPAA, HITECH, 21 CFR Part 11</td>
+                                                <td style="padding: 10px; border: 1px solid var(--border-light);">Patient data privacy, medical device security</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 10px; border: 1px solid var(--border-light);"><strong>Government</strong></td>
+                                                <td style="padding: 10px; border: 1px solid var(--border-light);">FISMA, FedRAMP, NIST 800-53</td>
+                                                <td style="padding: 10px; border: 1px solid var(--border-light);">Government data protection, cloud security</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 10px; border: 1px solid var(--border-light);"><strong>Global/EU</strong></td>
+                                                <td style="padding: 10px; border: 1px solid var(--border-light);">GDPR, NIS2, Cyber Resilience Act</td>
+                                                <td style="padding: 10px; border: 1px solid var(--border-light);">Data privacy, incident reporting, supply chain</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
+                                <div class="highlight-box">
+                                    <strong>📋 CISM Best Practice:</strong> Maintain a comprehensive compliance matrix that maps regulatory requirements to organizational controls and processes. This enables efficient compliance management and demonstrates due diligence to auditors and regulators.
+                                </div>
+                            </div>
+
+                            <!-- Organizational Structures -->
+                            <div style="margin: 20px 0; padding: 20px; background: var(--surface-white); border-radius: 8px; border-left: 4px solid var(--accent-cyan);">
+                                <h5 style="font-weight: 600; margin-bottom: 12px;">🏗️ Organizational Structures, Roles and Responsibilities</h5>
+                                <p style="margin-bottom: 12px;">
+                                    Clear organizational structures and well-defined roles are critical for effective security governance. This includes establishing accountability, authority, and communication pathways.
+                                </p>
+                                
+                                <!-- Interactive Org Chart -->
+                                <div style="margin: 16px 0;">
+                                    <strong>Typical Security Governance Structure:</strong>
+                                    <div style="margin: 16px 0; padding: 20px; background: var(--surface-gray); border-radius: 8px;">
+                                        <div style="text-align: center; margin-bottom: 20px;">
+                                            <div style="background: var(--primary-blue); color: white; padding: 8px 16px; border-radius: 8px; display: inline-block; margin-bottom: 16px;">
+                                                <strong>Board of Directors</strong><br>
+                                                <small>Ultimate accountability for security governance</small>
+                                            </div>
+                                        </div>
+                                        
+                                        <div style="text-align: center; margin-bottom: 20px;">
+                                            <div style="background: var(--accent-purple); color: white; padding: 8px 16px; border-radius: 8px; display: inline-block; margin: 0 8px 16px;">
+                                                <strong>CEO/Executive Leadership</strong><br>
+                                                <small>Strategic direction and resource allocation</small>
+                                            </div>
+                                        </div>
+                                        
+                                        <div style="display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 20px;">
+                                            <div style="background: var(--accent-cyan); color: white; padding: 8px 16px; border-radius: 8px; text-align: center; min-width: 140px;">
+                                                <strong>CISO</strong><br>
+                                                <small>Security strategy & execution</small>
+                                            </div>
+                                            <div style="background: var(--warning); color: white; padding: 8px 16px; border-radius: 8px; text-align: center; min-width: 140px;">
+                                                <strong>CRO</strong><br>
+                                                <small>Enterprise risk management</small>
+                                            </div>
+                                            <div style="background: var(--success); color: white; padding: 8px 16px; border-radius: 8px; text-align: center; min-width: 140px;">
+                                                <strong>Business Units</strong><br>
+                                                <small>Risk ownership & control implementation</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div style="margin: 16px 0;">
+                                    <strong>Key Governance Roles & Responsibilities:</strong>
+                                    <ul class="topic-list" style="margin-top: 8px;">
+                                        <li class="topic-item"><strong>Board of Directors:</strong> Fiduciary oversight, strategic direction, risk appetite setting</li>
+                                        <li class="topic-item"><strong>Audit Committee:</strong> Independent oversight of risk management and control effectiveness</li>
+                                        <li class="topic-item"><strong>Executive Leadership:</strong> Resource allocation, strategic priorities, culture setting</li>
+                                        <li class="topic-item"><strong>CISO:</strong> Security strategy development, program management, risk reporting</li>
+                                        <li class="topic-item"><strong>Business Unit Leaders:</strong> Risk ownership, control implementation, compliance</li>
+                                        <li class="topic-item"><strong>Risk Committees:</strong> Risk assessment, treatment decisions, policy oversight</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="subdomain">
+                            <h4 class="subdomain-title">B. Information Security Strategy</h4>
+                            <p style="margin-bottom: 16px; color: var(--text-secondary);">
+                                Information security strategy translates business objectives into actionable security initiatives and programs. It provides the roadmap for achieving desired security outcomes while supporting organizational goals.
+                            </p>
+                            
+                            <!-- Strategy Development Framework -->
+                            <div style="margin: 20px 0; padding: 20px; background: var(--surface-white); border-radius: 8px; border-left: 4px solid var(--primary-blue);">
+                                <h5 style="font-weight: 600; margin-bottom: 12px;">🎯 Information Security Strategy Development</h5>
+                                <p style="margin-bottom: 12px;">
+                                    Developing an effective information security strategy requires systematic analysis of business context, threat landscape, and organizational capabilities.
+                                </p>
+                                
+                                <!-- Interactive Strategy Development Tool -->
+                                <div style="margin: 16px 0; padding: 16px; background: var(--surface-gray); border-radius: 8px;">
+                                    <strong>Strategy Development Process:</strong>
+                                    <div style="margin-top: 16px;">
+                                        <div onclick="toggleStrategyStep(1)" style="cursor: pointer; padding: 12px; margin: 8px 0; background: var(--surface-white); border-radius: 6px; border-left: 4px solid var(--primary-blue);">
+                                            <strong>1. Business Context Analysis</strong> <span style="float: right;">▼</span>
+                                            <div id="strategyStep1" style="display: none; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-light);">
+                                                <ul class="topic-list">
+                                                    <li class="topic-item">Business objectives and strategic priorities</li>
+                                                    <li class="topic-item">Organizational culture and risk appetite</li>
+                                                    <li class="topic-item">Regulatory and compliance requirements</li>
+                                                    <li class="topic-item">Industry and competitive landscape</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        
+                                        <div onclick="toggleStrategyStep(2)" style="cursor: pointer; padding: 12px; margin: 8px 0; background: var(--surface-white); border-radius: 6px; border-left: 4px solid var(--accent-purple);">
+                                            <strong>2. Current State Assessment</strong> <span style="float: right;">▼</span>
+                                            <div id="strategyStep2" style="display: none; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-light);">
+                                                <ul class="topic-list">
+                                                    <li class="topic-item">Security maturity evaluation</li>
+                                                    <li class="topic-item">Risk assessment and threat analysis</li>
+                                                    <li class="topic-item">Gap analysis against industry standards</li>
+                                                    <li class="topic-item">Resource and capability assessment</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        
+                                        <div onclick="toggleStrategyStep(3)" style="cursor: pointer; padding: 12px; margin: 8px 0; background: var(--surface-white); border-radius: 6px; border-left: 4px solid var(--accent-cyan);">
+                                            <strong>3. Future State Design</strong> <span style="float: right;">▼</span>
+                                            <div id="strategyStep3" style="display: none; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-light);">
+                                                <ul class="topic-list">
+                                                    <li class="topic-item">Security vision and objectives</li>
+                                                    <li class="topic-item">Target architecture and capabilities</li>
+                                                    <li class="topic-item">Strategic initiatives and programs</li>
+                                                    <li class="topic-item">Success metrics and KPIs</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        
+                                        <div onclick="toggleStrategyStep(4)" style="cursor: pointer; padding: 12px; margin: 8px 0; background: var(--surface-white); border-radius: 6px; border-left: 4px solid var(--success);">
+                                            <strong>4. Implementation Roadmap</strong> <span style="float: right;">▼</span>
+                                            <div id="strategyStep4" style="display: none; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-light);">
+                                                <ul class="topic-list">
+                                                    <li class="topic-item">Phased implementation plan</li>
+                                                    <li class="topic-item">Resource requirements and timeline</li>
+                                                    <li class="topic-item">Risk mitigation during transition</li>
+                                                    <li class="topic-item">Change management and communication</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="highlight-box">
+                                    <strong>🎯 CISM Focus:</strong> Effective security strategies are living documents that evolve with business needs and threat landscapes. They should be reviewed and updated at least annually or when significant business changes occur.
+                                </div>
+                            </div>
+
+                            <!-- Frameworks and Standards -->
+                            <div style="margin: 20px 0; padding: 20px; background: var(--surface-white); border-radius: 8px; border-left: 4px solid var(--accent-purple);">
+                                <h5 style="font-weight: 600; margin-bottom: 12px;">📋 Information Governance Frameworks and Standards</h5>
+                                <p style="margin-bottom: 12px;">
+                                    Established frameworks provide proven structures for implementing effective information security governance. Understanding when and how to apply different frameworks is crucial for CISM professionals.
+                                </p>
+                                
+                                <!-- Framework Comparison Tool -->
+                                <div style="margin: 16px 0;">
+                                    <strong>Major Governance Frameworks Comparison:</strong>
+                                    <div style="margin: 16px 0;">
+                                        <div onclick="toggleFramework('iso27001')" style="cursor: pointer; padding: 12px; margin: 8px 0; background: var(--surface-gray); border-radius: 6px;">
+                                            <strong>ISO 27001/27002</strong> - International Standard for ISMS <span style="float: right;">🔍</span>
+                                            <div id="iso27001" style="display: none; margin-top: 12px; padding: 12px; background: var(--surface-white); border-radius: 4px;">
+                                                <p><strong>Best for:</strong> Organizations seeking international certification and comprehensive security management</p>
+                                                <p><strong>Key Features:</strong> 114 security controls, risk-based approach, continuous improvement cycle</p>
+                                                <p><strong>Industries:</strong> Global organizations, regulated industries, service providers</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div onclick="toggleFramework('nist')" style="cursor: pointer; padding: 12px; margin: 8px 0; background: var(--surface-gray); border-radius: 6px;">
+                                            <strong>NIST Cybersecurity Framework</strong> - US Government Framework <span style="float: right;">🔍</span>
+                                            <div id="nist" style="display: none; margin-top: 12px; padding: 12px; background: var(--surface-white); border-radius: 4px;">
+                                                <p><strong>Best for:</strong> Risk-based cybersecurity program development and improvement</p>
+                                                <p><strong>Key Features:</strong> Identify, Protect, Detect, Respond, Recover functions</p>
+                                                <p><strong>Industries:</strong> Critical infrastructure, government contractors, US organizations</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div onclick="toggleFramework('cobit')" style="cursor: pointer; padding: 12px; margin: 8px 0; background: var(--surface-gray); border-radius: 6px;">
+                                            <strong>COBIT 2019</strong> - IT Governance and Management <span style="float: right;">🔍</span>
+                                            <div id="cobit" style="display: none; margin-top: 12px; padding: 12px; background: var(--surface-white); border-radius: 4px;">
+                                                <p><strong>Best for:</strong> Aligning IT and security governance with business objectives</p>
+                                                <p><strong>Key Features:</strong> Governance and management objectives, performance metrics</p>
+                                                <p><strong>Industries:</strong> Large enterprises, complex IT environments, audit-focused organizations</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Governance Metrics Dashboard -->
+                    <div class="domain-card">
+                        <h3 style="font-size: 20px; margin-bottom: 24px;">📊 Security Governance Metrics & KPIs</h3>
+                        <p style="margin-bottom: 20px;">Effective governance requires measurement and monitoring. Here are key metrics that CISM professionals should track:</p>
+                        
+                        <div class="feature-grid">
+                            <div class="feature-card" onclick="toggleCard(this)">
+                                <div class="feature-card-header">
+                                    <h4 class="feature-title">📈 Strategic Metrics</h4>
+                                    <div class="expand-indicator">+</div>
+                                </div>
+                                <div class="feature-content">
+                                    <ul style="list-style: none; padding: 0;">
+                                        <li>• Security investment ROI</li>
+                                        <li>• Security strategy execution rate</li>
+                                        <li>• Board/executive engagement level</li>
+                                        <li>• Compliance rate with security policies</li>
+                                        <li>• Time to implement new security initiatives</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <div class="feature-card" onclick="toggleCard(this)">
+                                <div class="feature-card-header">
+                                    <h4 class="feature-title">⚡ Operational Metrics</h4>
+                                    <div class="expand-indicator">+</div>
+                                </div>
+                                <div class="feature-content">
+                                    <ul style="list-style: none; padding: 0;">
+                                        <li>• Security training completion rates</li>
+                                        <li>• Policy exception approval time</li>
+                                        <li>• Risk assessment completion rate</li>
+                                        <li>• Security control effectiveness</li>
+                                        <li>• Vendor security assessment coverage</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Key Tasks and Exam Tips -->
+                    <div class="highlight-box">
+                        <h4 style="margin-bottom: 16px;">🎯 Official CISM Supporting Tasks for Domain 1</h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 16px;">
+                            <div>
+                                <strong>Governance Tasks:</strong>
+                                <ul class="topic-list" style="margin-top: 8px;">
+                                    <li class="topic-item">Identify internal and external influences on the organization that impact the information security strategy</li>
+                                    <li class="topic-item">Establish and/or maintain an information security strategy in alignment with organizational goals and objectives</li>
+                                    <li class="topic-item">Establish and/or maintain an information security governance framework</li>
+                                    <li class="topic-item">Integrate information security governance into corporate governance</li>
+                                    <li class="topic-item">Establish and maintain information security policies to guide the development of standards, procedures and guidelines</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <strong>Strategic Tasks:</strong>
+                                <ul class="topic-list" style="margin-top: 8px;">
+                                    <li class="topic-item">Develop business cases to support investments in information security</li>
+                                    <li class="topic-item">Gain ongoing commitment from senior leadership and other stakeholders</li>
+                                    <li class="topic-item">Define, communicate and monitor information security responsibilities throughout the organization</li>
+                                    <li class="topic-item">Compile and present reports to key stakeholders on program effectiveness</li>
+                                    <li class="topic-item">Evaluate and report information security metrics to key stakeholders</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Exam Tips and Common Scenarios -->
+                    <div class="domain-card">
+                        <h3 style="font-size: 20px; margin-bottom: 24px;">💡 CISM Exam Tips & Common Scenarios</h3>
+                        
+                        <div style="margin: 20px 0;">
+                            <h4 style="margin-bottom: 12px;">🎯 Key Exam Focus Areas:</h4>
+                            <div class="highlight-box">
+                                <ul class="topic-list">
+                                    <li class="topic-item"><strong>Governance vs. Management:</strong> Understand the distinction between governance (what) and management (how)</li>
+                                    <li class="topic-item"><strong>Business Alignment:</strong> Always consider how security decisions support business objectives</li>
+                                    <li class="topic-item"><strong>Stakeholder Engagement:</strong> Focus on communication and relationship management with various stakeholders</li>
+                                    <li class="topic-item"><strong>Regulatory Compliance:</strong> Know major regulations and their impact on governance decisions</li>
+                                    <li class="topic-item"><strong>Risk-Based Approach:</strong> Understand how risk assessment drives governance decisions</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div style="margin: 20px 0;">
+                            <h4 style="margin-bottom: 12px;">📝 Common Exam Scenarios:</h4>
+                            <div style="padding: 16px; background: var(--surface-gray); border-radius: 8px;">
+                                <strong>Scenario 1:</strong> "A new regulation requires enhanced data protection. What should the CISM do FIRST?"<br>
+                                <em>Answer approach: Assess current state against new requirements, then update governance framework</em>
+                                
+                                <div style="margin-top: 16px;">
+                                    <strong>Scenario 2:</strong> "The board wants to understand security ROI. How should the CISM respond?"<br>
+                                    <em>Answer approach: Develop business-relevant metrics that demonstrate value and risk reduction</em>
+                                </div>
+                                
+                                <div style="margin-top: 16px;">
+                                    <strong>Scenario 3:</strong> "Business units resist new security policies. What's the BEST approach?"<br>
+                                    <em>Answer approach: Engage stakeholders, understand business needs, and adapt policies accordingly</em>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Study Tools -->
+                    <div class="domain-card">
+                        <h3 style="font-size: 20px; margin-bottom: 24px;">🛠️ Interactive Study Tools</h3>
+                        
+                        <!-- Governance Framework Selector -->
+                        <div style="margin: 24px 0;">
+                            <h4 style="margin-bottom: 16px;">🎯 Framework Selection Tool</h4>
+                            <p style="margin-bottom: 16px;">Select organizational characteristics to get framework recommendations:</p>
+                            
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0;">
+                                <div>
+                                    <label style="font-weight: 600; display: block; margin-bottom: 8px;">Organization Size:</label>
+                                    <select id="orgSize" class="form-select">
+                                        <option value="">Select size...</option>
+                                        <option value="small">Small (< 500 employees)</option>
+                                        <option value="medium">Medium (500-5000 employees)</option>
+                                        <option value="large">Large (> 5000 employees)</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label style="font-weight: 600; display: block; margin-bottom: 8px;">Industry:</label>
+                                    <select id="industry" class="form-select">
+                                        <option value="">Select industry...</option>
+                                        <option value="financial">Financial Services</option>
+                                        <option value="healthcare">Healthcare</option>
+                                        <option value="government">Government</option>
+                                        <option value="technology">Technology</option>
+                                        <option value="manufacturing">Manufacturing</option>
+                                        <option value="retail">Retail</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label style="font-weight: 600; display: block; margin-bottom: 8px;">Geographic Scope:</label>
+                                    <select id="geographic" class="form-select">
+                                        <option value="">Select scope...</option>
+                                        <option value="local">Local/Regional</option>
+                                        <option value="national">National</option>
+                                        <option value="international">International</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label style="font-weight: 600; display: block; margin-bottom: 8px;">Maturity Level:</label>
+                                    <select id="maturity" class="form-select">
+                                        <option value="">Select maturity...</option>
+                                        <option value="initial">Initial</option>
+                                        <option value="developing">Developing</option>
+                                        <option value="defined">Defined</option>
+                                        <option value="managed">Managed</option>
+                                        <option value="optimized">Optimized</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <button onclick="recommendFramework()" class="primary-btn" style="margin-top: 16px;">🎯 Get Framework Recommendation</button>
+                            
+                            <div id="frameworkRecommendation" style="display: none; margin-top: 20px; padding: 20px; background: var(--surface-gray); border-radius: 12px;">
+                                <h4 style="margin-bottom: 12px;">Recommended Framework:</h4>
+                                <div id="recommendedFramework" style="font-size: 18px; font-weight: bold; color: var(--primary-blue); margin-bottom: 12px;"></div>
+                                <div id="frameworkRationale" style="margin-bottom: 16px;"></div>
+                                <div id="implementationTips" style="padding: 12px; background: var(--surface-white); border-radius: 8px;"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Governance Checklist -->
+                        <div style="margin: 24px 0;">
+                            <h4 style="margin-bottom: 16px;">✅ Governance Implementation Checklist</h4>
+                            <div style="background: var(--surface-gray); padding: 20px; border-radius: 8px;">
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check1"> <label for="check1">Board charter includes information security oversight responsibility</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check2"> <label for="check2">Security strategy documented and approved by executive leadership</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check3"> <label for="check3">Information security policies cover all major risk areas</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check4"> <label for="check4">Regular security reporting to board and executives established</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check5"> <label for="check5">Security roles and responsibilities clearly defined and communicated</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check6"> <label for="check6">Compliance requirements mapped to organizational controls</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check7"> <label for="check7">Security metrics aligned with business objectives</label>
+                                </div>
+                                <div class="checklist-item">
+                                    <input type="checkbox" id="check8"> <label for="check8">Regular governance framework review and updates process</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Domain 1 Summary -->
+                    <div class="domain-card">
+                        <h3 style="font-size: 20px; margin-bottom: 24px;">📚 Domain 1 Study Summary</h3>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+                            <div>
+                                <h4 style="margin-bottom: 12px; color: var(--primary-blue);">🎯 Key Learning Objectives</h4>
+                                <ul class="topic-list">
+                                    <li class="topic-item">Understand the relationship between business strategy and security governance</li>
+                                    <li class="topic-item">Master the components of effective governance frameworks</li>
+                                    <li class="topic-item">Know how to engage executives and board members effectively</li>
+                                    <li class="topic-item">Understand regulatory compliance impact on governance</li>
+                                    <li class="topic-item">Develop skills in security strategy communication</li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h4 style="margin-bottom: 12px; color: var(--accent-purple);">📖 Recommended Study Resources</h4>
+                                <ul class="topic-list">
+                                    <li class="topic-item">ISACA CISM Review Manual - Chapter 1</li>
+                                    <li class="topic-item">ISO 27001:2022 Standard and Implementation Guide</li>
+                                    <li class="topic-item">NIST Cybersecurity Framework documentation</li>
+                                    <li class="topic-item">COBIT 2019 Framework and governance practices</li>
+                                    <li class="topic-item">Industry-specific compliance guides (GDPR, HIPAA, SOX)</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div style="margin-top: 24px; padding: 20px; background: var(--surface-gray); border-radius: 8px;">
+                            <h4 style="margin-bottom: 12px;">🔥 Domain 1 Quick Review Points</h4>
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+                                <div style="background: var(--surface-white); padding: 12px; border-radius: 6px;">
+                                    <strong>Governance Focus:</strong><br>
+                                    Direction, oversight, accountability
+                                </div>
+                                <div style="background: var(--surface-white); padding: 12px; border-radius: 6px;">
+                                    <strong>Strategy Elements:</strong><br>
+                                    Vision, objectives, roadmap, metrics
+                                </div>
+                                <div style="background: var(--surface-white); padding: 12px; border-radius: 6px;">
+                                    <strong>Stakeholder Engagement:</strong><br>
+                                    Board, executives, business units
+                                </div>
+                                <div style="background: var(--surface-white); padding: 12px; border-radius: 6px;">
+                                    <strong>Compliance Management:</strong><br>
+                                    Laws, regulations, standards, contracts
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -1209,22 +1794,24 @@
                         <div class="subdomain">
                             <h4 class="subdomain-title">A. Information Security Risk Assessment</h4>
                             <ul class="topic-list">
-                                <li class="topic-item"><strong>Emerging Risk and Threat Landscape:</strong> Identifying new and evolving threats and vulnerabilities</li>
-                                <li class="topic-item"><strong>Vulnerability and Control Deficiency Analysis:</strong> Systematic identification and analysis of weaknesses</li>
-                                <li class="topic-item"><strong>Risk Assessment and Analysis:</strong> Quantitative and qualitative risk assessment methodologies</li>
-                                <li class="topic-item"><strong>Risk Identification Techniques:</strong> Asset-based, threat-based, and vulnerability-based approaches</li>
-                                <li class="topic-item"><strong>Business Impact Analysis:</strong> Understanding potential impacts of security incidents on operations</li>
+                                <li class="topic-item"><strong>Emerging Risk and Threat Landscape:</strong> Identifying new and evolving threats, attack vectors, threat intelligence, and emerging technologies risks</li>
+                                <li class="topic-item"><strong>Vulnerability and Control Deficiency Analysis:</strong> Systematic identification, analysis, and assessment of technical and operational weaknesses</li>
+                                <li class="topic-item"><strong>Risk Assessment and Analysis Methodologies:</strong> Quantitative and qualitative approaches, risk modeling, and assessment frameworks</li>
+                                <li class="topic-item"><strong>Risk Identification Techniques:</strong> Asset-based, threat-based, vulnerability-based, and scenario-based risk identification approaches</li>
+                                <li class="topic-item"><strong>Business Impact Analysis (BIA):</strong> Understanding potential impacts of security incidents on business operations, processes, and revenue</li>
+                                <li class="topic-item"><strong>Risk Context and Environment:</strong> Internal and external factors influencing risk assessment and organizational risk profile</li>
                             </ul>
                         </div>
 
                         <div class="subdomain">
                             <h4 class="subdomain-title">B. Information Security Risk Response</h4>
                             <ul class="topic-list">
-                                <li class="topic-item"><strong>Risk Treatment/Risk Response Options:</strong> Accept, avoid, transfer, or mitigate risk strategies</li>
-                                <li class="topic-item"><strong>Risk and Control Ownership:</strong> Defining clear accountability for risk management activities</li>
-                                <li class="topic-item"><strong>Risk Monitoring and Reporting:</strong> Continuous monitoring and stakeholder communication processes</li>
-                                <li class="topic-item"><strong>Risk Appetite and Tolerance:</strong> Defining and communicating acceptable levels of risk</li>
-                                <li class="topic-item"><strong>Control Selection and Implementation:</strong> Choosing and deploying appropriate risk treatment measures</li>
+                                <li class="topic-item"><strong>Risk Treatment and Response Options:</strong> Accept, avoid, transfer, or mitigate strategies with cost-benefit analysis</li>
+                                <li class="topic-item"><strong>Risk and Control Ownership:</strong> Defining clear accountability, responsibility assignment, and governance structures for risk management</li>
+                                <li class="topic-item"><strong>Risk Monitoring and Reporting:</strong> Continuous monitoring processes, KRIs, risk dashboards, and stakeholder communication</li>
+                                <li class="topic-item"><strong>Risk Appetite and Tolerance Definition:</strong> Establishing acceptable risk levels, tolerance thresholds, and risk criteria</li>
+                                <li class="topic-item"><strong>Control Selection and Implementation:</strong> Choosing appropriate risk treatment measures and implementing compensating controls</li>
+                                <li class="topic-item"><strong>Risk Communication and Documentation:</strong> Risk registers, risk statements, and communication to various stakeholder levels</li>
                             </ul>
                         </div>
                     </div>
@@ -1232,13 +1819,16 @@
                     <div class="highlight-box">
                         <h4 style="margin-bottom: 16px;">🎯 Key Supporting Tasks</h4>
                         <ul class="topic-list">
-                            <li class="topic-item">Participate in and oversee risk identification, assessment, and treatment processes</li>
-                            <li class="topic-item">Participate in and oversee vulnerability assessment and threat analysis</li>
-                            <li class="topic-item">Identify and implement appropriate risk treatment options</li>
-                            <li class="topic-item">Determine effectiveness of information security controls</li>
-                            <li class="topic-item">Facilitate integration of information risk management into business processes</li>
-                            <li class="topic-item">Monitor for factors requiring risk reassessment</li>
-                            <li class="topic-item">Report on information security risk to key stakeholders</li>
+                            <li class="topic-item">Participate in and/or oversee the risk identification, risk assessment and risk treatment process</li>
+                            <li class="topic-item">Participate in and/or oversee the vulnerability assessment and threat analysis process</li>
+                            <li class="topic-item">Identify, recommend or implement appropriate risk treatment and response options to manage risk to acceptable levels</li>
+                            <li class="topic-item">Determine whether information security controls are appropriate and effectively manage risk to an acceptable level</li>
+                            <li class="topic-item">Facilitate the integration of information risk management into business and IT processes</li>
+                            <li class="topic-item">Monitor for internal and external factors that may require reassessment of risk</li>
+                            <li class="topic-item">Report on information security risk, including noncompliance and changes in information risk, to key stakeholders</li>
+                            <li class="topic-item">Establish and maintain risk management processes that support business objectives and regulatory requirements</li>
+                            <li class="topic-item">Develop and maintain risk assessment methodologies and frameworks appropriate to the organization</li>
+                            <li class="topic-item">Coordinate risk management activities across different business units and functions</li>
                         </ul>
                     </div>
 
@@ -1302,23 +1892,25 @@
                         <div class="subdomain">
                             <h4 class="subdomain-title">A. Information Security Program Development</h4>
                             <ul class="topic-list">
-                                <li class="topic-item"><strong>Information Security Program Resources:</strong> People, tools, technologies, and budget allocation strategies</li>
-                                <li class="topic-item"><strong>Information Asset Identification and Classification:</strong> Data classification schemes and comprehensive asset inventory</li>
-                                <li class="topic-item"><strong>Industry Standards and Frameworks:</strong> Implementation of security frameworks and standards</li>
-                                <li class="topic-item"><strong>Information Security Policies, Procedures and Guidelines:</strong> Development and maintenance of security documentation</li>
-                                <li class="topic-item"><strong>Information Security Program Metrics:</strong> KPIs and measurement frameworks for program effectiveness</li>
+                                <li class="topic-item"><strong>Information Security Program Resources:</strong> People, tools, technologies, budget allocation, organizational structure, and resource optimization strategies</li>
+                                <li class="topic-item"><strong>Information Asset Identification and Classification:</strong> Data classification schemes, asset inventory management, data lifecycle, and protection requirements</li>
+                                <li class="topic-item"><strong>Industry Standards and Frameworks:</strong> Implementation of security frameworks (NIST, ISO 27001/27002, CIS Controls) and industry best practices</li>
+                                <li class="topic-item"><strong>Information Security Policies, Procedures and Guidelines:</strong> Development, maintenance, and communication of comprehensive security documentation</li>
+                                <li class="topic-item"><strong>Information Security Program Metrics:</strong> KPIs, measurement frameworks, performance indicators, and program effectiveness assessment</li>
+                                <li class="topic-item"><strong>Program Planning and Design:</strong> Strategic program architecture, roadmap development, and alignment with business objectives</li>
                             </ul>
                         </div>
 
                         <div class="subdomain">
                             <h4 class="subdomain-title">B. Information Security Program Management</h4>
                             <ul class="topic-list">
-                                <li class="topic-item"><strong>Information Security Control Design and Selection:</strong> Choosing and designing appropriate security controls</li>
-                                <li class="topic-item"><strong>Information Security Control Implementation and Integration:</strong> Deploying controls across the organization</li>
-                                <li class="topic-item"><strong>Information Security Control Testing and Evaluation:</strong> Assessing control effectiveness and performance</li>
-                                <li class="topic-item"><strong>Information Security Awareness and Training:</strong> Education programs and security culture development</li>
-                                <li class="topic-item"><strong>Management of External Services:</strong> Third-party, fourth-party, and vendor risk management</li>
-                                <li class="topic-item"><strong>Information Security Program Communications and Reporting:</strong> Stakeholder communication and reporting frameworks</li>
+                                <li class="topic-item"><strong>Information Security Control Design and Selection:</strong> Choosing, designing, and implementing appropriate security controls based on risk assessment</li>
+                                <li class="topic-item"><strong>Information Security Control Implementation and Integration:</strong> Deploying controls across the organization, system integration, and operational embedding</li>
+                                <li class="topic-item"><strong>Information Security Control Testing and Evaluation:</strong> Assessing control effectiveness, performance monitoring, and continuous improvement</li>
+                                <li class="topic-item"><strong>Information Security Awareness and Training:</strong> Education programs, security culture development, and behavioral change initiatives</li>
+                                <li class="topic-item"><strong>Management of External Services:</strong> Third-party risk management, vendor assessments, fourth-party oversight, and contract security requirements</li>
+                                <li class="topic-item"><strong>Information Security Program Communications and Reporting:</strong> Stakeholder engagement, executive reporting, and program status communication</li>
+                                <li class="topic-item"><strong>Compliance and Audit Management:</strong> Regulatory compliance, internal audits, external assessments, and remediation tracking</li>
                             </ul>
                         </div>
                     </div>
@@ -1326,15 +1918,17 @@
                     <div class="highlight-box">
                         <h4 style="margin-bottom: 16px;">🎯 Key Supporting Tasks</h4>
                         <ul class="topic-list">
-                            <li class="topic-item">Establish and maintain information security program aligned with strategy</li>
-                            <li class="topic-item">Align information security program with operational objectives</li>
-                            <li class="topic-item">Establish and maintain information security processes and resources</li>
-                            <li class="topic-item">Establish, communicate, and maintain organizational security documentation</li>
-                            <li class="topic-item">Establish, promote, and maintain awareness and training programs</li>
-                            <li class="topic-item">Integrate security requirements into organizational processes</li>
-                            <li class="topic-item">Integrate security requirements into external party contracts</li>
-                            <li class="topic-item">Monitor external parties' adherence to security requirements</li>
-                            <li class="topic-item">Define and monitor management and operational metrics</li>
+                            <li class="topic-item">Establish and/or maintain the information security program in alignment with the information security strategy</li>
+                            <li class="topic-item">Align the information security program with the operational objectives of other business functions</li>
+                            <li class="topic-item">Establish and maintain information security processes and resources to execute the information security program</li>
+                            <li class="topic-item">Establish, communicate and maintain organizational information security policies, standards, guidelines, procedures and other documentation</li>
+                            <li class="topic-item">Establish, promote and maintain a program for information security awareness and training</li>
+                            <li class="topic-item">Integrate information security requirements into organizational processes to maintain the organization's security strategy</li>
+                            <li class="topic-item">Integrate information security requirements into contracts and activities of external parties</li>
+                            <li class="topic-item">Monitor external parties' adherence to established security requirements</li>
+                            <li class="topic-item">Define and monitor management and operational metrics for the information security program</li>
+                            <li class="topic-item">Establish and/or maintain a process for information asset identification and classification</li>
+                            <li class="topic-item">Identify legal, regulatory, organizational and other applicable compliance requirements</li>
                         </ul>
                     </div>
 
@@ -1400,24 +1994,26 @@
                         <div class="subdomain">
                             <h4 class="subdomain-title">A. Incident Management Readiness</h4>
                             <ul class="topic-list">
-                                <li class="topic-item"><strong>Incident Response Plan:</strong> Comprehensive planning for incident response activities and procedures</li>
-                                <li class="topic-item"><strong>Business Impact Analysis (BIA):</strong> Understanding critical business functions and dependencies</li>
-                                <li class="topic-item"><strong>Business Continuity Plan (BCP):</strong> Ensuring business operations continue during and after incidents</li>
-                                <li class="topic-item"><strong>Disaster Recovery Plan (DRP):</strong> Restoring IT systems and operations after incidents</li>
-                                <li class="topic-item"><strong>Incident Classification/Categorization:</strong> Systematic approach to incident triage and prioritization</li>
-                                <li class="topic-item"><strong>Incident Management Training, Testing and Evaluation:</strong> Preparedness through exercises and training programs</li>
+                                <li class="topic-item"><strong>Incident Response Plan:</strong> Comprehensive planning for incident response activities, procedures, escalation paths, and coordination mechanisms</li>
+                                <li class="topic-item"><strong>Business Impact Analysis (BIA):</strong> Understanding critical business functions, dependencies, impact assessment, and recovery prioritization</li>
+                                <li class="topic-item"><strong>Business Continuity Plan (BCP):</strong> Ensuring business operations continuity during and after incidents, alternative processes, and operational resilience</li>
+                                <li class="topic-item"><strong>Disaster Recovery Plan (DRP):</strong> Restoring IT systems and operations after incidents, recovery procedures, and technical restoration processes</li>
+                                <li class="topic-item"><strong>Incident Classification and Categorization:</strong> Systematic approach to incident triage, severity levels, priority assignment, and escalation criteria</li>
+                                <li class="topic-item"><strong>Incident Management Training, Testing and Evaluation:</strong> Preparedness through tabletop exercises, simulations, training programs, and plan validation</li>
+                                <li class="topic-item"><strong>Incident Response Team Structure:</strong> Team organization, roles and responsibilities, skill requirements, and communication protocols</li>
                             </ul>
                         </div>
 
                         <div class="subdomain">
                             <h4 class="subdomain-title">B. Incident Management Operations</h4>
                             <ul class="topic-list">
-                                <li class="topic-item"><strong>Incident Management Tools and Techniques:</strong> Technology and methodologies for effective incident response</li>
-                                <li class="topic-item"><strong>Incident Investigation and Evaluation:</strong> Forensic analysis and evidence preservation procedures</li>
-                                <li class="topic-item"><strong>Incident Containment Methods:</strong> Strategies to limit incident impact and prevent spread</li>
-                                <li class="topic-item"><strong>Incident Response Communications:</strong> Internal and external communication protocols and procedures</li>
-                                <li class="topic-item"><strong>Incident Eradication and Recovery:</strong> Removing threats and restoring normal business operations</li>
-                                <li class="topic-item"><strong>Post-Incident Review Practices:</strong> Lessons learned and continuous improvement processes</li>
+                                <li class="topic-item"><strong>Incident Management Tools and Techniques:</strong> Technology platforms, automation tools, forensic tools, and incident tracking systems</li>
+                                <li class="topic-item"><strong>Incident Investigation and Evaluation:</strong> Forensic analysis, evidence preservation, root cause analysis, and impact assessment procedures</li>
+                                <li class="topic-item"><strong>Incident Containment Methods:</strong> Strategies to limit incident impact, prevent spread, isolation techniques, and damage control measures</li>
+                                <li class="topic-item"><strong>Incident Response Communications:</strong> Internal and external communication protocols, stakeholder notification, media relations, and regulatory reporting</li>
+                                <li class="topic-item"><strong>Incident Eradication and Recovery:</strong> Removing threats, system restoration, data recovery, and return to normal operations</li>
+                                <li class="topic-item"><strong>Post-Incident Review Practices:</strong> Lessons learned, process improvement, corrective actions, and knowledge transfer</li>
+                                <li class="topic-item"><strong>Legal and Regulatory Compliance:</strong> Evidence handling, chain of custody, regulatory notifications, and legal coordination</li>
                             </ul>
                         </div>
                     </div>
@@ -1425,15 +2021,17 @@
                     <div class="highlight-box">
                         <h4 style="margin-bottom: 16px;">🎯 Key Supporting Tasks</h4>
                         <ul class="topic-list">
-                            <li class="topic-item">Establish and maintain incident response plan aligned with BCP and DRP</li>
-                            <li class="topic-item">Establish and maintain incident classification and categorization process</li>
-                            <li class="topic-item">Develop processes for timely identification of security incidents</li>
-                            <li class="topic-item">Establish processes to investigate and document incidents per legal requirements</li>
-                            <li class="topic-item">Establish incident handling processes including containment and recovery</li>
-                            <li class="topic-item">Organize, train, equip, and assign responsibilities to incident response teams</li>
-                            <li class="topic-item">Establish incident communication plans for internal and external parties</li>
-                            <li class="topic-item">Evaluate incident management plans through testing and exercises</li>
-                            <li class="topic-item">Conduct post-incident reviews for continuous improvement</li>
+                            <li class="topic-item">Establish and maintain an incident response plan, in alignment with the business continuity plan and disaster recovery plan</li>
+                            <li class="topic-item">Establish and maintain an information security incident classification and categorization process</li>
+                            <li class="topic-item">Develop and implement processes to ensure the timely identification of information security incidents</li>
+                            <li class="topic-item">Establish and maintain processes to investigate and document information security incidents in accordance with legal and regulatory requirements</li>
+                            <li class="topic-item">Establish and maintain incident handling process, including containment, notification, escalation, eradication and recovery</li>
+                            <li class="topic-item">Organize, train, equip and assign responsibilities to incident response teams</li>
+                            <li class="topic-item">Establish and maintain incident communication plans and processes for internal and external parties</li>
+                            <li class="topic-item">Evaluate incident management plans through testing and review, including table-top exercises, checklist review and simulation testing at planned intervals</li>
+                            <li class="topic-item">Conduct post-incident reviews to facilitate continuous improvement, including root-cause analysis, lessons learned, corrective actions and reassessment of risk</li>
+                            <li class="topic-item">Coordinate incident response activities across multiple business units, external parties, and regulatory bodies</li>
+                            <li class="topic-item">Maintain incident response capabilities and readiness through regular training, testing, and capability assessments</li>
                         </ul>
                     </div>
 
