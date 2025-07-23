@@ -600,18 +600,29 @@
             }
         });
 
-        nextBtn.addEventListener('click', () => displayQuestion(++currentAssessment.currentQuestionIndex));
-        prevBtn.addEventListener('click', () => displayQuestion(--currentAssessment.currentQuestionIndex));
+        nextBtn.addEventListener('click', () => changeQuestion(1));
+        prevBtn.addEventListener('click', () => changeQuestion(-1));
         submitBtn.addEventListener('click', submitAssessment);
-        quitBtn.addEventListener('click', () => quitModal.classList.remove('hidden'));
-        cancelQuitBtn.addEventListener('click', () => quitModal.classList.add('hidden'));
+        
+        quitBtn.addEventListener('click', () => {
+            quitModal.classList.remove('hidden');
+        });
+
+        cancelQuitBtn.addEventListener('click', () => {
+            quitModal.classList.add('hidden');
+        });
+
         confirmQuitBtn.addEventListener('click', () => {
             stopTimer();
             quitModal.classList.add('hidden');
             showView(setupView);
         });
+        
         reviewAnswersBtn.addEventListener('click', reviewAnswers);
-        restartAssessmentBtn.addEventListener('click', () => startAssessment(currentAssessment.questions, currentAssessment.assessmentType));
+        restartAssessmentBtn.addEventListener('click', () => {
+             // Re-run the same assessment
+             startAssessment(currentAssessment.questions, currentAssessment.assessmentType);
+        });
 
         // --- INITIALIZATION ---
         renderOptions('domain-1');
