@@ -17,7 +17,7 @@
             --text-secondary: #a0aec0;
             --border-color: #2d3748;
             --shadow-color: rgba(0, 191, 255, 0.1);
-            --transition-fast: all 0.3s ease-in-out; /* Adjusted for smoother accordion */
+            --transition-fast: all 0.3s ease-in-out;
         }
 
         body {
@@ -162,6 +162,13 @@
         }
 
         /* Main Content Body */
+        .tab-content {
+            display: none; /* Hide all tab content by default */
+        }
+        .tab-content.active {
+            display: block; /* Show active tab content */
+        }
+
         .content-body h4 {
             font-size: 1.8em;
             font-weight: 600;
@@ -196,8 +203,7 @@
             position: relative;
             overflow: hidden;
             cursor: pointer;
-            max-width: 200px; /* Max width as requested */
-            /* Centering styles */
+            max-width: 200px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -242,18 +248,87 @@
             margin: 0;
             line-height: 1.6;
             position: relative;
-            max-height: 0; /* Hidden by default */
-            opacity: 0; /* Hidden by default */
+            max-height: 0;
+            opacity: 0;
             overflow: hidden;
             transition: max-height 0.4s ease-out, opacity 0.4s ease-out, margin-top 0.4s ease-out;
         }
 
-        /* Style for the open card's paragraph */
         .card.open p {
-            max-height: 100px; /* Adjust as needed for content length */
+            max-height: 100px;
             opacity: 1;
-            margin-top: 10px; /* Add space when open */
+            margin-top: 10px;
         }
+
+        /* NEW ACCORDION STYLES */
+        .accordion-item {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+        .accordion-header {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        .accordion-header:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+        .accordion-toggle {
+            font-size: 1.8em;
+            font-weight: 400;
+            transition: transform 0.3s ease-out;
+        }
+        .accordion-item.open .accordion-toggle {
+            transform: rotate(45deg);
+        }
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+            padding: 0 20px;
+            color: var(--text-secondary);
+        }
+        .accordion-item.open .accordion-content {
+            max-height: 500px; /* Adjust if content is longer */
+            padding: 0 20px 20px 20px;
+        }
+        .accordion-content ul {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+        .accordion-content li {
+            margin-bottom: 8px;
+        }
+        .cost-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .cost-table th, .cost-table td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+        .cost-table th {
+            background-color: var(--dark-navy-bg);
+            color: var(--text-primary);
+        }
+        .cost-table a {
+            color: var(--accent-glow);
+            text-decoration: none;
+        }
+        .cost-table a:hover {
+            text-decoration: underline;
+        }
+
     </style>
 </head>
 <body>
@@ -295,58 +370,176 @@
                 </div>
 
                 <div class="tabs">
-                    <div class="tab active">Why CISM?</div>
-                    <div class="tab">Exam Details</div>
-                    <div class="tab">Maintenance</div>
+                    <div class="tab active" data-tab="why-cism">Why CISM?</div>
+                    <div class="tab" data-tab="exam-details">Exam Details</div>
+                    <div class="tab" data-tab="maintenance">Maintenance</div>
                 </div>
 
-                <div class="content-body">
-                    <h4>Why Pursue the CISM Certification?</h4>
-                    <p>The Certified Information Security Manager (CISM) certification, issued by ISACA, is a premier credential for professionals managing and overseeing information security systems in alignment with business goals. Explore the key benefits below.</p>
-
-                    <div class="feature-cards">
-                        <div class="card">
-                            <h5>Leadership-Focused</h5>
-                            <p>Develop and enhance your skills in leading information security teams and initiatives.</p>
-                        </div>
-                        <div class="card">
-                            <h5>Career-Enhancing</h5>
-                            <p>Boost your professional credibility and open doors to advanced roles in the cybersecurity field.</p>
-                        </div>
-                        <div class="card">
-                            <h5>Global Recognition</h5>
-                            <p>Gain a globally recognized certification that validates your expertise to employers worldwide.</p>
-                        </div>
-                        <div class="card">
-                            <h5>Industry Relevance</h5>
-                            <p>Stay current with the latest trends and best practices in information security management.</p>
+                <div class="tab-content active" id="why-cism">
+                    <div class="content-body">
+                        <h4>Why Pursue the CISM Certification?</h4>
+                        <p>The Certified Information Security Manager (CISM) certification, issued by ISACA, is a premier credential for professionals managing and overseeing information security systems in alignment with business goals. Explore the key benefits below.</p>
+                        <div class="feature-cards">
+                            <div class="card">
+                                <h5>Leadership-Focused</h5>
+                                <p>Develop and enhance your skills in leading information security teams and initiatives.</p>
+                            </div>
+                            <div class="card">
+                                <h5>Career-Enhancing</h5>
+                                <p>Boost your professional credibility and open doors to advanced roles in the cybersecurity field.</p>
+                            </div>
+                            <div class="card">
+                                <h5>Global Recognition</h5>
+                                <p>Gain a globally recognized certification that validates your expertise to employers worldwide.</p>
+                            </div>
+                            <div class="card">
+                                <h5>Industry Relevance</h5>
+                                <p>Stay current with the latest trends and best practices in information security management.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="tab-content" id="exam-details">
+                    <div class="content-body">
+                        <h4>CISM Exam Details</h4>
+                        <p>Everything you need to know about the CISM exam, from its format and cost to the experience required and testing options.</p>
+                        
+                        <div class="accordion">
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <span>Exam Format & Domains</span>
+                                    <span class="accordion-toggle">+</span>
+                                </div>
+                                <div class="accordion-content">
+                                    <ul>
+                                        <li><strong>Format:</strong> 150 multiple-choice questions</li>
+                                        <li><strong>Duration:</strong> 4 hours (240 minutes)</li>
+                                        <li><strong>Passing Score:</strong> 450 out of 800 (scaled score)</li>
+                                        <li><strong>Domains:</strong>
+                                            <ul>
+                                                <li>Information Security Governance</li>
+                                                <li>Information Security Risk Management</li>
+                                                <li>Information Security Program Development and Management</li>
+                                                <li>Information Security Incident Management</li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <span>Cost of Certification</span>
+                                    <span class="accordion-toggle">+</span>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>The cost varies depending on your ISACA membership status. Members receive a significant discount on both the exam and annual maintenance fees.</p>
+                                    <table class="cost-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Category</th>
+                                                <th>Exam Fee</th>
+                                                <th>Annual Maintenance Fee</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>ISACA Member</td>
+                                                <td>$575 USD</td>
+                                                <td>$45 USD</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Non-Member</td>
+                                                <td>$760 USD</td>
+                                                <td>$85 USD</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <span>Experience & Membership Requirements</span>
+                                    <span class="accordion-toggle">+</span>
+                                </div>
+                                <div class="accordion-content">
+                                    <p><strong>Experience Required:</strong><br>A minimum of <strong>5 years</strong> of professional information security management work experience is required for certification.</p>
+                                    <ul>
+                                        <li>3 of those years must be in at least 3 of the 4 CISM domains.</li>
+                                        <li>Substitutions for up to 2 years of general experience are available based on qualifying certifications (like CISSP, CISA) or a postgraduate degree in a related field.</li>
+                                    </ul>
+                                    <p><strong>ISACA Membership (Optional):</strong><br>While not mandatory, ISACA membership offers significant benefits, including exam discounts, free webinars, access to research, and networking opportunities with a global community of professionals.</p>
+                                </div>
+                            </div>
+
+                            <div class="accordion-item">
+                                <div class="accordion-header">
+                                    <span>Where to Take the Exam</span>
+                                    <span class="accordion-toggle">+</span>
+                                </div>
+                                <div class="accordion-content">
+                                    <p>ISACA offers flexible testing options to accommodate candidates worldwide. You can schedule your exam year-round through the official ISACA website.</p>
+                                    <ul>
+                                        <li><strong>Remote Proctored Online Exam:</strong> Take the exam from the comfort of your home or office. This option is available through both PSI and Pearson VUE platforms, monitored by a live proctor via webcam.</li>
+                                        <li><strong>In-Person Testing Centers:</strong> For those who prefer a traditional testing environment, the exam is offered at Pearson VUE testing centers located globally.</li>
+                                    </ul>
+                                    <p>Visit <a href="https://www.isaca.org" target="_blank" rel="noopener noreferrer">www.isaca.org</a> to find a testing center or schedule your remote exam.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="maintenance">
+                    <!-- Maintenance content will go here -->
+                </div>
+
             </section>
         </main>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Interactive Cards Logic
             const cards = document.querySelectorAll('.feature-cards .card');
-
             cards.forEach(card => {
                 card.addEventListener('click', function() {
-                    // Check if the clicked card is already open
                     const isAlreadyOpen = this.classList.contains('open');
-
-                    // First, close all other cards
-                    cards.forEach(c => {
-                        c.classList.remove('open');
-                    });
-
-                    // If the clicked card was not already open, open it.
-                    // This creates the toggle effect: clicking an open card closes it,
-                    // and clicking a new card closes the old one before opening the new one.
+                    cards.forEach(c => c.classList.remove('open'));
                     if (!isAlreadyOpen) {
                         this.classList.add('open');
                     }
+                });
+            });
+
+            // Tab Switching Logic
+            const tabs = document.querySelectorAll('.tabs .tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const targetContentId = this.getAttribute('data-tab');
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.id === targetContentId) {
+                            content.classList.add('active');
+                        }
+                    });
+                });
+            });
+
+            // Accordion Logic
+            const accordionItems = document.querySelectorAll('.accordion-item');
+            accordionItems.forEach(item => {
+                const header = item.querySelector('.accordion-header');
+                header.addEventListener('click', function() {
+                    // This allows multiple accordions to be open at once.
+                    // To only allow one, you would first loop through all items and remove 'open'.
+                    item.classList.toggle('open');
                 });
             });
         });
