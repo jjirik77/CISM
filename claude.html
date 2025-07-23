@@ -279,25 +279,35 @@
 
         .feature-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 24px;
             margin: 32px 0;
+            justify-items: center;
         }
 
         .feature-card {
             background: var(--surface-white);
             border-radius: 16px;
-            padding: 32px;
             box-shadow: var(--shadow-sm);
             border: 1px solid var(--border-light);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            cursor: pointer;
+            max-width: 200px;
+            width: 100%;
+            min-height: 120px;
         }
 
         .feature-card:hover {
             transform: translateY(-4px);
             box-shadow: var(--shadow-lg);
+        }
+
+        .feature-card.expanded {
+            transform: scale(1.02);
+            box-shadow: var(--shadow-xl);
+            z-index: 10;
         }
 
         .feature-card::before {
@@ -310,28 +320,77 @@
             background: linear-gradient(90deg, var(--primary-blue), var(--accent-purple));
         }
 
+        .feature-card-header {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            min-height: 120px;
+            position: relative;
+        }
+
         .feature-icon {
-            width: 48px;
-            height: 48px;
+            width: 40px;
+            height: 40px;
             background: linear-gradient(135deg, var(--primary-blue), var(--accent-purple));
-            border-radius: 12px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 20px;
-            font-size: 24px;
+            margin-bottom: 12px;
+            font-size: 20px;
+            color: white;
         }
 
         .feature-title {
-            font-size: 20px;
+            font-size: 16px;
             font-weight: 700;
-            margin-bottom: 12px;
             color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        .feature-content {
+            padding: 0 20px 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        .feature-card.expanded .feature-content {
+            max-height: 500px;
+            opacity: 1;
+            padding: 0 20px 20px;
         }
 
         .feature-description {
             color: var(--text-secondary);
             line-height: 1.6;
+            font-size: 14px;
+            margin-top: 16px;
+        }
+
+        .expand-indicator {
+            position: absolute;
+            bottom: 8px;
+            right: 12px;
+            width: 20px;
+            height: 20px;
+            background: var(--primary-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card.expanded .expand-indicator {
+            transform: rotate(180deg);
         }
 
         .domain-card {
@@ -837,40 +896,60 @@
                     </div>
 
                     <div class="feature-grid">
-                        <div class="feature-card">
-                            <div class="feature-icon">🎯</div>
-                            <h3 class="feature-title">Leadership-Focused</h3>
-                            <p class="feature-description">
-                                Develops strategic thinking and leadership skills essential for information security management roles, 
-                                focusing on governance and business alignment.
-                            </p>
+                        <div class="feature-card" onclick="toggleCard(this)">
+                            <div class="feature-card-header">
+                                <div class="feature-icon">🎯</div>
+                                <h3 class="feature-title">Leadership-Focused</h3>
+                                <div class="expand-indicator">+</div>
+                            </div>
+                            <div class="feature-content">
+                                <p class="feature-description">
+                                    Develops strategic thinking and leadership skills essential for information security management roles, 
+                                    focusing on governance and business alignment.
+                                </p>
+                            </div>
                         </div>
                         
-                        <div class="feature-card">
-                            <div class="feature-icon">📈</div>
-                            <h3 class="feature-title">Career-Enhancing</h3>
-                            <p class="feature-description">
-                                Average salary of $156,420 annually with opportunities for CISO roles. 90% of certification holders 
-                                renew their credentials, demonstrating lasting value.
-                            </p>
+                        <div class="feature-card" onclick="toggleCard(this)">
+                            <div class="feature-card-header">
+                                <div class="feature-icon">📈</div>
+                                <h3 class="feature-title">Career-Enhancing</h3>
+                                <div class="expand-indicator">+</div>
+                            </div>
+                            <div class="feature-content">
+                                <p class="feature-description">
+                                    Average salary of $156,420 annually with opportunities for CISO roles. 90% of certification holders 
+                                    renew their credentials, demonstrating lasting value.
+                                </p>
+                            </div>
                         </div>
                         
-                        <div class="feature-card">
-                            <div class="feature-icon">🌍</div>
-                            <h3 class="feature-title">Global Recognition</h3>
-                            <p class="feature-description">
-                                Recognized in 180+ countries by top employers like Deloitte, EY, Accenture, and Cisco. 
-                                Over 45,000 professionals have earned this prestigious certification.
-                            </p>
+                        <div class="feature-card" onclick="toggleCard(this)">
+                            <div class="feature-card-header">
+                                <div class="feature-icon">🌍</div>
+                                <h3 class="feature-title">Global Recognition</h3>
+                                <div class="expand-indicator">+</div>
+                            </div>
+                            <div class="feature-content">
+                                <p class="feature-description">
+                                    Recognized in 180+ countries by top employers like Deloitte, EY, Accenture, and Cisco. 
+                                    Over 45,000 professionals have earned this prestigious certification.
+                                </p>
+                            </div>
                         </div>
                         
-                        <div class="feature-card">
-                            <div class="feature-icon">🔄</div>
-                            <h3 class="feature-title">Industry Relevance</h3>
-                            <p class="feature-description">
-                                Continuously updated to address emerging threats including AI, blockchain, and cloud security. 
-                                Covers latest frameworks and industry best practices.
-                            </p>
+                        <div class="feature-card" onclick="toggleCard(this)">
+                            <div class="feature-card-header">
+                                <div class="feature-icon">🔄</div>
+                                <h3 class="feature-title">Industry Relevance</h3>
+                                <div class="expand-indicator">+</div>
+                            </div>
+                            <div class="feature-content">
+                                <p class="feature-description">
+                                    Continuously updated to address emerging threats including AI, blockchain, and cloud security. 
+                                    Covers latest frameworks and industry best practices.
+                                </p>
+                            </div>
                         </div>
                     </div>
 
@@ -897,26 +976,36 @@
                         <h3 style="font-size: 24px; margin-bottom: 20px;">📊 Exam Format & Requirements</h3>
                         
                         <div class="feature-grid">
-                            <div class="feature-card">
-                                <h4 class="feature-title">Exam Structure</h4>
-                                <ul style="list-style: none; padding: 0;">
-                                    <li><strong>Questions:</strong> 150 multiple-choice</li>
-                                    <li><strong>Duration:</strong> 4 hours</li>
-                                    <li><strong>Format:</strong> Computer-based</li>
-                                    <li><strong>Delivery:</strong> PSI centers or remote</li>
-                                    <li><strong>Languages:</strong> English, Chinese, Japanese, Spanish</li>
-                                </ul>
+                            <div class="feature-card" onclick="toggleCard(this)">
+                                <div class="feature-card-header">
+                                    <h4 class="feature-title">Exam Structure</h4>
+                                    <div class="expand-indicator">+</div>
+                                </div>
+                                <div class="feature-content">
+                                    <ul style="list-style: none; padding: 0;">
+                                        <li><strong>Questions:</strong> 150 multiple-choice</li>
+                                        <li><strong>Duration:</strong> 4 hours</li>
+                                        <li><strong>Format:</strong> Computer-based</li>
+                                        <li><strong>Delivery:</strong> PSI centers or remote</li>
+                                        <li><strong>Languages:</strong> English, Chinese, Japanese, Spanish</li>
+                                    </ul>
+                                </div>
                             </div>
                             
-                            <div class="feature-card">
-                                <h4 class="feature-title">Experience Requirements</h4>
-                                <ul style="list-style: none; padding: 0;">
-                                    <li><strong>Total:</strong> 5 years professional experience</li>
-                                    <li><strong>Management:</strong> 3 years in security management</li>
-                                    <li><strong>Domains:</strong> Cover at least 3 of 4 domains</li>
-                                    <li><strong>Waivers:</strong> Up to 2 years for degrees/certs</li>
-                                    <li><strong>Ethics:</strong> Adhere to ISACA Code</li>
-                                </ul>
+                            <div class="feature-card" onclick="toggleCard(this)">
+                                <div class="feature-card-header">
+                                    <h4 class="feature-title">Experience Requirements</h4>
+                                    <div class="expand-indicator">+</div>
+                                </div>
+                                <div class="feature-content">
+                                    <ul style="list-style: none; padding: 0;">
+                                        <li><strong>Total:</strong> 5 years professional experience</li>
+                                        <li><strong>Management:</strong> 3 years in security management</li>
+                                        <li><strong>Domains:</strong> Cover at least 3 of 4 domains</li>
+                                        <li><strong>Waivers:</strong> Up to 2 years for degrees/certs</li>
+                                        <li><strong>Ethics:</strong> Adhere to ISACA Code</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -961,24 +1050,34 @@
                         <h3 style="font-size: 24px; margin-bottom: 20px;">🔄 Maintenance Requirements</h3>
                         
                         <div class="feature-grid">
-                            <div class="feature-card">
-                                <h4 class="feature-title">Continuing Professional Education</h4>
-                                <ul style="list-style: none; padding: 0;">
-                                    <li><strong>Annual:</strong> Minimum 20 CPE hours</li>
-                                    <li><strong>3-Year Cycle:</strong> Total 120 CPE hours</li>
-                                    <li><strong>Activities:</strong> Training, conferences, development</li>
-                                    <li><strong>Reporting:</strong> By January 1st annually</li>
-                                </ul>
+                            <div class="feature-card" onclick="toggleCard(this)">
+                                <div class="feature-card-header">
+                                    <h4 class="feature-title">Continuing Professional Education</h4>
+                                    <div class="expand-indicator">+</div>
+                                </div>
+                                <div class="feature-content">
+                                    <ul style="list-style: none; padding: 0;">
+                                        <li><strong>Annual:</strong> Minimum 20 CPE hours</li>
+                                        <li><strong>3-Year Cycle:</strong> Total 120 CPE hours</li>
+                                        <li><strong>Activities:</strong> Training, conferences, development</li>
+                                        <li><strong>Reporting:</strong> By January 1st annually</li>
+                                    </ul>
+                                </div>
                             </div>
                             
-                            <div class="feature-card">
-                                <h4 class="feature-title">Renewal Process</h4>
-                                <ul style="list-style: none; padding: 0;">
-                                    <li><strong>Cycle:</strong> Every 3 years</li>
-                                    <li><strong>Audit:</strong> Random CPE audits</li>
-                                    <li><strong>Reinstatement:</strong> $50 fee if lapsed</li>
-                                    <li><strong>Status:</strong> Non-practicing option available</li>
-                                </ul>
+                            <div class="feature-card" onclick="toggleCard(this)">
+                                <div class="feature-card-header">
+                                    <h4 class="feature-title">Renewal Process</h4>
+                                    <div class="expand-indicator">+</div>
+                                </div>
+                                <div class="feature-content">
+                                    <ul style="list-style: none; padding: 0;">
+                                        <li><strong>Cycle:</strong> Every 3 years</li>
+                                        <li><strong>Audit:</strong> Random CPE audits</li>
+                                        <li><strong>Reinstatement:</strong> $50 fee if lapsed</li>
+                                        <li><strong>Status:</strong> Non-practicing option available</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
 
@@ -1047,26 +1146,36 @@
                     </div>
 
                     <div class="feature-grid">
-                        <div class="feature-card">
-                            <h4 class="feature-title">📚 Governance Frameworks</h4>
-                            <ul style="list-style: none; padding: 0;">
-                                <li>• ISO 27001/27002</li>
-                                <li>• NIST Cybersecurity Framework</li>
-                                <li>• COBIT 2019</li>
-                                <li>• PCI DSS</li>
-                                <li>• HIPAA/SOX</li>
-                            </ul>
+                        <div class="feature-card" onclick="toggleCard(this)">
+                            <div class="feature-card-header">
+                                <h4 class="feature-title">📚 Governance Frameworks</h4>
+                                <div class="expand-indicator">+</div>
+                            </div>
+                            <div class="feature-content">
+                                <ul style="list-style: none; padding: 0;">
+                                    <li>• ISO 27001/27002</li>
+                                    <li>• NIST Cybersecurity Framework</li>
+                                    <li>• COBIT 2019</li>
+                                    <li>• PCI DSS</li>
+                                    <li>• HIPAA/SOX</li>
+                                </ul>
+                            </div>
                         </div>
                         
-                        <div class="feature-card">
-                            <h4 class="feature-title">🔑 Key Concepts</h4>
-                            <ul style="list-style: none; padding: 0;">
-                                <li>• Governance vs. Management</li>
-                                <li>• Risk appetite and tolerance</li>
-                                <li>• Board oversight responsibilities</li>
-                                <li>• Compliance management</li>
-                                <li>• Strategic alignment</li>
-                            </ul>
+                        <div class="feature-card" onclick="toggleCard(this)">
+                            <div class="feature-card-header">
+                                <h4 class="feature-title">🔑 Key Concepts</h4>
+                                <div class="expand-indicator">+</div>
+                            </div>
+                            <div class="feature-content">
+                                <ul style="list-style: none; padding: 0;">
+                                    <li>• Governance vs. Management</li>
+                                    <li>• Risk appetite and tolerance</li>
+                                    <li>• Board oversight responsibilities</li>
+                                    <li>• Compliance management</li>
+                                    <li>• Strategic alignment</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -1130,26 +1239,36 @@
                     </div>
 
                     <div class="feature-grid">
-                        <div class="feature-card">
-                            <h4 class="feature-title">📊 Risk Assessment Methods</h4>
-                            <ul style="list-style: none; padding: 0;">
-                                <li>• Qualitative risk assessment</li>
-                                <li>• Quantitative risk assessment</li>
-                                <li>• FAIR methodology</li>
-                                <li>• OCTAVE approach</li>
-                                <li>• NIST Risk Management Framework</li>
-                            </ul>
+                        <div class="feature-card" onclick="toggleCard(this)">
+                            <div class="feature-card-header">
+                                <h4 class="feature-title">📊 Risk Assessment Methods</h4>
+                                <div class="expand-indicator">+</div>
+                            </div>
+                            <div class="feature-content">
+                                <ul style="list-style: none; padding: 0;">
+                                    <li>• Qualitative risk assessment</li>
+                                    <li>• Quantitative risk assessment</li>
+                                    <li>• FAIR methodology</li>
+                                    <li>• OCTAVE approach</li>
+                                    <li>• NIST Risk Management Framework</li>
+                                </ul>
+                            </div>
                         </div>
                         
-                        <div class="feature-card">
-                            <h4 class="feature-title">📈 Key Metrics</h4>
-                            <ul style="list-style: none; padding: 0;">
-                                <li>• Risk register components</li>
-                                <li>• Risk appetite statements</li>
-                                <li>• Key Risk Indicators (KRIs)</li>
-                                <li>• Recovery Time Objective (RTO)</li>
-                                <li>• Recovery Point Objective (RPO)</li>
-                            </ul>
+                        <div class="feature-card" onclick="toggleCard(this)">
+                            <div class="feature-card-header">
+                                <h4 class="feature-title">📈 Key Metrics</h4>
+                                <div class="expand-indicator">+</div>
+                            </div>
+                            <div class="feature-content">
+                                <ul style="list-style: none; padding: 0;">
+                                    <li>• Risk register components</li>
+                                    <li>• Risk appetite statements</li>
+                                    <li>• Key Risk Indicators (KRIs)</li>
+                                    <li>• Recovery Time Objective (RTO)</li>
+                                    <li>• Recovery Point Objective (RPO)</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -1216,28 +1335,38 @@
                     </div>
 
                     <div class="feature-grid">
-                        <div class="feature-card">
-                            <h4 class="feature-title">🛠️ Program Components</h4>
-                            <ul style="list-style: none; padding: 0;">
-                                <li>• Security architecture design</li>
-                                <li>• Control frameworks (NIST, ISO 27002)</li>
-                                <li>• Security awareness programs</li>
-                                <li>• Vendor management programs</li>
-                                <li>• Security metrics and KPIs</li>
-                                <li>• Compliance monitoring</li>
-                            </ul>
+                        <div class="feature-card" onclick="toggleCard(this)">
+                            <div class="feature-card-header">
+                                <h4 class="feature-title">🛠️ Program Components</h4>
+                                <div class="expand-indicator">+</div>
+                            </div>
+                            <div class="feature-content">
+                                <ul style="list-style: none; padding: 0;">
+                                    <li>• Security architecture design</li>
+                                    <li>• Control frameworks (NIST, ISO 27002)</li>
+                                    <li>• Security awareness programs</li>
+                                    <li>• Vendor management programs</li>
+                                    <li>• Security metrics and KPIs</li>
+                                    <li>• Compliance monitoring</li>
+                                </ul>
+                            </div>
                         </div>
                         
-                        <div class="feature-card">
-                            <h4 class="feature-title">⚙️ Implementation Areas</h4>
-                            <ul style="list-style: none; padding: 0;">
-                                <li>• Access control systems</li>
-                                <li>• Security monitoring and logging</li>
-                                <li>• Incident response procedures</li>
-                                <li>• Business continuity planning</li>
-                                <li>• Third-party risk management</li>
-                                <li>• Security control testing</li>
-                            </ul>
+                        <div class="feature-card" onclick="toggleCard(this)">
+                            <div class="feature-card-header">
+                                <h4 class="feature-title">⚙️ Implementation Areas</h4>
+                                <div class="expand-indicator">+</div>
+                            </div>
+                            <div class="feature-content">
+                                <ul style="list-style: none; padding: 0;">
+                                    <li>• Access control systems</li>
+                                    <li>• Security monitoring and logging</li>
+                                    <li>• Incident response procedures</li>
+                                    <li>• Business continuity planning</li>
+                                    <li>• Third-party risk management</li>
+                                    <li>• Security control testing</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -1305,26 +1434,36 @@
                     </div>
 
                     <div class="feature-grid">
-                        <div class="feature-card">
-                            <h4 class="feature-title">📋 Response Frameworks</h4>
-                            <ul style="list-style: none; padding: 0;">
-                                <li>• NIST Incident Response Framework</li>
-                                <li>• SANS Incident Response Process</li>
-                                <li>• ISO 27035 Incident Management</li>
-                                <li>• ENISA Guidelines</li>
-                                <li>• Industry-specific frameworks</li>
-                            </ul>
+                        <div class="feature-card" onclick="toggleCard(this)">
+                            <div class="feature-card-header">
+                                <h4 class="feature-title">📋 Response Frameworks</h4>
+                                <div class="expand-indicator">+</div>
+                            </div>
+                            <div class="feature-content">
+                                <ul style="list-style: none; padding: 0;">
+                                    <li>• NIST Incident Response Framework</li>
+                                    <li>• SANS Incident Response Process</li>
+                                    <li>• ISO 27035 Incident Management</li>
+                                    <li>• ENISA Guidelines</li>
+                                    <li>• Industry-specific frameworks</li>
+                                </ul>
+                            </div>
                         </div>
                         
-                        <div class="feature-card">
-                            <h4 class="feature-title">⏱️ Recovery Metrics</h4>
-                            <ul style="list-style: none; padding: 0;">
-                                <li>• Recovery Time Objective (RTO)</li>
-                                <li>• Recovery Point Objective (RPO)</li>
-                                <li>• Mean Time to Recovery (MTTR)</li>
-                                <li>• Maximum Tolerable Downtime (MTD)</li>
-                                <li>• Work Recovery Time (WRT)</li>
-                            </ul>
+                        <div class="feature-card" onclick="toggleCard(this)">
+                            <div class="feature-card-header">
+                                <h4 class="feature-title">⏱️ Recovery Metrics</h4>
+                                <div class="expand-indicator">+</div>
+                            </div>
+                            <div class="feature-content">
+                                <ul style="list-style: none; padding: 0;">
+                                    <li>• Recovery Time Objective (RTO)</li>
+                                    <li>• Recovery Point Objective (RPO)</li>
+                                    <li>• Mean Time to Recovery (MTTR)</li>
+                                    <li>• Maximum Tolerable Downtime (MTD)</li>
+                                    <li>• Work Recovery Time (WRT)</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -1420,6 +1559,31 @@
     </div>
 
     <script>
+        // Toggle card functionality
+        function toggleCard(card) {
+            // Close all other cards
+            const allCards = document.querySelectorAll('.feature-card');
+            allCards.forEach(otherCard => {
+                if (otherCard !== card) {
+                    otherCard.classList.remove('expanded');
+                    const indicator = otherCard.querySelector('.expand-indicator');
+                    if (indicator) indicator.textContent = '+';
+                }
+            });
+
+            // Toggle current card
+            const isExpanded = card.classList.contains('expanded');
+            const indicator = card.querySelector('.expand-indicator');
+            
+            if (isExpanded) {
+                card.classList.remove('expanded');
+                if (indicator) indicator.textContent = '+';
+            } else {
+                card.classList.add('expanded');
+                if (indicator) indicator.textContent = '-';
+            }
+        }
+
         // Navigation functionality
         function showSection(sectionId) {
             // Hide all sections
