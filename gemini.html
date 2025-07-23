@@ -184,6 +184,15 @@
             color: var(--text-secondary);
             margin-bottom: 40px;
         }
+        
+        .content-body ul {
+            padding-left: 20px;
+            margin-bottom: 40px;
+        }
+        .content-body li {
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+        }
 
         /* CARDS REDESIGN (Glassmorphism & Interactive) */
         .feature-cards {
@@ -260,7 +269,7 @@
             margin-top: 10px;
         }
 
-        /* NEW ACCORDION STYLES */
+        /* ACCORDION STYLES */
         .accordion-item {
             background-color: var(--surface-color);
             border: 1px solid var(--border-color);
@@ -328,6 +337,20 @@
         .cost-table a:hover {
             text-decoration: underline;
         }
+        
+        .maintenance-section {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+        }
+        .maintenance-section h5 {
+            font-size: 1.4em;
+            color: var(--text-primary);
+            font-weight: 600;
+            margin: 0 0 15px 0;
+        }
+
 
     </style>
 </head>
@@ -493,7 +516,46 @@
                 </div>
                 
                 <div class="tab-content" id="maintenance">
-                    <!-- Maintenance content will go here -->
+                    <div class="content-body">
+                        <h4>Maintaining Your CISM Certification</h4>
+                        <p>Holding the CISM certification is an ongoing commitment to professional development. To maintain your credential, you must adhere to ISACA's requirements for continuing professional education (CPE) and professional conduct.</p>
+                        
+                        <div class="maintenance-section">
+                            <h5>CPE Requirements</h5>
+                            <p>You must demonstrate your commitment to keeping your skills current by earning and reporting Continuing Professional Education (CPE) credits.</p>
+                            <ul>
+                                <li>Earn a minimum of <strong>20 CPE credits annually</strong>.</li>
+                                <li>Earn a total of <strong>120 CPE credits over a 3-year reporting cycle</strong>.</li>
+                            </ul>
+
+                            <h5>Annual Maintenance Fee</h5>
+                            <p>An annual fee is required to maintain your certification in good standing.</p>
+                            <table class="cost-table">
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Annual Maintenance Fee</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>ISACA Member</td>
+                                        <td>$45 USD</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Non-Member</td>
+                                        <td>$85 USD</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h5 style="margin-top: 30px;">Other Requirements</h5>
+                            <ul>
+                                <li>Adhere to ISACA's <strong>Code of Professional Ethics</strong>.</li>
+                                <li>Comply with the CISM <strong>Continuing Professional Education (CPE) Policy</strong> and reporting requirements.</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
 
             </section>
