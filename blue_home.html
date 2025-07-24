@@ -39,6 +39,8 @@
             border-radius: 16px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.2);
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
         /* Header Section */
@@ -48,6 +50,7 @@
             background: linear-gradient(180deg, var(--surface-color), var(--dark-navy-bg));
             border-bottom: 1px solid var(--border-color);
             position: relative;
+            flex-shrink: 0;
         }
 
         header h1 {
@@ -68,7 +71,8 @@
         /* Main Layout (Sidebar + Content) */
         .main-layout {
             display: flex;
-            height: calc(100vh - 145px); /* Adjust based on header height */
+            flex-grow: 1;
+            overflow: hidden; /* Prevent double scrollbars */
         }
 
         /* Sidebar Navigation */
@@ -78,6 +82,7 @@
             display: flex;
             flex-direction: column;
             gap: 5px; /* Added gap for spacing */
+            overflow-y: auto;
         }
 
         .nav-item {
@@ -153,10 +158,22 @@
         .content-area {
             flex-grow: 1;
             padding: 0;
-            overflow-y: auto;
             height: 100%;
             position: relative; /* Positioning context for the fullscreen button */
         }
+        
+        /* Style for content area when in fullscreen */
+        .content-area:fullscreen {
+            padding: 0;
+            background-color: var(--dark-navy-bg);
+        }
+        .content-area:-webkit-full-screen {
+            background-color: var(--dark-navy-bg);
+        }
+        .content-area:-moz-full-screen {
+            background-color: var(--dark-navy-bg);
+        }
+
 
         #fullscreen-btn {
             position: absolute;
@@ -266,6 +283,7 @@
             const navItems = document.querySelectorAll('.sidebar .nav-item');
             const contentIframe = document.getElementById('content-iframe');
             const fullscreenBtn = document.getElementById('fullscreen-btn');
+            const contentArea = document.querySelector('.content-area'); // Target the content area
             const fullscreenOpenIcon = document.getElementById('fullscreen-icon-open');
             const fullscreenCloseIcon = document.getElementById('fullscreen-icon-close');
 
@@ -288,31 +306,30 @@
 
             // --- FULLSCREEN LOGIC ---
             function toggleFullscreen() {
-                if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
-                    if (document.documentElement.requestFullscreen) {
-                        document.documentElement.requestFullscreen();
-                    } else if (document.documentElement.msRequestFullscreen) {
-                        document.documentElement.msRequestFullscreen();
-                    } else if (document.documentElement.mozRequestFullScreen) {
-                        document.documentElement.mozRequestFullScreen();
-                    } else if (document.documentElement.webkitRequestFullscreen) {
-                        document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+                // Check if we're currently in fullscreen mode by checking the contentArea element
+                if (!document.fullscreenElement && !document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement) {
+                    // Request fullscreen on the contentArea element
+                    if (contentArea.requestFullscreen) {
+                        contentArea.requestFullscreen();
+                    } else if (contentArea.webkitRequestFullscreen) { /* Safari */
+                        contentArea.webkitRequestFullscreen();
+                    } else if (contentArea.msRequestFullscreen) { /* IE11 */
+                        contentArea.msRequestFullscreen();
                     }
                 } else {
+                    // Exit fullscreen
                     if (document.exitFullscreen) {
                         document.exitFullscreen();
-                    } else if (document.msExitFullscreen) {
-                        document.msExitFullscreen();
-                    } else if (document.mozCancelFullScreen) {
-                        document.mozCancelFullScreen();
-                    } else if (document.webkitExitFullscreen) {
+                    } else if (document.webkitExitFullscreen) { /* Safari */
                         document.webkitExitFullscreen();
+                    } else if (document.msExitFullscreen) { /* IE11 */
+                        document.msExitFullscreen();
                     }
                 }
             }
 
             function updateFullscreenIcon() {
-                if (document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
+                if (document.fullscreenElement === contentArea || document.webkitIsFullScreen || document.mozFullScreen || document.msFullscreenElement) {
                     fullscreenOpenIcon.style.display = 'none';
                     fullscreenCloseIcon.style.display = 'block';
                 } else {
@@ -323,8 +340,8 @@
 
             fullscreenBtn.addEventListener('click', toggleFullscreen);
             document.addEventListener('fullscreenchange', updateFullscreenIcon);
-            document.addEventListener('mozfullscreenchange', updateFullscreenIcon);
             document.addEventListener('webkitfullscreenchange', updateFullscreenIcon);
+            document.addEventListener('mozfullscreenchange', updateFullscreenIcon);
             document.addEventListener('msfullscreenchange', updateFullscreenIcon);
         });
     </script>
