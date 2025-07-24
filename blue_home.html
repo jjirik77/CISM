@@ -47,6 +47,7 @@
             padding: 40px 30px;
             background: linear-gradient(180deg, var(--surface-color), var(--dark-navy-bg));
             border-bottom: 1px solid var(--border-color);
+            position: relative;
         }
 
         header h1 {
@@ -154,6 +155,26 @@
             padding: 0;
             overflow-y: auto;
             height: 100%;
+            position: relative; /* Positioning context for the fullscreen button */
+        }
+
+        #fullscreen-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+            z-index: 10; /* Ensure it's above the iframe */
+        }
+
+        #fullscreen-btn:hover {
+            color: var(--accent-glow);
+        }
+
+        #fullscreen-btn svg {
+            width: 24px;
+            height: 24px;
         }
         
         #iframe-content {
@@ -166,41 +187,6 @@
             height: 100%;
             border: none;
             background-color: #fff; /* A fallback background for the iframe */
-        }
-
-        /* TABS REDESIGN */
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin: 40px 0;
-            background-color: var(--surface-color);
-            padding: 8px;
-            border-radius: 12px;
-            border: 1px solid var(--border-color);
-        }
-
-        .tab {
-            flex: 1;
-            padding: 12px 15px;
-            cursor: pointer;
-            color: var(--text-secondary);
-            font-weight: 600;
-            border-radius: 8px;
-            text-align: center;
-            transition: var(--transition-fast);
-        }
-
-        .tab.active {
-            color: var(--dark-navy-bg);
-            background-image: linear-gradient(to top, var(--accent-glow), #4dd7ff); /* Subtle gradient */
-            box-shadow: 0 0 20px var(--shadow-color); /* Enhanced glow */
-            transform: translateY(-2px); /* Lift effect */
-        }
-
-        .tab:not(.active):hover {
-            color: var(--text-primary);
-            background-color: rgba(45, 55, 72, 0.5); /* Slightly darker hover */
-            transform: translateY(-2px); /* Lift effect */
         }
 
     </style>
@@ -253,6 +239,10 @@
             </aside>
 
             <section class="content-area">
+                <div id="fullscreen-btn" title="Toggle Fullscreen">
+                    <svg id="fullscreen-icon-open" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+                    <svg id="fullscreen-icon-close" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M8 3v3a2 2 0 0 1-2 2H3m18 0h-3a2 2 0 0 1-2-2V3m0 18v-3a2 2 0 0 1 2-2h3M3 16h3a2 2 0 0 1 2 2v3"/></svg>
+                </div>
                 <div id="iframe-content" class="page-content active">
                     <iframe id="content-iframe" src="" title="Study Guide Content"></iframe>
                 </div>
@@ -275,6 +265,9 @@
             // --- DOM ELEMENTS ---
             const navItems = document.querySelectorAll('.sidebar .nav-item');
             const contentIframe = document.getElementById('content-iframe');
+            const fullscreenBtn = document.getElementById('fullscreen-btn');
+            const fullscreenOpenIcon = document.getElementById('fullscreen-icon-open');
+            const fullscreenCloseIcon = document.getElementById('fullscreen-icon-close');
 
             // --- PAGE NAVIGATION LOGIC ---
             navItems.forEach(item => {
@@ -293,6 +286,46 @@
             // Set initial iframe content
             contentIframe.src = urlMap['introduction'];
 
+            // --- FULLSCREEN LOGIC ---
+            function toggleFullscreen() {
+                if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement && !document.msFullscreenElement) {
+                    if (document.documentElement.requestFullscreen) {
+                        document.documentElement.requestFullscreen();
+                    } else if (document.documentElement.msRequestFullscreen) {
+                        document.documentElement.msRequestFullscreen();
+                    } else if (document.documentElement.mozRequestFullScreen) {
+                        document.documentElement.mozRequestFullScreen();
+                    } else if (document.documentElement.webkitRequestFullscreen) {
+                        document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+                    }
+                } else {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.msExitFullscreen) {
+                        document.msExitFullscreen();
+                    } else if (document.mozCancelFullScreen) {
+                        document.mozCancelFullScreen();
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    }
+                }
+            }
+
+            function updateFullscreenIcon() {
+                if (document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
+                    fullscreenOpenIcon.style.display = 'none';
+                    fullscreenCloseIcon.style.display = 'block';
+                } else {
+                    fullscreenOpenIcon.style.display = 'block';
+                    fullscreenCloseIcon.style.display = 'none';
+                }
+            }
+
+            fullscreenBtn.addEventListener('click', toggleFullscreen);
+            document.addEventListener('fullscreenchange', updateFullscreenIcon);
+            document.addEventListener('mozfullscreenchange', updateFullscreenIcon);
+            document.addEventListener('webkitfullscreenchange', updateFullscreenIcon);
+            document.addEventListener('msfullscreenchange', updateFullscreenIcon);
         });
     </script>
 
