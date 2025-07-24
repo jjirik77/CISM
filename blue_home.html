@@ -168,6 +168,41 @@
             background-color: #fff; /* A fallback background for the iframe */
         }
 
+        /* TABS REDESIGN */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin: 40px 0;
+            background-color: var(--surface-color);
+            padding: 8px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px 15px;
+            cursor: pointer;
+            color: var(--text-secondary);
+            font-weight: 600;
+            border-radius: 8px;
+            text-align: center;
+            transition: var(--transition-fast);
+        }
+
+        .tab.active {
+            color: var(--dark-navy-bg);
+            background-image: linear-gradient(to top, var(--accent-glow), #4dd7ff); /* Subtle gradient */
+            box-shadow: 0 0 20px var(--shadow-color); /* Enhanced glow */
+            transform: translateY(-2px); /* Lift effect */
+        }
+
+        .tab:not(.active):hover {
+            color: var(--text-primary);
+            background-color: rgba(45, 55, 72, 0.5); /* Slightly darker hover */
+            transform: translateY(-2px); /* Lift effect */
+        }
+
     </style>
 </head>
 <body>
