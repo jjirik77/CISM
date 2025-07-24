@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CISM 2024: Domain 4 - Incident Management (Designer Edition)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Global Styles & Font Import */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&display=swap');
+
+        :root {
+            --dark-navy-bg: #0a101f;
+            --surface-color: #10192b;
+            --accent-glow: #00bfff; /* Deep Sky Blue */
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --border-color: #2d3748;
+            --shadow-color: rgba(0, 191, 255, 0.1);
+            --shadow-color-hover: rgba(0, 191, 255, 0.3);
+            --transition-fast: all 0.3s ease-in-out;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-navy-bg);
+            background-image: radial-gradient(circle at top, #10192b, var(--dark-navy-bg));
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('https://www.transparenttextures.com/patterns/subtle-noise.png');
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+        }
+
+        /* Header */
+        header.main-header {
+            background: linear-gradient(180deg, var(--surface-color), #0a101fcc);
+            border-bottom: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            position: relative;
+        }
+        
+        .header-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 400px;
+            height: 200px;
+            background: var(--accent-glow);
+            border-radius: 50%;
+            filter: blur(100px);
+            transform: translate(-50%, -50%);
+            opacity: 0.1;
+            animation: pulseGlow 8s infinite alternate;
+            z-index: 0;
+        }
+
+        @keyframes pulseGlow {
+            from { opacity: 0.05; transform: translate(-50%, -50%) scale(0.8); }
+            to { opacity: 0.15; transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        header.main-header .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        header.main-header h1 {
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 15px rgba(0, 191, 255, 0.2);
+        }
+
+        /* Main Content Area */
+        main {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            overflow: hidden;
+            padding: 2rem;
+        }
+        
+        /* Section Header */
+        .section-header {
+            border-left: 6px solid var(--accent-glow);
+            padding-left: 1.25rem;
+            font-size: 2.5rem;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 0.5px;
+            color: var(--text-primary);
+        }
+        
+        /* Navigation Tabs */
+        .nav-item {
+            border: 2px solid transparent;
+            border-radius: 0.5rem;
+            transition: var(--transition-fast);
+            position: relative;
+            overflow: hidden;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+        .nav-item:not(.active):hover {
+            border-color: var(--accent-glow);
+            background-color: rgba(0, 191, 255, 0.05);
+            color: var(--text-primary);
+        }
+        .nav-item.active {
+            background-color: var(--accent-glow);
+            color: var(--dark-navy-bg);
+            font-weight: 700;
+            box-shadow: 0 0 20px var(--shadow-color);
+        }
+
+        /* Enhanced Fade-in Animation */
+        .fade-in {
+            animation: enhancedFadeIn 0.7s ease-out;
+        }
+        @keyframes enhancedFadeIn {
+            from { opacity: 0; transform: translateY(25px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* General content box */
+        .content-box {
+            background-color: rgba(10, 16, 31, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+        }
+
+        /* Accordion Styles */
+        .accordion-button {
+            background-color: var(--dark-navy-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            padding: 1rem 1.5rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            transition: var(--transition-fast);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+        }
+        .accordion-button:hover {
+            border-color: var(--accent-glow);
+            background-color: rgba(0, 191, 255, 0.05);
+        }
+        .accordion-icon {
+            transition: transform 0.3s ease-in-out;
+        }
+        .accordion-button.open .accordion-icon {
+            transform: rotate(45deg);
+        }
+        .accordion-content {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            border-top: none;
+            border-radius: 0 0 0.75rem 0.75rem;
+            padding: 1.5rem;
+            margin-top: -0.75rem;
+            animation: enhancedFadeIn 0.5s ease-in-out;
+        }
+
+        /* Unified Interactive Card Styles */
+        .unified-card {
+            background: rgba(10, 16, 31, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            transition: var(--transition-fast);
+            padding: 1.5rem;
+            cursor: pointer;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 120px;
+        }
+        .unified-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4), 0 0 25px var(--shadow-color-hover);
+            border-color: var(--accent-glow);
+        }
+        .unified-card.active {
+            border-color: var(--accent-glow);
+            box-shadow: 0 0 25px var(--shadow-color-hover);
+            background-color: rgba(0, 191, 255, 0.1);
+            transform: scale(1.02);
+        }
+        .unified-card .card-title {
+            font-size: 1.1em;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+            color: var(--accent-glow);
+            text-align: center;
+            transition: var(--transition-fast);
+        }
+        .unified-card:hover .card-title {
+            text-shadow: 0 0 8px var(--accent-glow);
+        }
+        .unified-card .card-description {
+            font-weight: 400;
+            font-size: 0.95em;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+            display: none;
+            text-align: left;
+            width: 100%;
+        }
+        .unified-card.active .card-description {
+            display: block;
+            animation: enhancedFadeIn 0.5s ease-in-out;
+        }
+        
+        /* Flowchart Styles */
+        .flow-arrow {
+            font-size: 2.5em;
+            color: var(--border-color);
+            line-height: 1;
+        }
+        
+        /* Incident Classification Card Styling */
+        .incident-classification-card {
+            text-align: left;
+        }
+        .incident-classification-card .card-title { text-align: left; color: var(--text-primary); }
+        .incident-classification-card.active .card-title { color: var(--accent-glow); }
+        .incident-classification-card .card-description { text-align: left; }
+
+        .incident-classification-card[data-classification="critical"] { border-left: 5px solid #FF4D4D; }
+        .incident-classification-card[data-classification="high"] { border-left: 5px solid #FFA500; }
+        .incident-classification-card[data-classification="medium"] { border-left: 5px solid #FFD700; }
+        .incident-classification-card[data-classification="low"] { border-left: 5px solid #8BC34A; }
+
+        .incident-classification-card.active[data-classification="critical"] { background-color: rgba(255, 77, 77, 0.1); }
+        .incident-classification-card.active[data-classification="high"] { background-color: rgba(255, 165, 0, 0.1); }
+        .incident-classification-card.active[data-classification="medium"] { background-color: rgba(255, 215, 0, 0.1); }
+        .incident-classification-card.active[data-classification="low"] { background-color: rgba(139, 195, 74, 0.1); }
+
+        /* Key Terms Section Layout */
+        #key-terms-grid {
+            display: grid;
+            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        }
+        
+    </style>
+</head>
+<body class="leading-relaxed">
+    <div class="container mx-auto p-4 sm:p-6 lg:p-12">
+        <header class="main-header text-center py-10 mb-10 overflow-hidden">
+            <div class="header-glow"></div>
+            <div class="header-content">
+                <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-2">CISM Domain 4 Study Guide</h1>
+                <p class="text-xl sm:text-2xl text-gray-400">Incident Management</p>
+                <p class="text-md text-gray-500 mt-2">Preparing For and Responding to Information Security Incidents</p>
+            </div>
+        </header>
+
+        <nav class="p-2 rounded-lg mb-10 flex flex-wrap justify-center sticky top-4 z-10 gap-2 sm:gap-4 bg-black/30 backdrop-blur-sm border border-gray-700/50">
+            <button class="nav-item px-4 py-2 text-lg font-medium transition-colors duration-200 active" data-target="introduction">Introduction</button>
+            <button class="nav-item px-4 py-2 text-lg font-medium transition-colors duration-200" data-target="incident-readiness">Incident Readiness</button>
+            <button class="nav-item px-4 py-2 text-lg font-medium transition-colors duration-200" data-target="incident-operations">Incident Operations</button>
+            <button class="nav-item px-4 py-2 text-lg font-medium transition-colors duration-200" data-target="key-terms">Key Terms</button>
+            <button class="nav-item px-4 py-2 text-lg font-medium transition-colors duration-200" data-target="domain-summary">Domain Summary</button>
+        </nav>
+
+        <main id="content-area">
+            <section id="introduction" class="content-section fade-in">
+                <h2 class="text-3xl font-bold section-header mb-6">Introduction to CISM Domain 4</h2>
+                <div class="content-box">
+                    <p class="text-gray-300 mb-4">Welcome to the interactive study guide for CISM Domain 4: Incident Management. This domain is critical for information security managers, as it focuses on the organization's ability to effectively prepare for, detect, respond to, and recover from information security incidents. In today's dynamic threat landscape, a robust incident management capability is not just a best practice; it's a fundamental requirement for business resilience and continuity.</p>
+                    <p class="text-gray-300">Throughout this guide, you will explore the dual aspects of incident management: <strong>Readiness</strong> (proactive planning and preparation) and <strong>Operations</strong> (reactive execution during an incident). You'll delve into the intricacies of incident response planning, business impact analysis, disaster recovery, and the practical application of tools and techniques for investigation, containment, and recovery. By mastering these areas, you will gain the expertise to minimize the impact of security incidents, ensure organizational stability, and facilitate continuous improvement in your security posture.</p>
+                </div>
+            </section>
+
+            <section id="incident-readiness" class="content-section hidden">
+                <h2 class="text-3xl font-bold section-header mb-6">Section A: Incident Management Readiness</h2>
+                <p class="mb-8 text-gray-400">Effective incident management begins long before an incident occurs. This section covers the crucial planning, documentation, and preparation activities that lay the groundwork for a swift and organized response.</p>
+
+                <div class="space-y-6">
+                    <!-- Accordion 1: IRP/IMP -->
+                    <div>
+                        <button class="accordion-button w-full">
+                            <span>1. Incident Response Plan (IRP) / Incident Management Plan (IMP)</span>
+                            <span class="accordion-icon text-2xl">+</span>
+                        </button>
+                        <div class="accordion-content hidden">
+                            <p class="text-gray-300 mb-4">The IRP is the blueprint for how an organization reacts to security incidents. It outlines the systematic approach to manage incidents from detection to post-incident review.</p>
+                            
+                            <h4 class="text-lg font-semibold text-white mb-3">a. Define scope, objectives, and roles within the plan.</h4>
+                            <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="plan-elements">
+                                <div class="unified-card" data-key="scope"><span class="card-title">Scope of the Plan</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="objectives"><span class="card-title">Objectives of the Plan</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="roles"><span class="card-title">Roles & Responsibilities</span><div class="card-description"></div></div>
+                            </div>
+
+                            <h4 class="text-lg font-semibold text-white mb-3">b. Document classification criteria and severity levels.</h4>
+                            <p class="text-gray-400 mb-4">Incidents need to be categorized based on their characteristics (e.g., impact, data sensitivity) to ensure appropriate and proportionate responses. Severity levels dictate urgency and resource allocation.</p>
+
+                            <h4 class="text-lg font-semibold text-white mb-3">c. Ensure plan includes activation, containment, communication, and recovery methods.</h4>
+                             <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="response-methods">
+                                 <div class="unified-card" data-key="activation"><span class="card-title">Activation</span><div class="card-description"></div></div>
+                                 <div class="unified-card" data-key="containment"><span class="card-title">Containment</span><div class="card-description"></div></div>
+                                 <div class="unified-card" data-key="communication"><span class="card-title">Communication</span><div class="card-description"></div></div>
+                                 <div class="unified-card" data-key="recovery"><span class="card-title">Recovery</span><div class="card-description"></div></div>
+                             </div>
+
+                            <h4 class="text-lg font-semibold text-white mb-3">d. Core Phases of Incident Response.</h4>
+                            <p class="text-gray-400 mb-4">Incident response typically follows a structured set of phases. Click each phase to learn more.</p>
+                            <div class="flex flex-col items-center gap-2" data-interactive-group="incident-phases">
+                                <div class="unified-card w-full max-w-sm" data-key="detection"><span class="card-title">Detection & Analysis</span><div class="card-description"></div></div>
+                                <span class="flow-arrow">↓</span>
+                                <div class="unified-card w-full max-w-sm" data-key="containment"><span class="card-title">Containment</span><div class="card-description"></div></div>
+                                <span class="flow-arrow">↓</span>
+                                <div class="unified-card w-full max-w-sm" data-key="eradication"><span class="card-title">Eradication</span><div class="card-description"></div></div>
+                                <span class="flow-arrow">↓</span>
+                                <div class="unified-card w-full max-w-sm" data-key="recovery"><span class="card-title">Recovery</span><div class="card-description"></div></div>
+                                 <span class="flow-arrow">↓</span>
+                                <div class="unified-card w-full max-w-sm" data-key="post-incident"><span class="card-title">Post-Incident Review</span><div class="card-description"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Accordion 2: BIA -->
+                    <div>
+                        <button class="accordion-button w-full">
+                            <span>2. Business Impact Analysis (BIA)</span>
+                            <span class="accordion-icon text-2xl">+</span>
+                        </button>
+                        <div class="accordion-content hidden">
+                            <p class="text-gray-300 mb-4">The BIA quantifies the potential impact of disruptions to critical business functions, guiding recovery priorities and objectives.</p>
+                            
+                            <h4 class="text-lg font-semibold text-white mb-3">a. Identify mission-critical business functions, dependencies, and acceptable downtime.</h4>
+                            <p class="text-gray-400 mb-4">The BIA identifies which business operations are most vital, their reliance on specific systems or data, and how long the business can tolerate their unavailability without suffering significant harm.</p>
+
+                            <h4 class="text-lg font-semibold text-white">b. Determine metrics like Recovery Time Objective (RTO) and Recovery Point Objective (RPO).</h4>
+                            <div class="flex flex-wrap justify-center gap-4 mt-4" data-interactive-group="bcp-elements">
+                                <div class="unified-card" data-key="rto"><span class="card-title">Recovery Time Objective (RTO)</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="rpo"><span class="card-title">Recovery Point Objective (RPO)</span><div class="card-description"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Accordion 3: BCP -->
+                    <div>
+                        <button class="accordion-button w-full">
+                            <span>3. Business Continuity Plan (BCP)</span>
+                            <span class="accordion-icon text-2xl">+</span>
+                        </button>
+                        <div class="accordion-content hidden">
+                            <p class="text-gray-300 mb-4">The BCP ensures that essential business functions can continue during and after a significant disruption.</p>
+                            <h4 class="text-lg font-semibold text-white mb-3">a. Coordinate incident response with continuity strategies.</h4>
+                            <div class="flex flex-col md:flex-row flex-wrap justify-center items-center gap-4 mb-6" data-interactive-group="dependencies">
+                                <div class="unified-card flex-1" data-key="incident-response"><span class="card-title">Incident Response (IR)</span><div class="card-description"></div></div>
+                                <span class="text-3xl text-gray-400">→</span>
+                                <div class="unified-card flex-1" data-key="business-continuity"><span class="card-title">Business Continuity (BCP)</span><div class="card-description"></div></div>
+                            </div>
+                            <h4 class="text-lg font-semibold text-white mb-3">b. Include backup arrangements, failover procedures, and alternate work sites.</h4>
+                            <p class="text-gray-400 mb-4">A robust BCP specifies mechanisms like regular data backups, redundant systems for seamless failover, and alternative locations for staff to work from if primary facilities are unavailable.</p>
+                            <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="bcp-components">
+                                <div class="unified-card" data-key="backups"><span class="card-title">Backup Arrangements</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="redundant-systems"><span class="card-title">Redundant Systems</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="alternate-locations"><span class="card-title">Alternate Locations</span><div class="card-description"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Accordion 4: DRP -->
+                    <div>
+                        <button class="accordion-button w-full">
+                            <span>4. Disaster Recovery Plan (DRP)</span>
+                            <span class="accordion-icon text-2xl">+</span>
+                        </button>
+                        <div class="accordion-content hidden">
+                              <p class="text-gray-300 mb-4">The DRP details the technical steps to restore IT systems and infrastructure after a disaster.</p>
+                              <h4 class="text-lg font-semibold text-white mb-3">a. Prepare technical restoration procedures aligned with BIA/BCP metrics.</h4>
+                              <p class="text-gray-400 mb-4">The DRP outlines precise, step-by-step procedures for rebuilding systems, restoring data, and re-establishing network connectivity, all designed to meet the RTOs and RPOs defined in the BIA and BCP.</p>
+                              <h4 class="text-lg font-semibold text-white mb-3">b. Validate DRP periodically through testing and simulation.</h4>
+                              <p class="text-gray-400 mb-4">Regular testing (e.g., tabletop exercises, simulations, full drills) is crucial to ensure the DRP is viable, up-to-date, and that recovery teams are proficient in executing the plan. This identifies gaps and areas for improvement.</p>
+                              <h4 class="text-lg font-semibold text-white mb-3">c. DRP Site Types.</h4>
+                              <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="drp-sites">
+                                 <div class="unified-card" data-key="hot-site"><span class="card-title">Hot Site</span><div class="card-description"></div></div>
+                                 <div class="unified-card" data-key="warm-site"><span class="card-title">Warm Site</span><div class="card-description"></div></div>
+                                 <div class="unified-card" data-key="cold-site"><span class="card-title">Cold Site</span><div class="card-description"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Accordion 5: Classification -->
+                    <div>
+                        <button class="accordion-button w-full">
+                            <span>5. Incident Categorization / Classification</span>
+                            <span class="accordion-icon text-2xl">+</span>
+                        </button>
+                        <div class="accordion-content hidden">
+                            <h4 class="text-lg font-semibold text-white mb-3">a. Establish criteria to classify incidents based on impact, sensitivity, or compliance.</h4>
+                            <p class="text-gray-300 mb-4">Incidents are classified using defined criteria such as potential financial loss, number of affected users, sensitivity of compromised data (e.g., PII, PHI), and regulatory reporting obligations. Click each level to learn more.</p>
+                            <div class="flex flex-col items-center gap-4" data-interactive-group="incident-classification">
+                                <div class="unified-card incident-classification-card w-full max-w-lg" data-classification="critical" data-key="critical"><span class="card-title">Critical (Severity 1)</span><div class="card-description"></div></div>
+                                <div class="unified-card incident-classification-card w-full max-w-lg" data-classification="high" data-key="high"><span class="card-title">High (Severity 2)</span><div class="card-description"></div></div>
+                                <div class="unified-card incident-classification-card w-full max-w-lg" data-classification="medium" data-key="medium"><span class="card-title">Medium (Severity 3)</span><div class="card-description"></div></div>
+                                <div class="unified-card incident-classification-card w-full max-w-lg" data-classification="low" data-key="low"><span class="card-title">Low (Severity 4)</span><div class="card-description"></div></div>
+                            </div>
+                            <h4 class="text-lg font-semibold text-white mt-6 mb-3">b. Use classification to guide escalation and resource mobilization.</h4>
+                            <p class="text-gray-400 mb-4">The assigned incident classification directly informs who needs to be notified (escalation path) and what resources (personnel, tools, budget) should be deployed to address the incident effectively and efficiently.</p>
+                        </div>
+                    </div>
+
+                    <!-- Accordion 6: Post-Incident Review -->
+                    <div>
+                        <button class="accordion-button w-full">
+                            <span>6. Incident Management Testing and Review</span>
+                            <span class="accordion-icon text-2xl">+</span>
+                        </button>
+                        <div class="accordion-content hidden">
+                              <h4 class="text-lg font-semibold text-white mb-3">a. Conduct tabletop exercises, simulations, and full-scale drills.</h4>
+                              <p class="text-gray-400 mb-4">Testing ensures plans are viable and teams are proficient. Click a testing type to learn more.</p>
+                              <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="testing-types">
+                                 <div class="unified-card" data-key="tabletop"><span class="card-title">Tabletop Exercises</span><div class="card-description"></div></div>
+                                 <div class="unified-card" data-key="simulation"><span class="card-title">Simulations</span><div class="card-description"></div></div>
+                                 <div class="unified-card" data-key="full-scale"><span class="card-title">Full-Scale Drills</span><div class="card-description"></div></div>
+                            </div>
+                            <h4 class="text-lg font-semibold text-white mb-3">b. Identify plan gaps, clarify roles, and refine procedures based on outcomes.</h4>
+                            <p class="text-gray-400">The goal of testing isn't just to practice, but to identify weaknesses in the plan, ambiguous roles, and inefficient procedures. Findings from these exercises drive continuous improvement of the IRP, BCP, and DRP, along with targeted training for personnel.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="incident-operations" class="content-section hidden">
+                <h2 class="text-3xl font-bold section-header mb-6">Section B: Incident Management Operations</h2>
+                <p class="mb-8 text-gray-400">This section describes the real-time execution of the incident response plan when a security incident is detected.</p>
+                
+                <div class="space-y-6">
+                    <!-- Accordion 1: Tools -->
+                    <div>
+                        <button class="accordion-button w-full">
+                            <span>1. Incident Management Techniques and Tools</span>
+                            <span class="accordion-icon text-2xl">+</span>
+                        </button>
+                        <div class="accordion-content hidden">
+                            <p class="text-gray-300 mb-4">Effective incident management relies on a combination of methodologies and specialized technological solutions for detection, analysis, and response.</p>
+                            <h4 class="text-lg font-semibold text-white mb-3">a. Use tools such as SIEM, EDR, IDS/IPS, and threat intelligence platforms.</h4>
+                            <p class="text-gray-300 mb-4">These tools are critical for identifying, analyzing, and responding to incidents. Click on a tool to learn about its primary function in incident management:</p>
+                            <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="ir-tools">
+                               <div class="unified-card" data-key="siem"><span class="card-title">SIEM</span><div class="card-description"></div></div>
+                               <div class="unified-card" data-key="edr"><span class="card-title">EDR</span><div class="card-description"></div></div>
+                               <div class="unified-card" data-key="ids-ips"><span class="card-title">IDS/IPS</span><div class="card-description"></div></div>
+                               <div class="unified-card" data-key="threat-intel"><span class="card-title">Threat Intelligence</span><div class="card-description"></div></div>
+                            </div>
+                            <h4 class="text-lg font-semibold text-white mb-3">b. Apply methods for detection, triage, and situational awareness.</h4>
+                            <p class="text-gray-400">This involves continuously monitoring systems for anomalies, rapidly assessing alerts to determine if they are true incidents (triage), and maintaining a comprehensive understanding of the incident's status and impact as it unfolds.</p>
+                        </div>
+                    </div>
+
+                    <!-- Accordion 2: Investigation -->
+                    <div>
+                        <button class="accordion-button w-full">
+                            <span>2. Incident Investigation and Evaluation</span>
+                            <span class="accordion-icon text-2xl">+</span>
+                        </button>
+                        <div class="accordion-content hidden">
+                            <p class="text-gray-300 mb-4">Once an incident is confirmed, a thorough investigation is crucial to understand its scope, impact, and root cause.</p>
+                            <h4 class="text-lg font-semibold text-white mb-3">a. Launch investigations using forensic methodologies.</h4>
+                            <p class="text-gray-400 mb-4">Forensic methodologies involve systematic and legally sound processes for collecting, preserving, and analyzing digital evidence to reconstruct events and identify perpetrators. Click on each method to learn more:</p>
+                            <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="forensic-methods">
+                                <div class="unified-card" data-key="chain-of-custody"><span class="card-title">Chain of Custody</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="immutability"><span class="card-title">Immutability</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="least-intrusive"><span class="card-title">Least Intrusive</span><div class="card-description"></div></div>
+                            </div>
+                            <h4 class="text-lg font-semibold text-white mb-3">b. Forensic Investigation Steps.</h4>
+                            <p class="text-gray-400 mb-4">A structured approach ensures thorough and legally sound evidence handling. Click on each step or arrow to learn more:</p>
+                            <div class="flex flex-col items-center gap-2" data-interactive-group="forensic-steps">
+                                <div class="unified-card w-full max-w-sm" data-key="collection"><span class="card-title">Collection</span><div class="card-description"></div></div>
+                                <span class="flow-arrow">↓</span>
+                                <div class="unified-card w-full max-w-sm" data-key="examination"><span class="card-title">Examination</span><div class="card-description"></div></div>
+                                <span class="flow-arrow">↓</span>
+                                <div class="unified-card w-full max-w-sm" data-key="analysis"><span class="card-title">Analysis</span><div class="card-description"></div></div>
+                                <span class="flow-arrow">↓</span>
+                                <div class="unified-card w-full max-w-sm" data-key="reporting"><span class="card-title">Reporting</span><div class="card-description"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Accordion 3: Containment -->
+                    <div>
+                        <button class="accordion-button w-full">
+                            <span>3. Incident Containment Methods</span>
+                            <span class="accordion-icon text-2xl">+</span>
+                        </button>
+                        <div class="accordion-content hidden">
+                            <p class="text-gray-300 mb-4">Containment aims to limit the damage and prevent the spread of an incident, protecting unaffected systems and data.</p>
+                            <h4 class="text-lg font-semibold text-white mb-3">a. Apply appropriate techniques (e.g., isolating systems, disabling accounts, network segmentation).</h4>
+                            <p class="text-gray-300 mb-4">Containment strategies include disconnecting compromised systems, revoking access for affected accounts, or segmenting networks to quarantine the threat. Click on a method to learn more:</p>
+                            <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="containment-methods">
+                                <div class="unified-card" data-key="isolation"><span class="card-title">System Isolation</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="account-disabling"><span class="card-title">Account Disabling</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="network-segmentation"><span class="card-title">Network Segmentation</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="firewall-rules"><span class="card-title">Firewall/IPS Rules</span><div class="card-description"></div></div>
+                            </div>
+                            <h4 class="text-lg font-semibold text-white mb-3">b. Balance containment with business and operational impacts.</h4>
+                            <p class="text-gray-400">Containment actions can disrupt business operations. The security manager must make informed decisions, often in consultation with business leaders, to balance the need to stop the attack with minimizing disruption to critical business functions.</p>
+                        </div>
+                    </div>
+
+                    <!-- Accordion 4: Communications -->
+                    <div>
+                        <button class="accordion-button w-full">
+                            <span>4. Incident Response Communications</span>
+                            <span class="accordion-icon text-2xl">+</span>
+                        </button>
+                        <div class="accordion-content hidden">
+                            <p class="text-gray-300 mb-4">Clear, timely, and accurate communication is crucial during an incident to manage expectations and ensure proper coordination with all stakeholders.</p>
+                            <h4 class="text-lg font-semibold text-white mb-3">a. Activate escalation and notification procedures.</h4>
+                            <p class="text-gray-400 mb-4">Define who needs to be informed (e.g., legal, PR, affected business units, regulators, law enforcement, customers) at each stage of the incident, based on its severity and impact. Click on a stakeholder group to learn more:</p>
+                            <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="comm-stakeholders">
+                                <div class="unified-card" data-key="internal"><span class="card-title">Internal Stakeholders</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="external"><span class="card-title">External Stakeholders</span><div class="card-description"></div></div>
+                            </div>
+                            <h4 class="text-lg font-semibold text-white mb-3">b. Maintain incident logs, updates, and disclosures.</h4>
+                            <p class="text-gray-400 mb-4">Meticulous logging of all incident activities is essential for post-incident review and legal compliance. Regular status updates keep internal teams aligned, and timely, accurate regulatory disclosures prevent legal penalties. Click on a communication action to learn more:</p>
+                            <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="comm-actions">
+                                <div class="unified-card" data-key="notification"><span class="card-title">Notification Procedures</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="incident-logs"><span class="card-title">Incident Logs</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="regulatory-disclosures"><span class="card-title">Regulatory Disclosures</span><div class="card-description"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Accordion 5: Recovery/Eradication -->
+                    <div>
+                        <button class="accordion-button w-full">
+                            <span>5. Incident Recovery and Eradication</span>
+                            <span class="accordion-icon text-2xl">+</span>
+                        </button>
+                        <div class="accordion-content hidden">
+                            <p class="text-gray-300 mb-4">Once contained, the focus shifts to removing the threat and restoring normal operations.</p>
+                            <h4 class="text-lg font-semibold text-white mb-3">a. Eradicate malicious elements and vulnerabilities.</h4>
+                            <p class="text-gray-400 mb-4">This involves completely removing all traces of the attacker and malicious code from affected systems, and, crucially, addressing the underlying vulnerabilities that allowed the incident to occur (e.g., patching, reconfiguring insecure services). Click on each eradication step to learn more:</p>
+                            <div class="flex flex-col md:flex-row flex-wrap justify-center items-center gap-4 mb-6" data-interactive-group="eradication-steps">
+                                <div class="unified-card flex-1" data-key="identify-remove"><span class="card-title">Identify & Remove Root Cause</span><div class="card-description"></div></div>
+                                <span class="text-3xl text-gray-400">→</span>
+                                <div class="unified-card flex-1" data-key="clean-elements"><span class="card-title">Clean Malicious Elements</span><div class="card-description"></div></div>
+                                <span class="text-3xl text-gray-400">→</span>
+                                <div class="unified-card flex-1" data-key="harden-systems"><span class="card-title">Harden Systems</span><div class="card-description"></div></div>
+                            </div>
+                            <h4 class="text-lg font-semibold text-white mb-3">b. Recover systems based on BCP/DR metrics.</h4>
+                            <p class="text-gray-400 mb-4">Systems are restored using clean backups and recovery procedures defined in the DRP and BCP. Rigorous validation ensures systems are fully functional, secure, and free of residual threats before being returned to production, meeting established RTOs and RPOs. Click on each recovery step to learn more:</p>
+                            <div class="flex flex-col md:flex-row flex-wrap justify-center items-center gap-4 mb-6" data-interactive-group="recovery-steps">
+                               <div class="unified-card flex-1" data-key="validate-systems"><span class="card-title">Validate Systems</span><div class="card-description"></div></div>
+                               <span class="text-3xl text-gray-400">→</span>
+                               <div class="unified-card flex-1" data-key="restore-data"><span class="card-title">Restore Data/Services</span><div class="card-description"></div></div>
+                               <span class="text-3xl text-gray-400">→</span>
+                               <div class="unified-card flex-1" data-key="verify-monitor"><span class="card-title">Verify & Monitor</span><div class="card-description"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Accordion 6: Post-Incident Review Practices -->
+                    <div>
+                        <button class="accordion-button w-full">
+                            <span>6. Post-Incident Review Practices</span>
+                            <span class="accordion-icon text-2xl">+</span>
+                        </button>
+                        <div class="accordion-content hidden">
+                            <p class="text-gray-300 mb-4">The incident response lifecycle concludes with a review to learn from the event and continuously improve the security posture.</p>
+                            <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="post-incident-practices">
+                                <div class="unified-card" data-key="after-action-review"><span class="card-title">After-Action Review (AAR)</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="lessons-learned"><span class="card-title">Lessons Learned</span><div class="card-description"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="key-terms" class="content-section hidden">
+                <h2 class="text-3xl font-bold section-header mb-6">Key Terms</h2>
+                <p class="mb-8 text-gray-400">Test your knowledge of key terms in Incident Management with these interactive flashcards. Click on a card to reveal its definition.</p>
+                <div id="key-terms-grid" data-interactive-group="key-terms">
+                    <!-- Key Terms will be populated by JavaScript -->
+                </div>
+            </section>
+
+            <section id="domain-summary" class="content-section hidden">
+                <h2 class="text-3xl font-bold section-header mb-6">Domain Summary</h2>
+                <div class="content-box">
+                    <p class="text-gray-300 mb-4">CISM Domain 4: Incident Management, emphasizes the critical role of information security managers in preparing for, responding to, and recovering from information security incidents. It's a highly practical domain that covers the entire lifecycle of an incident, from proactive planning to post-event analysis.</p>
+                    <p class="text-gray-300 mb-4">The domain is split into two key areas: <strong>Incident Management Readiness</strong> focuses on the foundational work, including developing comprehensive Incident Response Plans (IRPs), conducting Business Impact Analyses (BIAs) to understand critical assets and their recovery needs (RTOs/RPOs), and establishing robust Business Continuity Plans (BCPs) and Disaster Recovery Plans (DRPs). It also covers establishing clear incident classification criteria and the importance of regular testing, evaluation, and training for the entire incident management team.</p>
+                    <p class="text-gray-300"><strong>Incident Management Operations</strong> delves into the active phases of incident handling. This includes leveraging various security tools (SIEM, EDR, IDS/IPS), applying forensic methodologies for investigation and root cause analysis, implementing effective containment strategies, and managing multi-faceted communications with both internal and external stakeholders. Finally, it assesses the crucial steps of eradicating threats, recovering systems to a secure state, and conducting thorough post-incident reviews to identify lessons learned and drive continuous improvement in the organization's security posture. A strong grasp of this domain is essential for any CISM professional looking to minimize business disruption and enhance organizational resilience in the face of security challenges.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="text-center py-8 mt-10 text-gray-500 text-sm">
+            <p>&copy; 2024 CISM Study Guide. All rights reserved. For educational purposes.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Data for interactive elements
+            const data = {
+                'plan-elements': {
+                    scope: { description: "Defines what constitutes an 'information security incident' and which systems, networks, data, and business processes are covered. It clarifies the boundaries of the incident response team's authority." },
+                    objectives: { description: "Outlines the goals of the IRP, such as minimizing damage, restoring operations quickly, protecting reputation, and complying with legal obligations." },
+                    roles: { description: "Clearly defines who does what during an incident, including the IRT lead, technical specialists, communication lead, and legal counsel, to ensure accountability and coordination." }
+                },
+                'response-methods': {
+                    activation: { description: "Procedures for initiating the IRP upon detection of a confirmed incident, including notification protocols and mobilization of the IRT." },
+                    containment: { description: "Techniques to limit the scope and impact of an incident, such as isolating affected systems or disabling compromised accounts." },
+                    communication: { description: "Protocols for sharing information with internal stakeholders (management, legal) and external parties (regulators, customers)." },
+                    recovery: { description: "Procedures for restoring affected systems and data to normal, secure operation after eradication, including restoring from backups and validating security." }
+                },
+                'incident-phases': {
+                    detection: { description: "The phase where security events are identified, analyzed, and confirmed as incidents, involving monitoring logs, alerts, and user reports." },
+                    containment: { description: "Actions taken to limit the scope and impact of the incident, preventing further damage or spread, such as isolating systems." },
+                    eradication: { description: "The process of removing the root cause of the incident and any malicious elements from affected systems, including cleaning malware and patching vulnerabilities." },
+                    recovery: { description: "Restoring affected systems and data to normal, secure operation, including validating system integrity and restoring from clean backups." },
+                    'post-incident': { description: "Conducting an after-action review to analyze the response, identify lessons learned, and implement corrective actions to improve future security." }
+                },
+                'bcp-elements': {
+                    rto: { description: "The maximum tolerable duration of time that a system, application, or network can be down after a disaster or incident without causing unacceptable harm to the business. Example: An e-commerce platform has an RTO of 4 hours." },
+                    rpo: { description: "The maximum tolerable amount of data that can be lost from an IT service due to a major incident, indicating how recent backups need to be. Example: A customer database has an RPO of 1 hour." }
+                },
+                'bcp-components': {
+                    backups: { description: "Regularly creating copies of data to ensure it can be restored in case of loss. Key considerations are frequency (how often), location (off-site/cloud), and retention (how long)." },
+                    'redundant-systems': { description: "Implementing duplicate systems (e.g., servers, network devices) that can take over if a primary component fails. This is often achieved through failover clustering or load balancing." },
+                    'alternate-locations': { description: "Designated alternative physical sites where business operations can continue if the primary facility is unusable. These range from fully equipped hot sites to basic cold sites." }
+                },
+                'dependencies': {
+                    'incident-response': { description: "Focuses on the immediate, tactical handling of security incidents to detect, analyze, contain, eradicate, and recover from specific breaches." },
+                    'business-continuity': { description: "A broader discipline ensuring the organization can continue critical business functions during and after any disruptive event, focusing on maintaining operations." }
+                },
+                'drp-sites': {
+                    'hot-site': { description: "A fully equipped off-site data center that mirrors the primary site, allowing for immediate or near-immediate recovery (low RTO). Most expensive option." },
+                    'warm-site': { description: "A partially equipped off-site location with hardware and connectivity, but requiring some setup and data restoration (moderate RTO and cost)." },
+                    'cold-site': { description: "A basic off-site facility with space and power but no hardware. Least expensive but requires significant time to become operational (high RTO)." }
+                },
+                'incident-classification': {
+                    critical: { description: "<strong>Impact:</strong> Severe financial/reputational damage, major operational disruption. <br><strong>Examples:</strong> Major data breach, ransomware on critical systems. <br><strong>Response:</strong> Immediate, 24/7, C-suite notification." },
+                    high: { description: "<strong>Impact:</strong> Significant operational disruption, potential financial loss. <br><strong>Examples:</strong> Widespread malware, unauthorized access to non-sensitive systems. <br><strong>Response:</strong> Urgent, on-call support, management notification." },
+                    medium: { description: "<strong>Impact:</strong> Limited operational disruption, minor financial impact. <br><strong>Examples:</strong> Single compromised account, contained malware. <br><strong>Response:</strong> Standard business hours, team lead notification." },
+                    low: { description: "<strong>Impact:</strong> Minimal or no business impact. <br><strong>Examples:</strong> Failed login attempts, minor policy non-compliance. <br><strong>Response:</strong> Routine investigation, documented for trends." }
+                },
+                'testing-types': {
+                    tabletop: { description: "Discussion-based sessions where participants walk through an incident scenario to validate the plan, clarify roles, and identify gaps. Low cost, high flexibility." },
+                    simulation: { description: "Hands-on practice where teams interact with simulated environments to respond to a controlled incident, testing technical procedures and team coordination." },
+                    'full-scale': { description: "Replicates a real incident as closely as possible, involving live systems, full teams, and often external parties. Most resource-intensive but provides the most realistic test." }
+                },
+                'ir-tools': {
+                    siem: { description: "Aggregates and correlates security logs from various sources to provide centralized visibility and detect anomalies or indicators of compromise in real-time." },
+                    edr: { description: "Monitors and collects data from endpoint devices to detect malicious activity, provide in-depth visibility, and enable rapid response at the device level." },
+                    'ids-ips': { description: "<strong>IDS</strong> detects malicious activity but doesn't block it; <strong>IPS</strong> detects and actively prevents or blocks threats based on predefined rules or signatures." },
+                    'threat-intel': { description: "Provides contextual information about current and emerging threats, including Indicators of Compromise (IOCs) and attacker tactics, techniques, and procedures (TTPs)." }
+                },
+                'forensic-methods': {
+                    'chain-of-custody': { description: "A meticulous, unbroken record of the seizure, custody, control, transfer, analysis, and disposition of evidence, essential to maintain evidence integrity and legal admissibility." },
+                    immutability: { description: "The principle that digital evidence, once acquired, should not be altered. Forensic copies are made, and analysis is performed on these copies, never the original." },
+                    'least-intrusive': { description: "Applying forensic techniques that minimize impact on the live system and original evidence, prioritizing volatile data collection (e.g., memory) before non-volatile (e.g., disk imaging)." }
+                },
+                'forensic-steps': {
+                    collection: { description: "Secure and preserve digital evidence from compromised systems (e.g., disk images, memory dumps, logs) in a forensically sound manner, ensuring integrity and maintaining a strict chain of custody." },
+                    examination: { description: "Thoroughly inspect and process the collected evidence using specialized forensic tools to extract relevant data, including recovering deleted files and parsing logs." },
+                    analysis: { description: "Interpret the examined data to reconstruct the incident timeline, identify the attack vector, understand attacker methodologies (TTPs), and determine the full scope and impact of the breach." },
+                    reporting: { description: "Document all findings, conclusions, and recommendations in a clear, concise, and legally defensible report, including technical details, business impact, and actionable steps." }
+                },
+                'containment-methods': {
+                    isolation: { description: "Disconnecting compromised systems from the network to prevent further spread of malware or attacker lateral movement." },
+                    'account-disabling': { description: "Suspending or disabling user or service accounts that have been compromised to prevent further unauthorized access." },
+                    'network-segmentation': { description: "Logically or physically dividing a network into smaller, isolated segments to limit the blast radius of an incident." },
+                    'firewall-rules': { description: "Implementing temporary firewall rules or IPS signatures to block known malicious IP addresses, domains, or attack patterns." }
+                },
+                'comm-stakeholders': {
+                    internal: { description: "Includes Executives, Legal, HR, IT Teams, and Business Units. Communication focuses on business impact, operational status, and internal coordination." },
+                    external: { description: "Includes Law Enforcement, Regulators, Customers, Media, and Third-Party Partners. Requires careful, legally reviewed messaging and adherence to disclosure requirements." }
+                },
+                'comm-actions': {
+                    notification: { description: "Defined processes for alerting relevant parties about an incident, including escalation paths, contact lists, and secure communication channels." },
+                    'incident-logs': { description: "Meticulous, chronological records of all actions, observations, and decisions during an incident, essential for review and legal purposes." },
+                    'regulatory-disclosures': { description: "Adherence to legal and regulatory obligations for reporting data breaches to authorities and affected individuals within specified timelines." }
+                },
+                'eradication-steps': {
+                    'identify-remove': { description: "Pinpoint and eliminate the underlying vulnerability that allowed the incident to occur (e.g., unpatched software, misconfiguration) to prevent recurrence." },
+                    'clean-elements': { description: "Thoroughly remove all traces of the attacker and malicious code from affected systems, including malware, backdoors, and unauthorized accounts." },
+                    'harden-systems': { description: "Implement additional security controls or configurations on affected and similar systems to strengthen defenses and reduce the attack surface." }
+                },
+                'recovery-steps': {
+                    'validate-systems': { description: "Rigorously test restored systems to ensure they are fully functional, stable, and free of any lingering threats before returning them to production." },
+                    'restore-data': { description: "Bring critical systems and data back online from clean, verified backups, prioritizing services based on RTO and business criticality." },
+                    'verify-monitor': { description: "Continuously monitor restored systems for any signs of renewed malicious activity and verify that all security controls are operating effectively." }
+                },
+                'post-incident-practices': {
+                    'after-action-review': { description: "A structured review process conducted after an incident to analyze the effectiveness of the response. It identifies what went well, what could be improved, and potential root causes of issues, focusing on objective facts rather than blame." },
+                    'lessons-learned': { description: "Collaborative meetings where all involved parties (technical teams, management, legal, communications) discuss the findings from the AAR. The goal is to document key takeaways, share knowledge, and propose actionable recommendations for improving future incident response capabilities." }
+                },
+                'key-terms': [
+                    { term: "Incident Response Plan (IRP)", definition: "A documented set of procedures for detecting, analyzing, containing, eradicating, and recovering from information security incidents." },
+                    { term: "Business Impact Analysis (BIA)", definition: "A process to identify and evaluate the potential effects (financial, operational, reputational) of disruptive events on an organization's critical business functions." },
+                    { term: "Recovery Time Objective (RTO)", definition: "The maximum acceptable downtime for a system or business function after a disruption." },
+                    { term: "Recovery Point Objective (RPO)", definition: "The maximum acceptable amount of data that can be lost from an IT service due to a major incident, typically measured in time (e.g., 1 hour of data loss)." },
+                    { term: "Business Continuity Plan (BCP)", definition: "A comprehensive plan outlining how an organization will maintain essential business functions during and after a significant disruption, regardless of cause." },
+                    { term: "Disaster Recovery Plan (DRP)", definition: "A detailed technical plan focused on restoring IT systems, applications, and data after a disaster, aligning with BIA-defined RTOs and RPOs." },
+                    { term: "Incident Categorization", definition: "The process of classifying incidents based on their type, impact, sensitivity of data involved, and compliance requirements to prioritize response." },
+                    { term: "Tabletop Exercise", definition: "A discussion-based incident management exercise where participants talk through an incident scenario to validate the plan, clarify roles, and identify gaps." },
+                    { term: "SIEM", definition: "A security solution that collects, aggregates, and analyzes security logs and events from various sources to provide real-time threat detection and security monitoring." },
+                    { term: "EDR", definition: "A cybersecurity solution that continuously monitors endpoint devices for suspicious activity, collects data, and enables rapid investigation and response to threats at the endpoint level." },
+                    { term: "IDS/IPS", definition: "<strong>IDS</strong> detects malicious activity but doesn't block it; <strong>IPS</strong> detects and actively prevents or blocks threats based on predefined rules or signatures." },
+                    { term: "Chain of Custody", definition: "The chronological documentation showing the seizure, custody, control, transfer, analysis, and disposition of physical or electronic evidence." },
+                    { term: "Containment", definition: "The phase of incident response focused on limiting the scope and impact of a security incident to prevent further damage or spread." },
+                    { term: "Eradication", definition: "The phase of incident response focused on completely removing the malicious elements from affected systems and addressing the root cause vulnerability." },
+                    { term: "After-Action Review (AAR)", definition: "A structured process conducted post-incident to objectively evaluate the effectiveness of the response, identify strengths, weaknesses, and areas for improvement." }
+                ]
+            };
+
+            // --- BEHAVIOR SETUP ---
+            function setupNavigation() {
+                const navButtons = document.querySelectorAll('.nav-item');
+                const contentSections = document.querySelectorAll('.content-section');
+                navButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        navButtons.forEach(btn => btn.classList.remove('active'));
+                        button.classList.add('active');
+                        const targetId = button.dataset.target;
+                        contentSections.forEach(section => {
+                            section.classList.add('hidden');
+                            section.classList.remove('fade-in');
+                        });
+                        const targetSection = document.getElementById(targetId);
+                        targetSection.classList.remove('hidden');
+                        // Use a short timeout to ensure the fade-in animation re-triggers
+                        setTimeout(() => targetSection.classList.add('fade-in'), 10);
+
+                        if (targetId === 'key-terms') {
+                            renderKeyTerms();
+                        }
+                    });
+                });
+            }
+
+            function setupAccordions() {
+                document.querySelectorAll('.accordion-button').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const content = button.nextElementSibling;
+                        const isOpening = content.classList.contains('hidden');
+                        if (isOpening) {
+                            content.classList.remove('hidden');
+                            button.classList.add('open');
+                        } else {
+                            content.classList.add('hidden');
+                            button.classList.remove('open');
+                        }
+                    });
+                });
+            }
+
+            function setupInteractiveCards() {
+                document.querySelectorAll('[data-interactive-group]').forEach(group => {
+                    group.querySelectorAll('.unified-card').forEach(card => {
+                        card.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            const cardKey = card.dataset.key;
+                            const groupName = group.dataset.interactiveGroup;
+                            const descriptionDiv = card.querySelector('.card-description');
+                            const isActive = card.classList.contains('active');
+                            
+                            // Deactivate all other cards in the same group
+                            group.querySelectorAll('.unified-card').forEach(otherCard => {
+                                if (otherCard !== card) {
+                                    otherCard.classList.remove('active');
+                                    const otherDesc = otherCard.querySelector('.card-description');
+                                    if(otherDesc) otherDesc.style.display = 'none';
+                                }
+                            });
+
+                            // Toggle the current card
+                            card.classList.toggle('active', !isActive);
+                            if (!isActive && descriptionDiv && data[groupName] && data[groupName][cardKey]) {
+                                descriptionDiv.innerHTML = `<p>${data[groupName][cardKey].description}</p>`;
+                                descriptionDiv.style.display = 'block';
+                            } else if (descriptionDiv) {
+                                descriptionDiv.style.display = 'none';
+                            }
+                        });
+                    });
+                });
+            }
+
+            function renderKeyTerms() {
+                const container = document.getElementById('key-terms-grid');
+                if (!container || container.children.length > 0) return; // Prevent re-rendering
+                
+                data['key-terms'].forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'unified-card';
+                    card.innerHTML = `<h3 class="card-title">${item.term}</h3><div class="card-description"><p>${item.definition}</p></div>`;
+                    card.addEventListener('click', () => {
+                        const wasActive = card.classList.contains('active');
+                        // Deactivate all other key term cards
+                        container.querySelectorAll('.unified-card').forEach(c => c.classList.remove('active'));
+                        // Toggle current card
+                        if (!wasActive) {
+                            card.classList.add('active');
+                        }
+                    });
+                    container.appendChild(card);
+                });
+            }
+            
+            // --- INITIALIZATION ---
+            setupNavigation();
+            setupAccordions();
+            setupInteractiveCards();
+            renderKeyTerms(); // Initial call to populate on first load if needed
+        });
+    </script>
+</body>
+</html>
