@@ -10,22 +10,13 @@
         /* --- MASTER STYLESHEET --- */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
         
-        html, body {
-            height: 100%;
-            overflow: hidden; /* Prevent main page scrolling */
-        }
         body {
             font-family: 'Inter', sans-serif;
             background-color: #F8F5EF;
             color: #333333;
-            display: flex;
-            flex-direction: column;
         }
         .container {
             max-width: 1200px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1; /* Allow container to fill space */
         }
         .master-nav-item {
             transition: all 0.2s ease-in-out;
@@ -44,6 +35,10 @@
         .master-nav-item:not(.active):hover {
             background-color: #e2e8f0;
         }
+        #content-iframe {
+            /* Start with a min-height to avoid layout collapse while loading */
+            min-height: 80vh;
+        }
     </style>
 </head>
 <body class="leading-relaxed">
@@ -54,7 +49,7 @@
             <p class="text-xl sm:text-2xl text-gray-600">Comprehensive Interactive Educational Resource for CISM Certification Exam</p>
         </header>
 
-        <div class="flex flex-col md:flex-row gap-8 flex-grow min-h-0">
+        <div class="flex flex-col md:flex-row gap-8">
             <aside class="md:w-1/4 lg:w-1/5 flex-shrink-0">
                 <nav id="master-navigation" class="bg-white p-4 rounded-lg shadow-md flex flex-col space-y-2 sticky top-4">
                     <button class="master-nav-item text-gray-700 active" data-url="https://jjirik77.github.io/CISM/CISM_Introduction.html">
@@ -96,9 +91,9 @@
                 </nav>
             </aside>
 
-            <main id="domains-content-area" class="flex-1 flex flex-col">
-                <div id="iframe-container" class="relative bg-white p-6 rounded-lg shadow-md flex-grow">
-                    <iframe id="content-iframe" class="w-full h-full rounded-lg border border-gray-200" sandbox="allow-scripts allow-same-origin allow-popups allow-forms"></iframe>
+            <main id="domains-content-area" class="flex-1">
+                <div id="iframe-container" class="relative bg-white p-6 rounded-lg shadow-md">
+                    <iframe id="content-iframe" class="w-full h-full rounded-lg border border-gray-200" sandbox="allow-scripts allow-same-origin allow-popups allow-forms" scrolling="no"></iframe>
                     <div id="iframe-placeholder" class="absolute inset-0 flex items-center justify-center text-gray-500 p-6">
                         <p>Content will be displayed here. Note: Some websites may not load due to their security policies.</p>
                     </div>
@@ -118,13 +113,17 @@
         const placeholder = document.getElementById('iframe-placeholder');
 
         function loadContent(url) {
+            // Show placeholder and reset iframe height while loading new content
+            iframe.style.height = '80vh';
+            placeholder.innerHTML = '<p>Loading content...</p>';
+            placeholder.style.display = 'flex';
+            iframe.src = 'about:blank'; // Clear previous content
+
             if (url && url !== 'about:blank') {
                 iframe.src = url;
-                placeholder.style.display = 'none';
             } else {
                 iframe.src = 'about:blank';
                 placeholder.innerHTML = '<p>This section is under construction.</p>';
-                placeholder.style.display = 'flex';
             }
         }
 
@@ -136,6 +135,27 @@
                 loadContent(url);
             });
         });
+
+        // --- Iframe Auto-Resizing Logic ---
+        // This function will listen for messages from the iframe content
+        // to automatically adjust its height.
+        window.addEventListener('message', function(event) {
+            // Security check: only accept messages from the expected origin
+            if (event.origin === "https://jjirik77.github.io") {
+                if (event.data && event.data.height) {
+                    const newHeight = event.data.height + 50; // Add some padding
+                    iframe.style.height = newHeight + 'px';
+                }
+            }
+        });
+        
+        iframe.addEventListener('load', () => {
+            placeholder.style.display = 'none';
+            // Fallback for pages that don't send a postMessage
+            // This is a simple fallback and might not be perfect for all content
+            iframe.style.height = '100vh'; // A reasonable default height
+        });
+
 
         // Initial Load
         const initialUrl = document.querySelector('#master-navigation .master-nav-item.active').dataset.url;
