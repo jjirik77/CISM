@@ -853,21 +853,26 @@
             };
             
             const keyTermsData = [
-                { term: "Inherent Risk", definition: "The level of risk that exists before any controls or other mitigating factors are put in place. It's the raw risk." },
-                { term: "Residual Risk", definition: "The level of risk that remains after controls have been implemented and account for their effectiveness. This is the risk that management accepts." },
-                { term: "Risk Appetite", definition: "The amount of risk an organization is willing to take to achieve its objectives. It's a high-level strategic statement." },
-                { term: "Risk Tolerance", definition: "The acceptable deviation from the risk appetite. It sets specific thresholds for different types of risks." },
-                { term: "Qualitative", definition: "Uses descriptive terms (e.g., high, medium, low) to define likelihood and impact. It's subjective but quick and often used for initial assessments." },
-                { term: "Quantitative", definition: "Assigns numerical values (e.g., monetary cost, probability percentages) to likelihood and impact. It aims to provide a more objective and measurable view of risk (e.g., ALE, SLE, ARO)." },
-                { term: "ALE", definition: "Annualized Loss Expectancy: The expected monetary loss for an asset due to a risk over a one-year period. (SLE x ARO)." },
-                { term: "SLE", definition: "Single Loss Expectancy: The monetary loss expected each time a risk event occurs. (AV x EF)." },
-                { term: "ARO", definition: "Annualized Rate of Occurrence: The estimated frequency at which a threat event is expected to occur within a one-year period." },
-                { term: "Mitigation", definition: "Reducing the likelihood or impact of a risk through the implementation of security controls." },
-                { term: "Transfer", definition: "Shifting the financial or operational burden of a risk to a third party, often through insurance or contractual agreements." },
-                { term: "Avoidance", definition: "Eliminating the risk entirely by choosing not to engage in or ceasing an activity that gives rise to the risk." },
-                { term: "Acceptance", definition: "Acknowledging the existence of a risk and deciding to take no further action to mitigate it, usually with formal management approval." },
-                { term: "KRI", definition: "Key Risk Indicator: Metrics that provide an early warning signal of increasing risk exposure, helping in proactive risk management." },
-                { term: "Risk Register", definition: "A central repository for all identified risks, including their description, ownership, assessment, and treatment status." }
+                 { term: "Risk", definition: "The potential for loss, calculated as the product of likelihood and impact." },
+                 { term: "Threat", definition: "Any potential danger that could harm an asset." },
+                 { term: "Vulnerability", definition: "A weakness in an asset or control that can be exploited by a threat." },
+                 { term: "Risk Assessment", definition: "The overall process of identifying, analyzing, and evaluating risks." },
+                 { term: "Risk Analysis", definition: "The specific step of evaluating the likelihood and impact of a risk." },
+                 { term: "Qualitative Risk Analysis", definition: "A subjective analysis using descriptive terms (High, Medium, Low)." },
+                 { term: "Quantitative Risk Analysis", definition: "An objective analysis using monetary values (SLE, ARO, ALE)." },
+                 { term: "SLE (Single Loss Expectancy)", definition: "The financial loss from a single incident." },
+                 { term: "ARO (Annualized Rate of Occurrence)", definition: "The number of times an incident is expected to occur in one year." },
+                 { term: "ALE (Annualized Loss Expectancy)", definition: "The total expected financial loss from a risk in one year." },
+                 { term: "Risk Mitigation", definition: "Applying controls to reduce risk." },
+                 { term: "Risk Transference", definition: "Shifting the financial impact of a risk to a third party (e.g., insurance)." },
+                 { term: "Risk Avoidance", definition: "Not engaging in the activity that creates the risk." },
+                 { term: "Risk Acceptance", definition: "Formally deciding to accept a risk without further action." },
+                 { term: "Inherent Risk", definition: "The risk before controls are applied." },
+                 { term: "Residual Risk", definition: "The risk that remains after controls are applied." },
+                 { term: "KRI (Key Risk Indicator)", definition: "A forward-looking metric used as an early warning for changing risk levels." },
+                 { term: "Risk Register", definition: "A document used to track and manage all identified risks." },
+                 { term: "Risk Appetite", definition: "The amount of risk an organization is willing to take to achieve its objectives. It's a high-level strategic statement." },
+                 { term: "Risk Tolerance", definition: "The acceptable deviation from the risk appetite. It sets specific thresholds for different types of risks." }
             ];
 
             let threatDistributionChartInstance, riskMonitoringKRIChartInstance;
