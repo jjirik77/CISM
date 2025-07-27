@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CISM Domain 2 Case Study - TechTrend Risk Management</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #ff7b7b 0%, #667eea 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-btn:hover {
+            background: #e74c3c;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.3);
+        }
+
+        .nav-btn.active {
+            background: #c0392b;
+            color: white;
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            color: #2c3e50;
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #e74c3c;
+            padding-bottom: 10px;
+        }
+
+        .card {
+            background: #f8f9fa;
+            border-left: 4px solid #e74c3c;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h3 {
+            color: #c0392b;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .success {
+            background: #d4edda;
+            border-left-color: #28a745;
+        }
+
+        .info {
+            background: #d1ecf1;
+            border-left-color: #17a2b8;
+        }
+
+        .warning {
+            background: #f8d7da;
+            border-left-color: #dc3545;
+        }
+
+        .critical {
+            background: #fadbd8;
+            border-left-color: #e74c3c;
+            border: 2px solid #e74c3c;
+        }
+
+        .budget-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .budget-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+
+        .budget-amount {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #28a745;
+        }
+
+        .risk-amount {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #dc3545;
+        }
+
+        .asset-chart {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .asset-card {
+            background: linear-gradient(135deg, #ff7b7b 0%, #667eea 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .task-checklist {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .task-item {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .task-checkbox {
+            margin-right: 15px;
+            transform: scale(1.2);
+        }
+
+        .deliverable-template {
+            background: #f8f9fa;
+            border: 2px dashed #6c757d;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+
+        .progress-bar {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 20px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #e74c3c, #ff6b6b);
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .risk-matrix {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .risk-matrix table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .risk-matrix th, .risk-matrix td {
+            border: 1px solid #dee2e6;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .risk-matrix th {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+
+        .risk-critical {
+            background: #f8d7da !important;
+            color: #721c24;
+            font-weight: bold;
+        }
+
+        .risk-high {
+            background: #fff3cd !important;
+            color: #856404;
+            font-weight: bold;
+        }
+
+        .risk-medium {
+            background: #d1ecf1 !important;
+            color: #0c5460;
+        }
+
+        .risk-low {
+            background: #d4edda !important;
+            color: #155724;
+        }
+
+        .threat-box {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+
+        .threat-box h4 {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .vulnerability-scan {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .nav-btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚠️ CISM Domain 2 Case Study</h1>
+            <div class="subtitle">TechTrend Innovations - Information Risk Management</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div id="progressText">Progress: 0% Complete</div>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-btn active" onclick="showSection('scenario')">🏢 Scenario Update</button>
+            <button class="nav-btn" onclick="showSection('assets')">🏗️ Asset Inventory</button>
+            <button class="nav-btn" onclick="showSection('threats')">🎯 Threat Analysis</button>
+            <button class="nav-btn" onclick="showSection('domain2')">⚠️ Domain 2 Tasks</button>
+            <button class="nav-btn" onclick="showSection('deliverables')">📝 Deliverables</button>
+            <button class="nav-btn" onclick="showSection('resources')">📚 Resources</button>
+        </div>
+
+        <!-- Scenario Update Section -->
+        <div id="scenario" class="content-section active">
+            <h2 class="section-title">🏢 TechTrend Scenario Update - 6 Months Later</h2>
+            
+            <div class="card success">
+                <h3>✅ Governance Framework Progress</h3>
+                <p>Following your Domain 1 recommendations, TechTrend has successfully:</p>
+                <ul style="margin-top: 15px; padding-left: 20px;">
+                    <li>Established security steering committee with board oversight</li>
+                    <li>Secured $800K budget approval for security program</li>
+                    <li>Hired 3 additional security professionals</li>
+                    <li>Initiated ISO 27001 certification process</li>
+                </ul>
+            </div>
+
+            <div class="card critical">
+                <h3>🚨 New Risk Management Challenge</h3>
+                <p><strong>Major Client Requirement:</strong> MegaCorp Industries (potential $5M annual contract) requires a comprehensive risk assessment before signing. Their security team needs:</p>
+                <ul style="margin-top: 15px; padding-left: 20px;">
+                    <li>Complete asset inventory with business impact analysis</li>
+                    <li>Threat landscape assessment for SaaS industry</li>
+                    <li>Vulnerability assessment findings and remediation plan</li>
+                    <li>Risk register with quantified risk levels</li>
+                    <li>Risk treatment decisions and timelines</li>
+                </ul>
+            </div>
+
+            <div class="card warning">
+                <h3>⏰ Critical Timeline</h3>
+                <div class="budget-breakdown">
+                    <div class="budget-item">
+                        <h4>Contract Deadline</h4>
+                        <div class="risk-amount">30 Days</div>
+                        <p>MegaCorp needs risk assessment to proceed</p>
+                    </div>
+                    <div class="budget-item">
+                        <h4>Revenue at Risk</h4>
+                        <div class="risk-amount">$5M/year</div>
+                        <p>Annual contract value if requirements met</p>
+                    </div>
+                    <div class="budget-item">
+                        <h4>Competitive Pressure</h4>
+                        <div class="risk-amount">High</div>
+                        <p>Two competitors also bidding with security certs</p>
+                    </div>
+                    <div class="budget-item">
+                        <h4>Reputation Impact</h4>
+                        <div class="risk-amount">Critical</div>
+                        <p>MegaCorp is industry reference customer</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card info">
+                <h3>🎯 Your Updated Role</h3>
+                <p>As Chief Information Security Officer (recently promoted), you must lead the risk management initiative. Success here will:</p>
+                <ul style="padding-left: 20px; margin-top: 10px;">
+                    <li>Secure the largest contract in company history</li>
+                    <li>Establish TechTrend as enterprise-ready</li>
+                    <li>Validate the security investment to the board</li>
+                    <li>Position for additional enterprise opportunities</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>📊 Recent Security Incidents</h3>
+                <p>Three incidents in the past quarter highlight the need for formal risk management:</p>
+                <div class="budget-breakdown">
+                    <div class="budget-item">
+                        <h4>🎣 Phishing Attack</h4>
+                        <p><strong>Impact:</strong> 5 employee credentials compromised<br>
+                        <strong>Cost:</strong> $75K in response and remediation<br>
+                        <strong>Duration:</strong> 18 hours to full containment</p>
+                    </div>
+                    <div class="budget-item">
+                        <h4>☁️ Cloud Misconfiguration</h4>
+                        <p><strong>Impact:</strong> Customer database briefly exposed<br>
+                        <strong>Cost:</strong> $125K in notifications and credit monitoring<br>
+                        <strong>Duration:</strong> 6 hours of exposure</p>
+                    </div>
+                    <div class="budget-item">
+                        <h4>🔒 Ransomware Attempt</h4>
+                        <p><strong>Impact:</strong> Development systems infected<br>
+                        <strong>Cost:</strong> $200K in recovery and lost productivity<br>
+                        <strong>Duration:</strong> 3 days to full recovery</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Asset Inventory Section -->
+        <div id="assets" class="content-section">
+            <h2 class="section-title">🏗️ Critical Asset Inventory</h2>
+            
+            <div class="card">
+                <h3>💎 High-Value Information Assets</h3>
+                <div class="asset-chart">
+                    <div class="asset-card">
+                        <div>🗄️ Customer Database</div>
+                        <div style="font-size: 1.5em; margin: 10px 0;">$15M</div>
+                        <div>2.8M customer records<br>Financial data, PII</div>
+                    </div>
+                    <div class="asset-card">
+                        <div>🧠 AI/ML Algorithms</div>
+                        <div style="font-size: 1.5em; margin: 10px 0;">$35M</div>
+                        <div>Proprietary analytics<br>Competitive advantage</div>
+                    </div>
+                    <div class="asset-card">
+                        <div>⚙️ Production Systems</div>
+                        <div style="font-size: 1.5em; margin: 10px 0;">$8M</div>
+                        <div>24-hour outage impact<br>SLA penalties</div>
+                    </div>
+                    <div class="asset-card">
+                        <div>📋 Source Code</div>
+                        <div style="font-size: 1.5em; margin: 10px 0;">$25M</div>
+                        <div>5 years development<br>Trade secrets</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🏢 Infrastructure Assets</h3>
+                <div class="budget-breakdown">
+                    <div class="budget-item">
+                        <h4>☁️ AWS Cloud Environment</h4>
+                        <div class="budget-amount">350 Instances</div>
+                        <p>Multi-region deployment across US, Canada, Germany</p>
+                    </div>
+                    <div class="budget-item">
+                        <h4>🔗 Network Infrastructure</h4>
+                        <div class="budget-amount">99.9% SLA</div>
+                        <p>Load balancers, CDN, VPN connections</p>
+                    </div>
+                    <div class="budget-item">
+                        <h4>💻 Employee Devices</h4>
+                        <div class="budget-amount">520 Endpoints</div>
+                        <p>Laptops, mobile devices, tablets</p>
+                    </div>
+                    <div class="budget-item">
+                        <h4>🏢 Physical Offices</h4>
+                        <div class="budget-amount">3 Locations</div>
+                        <p>San Francisco, Toronto, Munich</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card info">
+                <h3>👥 Human Assets & Dependencies</h3>
+                <ul style="padding-left: 20px;">
+                    <li><strong>Key Personnel:</strong> 25 employees with critical system knowledge</li>
+                    <li><strong>Development Team:</strong> 120 engineers with source code access</li>
+                    <li><strong>Customer Support:</strong> 80 staff with customer data access</li>
+                    <li><strong>Third-Party Vendors:</strong> 15 critical service providers</li>
+                    <li><strong>Cloud Dependencies:</strong> AWS, Cloudflare, Auth0, SendGrid</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>📊 Asset Classification Matrix</h3>
+                <div class="risk-matrix">
+                    <table>
+                        <tr>
+                            <th>Asset Category</th>
+                            <th>Confidentiality</th>
+                            <th>Integrity</th>
+                            <th>Availability</th>
+                            <th>Business Impact</th>
+                        </tr>
+                        <tr>
+                            <td>Customer Data</td>
+                            <td class="risk-critical">Critical</td>
+                            <td class="risk-critical">Critical</td>
+                            <td class="risk-high">High</td>
+                            <td>$15M + Legal/Regulatory</td>
+                        </tr>
+                        <tr>
+                            <td>AI/ML Algorithms</td>
+                            <td class="risk-critical">Critical</td>
+                            <td class="risk-critical">Critical</td>
+                            <td class="risk-medium">Medium</td>
+                            <td>$35M Competitive Loss</td>
+                        </tr>
+                        <tr>
+                            <td>Production Systems</td>
+                            <td class="risk-low">Low</td>
+                            <td class="risk-critical">Critical</td>
+                            <td class="risk-critical">Critical</td>
+                            <td>$8M + SLA Penalties</td>
+                        </tr>
+                        <tr>
+                            <td>Source Code</td>
+                            <td class="risk-critical">Critical</td>
+                            <td class="risk-critical">Critical</td>
+                            <td class="risk-medium">Medium</td>
+                            <td>$25M Development Cost</td>
+                        </tr>
+                        <tr>
+                            <td>Employee Data</td>
+                            <td class="risk-high">High</td>
+                            <td class="risk-high">High</td>
+                            <td class="risk-medium">Medium</td>
+                            <td>Legal/Regulatory/Reputation</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Threat Analysis Section -->
+        <div id="threats" class="content-section">
+            <h2 class="section-title">🎯 Threat Landscape Analysis</h2>
+            
+            <div class="card">
+                <h3>🌐 External Threat Environment</h3>
+                <div class="threat-box">
+                    <h4>🎣 Advanced Persistent Threats (APTs)</h4>
+                    <p><strong>Likelihood:</strong> Medium | <strong>Impact:</strong> Critical</p>
+                    <p>Nation-state actors targeting SaaS companies for customer data and intellectual property. Recent campaigns against similar companies in financial technology sector.</p>
+                </div>
+                
+                <div class="threat-box">
+                    <h4>🔒 Ransomware Groups</h4>
+                    <p><strong>Likelihood:</strong> High | <strong>Impact:</strong> Critical</p>
+                    <p>Targeted attacks on cloud-native companies. Average ransom demand: $2.3M. Recent successful attacks on 3 competitors in past 6 months.</p>
+                </div>
+                
+                <div class="threat-box">
+                    <h4>💰 Financially Motivated Cybercriminals</h4>
+                    <p><strong>Likelihood:</strong> Very High | <strong>Impact:</strong> High</p>
+                    <p>Targeting customer financial data for fraud and identity theft. Dark web pricing for financial records: $50-200 per record.</p>
+                </div>
+                
+                <div class="threat-box">
+                    <h4>🕵️ Corporate Espionage</h4>
+                    <p><strong>Likelihood:</strong> Medium | <strong>Impact:</strong> Very High</p>
+                    <p>Competitors seeking AI/ML algorithms and customer lists. Recent hiring of employees by competitors with access attempts.</p>
+                </div>
+            </div>
+
+            <div class="card warning">
+                <h3>🏠 Internal Threat Landscape</h3>
+                <div class="budget-breakdown">
+                    <div class="budget-item">
+                        <h4>😤 Disgruntled Employees</h4>
+                        <p><strong>Risk Level:</strong> Medium<br>
+                        Recent layoffs in marketing (15 people), access not immediately revoked for 3 employees</p>
+                    </div>
+                    <div class="budget-item">
+                        <h4>🤝 Privileged User Abuse</h4>
+                        <p><strong>Risk Level:</strong> Medium<br>
+                        25 employees with admin access, minimal monitoring of privileged activities</p>
+                    </div>
+                    <div class="budget-item">
+                        <h4>🎓 Inadequate Training</h4>
+                        <p><strong>Risk Level:</strong> High<br>
+                        40% of employees failed recent phishing simulation test</p>
+                    </div>
+                    <div class="budget-item">
+                        <h4>📱 Shadow IT</h4>
+                        <p><strong>Risk Level:</strong> High<br>
+                        Discovered 200+ unauthorized cloud services in use across organization</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="vulnerability-scan">
+                <h3>🔍 Recent Vulnerability Assessment Findings</h3>
+                <div class="budget-breakdown">
+                    <div class="budget-item">
+                        <h4>Critical Vulnerabilities</h4>
+                        <div class="risk-amount">23</div>
+                        <p>Immediate remediation required</p>
+                    </div>
+                    <div class="budget-item">
+                        <h4>High Vulnerabilities</h4>
+                        <div class="risk-amount">156</div>
+                        <p>30-day remediation target</p>
+                    </div>
+                    <div class="budget-item">
+                        <h4>Unpatched Systems</h4>
+                        <div class="risk-amount">45%</div>
+                        <p>Missing critical security patches</p>
+                    </div>
+                    <div class="budget-item">
+                        <h4>Default Passwords</h4>
+                        <div class="risk-amount">12</div>
+                        <p>Systems with unchanged defaults</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🌍 Industry-Specific Threats</h3>
+                <ul style="padding-left: 20px;">
+                    <li><strong>SaaS Supply Chain Attacks:</strong> Targeting shared infrastructure and dependencies</li>
+                    <li><strong>API Security Threats:</strong> 300+ API endpoints with varying security controls</li>
+                    <li><strong>Multi-Tenant Data Breaches:</strong> Risk of cross-customer data exposure</li>
+                    <li><strong>Compliance Violations:</strong> GDPR, CCPA enforcement increasing fines</li>
+                    <li><strong>Third-Party Vendor Risks:</strong> 15 critical vendors with system access</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Domain 2 Tasks Section -->
+        <div id="domain2" class="content-section">
+            <h2 class="section-title">⚠️ Domain 2: Information Risk Management Tasks</h2>
+            
+            <div class="card critical">
+                <h3>🎯 Domain 2 Mission: Complete Risk Assessment for MegaCorp</h3>
+                <p><strong>Scenario Context:</strong> MegaCorp's security team requires a comprehensive risk assessment demonstrating TechTrend's risk management maturity before approving the $5M annual contract.</p>
+                
+                <div class="task-checklist">
+                    <div class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div>
+                            <strong>Task 2.1:</strong> Asset Risk Analysis (45 min)
+                            <div style="font-size: 0.9em; color: #666; margin-top: 5px;">Conduct business impact analysis and assign risk values to critical assets</div>
+                        </div>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div>
+                            <strong>Task 2.2:</strong> Threat & Vulnerability Assessment (45 min)
+                            <div style="font-size: 0.9em; color: #666; margin-top: 5px;">Map threats to assets, assess vulnerability exposure, calculate risk probability</div>
+                        </div>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div>
+                            <strong>Task 2.3:</strong> Risk Evaluation & Treatment Plan (30 min)
+                            <div style="font-size: 0.9em; color: #666; margin-top: 5px;">Create risk register, determine treatment strategies, establish monitoring</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📊 Risk Assessment Methodology</h3>
+                <p>Use the following approach based on ISO 27005 and NIST 800-30:</p>
+                <div class="budget-breakdown">
+                    <div class="budget-item">
+                        <h4>📈 Risk Calculation</h4>
+                        <p><strong>Risk = Threat × Vulnerability × Impact</strong><br>
+                        Scale: 1-5 (Very Low to Very High)</p>
+                    </div>
+                    <div class="budget-item">
+                        <h4>💰 Business Impact</h4>
+                        <p><strong>Financial + Operational + Reputation</strong><br>
+                        Include regulatory fines and recovery costs</p>
+                    </div>
+                    <div class="budget-item">
+                        <h4>⏰ Threat Likelihood</h4>
+                        <p><strong>Historical + Industry + Current</strong><br>
+                        Consider threat actor motivation and capability</p>
+                    </div>
+                    <div class="budget-item">
+                        <h4>🔍 Vulnerability Rating</h4>
+                        <p><strong>Technical + Procedural + Human</strong><br>
+                        Include existing controls effectiveness</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🎯 Risk Treatment Options</h3>
+                <div class="budget-breakdown">
+                    <div class="budget-item">
+                        <h4>🛡️ Mitigate</h4>
+                        <p>Implement controls to reduce likelihood or impact. Most common approach for critical/high risks.</p>
+                    </div>
+                    <div class="budget-item">
+                        <h4>🔄 Transfer</h4>
+                        <p>Use insurance or contracts to shift risk. Consider for high-impact, low-frequency events.</p>
+                    </div>
+                    <div class="budget-item">
+                        <h4>✅ Accept</h4>
+                        <p>Acknowledge risk but take no action. Only for risks within appetite threshold.</p>
+                    </div>
+                    <div class="budget-item">
+                        <h4>🚫 Avoid</h4>
+                        <p>Eliminate risk by changing business process. Consider for unacceptable risks.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card info">
+                <h3>📋 Risk Register Template</h3>
+                <p>Your risk register should include these elements for each identified risk:</p>
+                <ul style="padding-left: 20px; margin-top: 10px;">
+                    <li><strong>Risk ID:</strong> Unique identifier (R001, R002, etc.)</li>
+                    <li><strong>Risk Description:</strong> Clear statement of the risk scenario</li>
+                    <li><strong>Asset(s) Affected:</strong> Which critical assets are at risk</li>
+                    <li><strong>Threat Source:</strong> What or who poses the threat</li>
+                    <li><strong>Vulnerability:</strong> Weakness that could be exploited</li>
+                    <li><strong>Likelihood:</strong> Probability of occurrence (1-5 scale)</li>
+                    <li><strong>Impact:</strong> Business consequence if risk occurs (1-5 scale)</li>
+                    <li><strong>Risk Level:</strong> Calculated risk score (Likelihood × Impact)</li>
+                    <li><strong>Treatment Decision:</strong> Mitigate, Transfer, Accept, or Avoid</li>
+                    <li><strong>Control Measures:</strong> Existing or planned risk controls</li>
+                    <li><strong>Owner:</strong> Person responsible for managing the risk</li>
+                    <li><strong>Timeline:</strong> Target dates for risk treatment actions</li>
+                </ul>
+            </div>
+
+            <div class="card warning">
+                <h3>⚠️ MegaCorp's Specific Requirements</h3>
+                <p>The risk assessment must address these specific concerns:</p>
+                <ul style="padding-left: 20px;">
+                    <li><strong>Data Segregation:</strong> How customer data is isolated in multi-tenant environment</li>
+                    <li><strong>Incident Response:</strong> Time to detection and containment capabilities</li>
+                    <li><strong>Business Continuity:</strong> RTO/RPO commitments and disaster recovery</li>
+                    <li><strong>Third-Party Risk:</strong> Vendor management and supply chain security</li>
+                    <li><strong>Regulatory Compliance:</strong> GDPR, SOX, and industry-specific requirements</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Deliverables Section -->
+        <div id="deliverables" class="content-section">
+            <h2 class="section-title">📝 Risk Assessment Deliverables</h2>
+            
+            <div class="card">
+                <h3>📄 Executive Risk Assessment Report (3-4 pages)</h3>
+                <div class="deliverable-template">
+                    <h4>Section 1: Executive Summary (0.5 pages)</h4>
+                    <ul style="padding-left: 20px;">
+                        <li>Overall risk posture and key findings</li>
+                        <li>Critical risks requiring immediate attention</li>
+                        <li>Risk treatment recommendations and timelines</li>
+                        <li>Investment requirements for risk mitigation</li>
+                    </ul>
+                </div>
+                
+                <div class="deliverable-template">
+                    <h4>Section 2: Asset & Business Impact Analysis (1 page)</h4>
+                    <ul style="padding-left: 20px;">
+                        <li>Critical asset inventory with valuations</li>
+                        <li>Business impact analysis for each asset category</li>
+                        <li>Asset interdependencies and single points of failure</li>
+                        <li>Regulatory and compliance impact considerations</li>
+                    </ul>
+                </div>
+                
+                <div class="deliverable-template">
+                    <h4>Section 3: Threat & Vulnerability Assessment (1 page)</h4>
+                    <ul style="padding-left: 20px;">
+                        <li>Threat landscape analysis for SaaS industry</li>
+                        <li>Internal and external threat actor assessment</li>
+                        <li>Vulnerability assessment findings and trends</li>
+                        <li>Attack surface analysis and exposure points</li>
+                    </ul>
+                </div>
+                
+                <div class="deliverable-template">
+                    <h4>Section 4: Risk Register & Treatment Plan (1.5 pages)</h4>
+                    <ul style="padding-left: 20px;">
+                        <li>Comprehensive risk register with quantified risks</li>
+                        <li>Risk treatment decisions and justifications</li>
+                        <li>Implementation roadmap with priorities and timelines</li>
+                        <li>Risk monitoring and review procedures</li>
+                        <li>Residual risk assessment after treatment</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📊 Risk Dashboard Template</h3>
+                <div class="deliverable-template">
+                    <h4>Visual Risk Summary Dashboard</h4>
+                    <ul style="padding-left: 20px;">
+                        <li>Risk heat map showing probability vs. impact</li>
+                        <li>Top 10 risks by business impact</li>
+                        <li>Risk treatment status by category</li>
+                        <li>Trend analysis over time</li>
+                        <li>Key risk indicators (KRIs) and thresholds</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card success">
+                <h3>✅ Success Criteria for MegaCorp Review</h3>
+                <ul style="padding-left: 20px;">
+                    <li><strong>Comprehensive Coverage:</strong> All critical assets and major threat scenarios addressed</li>
+                    <li><strong>Quantified Risk Analysis:</strong> Business impact expressed in financial terms</li>
+                    <li><strong>Realistic Treatment Plans:</strong> Practical mitigation strategies within budget constraints</li>
+                    <li><strong>Industry Benchmarking:</strong> Risk levels compared to SaaS industry standards</li>
+                    <li><strong>Continuous Monitoring:</strong> Ongoing risk management processes defined</li>
+                </ul>
+            </div>
+
+            <div class="card info">
+                <h3>💡 Risk Assessment Tips</h3>
+                <ul style="padding-left: 20px;">
+                    <li><strong>Be Realistic:</strong> Base likelihood assessments on actual industry data</li>
+                    <li><strong>Quantify Impact:</strong> Use financial metrics wherever possible</li>
+                    <li><strong>Consider Cascading Effects:</strong> How one incident can trigger multiple impacts</li>
+                    <li><strong>Include Stakeholder Input:</strong> Business owners best understand asset values</li>
+                    <li><strong>Document Assumptions:</strong> Clearly state the basis for risk calculations</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Resources Section -->
+        <div id="resources" class="content-section">
+            <h2 class="section-title">📚 Risk Management Resources</h2>
+            
+            <div class="card">
+                <h3>📖 Required Reading Materials</h3>
+                <ul style="padding-left: 20px;">
+                    <li><strong>CISM Review Manual 16th Edition:</strong> Chapter 2 - Information Risk Management</li>
+                    <li><strong>ISO 27005:2022:</strong> Information Security Risk Management</li>
+                    <li><strong>NIST SP 800-30:</strong> Guide for Conducting Risk Assessments</li>
+                    <li><strong>FAIR Risk Analysis:</strong> Factor Analysis of Information Risk methodology</li>
+                    <li><strong>ENISA Threat Landscape:</strong> Current cybersecurity threat environment</li>
+                </ul>
+            </div>
+
+            <div class="card info">
+                <h3>🔗 Additional Risk Management Resources</h3>
+                <div class="budget-breakdown">
+                    <div class="budget-item">
+                        <h4>📋 Risk Assessment Tools</h4>
+                        <ul style="text-align: left;">
+                            <li>Risk register templates</li>
+                            <li>Business impact analysis worksheets</li>
+                            <li>Threat modeling frameworks</li>
+                            <li>Risk calculation spreadsheets</li>
+                        </ul>
+                    </div>
+                    <div class="budget-item">
+                        <h4>📊 Industry Benchmarks</h4>
+                        <ul style="text-align: left;">
+                            <li>SaaS security incident statistics</li>
+                            <li>Cybersecurity cost analysis reports</li>
+                            <li>Threat actor profiles and TTPs</li>
+                            <li>Vulnerability database trends</li>
+                        </ul>
+                    </div>
+                    <div class="budget-item">
+                        <h4>⚖️ Compliance Frameworks</h4>
+                        <ul style="text-align: left;">
+                            <li>GDPR risk assessment guidance</li>
+                            <li>SOX IT controls requirements</li>
+                            <li>ISO 27001 risk management process</li>
+                            <li>SOC 2 Type II criteria</li>
+                        </ul>
+                    </div>
+                    <div class="budget-item">
+                        <h4>🎯 Practical Examples</h4>
+                        <ul style="text-align: left;">
+                            <li>SaaS company risk assessments</li>
+                            <li>Risk treatment case studies</li>
+                            <li>Incident impact calculations</li>
+                            <li>Risk communication templates</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card success">
+                <h3>🏆 Domain 2 Completion Checklist</h3>
+                <div class="task-checklist">
+                    <div class="task-item">
+                        <input type="checkbox" class="completion-checkbox">
+                        <div>Reviewed scenario update and MegaCorp requirements</div>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox" class="completion-checkbox">
+                        <div>Completed asset inventory and business impact analysis</div>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox" class="completion-checkbox">
+                        <div>Analyzed threat landscape and vulnerability exposure</div>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox" class="completion-checkbox">
+                        <div>Developed comprehensive risk register with treatment plans</div>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox" class="completion-checkbox">
+                        <div>Created executive risk assessment report</div>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox" class="completion-checkbox">
+                        <div>Prepared risk dashboard and visual summaries</div>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox" class="completion-checkbox">
+                        <div>Final review and MegaCorp presentation preparation</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card warning">
+                <h3>⚠️ Common Risk Assessment Pitfalls</h3>
+                <ul style="padding-left: 20px;">
+                    <li><strong>Underestimating Impact:</strong> Consider all costs including reputation, legal, recovery</li>
+                    <li><strong>Overestimating Likelihood:</strong> Base on actual data, not fear or headlines</li>
+                    <li><strong>Ignoring Interdependencies:</strong> Map how asset failures cascade to other systems</li>
+                    <li><strong>Static Assessment:</strong> Risk changes constantly, build in regular review cycles</li>
+                    <li><strong>Generic Treatment Plans:</strong> Ensure controls address specific identified risks</li>
+                    <li><strong>Poor Communication:</strong> Translate technical risks into business language</li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>🔍 MegaCorp Evaluation Criteria</h3>
+                <p>Your risk assessment will be evaluated against these specific criteria:</p>
+                <div class="budget-breakdown">
+                    <div class="budget-item">
+                        <h4>Completeness (30%)</h4>
+                        <p>Coverage of all critical assets, threats, and vulnerabilities</p>
+                    </div>
+                    <div class="budget-item">
+                        <h4>Accuracy (25%)</h4>
+                        <p>Realistic risk calculations based on industry data</p>
+                    </div>
+                    <div class="budget-item">
+                        <h4>Business Relevance (25%)</h4>
+                        <p>Clear connection between risks and business impact</p>
+                    </div>
+                    <div class="budget-item">
+                        <h4>Actionability (20%)</h4>
+                        <p>Practical treatment plans with clear timelines</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            console.log('showSection called with:', sectionId);
+            
+            // Hide all sections
+            var sections = document.querySelectorAll('.content-section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            
+            // Remove active from all buttons
+            var buttons = document.querySelectorAll('.nav-btn');
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove('active');
+            }
+            
+            // Show target section
+            var targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+                console.log('Section shown:', sectionId);
+            } else {
+                console.error('Section not found:', sectionId);
+            }
+            
+            // Add active to clicked button
+            var clickedButton = event.target;
+            if (clickedButton) {
+                clickedButton.classList.add('active');
+            }
+        }
+
+        // Progress tracking
+        function updateProgress() {
+            var allCheckboxes = document.querySelectorAll('.task-checkbox, .completion-checkbox');
+            var checkedBoxes = document.querySelectorAll('.task-checkbox:checked, .completion-checkbox:checked');
+            var progress = allCheckboxes.length > 0 ? (checkedBoxes.length / allCheckboxes.length) * 100 : 0;
+            
+            var progressFill = document.getElementById('progressFill');
+            var progressText = document.getElementById('progressText');
+            
+            if (progressFill && progressText) {
+                progressFill.style.width = progress + '%';
+                progressText.textContent = 'Progress: ' + Math.round(progress) + '% Complete';
+                
+                if (progress === 100) {
+                    progressText.textContent = '🎉 Domain 2 Complete! Risk Assessment Ready!';
+                    progressText.style.color = '#e74c3c';
+                    progressText.style.fontWeight = 'bold';
+                }
+            }
+        }
+
+        // Initialize when page loads
+        window.onload = function() {
+            console.log('Page loaded, initializing...');
+            
+            // Add event listeners to checkboxes
+            var checkboxes = document.querySelectorAll('.task-checkbox, .completion-checkbox');
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].addEventListener('change', updateProgress);
+            }
+            
+            // Initialize progress
+            updateProgress();
+            
+            console.log('Initialization complete!');
+        };
+    </script>
+</body>
+</html>
