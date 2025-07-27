@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CISM 2024: Domain 2 - Information Security Risk Management (Designer Edition)</title>
+    <title>CISM 2025: Domain 2 - Information Security Risk Management (Designer Edition)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -617,11 +617,11 @@
                                 <table class="dark-table">
                                     <thead><tr><th>Risk Area</th><th>Current Level</th><th>Trend</th><th>Last Review</th></tr></thead>
                                     <tbody>
-                                        <tr><td>Cyber Attack Surface</td><td class="risk-level-medium">Medium</td><td class="trend-stable">Stable</td><td>Q2 2024</td></tr>
-                                        <tr><td>Data Privacy Compliance</td><td class="risk-level-low">Low</td><td class="trend-down">Improving</td><td>Q2 2024</td></tr>
-                                        <tr><td>Third-Party Vendor Risk</td><td class="risk-level-high">High</td><td class="trend-up">Worsening</td><td>Q2 2024</td></tr>
-                                        <tr><td>Insider Threat</td><td class="risk-level-medium">Medium</td><td class="trend-stable">Stable</td><td>Q2 2024</td></tr>
-                                        <tr><td>Operational Resilience</td><td class="risk-level-low">Low</td><td class="trend-down">Improving</td><td>Q2 2024</td></tr>
+                                        <tr><td>Cyber Attack Surface</td><td class="risk-level-medium">Medium</td><td class="trend-stable">Stable</td><td>Q2 2025</td></tr>
+                                        <tr><td>Data Privacy Compliance</td><td class="risk-level-low">Low</td><td class="trend-down">Improving</td><td>Q2 2025</td></tr>
+                                        <tr><td>Third-Party Vendor Risk</td><td class="risk-level-high">High</td><td class="trend-up">Worsening</td><td>Q2 2025</td></tr>
+                                        <tr><td>Insider Threat</td><td class="risk-level-medium">Medium</td><td class="trend-stable">Stable</td><td>Q2 2025</td></tr>
+                                        <tr><td>Operational Resilience</td><td class="risk-level-low">Low</td><td class="trend-down">Improving</td><td>Q2 2025</td></tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -651,7 +651,7 @@
         </main>
 
         <footer class="text-center py-8 mt-10 text-gray-500 text-sm">
-            <p>&copy; 2024 CISM Study Guide. All rights reserved. For educational purposes only.</p>
+            <p>&copy; 2025 CISM Study Guide. All rights reserved. For educational purposes only.</p>
         </footer>
     </div>
 
@@ -729,32 +729,51 @@
                 document.querySelectorAll('.accordion-button').forEach(button => {
                     button.addEventListener('click', () => {
                         const content = button.nextElementSibling;
+                        const icon = button.querySelector('.accordion-icon');
                         const isOpening = content.classList.contains('hidden');
+                        
                         if (isOpening) {
                             content.classList.remove('hidden');
                             button.classList.add('open');
+                            icon.textContent = '-';
                         } else {
                             content.classList.add('hidden');
                             button.classList.remove('open');
+                            icon.textContent = '+';
                         }
                     });
                 });
             }
             
-            function setupCardToggles() {
-                const allCards = document.querySelectorAll('[data-group]');
-                allCards.forEach(card => {
-                    card.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        const group = card.dataset.group;
-                        const isAlreadyActive = card.classList.contains('active');
-                        document.querySelectorAll(`[data-group="${group}"]`).forEach(otherCard => {
-                            otherCard.classList.remove('active');
-                        });
-                        if (!isAlreadyActive) {
-                            card.classList.add('active');
-                        }
+            /**
+             * Sets up card toggle functionality using event delegation.
+             * This is more efficient and robust, especially for dynamically added content.
+             */
+            function setupCardTogglesWithDelegation() {
+                const contentArea = document.getElementById('content-area');
+                if (!contentArea) return;
+
+                contentArea.addEventListener('click', (e) => {
+                    // Find the closest card with a data-group attribute from the click target
+                    const card = e.target.closest('[data-group]');
+                    
+                    // If no card was clicked, do nothing
+                    if (!card) return;
+
+                    // This logic handles all cards with a 'data-group' attribute
+                    const group = card.dataset.group;
+                    const isAlreadyActive = card.classList.contains('active');
+
+                    // Deactivate all cards in the same group
+                    contentArea.querySelectorAll(`[data-group="${group}"]`).forEach(otherCard => {
+                        otherCard.classList.remove('active');
                     });
+
+                    // If the card was not already active, activate it.
+                    // This creates a toggle behavior: click once to open, click again (or another card) to close.
+                    if (!isAlreadyActive) {
+                        card.classList.add('active');
+                    }
                 });
             }
 
@@ -769,25 +788,35 @@
                         e.stopPropagation();
                         const isAlreadyActive = vulnerabilityNode.classList.contains('active');
                         
-                        // Reset all scenarios
+                        // Reset all other scenarios to ensure only one is open at a time
                         document.querySelectorAll('.flow-scenario').forEach(s => {
-                            s.querySelectorAll('.unified-card').forEach(n => n.classList.remove('active'));
-                            s.querySelectorAll('.flow-arrow, [data-node-type="threat"], [data-node-type="impact"]').forEach(el => el.classList.add('hidden'));
+                            if (s !== scenario) {
+                                s.querySelectorAll('.unified-card').forEach(n => n.classList.remove('active'));
+                                s.querySelectorAll('.flow-arrow, [data-node-type="threat"], [data-node-type="impact"]').forEach(el => el.classList.add('hidden'));
+                            }
                         });
 
+                        // Toggle the current scenario's first step
                         if (!isAlreadyActive) {
                             vulnerabilityNode.classList.add('active');
                             threatNode.classList.remove('hidden');
                             arrows[0].classList.remove('hidden');
+                        } else {
+                             // If clicking an active vulnerability node, close the whole chain
+                            vulnerabilityNode.classList.remove('active');
+                            threatNode.classList.add('hidden');
+                            threatNode.classList.remove('active');
+                            impactNode.classList.add('hidden');
+                            impactNode.classList.remove('active');
+                            arrows.forEach(arrow => arrow.classList.add('hidden'));
                         }
                     });
 
                     threatNode.addEventListener('click', (e) => {
                         e.stopPropagation();
                         const isAlreadyActive = threatNode.classList.contains('active');
-                        // Deactivate impact node if threat node is toggled
-                        impactNode.classList.remove('active');
 
+                        // Toggle the second step
                         if (!isAlreadyActive) {
                             threatNode.classList.add('active');
                             impactNode.classList.remove('hidden');
@@ -795,8 +824,15 @@
                         } else {
                             threatNode.classList.remove('active');
                             impactNode.classList.add('hidden');
+                            impactNode.classList.remove('active'); // also deactivate impact
                             arrows[1].classList.add('hidden');
                         }
+                    });
+
+                     impactNode.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        // Simple toggle for the final card in the chain
+                        impactNode.classList.toggle('active');
                     });
                 });
             }
@@ -899,21 +935,19 @@
                 keyTermsData.forEach(item => {
                     const card = document.createElement('div');
                     card.className = 'unified-card key-term-card';
-                    card.dataset.group = 'key-terms';
+                    card.dataset.group = 'key-terms'; // This allows the delegated event listener to find it
                     card.innerHTML = `
                         <span class="card-title">${item.term}</span>
                         <div class="card-description">${item.definition}</div>
                     `;
                     container.appendChild(card);
                 });
-                // Re-apply toggle logic to newly created cards
-                setupCardToggles();
             }
 
             // --- INITIALIZATION ---
             setupNavigation();
             setupAccordions();
-            setupCardToggles();
+            setupCardTogglesWithDelegation(); // Use the new, robust method
             setupFlowchartToggles();
             initThreatDistributionChart();
             initRiskMonitoringKRIChart();
