@@ -3,264 +3,531 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CISM 2025: Domain 2 - Information Security Risk Management (Designer Edition)</title>
+    <title>CISM 2024: Domain 2 - Information Security Risk Management (Interactive Study Guide)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        /* Global Styles & Font Import */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&display=swap');
-
-        :root {
-            --dark-navy-bg: #0a101f;
-            --surface-color: #10192b;
-            --accent-glow: #00bfff; /* Deep Sky Blue */
-            --text-primary: #e2e8f0;
-            --text-secondary: #94a3b8;
-            --border-color: #2d3748;
-            --shadow-color: rgba(0, 191, 255, 0.1);
-            --shadow-color-hover: rgba(0, 191, 255, 0.3);
-            --transition-fast: all 0.3s ease-in-out;
-            --color-red: #FF6384;
-            --color-yellow: #FFCD56;
-            --color-green: #4BC0C0;
-            --color-purple: #9966FF;
-            --color-orange: #DAA520;
-            --color-blue-alt: #6A5ACD;
-        }
-
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--dark-navy-bg);
-            background-image: radial-gradient(circle at top, #10192b, var(--dark-navy-bg));
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
+            background-color: #F8F5EF; /* Warm Neutral Background */
+            color: #333333;
         }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-image: url('https://www.transparenttextures.com/patterns/subtle-noise.png');
-            opacity: 0.03;
-            pointer-events: none;
-            z-index: -1;
-        }
-        
         .container {
             max-width: 1200px;
         }
-
-        /* Header */
-        header.main-header {
-            background: linear-gradient(180deg, var(--surface-color), #0a101fcc);
-            border-bottom: 1px solid var(--border-color);
-            border-radius: 0.75rem;
-            position: relative;
-        }
-        
-        .header-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 400px;
-            height: 200px;
-            background: var(--accent-glow);
-            border-radius: 50%;
-            filter: blur(100px);
-            transform: translate(-50%, -50%);
-            opacity: 0.1;
-            animation: pulseGlow 8s infinite alternate;
-            z-index: 0;
-        }
-
-        @keyframes pulseGlow {
-            from { opacity: 0.05; transform: translate(-50%, -50%) scale(0.8); }
-            to { opacity: 0.15; transform: translate(-50%, -50%) scale(1.2); }
-        }
-
-        header.main-header .header-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        header.main-header h1 {
-            font-family: 'Poppins', sans-serif;
-            letter-spacing: 0.5px;
-            text-shadow: 0 0 15px rgba(0, 191, 255, 0.2);
-        }
-
-        /* Main Content Area */
-        main {
-            background-color: var(--surface-color);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-            overflow: hidden;
-            padding: 2rem;
-        }
-        
-        /* Section Header */
+        /* Enhanced Section Header with new accent color from Domain 3 */
         .section-header {
-            border-left: 6px solid var(--accent-glow);
+            border-left: 6px solid #00A896; /* Vibrant Teal Accent */
             padding-left: 1.25rem;
-            font-size: 2.5rem;
-            font-family: 'Poppins', sans-serif;
-            letter-spacing: 0.5px;
-            color: var(--text-primary);
+            font-size: 2.5rem; /* Slightly larger */
+            color: #222222; /* Darker text for contrast */
         }
-        
-        /* Navigation Tabs */
-        .nav-item {
-            border: 2px solid transparent;
-            border-radius: 0.5rem;
-            transition: var(--transition-fast);
-            position: relative;
-            overflow: hidden;
-            color: var(--text-secondary);
-            font-weight: 600;
-        }
-        .nav-item:not(.active):hover {
-            border-color: var(--accent-glow);
-            background-color: rgba(0, 191, 255, 0.05);
-            color: var(--text-primary);
-        }
-        .nav-item.active {
-            background-color: var(--accent-glow);
-            color: var(--dark-navy-bg);
-            font-weight: 700;
-            box-shadow: 0 0 20px var(--shadow-color);
-        }
-
-        /* Enhanced Fade-in Animation */
-        .fade-in {
-            animation: enhancedFadeIn 0.7s ease-out;
-        }
-        @keyframes enhancedFadeIn {
-            from { opacity: 0; transform: translateY(25px) scale(0.98); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-        }
-
-        /* General content box */
-        .content-box {
-            background-color: rgba(10, 16, 31, 0.5);
-            border: 1px solid var(--border-color);
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-        }
-
-        /* Accordion Styles */
+        /* Refined Accordion Button and Content from Domain 3 */
         .accordion-button {
-            background-color: var(--dark-navy-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 0.75rem;
-            padding: 1rem 1.5rem;
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-primary);
-            transition: var(--transition-fast);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            text-align: left;
+            background-color: #EDEAE0; /* Secondary Neutral */
+            border-bottom: 1px solid #D5D2C8;
+            border-radius: 0.75rem; /* More rounded */
+            padding: 1rem 1.5rem; /* Increased padding */
+            font-size: 1.25rem; /* Slightly larger font */
+            font-weight: 700; /* Bolder */
+            color: #333333;
+            transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+            display: flex; /* Ensure flex behavior */
+            justify-content: space-between; /* Pushes content and icon to ends */
+            align-items: center; /* Vertically centers items */
+            text-align: left; /* Keep text aligned left within the button */
         }
         .accordion-button:hover {
-            border-color: var(--accent-glow);
-            background-color: rgba(0, 191, 255, 0.05);
-        }
-        .accordion-icon {
-            transition: transform 0.3s ease-in-out;
-        }
-        .accordion-button.open .accordion-icon {
-            transform: rotate(45deg);
+            background-color: #D5D2C8; /* Darker on hover */
+            transform: translateY(-1px);
         }
         .accordion-content {
-            background-color: transparent;
-            border: 1px solid var(--border-color);
-            border-top: none;
-            border-radius: 0 0 0.75rem 0.75rem;
-            padding: 1.5rem;
-            margin-top: -0.75rem;
-            animation: enhancedFadeIn 0.5s ease-in-out;
+            background-color: #FFFFFF;
+            border-bottom: 1px solid #D5D2C8;
+            border-radius: 0 0 0.75rem 0.75rem; /* Match top radius */
+            padding: 1.5rem; /* More padding */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow */
         }
-
-        /* Unified Interactive Card Styles */
-        .unified-card {
-            background: rgba(10, 16, 31, 0.5);
-            border: 1px solid var(--border-color);
-            border-radius: 0.75rem;
-            transition: var(--transition-fast);
-            padding: 1.5rem;
-            cursor: pointer;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 120px;
-        }
-        .unified-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4), 0 0 25px var(--shadow-color-hover);
-            border-color: var(--accent-glow);
-        }
-        .unified-card.active {
-            border-color: var(--accent-glow);
-            box-shadow: 0 0 25px var(--shadow-color-hover);
-            background-color: rgba(0, 191, 255, 0.1);
-            transform: scale(1.02);
-        }
-        .unified-card .card-title {
-            font-size: 1.1em;
-            font-weight: 700;
-            margin-bottom: 0.6rem;
-            color: var(--accent-glow);
-            text-align: center;
-            transition: var(--transition-fast);
-        }
-        .unified-card:hover .card-title {
-            text-shadow: 0 0 8px var(--accent-glow);
-        }
-        .unified-card .card-description {
-            font-weight: 400;
-            font-size: 0.95em;
-            color: var(--text-secondary);
-            margin-top: 0.5rem;
-            display: none;
-            text-align: left;
-            width: 100%;
-        }
-        .unified-card.active .card-description {
-            display: block;
-            animation: enhancedFadeIn 0.5s ease-in-out;
-        }
-
-        /* Specific Card Widths */
-        .risk-framework-card { width: 200px; }
-        .risk-response-card { width: 200px; }
-        .risk-method-card { width: 250px; }
-        .key-term-card { width: 150px; }
-        .role-node { width: 220px; }
-        .flow-node { width: 150px; }
-
-        /* Chart & Interactive Element Containers */
         .chart-container {
             position: relative;
             width: 100%;
-            max-width: 600px;
-            height: 40vh;
-            margin: 1rem auto;
+            max-width: 900px; /* Increased max-width for charts */
+            height: 50vh; /* Increased height */
+            max-height: 500px; /* Increased max height */
+            margin-left: auto;
+            margin-right: auto;
+            overflow: hidden; /* Prevent overflow */
         }
-        
-        /* Flowchart & Hierarchy Styles */
-        .flow-arrow, .hierarchy-line {
+        @media (min-width: 640px) { /* sm */
+            .chart-container {
+                height: 45vh; /* Increased height for sm screens */
+                max-height: 450px; /* Increased max height for sm screens */
+            }
+        }
+        @media (min-width: 768px) { /* md */
+            .chart-container {
+                height: 40vh; /* Increased height for md screens */
+                max-height: 400px; /* Increased max height for md screens */
+            }
+        }
+        /* Active Navigation Item from Domain 3 */
+        .nav-item.active {
+            border-bottom: 3px solid #00A896; /* Vibrant Teal Accent */
+            font-weight: 700; /* Bolder */
+            color: #222222;
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .tooltip-custom-title {
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        .tooltip-custom-body {
+            font-size: 0.8em;
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        /* Risk Matrix Specific Styles */
+        .risk-matrix-table {
+            width: 100%;
+            max-width: 400px; /* Adjust as needed */
+            margin: 1rem auto;
+            border-collapse: collapse;
+        }
+        .risk-matrix-table th, .risk-matrix-table td {
+            border: 1px solid #D5D2C8;
+            padding: 0.75rem;
+            text-align: center;
+            font-weight: 600;
+        }
+        .risk-matrix-table th {
+            background-color: #EDEAE0;
+            color: #333333;
+        }
+        .risk-matrix-table td {
+            background-color: #FFFFFF;
+        }
+        .risk-matrix-table .low { background-color: #D4EDDA; color: #155724; } /* Green */
+        .risk-matrix-table .medium { background-color: #FFF3CD; color: #856404; } /* Yellow */
+        .risk-matrix-table .high { background-color: #F8D7DA; color: #721C24; } /* Red */
+        .risk-matrix-table .critical { background-color: #DC3545; color: #FFFFFF; } /* Darker Red */
+
+        /* Unified Styles for Interactive Cards (Frameworks, Response, Methods, Key Terms, Vulnerability Scenarios) */
+        .risk-framework-card, .risk-response-card, .risk-method-card, .key-term-card {
+            background-color: #EDEAE0; /* Secondary Neutral */
+            border: 1px solid #D5D2C8;
+            padding: 1rem;
+            border-radius: 0.75rem; /* More rounded */
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            box-sizing: border-box;
+            text-align: left;
+            font-weight: 600;
+            color: #333333;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Centered vertically */
+            align-items: center; /* Centered horizontally */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08); /* Subtle initial shadow */
+            flex-grow: 0; /* Prevent horizontal growth */
+            flex-shrink: 0; /* Prevent horizontal shrinking */
+        }
+
+        .risk-framework-card:hover, .risk-response-card:hover, .risk-method-card:hover, .key-term-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* More pronounced shadow on hover */
+        }
+
+        /* Active state for all interactive cards */
+        .risk-framework-card.active, .risk-response-card.active, .risk-method-card.active, .key-term-card.active {
+            border-color: #00A896; /* Vibrant Teal border */
+            box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3); /* Teal glow */
+            background-color: #E0F7F5; /* Very light teal background */
+        }
+
+        .risk-framework-card .card-title, .risk-response-card .card-title, .risk-method-card .card-title, .key-term-card .card-title {
+            font-size: 1.15em; /* Slightly larger title */
+            margin-bottom: 0.6rem;
+            text-align: center;
+            color: #004085; /* Dark blue for title for consistency */
+        }
+
+        .risk-framework-card .card-description, .risk-response-card .card-description, .risk-method-card .card-description, .key-term-card .card-description {
+            font-weight: 400; /* Regular font weight for description */
+            font-size: 0.9em;
+            color: #555555;
+            margin-top: 0.5rem;
+            display: none; /* Hidden by default */
+            text-align: left; /* Default text alignment for descriptions */
+            word-break: break-word; /* Ensure text breaks within the fixed width */
+        }
+        /* Specific override for key-term-card description text alignment */
+        .key-term-card .card-description {
+            text-align: center;
+        }
+        /* Specific override for vulnerability-scenario-card description text alignment */
+        .vulnerability-scenario-card .card-description {
+            text-align: left; /* Keep left alignment for detailed impact */
+        }
+
+        .risk-framework-card.active .card-description, .risk-response-card.active .card-description, .risk-method-card.active .card-description, .key-term-card.active .card-description {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+
+        /* Specific colors for risk response cards (overriding general card background) */
+        .risk-response-card.mitigate { background-color: #D4EDDA; color: #155724; } /* Light Green */
+        .risk-response-card.mitigate:hover { background-color: #C3E6CB; }
+        .risk-response-card.transfer { background-color: #CCE5FF; color: #004085; } /* Light Blue */
+        .risk-response-card.transfer:hover { background-color: #B8DAFF; }
+        .risk-response-card.avoid { background-color: #F8D7DA; color: #721C24; } /* Light Red */
+        .risk-response-card.avoid:hover { background-color: #F5C6CB; }
+        .risk-response-card.accept { background-color: #FFF3CD; color: #856404; } /* Light Yellow */
+        .risk-response-card.accept:hover { background-color: #FFECB3; }
+
+        /* Specific colors for risk method cards (overriding general card background) */
+        .risk-method-card.qualitative { background-color: #F0F8FF; color: #001f3f; } /* Alice Blue */
+        .risk-method-card.qualitative:hover { background-color: #E0F2FF; }
+        .risk-method-card.quantitative { background-color: #F5FFFA; color: #003300; } /* Mint Cream */
+        .risk-method-card.quantitative:hover { background-color: #E6FFF2; }
+        .risk-method-card.hybrid { background-color: #FAEBD7; color: #4B0082; } /* Antique White with Indigo */
+        .risk-method-card.hybrid:hover { background-color: #F0DDC0; }
+
+
+        /* Risk Posture Scorecard Table Styles */
+        .risk-scorecard-table {
+            width: 100%;
+            max-width: 600px;
+            margin: 1rem auto;
+            border-collapse: collapse;
+            font-size: 0.9em;
+        }
+        .risk-scorecard-table th, .risk-scorecard-table td {
+            border: 1px solid #D5D2C8;
+            padding: 0.6rem;
+            text-align: center;
+        }
+        .risk-scorecard-table th {
+            background-color: #EDEAE0;
+            font-weight: 600;
+            color: #333333;
+        }
+        .risk-scorecard-table td {
+            background-color: #FFFFFF;
+            color: #555555;
+        }
+        .risk-scorecard-table .risk-level-low { background-color: #D4EDDA; color: #155724; } /* Green */
+        .risk-scorecard-table .risk-level-medium { background-color: #FFF3CD; color: #856404; } /* Yellow */
+        .risk-scorecard-table .risk-level-high { background-color: #F8D7DA; color: #721C24; } /* Red */
+        .risk-scorecard-table .critical { background-color: #DC3545; color: #FFFFFF; } /* Darker Red */
+
+        /* Styles for Corporate Hierarchy Chart */
+        .hierarchy-chart-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem; /* Space between elements */
+            padding: 1rem;
+            background-color: #F8F5EF; /* Match body background */
+            border-radius: 0.5rem;
+            max-width: 600px; /* Constrain width for better layout */
+            margin: 1rem auto; /* Center the chart */
+        }
+
+        .role-node {
+            background-color: #EDEAE0; /* Default neutral for nodes */
+            color: #333333;
+            padding: 1rem 1.5rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            font-weight: 600;
+            text-align: center;
+            min-width: 200px; /* Ensure some minimum width */
+            width: fit-content; /* Adjust width to content */
+            display: flex; /* Use flexbox for content alignment */
+            flex-direction: column; /* Stack content vertically */
+            justify-content: center; /* Centered vertically */
+            align-items: center; /* Centered horizontally */
+        }
+
+        .role-node:hover {
+            background-color: #D5D2C8; /* Darker neutral on hover */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .role-node.active {
+            border-color: #00A896; /* Vibrant Teal border */
+            box-shadow: 0 44px 8px rgba(0, 168, 150, 0.3); /* Teal glow */
+            background-color: #E0F7F5; /* Very light teal background */
+        }
+
+        .role-node .role-title {
+            display: block;
+            margin-bottom: 0.6rem; /* Space between title and description */
+            font-size: 1.15em; /* Slightly larger title */
+            color: #004085; /* Dark blue for title for consistency */
+        }
+        .role-node .role-description {
+            font-weight: 400; /* Regular font weight for description */
+            font-size: 0.9em;
+            color: #555555;
+            text-align: left; /* Align description text left */
+            margin-top: 0.5rem;
+            display: none; /* Hidden by default */
+        }
+        .role-node.active .role-description {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+
+        .hierarchy-line {
             width: 2px;
-            height: 2rem;
-            background-color: var(--border-color);
+            height: 2rem; /* Length of vertical line */
+            background-color: #D5D2C8; /* Neutral line color */
+        }
+
+        .hierarchy-line-split {
+            width: 60%; /* Horizontal span for split */
+            height: 2px;
+            background-color: #D5D2C8;
+            position: relative;
+            margin-top: 1rem;
+            margin-bottom: 1rem;
+        }
+        .hierarchy-line-split::before,
+        .hierarchy-line-split::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 1rem; /* Vertical stub from horizontal line */
+            background-color: #D5D2C8;
+            bottom: 0;
+        }
+        .hierarchy-line-split::before {
+            left: 0;
+            transform: translateX(-50%); /* Center under left node */
+        }
+        .hierarchy-line-split::after {
+            right: 0;
+            transform: translateX(50%); /* Center under right node */
+        }
+
+        /* Specific colors for roles */
+        .role-node.board { background-color: #A1C9CE; color: #333333; } /* Soft Blue */
+        .role-node.ciso { background-color: #8FB8A1; color: #333333; } /* Soft Green */
+        .role-node.data-owners { background-color: #FFD700; color: #333333; } /* Gold */
+        .role-node.it-ops { background-color: #FF6384; color: #333333; } /* Pinkish Red */
+        .role-node.end-users { background-color: #B0C4DE; color: #333333; } /* Light Steel Blue - Changed for readability */
+
+
+        /* Responsive Adjustments for new cards/elements */
+        @media (max-width: 768px) {
+            .risk-framework-card,
+            .risk-response-card,
+            .risk-method-card,
+            .key-term-card,
+            .vulnerability-scenario-card, /* Added for responsiveness */
+            .role-node { /* Apply to all interactive cards */
+                flex: 1 1 100%; /* Stack cards on medium screens */
+                max-width: 100%;
+            }
+            .hierarchy-line-split {
+                width: 2px; /* Make it vertical on small screens */
+                height: 2rem;
+                margin: 1rem auto;
+            }
+            .hierarchy-line-split::before,
+            .hierarchy-line-split::after {
+                display: none; /* Hide horizontal stubs */
+            }
+        }
+        /* Adjusted for larger screens to maintain 6 columns for key terms */
+        @media (min-width: 1024px) {
+            #key-terms .grid {
+                grid-template-columns: repeat(6, 1fr); /* Six columns on large screens */
+                gap: 1.5rem; /* Ensure gap is consistent */
+            }
+            .key-term-card {
+                /* Calculate width for 6 columns with gap-6 (1.5rem) */
+                flex: 1 1 calc((100% - (5 * 1.5rem)) / 6);
+                max-width: calc((100% - (5 * 1.5rem)) / 6);
+                min-height: 180px; /* Increased min-height for more text */
+            }
+            .key-term-card .card-title {
+                font-size: 1em; /* Slightly smaller title for more space */
+            }
+            .key-term-card .card-description {
+                font-size: 0.85em; /* Slightly smaller description for more space */
+            }
+        }
+
+        /* Custom button colors for threat distribution */
+        .btn-ransomware { background-color: #A1C9CE; color: #333333; }
+        .btn-ransomware:hover { background-color: #8FB8A1; }
+        .btn-insider-threats { background-color: #8FB8A1; color: #333333; }
+        .btn-insider-threats:hover { background-color: #6F9C7D; }
+        .btn-third-party-risks { background-color: #FFD700; color: #333333; }
+        .btn-third-party-risks:hover { background-color: #E0B800; }
+        .btn-phishing { background-color: #FF6384; color: #FFFFFF; }
+        .btn-phishing:hover { background-color: #E04B6D; }
+        .btn-ddos { background-color: #6A5ACD; color: #FFFFFF; }
+        .btn-ddos:hover { background-color: #5A4DAA; }
+        .btn-apt { background-color: #DAA520; color: #333333; }
+        .btn-apt:hover { background-color: #B8860B; }
+
+        /* Specific min-width and width for cards */
+        .risk-framework-card {
+            min-width: 200px; /* Set min-width as requested */
+            width: 200px; /* Fixed width */
+            flex-basis: 200px; /* Ensure flex-basis matches width */
+        }
+        .risk-response-card {
+            min-width: 200px; /* Changed to 200px as requested */
+            width: 200px; /* Fixed width */
+            flex-basis: 200px; /* Ensure flex-basis matches width */
+        }
+        .risk-method-card {
+            min-width: 250px; /* Set min-width as requested */
+            width: 250px; /* Fixed width */
+            flex-basis: 250px; /* Ensure flex-basis matches width */
+        }
+        .key-term-card {
+            min-width: 150px; /* Set min-width as requested */
+            width: 150px; /* Fixed width */
+            flex-basis: 150px; /* Ensure flex-basis matches width */
+        }
+        /* New styles for vulnerability scenario cards */
+        .vulnerability-scenario-card {
+            min-width: 150px; /* Set min-width as requested */
+            width: 150px; /* Fixed width */
+            flex-basis: 150px; /* Ensure flex-basis matches width */
+            /* min-height: 100px; Removed min-height to allow vertical expansion */
+            text-align: center; /* Center content horizontally */
+            justify-content: center; /* Center content vertically */
+            padding: 1rem;
+            border: 1px solid #D5D2C8;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+            transition: all 0.2s ease-in-out;
+            background-color: #F0F8FF; /* Light background */
+        }
+        .vulnerability-scenario-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        .vulnerability-scenario-card.active {
+            border-color: #00A896;
+            box-shadow: 0 4px 8px rgba(0, 168, 150, 0.3);
+            background-color: #E0F7F5;
+        }
+        .vulnerability-scenario-card .card-title {
+            font-size: 1.1em;
+            font-weight: 700;
+            color: #004085;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+        .vulnerability-scenario-card .card-description {
+            font-weight: 400;
+            font-size: 0.85em;
+            color: #555555;
+            margin-top: 0.5rem;
+            display: none; /* Hidden by default */
+            text-align: left; /* Keep left alignment for detailed impact */
+        }
+        .vulnerability-scenario-card.active .card-description {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        /* Flowchart specific styles */
+        .flowchart-container {
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping for multiple scenarios */
+            justify-content: center;
+            gap: 1rem; /* Space between scenarios */
+            margin-top: 1rem;
+        }
+
+        .flow-scenario {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2rem; /* Space between individual flow chains */
+        }
+
+        .flow-node {
+            background-color: #EDEAE0;
+            border: 1px solid #D5D2C8;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            box-sizing: border-box;
+            text-align: center;
+            font-weight: 600;
+            color: #333333;
+            /* min-height: 80px; Removed min-height to allow vertical expansion */
+            width: 150px; /* Fixed width for flow nodes - as requested */
+            flex-basis: 150px; /* Fixed flex-basis for flow nodes - as requested */
+        }
+
+        .flow-node:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .flow-node.active {
+            border-color: #00A896;
+            box-shadow: 0 2px 5px rgba(0, 168, 150, 0.3);
+            background-color: #E0F7F5;
+        }
+
+        .flow-node .node-title {
+            font-size: 0.9em; /* Slightly reduced font size for title */
+            font-weight: 700;
+            color: #004085;
+            margin-bottom: 0.4rem;
+            display: block;
+        }
+
+        .flow-node .node-description {
+            font-weight: 400;
+            font-size: 0.75em; /* Slightly reduced font size for description */
+            color: #555555;
+            margin-top: 0.4rem;
+            display: none;
+            word-break: break-word;
+        }
+
+        .flow-node.active .node-description {
+            display: block;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .flow-arrow {
+            width: 2px;
+            height: 2rem; /* Length of the arrow line */
+            background-color: #D5D2C8;
+            margin: 0.5rem 0; /* Space above/below arrow */
             position: relative;
         }
         .flow-arrow::after {
@@ -268,269 +535,338 @@
             position: absolute;
             bottom: 0;
             left: 50%;
-            transform: translateX(-50%) translateY(50%) rotate(135deg);
+            transform: translateX(-50%) translateY(50%) rotate(135deg); /* Corrected to point downwards */
             width: 8px;
             height: 8px;
-            border-top: 2px solid var(--border-color);
-            border-right: 2px solid var(--border-color);
-        }
-        .hierarchy-line-split {
-            width: 60%;
-            height: 2px;
-            background-color: var(--border-color);
-            position: relative;
-            margin: 1rem 0;
+            border-top: 2px solid #D5D2C8;
+            border-right: 2px solid #D5D2C8;
         }
 
-        /* Table Styles */
-        .dark-table {
-            width: 100%;
-            max-width: 600px;
-            margin: 1rem auto;
-            border-collapse: collapse;
-            font-size: 0.9em;
-        }
-        .dark-table th, .dark-table td {
-            border: 1px solid var(--border-color);
-            padding: 0.75rem;
-            text-align: center;
-        }
-        .dark-table th {
-            background-color: var(--dark-navy-bg);
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-        .dark-table td {
-            background-color: var(--surface-color);
-            color: var(--text-secondary);
-        }
-        .dark-table .risk-level-low { color: var(--color-green); }
-        .dark-table .risk-level-medium { color: var(--color-yellow); }
-        .dark-table .risk-level-high { color: var(--color-red); }
-        .dark-table .critical { color: var(--color-red); font-weight: bold; }
-        .dark-table .trend-up::before { content: '▲ '; color: var(--color-red); }
-        .dark-table .trend-down::before { content: '▼ '; color: var(--color-green); }
-        .dark-table .trend-stable::before { content: '● '; color: var(--color-yellow); }
+        /* Specific colors for flowchart nodes */
+        .vulnerability-node { background-color: #F0F8FF; } /* Alice Blue */
+        .vulnerability-node:hover { background-color: #DDEBF7; }
+        .threat-node { background-color: #FFF3CD; } /* Light Yellow */
+        .threat-node:hover { background-color: #FFE699; }
+        .impact-node { background-color: #F8D7DA; } /* Light Red */
+        .impact-node:hover { background-color: #F5C6CB; }
 
-        /* Quantitative Calculator Styles */
-        .calculator-form input {
-            background-color: var(--dark-navy-bg);
-            border: 1px solid var(--border-color);
-            color: var(--text-primary);
-            border-radius: 0.5rem;
-            padding: 0.5rem;
-            transition: var(--transition-fast);
+        /* Ensure titles and descriptions are visible on colored backgrounds */
+        .vulnerability-node .node-title, .threat-node .node-title, .impact-node .node-title {
+            color: #004085; /* Dark blue for titles */
         }
-        .calculator-form input:focus {
-            outline: none;
-            box-shadow: 0 0 0 2px var(--accent-glow);
-            border-color: var(--accent-glow);
-        }
-        .calculator-result {
-            color: var(--accent-glow);
-            font-weight: 700;
+        .vulnerability-node .node-description, .threat-node .node-description, .impact-node .node-description {
+            color: #333333; /* Darker text for descriptions */
         }
 
-        /* Responsive Adjustments */
+        /* Responsive adjustments for flow nodes */
         @media (max-width: 768px) {
-            .unified-card {
-                flex: 1 1 100%;
-                width: 100% !important;
-                max-width: 100%;
+            .flow-node {
+                width: 100%; /* Full width on small screens */
+                flex-basis: 100%;
             }
         }
     </style>
 </head>
 <body class="leading-relaxed">
-    <div class="container mx-auto p-4 sm:p-6 lg:p-12">
-        <header class="main-header text-center py-10 mb-10 overflow-hidden">
-            <div class="header-glow"></div>
-            <div class="header-content">
-                <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-2">CISM Domain 2 Study Guide</h1>
-                <p class="text-xl sm:text-2xl text-gray-400">Information Security Risk Management</p>
-                <p class="text-md text-gray-500 mt-2">Your Interactive Study Guide for Proactive Security Protection</p>
-            </div>
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <header class="text-center py-8 bg-white rounded-lg shadow-md mb-8">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-2">CISM Domain 2 Study Guide</h1>
+            <p class="text-xl sm:text-2xl text-gray-600">Information Security Risk Management</p>
+            <p class="text-md text-gray-500 mt-2">Your Interactive Study Guide for Proactive Security Protection</p>
         </header>
 
-        <nav class="p-2 rounded-lg mb-10 flex flex-wrap justify-center sticky top-4 z-10 gap-2 sm:gap-4 bg-black/30 backdrop-blur-sm border border-gray-700/50">
-            <button class="nav-item px-4 py-2 text-lg font-medium transition-colors duration-200 active" data-target="introduction">Introduction</button>
-            <button class="nav-item px-4 py-2 text-lg font-medium transition-colors duration-200" data-target="risk-assessment">Risk Assessment</button>
-            <button class="nav-item px-4 py-2 text-lg font-medium transition-colors duration-200" data-target="risk-response">Risk Response</button>
-            <button class="nav-item px-4 py-2 text-lg font-medium transition-colors duration-200" data-target="key-terms">Key Terms</button>
-            <button class="nav-item px-4 py-2 text-lg font-medium transition-colors duration-200" data-target="domain-summary">Domain Summary</button>
+        <nav class="bg-white p-4 rounded-lg shadow-md mb-8 flex justify-center sticky top-0 z-10">
+            <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200 active" data-target="introduction">Introduction</button>
+            <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="risk-assessment">Information Security Risk Assessment</button>
+            <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="risk-response">Information Security Risk Response</button>
+            <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="key-terms">Key Terms</button>
+            <button class="nav-item px-4 py-2 text-lg font-medium text-gray-700 hover:text-gray-900 mx-2 sm:mx-4 transition-colors duration-200" data-target="domain-summary">Domain Summary</button>
         </nav>
 
         <main id="content-area">
-            <!-- Introduction Section -->
-            <section id="introduction" class="content-section">
-                <h2 class="text-3xl font-bold section-header mb-6">Introduction to CISM Domain 2</h2>
-                <div class="content-box">
-                    <p class="text-gray-300 mb-4">Welcome to the interactive study guide for CISM Domain 2: Information Security Risk Management. This domain is the cornerstone of effective information security, focusing on how organizations identify, assess, respond to, and monitor risks to their valuable information assets. A strong grasp of these principles is not just theoretical; it's crucial for making informed, business-aligned decisions that proactively protect the enterprise.</p>
-                    <p class="text-gray-300">Throughout this guide, you will explore the dynamic threat landscape, learn how to analyze vulnerabilities, apply various risk assessment methodologies, and understand the critical strategies for responding to risks. We will also delve into the importance of clear risk and control ownership and the continuous process of monitoring and reporting. This interactive format is designed to enhance your learning experience, making complex topics more accessible and engaging.</p>
+            <!-- New Section for Introduction -->
+            <section id="introduction" class="content-section fade-in">
+                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Introduction to CISM Domain 2</h2>
+                <div class="p-6 bg-white rounded-lg shadow-md">
+                    <p class="text-gray-700 mb-4">Welcome to the interactive study guide for CISM Domain 2: Information Security Risk Management. This domain is the cornerstone of effective information security, focusing on how organizations identify, assess, respond to, and monitor risks to their valuable information assets. A strong grasp of these principles is not just theoretical; it's crucial for making informed, business-aligned decisions that proactively protect the enterprise.</p>
+                    <p class="text-gray-700">Throughout this guide, you will explore the dynamic threat landscape, learn how to analyze vulnerabilities, apply various risk assessment methodologies, and understand the critical strategies for responding to risks. We will also delve into the importance of clear risk and control ownership and the continuous process of monitoring and reporting. This interactive format is designed to enhance your learning experience, making complex topics more accessible and engaging.</p>
                 </div>
             </section>
 
             <!-- Information Security Risk Assessment Section -->
             <section id="risk-assessment" class="content-section hidden">
-                <h2 class="text-3xl font-bold section-header mb-6">Section A: Information Security Risk Assessment</h2>
-                <p class="mb-8 text-gray-400">Information security risk assessment is the systematic process of identifying potential threats and vulnerabilities, analyzing their potential impact, and determining the likelihood of their occurrence. It's about understanding "what could go wrong" and "how bad it could be".</p>
+                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Section A: Information Security Risk Assessment</h2>
+                <p class="mb-8 text-gray-700">Information security risk assessment is the systematic process of identifying potential threats and vulnerabilities, analyzing their potential impact, and determining the likelihood of their occurrence. It's about understanding "what could go wrong" and "how bad it could be".</p>
 
-                <div class="space-y-4">
-                    <!-- Emerging Risk and Threat Landscape -->
-                    <div>
-                        <button class="accordion-button w-full">
-                            <span>1. Emerging Risk and Threat Landscape</span>
-                            <span class="accordion-icon text-2xl">+</span>
-                        </button>
-                        <div class="accordion-content hidden">
-                            <p class="text-gray-300 mb-4">The threat landscape is constantly evolving. As an information security manager, you must be vigilant and proactive in understanding new and evolving dangers.</p>
-                            <h4 class="text-lg font-semibold text-white mb-3">a. Understand emerging and evolving threats (e.g., ransomware, insider threats, third-party risks).</h4>
-                            <p class="text-gray-400 mb-4">Explore the common distribution of various emerging threats and how they impact organizations:</p>
-                            <div class="chart-container mb-6">
-                                <canvas id="threatDistributionChart"></canvas>
-                            </div>
-                            <div class="flex flex-wrap justify-center gap-4 mb-4">
-                                <button class="toggle-chart-data px-4 py-2 rounded-full text-sm font-semibold" data-chart-id="threatDistributionChart" data-data-set="ransomwareFocus" style="background-color: var(--color-red); color: white;">Ransomware</button>
-                                <button class="toggle-chart-data px-4 py-2 rounded-full text-sm font-semibold" data-chart-id="threatDistributionChart" data-data-set="insiderFocus" style="background-color: var(--color-yellow); color: var(--dark-navy-bg);">Insider Threats</button>
-                                <button class="toggle-chart-data px-4 py-2 rounded-full text-sm font-semibold" data-chart-id="threatDistributionChart" data-data-set="thirdPartyFocus" style="background-color: var(--color-purple); color: white;">Third-Party Risks</button>
-                                <button class="toggle-chart-data px-4 py-2 rounded-full text-sm font-semibold" data-chart-id="threatDistributionChart" data-data-set="phishingFocus" style="background-color: var(--color-green); color: var(--dark-navy-bg);">Phishing</button>
-                                <button class="toggle-chart-data px-4 py-2 rounded-full text-sm font-semibold" data-chart-id="threatDistributionChart" data-data-set="ddosFocus" style="background-color: var(--color-blue-alt); color: white;">DDoS</button>
-                                <button class="toggle-chart-data px-4 py-2 rounded-full text-sm font-semibold" data-chart-id="threatDistributionChart" data-data-set="aptFocus" style="background-color: var(--color-orange); color: var(--dark-navy-bg);">APT</button>
-                            </div>
-                            <div id="threat-explanation" class="text-gray-400 text-sm italic mt-2 text-center">This chart illustrates a simulated distribution of common emerging threats. Use the buttons to view different focuses.</div>
-                            
-                            <h4 class="text-lg font-semibold text-white my-3">b. Monitor threat intelligence feeds and industry trend reports.</h4>
-                            <p class="text-gray-400 mb-4">Threat intelligence helps organizations understand the "who, what, where, when, why, and how" of attacks, while industry reports provide broad trends for strategic planning.</p>
+                <!-- Sub-Domain: Emerging Risk and Threat Landscape -->
+                <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
+                    <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                        1. Emerging Risk and Threat Landscape
+                        <span class="accordion-icon text-2xl">+</span>
+                    </button>
+                    <div class="accordion-content hidden p-6">
+                        <p class="text-gray-700 mb-4">The threat landscape is constantly evolving. As an information security manager, you must be vigilant and proactive in understanding new and evolving dangers.</p>
 
-                            <h4 class="text-lg font-semibold text-white my-3">c. Analyze external drivers like regulatory shifts, geopolitical risks, and technological disruption.</h4>
-                            <p class="text-gray-400">New regulations (e.g., updated data privacy laws), global events, and emerging technologies (e.g., AI, IoT) constantly introduce new security challenges and risks that must be analyzed.</p>
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Understand emerging and evolving threats (e.g., ransomware, insider threats, third-party risks).</h4>
+                        <p class="text-gray-600 mb-4">Explore the common distribution of various emerging threats and how they impact organizations:</p>
+                        <div class="chart-container mb-6">
+                            <canvas id="threatDistributionChart"></canvas>
+                        </div>
+                        <div class="flex flex-wrap justify-center gap-4 mb-4">
+                            <button class="toggle-chart-data btn-ransomware px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" data-chart-id="threatDistributionChart" data-data-set="ransomwareFocus">Ransomware</button>
+                            <button class="toggle-chart-data btn-insider-threats px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" data-chart-id="threatDistributionChart" data-data-set="insiderFocus">Insider Threats</button>
+                            <button class="toggle-chart-data btn-third-party-risks px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" data-chart-id="threatDistributionChart" data-data-set="thirdPartyFocus">Third-Party Risks</button>
+                            <button class="toggle-chart-data btn-phishing px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" data-chart-id="threatDistributionChart" data-data-set="phishingFocus">Phishing</button>
+                            <button class="toggle-chart-data btn-ddos px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" data-chart-id="threatDistributionChart" data-data-set="ddosFocus">DDoS</button>
+                            <button class="toggle-chart-data btn-apt px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-200" data-chart-id="threatDistributionChart" data-data-set="aptFocus">APT</button>
+                        </div>
+                        <div id="threat-explanation" class="text-gray-600 text-sm italic mt-2 text-center">This chart illustrates a simulated distribution of common emerging threats. Use the buttons to view different focuses.</div>
+                        
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Monitor threat intelligence feeds and industry trend reports.</h4>
+                        <p class="text-gray-600 mb-4">Threat intelligence helps organizations understand the "who, what, where, when, why, and how" of attacks, while industry reports provide broad trends for strategic planning.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Analyze external drivers like regulatory shifts, geopolitical risks, and technological disruption.</h4>
+                        <p class="text-gray-600">New regulations (e.g., updated data privacy laws), global events, and emerging technologies (e.g., AI, IoT) constantly introduce new security challenges and risks that must be analyzed.</p>
+                    </div>
+                </div>
+
+                <!-- Sub-Domain: Vulnerability and Control Deficiency Analysis -->
+                <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
+                    <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                        2. Vulnerability and Control Deficiency Analysis
+                        <span class="accordion-icon text-2xl">+</span>
+                    </button>
+                    <div class="accordion-content hidden p-6">
+                        <p class="text-gray-700 mb-4">Once threats are understood, the next step is to identify where an organization is susceptible to these threats.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Identify and assess weaknesses in IT systems, processes, and controls.</h4>
+                        <p class="text-gray-600 mb-4">This involves using various methods like vulnerability scanning, penetration testing, and security audits to pinpoint weaknesses.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Determine exposure levels due to missing or ineffective controls.</h4>
+                        <p class="text-gray-600 mb-4">A control might exist but be poorly designed or implemented, leading to increased exposure and higher potential impact.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700">c. Map vulnerabilities to threats and evaluate potential impacts.</h4>
+                        <p class="text-gray-600 mb-4">Understand which threats could exploit identified vulnerabilities and the potential impact on confidentiality, integrity, availability, and overall business operations. See the example mapping below:</p>
+                        <div class="mb-6 p-4 bg-gray-50 rounded-md shadow-sm">
+                            <h6 class="text-md font-semibold text-gray-700 mb-2 text-center">Sample Vulnerability-Threat-Impact Mapping</h6>
+                            <div class="flowchart-container">
+                                <!-- Scenario 1: Unpatched Web Server -->
+                                <div class="flow-scenario" data-scenario-id="0">
+                                    <div class="flow-node vulnerability-node" data-node-type="vulnerability">
+                                        <span class="node-title">Unpatched Web Server</span>
+                                        <div class="node-description hidden">Servers with outdated software or missing security patches are prime targets for attackers looking to exploit known weaknesses.</div>
+                                    </div>
+                                    <div class="flow-arrow hidden" data-arrow-id="0-1"></div>
+                                    <div class="flow-node threat-node hidden" data-node-type="threat">
+                                        <span class="node-title">Remote Code Execution (RCE)</span>
+                                        <div class="node-description hidden">RCE allows an attacker to execute arbitrary code on a remote system, gaining full control. This is often achieved through exploiting software vulnerabilities.</div>
+                                    </div>
+                                    <div class="flow-arrow hidden" data-arrow-id="1-2"></div>
+                                    <div class="flow-node impact-node hidden" data-node-type="impact">
+                                        <span class="node-title">Data Breach, System Compromise</span>
+                                        <div class="node-description hidden">Confidentiality, Integrity, Availability impact.</div>
+                                    </div>
+                                </div>
+                                <!-- Scenario 2: Weak Employee Password Policy -->
+                                <div class="flow-scenario" data-scenario-id="1">
+                                    <div class="flow-node vulnerability-node" data-node-type="vulnerability">
+                                        <span class="node-title">Weak Employee Password Policy</span>
+                                        <div class="node-description hidden">Policies allowing simple, common, or reused passwords make accounts easy targets for automated guessing attacks.</div>
+                                    </div>
+                                    <div class="flow-arrow hidden" data-arrow-id="0-1"></div>
+                                    <div class="flow-node threat-node hidden" data-node-type="threat">
+                                        <span class="node-title">Brute-force/Credential Stuffing</span>
+                                        <div class="node-description hidden">Brute-force attacks try many passwords until one works. Credential stuffing uses stolen username/password pairs from other breaches to try and log into new systems.</div>
+                                    </div>
+                                    <div class="flow-arrow hidden" data-arrow-id="1-2"></div>
+                                    <div class="flow-node impact-node hidden" data-node-type="impact">
+                                        <span class="node-title">Unauthorized Access</span>
+                                        <div class="node-description hidden">Confidentiality, Integrity impact.</div>
+                                    </div>
+                                </div>
+                                <!-- Scenario 3: Lack of Data Encryption at Rest -->
+                                <div class="flow-scenario" data-scenario-id="2">
+                                    <div class="flow-node vulnerability-node" data-node-type="vulnerability">
+                                        <span class="node-title">Lack of Data Encryption at Rest</span>
+                                        <div class="node-description hidden">Storing sensitive data on devices (laptops, servers, backups) without encryption means the data is readable if the device is lost or stolen.</div>
+                                    </div>
+                                    <div class="flow-arrow hidden" data-arrow-id="0-1"></div>
+                                    <div class="flow-node threat-node hidden" data-node-type="threat">
+                                        <span class="node-title">Physical Theft of Storage Device</span>
+                                        <div class="node-description hidden">An attacker physically gains possession of a storage device containing unencrypted sensitive data.</div>
+                                    </div>
+                                    <div class="flow-arrow hidden" data-arrow-id="1-2"></div>
+                                    <div class="flow-node impact-node hidden" data-node-type="impact">
+                                        <span class="node-title">Data Exposure</span>
+                                        <div class="node-description hidden">Confidentiality impact.</div>
+                                    </div>
+                                </div>
+                                <!-- Scenario 4: Single Point of Failure in Network -->
+                                <div class="flow-scenario" data-scenario-id="3">
+                                    <div class="flow-node vulnerability-node" data-node-type="vulnerability">
+                                        <span class="node-title">Single Point of Failure</span>
+                                        <div class="node-description hidden">A critical component (e.g., a single router, server, or internet link) whose failure would bring down an entire system or service.</div>
+                                    </div>
+                                    <div class="flow-arrow hidden" data-arrow-id="0-1"></div>
+                                    <div class="flow-node threat-node hidden" data-node-type="threat">
+                                        <span class="node-title">Hardware Failure / DDoS</span>
+                                        <div class="node-description hidden">Hardware failure is an accidental event. A DDoS attack is a malicious attempt to disrupt normal traffic of a targeted server, service or network by overwhelming the target or its surrounding infrastructure with a flood of Internet traffic.</div>
+                                    </div>
+                                    <div class="flow-arrow hidden" data-arrow-id="1-2"></div>
+                                    <div class="flow-node impact-node hidden" data-node-type="impact">
+                                        <span class="node-title">Service Outage, Business Disruption</span>
+                                        <div class="node-description hidden">Availability impact.</div>
+                                    </div>
+                                </div>
+                                <!-- Scenario 5: Insufficient Security Awareness Training -->
+                                <div class="flow-scenario" data-scenario-id="4">
+                                    <div class="flow-node vulnerability-node" data-node-type="vulnerability">
+                                        <span class="node-title">Insufficient Awareness Training</span>
+                                        <div class="node-description hidden">Employees who are not regularly trained on common attack vectors are more susceptible to falling for scams.</div>
+                                    </div>
+                                    <div class="flow-arrow hidden" data-arrow-id="0-1"></div>
+                                    <div class="flow-node threat-node hidden" data-node-type="threat">
+                                        <span class="node-title">Phishing / Social Engineering</span>
+                                        <div class="node-description hidden">Phishing uses deceptive emails or messages. Social engineering manipulates people into performing actions or divulging confidential information.</div>
+                                    </div>
+                                    <div class="flow-arrow hidden" data-arrow-id="1-2"></div>
+                                    <div class="flow-node impact-node hidden" data-node-type="impact">
+                                        <span class="node-title">Credential Theft, Malware, Financial Fraud</span>
+                                        <div class="node-description hidden">Confidentiality, Integrity, Financial impact.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 text-sm italic mt-2 text-center">Click on a card to see the potential impact of the vulnerability and threat combination.</p>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Vulnerability and Control Deficiency Analysis -->
-                    <div>
-                        <button class="accordion-button w-full">
-                            <span>2. Vulnerability and Control Deficiency Analysis</span>
-                            <span class="accordion-icon text-2xl">+</span>
-                        </button>
-                        <div class="accordion-content hidden">
-                            <p class="text-gray-300 mb-4">Once threats are understood, the next step is to identify where an organization is susceptible to these threats.</p>
-                            <h4 class="text-lg font-semibold text-white mb-3">a. Identify and assess weaknesses in IT systems, processes, and controls.</h4>
-                            <p class="text-gray-400 mb-4">This involves using various methods like vulnerability scanning, penetration testing, and security audits to pinpoint weaknesses.</p>
-                            <h4 class="text-lg font-semibold text-white mb-3">b. Determine exposure levels due to missing or ineffective controls.</h4>
-                            <p class="text-gray-400 mb-4">A control might exist but be poorly designed or implemented, leading to increased exposure and higher potential impact.</p>
-                            <h4 class="text-lg font-semibold text-white mb-3">c. Map vulnerabilities to threats and evaluate potential impacts.</h4>
-                            <p class="text-gray-400 mb-4">Understand which threats could exploit identified vulnerabilities and the potential impact on confidentiality, integrity, availability, and overall business operations. See the example mapping below:</p>
-                            <div class="content-box">
-                                <h6 class="text-md font-semibold text-white mb-4 text-center">Sample Vulnerability-Threat-Impact Mapping</h6>
-                                <div class="flex flex-wrap justify-center gap-4">
-                                    <!-- Scenario 1 -->
-                                    <div class="flow-scenario flex flex-col items-center gap-2" data-scenario-id="0">
-                                        <div class="unified-card flow-node" data-group="flow-0" data-node-type="vulnerability"><span class="card-title">Unpatched Server</span><div class="card-description">Servers with outdated software are prime targets for attackers.</div></div>
-                                        <div class="flow-arrow hidden"></div>
-                                        <div class="unified-card flow-node hidden" data-group="flow-0" data-node-type="threat"><span class="card-title">RCE</span><div class="card-description">Remote Code Execution allows an attacker to take full control.</div></div>
-                                        <div class="flow-arrow hidden"></div>
-                                        <div class="unified-card flow-node hidden" data-group="flow-0" data-node-type="impact"><span class="card-title">Data Breach</span><div class="card-description">Confidentiality, Integrity, Availability impact.</div></div>
-                                    </div>
-                                    <!-- Scenario 2 -->
-                                    <div class="flow-scenario flex flex-col items-center gap-2" data-scenario-id="1">
-                                        <div class="unified-card flow-node" data-group="flow-1" data-node-type="vulnerability"><span class="card-title">Weak Passwords</span><div class="card-description">Simple or reused passwords make accounts easy targets.</div></div>
-                                        <div class="flow-arrow hidden"></div>
-                                        <div class="unified-card flow-node hidden" data-group="flow-1" data-node-type="threat"><span class="card-title">Credential Stuffing</span><div class="card-description">Using stolen passwords from other breaches to gain access.</div></div>
-                                        <div class="flow-arrow hidden"></div>
-                                        <div class="unified-card flow-node hidden" data-group="flow-1" data-node-type="impact"><span class="card-title">Unauthorized Access</span><div class="card-description">Confidentiality, Integrity impact.</div></div>
-                                    </div>
-                                    <!-- Scenario 3 -->
-                                    <div class="flow-scenario flex flex-col items-center gap-2" data-scenario-id="2">
-                                        <div class="unified-card flow-node" data-group="flow-2" data-node-type="vulnerability"><span class="card-title">No Encryption</span><div class="card-description">Storing sensitive data without encryption.</div></div>
-                                        <div class="flow-arrow hidden"></div>
-                                        <div class="unified-card flow-node hidden" data-group="flow-2" data-node-type="threat"><span class="card-title">Physical Theft</span><div class="card-description">An attacker physically steals a storage device.</div></div>
-                                        <div class="flow-arrow hidden"></div>
-                                        <div class="unified-card flow-node hidden" data-group="flow-2" data-node-type="impact"><span class="card-title">Data Exposure</span><div class="card-description">Confidentiality impact.</div></div>
-                                    </div>
-                                    <!-- Scenario 4 -->
-                                    <div class="flow-scenario flex flex-col items-center gap-2" data-scenario-id="3">
-                                        <div class="unified-card flow-node" data-group="flow-3" data-node-type="vulnerability"><span class="card-title">Single Point of Failure</span><div class="card-description">A critical component whose failure would cause an outage.</div></div>
-                                        <div class="flow-arrow hidden"></div>
-                                        <div class="unified-card flow-node hidden" data-group="flow-3" data-node-type="threat"><span class="card-title">Hardware Failure / DDoS</span><div class="card-description">Accidental or malicious event causing disruption.</div></div>
-                                        <div class="flow-arrow hidden"></div>
-                                        <div class="unified-card flow-node hidden" data-group="flow-3" data-node-type="impact"><span class="card-title">Service Outage</span><div class="card-description">Availability impact.</div></div>
-                                    </div>
-                                    <!-- Scenario 5 -->
-                                    <div class="flow-scenario flex flex-col items-center gap-2" data-scenario-id="4">
-                                        <div class="unified-card flow-node" data-group="flow-4" data-node-type="vulnerability"><span class="card-title">No Awareness Training</span><div class="card-description">Employees are not trained to spot common attacks.</div></div>
-                                        <div class="flow-arrow hidden"></div>
-                                        <div class="unified-card flow-node hidden" data-group="flow-4" data-node-type="threat"><span class="card-title">Phishing</span><div class="card-description">Deceptive emails to trick users into revealing information.</div></div>
-                                        <div class="flow-arrow hidden"></div>
-                                        <div class="unified-card flow-node hidden" data-group="flow-4" data-node-type="impact"><span class="card-title">Credential Theft</span><div class="card-description">Confidentiality, Integrity, Financial impact.</div></div>
-                                    </div>
-                                </div>
-                                <p class="text-gray-400 text-sm italic mt-4 text-center">Click on a card to see the potential threat and impact.</p>
+                <!-- Sub-Domain: Risk Assessment and Analysis -->
+                <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
+                    <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                        3. Risk Assessment and Analysis
+                        <span class="accordion-icon text-2xl">+</span>
+                    </button>
+                    <div class="accordion-content hidden p-6">
+                        <p class="text-gray-700 mb-4">This is where the identified threats, vulnerabilities, and impacts are formally analyzed to quantify or qualify the risk.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Apply qualitative, quantitative, and hybrid risk assessment methods.</h4>
+                        <p class="text-gray-600 mb-4">Explore the characteristics of different risk assessment methods:</p>
+                        <div class="flex flex-wrap justify-center gap-4 mb-6">
+                            <div class="risk-method-card qualitative" data-method="qualitative">
+                                <span class="card-title">Qualitative</span>
+                                <div class="card-description hidden">Uses descriptive terms (e.g., high, medium, low) for likelihood and impact. It's subjective but quick and often used for initial assessments or when precise data is unavailable. Good for prioritization.</div>
+                            </div>
+                            <div class="risk-method-card quantitative" data-method="quantitative">
+                                <span class="card-title">Quantitative</span>
+                                <div class="card-description hidden">Assigns numerical values (e.g., monetary cost, probability percentages) to likelihood and impact. It aims to provide a more objective and measurable view of risk. Useful for cost-benefit analysis (e.g., SLE, ARO, ALE).</div>
+                            </div>
+                            <div class="risk-method-card hybrid" data-method="hybrid">
+                                <span class="card-title">Hybrid</span>
+                                <div class="card-description hidden">Combines elements of both qualitative and quantitative approaches. Often, qualitative assessments are used to identify and prioritize risks, and then quantitative analysis is applied to the most critical risks for detailed analysis.</div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Risk Assessment and Analysis -->
-                    <div>
-                        <button class="accordion-button w-full">
-                            <span>3. Risk Assessment and Analysis</span>
-                            <span class="accordion-icon text-2xl">+</span>
-                        </button>
-                        <div class="accordion-content hidden">
-                            <p class="text-gray-300 mb-4">This is where the identified threats, vulnerabilities, and impacts are formally analyzed to quantify or qualify the risk.</p>
-                            <h4 class="text-lg font-semibold text-white mb-3">a. Apply qualitative, quantitative, and hybrid risk assessment methods.</h4>
-                            <p class="text-gray-400 mb-4">Explore the characteristics of different risk assessment methods:</p>
-                            <div class="flex flex-wrap justify-center gap-4 mb-6">
-                                <div class="unified-card risk-method-card" data-group="risk-method"><span class="card-title">Qualitative</span><div class="card-description">Uses descriptive terms (e.g., high, medium, low) for likelihood and impact. It's subjective but quick and often used for initial assessments or when precise data is unavailable. Good for prioritization.</div></div>
-                                <div class="unified-card risk-method-card" data-group="risk-method"><span class="card-title">Quantitative</span><div class="card-description">Assigns numerical values (e.g., monetary cost, probability percentages) to likelihood and impact. It aims to provide a more objective and measurable view of risk. Useful for cost-benefit analysis (e.g., SLE, ARO, ALE).</div></div>
-                                <div class="unified-card risk-method-card" data-group="risk-method"><span class="card-title">Hybrid</span><div class="card-description">Combines elements of both qualitative and quantitative approaches. Often, qualitative assessments are used to identify and prioritize risks, and then quantitative analysis is applied to the most critical risks for detailed analysis.</div></div>
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Determine inherent and residual risk.</h4>
+                        <p class="text-gray-600 mb-4"><strong>Inherent risk</strong> is the raw risk before controls. <strong>Residual risk</strong> is what remains after controls are applied.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Use standardized risk frameworks (e.g., ISO/IEC 27005, NIST SP 800-30, FAIR, OCTAVE).</h4>
+                        <p class="text-gray-600 mb-4">These frameworks provide structure and consistency for risk management processes. Click on a card to learn more:</p>
+                        <div class="flex flex-wrap justify-center gap-4 mb-6">
+                            <div class="risk-framework-card" data-framework="iso27005">
+                                <span class="card-title">ISO/IEC 27005</span>
+                                <div class="card-description hidden">Provides guidelines for information security risk management. It supports the general concepts specified in ISO/IEC 27001 (for ISMS) and is designed to assist the satisfactory implementation of information security based on a risk management approach."</div>
                             </div>
-
-                            <h4 class="text-lg font-semibold text-white mb-3">b. Determine inherent and residual risk.</h4>
-                            <p class="text-gray-400 mb-4"><strong>Inherent risk</strong> is the raw risk before controls. <strong>Residual risk</strong> is what remains after controls are applied.</p>
-
-                            <h4 class="text-lg font-semibold text-white mb-3">c. Use standardized risk frameworks (e.g., ISO/IEC 27005, NIST SP 800-30, FAIR, OCTAVE).</h4>
-                            <p class="text-gray-400 mb-4">These frameworks provide structure and consistency for risk management processes. Click on a card to learn more:</p>
-                            <div class="flex flex-wrap justify-center gap-4 mb-6">
-                                <div class="unified-card risk-framework-card" data-group="risk-framework"><span class="card-title">ISO/IEC 27005</span><div class="card-description">Provides guidelines for information security risk management. It supports the general concepts specified in ISO/IEC 27001 (for ISMS) and is designed to assist the satisfactory implementation of information security based on a risk management approach.</div></div>
-                                <div class="unified-card risk-framework-card" data-group="risk-framework"><span class="card-title">NIST SP 800-30</span><div class="card-description">A guide for conducting risk assessments, developed by the National Institute of Standards and Technology (NIST). It provides a systematic approach to identifying, analyzing, and mitigating risks to information systems and organizations.</div></div>
-                                <div class="unified-card risk-framework-card" data-group="risk-framework"><span class="card-title">FAIR</span><div class="card-description">A quantitative risk analysis model that focuses on understanding and measuring information risk in financial terms. It helps break down complex risk scenarios into measurable components, enabling more objective risk comparisons and cost-benefit analyses.</div></div>
-                                <div class="unified-card risk-framework-card" data-group="risk-framework"><span class="card-title">OCTAVE</span><div class="card-description">A suite of methods that help organizations assess and manage information security risks. It emphasizes a self-directed approach where organizations identify and prioritize risks based on their own operational risk environment, involving key stakeholders from across the organization.</div></div>
+                            <div class="risk-framework-card" data-framework="nist80030">
+                                <span class="card-title">NIST SP 800-30</span>
+                                <div class="card-description hidden">A guide for conducting risk assessments, developed by the National Institute of Standards and Technology (NIST). It provides a systematic approach to identifying, analyzing, and mitigating risks to information systems and organizations."</div>
                             </div>
-                            
-                            <h4 class="text-lg font-semibold text-white mb-3">d. Practical Risk Calculations</h4>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div class="content-box">
-                                    <h5 class="text-md font-bold text-white mb-2">Qualitative Risk Matrix</h5>
-                                    <p class="text-gray-400 mb-4 text-sm">A risk matrix helps visualize and prioritize risks by plotting their likelihood against their potential impact.</p>
-                                    <table class="dark-table w-full">
-                                        <thead><tr><th>Likelihood \ Impact</th><th>Low</th><th>Medium</th><th>High</th></tr></thead>
-                                        <tbody>
-                                            <tr><td>High</td><td class="risk-level-medium">Medium</td><td class="risk-level-high">High</td><td class="critical">Critical</td></tr>
-                                            <tr><td>Medium</td><td class="risk-level-low">Low</td><td class="risk-level-medium">Medium</td><td class="risk-level-high">High</td></tr>
-                                            <tr><td>Low</td><td class="risk-level-low">Low</td><td class="risk-level-low">Low</td><td class="risk-level-medium">Medium</td></tr>
-                                        </tbody>
-                                    </table>
+                            <div class="risk-framework-card" data-framework="fair">
+                                <span class="card-title">FAIR</span>
+                                <div class="card-description hidden">A quantitative risk analysis model that focuses on understanding and measuring information risk in financial terms. It helps break down complex risk scenarios into measurable components, enabling more objective risk comparisons and cost-benefit analyses."</div>
+                            </div>
+                            <div class="risk-framework-card" data-framework="octave">
+                                <span class="card-title">OCTAVE</span>
+                                <div class="card-description hidden">A suite of methods that help organizations assess and manage information security risks. It emphasizes a self-directed approach where organizations identify and prioritize risks based on their own operational risk environment, involving key stakeholders from across the organization."</div>
+                            </div>
+                        </div>
+                        <!-- Removed the separate risk-framework-description div -->
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">d. Evaluate risks based on likelihood and business impact.</h4>
+                        <p class="text-gray-600 mb-4">Plotting likelihood against impact helps prioritize risks and align with the organization's risk appetite and tolerance.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">e. Practical Risk Calculations</h4>
+                        <p class="text-gray-600 mb-4">Understanding how to quantify risk is crucial for making informed decisions and justifying security investments.</p>
+
+                        <div class="mb-6 p-4 bg-gray-50 rounded-md shadow-sm">
+                            <h5 class="text-md font-bold text-gray-800 mb-2">Qualitative Risk Example (Risk Register Entry & Matrix)</h5>
+                            <p class="text-gray-700 mb-2">Consider a "High" risk of a "Phishing Attack leading to Credential Theft" with a "Medium" likelihood and "High" impact. This would be documented in a risk register and can be visualized on a matrix:</p>
+                            <ul class="list-disc list-inside text-gray-600 ml-4 mb-4">
+                                <li><strong>Risk ID:</strong> R-001</li>
+                                <li><strong>Risk Description:</strong> Phishing attack leading to credential theft.</li>
+                                <li><strong>Inherent Risk:</strong> High</li>
+                                <li><strong>Likelihood:</strong> Medium</li>
+                                <li><strong>Impact:</strong> High (e.g., data breach, financial loss)</li>
+                                <li><strong>Proposed Response:</strong> Mitigate (e.g., advanced email filtering, user training)</li>
+                                <li><strong>Residual Risk:</strong> Medium (after controls)</li>
+                            </ul>
+
+                            <h6 class="text-md font-semibold text-gray-700 mb-2 text-center">Example Risk Matrix (Likelihood vs. Impact)</h6>
+                            <table class="risk-matrix-table">
+                                <thead>
+                                    <tr>
+                                        <th>Likelihood \ Impact</th>
+                                        <th>Low</th>
+                                        <th>Medium</th>
+                                        <th>High</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>High</td>
+                                        <td class="medium">Medium</td>
+                                        <td class="high">High</td>
+                                        <td class="critical">Critical</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Medium</td>
+                                        <td class="low">Low</td>
+                                        <td class="medium">Medium</td>
+                                        <td class="high">High</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Low</td>
+                                        <td class="low">Low</td>
+                                        <td class="low">Low</td>
+                                        <td class="medium">Medium</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-gray-600 text-sm italic mt-2 text-center">In this matrix, our example risk (Medium Likelihood, High Impact) falls into the "High" category.</p>
+                        </div>
+
+                        <div class="mb-6 p-4 bg-gray-50 rounded-md shadow-sm">
+                            <h5 class="text-md font-bold text-gray-800 mb-2">Quantitative Risk Calculation (ALE)</h5>
+                            <p class="text-gray-700 mb-2">Calculate the Annualized Loss Expectancy (ALE) for a given asset:</p>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                                <div>
+                                    <label for="assetValue" class="block text-gray-700 text-sm font-bold mb-1">Asset Value (AV) ($):</label>
+                                    <input type="text" id="assetValue" value="100,000" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200">
                                 </div>
-                                <div class="content-box calculator-form">
-                                    <h5 class="text-md font-bold text-white mb-2">Quantitative Risk (ALE)</h5>
-                                    <p class="text-gray-400 mb-4 text-sm">Calculate the Annualized Loss Expectancy (ALE).</p>
-                                    <div class="mb-3">
-                                        <label for="assetValue" class="block text-gray-400 text-sm font-bold mb-1">Asset Value (AV) ($):</label>
-                                        <input type="text" id="assetValue" value="100,000" class="w-full">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="exposureFactor" class="block text-gray-400 text-sm font-bold mb-1">Exposure Factor (EF) (%):</label>
-                                        <input type="number" id="exposureFactor" value="75" min="0" max="100" step="1" class="w-full">
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="aro" class="block text-gray-400 text-sm font-bold mb-1">Annualized Rate of Occurrence (ARO):</label>
-                                        <input type="number" id="aro" value="0.5" min="0" step="0.1" class="w-full">
-                                    </div>
-                                    <p class="text-gray-300 mt-4">SLE: $<span id="sleResult" class="calculator-result"></span></p>
-                                    <p class="text-gray-300">ALE: $<span id="aleResult" class="calculator-result"></span></p>
+                                <div>
+                                    <label for="exposureFactor" class="block text-gray-700 text-sm font-bold mb-1">Exposure Factor (EF) (% loss):</label>
+                                    <input type="number" id="exposureFactor" value="0.75" min="0" max="1" step="0.01" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200">
                                 </div>
                             </div>
+                            <p class="text-gray-700 mb-2"><strong>Single Loss Expectancy (SLE):</strong> $AV \times EF$</p>
+                            <p class="text-lg font-semibold text-gray-800 mb-4">SLE: $<span id="sleResult"></span></p>
+
+                            <label for="aro" class="block text-gray-700 text-sm font-bold mb-1">Annualized Rate of Occurrence (ARO) (times/year):</label>
+                            <input type="number" id="aro" value="0.5" min="0" step="0.1" class="w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 mb-4">
+
+                            <p class="text-gray-700 mb-2"><strong>Annualized Loss Expectancy (ALE):</strong> $SLE \times ARO$</p>
+                            <p class="text-lg font-semibold text-gray-800">ALE: $<span id="aleResult"></span></p>
+                            <p class="text-gray-600 text-sm italic mt-2">Adjust the values above to see how SLE and ALE change. ARO of 0.5 means the event is expected to occur once every two years.</p>
                         </div>
                     </div>
                 </div>
@@ -538,421 +874,832 @@
 
             <!-- Information Security Risk Response Section -->
             <section id="risk-response" class="content-section hidden">
-                <h2 class="text-3xl font-bold section-header mb-6">Section B: Information Security Risk Response</h2>
-                <p class="mb-8 text-gray-400">Once risks have been assessed and analyzed, the next critical phase is to determine how to address them. This involves selecting and implementing appropriate risk treatment strategies.</p>
-                
-                <div class="space-y-4">
-                    <!-- Risk Treatment / Risk Response Options -->
-                    <div>
-                        <button class="accordion-button w-full">
-                            <span>1. Risk Treatment / Risk Response Options</span>
-                            <span class="accordion-icon text-2xl">+</span>
-                        </button>
-                        <div class="accordion-content hidden">
-                            <p class="text-gray-300 mb-4">There are generally four primary strategies for responding to identified risks. Click on a card to learn about each strategy:</p>
-                            <div class="flex flex-wrap justify-center gap-4 mb-6">
-                                <div class="unified-card risk-response-card" data-group="risk-response"><span class="card-title">Mitigate</span><div class="card-description">Reduce the likelihood or impact of a risk through the implementation of security controls (e.g., firewalls, encryption, security awareness training). This is the most common response.</div></div>
-                                <div class="unified-card risk-response-card" data-group="risk-response"><span class="card-title">Transfer</span><div class="card-description">Shift the financial or operational burden of a risk to a third party (e.g., purchasing cyber insurance, outsourcing to a vendor with strong security clauses).</div></div>
-                                <div class="unified-card risk-response-card" data-group="risk-response"><span class="card-title">Avoid</span><div class="card-description">Eliminate the risk entirely by choosing not to engage in or ceasing an activity that gives rise to the risk (e.g., deciding not to store sensitive customer data, discontinuing an insecure legacy application).</div></div>
-                                <div class="unified-card risk-response-card" data-group="risk-response"><span class="card-title">Accept</span><div class="card-description">Acknowledge the existence of a risk and decide to take no further action to mitigate it, usually because the cost of mitigation outweighs the potential impact, or the risk is below the organization's risk tolerance. Requires formal management approval.</div></div>
-                            </div>
-                            <h4 class="text-lg font-semibold text-white mb-3">b. Ensure treatment aligns with legal, regulatory, and business constraints.</h4>
-                            <p class="text-gray-400 mb-4">Risk treatment decisions must comply with all applicable laws and regulations and support overall business objectives.</p>
-                            <h4 class="text-lg font-semibold text-white mb-3">c. Select controls using frameworks like ISO/IEC 27002 and NIST CSF.</h4>
-                            <p class="text-gray-400">These frameworks provide a comprehensive set of generic information security controls and best practices for implementation.</p>
-                        </div>
-                    </div>
+                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Section B: Information Security Risk Response</h2>
+                <p class="mb-8 text-gray-700">Once risks have been assessed and analyzed, the next critical phase is to determine how to address them. This involves selecting and implementing appropriate risk treatment strategies.</p>
 
-                    <!-- Risk and Control Ownership -->
-                    <div>
-                        <button class="accordion-button w-full">
-                            <span>2. Risk and Control Ownership</span>
-                            <span class="accordion-icon text-2xl">+</span>
-                        </button>
-                        <div class="accordion-content hidden">
-                            <p class="text-gray-300 mb-4">Clear accountability is essential for effective risk management. Explore typical roles and their ownership responsibilities in the hierarchy below:</p>
-                            <div class="content-box">
-                                <h6 class="text-md font-semibold text-white mb-4 text-center">Corporate Hierarchy: Risk and Control Ownership</h6>
-                                <div class="flex flex-col items-center gap-2">
-                                    <div class="unified-card role-node" data-group="role-ownership"><span class="card-title">Board/Executive Management</span><div class="card-description">Holds ultimate accountability for risk, defines risk appetite, and ensures resources are allocated.</div></div>
-                                    <div class="hierarchy-line"></div>
-                                    <div class="unified-card role-node" data-group="role-ownership"><span class="card-title">CISO / Security Manager</span><div class="card-description">Manages the security program, advises leadership, and oversees control implementation.</div></div>
-                                    <div class="hierarchy-line-split"></div>
-                                    <div class="flex justify-center gap-8 w-full mt-[-1rem] mb-[-1rem]">
-                                        <div class="unified-card role-node" data-group="role-ownership"><span class="card-title">Data Owners</span><div class="card-description">Accountable for risks to specific data assets and make risk treatment decisions.</div></div>
-                                        <div class="unified-card role-node" data-group="role-ownership"><span class="card-title">IT / Security Teams</span><div class="card-description">Responsible for the technical implementation and operation of controls.</div></div>
+                <!-- Sub-Domain: Risk Treatment / Risk Response Options -->
+                <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
+                    <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                        1. Risk Treatment / Risk Response Options
+                        <span class="accordion-icon text-2xl">+</span>
+                    </button>
+                    <div class="accordion-content hidden p-6">
+                        <p class="text-gray-700 mb-4">There are generally four primary strategies for responding to identified risks.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Develop and apply appropriate response strategies:</h4>
+                        <p class="text-gray-600 mb-4">Click on a card to learn about each strategy:</p>
+                        <div class="flex flex-wrap justify-center gap-4 mb-6">
+                            <div class="risk-response-card mitigate" data-response="mitigate">
+                                <span class="card-title">Mitigate</span>
+                                <div class="card-description hidden">Reduce the likelihood or impact of a risk through the implementation of security controls (e.g., firewalls, encryption, security awareness training). This is the most common response.</div>
+                            </div>
+                            <div class="risk-response-card transfer" data-response="transfer">
+                                <span class="card-title">Transfer</span>
+                                <div class="card-description hidden">Shift the financial or operational burden of a risk to a third party (e.g., purchasing cyber insurance, outsourcing to a vendor with strong security clauses).</div>
+                            </div>
+                            <div class="risk-response-card avoid" data-response="avoid">
+                                <span class="card-title">Avoid</span>
+                                <div class="card-description hidden">Eliminate the risk entirely by choosing not to engage in or ceasing an activity that gives rise to the risk (e.g., deciding not to store sensitive customer data, discontinuing an insecure legacy application).</div>
+                            </div>
+                            <div class="risk-response-card accept" data-response="accept">
+                                <span class="card-title">Accept</span>
+                                <div class="card-description hidden">Acknowledge the existence of a risk and decide to take no further action to mitigate it, usually because the cost of mitigation outweighs the potential impact, or the risk is below the organization's risk tolerance. Requires formal management approval.</div>
+                            </div>
+                        </div>
+                        <!-- Removed the separate risk-response-description div -->
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Ensure treatment aligns with legal, regulatory, and business constraints.</h4>
+                        <p class="text-gray-600 mb-4">Risk treatment decisions must comply with all applicable laws and regulations and support overall business objectives.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700">c. Select controls using frameworks like ISO/IEC 27002 and NIST CSF.</h4>
+                        <p class="text-gray-600">These frameworks provide a comprehensive set of generic information security controls and best practices for implementation.</p>
+                    </div>
+                </div>
+
+                <!-- Sub-Domain: Risk and Control Ownership -->
+                <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
+                    <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                        2. Risk and Control Ownership
+                        <span class="accordion-icon text-2xl">+</span>
+                    </button>
+                    <div class="accordion-content hidden p-6">
+                        <p class="text-gray-700 mb-4">Clear accountability is essential for effective risk management.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Assign risk ownership to appropriate stakeholders (e.g., data owners, business units).</h4>
+                        <p class="text-gray-600 mb-4">Risks belong to the business functions that generate or are most impacted by them, not solely to the security department.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Establish accountability for control implementation and operation.</h4>
+                        <p class="text-gray-600 mb-4">Individuals or teams responsible for the implementation and maintenance of specific security controls must be clearly defined.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700">c. Define responsibilities in risk treatment plans and governance documentation.</h4>
+                        <p class="text-gray-600 mb-4">Formal documentation like risk treatment plans and governance policies ensure that risk management is embedded into the organizational culture. Explore typical roles and their ownership responsibilities in the hierarchy below:</p>
+                        <div class="mb-6 p-4 bg-gray-50 rounded-md shadow-sm">
+                            <h6 class="text-md font-semibold text-gray-700 mb-4 text-center">Corporate Hierarchy: Risk and Control Ownership</h6>
+                            <div class="hierarchy-chart-container">
+                                <div class="role-node board" data-role="board">
+                                    <span class="role-title">Board/Executive Management</span>
+                                    <div class="role-description hidden"></div>
+                                </div>
+                                <div class="hierarchy-line"></div>
+                                <div class="role-node ciso" data-role="ciso">
+                                    <span class="role-title">CISO / Information Security Manager</span>
+                                    <div class="role-description hidden"></div>
+                                </div>
+                                <div class="hierarchy-line-split"></div>
+                                <div class="flex justify-center gap-8 w-full">
+                                    <div class="role-node data-owners" data-role="dataOwners">
+                                        <span class="role-title">Data Owners / Business Unit Heads</span>
+                                        <div class="role-description hidden"></div>
                                     </div>
-                                    <div class="hierarchy-line"></div>
-                                    <div class="unified-card role-node" data-group="role-ownership"><span class="card-title">End Users</span><div class="card-description">Responsible for adhering to security policies and procedures in their daily activities.</div></div>
+                                    <div class="role-node it-ops" data-role="itOps">
+                                        <span class="role-title">IT Operations / Security Teams</span>
+                                        <div class="role-description hidden"></div>
+                                    </div>
+                                </div>
+                                <div class="hierarchy-line"></div>
+                                <div class="role-node end-users" data-role="endUsers">
+                                    <span class="role-title">End Users</span>
+                                    <div class="role-description hidden"></div>
                                 </div>
                             </div>
+                            <p class="text-gray-600 text-sm italic mt-2 text-center">Click on a role in the hierarchy above to see a detailed description of their responsibilities.</p>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Risk Monitoring and Reporting -->
-                    <div>
-                        <button class="accordion-button w-full">
-                            <span>3. Risk Monitoring and Reporting</span>
-                            <span class="accordion-icon text-2xl">+</span>
-                        </button>
-                        <div class="accordion-content hidden">
-                            <p class="text-gray-300 mb-4">Risk management is not a one-time event; it's a continuous process that requires ongoing monitoring and communication.</p>
-                            <h4 class="text-lg font-semibold text-white mb-3">a. Monitor key risk indicators (KRIs), control effectiveness, and residual risk levels.</h4>
-                            <p class="text-gray-400 mb-4">Continuously track metrics that provide early warning signals of increasing risk exposure and assess the ongoing effectiveness of security controls.</p>
-                            <div class="chart-container mb-6">
-                                <canvas id="riskMonitoringKRIChart"></canvas>
-                            </div>
-                            <div class="mb-4">
-                                <label for="riskMonitoringKRISelect" class="block text-gray-400 text-sm font-bold mb-2">Select KRI to view trend:</label>
-                                <select id="riskMonitoringKRISelect" class="block w-full p-2 rounded-md" style="background-color: var(--dark-navy-bg); border: 1px solid var(--border-color);">
-                                    <option value="unpatchedSystems">Unpatched Critical Systems</option>
-                                    <option value="securityIncidents">Security Incidents Trend</option>
-                                    <option value="thirdPartyBreaches">Third-Party Breach Incidents</option>
-                                </select>
-                            </div>
-                            <h4 class="text-lg font-semibold text-white mb-3">b. Report risk trends and posture to leadership.</h4>
-                            <p class="text-gray-400 mb-4">Tailor reports to the audience, providing high-level, strategic overviews for leadership to support informed decision-making. Below is a sample risk posture scorecard:</p>
-                            <div class="content-box">
-                                <h6 class="text-md font-semibold text-white mb-2 text-center">Sample Quarterly Risk Posture Scorecard</h6>
-                                <table class="dark-table">
-                                    <thead><tr><th>Risk Area</th><th>Current Level</th><th>Trend</th><th>Last Review</th></tr></thead>
-                                    <tbody>
-                                        <tr><td>Cyber Attack Surface</td><td class="risk-level-medium">Medium</td><td class="trend-stable">Stable</td><td>Q2 2025</td></tr>
-                                        <tr><td>Data Privacy Compliance</td><td class="risk-level-low">Low</td><td class="trend-down">Improving</td><td>Q2 2025</td></tr>
-                                        <tr><td>Third-Party Vendor Risk</td><td class="risk-level-high">High</td><td class="trend-up">Worsening</td><td>Q2 2025</td></tr>
-                                        <tr><td>Insider Threat</td><td class="risk-level-medium">Medium</td><td class="trend-stable">Stable</td><td>Q2 2025</td></tr>
-                                        <tr><td>Operational Resilience</td><td class="risk-level-low">Low</td><td class="trend-down">Improving</td><td>Q2 2025</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                <!-- Sub-Domain: Risk Monitoring and Reporting -->
+                <div class="mb-10 p-6 bg-white rounded-lg shadow-md">
+                    <button class="accordion-button w-full text-left py-4 px-6 text-xl font-semibold text-gray-800 flex justify-between items-center">
+                        3. Risk Monitoring and Reporting
+                        <span class="accordion-icon text-2xl">+</span>
+                    </button>
+                    <div class="accordion-content hidden p-6">
+                        <p class="text-gray-700 mb-4">Risk management is not a one-time event; it's a continuous process that requires ongoing monitoring and communication.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">b. Monitor key risk indicators (KRIs), control effectiveness, and residual risk levels.</h4>
+                        <p class="text-gray-600 mb-4">Continuously track metrics that provide early warning signals of increasing risk exposure and assess the ongoing effectiveness of security controls.</p>
+                        <div class="chart-container mb-6">
+                            <canvas id="riskMonitoringKRIChart"></canvas>
                         </div>
+                        <div class="mb-4">
+                            <label for="riskMonitoringKRISelect" class="block text-gray-700 text-sm font-bold mb-2">Select KRI to view trend:</label>
+                            <select id="riskMonitoringKRISelect" class="block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-200">
+                                <option value="unpatchedSystems">Unpatched Critical Systems</option>
+                                <option value="securityIncidents">Security Incidents Trend</option>
+                                <option value="thirdPartyBreaches">Third-Party Breach Incidents</option>
+                            </select>
+                        </div>
+                        <p class="text-gray-600 text-sm italic">This line chart illustrates simulated trends for various Key Risk Indicators (KRIs) related to risk monitoring. Select an KRI from the dropdown to see its trend.</p>
+
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">a. Maintain and update the risk register.</h4>
+                        <p class="text-gray-600 mb-4">The risk register is a living document that tracks all identified risks, their status, and assigned ownership.</p>
+                        
+                        <h4 class="text-lg font-semibold text-gray-700 mb-3">c. Report risk trends and posture to leadership and boards using dashboards, scorecards, and executive summaries.</h4>
+                        <p class="text-gray-600 mb-4">Tailor reports to the audience, providing high-level, strategic overviews for leadership to support informed decision-making. Below is a sample risk posture scorecard:</p>
+                        <div class="mb-6 p-4 bg-gray-50 rounded-md shadow-sm">
+                            <h6 class="text-md font-semibold text-gray-700 mb-2 text-center">Sample Quarterly Risk Posture Scorecard</h6>
+                            <table class="risk-scorecard-table">
+                                <thead>
+                                    <tr>
+                                        <th>Risk Area</th>
+                                        <th>Current Level</th>
+                                        <th>Trend</th>
+                                        <th>Last Review</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Cyber Attack Surface</td>
+                                        <td class="risk-level-medium">Medium</td>
+                                        <td class="trend-stable">Stable</td>
+                                        <td>Q2 2024</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Data Privacy Compliance</td>
+                                        <td class="risk-level-low">Low</td>
+                                        <td class="trend-down">Improving</td>
+                                        <td>Q2 2024</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Third-Party Vendor Risk</td>
+                                        <td class="risk-level-high">High</td>
+                                        <td class="trend-up">Worsening</td>
+                                        <td>Q2 2024</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Insider Threat</td>
+                                        <td class="risk-level-medium">Medium</td>
+                                        <td class="trend-stable">Stable</td>
+                                        <td>Q2 2024</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Operational Resilience</td>
+                                        <td class="risk-level-low">Low</td>
+                                        <td class="trend-down">Improving</td>
+                                        <td>Q2 2024</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p class="text-gray-600 text-sm italic mt-2 text-center">This scorecard provides a high-level summary of key risk areas, their current status, and trend, ideal for executive reporting.</p>
+                        </div>
+                        
+                        <h4 class="text-lg font-semibold text-gray-700">d. Support continuous improvement in risk response and awareness.</h4>
+                        <p class="text-gray-600">Establish feedback loops and ongoing security awareness programs to continuously enhance the organization's risk posture.</p>
                     </div>
                 </div>
             </section>
 
-            <!-- Key Terms Section -->
+            <!-- New Section for Key Terms -->
             <section id="key-terms" class="content-section hidden">
-                <h2 class="text-3xl font-bold section-header mb-6">Key Terms</h2>
-                <p class="mb-8 text-gray-400">Test your knowledge of key terms in Information Security Risk Management with these interactive flashcards. Click on a card to reveal its definition.</p>
-                <div id="key-terms-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                    <!-- Key terms will be dynamically inserted here by JavaScript -->
+                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Key Terms</h2>
+                <p class="mb-8 text-gray-700">Test your knowledge of key terms in Information Security Risk Management with these interactive flashcards. Click on a card to reveal its definition.</p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-6">
+                    <!-- Key Terms will be populated here by JavaScript -->
                 </div>
             </section>
 
-            <!-- Domain Summary Section -->
+            <!-- New Section for Domain Summary -->
             <section id="domain-summary" class="content-section hidden">
-                <h2 class="text-3xl font-bold section-header mb-6">Domain Summary</h2>
-                <div class="content-box">
-                    <p class="text-gray-300 mb-4">Domain 2: Information Security Risk Management is a critical component of the CISM framework, focusing on the systematic identification, assessment, response, and monitoring of risks to an organization's information assets. It emphasizes a proactive approach to understanding the evolving threat landscape, including emerging threats like ransomware, insider threats, and third-party risks, and analyzing their potential impact.</p>
-                    <p class="text-gray-300 mb-4">The domain covers various risk assessment methodologies, including qualitative, quantitative, and hybrid approaches, and the use of standardized frameworks such as ISO/IEC 27005, NIST SP 800-30, FAIR, and OCTAVE. It highlights the importance of distinguishing between inherent and residual risk and evaluating risks based on their likelihood and business impact. Furthermore, Domain 2 delves into risk response strategies—mitigating with controls, transferring through contracts or insurance, avoiding risky activities, or accepting risks with management approval—ensuring these align with legal, regulatory, and business constraints.</p>
-                    <p class="text-gray-300">Crucially, this domain stresses the assignment of clear risk and control ownership to appropriate stakeholders, establishing accountability for implementation and operation. Finally, it covers the continuous process of risk monitoring and reporting, including maintaining risk registers, tracking Key Risk Indicators (KRIs), and communicating risk posture to leadership through dashboards and executive summaries, all aimed at supporting continuous improvement in the organization's security posture.</p>
+                <h2 class="text-3xl font-bold section-header text-gray-800 mb-6">Domain Summary</h2>
+                <div class="p-6 bg-white rounded-lg shadow-md">
+                    <p class="text-gray-700 mb-4">Domain 2: Information Security Risk Management is a critical component of the CISM framework, focusing on the systematic identification, assessment, response, and monitoring of risks to an organization's information assets. It emphasizes a proactive approach to understanding the evolving threat landscape, including emerging threats like ransomware, insider threats, and third-party risks, and analyzing their potential impact.</p>
+                    <p class="text-gray-700 mb-4">The domain covers various risk assessment methodologies, including qualitative, quantitative, and hybrid approaches, and the use of standardized frameworks such as ISO/IEC 27005, NIST SP 800-30, FAIR, and OCTAVE. It highlights the importance of distinguishing between inherent and residual risk and evaluating risks based on their likelihood and business impact. Furthermore, Domain 2 delves into risk response strategies—mitigating with controls, transferring through contracts or insurance, avoiding risky activities, or accepting risks with management approval—ensuring these align with legal, regulatory, and business constraints.</p>
+                    <p class="text-gray-700">Crucially, this domain stresses the assignment of clear risk and control ownership to appropriate stakeholders, establishing accountability for implementation and operation. Finally, it covers the continuous process of risk monitoring and reporting, including maintaining risk registers, tracking Key Risk Indicators (KRIs), and communicating risk posture to leadership through dashboards and executive summaries, all aimed at supporting continuous improvement in the organization's security posture.</p>
                 </div>
             </section>
         </main>
 
-        <footer class="text-center py-8 mt-10 text-gray-500 text-sm">
-            <p>&copy; 2025 CISM Study Guide. All rights reserved. For educational purposes only.</p>
+        <footer class="text-center py-6 mt-8 text-gray-500 text-sm">
+            <p>&copy; 2024 CISM Study Guide. All rights reserved. For educational purposes only.</p>
         </footer>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- CONFIG & DATA ---
-            const textPrimary = '#e2e8f0';
-            const textSecondary = '#94a3b8';
-            const borderColor = '#2d3748';
-            const surfaceColor = '#10192b';
-            const chartColors = {
-                red: '#FF6384',
-                yellow: '#FFCD56',
-                green: '#4BC0C0',
-                purple: '#9966FF',
-                orange: '#DAA520',
-                blue_alt: '#6A5ACD',
-                cyan: '#00bfff' // Accent Glow
-            };
+        // JS Variables for current state and base data
+        const currentSection = {
+            id: 'introduction' // Default to introduction
+        };
 
-            const threatDistributionData = {
-                threatOrder: ['Ransomware', 'Insider Threats', 'Third-Party Risks', 'Phishing', 'DDoS', 'APT'],
-                threatColors: [chartColors.red, chartColors.yellow, chartColors.purple, chartColors.green, chartColors.blue_alt, chartColors.orange],
-                ransomwareFocus: { data: [40, 10, 15, 15, 10, 10], explanation: `Focus on Ransomware (40%). This is malicious software that encrypts data and demands a ransom for its release.` },
-                insiderFocus: { data: [10, 40, 15, 15, 10, 10], explanation: `Focus on Insider Threats (40%). These threats originate from within the organization and can be malicious or unintentional.` },
-                thirdPartyFocus: { data: [15, 10, 40, 15, 10, 10], explanation: `Focus on Third-Party Risks (40%). These risks arise from reliance on external vendors and service providers.` },
-                phishingFocus: { data: [15, 10, 10, 40, 10, 15], explanation: `Focus on Phishing (40%). A common social engineering technique to trick individuals into revealing sensitive info.` },
-                ddosFocus: { data: [10, 10, 15, 15, 40, 10], explanation: `Focus on DDoS (40%). Attacks that overwhelm a system with traffic, making it unavailable.` },
-                aptFocus: { data: [10, 10, 15, 15, 10, 40], explanation: `Focus on APTs (40%). Sophisticated, prolonged cyberattacks where an intruder remains undetected.` }
-            };
+        // Data for Section A.1.a (Emerging Threats)
+        const threatDistributionData = {
+            // Define the fixed order of labels and their corresponding colors
+            threatOrder: ['Ransomware', 'Insider Threats', 'Third-Party Risks', 'Phishing', 'DDoS', 'APT'],
+            threatColors: ['#A1C9CE', '#8FB8A1', '#FFD700', '#FF6384', '#6A5ACD', '#DAA520'], // These are the chart colors
 
-            const riskMonitoringKRITrendData = {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                unpatchedSystems: { label: 'Unpatched Critical Systems', data: [15, 12, 10, 8, 7, 6, 5, 4, 3, 2, 1, 1], borderColor: chartColors.red, backgroundColor: 'rgba(255, 99, 132, 0.2)' },
-                securityIncidents: { label: 'Security Incidents Reported', data: [5, 7, 6, 8, 9, 7, 6, 5, 4, 3, 2, 2], borderColor: chartColors.cyan, backgroundColor: 'rgba(0, 191, 255, 0.2)' },
-                thirdPartyBreaches: { label: 'Third-Party Breach Incidents', data: [2, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0], borderColor: chartColors.yellow, backgroundColor: 'rgba(255, 205, 86, 0.2)' }
-            };
-            
-            const keyTermsData = [
-                { term: "Inherent Risk", definition: "The level of risk that exists before any controls or other mitigating factors are put in place. It's the raw risk." },
-                { term: "Residual Risk", definition: "The level of risk that remains after controls have been implemented and account for their effectiveness. This is the risk that management accepts." },
-                { term: "Risk Appetite", definition: "The amount of risk an organization is willing to take to achieve its objectives. It's a high-level strategic statement." },
-                { term: "Risk Tolerance", definition: "The acceptable deviation from the risk appetite. It sets specific thresholds for different types of risks." },
-                { term: "Qualitative", definition: "Uses descriptive terms (e.g., high, medium, low) to define likelihood and impact. It's subjective but quick and often used for initial assessments." },
-                { term: "Quantitative", definition: "Assigns numerical values (e.g., monetary cost, probability percentages) to likelihood and impact. It aims to provide a more objective and measurable view of risk (e.g., ALE, SLE, ARO)." },
-                { term: "ALE", definition: "Annualized Loss Expectancy: The expected monetary loss for an asset due to a risk over a one-year period. (SLE x ARO)." },
-                { term: "SLE", definition: "Single Loss Expectancy: The monetary loss expected each time a risk event occurs. (AV x EF)." },
-                { term: "ARO", definition: "Annualized Rate of Occurrence: The estimated frequency at which a threat event is expected to occur within a one-year period." },
-                { term: "Mitigation", definition: "Reducing the likelihood or impact of a risk through the implementation of security controls." },
-                { term: "Transfer", definition: "Shifting the financial or operational burden of a risk to a third party, often through insurance or contractual agreements." },
-                { term: "Avoidance", definition: "Eliminating the risk entirely by choosing not to engage in or ceasing an activity that gives rise to the risk." },
-                { term: "Acceptance", definition: "Acknowledging the existence of a risk and deciding to take no further action to mitigate it, usually with formal management approval." },
-                { term: "KRI", definition: "Key Risk Indicator: Metrics that provide an early warning signal of increasing risk exposure, helping in proactive risk management." },
-                { term: "Risk Register", definition: "A central repository for all identified risks, including their description, ownership, assessment, and treatment status." }
-            ];
-
-            let threatDistributionChartInstance, riskMonitoringKRIChartInstance;
-
-            // --- BEHAVIOR SETUP ---
-            function setupNavigation() {
-                document.querySelectorAll('.nav-item').forEach(button => {
-                    button.addEventListener('click', () => {
-                        document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
-                        button.classList.add('active');
-                        document.querySelectorAll('.content-section').forEach(section => section.classList.add('hidden'));
-                        const targetSection = document.getElementById(button.dataset.target);
-                        targetSection.classList.remove('hidden');
-                        // Use a short timeout to ensure the fade-in animation triggers correctly
-                        setTimeout(() => targetSection.classList.add('fade-in'), 10);
-                    });
-                });
+            // Data for each focus, ensuring the data array matches threatOrder
+            overall: { // This data is now only used as a base for specific focuses
+                data: [25, 15, 20, 20, 10, 10], // Sums to 100
+                explanation: `This chart shows the overall distribution of common emerging threats. Ransomware: 25%, Insider Threats: 15%, Third-Party Risks: 20%, Phishing: 20%, DDoS: 10%, APT: 10%.`
+            },
+            ransomwareFocus: {
+                data: [40, 10, 15, 15, 10, 10], // Ransomware is high
+                explanation: `This view highlights a scenario where Ransomware is a primary concern, accounting for 40% of the focus, with other threats de-emphasized. Ransomware is malicious software that encrypts data and demands a ransom for its release. It can severely disrupt business operations.`
+            },
+            insiderFocus: {
+                data: [10, 40, 15, 15, 10, 10], // Insider Threats is high
+                explanation: `This view emphasizes Insider Threats, showing them as 40% of the focus, indicating a strong internal security posture or recent internal concerns. Insider threats originate from within the organization and can be malicious or unintentional.`
+            },
+            thirdPartyFocus: {
+                data: [15, 10, 40, 15, 10, 10], // Third-Party Risks is high
+                explanation: `This view emphasizes Third-Party Risks, showing them as 40% of the focus, indicating a strong emphasis on supply chain security or vendor management. Third-party risks arise from reliance on external vendors and service providers, whose security posture can impact the organization.`
+            },
+            phishingFocus: {
+                data: [15, 10, 10, 40, 10, 15], // Phishing is high
+                explanation: `This view emphasizes Phishing attacks, showing them as 40% of the focus. Phishing is a common social engineering technique used to trick individuals into revealing sensitive information or installing malware.`
+            },
+            ddosFocus: {
+                data: [10, 10, 15, 15, 40, 10], // DDoS is high
+                explanation: `This view emphasizes DDoS attacks, showing them as 40% of the focus. DDoS (Distributed Denial of Service) attacks overwhelm a system or network with traffic, making it unavailable to legitimate users.`
+            },
+            aptFocus: {
+                data: [10, 10, 15, 15, 10, 40], // APT is high
+                explanation: `This view emphasizes APTs, showing them as 40% of the focus. APTs (Advanced Persistent Threats) are sophisticated, prolonged cyberattacks where an intruder gains access to a network and remains undetected for an extended period.`
             }
+        };
 
-            function setupAccordions() {
-                document.querySelectorAll('.accordion-button').forEach(button => {
-                    button.addEventListener('click', () => {
-                        const content = button.nextElementSibling;
-                        const icon = button.querySelector('.accordion-icon');
-                        const isOpening = content.classList.contains('hidden');
-                        
-                        if (isOpening) {
-                            content.classList.remove('hidden');
-                            button.classList.add('open');
-                            icon.textContent = '-';
-                        } else {
-                            content.classList.add('hidden');
-                            button.classList.remove('open');
-                            icon.textContent = '+';
+        // Data for Section A.3.a (Risk Assessment Methods)
+        const riskMethodDescriptions = {
+            qualitative: "Uses descriptive terms (e.g., high, medium, low) for likelihood and impact. It's subjective but quick and often used for initial assessments or when precise data is unavailable. Good for prioritization.",
+            quantitative: "Assigns numerical values (e.g., monetary cost, probability percentages) to likelihood and impact. It aims to provide a more objective and measurable view of risk. Useful for cost-benefit analysis (e.g., SLE, ARO, ALE).",
+            hybrid: "Combines elements of both qualitative and quantitative approaches. Often, qualitative assessments are used to identify and prioritize risks, and then quantitative analysis is applied to the most critical risks for detailed analysis."
+        };
+
+        // Data for Section A.3.c (Risk Frameworks)
+        const riskFrameworkDescriptions = {
+            iso27005: {
+                name: "ISO/IEC 27005",
+                description: "Provides guidelines for information security risk management. It supports the general concepts specified in ISO/IEC 27001 (for ISMS) and is designed to assist the satisfactory implementation of information security based on a risk management approach."
+            },
+            nist80030: {
+                name: "NIST SP 800-30",
+                description: "A guide for conducting risk assessments, developed by the National Institute of Standards and Technology (NIST). It provides a systematic approach to identifying, analyzing, and mitigating risks to information systems and organizations."
+            },
+            fair: {
+                name: "FAIR (Factor Analysis of Information Risk)",
+                description: "A quantitative risk analysis model that focuses on understanding and measuring information risk in financial terms. It helps break down complex risk scenarios into measurable components, enabling more objective risk comparisons and cost-benefit analyses."
+            },
+            octave: {
+                name: "OCTAVE (Operationally Critical Threat, Asset, and Vulnerability Evaluation)",
+                description: "A suite of methods that help organizations assess and manage information security risks. It emphasizes a self-directed approach where organizations identify and prioritize risks based on their own operational risk environment, involving key stakeholders from across the organization."
+            }
+        };
+
+        // Data for Section B.1.a (Risk Response Options)
+        const riskResponseDescriptions = {
+            mitigate: "Implement controls to lower the likelihood or impact of a risk. This is the most common response, involving security controls like firewalls, encryption, or security awareness training.",
+            transfer: "Shift the financial or operational burden of a risk to a third party (e.g., purchasing cyber insurance, outsourcing to a vendor with strong security clauses).",
+            avoid: "Eliminate the risk entirely by choosing not to engage in or ceasing an activity that gives rise to the risk (e.g., deciding not to store sensitive customer data, discontinuing an insecure legacy application).",
+            accept: "Acknowledge the existence of a risk and decide to take no further action to mitigate it, usually because the cost of mitigation outweighs the potential impact, or the risk is below the organization's risk tolerance. Requires formal management approval."
+        };
+
+        // Data for Section B.2.c (Risk and Control Ownership) - Detailed Role Descriptions
+        const detailedRoleDescriptions = {
+            board: {
+                title: "Board/Executive Management Responsibilities",
+                description: "The Board and Executive Management hold ultimate accountability for information security risk. Their responsibilities include defining the organization's overall risk appetite, approving major risk management strategies and significant security investments, and providing high-level oversight to ensure that information security aligns with business objectives and regulatory requirements. They ensure adequate resources are allocated for control implementation and monitor the overall effectiveness of the control environment."
+            },
+            ciso: {
+                title: "CISO / Information Security Manager Responsibilities",
+                description: "The CISO (Chief Information Security Officer) or Information Security Manager is responsible for the strategic direction and operational oversight of the information security program. This includes advising senior leadership on risk identification and assessment, reporting on the organization's risk posture, facilitating risk treatment decisions, developing and managing the information security program, overseeing control implementation and operation, and reporting on control effectiveness to relevant stakeholders."
+            },
+            dataOwners: {
+                title: "Data Owners / Business Unit Heads Responsibilities",
+                description: "Data Owners and Business Unit Heads are accountable for the risks associated with the information assets and business processes within their respective domains. They are responsible for making decisions on how to treat these risks (accept, transfer, or mitigate) and ensuring that appropriate controls are implemented and operated effectively within their business units to protect their data and processes. They often work closely with the CISO to understand their specific risk profiles."
+            },
+            itOps: {
+                title: "IT Operations / Security Teams Responsibilities",
+                description: "IT Operations and dedicated Security Teams are primarily responsible for the technical implementation and operational maintenance of security controls. Their duties include identifying technical risks and vulnerabilities, recommending specific mitigation strategies, implementing and maintaining technical controls (such as firewalls, intrusion detection systems, and patching), managing access controls, and responding to security incidents as part of the overall security program."
+            },
+            endUsers: {
+                title: "End User Responsibilities",
+                description: "Every end user in the organization plays a vital role in information security. Their responsibilities include understanding and adhering to established security policies and procedures, practicing good security hygiene (e.g., using strong passwords, identifying phishing attempts), and reporting suspicious activities or potential security incidents. While they may not 'own' risks in the same strategic sense as management, their adherence to controls is critical for overall risk reduction."
+            }
+        };
+
+
+        // Data for Section B.3.b (Risk Monitoring KRIs)
+        const riskMonitoringKRITrendData = {
+            unpatchedSystems: {
+                label: 'Unpatched Critical Systems (Count)',
+                data: [15, 12, 10, 8, 7, 6, 5, 4, 3, 2, 1, 1], // Simulating a decreasing trend
+                borderColor: '#FF6384',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)'
+            },
+            securityIncidents: {
+                label: 'Security Incidents Reported (Monthly)',
+                data: [5, 7, 6, 8, 9, 7, 6, 5, 4, 3, 2, 2], // Simulating fluctuations
+                borderColor: '#A1C9CE',
+                backgroundColor: 'rgba(161, 201, 206, 0.2)'
+            },
+            thirdPartyBreaches: {
+                label: 'Third-Party Breach Incidents (Quarterly)',
+                data: [2, 1, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0], // Simulating infrequent, but impactful events
+                borderColor: '#8FB8A1',
+                backgroundColor: 'rgba(143, 184, 161, 0.2)'
+            }
+        };
+        const riskMonitoringKRILabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+        // Data for Key Terms (New for Domain 2)
+        const keyTermsData = [
+            { term: "Inherent Risk", definition: "The level of risk that exists before any controls or other mitigating factors are put in place. It's the raw risk." },
+            { term: "Residual Risk", definition: "The level of risk that remains after controls have been implemented and account for their effectiveness. This is the risk that management accepts." },
+            { term: "Risk Appetite", definition: "The amount of risk an organization is willing to take to achieve its objectives. It's a high-level strategic statement." },
+            { term: "Risk Tolerance", definition: "The acceptable deviation from the risk appetite. It sets specific thresholds for different types of risks." },
+            { term: "Qualitative Risk Assessment", definition: "Uses descriptive terms (e.g., high, medium, low) to define likelihood and impact. It's subjective but quick and often used for initial assessments." },
+            { term: "Quantitative Risk Assessment", definition: "Assigns numerical values (e.g., monetary cost, probability percentages) to likelihood and impact. It aims to provide a more objective and measurable view of risk (e.g., ALE, SLE, ARO)." },
+            { term: "Annualized Loss Expectancy (ALE)", definition: "The expected monetary loss for an asset due to a risk over a one-year period. Calculated as Single Loss Expectancy (SLE) multiplied by Annualized Rate of Occurrence (ARO)." },
+            { term: "Single Loss Expectancy (SLE)", definition: "The monetary loss expected each time a risk event occurs. Calculated as Asset Value (AV) multiplied by Exposure Factor (EF)." },
+            { term: "Annualized Rate of Occurrence (ARO)", definition: "The estimated frequency at which a threat event is expected to occur within a one-year period." },
+            { term: "Risk Mitigation", definition: "Reducing the likelihood or impact of a risk through the implementation of security controls." },
+            { term: "Risk Transfer", definition: "Shifting the financial or operational burden of a risk to a third party, often through insurance or contractual agreements." },
+            { term: "Risk Avoidance", definition: "Eliminating the risk entirely by choosing not to engage in or ceasing an activity that gives rise to the risk." },
+            { term: "Risk Acceptance", definition: "Acknowledging the existence of a risk and deciding to take no further action to mitigate it, usually with formal management approval." },
+            { term: "Key Risk Indicator (KRI)", definition: "Metrics that provide an early warning signal of increasing risk exposure, helping in proactive risk management." },
+            { term: "Risk Register", definition: "A central repository for all identified risks, including their description, ownership, assessment, and treatment status." }
+        ];
+
+
+        let threatDistributionChartInstance;
+        let riskMonitoringKRIChartInstance;
+
+        // Utility function to wrap labels for charts (no longer used for legend directly)
+        const wrapLabel = (label, maxCharsPerLine = 16) => {
+            if (label.length <= maxCharsPerLine) return label;
+            const words = label.split(' ');
+            let line = '';
+            let lines = [];
+            words.forEach(word => {
+                if ((line + word).length > maxCharsPerLine) {
+                    lines.push(line.trim());
+                    line = word + ' ';
+                } else {
+                    line += word + ' ';
+                }
+            });
+            lines.push(line.trim());
+            return lines;
+        };
+
+        // Initialize Charts
+        const initThreatDistributionChart = () => {
+            const ctx = document.getElementById('threatDistributionChart').getContext('2d');
+            threatDistributionChartInstance = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: threatDistributionData.threatOrder, // Use fixed order for labels
+                    datasets: [{
+                        data: threatDistributionData.overall.data, // Initial data
+                        backgroundColor: threatDistributionData.threatColors, // Use fixed colors
+                        hoverOffset: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: function(context) {
+                                    const label = context[0].label;
+                                    return Array.isArray(label) ? label.join(' ') : label;
+                                },
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed) {
+                                        label += context.parsed + '%';
+                                    }
+                                    return label;
+                                }
+                            }
                         }
-                    });
-                });
+                    }
+                }
+            });
+        };
+
+        const initRiskMonitoringKRIChart = () => {
+            const ctx = document.getElementById('riskMonitoringKRIChart').getContext('2d');
+            riskMonitoringKRIChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: riskMonitoringKRILabels,
+                    datasets: [{
+                        label: riskMonitoringKRITrendData.unpatchedSystems.label,
+                        data: riskMonitoringKRITrendData.unpatchedSystems.data,
+                        borderColor: '#FF6384',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        fill: true,
+                        tension: 0.3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Count'
+                            }
+                        },
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Month'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                title: function(context) {
+                                    return context[0].label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        };
+
+        // Update Chart Functions
+        const updateChart = (chartInstance, newData, newLabels, newColors) => {
+            if (chartInstance) {
+                chartInstance.data.labels = newLabels;
+                chartInstance.data.datasets[0].data = newData;
+                chartInstance.data.datasets[0].backgroundColor = newColors; /* Ensure colors are updated */
+                chartInstance.update();
             }
-            
-            /**
-             * Sets up card toggle functionality using event delegation.
-             * This is more efficient and robust, especially for dynamically added content.
-             */
-            function setupCardTogglesWithDelegation() {
-                const contentArea = document.getElementById('content-area');
-                if (!contentArea) return;
+        };
 
-                contentArea.addEventListener('click', (e) => {
-                    // Find the closest card with a data-group attribute from the click target
-                    const card = e.target.closest('[data-group]');
+        const updateLineChart = (chartInstance, newData, newLabel, newBorderColor, newBackgroundColor) => {
+            if (chartInstance) {
+                chartInstance.data.datasets[0].label = newLabel;
+                chartInstance.data.datasets[0].data = newData;
+                chartInstance.data.datasets[0].borderColor = newBorderColor;
+                chartInstance.data.datasets[0].backgroundColor = newBackgroundColor;
+                chartInstance.data.datasets[0].fill = true;
+                chartInstance.update();
+            }
+        };
+
+        // Quantitative Risk Calculation Function
+        const calculateQuantitativeRisk = () => {
+            const assetValueInput = document.getElementById('assetValue');
+            const rawAssetValue = assetValueInput.value.replace(/,/g, ''); // Remove commas for parsing
+            let assetValue = parseFloat(rawAssetValue);
+
+            const exposureFactor = parseFloat(document.getElementById('exposureFactor').value);
+            const aro = parseFloat(document.getElementById('aro').value);
+
+            let sle = 0;
+            let ale = 0;
+
+            if (!isNaN(assetValue)) {
+                // Format the input value immediately after parsing
+                assetValueInput.value = assetValue.toLocaleString('en-US');
+            } else {
+                assetValue = 0; // Treat invalid input as 0 for calculation
+            }
+
+
+            if (!isNaN(assetValue) && !isNaN(exposureFactor)) {
+                sle = assetValue * exposureFactor;
+            }
+
+            if (!isNaN(sle) && !isNaN(aro)) {
+                ale = sle * aro;
+            }
+
+            // Format monetary values with commas and two decimal places
+            document.getElementById('sleResult').textContent = sle.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            document.getElementById('aleResult').textContent = ale.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        };
+
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initial Chart Render
+            initThreatDistributionChart();
+            initRiskMonitoringKRIChart();
+
+            // Initial quantitative risk calculation display
+            calculateQuantitativeRisk();
+
+            // Navigation
+            document.querySelectorAll('.nav-item').forEach(button => {
+                button.addEventListener('click', () => {
+                    document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    document.querySelectorAll('.content-section').forEach(section => {
+                        section.classList.add('hidden');
+                        section.classList.remove('fade-in');
+                    });
+
+                    const targetSection = document.getElementById(button.dataset.target);
+                    targetSection.classList.remove('hidden');
+                    targetSection.classList.add('fade-in');
+                    currentSection.id = button.dataset.target;
+
+                    // Specific rendering for Key Terms section if activated
+                    if (button.dataset.target === 'key-terms') {
+                        renderKeyTerms();
+                    }
+                });
+            });
+
+            // Set the Introduction tab as active by default on load
+            const introButton = document.querySelector('.nav-item[data-target="introduction"]');
+            const introSection = document.getElementById('introduction');
+            if (introButton && introSection) {
+                introButton.classList.add('active');
+                introSection.classList.remove('hidden');
+                introSection.classList.add('fade-in');
+                currentSection.id = 'introduction';
+            }
+
+
+            // Accordion Functionality
+            document.querySelectorAll('.accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const icon = button.querySelector('.accordion-icon');
+
+                    if (content.classList.contains('hidden')) {
+                        content.classList.remove('hidden');
+                        content.classList.add('fade-in');
+                        icon.textContent = '–';
+                    } else {
+                        content.classList.add('hidden');
+                        content.classList.remove('fade-in');
+                        icon.textContent = '+';
+                    }
+                });
+            });
+
+            // Threat Distribution Chart Toggles
+            const threatExplanationDiv = document.getElementById('threat-explanation');
+            document.querySelectorAll('.toggle-chart-data[data-chart-id="threatDistributionChart"]').forEach(button => {
+                button.addEventListener('click', () => {
+                    const dataSetKey = button.dataset.dataSet;
+                    const data = threatDistributionData[dataSetKey];
                     
-                    // If no card was clicked, do nothing
-                    if (!card) return;
+                    // Update chart with specific data and fixed colors
+                    updateChart(threatDistributionChartInstance, data.data, threatDistributionData.threatOrder, threatDistributionData.threatColors);
 
-                    // This logic handles all cards with a 'data-group' attribute
-                    const group = card.dataset.group;
-                    const isAlreadyActive = card.classList.contains('active');
+                    // Update explanation
+                    threatExplanationDiv.textContent = data.explanation;
+                });
+            });
 
-                    // Deactivate all cards in the same group
-                    contentArea.querySelectorAll(`[data-group="${group}"]`).forEach(otherCard => {
+
+            // Risk Assessment Method Card Toggles
+            document.querySelectorAll('.risk-method-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const currentlyActive = card.classList.contains('active');
+
+                    // Close all other open cards in this section
+                    document.querySelectorAll('.risk-method-card').forEach(otherCard => {
                         otherCard.classList.remove('active');
                     });
 
-                    // If the card was not already active, activate it.
-                    // This creates a toggle behavior: click once to open, click again (or another card) to close.
-                    if (!isAlreadyActive) {
+                    // If the card was not already active, activate it
+                    if (!currentlyActive) {
                         card.classList.add('active');
                     }
                 });
-            }
+            });
 
-            function setupFlowchartToggles() {
-                document.querySelectorAll('.flow-scenario').forEach(scenario => {
-                    const vulnerabilityNode = scenario.querySelector('[data-node-type="vulnerability"]');
-                    const threatNode = scenario.querySelector('[data-node-type="threat"]');
-                    const impactNode = scenario.querySelector('[data-node-type="impact"]');
-                    const arrows = scenario.querySelectorAll('.flow-arrow');
-
-                    vulnerabilityNode.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        const isAlreadyActive = vulnerabilityNode.classList.contains('active');
-                        
-                        // Reset all other scenarios to ensure only one is open at a time
-                        document.querySelectorAll('.flow-scenario').forEach(s => {
-                            if (s !== scenario) {
-                                s.querySelectorAll('.unified-card').forEach(n => n.classList.remove('active'));
-                                s.querySelectorAll('.flow-arrow, [data-node-type="threat"], [data-node-type="impact"]').forEach(el => el.classList.add('hidden'));
-                            }
-                        });
-
-                        // Toggle the current scenario's first step
-                        if (!isAlreadyActive) {
-                            vulnerabilityNode.classList.add('active');
-                            threatNode.classList.remove('hidden');
-                            arrows[0].classList.remove('hidden');
-                        } else {
-                             // If clicking an active vulnerability node, close the whole chain
-                            vulnerabilityNode.classList.remove('active');
-                            threatNode.classList.add('hidden');
-                            threatNode.classList.remove('active');
-                            impactNode.classList.add('hidden');
-                            impactNode.classList.remove('active');
-                            arrows.forEach(arrow => arrow.classList.add('hidden'));
-                        }
+            // Risk Framework Card Toggles
+            document.querySelectorAll('.risk-framework-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const currentlyActive = card.classList.contains('active');
+                    
+                    // Close all other open cards
+                    document.querySelectorAll('.risk-framework-card').forEach(otherCard => {
+                        otherCard.classList.remove('active');
                     });
-
-                    threatNode.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        const isAlreadyActive = threatNode.classList.contains('active');
-
-                        // Toggle the second step
-                        if (!isAlreadyActive) {
-                            threatNode.classList.add('active');
-                            impactNode.classList.remove('hidden');
-                            arrows[1].classList.remove('hidden');
-                        } else {
-                            threatNode.classList.remove('active');
-                            impactNode.classList.add('hidden');
-                            impactNode.classList.remove('active'); // also deactivate impact
-                            arrows[1].classList.add('hidden');
-                        }
-                    });
-
-                     impactNode.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        // Simple toggle for the final card in the chain
-                        impactNode.classList.toggle('active');
-                    });
-                });
-            }
-
-            // --- CHART & INTERACTIVE LOGIC ---
-            function initThreatDistributionChart() {
-                const ctx = document.getElementById('threatDistributionChart')?.getContext('2d');
-                if (!ctx) return;
-                threatDistributionChartInstance = new Chart(ctx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: threatDistributionData.threatOrder,
-                        datasets: [{
-                            data: threatDistributionData.ransomwareFocus.data, // Default view
-                            backgroundColor: threatDistributionData.threatColors,
-                            hoverOffset: 4,
-                            borderColor: surfaceColor
-                        }]
-                    },
-                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom', labels: { color: textSecondary } } } }
-                });
-
-                document.querySelectorAll('.toggle-chart-data[data-chart-id="threatDistributionChart"]').forEach(button => {
-                    button.addEventListener('click', e => {
-                        const dataSetKey = e.currentTarget.dataset.dataSet;
-                        const data = threatDistributionData[dataSetKey];
-                        threatDistributionChartInstance.data.datasets[0].data = data.data;
-                        threatDistributionChartInstance.update();
-                        document.getElementById('threat-explanation').textContent = data.explanation;
-                    });
-                });
-                 // Set initial explanation
-                document.getElementById('threat-explanation').textContent = threatDistributionData.ransomwareFocus.explanation;
-            }
-
-            function initRiskMonitoringKRIChart() {
-                const ctx = document.getElementById('riskMonitoringKRIChart')?.getContext('2d');
-                if (!ctx) return;
-                riskMonitoringKRIChartInstance = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: riskMonitoringKRITrendData.labels,
-                        datasets: [{ ...riskMonitoringKRITrendData.unpatchedSystems, fill: true, tension: 0.3 }]
-                    },
-                    options: {
-                        responsive: true, maintainAspectRatio: false,
-                        scales: {
-                            y: { beginAtZero: true, grid: { color: borderColor }, ticks: { color: textSecondary } },
-                            x: { grid: { color: borderColor }, ticks: { color: textSecondary } }
-                        },
-                        plugins: { legend: { position: 'top', labels: { color: textSecondary } } }
+                    
+                    // If the card was not already active, activate it
+                    if (!currentlyActive) {
+                        card.classList.add('active');
                     }
                 });
-                document.getElementById('riskMonitoringKRISelect').addEventListener('change', e => {
-                    const data = riskMonitoringKRITrendData[e.target.value];
-                    riskMonitoringKRIChartInstance.data.datasets[0] = { ...data, fill: true, tension: 0.3 };
-                    riskMonitoringKRIChartInstance.update();
+            });
+
+
+            // Risk Response Option Description Toggles
+            document.querySelectorAll('.risk-response-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    const currentlyActive = card.classList.contains('active');
+
+                    // Close all other open cards
+                    document.querySelectorAll('.risk-response-card').forEach(otherCard => {
+                        otherCard.classList.remove('active');
+                    });
+
+                    // If the card was not already active, activate it
+                    if (!currentlyActive) {
+                        card.classList.add('active');
+                    }
                 });
-            }
+            });
 
-            function setupALE_Calculator() {
-                const inputs = ['assetValue', 'exposureFactor', 'aro'];
-                inputs.forEach(id => document.getElementById(id)?.addEventListener('input', calculateQuantitativeRisk));
-                calculateQuantitativeRisk(); // Initial calculation
-            }
+            // Risk and Control Ownership Role Details
+            document.querySelectorAll('.role-node').forEach(roleNode => {
+                roleNode.addEventListener('click', () => {
+                    const currentlyActive = roleNode.classList.contains('active');
+                    const roleKey = roleNode.dataset.role;
+                    const roleInfo = detailedRoleDescriptions[roleKey];
+                    const roleDescriptionDiv = roleNode.querySelector('.role-description');
 
-            function calculateQuantitativeRisk() {
-                const assetValueInput = document.getElementById('assetValue');
-                if (!assetValueInput) return;
-                
-                const rawAssetValue = assetValueInput.value.replace(/,/g, '');
-                let assetValue = parseFloat(rawAssetValue);
-                const exposureFactor = parseFloat(document.getElementById('exposureFactor').value) / 100; // Convert percentage to decimal
-                const aro = parseFloat(document.getElementById('aro').value);
+                    // Close all other open role descriptions and clear their content
+                    document.querySelectorAll('.role-node').forEach(otherRoleNode => {
+                        otherRoleNode.classList.remove('active');
+                        const otherDesc = otherRoleNode.querySelector('.role-description');
+                        if (otherDesc) {
+                            otherDesc.innerHTML = '';
+                        }
+                    });
 
-                if (!isNaN(assetValue)) {
-                    assetValueInput.value = assetValue.toLocaleString('en-US');
-                } else {
-                    assetValue = 0;
-                }
+                    // If the card was not already active, activate it and populate its content
+                    if (!currentlyActive) {
+                        roleNode.classList.add('active');
+                        if (roleDescriptionDiv && roleInfo) {
+                            roleDescriptionDiv.innerHTML = `<p>${roleInfo.description}</p>`;
+                        }
+                    }
+                });
+            });
 
-                let sle = 0;
-                let ale = 0;
 
-                if (!isNaN(assetValue) && !isNaN(exposureFactor)) {
-                    sle = assetValue * exposureFactor;
-                }
-                if (!isNaN(sle) && !isNaN(aro)) {
-                    ale = sle * aro;
-                }
+            // Risk Monitoring KRI Chart Selector
+            document.getElementById('riskMonitoringKRISelect').addEventListener('change', (event) => {
+                const selectedKRI = event.target.value;
+                const data = riskMonitoringKRITrendData[selectedKRI];
+                updateLineChart(riskMonitoringKRIChartInstance, data.data, data.label, data.borderColor, data.backgroundColor);
+            });
 
-                document.getElementById('sleResult').textContent = sle.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-                document.getElementById('aleResult').textContent = ale.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-            }
+            // Quantitative Risk Calculation Event Listeners
+            document.getElementById('assetValue').addEventListener('input', calculateQuantitativeRisk);
+            document.getElementById('exposureFactor').addEventListener('input', calculateQuantitativeRisk);
+            document.getElementById('aro').addEventListener('input', calculateQuantitativeRisk);
 
-            function renderKeyTerms() {
-                const container = document.getElementById('key-terms-grid');
-                if (!container) return;
-                container.innerHTML = '';
-                keyTermsData.forEach(item => {
-                    const card = document.createElement('div');
-                    card.className = 'unified-card key-term-card';
-                    card.dataset.group = 'key-terms'; // This allows the delegated event listener to find it
-                    card.innerHTML = `
-                        <span class="card-title">${item.term}</span>
-                        <div class="card-description">${item.definition}</div>
+            // Function to render Key Terms cards
+            const renderKeyTerms = () => {
+                const keyTermsContainer = document.querySelector('#key-terms .grid');
+                if (!keyTermsContainer) return; // Exit if container not found
+                keyTermsContainer.innerHTML = ''; // Clear existing cards
+
+                keyTermsData.forEach((item, index) => {
+                    const cardHtml = `
+                        <div class="key-term-card" data-term-key="${index}">
+                            <h3 class="card-title">${item.term}</h3>
+                            <div class="card-description"></div>
+                        </div>
                     `;
-                    container.appendChild(card);
+                    keyTermsContainer.insertAdjacentHTML('beforeend', cardHtml);
                 });
-            }
 
-            // --- INITIALIZATION ---
-            setupNavigation();
-            setupAccordions();
-            setupCardTogglesWithDelegation(); // Use the new, robust method
-            setupFlowchartToggles();
-            initThreatDistributionChart();
-            initRiskMonitoringKRIChart();
-            setupALE_Calculator();
-            renderKeyTerms();
+                // Add event listeners for key term cards
+                document.querySelectorAll('.key-term-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        const currentlyActive = card.classList.contains('active');
+                        const descriptionDiv = card.querySelector('.card-description');
+                        const termIndex = parseInt(card.dataset.termKey);
+
+                        // Close all other open cards and remove 'active' class
+                        document.querySelectorAll('.key-term-card').forEach(otherCard => {
+                            otherCard.classList.remove('active');
+                            // Also clear the content to be safe
+                            const otherDesc = otherCard.querySelector('.card-description');
+                            if(otherDesc) {
+                                otherDesc.innerHTML = '';
+                            }
+                        });
+                        
+                        // If the card was not already active, activate it and populate
+                        if (!currentlyActive) {
+                            card.classList.add('active');
+                            if (descriptionDiv && keyTermsData[termIndex]) {
+                                descriptionDiv.innerHTML = `<p>${keyTermsData[termIndex].definition}</p>`;
+                            }
+                        }
+                    });
+                });
+            };
+
+            // Vulnerability Scenario Card Toggles
+            document.querySelectorAll('.flow-node[data-node-type="vulnerability"]').forEach(vulnerabilityNode => {
+                vulnerabilityNode.addEventListener('click', () => {
+                    const scenarioContainer = vulnerabilityNode.closest('.flow-scenario');
+                    const threatNode = scenarioContainer.querySelector('.flow-node[data-node-type="threat"]');
+                    const arrow1 = scenarioContainer.querySelector('.flow-arrow[data-arrow-id="0-1"]');
+                    const impactNode = scenarioContainer.querySelector('.flow-node[data-node-type="impact"]');
+                    const arrow2 = scenarioContainer.querySelector('.flow-arrow[data-arrow-id="1-2"]');
+                    const vulnerabilityDescriptionDiv = vulnerabilityNode.querySelector('.node-description');
+                    const currentlyActive = vulnerabilityNode.classList.contains('active');
+
+                    // Close all other scenarios
+                    document.querySelectorAll('.flow-scenario').forEach(otherScenario => {
+                        otherScenario.querySelectorAll('.flow-node').forEach(node => {
+                            node.classList.remove('active');
+                            const desc = node.querySelector('.node-description');
+                            if (desc) desc.style.display = 'none';
+                        });
+                        otherScenario.querySelectorAll('.flow-arrow').forEach(arrow => arrow.classList.add('hidden'));
+                        otherScenario.querySelectorAll('.flow-node[data-node-type="threat"]').forEach(node => node.classList.add('hidden'));
+                        otherScenario.querySelectorAll('.flow-node[data-node-type="impact"]').forEach(node => node.classList.add('hidden'));
+                    });
+
+                    // If the clicked node wasn't active, open this scenario
+                    if (!currentlyActive) {
+                        vulnerabilityNode.classList.add('active');
+                        if (vulnerabilityDescriptionDiv) vulnerabilityDescriptionDiv.style.display = 'block';
+                        if (threatNode) threatNode.classList.remove('hidden');
+                        if (arrow1) arrow1.classList.remove('hidden');
+                    }
+                });
+            });
+
+            document.querySelectorAll('.flow-node[data-node-type="threat"]').forEach(threatNode => {
+                threatNode.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevent the parent vulnerability node's click event from firing
+                    const scenarioContainer = threatNode.closest('.flow-scenario');
+                    const impactNode = scenarioContainer.querySelector('.flow-node[data-node-type="impact"]');
+                    const arrow2 = scenarioContainer.querySelector('.flow-arrow[data-arrow-id="1-2"]');
+                    const threatDescriptionDiv = threatNode.querySelector('.node-description');
+                    const currentlyActive = threatNode.classList.contains('active');
+
+                    // Deactivate any other active nodes within the same scenario
+                    scenarioContainer.querySelectorAll('.flow-node').forEach(node => {
+                        if(node !== threatNode && node.dataset.nodeType !== 'vulnerability') {
+                            node.classList.remove('active');
+                            const desc = node.querySelector('.node-description');
+                            if (desc) desc.style.display = 'none';
+                        }
+                    });
+
+
+                    // Toggle current threat node
+                    threatNode.classList.toggle('active');
+
+                    if (threatNode.classList.contains('active')) {
+                        if (threatDescriptionDiv) threatDescriptionDiv.style.display = 'block';
+                        if (impactNode) impactNode.classList.remove('hidden');
+                        if (arrow2) arrow2.classList.remove('hidden');
+                    } else {
+                        if (threatDescriptionDiv) threatDescriptionDiv.style.display = 'none';
+                        if (impactNode) {
+                            impactNode.classList.add('hidden');
+                            impactNode.classList.remove('active');
+                            const impactDesc = impactNode.querySelector('.node-description');
+                            if(impactDesc) impactDesc.style.display = 'none';
+                        }
+                        if (arrow2) arrow2.classList.add('hidden');
+                    }
+                });
+            });
+
+            document.querySelectorAll('.flow-node[data-node-type="impact"]').forEach(impactNode => {
+                impactNode.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevent parent click events
+                    impactNode.classList.toggle('active');
+                    const impactDescriptionDiv = impactNode.querySelector('.node-description');
+                    if (impactNode.classList.contains('active')) {
+                        if (impactDescriptionDiv) impactDescriptionDiv.style.display = 'block';
+                    } else {
+                        if (impactDescriptionDiv) impactDescriptionDiv.style.display = 'none';
+                    }
+                });
+            });
+
+            // Initial state: hide all threat and impact nodes and arrows
+            document.querySelectorAll('.flow-node[data-node-type="threat"], .flow-node[data-node-type="impact"]').forEach(node => {
+                node.classList.add('hidden');
+                const desc = node.querySelector('.node-description');
+                if (desc) desc.style.display = 'none';
+            });
+            document.querySelectorAll('.flow-arrow').forEach(arrow => arrow.classList.add('hidden'));
+
         });
     </script>
 </body>
