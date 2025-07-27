@@ -282,7 +282,16 @@
         .risk-method-card { width: 250px; }
         .key-term-card { width: 150px; }
         .role-node { width: 220px; }
-        .flow-node { width: 150px; }
+        .flow-node { 
+            width: 150px; 
+            min-height: 160px; /* Uniform height for flowchart cards */
+            display: flex;
+            flex-direction: column;
+        }
+        .flow-node .card-description {
+            flex-grow: 1; /* Allows description to fill space */
+        }
+
 
         /* Chart & Interactive Element Containers */
         .chart-container {
