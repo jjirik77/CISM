@@ -323,30 +323,28 @@
                             <span class="accordion-icon text-2xl">+</span>
                         </button>
                         <div class="accordion-content hidden">
-                            <p class="text-gray-300 mb-4">The IRP is the blueprint for how an organization reacts to security incidents. It outlines the systematic approach to manage incidents from detection to post-incident review.</p>
+                            <p class="text-gray-300 mb-4">The Incident Response Plan (IRP) is the foundational document that guides an organization's actions during and after a security incident. This subsection distinguishes between the strategic oversight of incident management and the tactical actions of incident response. It outlines the core objectives of the plan, the key roles and teams involved, and the importance of having a documented, repeatable process to follow under the stressful conditions of a real incident.</p>
                             
-                            <h4 class="text-lg font-semibold text-white mb-3">a. Define scope, objectives, and roles within the plan.</h4>
-                            <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="plan-elements">
-                                <div class="unified-card" data-key="scope"><span class="card-title">Scope of the Plan</span><div class="card-description"></div></div>
-                                <div class="unified-card" data-key="objectives"><span class="card-title">Objectives of the Plan</span><div class="card-description"></div></div>
-                                <div class="unified-card" data-key="roles"><span class="card-title">Roles & Responsibilities</span><div class="card-description"></div></div>
+                            <h4 class="text-lg font-semibold text-white mb-3">a. Incident Management vs. Incident Response</h4>
+                            <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="irp-concepts">
+                                <div class="unified-card" data-key="incident-management"><span class="card-title">Incident Management</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="incident-response"><span class="card-title">Incident Response</span><div class="card-description"></div></div>
                             </div>
-
-                            <h4 class="text-lg font-semibold text-white mb-3">b. Document classification criteria and severity levels.</h4>
-                            <p class="text-gray-400 mb-4">Incidents need to be categorized based on their characteristics (e.g., impact, data sensitivity) to ensure appropriate and proportionate responses. Severity levels dictate urgency and resource allocation.</p>
-
-                            <h4 class="text-lg font-semibold text-white mb-3">c. Ensure plan includes activation, containment, communication, and recovery methods.</h4>
-                             <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="response-methods">
-                                 <div class="unified-card" data-key="activation"><span class="card-title">Activation</span><div class="card-description"></div></div>
-                                 <div class="unified-card" data-key="containment"><span class="card-title">Containment</span><div class="card-description"></div></div>
-                                 <div class="unified-card" data-key="communication"><span class="card-title">Communication</span><div class="card-description"></div></div>
-                                 <div class="unified-card" data-key="recovery"><span class="card-title">Recovery</span><div class="card-description"></div></div>
+                            
+                            <h4 class="text-lg font-semibold text-white mb-3">b. Roles and Staffing</h4>
+                            <p class="text-gray-400 mb-4">The plan must define clear roles and responsibilities before an incident occurs. The Information Security Manager plays a key coordinating role, often leading the response and acting as the liaison to senior management.</p>
+                             <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="irp-roles">
+                                 <div class="unified-card" data-key="emergency-team"><span class="card-title">Emergency Action Team</span><div class="card-description"></div></div>
+                                 <div class="unified-card" data-key="security-team"><span class="card-title">Security Team</span><div class="card-description"></div></div>
+                                 <div class="unified-card" data-key="relocation-team"><span class="card-title">Relocation Team</span><div class="card-description"></div></div>
                              </div>
 
-                            <h4 class="text-lg font-semibold text-white mb-3">d. Core Phases of Incident Response.</h4>
-                            <p class="text-gray-400 mb-4">Incident response typically follows a structured set of phases. Click each phase to learn more.</p>
+                            <h4 class="text-lg font-semibold text-white mb-3">c. Core Phases of Incident Response (The Incident Handling Life Cycle)</h4>
+                            <p class="text-gray-400 mb-4">While specific frameworks (like NIST or SANS) vary, the general process flow is key for the exam. Incident response typically follows this structured set of phases. Click each phase to learn more.</p>
                             <div class="flex flex-col items-center gap-2" data-interactive-group="incident-phases">
-                                <div class="unified-card" data-key="detection"><span class="card-title">Detection & Analysis</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="preparation"><span class="card-title">Preparation</span><div class="card-description"></div></div>
+                                <span class="flow-arrow">↓</span>
+                                <div class="unified-card" data-key="detection"><span class="card-title">Identification (Detection & Analysis)</span><div class="card-description"></div></div>
                                 <span class="flow-arrow">↓</span>
                                 <div class="unified-card" data-key="containment"><span class="card-title">Containment</span><div class="card-description"></div></div>
                                 <span class="flow-arrow">↓</span>
@@ -354,7 +352,7 @@
                                 <span class="flow-arrow">↓</span>
                                 <div class="unified-card" data-key="recovery"><span class="card-title">Recovery</span><div class="card-description"></div></div>
                                  <span class="flow-arrow">↓</span>
-                                <div class="unified-card" data-key="post-incident"><span class="card-title">Post-Incident Review</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="post-incident"><span class="card-title">Lessons Learned (Post-Incident Review)</span><div class="card-description"></div></div>
                             </div>
                         </div>
                     </div>
@@ -366,15 +364,28 @@
                             <span class="accordion-icon text-2xl">+</span>
                         </button>
                         <div class="accordion-content hidden">
-                            <p class="text-gray-300 mb-4">The BIA quantifies the potential impact of disruptions to critical business functions, guiding recovery priorities and objectives.</p>
+                            <p class="text-gray-300 mb-4">The Business Impact Analysis (BIA) is the foundational analysis that determines the priorities for all continuity and recovery planning. Its purpose is to identify the organization's most critical business functions and quantify the operational and financial impact of a disruption to those functions over time. The outputs of the BIA directly inform the creation of the Business Continuity and Disaster Recovery plans.</p>
+                            <h4 class="text-lg font-semibold text-white mb-3">a. Purpose of the BIA</h4>
+                            <p class="text-gray-400 mb-4">To determine the impact on the business if critical processes or resources fail. It answers key questions like: Which business functions are most critical? What is the maximum amount of time a function can be down? What resources (people, technology, facilities) are needed for recovery?</p>
                             
-                            <h4 class="text-lg font-semibold text-white mb-3">a. Identify mission-critical business functions, dependencies, and acceptable downtime.</h4>
-                            <p class="text-gray-400 mb-4">The BIA identifies which business operations are most vital, their reliance on specific systems or data, and how long the business can tolerate their unavailability without suffering significant harm.</p>
-
-                            <h4 class="text-lg font-semibold text-white">b. Determine metrics like Recovery Time Objective (RTO) and Recovery Point Objective (RPO).</h4>
-                            <div class="flex flex-wrap justify-center gap-4 mt-4" data-interactive-group="bcp-elements">
+                            <h4 class="text-lg font-semibold text-white mb-3">b. Key Outputs and Metrics</h4>
+                            <p class="text-gray-400 mb-4">The BIA produces several critical metrics that drive recovery planning.</p>
+                             <div class="flex flex-wrap justify-center gap-4 mt-4" data-interactive-group="bcp-elements">
                                 <div class="unified-card" data-key="rto"><span class="card-title">Recovery Time Objective (RTO)</span><div class="card-description"></div></div>
                                 <div class="unified-card" data-key="rpo"><span class="card-title">Recovery Point Objective (RPO)</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="mtd"><span class="card-title">Maximum Tolerable Downtime (MTD)</span><div class="card-description"></div></div>
+                            </div>
+
+                            <h4 class="text-lg font-semibold text-white mt-6 mb-3">c. BIA Process Steps</h4>
+                            <p class="text-gray-400 mb-4">A BIA is conducted by following these core steps.</p>
+                            <div class="flex flex-wrap justify-center items-center gap-4 mt-4" data-interactive-group="bia-steps">
+                                <div class="unified-card" data-key="identify-functions"><span class="card-title">1. Identify Critical Functions</span><div class="card-description"></div></div>
+                                <span class="text-3xl text-gray-400">→</span>
+                                <div class="unified-card" data-key="map-dependencies"><span class="card-title">2. Map Dependencies</span><div class="card-description"></div></div>
+                                 <span class="text-3xl text-gray-400">→</span>
+                                <div class="unified-card" data-key="estimate-impacts"><span class="card-title">3. Estimate Impacts</span><div class="card-description"></div></div>
+                                 <span class="text-3xl text-gray-400">→</span>
+                                <div class="unified-card" data-key="determine-rto-rpo"><span class="card-title">4. Determine RTO/RPO</span><div class="card-description"></div></div>
                             </div>
                         </div>
                     </div>
@@ -386,20 +397,19 @@
                             <span class="accordion-icon text-2xl">+</span>
                         </button>
                         <div class="accordion-content hidden">
-                            <p class="text-gray-300 mb-4">The BCP ensures that essential business functions can continue during and after a significant disruption.</p>
-                            <h4 class="text-lg font-semibold text-white mb-3">a. Coordinate incident response with continuity strategies.</h4>
-                            <div class="flex flex-wrap justify-center items-center gap-4 mb-6" data-interactive-group="dependencies">
-                                <div class="unified-card" data-key="incident-response"><span class="card-title">Incident Response (IR)</span><div class="card-description"></div></div>
-                                <span class="text-3xl text-gray-400">→</span>
-                                <div class="unified-card" data-key="business-continuity"><span class="card-title">Business Continuity (BCP)</span><div class="card-description"></div></div>
+                            <p class="text-gray-300 mb-4">The Business Continuity Plan (BCP) is a strategic document that outlines how the business as a whole will continue to deliver products and services during an unexpected interruption. It is a business-focused plan, not just a technical one, designed to minimize the overall impact of a disruption and protect critical business processes.</p>
+                            <h4 class="text-lg font-semibold text-white mb-3">a. Integration with Other Plans</h4>
+                            <p class="text-gray-400 mb-4">The BCP is the overarching plan. The Incident Response Plan (IRP) handles the immediate reaction to an incident. The Disaster Recovery Plan (DRP) is a component of the BCP that focuses specifically on restoring IT systems and data. All three plans must be aligned, with consistent RTOs and RPOs derived from the BIA.</p>
+                            <h4 class="text-lg font-semibold text-white mb-3">b. High Availability (HA) and Resilience</h4>
+                            <p class="text-gray-400 mb-4">These are technical strategies used to meet the RTOs defined in the BIA.</p>
+                            <div class="flex flex-wrap justify-center items-center gap-4 mb-6" data-interactive-group="bcp-concepts">
+                                <div class="unified-card" data-key="high-availability"><span class="card-title">High Availability (HA)</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="system-resilience"><span class="card-title">System Resilience</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="spof"><span class="card-title">Single Point of Failure (SPOF)</span><div class="card-description"></div></div>
                             </div>
-                            <h4 class="text-lg font-semibold text-white mb-3">b. Include backup arrangements, failover procedures, and alternate work sites.</h4>
-                            <p class="text-gray-400 mb-4">A robust BCP specifies mechanisms like regular data backups, redundant systems for seamless failover, and alternative locations for staff to work from if primary facilities are unavailable.</p>
-                            <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="bcp-components">
-                                <div class="unified-card" data-key="backups"><span class="card-title">Backup Arrangements</span><div class="card-description"></div></div>
-                                <div class="unified-card" data-key="redundant-systems"><span class="card-title">Redundant Systems</span><div class="card-description"></div></div>
-                                <div class="unified-card" data-key="alternate-locations"><span class="card-title">Alternate Locations</span><div class="card-description"></div></div>
-                            </div>
+
+                            <h4 class="text-lg font-semibold text-white mb-3">c. Insurance and Cyber Insurance</h4>
+                            <p class="text-gray-400 mb-4">Insurance is a form of risk transference used to reduce the financial impact of a rare, high-cost event; it does not prevent the event itself. Cyber insurance can cover costs associated with data breaches, ransomware payments, and business interruption. Insurers often mandate that the organization implement specific security controls as a prerequisite for coverage.</p>
                         </div>
                     </div>
 
@@ -410,16 +420,24 @@
                             <span class="accordion-icon text-2xl">+</span>
                         </button>
                         <div class="accordion-content hidden">
-                              <p class="text-gray-300 mb-4">The DRP details the technical steps to restore IT systems and infrastructure after a disaster.</p>
-                              <h4 class="text-lg font-semibold text-white mb-3">a. Prepare technical restoration procedures aligned with BIA/BCP metrics.</h4>
-                              <p class="text-gray-400 mb-4">The DRP outlines precise, step-by-step procedures for rebuilding systems, restoring data, and re-establishing network connectivity, all designed to meet the RTOs and RPOs defined in the BIA and BCP.</p>
-                              <h4 class="text-lg font-semibold text-white mb-3">b. Validate DRP periodically through testing and simulation.</h4>
-                              <p class="text-gray-400 mb-4">Regular testing (e.g., tabletop exercises, simulations, full drills) is crucial to ensure the DRP is viable, up-to-date, and that recovery teams are proficient in executing the plan. This identifies gaps and areas for improvement.</p>
-                              <h4 class="text-lg font-semibold text-white mb-3">c. DRP Site Types.</h4>
-                              <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="drp-sites">
+                             <p class="text-gray-300 mb-4">The Disaster Recovery Plan (DRP) is the technical component of the BCP that focuses on restoring IT infrastructure, services, and data after a major disruption. The choice of strategy is directly driven by the RTO and RPO requirements identified in the BIA.</p>
+                            <h4 class="text-lg font-semibold text-white mb-3">a. Purpose of the DRP</h4>
+                            <p class="text-gray-400 mb-4">To get critical technology operational again to support business recovery. It is a technically focused plan.</p>
+                            
+                            <h4 class="text-lg font-semibold text-white mb-3">b. Recovery Site Strategies.</h4>
+                             <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="drp-sites">
                                  <div class="unified-card" data-key="hot-site"><span class="card-title">Hot Site</span><div class="card-description"></div></div>
                                  <div class="unified-card" data-key="warm-site"><span class="card-title">Warm Site</span><div class="card-description"></div></div>
                                  <div class="unified-card" data-key="cold-site"><span class="card-title">Cold Site</span><div class="card-description"></div></div>
+                                 <div class="unified-card" data-key="draas"><span class="card-title">DRaaS</span><div class="card-description"></div></div>
+                            </div>
+
+                            <h4 class="text-lg font-semibold text-white mb-3">c. Backup Strategies</h4>
+                            <p class="text-gray-400 mb-4">Common methods for data backup include:</p>
+                            <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="drp-backups">
+                                 <div class="unified-card" data-key="full-backup"><span class="card-title">Full Backup</span><div class="card-description"></div></div>
+                                 <div class="unified-card" data-key="incremental-backup"><span class="card-title">Incremental Backup</span><div class="card-description"></div></div>
+                                 <div class="unified-card" data-key="differential-backup"><span class="card-title">Differential Backup</span><div class="card-description"></div></div>
                             </div>
                         </div>
                     </div>
@@ -431,7 +449,17 @@
                             <span class="accordion-icon text-2xl">+</span>
                         </button>
                         <div class="accordion-content hidden">
-                            <h4 class="text-lg font-semibold text-white mb-3">a. Establish criteria to classify incidents based on impact, sensitivity, or compliance.</h4>
+                            <p class="text-gray-300 mb-4">To respond effectively, an incident must be properly understood and prioritized. This process ensures that incidents are routed to the right teams and that the most critical issues receive immediate attention, guided by a formal escalation procedure.</p>
+                            <h4 class="text-lg font-semibold text-white mb-3">a. Categorization vs. Classification</h4>
+                            <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="classification-concepts">
+                                <div class="unified-card" data-key="categorization"><span class="card-title">Categorization</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="classification"><span class="card-title">Classification (Severity)</span><div class="card-description"></div></div>
+                            </div>
+                            
+                            <h4 class="text-lg font-semibold text-white mb-3">b. Escalation Process</h4>
+                            <p class="text-gray-400 mb-4">A documented procedure that defines when, how, and to whom an incident should be reported as its severity increases or if it remains unresolved for too long. It includes predefined triggers, clear authority for actions, and pre-approved notification lists and channels.</p>
+
+                            <h4 class="text-lg font-semibold text-white mb-3">c. Example Classification Levels</h4>
                             <p class="text-gray-300 mb-4">Incidents are classified using defined criteria such as potential financial loss, number of affected users, sensitivity of compromised data (e.g., PII, PHI), and regulatory reporting obligations. Click each level to learn more.</p>
                             <div class="flex flex-col items-center gap-4" data-interactive-group="incident-classification">
                                 <div class="unified-card incident-classification-card" data-classification="critical" data-key="critical"><span class="card-title">Critical (Severity 1)</span><div class="card-description"></div></div>
@@ -439,8 +467,6 @@
                                 <div class="unified-card incident-classification-card" data-classification="medium" data-key="medium"><span class="card-title">Medium (Severity 3)</span><div class="card-description"></div></div>
                                 <div class="unified-card incident-classification-card" data-classification="low" data-key="low"><span class="card-title">Low (Severity 4)</span><div class="card-description"></div></div>
                             </div>
-                            <h4 class="text-lg font-semibold text-white mt-6 mb-3">b. Use classification to guide escalation and resource mobilization.</h4>
-                            <p class="text-gray-400 mb-4">The assigned incident classification directly informs who needs to be notified (escalation path) and what resources (personnel, tools, budget) should be deployed to address the incident effectively and efficiently.</p>
                         </div>
                     </div>
 
@@ -451,15 +477,29 @@
                             <span class="accordion-icon text-2xl">+</span>
                         </button>
                         <div class="accordion-content hidden">
-                              <h4 class="text-lg font-semibold text-white mb-3">a. Conduct tabletop exercises, simulations, and full-scale drills.</h4>
-                              <p class="text-gray-400 mb-4">Testing ensures plans are viable and teams are proficient. Click a testing type to learn more.</p>
-                              <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="testing-types">
-                                 <div class="unified-card" data-key="tabletop"><span class="card-title">Tabletop Exercises</span><div class="card-description"></div></div>
-                                 <div class="unified-card" data-key="simulation"><span class="card-title">Simulations</span><div class="card-description"></div></div>
-                                 <div class="unified-card" data-key="full-scale"><span class="card-title">Full-Scale Drills</span><div class="card-description"></div></div>
+                             <p class="text-gray-300 mb-4">A plan that is not tested is just a document; it is not a capability. This final subsection of Part A covers the ongoing activities required to ensure the incident response plan remains effective and that personnel are prepared to execute it.</p>
+                            <h4 class="text-lg font-semibold text-white mb-3">a. Training and Evaluation</h4>
+                            <p class="text-gray-400 mb-4">All relevant personnel must be trained on their roles and responsibilities. After any test or real incident, an evaluation must be conducted to capture lessons learned and identify strengths and weaknesses.</p>
+                            <h4 class="text-lg font-semibold text-white mb-3">b. Metrics and Indicators</h4>
+                            <p class="text-gray-400 mb-4">Performance is tracked using Key Performance Indicators (KPIs).</p>
+                             <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="testing-metrics">
+                                 <div class="unified-card" data-key="kpi"><span class="card-title">Key Performance Indicators (KPIs)</span><div class="card-description"></div></div>
+                                 <div class="unified-card" data-key="mttr"><span class="card-title">Mean Time to Respond/Resolve</span><div class="card-description"></div></div>
+                             </div>
+
+                            <h4 class="text-lg font-semibold text-white mb-3">c. Testing the Plans</h4>
+                             <p class="text-gray-400 mb-4">The primary goal of testing is to validate the readiness of both personnel and processes. Test types range from simplest to complex.</p>
+                             <div class="flex flex-wrap justify-center items-center gap-4 mb-6" data-interactive-group="testing-types">
+                                 <div class="unified-card" data-key="read-through"><span class="card-title">Read-Through Test</span><div class="card-description"></div></div>
+                                 <span class="text-3xl text-gray-400">→</span>
+                                 <div class="unified-card" data-key="tabletop"><span class="card-title">Walkthrough (Tabletop)</span><div class="card-description"></div></div>
+                                 <span class="text-3xl text-gray-400">→</span>
+                                 <div class="unified-card" data-key="simulation"><span class="card-title">Simulation Test</span><div class="card-description"></div></div>
+                                 <span class="text-3xl text-gray-400">→</span>
+                                 <div class="unified-card" data-key="parallel"><span class="card-title">Parallel Test</span><div class="card-description"></div></div>
+                                 <span class="text-3xl text-gray-400">→</span>
+                                 <div class="unified-card" data-key="full-interruption"><span class="card-title">Full Interruption Test</span><div class="card-description"></div></div>
                             </div>
-                            <h4 class="text-lg font-semibold text-white mb-3">b. Identify plan gaps, clarify roles, and refine procedures based on outcomes.</h4>
-                            <p class="text-gray-400">The goal of testing isn't just to practice, but to identify weaknesses in the plan, ambiguous roles, and inefficient procedures. Findings from these exercises drive continuous improvement of the IRP, BCP, and DRP, along with targeted training for personnel.</p>
                         </div>
                     </div>
                 </div>
@@ -467,7 +507,7 @@
 
             <section id="incident-operations" class="content-section hidden">
                 <h2 class="text-3xl font-bold section-header mb-6">Section B: Incident Management Operations</h2>
-                <p class="mb-8 text-gray-400">This section describes the real-time execution of the incident response plan when a security incident is detected.</p>
+                <p class="mb-8 text-gray-400">This section covers the hands-on execution of the incident response plan, detailing the tools, techniques, and procedures used during and after an incident.</p>
                 
                 <div class="space-y-6">
                     <!-- Accordion 1: Tools -->
@@ -477,17 +517,20 @@
                             <span class="accordion-icon text-2xl">+</span>
                         </button>
                         <div class="accordion-content hidden">
-                            <p class="text-gray-300 mb-4">Effective incident management relies on a combination of methodologies and specialized technological solutions for detection, analysis, and response.</p>
-                            <h4 class="text-lg font-semibold text-white mb-3">a. Use tools such as SIEM, EDR, IDS/IPS, and threat intelligence platforms.</h4>
-                            <p class="text-gray-300 mb-4">These tools are critical for identifying, analyzing, and responding to incidents. Click on a tool to learn about its primary function in incident management:</p>
+                            <p class="text-gray-300 mb-4">Effective incident response in a modern enterprise is impossible without specialized tools and a well-structured team. This subsection introduces the systems used to detect and manage incidents at scale, and discusses the composition and skills required for a successful incident response team.</p>
+                            <h4 class="text-lg font-semibold text-white mb-3">a. Incident Management Systems and Tools</h4>
                             <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="ir-tools">
                                <div class="unified-card" data-key="siem"><span class="card-title">SIEM</span><div class="card-description"></div></div>
                                <div class="unified-card" data-key="edr"><span class="card-title">EDR</span><div class="card-description"></div></div>
-                               <div class="unified-card" data-key="ids-ips"><span class="card-title">IDS/IPS</span><div class="card-description"></div></div>
+                               <div class="unified-card" data-key="xdr"><span class="card-title">XDR</span><div class="card-description"></div></div>
                                <div class="unified-card" data-key="threat-intel"><span class="card-title">Threat Intelligence</span><div class="card-description"></div></div>
                             </div>
-                            <h4 class="text-lg font-semibold text-white mb-3">b. Apply methods for detection, triage, and situational awareness.</h4>
-                            <p class="text-gray-400">This involves continuously monitoring systems for anomalies, rapidly assessing alerts to determine if they are true incidents (triage), and maintaining a comprehensive understanding of the incident's status and impact as it unfolds.</p>
+                            <h4 class="text-lg font-semibold text-white mb-3">b. Incident Response Team Structure and Skills</h4>
+                            <p class="text-gray-400 mb-4">A plan must outline permanent roles (handlers, forensics) and temporary roles (legal, PR, HR). The team needs a mix of skills.</p>
+                             <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="team-skills">
+                               <div class="unified-card" data-key="technical-skills"><span class="card-title">Technical Skills</span><div class="card-description"></div></div>
+                               <div class="unified-card" data-key="soft-skills"><span class="card-title">Soft Skills</span><div class="card-description"></div></div>
+                             </div>
                         </div>
                     </div>
 
@@ -498,16 +541,24 @@
                             <span class="accordion-icon text-2xl">+</span>
                         </button>
                         <div class="accordion-content hidden">
-                            <p class="text-gray-300 mb-4">Once an incident is confirmed, a thorough investigation is crucial to understand its scope, impact, and root cause.</p>
-                            <h4 class="text-lg font-semibold text-white mb-3">a. Launch investigations using forensic methodologies.</h4>
-                            <p class="text-gray-400 mb-4">Forensic methodologies involve systematic and legally sound processes for collecting, preserving, and analyzing digital evidence to reconstruct events and identify perpetrators. Click on each method to learn more:</p>
+                            <p class="text-gray-300 mb-4">When a potential incident is detected, a formal investigation must begin. A central theme is the critical importance of evidence handling to ensure that evidence is admissible in legal proceedings.</p>
+                            <h4 class="text-lg font-semibold text-white mb-3">a. Event vs. Incident</h4>
+                             <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="event-concepts">
+                                <div class="unified-card" data-key="event"><span class="card-title">Event</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="incident"><span class="card-title">Incident</span><div class="card-description"></div></div>
+                            </div>
+                            <h4 class="text-lg font-semibold text-white mb-3">b. Digital Forensics vs. eDiscovery</h4>
+                            <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="forensic-concepts">
+                                <div class="unified-card" data-key="ediscovery"><span class="card-title">eDiscovery</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="digital-forensics"><span class="card-title">Digital Forensics</span><div class="card-description"></div></div>
+                            </div>
+                             <h4 class="text-lg font-semibold text-white mb-3">c. Evidence and Chain of Custody</h4>
+                            <p class="text-gray-400 mb-4">Evidence is any information that can prove or disprove facts related to an incident.</p>
                             <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="forensic-methods">
                                 <div class="unified-card" data-key="chain-of-custody"><span class="card-title">Chain of Custody</span><div class="card-description"></div></div>
-                                <div class="unified-card" data-key="immutability"><span class="card-title">Immutability</span><div class="card-description"></div></div>
-                                <div class="unified-card" data-key="least-intrusive"><span class="card-title">Least Intrusive</span><div class="card-description"></div></div>
                             </div>
-                            <h4 class="text-lg font-semibold text-white mb-3">b. Forensic Investigation Steps.</h4>
-                            <p class="text-gray-400 mb-4">A structured approach ensures thorough and legally sound evidence handling. Click on each step or arrow to learn more:</p>
+                            <h4 class="text-lg font-semibold text-white mb-3">d. Forensic Investigation Steps</h4>
+                            <p class="text-gray-400 mb-4">A structured approach ensures thorough and legally sound evidence handling. Click on each step to learn more:</p>
                             <div class="flex flex-col items-center gap-2" data-interactive-group="forensic-steps">
                                 <div class="unified-card" data-key="collection"><span class="card-title">Collection</span><div class="card-description"></div></div>
                                 <span class="flow-arrow">↓</span>
@@ -527,8 +578,12 @@
                             <span class="accordion-icon text-2xl">+</span>
                         </button>
                         <div class="accordion-content hidden">
-                            <p class="text-gray-300 mb-4">Containment aims to limit the damage and prevent the spread of an incident, protecting unaffected systems and data.</p>
-                            <h4 class="text-lg font-semibold text-white mb-3">a. Apply appropriate techniques (e.g., isolating systems, disabling accounts, network segmentation).</h4>
+                            <p class="text-gray-300 mb-4">Once an incident is validated, the immediate priority is to stop the bleeding. Containment involves taking immediate, short-term actions to limit the scope and impact of an incident.</p>
+                            <h4 class="text-lg font-semibold text-white mb-3">a. Purpose and Analogy</h4>
+                            <p class="text-gray-400 mb-4">The purpose of containment is to limit or reduce the immediate impact of an incident. It is a short-term, tactical action that does not fix the root cause. <strong>Analogy:</strong> Containment is like applying a tourniquet to a wound to stop the bleeding; it doesn't heal the underlying injury.</p>
+                            <h4 class="text-lg font-semibold text-white mb-3">b. The Decision to Contain</h4>
+                            <p class="text-gray-400 mb-4">This is a critical, risk-based business decision made by senior management with input from the security and legal teams. The benefit of stopping the damage must be weighed against the risk that the action might alert the attacker, causing them to escalate their attack or destroy evidence.</p>
+                            <h4 class="text-lg font-semibold text-white mb-3">c. Containment Activities</h4>
                             <p class="text-gray-300 mb-4">Containment strategies include disconnecting compromised systems, revoking access for affected accounts, or segmenting networks to quarantine the threat. Click on a method to learn more:</p>
                             <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="containment-methods">
                                 <div class="unified-card" data-key="isolation"><span class="card-title">System Isolation</span><div class="card-description"></div></div>
@@ -536,8 +591,6 @@
                                 <div class="unified-card" data-key="network-segmentation"><span class="card-title">Network Segmentation</span><div class="card-description"></div></div>
                                 <div class="unified-card" data-key="firewall-rules"><span class="card-title">Firewall/IPS Rules</span><div class="card-description"></div></div>
                             </div>
-                            <h4 class="text-lg font-semibold text-white mb-3">b. Balance containment with business and operational impacts.</h4>
-                            <p class="text-gray-400">Containment actions can disrupt business operations. The security manager must make informed decisions, often in consultation with business leaders, to balance the need to stop the attack with minimizing disruption to critical business functions.</p>
                         </div>
                     </div>
 
@@ -548,20 +601,23 @@
                             <span class="accordion-icon text-2xl">+</span>
                         </button>
                         <div class="accordion-content hidden">
-                            <p class="text-gray-300 mb-4">Clear, timely, and accurate communication is crucial during an incident to manage expectations and ensure proper coordination with all stakeholders.</p>
-                            <h4 class="text-lg font-semibold text-white mb-3">a. Activate escalation and notification procedures.</h4>
-                            <p class="text-gray-400 mb-4">Define who needs to be informed (e.g., legal, PR, affected business units, regulators, law enforcement, customers) at each stage of the incident, based on its severity and impact. Click on a stakeholder group to learn more:</p>
+                            <p class="text-gray-300 mb-4">Clear, timely, and tailored communication is essential for managing an incident effectively and maintaining stakeholder trust. This subsection covers the creation and execution of a communication plan.</p>
+                            <h4 class="text-lg font-semibold text-white mb-3">a. The Communication Plan</h4>
+                            <p class="text-gray-400 mb-4">This plan should be defined in advance and include: Who needs to be informed (internal and external stakeholders), what information each audience needs, how the communication will be delivered, and when updates will be provided.</p>
+                            <h4 class="text-lg font-semibold text-white mb-3">b. Key Principles</h4>
+                            <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="comm-principles">
+                                <div class="unified-card" data-key="single-source-truth"><span class="card-title">Single Source of Truth</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="secure-channels"><span class="card-title">Secure Channels</span><div class="card-description"></div></div>
+                            </div>
+                            
+                            <h4 class="text-lg font-semibold text-white mb-3">c. Stakeholder Communications</h4>
+                            <p class="text-gray-400 mb-4">Define who needs to be informed at each stage of the incident, based on its severity and impact. Click on a stakeholder group to learn more:</p>
                             <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="comm-stakeholders">
                                 <div class="unified-card" data-key="internal"><span class="card-title">Internal Stakeholders</span><div class="card-description"></div></div>
                                 <div class="unified-card" data-key="external"><span class="card-title">External Stakeholders</span><div class="card-description"></div></div>
                             </div>
-                            <h4 class="text-lg font-semibold text-white mb-3">b. Maintain incident logs, updates, and disclosures.</h4>
-                            <p class="text-gray-400 mb-4">Meticulous logging of all incident activities is essential for post-incident review and legal compliance. Regular status updates keep internal teams aligned, and timely, accurate regulatory disclosures prevent legal penalties. Click on a communication action to learn more:</p>
-                            <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="comm-actions">
-                                <div class="unified-card" data-key="notification"><span class="card-title">Notification Procedures</span><div class="card-description"></div></div>
-                                <div class="unified-card" data-key="incident-logs"><span class="card-title">Incident Logs</span><div class="card-description"></div></div>
-                                <div class="unified-card" data-key="regulatory-disclosures"><span class="card-title">Regulatory Disclosures</span><div class="card-description"></div></div>
-                            </div>
+                            <h4 class="text-lg font-semibold text-white mb-3">d. Documentation and Disclosures</h4>
+                            <p class="text-gray-400 mb-4">Meticulous logging of all incident activities is essential for post-incident review and legal compliance. Regular status updates keep internal teams aligned, and timely, accurate regulatory disclosures prevent legal penalties.</p>
                         </div>
                     </div>
                     
@@ -572,23 +628,30 @@
                             <span class="accordion-icon text-2xl">+</span>
                         </button>
                         <div class="accordion-content hidden">
-                            <p class="text-gray-300 mb-4">Once contained, the focus shifts to removing the threat and restoring normal operations.</p>
-                            <h4 class="text-lg font-semibold text-white mb-3">a. Eradicate malicious elements and vulnerabilities.</h4>
-                            <p class="text-gray-400 mb-4">This involves completely removing all traces of the attacker and malicious code from affected systems, and, crucially, addressing the underlying vulnerabilities that allowed the incident to occur (e.g., patching, reconfiguring insecure services). Click on each eradication step to learn more:</p>
+                            <p class="text-gray-300 mb-4">After an incident has been contained, the focus shifts to permanently removing the threat and restoring systems to a secure, operational state. A critical theme here is the importance of not rushing the recovery process until the root cause has been fully eradicated.</p>
+                            <h4 class="text-lg font-semibold text-white mb-3">a. Eradication vs. Recovery</h4>
+                            <ul class="list-disc list-inside text-gray-400 space-y-2 mb-4">
+                                <li><strong>Eradication:</strong> The process of removing all artifacts of the incident from the network, including malware, backdoors, and the root cause (e.g., an unpatched vulnerability). Its goal is to prevent recurrence.</li>
+                                <li><strong>Recovery:</strong> The process of carefully restoring affected systems to normal, secure operations after eradication is complete.</li>
+                            </ul>
+                            <p class="text-gray-400 mb-4"><strong>Critical Caution:</strong> Returning to business as usual too quickly, before the root cause has been fully eradicated, is a major risk that can lead to a repeat incident.</p>
+
+                            <h4 class="text-lg font-semibold text-white mb-3">b. Eradication Activities</h4>
+                            <p class="text-gray-400 mb-4">This involves completely removing all traces of the attacker and malicious code from affected systems, and, crucially, addressing the underlying vulnerabilities that allowed the incident to occur.</p>
                             <div class="flex flex-wrap justify-center items-center gap-4 mb-6" data-interactive-group="eradication-steps">
                                 <div class="unified-card" data-key="identify-remove"><span class="card-title">Identify & Remove Root Cause</span><div class="card-description"></div></div>
-                                <span class="text-3xl text-gray-400">→</span>
+                                 <span class="text-3xl text-gray-400">→</span>
                                 <div class="unified-card" data-key="clean-elements"><span class="card-title">Clean Malicious Elements</span><div class="card-description"></div></div>
-                                <span class="text-3xl text-gray-400">→</span>
+                                 <span class="text-3xl text-gray-400">→</span>
                                 <div class="unified-card" data-key="harden-systems"><span class="card-title">Harden Systems</span><div class="card-description"></div></div>
                             </div>
-                            <h4 class="text-lg font-semibold text-white mb-3">b. Recover systems based on BCP/DR metrics.</h4>
-                            <p class="text-gray-400 mb-4">Systems are restored using clean backups and recovery procedures defined in the DRP and BCP. Rigorous validation ensures systems are fully functional, secure, and free of residual threats before being returned to production, meeting established RTOs and RPOs. Click on each recovery step to learn more:</p>
+                            <h4 class="text-lg font-semibold text-white mb-3">c. Recovery Activities</h4>
+                            <p class="text-gray-400 mb-4">Systems are restored using clean backups and recovery procedures defined in the DRP and BCP. Rigorous validation ensures systems are fully functional, secure, and free of residual threats before being returned to production.</p>
                             <div class="flex flex-wrap justify-center items-center gap-4 mb-6" data-interactive-group="recovery-steps">
                                <div class="unified-card" data-key="validate-systems"><span class="card-title">Validate Systems</span><div class="card-description"></div></div>
-                               <span class="text-3xl text-gray-400">→</span>
+                                <span class="text-3xl text-gray-400">→</span>
                                <div class="unified-card" data-key="restore-data"><span class="card-title">Restore Data/Services</span><div class="card-description"></div></div>
-                               <span class="text-3xl text-gray-400">→</span>
+                                <span class="text-3xl text-gray-400">→</span>
                                <div class="unified-card" data-key="verify-monitor"><span class="card-title">Verify & Monitor</span><div class="card-description"></div></div>
                             </div>
                         </div>
@@ -601,7 +664,19 @@
                             <span class="accordion-icon text-2xl">+</span>
                         </button>
                         <div class="accordion-content hidden">
-                            <p class="text-gray-300 mb-4">The incident response lifecycle concludes with a review to learn from the event and continuously improve the security posture.</p>
+                            <p class="text-gray-300 mb-4">The final and perhaps most important phase of the incident management lifecycle is the post-incident review. This is where the organization turns a negative event into a positive opportunity to strengthen its security posture.</p>
+                            <h4 class="text-lg font-semibold text-white mb-3">a. Purpose of Post-Incident Review</h4>
+                            <p class="text-gray-400 mb-4">To capture lessons learned, refine processes, justify resources, and improve overall security.</p>
+                             <h4 class="text-lg font-semibold text-white mb-3">b. Key Activities</h4>
+                             <div class="flex flex-wrap justify-center items-center gap-4 mb-6" data-interactive-group="post-incident-activities">
+                                <div class="unified-card" data-key="root-cause-analysis"><span class="card-title">Root Cause Analysis</span><div class="card-description"></div></div>
+                                <span class="text-3xl text-gray-400">→</span>
+                                <div class="unified-card" data-key="remediation-plan"><span class="card-title">Remediation Plan</span><div class="card-description"></div></div>
+                             </div>
+                             <h4 class="text-lg font-semibold text-white mb-3">c. Legal Integration</h4>
+                            <p class="text-gray-400 mb-4">Involving legal counsel early is crucial, especially for breaches involving sensitive data, to get guidance on notification requirements, evidence handling, and preserving attorney-client privilege.</p>
+                            
+                            <h4 class="text-lg font-semibold text-white mb-3">d. Core Review Practices</h4>
                             <div class="flex flex-wrap justify-center gap-4 mb-6" data-interactive-group="post-incident-practices">
                                 <div class="unified-card" data-key="after-action-review"><span class="card-title">After-Action Review (AAR)</span><div class="card-description"></div></div>
                                 <div class="unified-card" data-key="lessons-learned"><span class="card-title">Lessons Learned</span><div class="card-description"></div></div>
@@ -638,41 +713,53 @@
         document.addEventListener('DOMContentLoaded', () => {
             // Data for interactive elements
             const data = {
-                'plan-elements': {
-                    scope: { description: "Defines what constitutes an 'information security incident' and which systems, networks, data, and business processes are covered. It clarifies the boundaries of the incident response team's authority." },
-                    objectives: { description: "Outlines the goals of the IRP, such as minimizing damage, restoring operations quickly, protecting reputation, and complying with legal obligations." },
-                    roles: { description: "Clearly defines who does what during an incident, including the IRT lead, technical specialists, communication lead, and legal counsel, to ensure accountability and coordination." }
+                'irp-concepts': {
+                    'incident-management': { description: "The strategic, overarching program and framework that includes planning, policies, resource allocation, and continuous improvement. It addresses the full lifecycle: before, during, and after an incident." },
+                    'incident-response': { description: "The tactical, 'boots on the ground' process that is triggered when an incident is declared. It focuses on immediate actions like detection, containment, and recovery to minimize the immediate impact." }
                 },
-                'response-methods': {
-                    activation: { description: "Procedures for initiating the IRP upon detection of a confirmed incident, including notification protocols and mobilization of the IRT." },
-                    containment: { description: "Techniques to limit the scope and impact of an incident, such as isolating affected systems or disabling compromised accounts." },
-                    communication: { description: "Protocols for sharing information with internal stakeholders (management, legal) and external parties (regulators, customers)." },
-                    recovery: { description: "Procedures for restoring affected systems and data to normal, secure operation after eradication, including restoring from backups and validating security." }
+                'irp-roles': {
+                    'emergency-team': { description: "Deals with immediate physical threats (e.g., fire, power outage) and initial damage assessment to ensure personnel safety and site security." },
+                    'security-team': { description: "Focuses on the technical aspects of the incident, such as network analysis, forensic evidence collection, malware analysis, and containment actions." },
+                    'relocation-team': { description: "Responsible for managing the logistics of moving business operations and personnel to a pre-designated alternate site if the primary location becomes unavailable." }
                 },
                 'incident-phases': {
-                    detection: { description: "The phase where security events are identified, analyzed, and confirmed as incidents, involving monitoring logs, alerts, and user reports." },
-                    containment: { description: "Actions taken to limit the scope and impact of the incident, preventing further damage or spread, such as isolating systems." },
-                    eradication: { description: "The process of removing the root cause of the incident and any malicious elements from affected systems, including cleaning malware and patching vulnerabilities." },
-                    recovery: { description: "Restoring affected systems and data to normal, secure operation, including validating system integrity and restoring from clean backups." },
-                    'post-incident': { description: "Conducting an after-action review to analyze the response, identify lessons learned, and implement corrective actions to improve future security." }
+                    preparation: { description: "This foundational phase includes all proactive measures: developing and documenting plans (IRP, BCP, DRP), forming and training the response team, acquiring necessary tools, and getting management support and funding."},
+                    detection: { description: "The phase where security events are identified through monitoring tools (like SIEM/IDS), analyzed to rule out false positives, and confirmed as actual incidents, triggering the formal response process." },
+                    containment: { description: "Immediate actions taken to limit the scope and impact of the incident, preventing further damage or spread, such as isolating systems from the network." },
+                    eradication: { description: "The process of removing the root cause of the incident and any malicious elements from affected systems, including cleaning malware, removing backdoors, and patching vulnerabilities to prevent recurrence." },
+                    recovery: { description: "Restoring affected systems and data to a normal, secure operational state. This includes restoring from clean backups, validating system integrity, and monitoring for any signs of reinfection." },
+                    'post-incident': { description: "Conducting an after-action review to analyze the entire response, identify what went well and what didn't, document lessons learned, and implement corrective actions to improve future security." }
                 },
                 'bcp-elements': {
                     rto: { description: "The maximum tolerable duration of time that a system, application, or network can be down after a disaster or incident without causing unacceptable harm to the business. Example: An e-commerce platform has an RTO of 4 hours." },
-                    rpo: { description: "The maximum tolerable amount of data that can be lost from an IT service due to a major incident, indicating how recent backups need to be. Example: A customer database has an RPO of 1 hour." }
+                    rpo: { description: "The maximum tolerable amount of data that can be lost from an IT service due to a major incident, indicating how recent backups need to be. Example: A customer database has an RPO of 1 hour." },
+                    mtd: { description: "The absolute longest the business can survive with a critical function being down before the organization suffers irreversible failure. The RTO must always be less than or equal to the MTD."}
                 },
-                'bcp-components': {
-                    backups: { description: "Regularly creating copies of data to ensure it can be restored in case of loss. Key considerations are frequency (how often), location (off-site/cloud), and retention (how long)." },
-                    'redundant-systems': { description: "Implementing duplicate systems (e.g., servers, network devices) that can take over if a primary component fails. This is often achieved through failover clustering or load balancing." },
-                    'alternate-locations': { description: "Designated alternative physical sites where business operations can continue if the primary facility is unusable. These range from fully equipped hot sites to basic cold sites." }
+                'bia-steps': {
+                    'identify-functions': { description: 'Identify all business functions and processes, then prioritize them based on their importance to the organization\'s mission and revenue streams.'},
+                    'map-dependencies': { description: 'For each critical function, identify all the supporting resources, including people, applications, IT systems, data, and third-party vendors.'},
+                    'estimate-impacts': { description: 'Quantify the financial (e.g., lost revenue, penalties) and operational (e.g., reputational damage) impacts that would occur if a function were disrupted over various timeframes.'},
+                    'determine-rto-rpo': { description: 'Based on the impact analysis, define the specific Recovery Time Objectives (RTO) and Recovery Point Objectives (RPO) for each critical function and its supporting resources.'},
                 },
-                'dependencies': {
-                    'incident-response': { description: "Focuses on the immediate, tactical handling of security incidents to detect, analyze, contain, eradicate, and recover from specific breaches." },
-                    'business-continuity': { description: "A broader discipline ensuring the organization can continue critical business functions during and after any disruptive event, focusing on maintaining operations." }
+                'bcp-concepts': {
+                    'high-availability': { description: "Keeping critical systems accessible with minimal downtime, often through redundancy (e.g., clustered servers, multiple power supplies) to eliminate single points of failure." },
+                    'system-resilience': { description: "The ability of a system to maintain an acceptable level of performance and service during or after a disruption, often by gracefully degrading non-essential functions." },
+                    'spof': { description: "A Single Point of Failure (SPOF) is any component (hardware, software, or process) whose failure would cause an entire system or business function to stop operating. A key goal of BCP and HA is to identify and eliminate SPOFs." }
                 },
                 'drp-sites': {
-                    'hot-site': { description: "A fully equipped off-site data center that mirrors the primary site, allowing for immediate or near-immediate recovery (low RTO). Most expensive option." },
+                    'hot-site': { description: "A fully equipped off-site data center that mirrors the primary site, with live or near-live replicated data. It allows for immediate or near-immediate recovery (low RTO). Most expensive option." },
                     'warm-site': { description: "A partially equipped off-site location with hardware and connectivity, but requiring some setup and data restoration (moderate RTO and cost)." },
-                    'cold-site': { description: "A basic off-site facility with space and power but no hardware. Least expensive but requires significant time to become operational (high RTO)." }
+                    'cold-site': { description: "A basic off-site facility with space and power but no hardware. Least expensive but requires significant time to become operational (high RTO)." },
+                    'draas': { description: "Disaster Recovery as a Service. A cloud computing model where a third-party provider hosts and manages the recovery site, offering geographic diversity and a flexible, pay-as-you-go cost structure."}
+                },
+                'drp-backups': {
+                    'full-backup': { description: "Backs up all selected data, regardless of when it last changed. Restores are simple (one set of media), but backups are slow and consume the most storage." },
+                    'incremental-backup': { description: "Backs up only the data that has changed since the last backup of any type (full or incremental). Backups are very fast, but restores are complex, requiring the last full backup and all subsequent incremental backups." },
+                    'differential-backup': { description: "Backs up all data that has changed since the last full backup. A balance between speed and simplicity; restores require only the last full backup and the most recent differential backup." }
+                },
+                'classification-concepts': {
+                    categorization: { description: "Describes WHAT KIND of incident it is. This helps in routing the incident to the correct response team with the right expertise. Examples: Malware incident, Network outage, Unauthorized access, Phishing attack." },
+                    classification: { description: "Defines HOW BAD the incident is by assessing its severity, business impact, and urgency. This determines the priority level (e.g., Critical, High, Medium, Low) and guides the response speed and resource allocation." },
                 },
                 'incident-classification': {
                     critical: { description: "<strong>Impact:</strong> Severe financial/reputational damage, major operational disruption. <br><strong>Examples:</strong> Major data breach, ransomware on critical systems. <br><strong>Response:</strong> Immediate, 24/7, C-suite notification." },
@@ -680,21 +767,37 @@
                     medium: { description: "<strong>Impact:</strong> Limited operational disruption, minor financial impact. <br><strong>Examples:</strong> Single compromised account, contained malware. <br><strong>Response:</strong> Standard business hours, team lead notification." },
                     low: { description: "<strong>Impact:</strong> Minimal or no business impact. <br><strong>Examples:</strong> Failed login attempts, minor policy non-compliance. <br><strong>Response:</strong> Routine investigation, documented for trends." }
                 },
+                'testing-metrics': {
+                    kpi: { description: "Key Performance Indicators are quantifiable measures used to evaluate the effectiveness and efficiency of the incident response process against predefined objectives."},
+                    mttr: { description: "Stands for Mean Time to Respond or Mean Time to Resolve/Remediate. These are crucial KPIs that measure the average time it takes for the team to react to an alert and the average time to fully resolve the incident. They are often compared against the RTO to measure success."}
+                },
                 'testing-types': {
-                    tabletop: { description: "Discussion-based sessions where participants walk through an incident scenario to validate the plan, clarify roles, and identify gaps. Low cost, high flexibility." },
-                    simulation: { description: "Hands-on practice where teams interact with simulated environments to respond to a controlled incident, testing technical procedures and team coordination." },
-                    'full-scale': { description: "Replicates a real incident as closely as possible, involving live systems, full teams, and often external parties. Most resource-intensive but provides the most realistic test." }
+                    'read-through': { description: "Team members review the plan on their own time to ensure familiarity with its contents. The simplest and least disruptive test."},
+                    tabletop: { description: "Discussion-based sessions where participants gather to walk through an incident scenario led by a moderator, validating the plan, clarifying roles, and identifying gaps. Low cost, high flexibility." },
+                    simulation: { description: "A more active, hands-on test where teams interact with simulated environments to respond to a controlled incident, testing technical procedures and team coordination without affecting live systems." },
+                    parallel: { description: "Personnel relocate to an alternate site and activate recovery procedures, running backup systems in parallel with live production systems to test functionality without disrupting operations." },
+                    'full-interruption': { description: "The most comprehensive and risky test. The primary site is shut down, and operations are fully shifted to the recovery site. It is the ultimate proof that the plan works but can cause significant disruption." }
                 },
                 'ir-tools': {
-                    siem: { description: "Aggregates and correlates security logs from various sources to provide centralized visibility and detect anomalies or indicators of compromise in real-time." },
-                    edr: { description: "Monitors and collects data from endpoint devices to detect malicious activity, provide in-depth visibility, and enable rapid response at the device level." },
-                    'ids-ips': { description: "<strong>IDS</strong> detects malicious activity but doesn't block it; <strong>IPS</strong> detects and actively prevents or blocks threats based on predefined rules or signatures." },
-                    'threat-intel': { description: "Provides contextual information about current and emerging threats, including Indicators of Compromise (IOCs) and attacker tactics, techniques, and procedures (TTPs)." }
+                    siem: { description: "Aggregates and correlates security logs from various sources (servers, firewalls, applications) to provide centralized visibility and detect anomalies or indicators of compromise in real-time." },
+                    edr: { description: "Endpoint Detection and Response. Monitors and collects data from endpoint devices (laptops, servers) to detect malicious activity, provide in-depth visibility, and enable rapid response (like isolation) at the device level." },
+                    xdr: { description: "Extended Detection and Response. A broader solution that integrates data and provides a unified view of threats from multiple security layers, including endpoints, network, cloud, and email."},
+                    'threat-intel': { description: "Provides contextual information about current and emerging threats, including Indicators of Compromise (IOCs) and attacker tactics, techniques, and procedures (TTPs), to help proactively identify and respond to attacks." }
+                },
+                'team-skills': {
+                    'technical-skills': { description: "Expertise in system administration, network protocols, operating systems, security tools (SIEM, EDR), and digital forensics."},
+                    'soft-skills': { description: "Crucial abilities like clear communication, effective problem-solving under pressure, strong decision-making, and stress management."}
+                },
+                'event-concepts': {
+                    event: { description: "Any observable occurrence in a system or network. Most events are benign and part of normal operations, such as a user logging in or a file being accessed." },
+                    incident: { description: "An event that has been analyzed and confirmed to have a potential or actual negative impact on the business's security posture, confidentiality, integrity, or availability. All incidents are events, but not all events are incidents." }
+                },
+                'forensic-concepts': {
+                    ediscovery: { description: "The process of identifying, preserving, collecting, and producing electronically stored information (ESI) in response to a legal or regulatory request (e.g., a lawsuit or investigation). It is primarily about collecting potentially relevant data, not deep analysis." },
+                    'digital-forensics': { description: "A specialized field of forensic science that uses scientific methods to analyze digital evidence, often to recover deleted or hidden data, reconstruct event timelines, and determine the root cause of an incident." }
                 },
                 'forensic-methods': {
-                    'chain-of-custody': { description: "A meticulous, unbroken record of the seizure, custody, control, transfer, analysis, and disposition of evidence, essential to maintain evidence integrity and legal admissibility." },
-                    immutability: { description: "The principle that digital evidence, once acquired, should not be altered. Forensic copies are made, and analysis is performed on these copies, never the original." },
-                    'least-intrusive': { description: "Applying forensic techniques that minimize impact on the live system and original evidence, prioritizing volatile data collection (e.g., memory) before non-volatile (e.g., disk imaging)." }
+                    'chain-of-custody': { description: "A meticulous, unbroken, and chronological record of the seizure, custody, control, transfer, analysis, and disposition of evidence. It is essential to maintain evidence integrity and ensure it is admissible in legal proceedings." }
                 },
                 'forensic-steps': {
                     collection: { description: "Secure and preserve digital evidence from compromised systems (e.g., disk images, memory dumps, logs) in a forensically sound manner, ensuring integrity and maintaining a strict chain of custody." },
@@ -708,14 +811,13 @@
                     'network-segmentation': { description: "Logically or physically dividing a network into smaller, isolated segments to limit the blast radius of an incident." },
                     'firewall-rules': { description: "Implementing temporary firewall rules or IPS signatures to block known malicious IP addresses, domains, or attack patterns." }
                 },
+                'comm-principles': {
+                    'single-source-truth': { description: "Designate a single, authorized spokesperson or communication channel to release official updates. This prevents conflicting messages, reduces confusion, and ensures information is consistent and accurate."},
+                    'secure-channels': { description: "Use out-of-band communication methods (like personal cell phones, satellite phones, or a separate, secured chat system) if primary channels like corporate email or network services might be compromised by the incident."}
+                },
                 'comm-stakeholders': {
                     internal: { description: "Includes Executives, Legal, HR, IT Teams, and Business Units. Communication focuses on business impact, operational status, and internal coordination." },
                     external: { description: "Includes Law Enforcement, Regulators, Customers, Media, and Third-Party Partners. Requires careful, legally reviewed messaging and adherence to disclosure requirements." }
-                },
-                'comm-actions': {
-                    notification: { description: "Defined processes for alerting relevant parties about an incident, including escalation paths, contact lists, and secure communication channels." },
-                    'incident-logs': { description: "Meticulous, chronological records of all actions, observations, and decisions during an incident, essential for review and legal purposes." },
-                    'regulatory-disclosures': { description: "Adherence to legal and regulatory obligations for reporting data breaches to authorities and affected individuals within specified timelines." }
                 },
                 'eradication-steps': {
                     'identify-remove': { description: "Pinpoint and eliminate the underlying vulnerability that allowed the incident to occur (e.g., unpatched software, misconfiguration) to prevent recurrence." },
@@ -727,25 +829,37 @@
                     'restore-data': { description: "Bring critical systems and data back online from clean, verified backups, prioritizing services based on RTO and business criticality." },
                     'verify-monitor': { description: "Continuously monitor restored systems for any signs of renewed malicious activity and verify that all security controls are operating effectively." }
                 },
+                'post-incident-activities': {
+                    'root-cause-analysis': { description: "A deep investigation to answer 'who, what, where, when, why, and how' the incident occurred to identify the fundamental cause, not just the symptoms. The goal is to prevent the problem from ever happening again."},
+                    'remediation-plan': { description: "Developing a formal plan with assigned owners, timelines, and deliverables to address the root cause and implement the recommendations from the post-incident review."}
+                },
                 'post-incident-practices': {
                     'after-action-review': { description: "A structured review process conducted after an incident to analyze the effectiveness of the response. It identifies what went well, what could be improved, and potential root causes of issues, focusing on objective facts rather than blame." },
                     'lessons-learned': { description: "Collaborative meetings where all involved parties (technical teams, management, legal, communications) discuss the findings from the AAR. The goal is to document key takeaways, share knowledge, and propose actionable recommendations for improving future incident response capabilities." }
                 },
                 'key-terms': [
+                    { term: "Incident Management", definition: "The overall strategic program for handling incidents, including planning, preparation, and continuous improvement." },
+                    { term: "Incident Response", definition: "The tactical, hands-on process of reacting to a security incident." },
                     { term: "Incident Response Plan (IRP)", definition: "A documented set of procedures for detecting, analyzing, containing, eradicating, and recovering from information security incidents." },
                     { term: "Business Impact Analysis (BIA)", definition: "A process to identify and evaluate the potential effects (financial, operational, reputational) of disruptive events on an organization's critical business functions." },
                     { term: "Recovery Time Objective (RTO)", definition: "The maximum acceptable downtime for a system or business function after a disruption." },
                     { term: "Recovery Point Objective (RPO)", definition: "The maximum acceptable amount of data that can be lost from an IT service due to a major incident, typically measured in time (e.g., 1 hour of data loss)." },
                     { term: "Business Continuity Plan (BCP)", definition: "A comprehensive plan outlining how an organization will maintain essential business functions during and after a significant disruption, regardless of cause." },
                     { term: "Disaster Recovery Plan (DRP)", definition: "A detailed technical plan focused on restoring IT systems, applications, and data after a disaster, aligning with BIA-defined RTOs and RPOs." },
-                    { term: "Incident Categorization", definition: "The process of classifying incidents based on their type, impact, sensitivity of data involved, and compliance requirements to prioritize response." },
+                    { term: "Recovery Sites (Hot, Warm, Cold)", definition: "Alternate facilities with varying levels of readiness used to recover IT operations." },
+                    { term: "Incident Classification", definition: "The process of determining the severity and impact of an incident (how bad it is)." },
+                    { term: "Incident Categorization", definition: "The process of determining the type of an incident (what kind it is)." },
                     { term: "Tabletop Exercise", definition: "A discussion-based incident management exercise where participants talk through an incident scenario to validate the plan, clarify roles, and identify gaps." },
                     { term: "SIEM", definition: "A security solution that collects, aggregates, and analyzes security logs and events from various sources to provide real-time threat detection and security monitoring." },
                     { term: "EDR", definition: "A cybersecurity solution that continuously monitors endpoint devices for suspicious activity, collects data, and enables rapid investigation and response to threats at the endpoint level." },
                     { term: "IDS/IPS", definition: "<strong>IDS</strong> detects malicious activity but doesn't block it; <strong>IPS</strong> detects and actively prevents or blocks threats based on predefined rules or signatures." },
                     { term: "Chain of Custody", definition: "The chronological documentation showing the seizure, custody, control, transfer, analysis, and disposition of physical or electronic evidence." },
-                    { term: "Containment", definition: "The phase of incident response focused on limiting the scope and impact of a security incident to prevent further damage or spread." },
-                    { term: "Eradication", definition: "The phase of incident response focused on completely removing the malicious elements from affected systems and addressing the root cause vulnerability." },
+                    { term: "Digital Forensics", definition: "The scientific analysis of digital evidence to investigate an incident." },
+                    { term: "eDiscovery", definition: "The process of identifying and producing electronically stored information (ESI) for legal purposes." },
+                    { term: "Containment", definition: "The immediate action taken to limit the spread and impact of an incident." },
+                    { term: "Eradication", definition: "The process of completely removing all artifacts and the root cause of an incident." },
+                    { term: "Recovery", definition: "The process of restoring systems to a normal, secure operational state after an incident." },
+                    { term: "Lessons Learned", definition: "The analysis conducted during a post-incident review to identify areas for improvement." },
                     { term: "After-Action Review (AAR)", definition: "A structured process conducted post-incident to objectively evaluate the effectiveness of the response, identify strengths, weaknesses, and areas for improvement." }
                 ]
             };
@@ -800,27 +914,35 @@
             }
 
             function setupInteractiveCards() {
-                 document.querySelectorAll('[data-interactive-group]').forEach(group => {
-                    group.querySelectorAll('.unified-card').forEach(card => {
-                        card.addEventListener('click', (e) => {
-                            e.stopPropagation();
-                            const wasActive = card.classList.contains('active');
-                            
-                            group.querySelectorAll('.unified-card').forEach(otherCard => {
-                                otherCard.classList.remove('active');
-                            });
+                // Use event delegation on a parent container to handle clicks for all cards
+                const mainArea = document.getElementById('content-area');
+                if (!mainArea) return;
 
-                            if (!wasActive) {
-                                card.classList.add('active');
-                            }
-                        });
+                mainArea.addEventListener('click', (e) => {
+                    const card = e.target.closest('.unified-card');
+                    if (!card) return; // Exit if click was not on a card
+                    
+                    const group = card.closest('[data-interactive-group]');
+                    if (!group) return; // Exit if card is not in a group
+
+                    e.stopPropagation();
+                    const wasActive = card.classList.contains('active');
+
+                    // Deactivate all other cards in the same group
+                    group.querySelectorAll('.unified-card').forEach(otherCard => {
+                        if (otherCard !== card) {
+                            otherCard.classList.remove('active');
+                        }
                     });
+
+                    // Toggle the active state of the clicked card
+                    card.classList.toggle('active');
                 });
             }
 
             function renderKeyTerms() {
                 const container = document.getElementById('key-terms-grid');
-                if (!container || container.children.length > 0) return;
+                if (!container || container.children.length > 0) return; // Render only once
                 
                 data['key-terms'].forEach(item => {
                     const card = document.createElement('div');
@@ -828,14 +950,14 @@
                     card.innerHTML = `<h3 class="card-title">${item.term}</h3><div class="card-description"><p>${item.definition}</p></div>`;
                     container.appendChild(card);
                 });
-                setupInteractiveCards();
+                // No need to call setupInteractiveCards() here due to event delegation
             }
             
             // --- INITIALIZATION ---
             setupNavigation();
             setupAccordions();
             populateCardDescriptions();
-            setupInteractiveCards();
+            setupInteractiveCards(); // This single call handles all current and future cards
         });
     </script>
 </body>
