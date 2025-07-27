@@ -188,6 +188,43 @@
             animation: enhancedFadeIn 0.5s ease-in-out;
         }
 
+        /* --- DESIGN STANDARDIZATION --- */
+        /* Standardize sub-headers inside accordions */
+        .accordion-content h4 {
+            font-size: 1.25rem; /* 20px */
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-top: 1.5rem; /* 24px */
+            margin-bottom: 0.75rem; /* 12px */
+            padding-bottom: 0.5rem; /* 8px */
+            border-bottom: 1px solid var(--border-color);
+        }
+        /* Standardize paragraph spacing */
+        .accordion-content p, .accordion-content ul {
+            margin-bottom: 1rem; /* 16px */
+            color: var(--text-secondary);
+        }
+        /* Custom Bullet Points */
+        .accordion-content ul {
+            list-style: none;
+            padding-left: 1.25rem; /* 20px */
+        }
+        .accordion-content ul li {
+            position: relative;
+            padding-left: 1.25rem; /* 20px */
+            margin-bottom: 0.5rem; /* 8px */
+        }
+        .accordion-content ul li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--accent-glow);
+            font-size: 1.25rem; /* 20px */
+            line-height: 1.6;
+        }
+        /* --- END DESIGN STANDARDIZATION --- */
+
         /* Unified Interactive Card Styles */
         .unified-card {
             background: rgba(10, 16, 31, 0.5);
@@ -365,8 +402,8 @@
             <section id="introduction" class="content-section">
                 <h2 class="text-3xl font-bold section-header mb-6">Introduction to CISM Domain 2</h2>
                 <div class="content-box">
-                    <p class="text-gray-300 mb-4">Welcome to the interactive study guide for CISM Domain 2: Information Security Risk Management. This domain is the cornerstone of effective information security, focusing on how organizations identify, assess, respond to, and monitor risks to their valuable information assets. A strong grasp of these principles is not just theoretical; it's crucial for making informed, business-aligned decisions that proactively protect the enterprise.</p>
-                    <p class="text-gray-300">Throughout this guide, you will explore the dynamic threat landscape, learn how to analyze vulnerabilities, apply various risk assessment methodologies, and understand the critical strategies for responding to risks. We will also delve into the importance of clear risk and control ownership and the continuous process of monitoring and reporting. This interactive format is designed to enhance your learning experience, making complex topics more accessible and engaging.</p>
+                    <p>Welcome to the interactive study guide for CISM Domain 2: Information Security Risk Management. This domain is the cornerstone of effective information security, focusing on how organizations identify, assess, respond to, and monitor risks to their valuable information assets. A strong grasp of these principles is not just theoretical; it's crucial for making informed, business-aligned decisions that proactively protect the enterprise.</p>
+                    <p>Throughout this guide, you will explore the dynamic threat landscape, learn how to analyze vulnerabilities, apply various risk assessment methodologies, and understand the critical strategies for responding to risks. We will also delve into the importance of clear risk and control ownership and the continuous process of monitoring and reporting. This interactive format is designed to enhance your learning experience, making complex topics more accessible and engaging.</p>
                 </div>
             </section>
 
@@ -383,9 +420,10 @@
                             <span class="accordion-icon text-2xl">+</span>
                         </button>
                         <div class="accordion-content hidden">
-                            <p class="text-gray-300 mb-4">The threat landscape is constantly evolving. As an information security manager, you must be vigilant and proactive in understanding new and evolving dangers.</p>
-                            <h4 class="text-lg font-semibold text-white mb-3">a. Understand emerging and evolving threats (e.g., ransomware, insider threats, third-party risks).</h4>
-                            <p class="text-gray-400 mb-4">Explore the common distribution of various emerging threats and how they impact organizations:</p>
+                            <p>To effectively manage risk, a security manager must first understand the environment from which threats emerge. This subsection covers the process of risk identification, which involves understanding the different categories of risk, the motivations of various threat actors, and the paths (or vectors) they use to attack an organization. We will also explore the critical role of threat intelligence in staying ahead of new and emerging threats, and how to use the fundamental risk formula (Risk = Likelihood x Impact) to begin prioritizing efforts.</p>
+                             
+                            <h4>a. Understand emerging and evolving threats (e.g., ransomware, insider threats, third-party risks).</h4>
+                            <p>Explore the common distribution of various emerging threats and how they impact organizations:</p>
                             <div class="chart-container mb-6">
                                 <canvas id="threatDistributionChart"></canvas>
                             </div>
@@ -398,12 +436,64 @@
                                 <button class="toggle-chart-data px-4 py-2 rounded-full text-sm font-semibold" data-chart-id="threatDistributionChart" data-data-set="aptFocus" style="background-color: var(--color-orange); color: var(--dark-navy-bg);">APT</button>
                             </div>
                             <div id="threat-explanation" class="text-gray-400 text-sm italic mt-2 text-center">This chart illustrates a simulated distribution of common emerging threats. Use the buttons to view different focuses.</div>
-                            
-                            <h4 class="text-lg font-semibold text-white my-3">b. Monitor threat intelligence feeds and industry trend reports.</h4>
-                            <p class="text-gray-400 mb-4">Threat intelligence helps organizations understand the "who, what, where, when, why, and how" of attacks, while industry reports provide broad trends for strategic planning.</p>
 
-                            <h4 class="text-lg font-semibold text-white my-3">c. Analyze external drivers like regulatory shifts, geopolitical risks, and technological disruption.</h4>
-                            <p class="text-gray-400">New regulations (e.g., updated data privacy laws), global events, and emerging technologies (e.g., AI, IoT) constantly introduce new security challenges and risks that must be analyzed.</p>
+                            <h4>b. Risk Identification and Frameworks</h4>
+                            <p>The process begins by identifying the organization's valuable assets, the threats that could harm them, and the vulnerabilities (weaknesses) that could be exploited. Frameworks like ISO 31000 and the NIST Risk Management Framework (RMF) provide structured templates for this process, ensuring a consistent and comprehensive approach.</p>
+
+                            <h4>c. Categories of Risk</h4>
+                            <div class="flex flex-wrap justify-center gap-4 my-6">
+                                <div class="unified-card" data-group="risk-categories" style="width: 220px;">
+                                    <span class="card-title">Strategic Risk</span>
+                                    <div class="card-description">Threatens the achievement of major business goals.</div>
+                                </div>
+                                <div class="unified-card" data-group="risk-categories" style="width: 220px;">
+                                    <span class="card-title">Operational Risk</span>
+                                    <div class="card-description">Relates to failures in day-to-day processes, people, or systems.</div>
+                                </div>
+                                <div class="unified-card" data-group="risk-categories" style="width: 220px;">
+                                    <span class="card-title">Reputational Risk</span>
+                                    <div class="card-description">Damages customer trust and brand image.</div>
+                                </div>
+                                <div class="unified-card" data-group="risk-categories" style="width: 220px;">
+                                    <span class="card-title">Compliance Risk</span>
+                                    <div class="card-description">Arises from failing to adhere to laws and regulations, leading to fines and penalties.</div>
+                                </div>
+                                <div class="unified-card" data-group="risk-categories" style="width: 220px;">
+                                    <span class="card-title">Technology Risk</span>
+                                    <div class="card-description">Associated with system failures, data breaches, and other technology issues.</div>
+                                </div>
+                            </div>
+
+                            <h4>d. Threat Actors and Vectors</h4>
+                             <p><strong>Threat Actors:</strong> The individuals or groups who pose a threat. Their motivations are key to understanding the risks they present.</p>
+                             <ul>
+                                <li>Examples: Script Kiddies (low skill, seeking notoriety), Hacktivists (mission-driven), Criminal Syndicates (profit-driven), Advanced Persistent Threats (APTs) (often state-sponsored, highly skilled, and well-funded), and Insiders (disgruntled or negligent employees).</li>
+                            </ul>
+                             <p><strong>Threat Vector:</strong> The path or method an attacker uses to exploit a vulnerability.</p>
+                             <ul>
+                                <li>Examples: Phishing emails, unpatched software, removable media (like USB drives), and compromised third-party vendors.</li>
+                            </ul>
+                            <p><strong>Attack Surface:</strong> The sum of all possible entry points an attacker could use. The goal is to reduce the attack surface.</p>
+
+                            <h4>e. Threat Intelligence</h4>
+                            <p>This is the practice of gathering and analyzing information about current and emerging threats to be proactive rather than reactive. Click the cards below to learn more.</p>
+                            <div class="flex flex-wrap justify-center gap-4 my-6">
+                                <div class="unified-card" data-group="threat-intel" style="width: 250px;">
+                                    <span class="card-title">Threat Intelligence Sources</span>
+                                    <div class="card-description">Sources include open-source feeds (from government agencies like CISA), proprietary/commercial feeds, and Information Sharing and Analysis Centers (ISACs).</div>
+                                </div>
+                                <div class="unified-card" data-group="threat-intel" style="width: 250px;">
+                                    <span class="card-title">Indicators of Compromise (IoCs)</span>
+                                    <div class="card-description">Forensic evidence that a security incident has occurred (e.g., a malicious file hash or IP address).</div>
+                                </div>
+                                <div class="unified-card" data-group="threat-intel" style="width: 250px;">
+                                    <span class="card-title">STIX/TAXII</span>
+                                    <div class="card-description">A standardized language (STIX) and protocol (TAXII) for sharing machine-readable threat intelligence between systems.</div>
+                                </div>
+                            </div>
+
+                            <h4>f. Risk Formula and Risk Register</h4>
+                            <p>The fundamental formula for risk is: <strong>Risk = Likelihood × Impact</strong>. This helps in prioritizing which risks to address first. The <strong>Risk Register</strong> is a living document, often a spreadsheet, used to track all identified risks. It typically includes a description of the risk, its likelihood, impact, owner, and the planned response.</p>
                         </div>
                     </div>
 
@@ -414,13 +504,44 @@
                             <span class="accordion-icon text-2xl">+</span>
                         </button>
                         <div class="accordion-content hidden">
-                            <p class="text-gray-300 mb-4">Once threats are understood, the next step is to identify where an organization is susceptible to these threats.</p>
-                            <h4 class="text-lg font-semibold text-white mb-3">a. Identify and assess weaknesses in IT systems, processes, and controls.</h4>
-                            <p class="text-gray-400 mb-4">This involves using various methods like vulnerability scanning, penetration testing, and security audits to pinpoint weaknesses.</p>
-                            <h4 class="text-lg font-semibold text-white mb-3">b. Determine exposure levels due to missing or ineffective controls.</h4>
-                            <p class="text-gray-400 mb-4">A control might exist but be poorly designed or implemented, leading to increased exposure and higher potential impact.</p>
-                            <h4 class="text-lg font-semibold text-white mb-3">c. Map vulnerabilities to threats and evaluate potential impacts.</h4>
-                            <p class="text-gray-400 mb-4">Understand which threats could exploit identified vulnerabilities and the potential impact on confidentiality, integrity, availability, and overall business operations. See the example mapping below:</p>
+                            <p>Once threats are understood, the focus shifts inward to the organization's own weaknesses. This subsection covers the methods used to find vulnerabilities and deficiencies in existing security controls. We will explore the difference between automated vulnerability scans and manual penetration tests, and how security control baselines are used to ensure a consistent and measurable level of security across the enterprise.</p>
+                            <h4>a. Identifying Vulnerabilities</h4>
+                            <p>A vulnerability is a weakness in a system, process, or policy that can be exploited by a threat. Click the cards for methods of finding them:</p>
+                             <div class="flex flex-wrap justify-center gap-4 my-6">
+                                <div class="unified-card" data-group="vuln-methods" style="width: 220px;">
+                                    <span class="card-title">Vulnerability Scans</span>
+                                    <div class="card-description">Automated tools that check systems for known weaknesses.</div>
+                                </div>
+                                <div class="unified-card" data-group="vuln-methods" style="width: 220px;">
+                                    <span class="card-title">Penetration Tests</span>
+                                    <div class="card-description">An "ethical hack" where a security professional simulates a real-world attack to find exploitable vulnerabilities.</div>
+                                </div>
+                                <div class="unified-card" data-group="vuln-methods" style="width: 220px;">
+                                    <span class="card-title">Security Audits</span>
+                                    <div class="card-description">Formal reviews to assess compliance with security standards.</div>
+                                </div>
+                            </div>
+                            <h4>b. Vulnerability Scans vs. Penetration Tests</h4>
+                            <p>This is a key distinction for the CISM exam. A vulnerability scan is automated and identifies potential weaknesses based on a database of known issues. It's like a fire alarm that tells you there might be smoke. A penetration test is manual and attempts to exploit the identified weaknesses to see how much damage could be done. It's like a firefighter actually testing the sprinklers and fire doors to see if they work. A pen test is the best way to assess risk from a series of vulnerabilities in related systems.</p>
+                            <h4>c. Common Vulnerability Sources</h4>
+                             <div class="flex flex-wrap justify-center gap-4 my-6">
+                                <div class="unified-card" data-group="vuln-sources" style="width: 220px;">
+                                    <span class="card-title">CVE</span>
+                                    <div class="card-description">(Common Vulnerabilities and Exposures): A dictionary of publicly known security vulnerabilities.</div>
+                                </div>
+                                <div class="unified-card" data-group="vuln-sources" style="width: 220px;">
+                                    <span class="card-title">CVSS</span>
+                                    <div class="card-description">(Common Vulnerability Scoring System): A standardized system for rating the severity of vulnerabilities, typically on a scale of 0-10.</div>
+                                </div>
+                                <div class="unified-card" data-group="vuln-sources" style="width: 220px;">
+                                    <span class="card-title">NVD</span>
+                                    <div class="card-description">(National Vulnerability Database): A comprehensive U.S. government repository of vulnerability management data.</div>
+                                </div>
+                            </div>
+                            <h4>d. Security Control Baselines</h4>
+                            <p>A baseline is a predefined minimum set of security controls that must be applied to all systems (or systems of a certain classification). It ensures a consistent, standardized level of security and provides a clear benchmark for audits.</p>
+                            <h4>e. Map vulnerabilities to threats and evaluate potential impacts.</h4>
+                            <p>Understand which threats could exploit identified vulnerabilities and the potential impact on confidentiality, integrity, availability, and overall business operations. See the example mapping below:</p>
                             <div class="content-box">
                                 <h6 class="text-md font-semibold text-white mb-4 text-center">Sample Vulnerability-Threat-Impact Mapping</h6>
                                 <div class="flex flex-wrap justify-center gap-4">
@@ -477,28 +598,37 @@
                             <span class="accordion-icon text-2xl">+</span>
                         </button>
                         <div class="accordion-content hidden">
-                            <p class="text-gray-300 mb-4">This is where the identified threats, vulnerabilities, and impacts are formally analyzed to quantify or qualify the risk.</p>
-                            <h4 class="text-lg font-semibold text-white mb-3">a. Apply qualitative, quantitative, and hybrid risk assessment methods.</h4>
-                            <p class="text-gray-400 mb-4">Explore the characteristics of different risk assessment methods:</p>
-                            <div class="flex flex-wrap justify-center gap-4 mb-6">
+                            <p>This is where the identified threats, vulnerabilities, and impacts are formally analyzed to quantify or qualify the risk.</p>
+                            <h4>a. Apply qualitative, quantitative, and hybrid risk assessment methods.</h4>
+                            <p>Explore the characteristics of different risk assessment methods:</p>
+                            <div class="flex flex-wrap justify-center gap-4 my-6">
                                 <div class="unified-card risk-method-card" data-group="risk-method"><span class="card-title">Qualitative</span><div class="card-description">Uses descriptive terms (e.g., high, medium, low) for likelihood and impact. It's subjective but quick and often used for initial assessments or when precise data is unavailable. Good for prioritization.</div></div>
                                 <div class="unified-card risk-method-card" data-group="risk-method"><span class="card-title">Quantitative</span><div class="card-description">Assigns numerical values (e.g., monetary cost, probability percentages) to likelihood and impact. It aims to provide a more objective and measurable view of risk. Useful for cost-benefit analysis (e.g., SLE, ARO, ALE).</div></div>
                                 <div class="unified-card risk-method-card" data-group="risk-method"><span class="card-title">Hybrid</span><div class="card-description">Combines elements of both qualitative and quantitative approaches. Often, qualitative assessments are used to identify and prioritize risks, and then quantitative analysis is applied to the most critical risks for detailed analysis.</div></div>
                             </div>
+                            
+                            <h4>b. Risk Assessment vs. Risk Analysis</h4>
+                            <div class="flex flex-wrap justify-center gap-4 my-6">
+                                <div class="unified-card risk-method-card" data-group="risk-definitions-2">
+                                    <span class="card-title">Risk Assessment</span>
+                                    <div class="card-description">The overall process of identifying, analyzing, and evaluating risk. It's the strategic overview.</div>
+                                </div>
+                                <div class="unified-card risk-method-card" data-group="risk-definitions-2">
+                                    <span class="card-title">Risk Analysis</span>
+                                    <div class="card-description">The specific step within risk assessment where you evaluate the likelihood and impact of an identified risk. It's the tactical deep dive.</div>
+                                </div>
+                            </div>
 
-                            <h4 class="text-lg font-semibold text-white mb-3">b. Determine inherent and residual risk.</h4>
-                            <p class="text-gray-400 mb-4"><strong>Inherent risk</strong> is the raw risk before controls. <strong>Residual risk</strong> is what remains after controls are applied.</p>
-
-                            <h4 class="text-lg font-semibold text-white mb-3">c. Use standardized risk frameworks (e.g., ISO/IEC 27005, NIST SP 800-30, FAIR, OCTAVE).</h4>
-                            <p class="text-gray-400 mb-4">These frameworks provide structure and consistency for risk management processes. Click on a card to learn more:</p>
-                            <div class="flex flex-wrap justify-center gap-4 mb-6">
+                            <h4>c. Use standardized risk frameworks (e.g., ISO/IEC 27005, NIST SP 800-30, FAIR, OCTAVE).</h4>
+                            <p>These frameworks provide structure and consistency for risk management processes. Click on a card to learn more:</p>
+                            <div class="flex flex-wrap justify-center gap-4 my-6">
                                 <div class="unified-card risk-framework-card" data-group="risk-framework"><span class="card-title">ISO/IEC 27005</span><div class="card-description">Provides guidelines for information security risk management. It supports the general concepts specified in ISO/IEC 27001 (for ISMS) and is designed to assist the satisfactory implementation of information security based on a risk management approach.</div></div>
                                 <div class="unified-card risk-framework-card" data-group="risk-framework"><span class="card-title">NIST SP 800-30</span><div class="card-description">A guide for conducting risk assessments, developed by the National Institute of Standards and Technology (NIST). It provides a systematic approach to identifying, analyzing, and mitigating risks to information systems and organizations.</div></div>
                                 <div class="unified-card risk-framework-card" data-group="risk-framework"><span class="card-title">FAIR</span><div class="card-description">A quantitative risk analysis model that focuses on understanding and measuring information risk in financial terms. It helps break down complex risk scenarios into measurable components, enabling more objective risk comparisons and cost-benefit analyses.</div></div>
                                 <div class="unified-card risk-framework-card" data-group="risk-framework"><span class="card-title">OCTAVE</span><div class="card-description">A suite of methods that help organizations assess and manage information security risks. It emphasizes a self-directed approach where organizations identify and prioritize risks based on their own operational risk environment, involving key stakeholders from across the organization.</div></div>
                             </div>
                             
-                            <h4 class="text-lg font-semibold text-white mb-3">d. Practical Risk Calculations</h4>
+                            <h4>d. Practical Risk Calculations</h4>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div class="content-box">
                                     <h5 class="text-md font-bold text-white mb-2">Qualitative Risk Matrix</h5>
@@ -549,17 +679,28 @@
                             <span class="accordion-icon text-2xl">+</span>
                         </button>
                         <div class="accordion-content hidden">
-                            <p class="text-gray-300 mb-4">There are generally four primary strategies for responding to identified risks. Click on a card to learn about each strategy:</p>
-                            <div class="flex flex-wrap justify-center gap-4 mb-6">
+                            <p>There are generally four primary strategies for responding to identified risks. Click on a card to learn about each strategy:</p>
+                            <div class="flex flex-wrap justify-center gap-4 my-6">
                                 <div class="unified-card risk-response-card" data-group="risk-response"><span class="card-title">Mitigate</span><div class="card-description">Reduce the likelihood or impact of a risk through the implementation of security controls (e.g., firewalls, encryption, security awareness training). This is the most common response.</div></div>
                                 <div class="unified-card risk-response-card" data-group="risk-response"><span class="card-title">Transfer</span><div class="card-description">Shift the financial or operational burden of a risk to a third party (e.g., purchasing cyber insurance, outsourcing to a vendor with strong security clauses).</div></div>
                                 <div class="unified-card risk-response-card" data-group="risk-response"><span class="card-title">Avoid</span><div class="card-description">Eliminate the risk entirely by choosing not to engage in or ceasing an activity that gives rise to the risk (e.g., deciding not to store sensitive customer data, discontinuing an insecure legacy application).</div></div>
                                 <div class="unified-card risk-response-card" data-group="risk-response"><span class="card-title">Accept</span><div class="card-description">Acknowledge the existence of a risk and decide to take no further action to mitigate it, usually because the cost of mitigation outweighs the potential impact, or the risk is below the organization's risk tolerance. Requires formal management approval.</div></div>
                             </div>
-                            <h4 class="text-lg font-semibold text-white mb-3">b. Ensure treatment aligns with legal, regulatory, and business constraints.</h4>
-                            <p class="text-gray-400 mb-4">Risk treatment decisions must comply with all applicable laws and regulations and support overall business objectives.</p>
-                            <h4 class="text-lg font-semibold text-white mb-3">c. Select controls using frameworks like ISO/IEC 27002 and NIST CSF.</h4>
-                            <p class="text-gray-400">These frameworks provide a comprehensive set of generic information security controls and best practices for implementation.</p>
+                            <h4>a. Inherent vs. Residual Risk</h4>
+                             <div class="flex flex-wrap justify-center gap-4 my-6">
+                                <div class="unified-card risk-method-card" data-group="risk-definitions-b1">
+                                    <span class="card-title">Inherent Risk</span>
+                                    <div class="card-description">The level of risk that exists before any security controls are applied.</div>
+                                </div>
+                                <div class="unified-card risk-method-card" data-group="risk-definitions-b1">
+                                    <span class="card-title">Residual Risk</span>
+                                    <div class="card-description">The level of risk that remains after security controls have been applied. The goal is to ensure the residual risk is at or below the organization's risk appetite.</div>
+                                </div>
+                            </div>
+                            <h4>b. Ensure treatment aligns with legal, regulatory, and business constraints.</h4>
+                            <p>Risk treatment decisions must comply with all applicable laws and regulations and support overall business objectives.</p>
+                            <h4>c. Select controls using frameworks like ISO/IEC 27002 and NIST CSF.</h4>
+                            <p>These frameworks provide a comprehensive set of generic information security controls and best practices for implementation.</p>
                         </div>
                     </div>
 
@@ -570,20 +711,41 @@
                             <span class="accordion-icon text-2xl">+</span>
                         </button>
                         <div class="accordion-content hidden">
-                            <p class="text-gray-300 mb-4">Clear accountability is essential for effective risk management. Explore typical roles and their ownership responsibilities in the hierarchy below:</p>
+                             <p>Clear accountability is essential for effective risk management.</p>
+                             <h4>a. Assign risk ownership to appropriate stakeholders (e.g., data owners, business units).</h4>
+                             <p>Risks belong to the business functions that generate or are most impacted by them, not solely to the security department.</p>
+                             <h4>b. Establish accountability for control implementation and operation.</h4>
+                             <p>Individuals or teams responsible for the implementation and maintenance of specific security controls must be clearly defined.</p>
+                             <h4>c. Define responsibilities in risk treatment plans and governance documentation.</h4>
+                             <p>Formal documentation like risk treatment plans and governance policies ensure that risk management is embedded into the organizational culture. Explore typical roles and their ownership responsibilities in the hierarchy below:</p>
                             <div class="content-box">
                                 <h6 class="text-md font-semibold text-white mb-4 text-center">Corporate Hierarchy: Risk and Control Ownership</h6>
                                 <div class="flex flex-col items-center gap-2">
-                                    <div class="unified-card role-node" data-group="role-ownership"><span class="card-title">Board/Executive Management</span><div class="card-description">Holds ultimate accountability for risk, defines risk appetite, and ensures resources are allocated.</div></div>
-                                    <div class="hierarchy-line"></div>
-                                    <div class="unified-card role-node" data-group="role-ownership"><span class="card-title">CISO / Security Manager</span><div class="card-description">Manages the security program, advises leadership, and oversees control implementation.</div></div>
-                                    <div class="hierarchy-line-split"></div>
-                                    <div class="flex justify-center gap-8 w-full mt-[-1rem] mb-[-1rem]">
-                                        <div class="unified-card role-node" data-group="role-ownership"><span class="card-title">Data Owners</span><div class="card-description">Accountable for risks to specific data assets and make risk treatment decisions.</div></div>
-                                        <div class="unified-card role-node" data-group="role-ownership"><span class="card-title">IT / Security Teams</span><div class="card-description">Responsible for the technical implementation and operation of controls.</div></div>
+                                    <div class="unified-card role-node" data-group="role-ownership">
+                                        <span class="card-title">Board/Executive Management</span>
+                                        <div class="card-description">The Board and Executive Management hold ultimate accountability for information security risk. Their responsibilities include defining the organization's overall risk appetite, approving major risk management strategies and significant security investments, and providing high-level oversight to ensure that information security aligns with business objectives and regulatory requirements. They ensure adequate resources are allocated for control implementation and monitor the overall effectiveness of the control environment.</div>
                                     </div>
                                     <div class="hierarchy-line"></div>
-                                    <div class="unified-card role-node" data-group="role-ownership"><span class="card-title">End Users</span><div class="card-description">Responsible for adhering to security policies and procedures in their daily activities.</div></div>
+                                    <div class="unified-card role-node" data-group="role-ownership">
+                                        <span class="card-title">CISO / Information Security Manager</span>
+                                        <div class="card-description">Manages the security program, advises leadership on risk, oversees control implementation, and reports on the organization's risk posture.</div>
+                                    </div>
+                                    <div class="hierarchy-line-split"></div>
+                                    <div class="flex justify-center gap-8 w-full mt-[-1rem] mb-[-1rem]">
+                                        <div class="unified-card role-node" data-group="role-ownership">
+                                            <span class="card-title">Data Owners / Business Unit Heads</span>
+                                            <div class="card-description">Accountable for risks to specific data assets and business processes within their domains. They make risk treatment decisions (accept, mitigate, transfer) for their data and ensure appropriate controls are in place.</div>
+                                        </div>
+                                        <div class="unified-card role-node" data-group="role-ownership">
+                                            <span class="card-title">IT Operations / Security Teams</span>
+                                            <div class="card-description">Responsible for the technical implementation, operation, and maintenance of security controls as directed by management and security policies.</div>
+                                        </div>
+                                    </div>
+                                    <div class="hierarchy-line"></div>
+                                    <div class="unified-card role-node" data-group="role-ownership">
+                                        <span class="card-title">End Users</span>
+                                        <div class="card-description">Responsible for adhering to security policies and procedures in their daily activities, reporting suspicious events, and completing security awareness training.</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -596,9 +758,9 @@
                             <span class="accordion-icon text-2xl">+</span>
                         </button>
                         <div class="accordion-content hidden">
-                            <p class="text-gray-300 mb-4">Risk management is not a one-time event; it's a continuous process that requires ongoing monitoring and communication.</p>
-                            <h4 class="text-lg font-semibold text-white mb-3">a. Monitor key risk indicators (KRIs), control effectiveness, and residual risk levels.</h4>
-                            <p class="text-gray-400 mb-4">Continuously track metrics that provide early warning signals of increasing risk exposure and assess the ongoing effectiveness of security controls.</p>
+                            <p>Risk management is not a one-time event; it's a continuous process that requires ongoing monitoring and communication.</p>
+                            <h4>a. Monitor key risk indicators (KRIs), control effectiveness, and residual risk levels.</h4>
+                            <p>Continuously track metrics that provide early warning signals of increasing risk exposure and assess the ongoing effectiveness of security controls.</p>
                             <div class="chart-container mb-6">
                                 <canvas id="riskMonitoringKRIChart"></canvas>
                             </div>
@@ -610,8 +772,8 @@
                                     <option value="thirdPartyBreaches">Third-Party Breach Incidents</option>
                                 </select>
                             </div>
-                            <h4 class="text-lg font-semibold text-white mb-3">b. Report risk trends and posture to leadership.</h4>
-                            <p class="text-gray-400 mb-4">Tailor reports to the audience, providing high-level, strategic overviews for leadership to support informed decision-making. Below is a sample risk posture scorecard:</p>
+                            <h4>b. Report risk trends and posture to leadership.</h4>
+                            <p>Tailor reports to the audience, providing high-level, strategic overviews for leadership to support informed decision-making. Below is a sample risk posture scorecard:</p>
                             <div class="content-box">
                                 <h6 class="text-md font-semibold text-white mb-2 text-center">Sample Quarterly Risk Posture Scorecard</h6>
                                 <table class="dark-table">
@@ -643,9 +805,9 @@
             <section id="domain-summary" class="content-section hidden">
                 <h2 class="text-3xl font-bold section-header mb-6">Domain Summary</h2>
                 <div class="content-box">
-                    <p class="text-gray-300 mb-4">Domain 2: Information Security Risk Management is a critical component of the CISM framework, focusing on the systematic identification, assessment, response, and monitoring of risks to an organization's information assets. It emphasizes a proactive approach to understanding the evolving threat landscape, including emerging threats like ransomware, insider threats, and third-party risks, and analyzing their potential impact.</p>
-                    <p class="text-gray-300 mb-4">The domain covers various risk assessment methodologies, including qualitative, quantitative, and hybrid approaches, and the use of standardized frameworks such as ISO/IEC 27005, NIST SP 800-30, FAIR, and OCTAVE. It highlights the importance of distinguishing between inherent and residual risk and evaluating risks based on their likelihood and business impact. Furthermore, Domain 2 delves into risk response strategies—mitigating with controls, transferring through contracts or insurance, avoiding risky activities, or accepting risks with management approval—ensuring these align with legal, regulatory, and business constraints.</p>
-                    <p class="text-gray-300">Crucially, this domain stresses the assignment of clear risk and control ownership to appropriate stakeholders, establishing accountability for implementation and operation. Finally, it covers the continuous process of risk monitoring and reporting, including maintaining risk registers, tracking Key Risk Indicators (KRIs), and communicating risk posture to leadership through dashboards and executive summaries, all aimed at supporting continuous improvement in the organization's security posture.</p>
+                    <p>Domain 2: Information Security Risk Management is a critical component of the CISM framework, focusing on the systematic identification, assessment, response, and monitoring of risks to an organization's information assets. It emphasizes a proactive approach to understanding the evolving threat landscape, including emerging threats like ransomware, insider threats, and third-party risks, and analyzing their potential impact.</p>
+                    <p>The domain covers various risk assessment methodologies, including qualitative, quantitative, and hybrid approaches, and the use of standardized frameworks such as ISO/IEC 27005, NIST SP 800-30, FAIR, and OCTAVE. It highlights the importance of distinguishing between inherent and residual risk and evaluating risks based on their likelihood and business impact. Furthermore, Domain 2 delves into risk response strategies—mitigating with controls, transferring through contracts or insurance, avoiding risky activities, or accepting risks with management approval—ensuring these align with legal, regulatory, and business constraints.</p>
+                    <p>Crucially, this domain stresses the assignment of clear risk and control ownership to appropriate stakeholders, establishing accountability for implementation and operation. Finally, it covers the continuous process of risk monitoring and reporting, including maintaining risk registers, tracking Key Risk Indicators (KRIs), and communicating risk posture to leadership through dashboards and executive summaries, all aimed at supporting continuous improvement in the organization's security posture.</p>
                 </div>
             </section>
         </main>
