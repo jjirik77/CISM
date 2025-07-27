@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CISM Domain 4 Case Study</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6; color: #333;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            min-height: 100vh;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header {
+            background: rgba(255, 255, 255, 0.95); border-radius: 15px; padding: 30px;
+            margin-bottom: 30px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); text-align: center;
+        }
+        .header h1 { color: #2c3e50; font-size: 2.5em; margin-bottom: 10px; font-weight: 700; }
+        .header .subtitle { color: #7f8c8d; font-size: 1.2em; margin-bottom: 20px; }
+        .navigation { display: flex; justify-content: center; flex-wrap: wrap; gap: 15px; margin-bottom: 30px; }
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.9); border: none; padding: 12px 24px; border-radius: 25px;
+            cursor: pointer; font-weight: 600; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .nav-btn:hover { background: #ff6b6b; color: white; transform: translateY(-2px); }
+        .nav-btn.active { background: #ee5a52; color: white; }
+        .content-section {
+            background: rgba(255, 255, 255, 0.95); border-radius: 15px; padding: 30px;
+            margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); display: none;
+        }
+        .content-section.active { display: block; }
+        .section-title { color: #2c3e50; font-size: 2em; margin-bottom: 20px; border-bottom: 3px solid #ff6b6b; padding-bottom: 10px; }
+        .card { background: #f8f9fa; border-left: 4px solid #ff6b6b; padding: 20px; margin: 20px 0; border-radius: 8px; }
+        .card h3 { color: #ee5a52; margin-bottom: 15px; font-size: 1.3em; }
+        .progress-bar { background: #e9ecef; border-radius: 10px; height: 20px; margin: 20px 0; overflow: hidden; }
+        .progress-fill { background: linear-gradient(90deg, #ff6b6b, #ee5a52); height: 100%; width: 0%; transition: width 0.5s ease; }
+        .budget-breakdown { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0; }
+        .budget-item { background: #f8f9fa; padding: 15px; border-radius: 8px; border: 1px solid #dee2e6; }
+        .task-checklist { background: #f8f9fa; padding: 20px; border-radius: 10px; margin: 20px 0; }
+        .task-item { display: flex; align-items: center; padding: 10px 0; border-bottom: 1px solid #dee2e6; }
+        .task-checkbox { margin-right: 15px; transform: scale(1.2); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚨 CISM Domain 4 Case Study</h1>
+            <div class="subtitle">TechTrend Innovations - Information Security Incident Management</div>
+            <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+            <div id="progressText">Progress: 0% Complete</div>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-btn active" onclick="showSection('scenario')">🏢 Scenario</button>
+            <button class="nav-btn" onclick="showSection('incident')">🚨 Major Incident</button>
+            <button class="nav-btn" onclick="showSection('domain4')">⚡ Domain 4 Tasks</button>
+            <button class="nav-btn" onclick="showSection('deliverables')">📝 Deliverables</button>
+            <button class="nav-btn" onclick="showSection('resources')">📚 Resources</button>
+        </div>
+
+        <!-- Scenario Section -->
+        <div id="scenario" class="content-section active">
+            <h2 class="section-title">🏢 TechTrend Crisis - 18 Months Later</h2>
+            <div class="card">
+                <h3>🚨 BREAKING: Major Security Incident</h3>
+                <p>TechTrend has just experienced a sophisticated cyber attack. As CISO, you must lead the incident response.</p>
+                <div class="budget-breakdown">
+                    <div class="budget-item">
+                        <h4>💼 Company Status</h4>
+                        <p>Public company, 1,200 employees, $500M revenue</p>
+                    </div>
+                    <div class="budget-item">
+                        <h4>🔴 Incident Impact</h4>
+                        <p>2.8M customer records compromised, $15M exposure</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Major Incident Section -->
+        <div id="incident" class="content-section">
+            <h2 class="section-title">🚨 Active Security Incident</h2>
+            <div class="card">
+                <h3>🔍 Incident Details</h3>
+                <p><strong>Incident ID:</strong> INC-2025-001</p>
+                <p><strong>Discovery:</strong> Today, 3:47 AM PST</p>
+                <p><strong>Type:</strong> Data breach via APT attack</p>
+                <p><strong>Impact:</strong> 2.8 million customer records exposed</p>
+                <div class="budget-breakdown">
+                    <div class="budget-item">
+                        <h4>Attack Vector</h4>
+                        <p>Spear phishing → Domain compromise → Data exfiltration</p>
+                    </div>
+                    <div class="budget-item">
+                        <h4>Timeline</h4>
+                        <p>14-day undetected presence, 3-day active exfiltration</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Domain 4 Tasks Section -->
+        <div id="domain4" class="content-section">
+            <h2 class="section-title">⚡ DOMAIN 4 TASKS: Incident Management</h2>
+            <div class="card">
+                <h3>🎯 YOUR MISSION: Lead Incident Response</h3>
+                <p>As CISO, lead the response to TechTrend's first major security incident.</p>
+                <div class="task-checklist">
+                    <div class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div>
+                            <strong>Task 4.1:</strong> Incident Response Leadership (45 min)
+                            <div style="font-size: 0.9em; color: #666;">Lead CSIRT, coordinate immediate response</div>
+                        </div>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div>
+                            <strong>Task 4.2:</strong> Investigation & Forensics (45 min)
+                            <div style="font-size: 0.9em; color: #666;">Direct forensic analysis, preserve evidence</div>
+                        </div>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div>
+                            <strong>Task 4.3:</strong> Business Continuity (30 min)
+                            <div style="font-size: 0.9em; color: #666;">Maintain operations during response</div>
+                        </div>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox" class="task-checkbox">
+                        <div>
+                            <strong>Task 4.4:</strong> Communications (30 min)
+                            <div style="font-size: 0.9em; color: #666;">Manage stakeholder communications</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h3>🎯 Success Objectives</h3>
+                <div class="budget-breakdown">
+                    <div class="budget-item">
+                        <h4>⏱️ Containment Time</h4>
+                        <p>Target: Under 4 hours</p>
+                    </div>
+                    <div class="budget-item">
+                        <h4>💰 Cost Control</h4>
+                        <p>Target: Under $5M total</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Deliverables Section - COMPLETELY DIFFERENT -->
+        <div id="deliverables" class="content-section">
+            <h2 class="section-title">📝 DELIVERABLES: What You Must Produce</h2>
+            <div class="card">
+                <h3>📄 REQUIRED OUTPUT: Executive Incident Report</h3>
+                <p><strong>Due:</strong> 48 hours after incident resolution</p>
+                <p><strong>Audience:</strong> Board of Directors, SEC, Regulators</p>
+                <p><strong>Length:</strong> 6-8 pages professional report</p>
+            </div>
+            <div class="card">
+                <h3>📋 Report Must Include</h3>
+                <div class="budget-breakdown">
+                    <div class="budget-item">
+                        <h4>Executive Summary</h4>
+                        <p>Board-level overview of incident and response</p>
+                    </div>
+                    <div class="budget-item">
+                        <h4>Technical Analysis</h4>
+                        <p>Forensic findings, attack timeline, attribution</p>
+                    </div>
+                    <div class="budget-item">
+                        <h4>Financial Impact</h4>
+                        <p>Total costs: $4.4M (response + fines + disruption)</p>
+                    </div>
+                    <div class="budget-item">
+                        <h4>Regulatory Filings</h4>
+                        <p>SEC 8-K, GDPR notifications, state breach reports</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h3>📊 Dashboard Requirements</h3>
+                <ul style="padding-left: 20px;">
+                    <li>Response timeline metrics (detection to containment)</li>
+                    <li>Financial impact breakdown by category</li>
+                    <li>Regulatory compliance status tracker</li>
+                    <li>System recovery progress indicators</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Resources Section - COMPLETELY DIFFERENT -->
+        <div id="resources" class="content-section">
+            <h2 class="section-title">📚 RESOURCES: Study Materials</h2>
+            <div class="card">
+                <h3>📖 Required Reading</h3>
+                <ul style="padding-left: 20px;">
+                    <li><strong>CISM Review Manual 16th Edition:</strong> Chapter 4</li>
+                    <li><strong>NIST SP 800-61:</strong> Incident Handling Guide</li>
+                    <li><strong>ISO 27035:</strong> Incident Management Standard</li>
+                    <li><strong>FIRST Guidelines:</strong> Incident Response</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>🛠️ Tools & Templates</h3>
+                <div class="budget-breakdown">
+                    <div class="budget-item">
+                        <h4>Forensic Tools</h4>
+                        <p>EnCase, Volatility, Autopsy, YARA rules</p>
+                    </div>
+                    <div class="budget-item">
+                        <h4>Response Templates</h4>
+                        <p>CSIRT contact lists, communication templates</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <h3>🏆 Completion Checklist</h3>
+                <div class="task-checklist">
+                    <div class="task-item">
+                        <input type="checkbox" class="completion-checkbox">
+                        <div>Completed all Domain 4 tasks</div>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox" class="completion-checkbox">
+                        <div>Prepared incident response report</div>
+                    </div>
+                    <div class="task-item">
+                        <input type="checkbox" class="completion-checkbox">
+                        <div>Documented lessons learned</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            console.log('Showing section:', sectionId);
+            
+            // Hide all sections
+            var sections = document.querySelectorAll('.content-section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].classList.remove('active');
+            }
+            
+            // Remove active from all buttons
+            var buttons = document.querySelectorAll('.nav-btn');
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove('active');
+            }
+            
+            // Show target section
+            var targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+                console.log('Section shown successfully:', sectionId);
+            } else {
+                console.error('Section not found:', sectionId);
+            }
+            
+            // Add active to clicked button
+            event.target.classList.add('active');
+        }
+
+        function updateProgress() {
+            var allCheckboxes = document.querySelectorAll('.task-checkbox, .completion-checkbox');
+            var checkedBoxes = document.querySelectorAll('.task-checkbox:checked, .completion-checkbox:checked');
+            var progress = allCheckboxes.length > 0 ? (checkedBoxes.length / allCheckboxes.length) * 100 : 0;
+            
+            var progressFill = document.getElementById('progressFill');
+            var progressText = document.getElementById('progressText');
+            
+            if (progressFill && progressText) {
+                progressFill.style.width = progress + '%';
+                progressText.textContent = 'Progress: ' + Math.round(progress) + '% Complete';
+                
+                if (progress === 100) {
+                    progressText.textContent = '🎉 Domain 4 Complete!';
+                    progressText.style.color = '#ff6b6b';
+                    progressText.style.fontWeight = 'bold';
+                }
+            }
+        }
+
+        window.onload = function() {
+            console.log('Page loaded successfully');
+            
+            var checkboxes = document.querySelectorAll('.task-checkbox, .completion-checkbox');
+            for (var i = 0; i < checkboxes.length; i++) {
+                checkboxes[i].addEventListener('change', updateProgress);
+            }
+            
+            updateProgress();
+            console.log('Initialization complete');
+        };
+    </script>
+</body>
+</html>
