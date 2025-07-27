@@ -186,7 +186,6 @@
             background: rgba(10, 16, 31, 0.5);
             border: 1px solid var(--border-color);
             border-radius: 0.75rem;
-            transition: var(--transition-fast);
             padding: 1.5rem;
             cursor: pointer;
             text-align: center;
@@ -194,7 +193,12 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            min-height: 120px;
+            flex: 0 1 280px;
+            width: 280px;
+            min-height: 120px; 
+            max-height: 120px; 
+            overflow: hidden; 
+            transition: all 0.3s ease-in-out, max-height 0.5s ease-in-out;
         }
         .unified-card:hover {
             transform: translateY(-5px) scale(1.02);
@@ -202,6 +206,8 @@
             border-color: var(--accent-glow);
         }
         .unified-card.active {
+            max-height: 600px; /* Expanded max-height */
+            justify-content: flex-start;
             border-color: var(--accent-glow);
             box-shadow: 0 0 25px var(--shadow-color-hover);
             background-color: rgba(0, 191, 255, 0.1);
@@ -210,26 +216,32 @@
         .unified-card .card-title {
             font-size: 1.1em;
             font-weight: 700;
-            margin-bottom: 0.6rem;
             color: var(--accent-glow);
             text-align: center;
             transition: var(--transition-fast);
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%; /* Ensure title container takes full width */
         }
         .unified-card:hover .card-title {
             text-shadow: 0 0 8px var(--accent-glow);
         }
         .unified-card .card-description {
+            display: none; /* FIX: Hide from layout flow when inactive */
             font-weight: 400;
             font-size: 0.95em;
             color: var(--text-secondary);
-            margin-top: 0.5rem;
-            display: none;
             text-align: left;
             width: 100%;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out 0.2s; /* Fade in after expansion */
         }
         .unified-card.active .card-description {
-            display: block;
-            animation: enhancedFadeIn 0.5s ease-in-out;
+            display: block; /* FIX: Show in layout flow when active */
+            opacity: 1;
+            margin-top: 0.6rem;
         }
         
         /* Flowchart Styles */
@@ -243,9 +255,13 @@
         .incident-classification-card {
             text-align: left;
         }
-        .incident-classification-card .card-title { text-align: left; color: var(--text-primary); }
-        .incident-classification-card.active .card-title { color: var(--accent-glow); }
-        .incident-classification-card .card-description { text-align: left; }
+        .incident-classification-card .card-title { 
+            color: var(--text-primary); 
+        }
+        .incident-classification-card.active .card-title { 
+            color: var(--accent-glow); 
+            justify-content: flex-start; /* Justify left only when active */
+        }
 
         .incident-classification-card[data-classification="critical"] { border-left: 5px solid #FF4D4D; }
         .incident-classification-card[data-classification="high"] { border-left: 5px solid #FFA500; }
@@ -261,7 +277,8 @@
         #key-terms-grid {
             display: grid;
             gap: 1.5rem;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            justify-items: center;
         }
         
     </style>
@@ -329,15 +346,15 @@
                             <h4 class="text-lg font-semibold text-white mb-3">d. Core Phases of Incident Response.</h4>
                             <p class="text-gray-400 mb-4">Incident response typically follows a structured set of phases. Click each phase to learn more.</p>
                             <div class="flex flex-col items-center gap-2" data-interactive-group="incident-phases">
-                                <div class="unified-card w-full max-w-sm" data-key="detection"><span class="card-title">Detection & Analysis</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="detection"><span class="card-title">Detection & Analysis</span><div class="card-description"></div></div>
                                 <span class="flow-arrow">↓</span>
-                                <div class="unified-card w-full max-w-sm" data-key="containment"><span class="card-title">Containment</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="containment"><span class="card-title">Containment</span><div class="card-description"></div></div>
                                 <span class="flow-arrow">↓</span>
-                                <div class="unified-card w-full max-w-sm" data-key="eradication"><span class="card-title">Eradication</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="eradication"><span class="card-title">Eradication</span><div class="card-description"></div></div>
                                 <span class="flow-arrow">↓</span>
-                                <div class="unified-card w-full max-w-sm" data-key="recovery"><span class="card-title">Recovery</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="recovery"><span class="card-title">Recovery</span><div class="card-description"></div></div>
                                  <span class="flow-arrow">↓</span>
-                                <div class="unified-card w-full max-w-sm" data-key="post-incident"><span class="card-title">Post-Incident Review</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="post-incident"><span class="card-title">Post-Incident Review</span><div class="card-description"></div></div>
                             </div>
                         </div>
                     </div>
@@ -371,10 +388,10 @@
                         <div class="accordion-content hidden">
                             <p class="text-gray-300 mb-4">The BCP ensures that essential business functions can continue during and after a significant disruption.</p>
                             <h4 class="text-lg font-semibold text-white mb-3">a. Coordinate incident response with continuity strategies.</h4>
-                            <div class="flex flex-col md:flex-row flex-wrap justify-center items-center gap-4 mb-6" data-interactive-group="dependencies">
-                                <div class="unified-card flex-1" data-key="incident-response"><span class="card-title">Incident Response (IR)</span><div class="card-description"></div></div>
+                            <div class="flex flex-wrap justify-center items-center gap-4 mb-6" data-interactive-group="dependencies">
+                                <div class="unified-card" data-key="incident-response"><span class="card-title">Incident Response (IR)</span><div class="card-description"></div></div>
                                 <span class="text-3xl text-gray-400">→</span>
-                                <div class="unified-card flex-1" data-key="business-continuity"><span class="card-title">Business Continuity (BCP)</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="business-continuity"><span class="card-title">Business Continuity (BCP)</span><div class="card-description"></div></div>
                             </div>
                             <h4 class="text-lg font-semibold text-white mb-3">b. Include backup arrangements, failover procedures, and alternate work sites.</h4>
                             <p class="text-gray-400 mb-4">A robust BCP specifies mechanisms like regular data backups, redundant systems for seamless failover, and alternative locations for staff to work from if primary facilities are unavailable.</p>
@@ -417,10 +434,10 @@
                             <h4 class="text-lg font-semibold text-white mb-3">a. Establish criteria to classify incidents based on impact, sensitivity, or compliance.</h4>
                             <p class="text-gray-300 mb-4">Incidents are classified using defined criteria such as potential financial loss, number of affected users, sensitivity of compromised data (e.g., PII, PHI), and regulatory reporting obligations. Click each level to learn more.</p>
                             <div class="flex flex-col items-center gap-4" data-interactive-group="incident-classification">
-                                <div class="unified-card incident-classification-card w-full max-w-lg" data-classification="critical" data-key="critical"><span class="card-title">Critical (Severity 1)</span><div class="card-description"></div></div>
-                                <div class="unified-card incident-classification-card w-full max-w-lg" data-classification="high" data-key="high"><span class="card-title">High (Severity 2)</span><div class="card-description"></div></div>
-                                <div class="unified-card incident-classification-card w-full max-w-lg" data-classification="medium" data-key="medium"><span class="card-title">Medium (Severity 3)</span><div class="card-description"></div></div>
-                                <div class="unified-card incident-classification-card w-full max-w-lg" data-classification="low" data-key="low"><span class="card-title">Low (Severity 4)</span><div class="card-description"></div></div>
+                                <div class="unified-card incident-classification-card" data-classification="critical" data-key="critical"><span class="card-title">Critical (Severity 1)</span><div class="card-description"></div></div>
+                                <div class="unified-card incident-classification-card" data-classification="high" data-key="high"><span class="card-title">High (Severity 2)</span><div class="card-description"></div></div>
+                                <div class="unified-card incident-classification-card" data-classification="medium" data-key="medium"><span class="card-title">Medium (Severity 3)</span><div class="card-description"></div></div>
+                                <div class="unified-card incident-classification-card" data-classification="low" data-key="low"><span class="card-title">Low (Severity 4)</span><div class="card-description"></div></div>
                             </div>
                             <h4 class="text-lg font-semibold text-white mt-6 mb-3">b. Use classification to guide escalation and resource mobilization.</h4>
                             <p class="text-gray-400 mb-4">The assigned incident classification directly informs who needs to be notified (escalation path) and what resources (personnel, tools, budget) should be deployed to address the incident effectively and efficiently.</p>
@@ -492,13 +509,13 @@
                             <h4 class="text-lg font-semibold text-white mb-3">b. Forensic Investigation Steps.</h4>
                             <p class="text-gray-400 mb-4">A structured approach ensures thorough and legally sound evidence handling. Click on each step or arrow to learn more:</p>
                             <div class="flex flex-col items-center gap-2" data-interactive-group="forensic-steps">
-                                <div class="unified-card w-full max-w-sm" data-key="collection"><span class="card-title">Collection</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="collection"><span class="card-title">Collection</span><div class="card-description"></div></div>
                                 <span class="flow-arrow">↓</span>
-                                <div class="unified-card w-full max-w-sm" data-key="examination"><span class="card-title">Examination</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="examination"><span class="card-title">Examination</span><div class="card-description"></div></div>
                                 <span class="flow-arrow">↓</span>
-                                <div class="unified-card w-full max-w-sm" data-key="analysis"><span class="card-title">Analysis</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="analysis"><span class="card-title">Analysis</span><div class="card-description"></div></div>
                                 <span class="flow-arrow">↓</span>
-                                <div class="unified-card w-full max-w-sm" data-key="reporting"><span class="card-title">Reporting</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="reporting"><span class="card-title">Reporting</span><div class="card-description"></div></div>
                             </div>
                         </div>
                     </div>
@@ -558,21 +575,21 @@
                             <p class="text-gray-300 mb-4">Once contained, the focus shifts to removing the threat and restoring normal operations.</p>
                             <h4 class="text-lg font-semibold text-white mb-3">a. Eradicate malicious elements and vulnerabilities.</h4>
                             <p class="text-gray-400 mb-4">This involves completely removing all traces of the attacker and malicious code from affected systems, and, crucially, addressing the underlying vulnerabilities that allowed the incident to occur (e.g., patching, reconfiguring insecure services). Click on each eradication step to learn more:</p>
-                            <div class="flex flex-col md:flex-row flex-wrap justify-center items-center gap-4 mb-6" data-interactive-group="eradication-steps">
-                                <div class="unified-card flex-1" data-key="identify-remove"><span class="card-title">Identify & Remove Root Cause</span><div class="card-description"></div></div>
+                            <div class="flex flex-wrap justify-center items-center gap-4 mb-6" data-interactive-group="eradication-steps">
+                                <div class="unified-card" data-key="identify-remove"><span class="card-title">Identify & Remove Root Cause</span><div class="card-description"></div></div>
                                 <span class="text-3xl text-gray-400">→</span>
-                                <div class="unified-card flex-1" data-key="clean-elements"><span class="card-title">Clean Malicious Elements</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="clean-elements"><span class="card-title">Clean Malicious Elements</span><div class="card-description"></div></div>
                                 <span class="text-3xl text-gray-400">→</span>
-                                <div class="unified-card flex-1" data-key="harden-systems"><span class="card-title">Harden Systems</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-key="harden-systems"><span class="card-title">Harden Systems</span><div class="card-description"></div></div>
                             </div>
                             <h4 class="text-lg font-semibold text-white mb-3">b. Recover systems based on BCP/DR metrics.</h4>
                             <p class="text-gray-400 mb-4">Systems are restored using clean backups and recovery procedures defined in the DRP and BCP. Rigorous validation ensures systems are fully functional, secure, and free of residual threats before being returned to production, meeting established RTOs and RPOs. Click on each recovery step to learn more:</p>
-                            <div class="flex flex-col md:flex-row flex-wrap justify-center items-center gap-4 mb-6" data-interactive-group="recovery-steps">
-                               <div class="unified-card flex-1" data-key="validate-systems"><span class="card-title">Validate Systems</span><div class="card-description"></div></div>
+                            <div class="flex flex-wrap justify-center items-center gap-4 mb-6" data-interactive-group="recovery-steps">
+                               <div class="unified-card" data-key="validate-systems"><span class="card-title">Validate Systems</span><div class="card-description"></div></div>
                                <span class="text-3xl text-gray-400">→</span>
-                               <div class="unified-card flex-1" data-key="restore-data"><span class="card-title">Restore Data/Services</span><div class="card-description"></div></div>
+                               <div class="unified-card" data-key="restore-data"><span class="card-title">Restore Data/Services</span><div class="card-description"></div></div>
                                <span class="text-3xl text-gray-400">→</span>
-                               <div class="unified-card flex-1" data-key="verify-monitor"><span class="card-title">Verify & Monitor</span><div class="card-description"></div></div>
+                               <div class="unified-card" data-key="verify-monitor"><span class="card-title">Verify & Monitor</span><div class="card-description"></div></div>
                             </div>
                         </div>
                     </div>
@@ -748,9 +765,7 @@
                         });
                         const targetSection = document.getElementById(targetId);
                         targetSection.classList.remove('hidden');
-                        // Use a short timeout to ensure the fade-in animation re-triggers
                         setTimeout(() => targetSection.classList.add('fade-in'), 10);
-
                         if (targetId === 'key-terms') {
                             renderKeyTerms();
                         }
@@ -762,44 +777,41 @@
                 document.querySelectorAll('.accordion-button').forEach(button => {
                     button.addEventListener('click', () => {
                         const content = button.nextElementSibling;
-                        const isOpening = content.classList.contains('hidden');
-                        if (isOpening) {
-                            content.classList.remove('hidden');
-                            button.classList.add('open');
-                        } else {
-                            content.classList.add('hidden');
-                            button.classList.remove('open');
-                        }
+                        const icon = button.querySelector('.accordion-icon');
+                        content.classList.toggle('hidden');
+                        button.classList.toggle('open');
+                        icon.textContent = button.classList.contains('open') ? '–' : '+';
                     });
                 });
             }
 
+            function populateCardDescriptions() {
+                document.querySelectorAll('.unified-card[data-key]').forEach(card => {
+                    const cardKey = card.dataset.key;
+                    const group = card.closest('[data-interactive-group]');
+                    if (!group) return;
+                    const groupName = group.dataset.interactiveGroup;
+                    const descriptionDiv = card.querySelector('.card-description');
+
+                    if (descriptionDiv && data[groupName] && data[groupName][cardKey]) {
+                        descriptionDiv.innerHTML = `<p>${data[groupName][cardKey].description}</p>`;
+                    }
+                });
+            }
+
             function setupInteractiveCards() {
-                document.querySelectorAll('[data-interactive-group]').forEach(group => {
+                 document.querySelectorAll('[data-interactive-group]').forEach(group => {
                     group.querySelectorAll('.unified-card').forEach(card => {
                         card.addEventListener('click', (e) => {
                             e.stopPropagation();
-                            const cardKey = card.dataset.key;
-                            const groupName = group.dataset.interactiveGroup;
-                            const descriptionDiv = card.querySelector('.card-description');
-                            const isActive = card.classList.contains('active');
+                            const wasActive = card.classList.contains('active');
                             
-                            // Deactivate all other cards in the same group
                             group.querySelectorAll('.unified-card').forEach(otherCard => {
-                                if (otherCard !== card) {
-                                    otherCard.classList.remove('active');
-                                    const otherDesc = otherCard.querySelector('.card-description');
-                                    if(otherDesc) otherDesc.style.display = 'none';
-                                }
+                                otherCard.classList.remove('active');
                             });
 
-                            // Toggle the current card
-                            card.classList.toggle('active', !isActive);
-                            if (!isActive && descriptionDiv && data[groupName] && data[groupName][cardKey]) {
-                                descriptionDiv.innerHTML = `<p>${data[groupName][cardKey].description}</p>`;
-                                descriptionDiv.style.display = 'block';
-                            } else if (descriptionDiv) {
-                                descriptionDiv.style.display = 'none';
+                            if (!wasActive) {
+                                card.classList.add('active');
                             }
                         });
                     });
@@ -808,30 +820,22 @@
 
             function renderKeyTerms() {
                 const container = document.getElementById('key-terms-grid');
-                if (!container || container.children.length > 0) return; // Prevent re-rendering
+                if (!container || container.children.length > 0) return;
                 
                 data['key-terms'].forEach(item => {
                     const card = document.createElement('div');
                     card.className = 'unified-card';
                     card.innerHTML = `<h3 class="card-title">${item.term}</h3><div class="card-description"><p>${item.definition}</p></div>`;
-                    card.addEventListener('click', () => {
-                        const wasActive = card.classList.contains('active');
-                        // Deactivate all other key term cards
-                        container.querySelectorAll('.unified-card').forEach(c => c.classList.remove('active'));
-                        // Toggle current card
-                        if (!wasActive) {
-                            card.classList.add('active');
-                        }
-                    });
                     container.appendChild(card);
                 });
+                setupInteractiveCards();
             }
             
             // --- INITIALIZATION ---
             setupNavigation();
             setupAccordions();
+            populateCardDescriptions();
             setupInteractiveCards();
-            renderKeyTerms(); // Initial call to populate on first load if needed
         });
     </script>
 </body>
