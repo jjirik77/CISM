@@ -158,6 +158,13 @@
             border-radius: 0.75rem;
             padding: 1.5rem;
         }
+        
+        .accordion-content ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
 
         /* Accordion Styles */
         .accordion-button {
@@ -246,13 +253,13 @@
         }
 
         /* Policy Cycle & Flowchart Styles */
-        .policy-cycle-container, .implementation-steps-container, .third-party-steps-container {
+        .policy-cycle-container, .implementation-steps-container, .third-party-steps-container, .sdlc-cycle-container, .lifecycle-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 1rem;
         }
-        .policy-cycle-step, .implementation-step-card, .third-party-step-card {
+        .policy-cycle-step, .implementation-step-card, .third-party-step-card, .sdlc-step-card, .lifecycle-step-card {
             width: 90%;
             max-width: 400px;
         }
@@ -260,6 +267,12 @@
             font-size: 2em;
             color: var(--border-color);
             line-height: 1;
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
         }
 
         /* Audience Grid */
@@ -363,18 +376,46 @@
             <!-- Information Security Program Development Section -->
             <section id="program-development" class="content-section hidden">
                 <h2 class="text-3xl font-bold section-header mb-6">Section A: Information Security Program Development</h2>
-                <p class="mb-8 text-gray-400">This section is the blueprint for establishing a robust information security program. It focuses on strategic planning, resource allocation, and laying down the foundational elements that will govern security efforts across the organization.</p>
+                <p class="mb-8 text-gray-400">This section covers the essential planning and foundational activities required to build a security program from the ground up, ensuring it is aligned with the strategy defined in Domain 1. It is the blueprint for establishing a robust information security program. It focuses on strategic planning, resource allocation, and laying down the foundational elements that will govern security efforts across the organization.</p>
 
                 <div class="space-y-4">
-                    <!-- Sub-Domain: Information Security Program Resources -->
+                    <!-- 3.A.1: Information Security Program Resources -->
                     <div>
                         <button class="accordion-button w-full">
                             <span>1. Information Security Program Resources (People, Tools, Technologies)</span>
                             <span class="accordion-icon text-2xl">+</span>
                         </button>
                         <div class="accordion-content hidden">
-                            <p class="text-gray-300 mb-4">Building an information security program requires the right blend of human capital, effective tools, and appropriate technologies. Proper resource allocation ensures the program has the necessary support to achieve its objectives.</p>
-                            <h4 class="text-lg font-semibold text-white mb-3">a. Identify and allocate internal/external staff, tools, and technologies.</h4>
+                            <p class="text-gray-300 mb-4">Before any security program can be implemented, it must be properly justified, chartered, and planned. This subsection deals with securing the essential elements needed for success: people, processes, and technology. It covers the creation of a business case to get funding and support, defining the program's authority and boundaries through a charter and scope, creating a roadmap for implementation, and integrating security into the entire lifecycle of systems development. Building an information security program requires the right blend of human capital, effective tools, and appropriate technologies. Proper resource allocation ensures the program has the necessary support to achieve its objectives.</p>
+                            
+                            <h4 class="text-lg font-semibold text-white mb-3">a. The Information Security Program</h4>
+                            <p class="text-gray-400 mb-4">This is the execution of the security strategy. It's the combination of people, processes, and technology designed to protect the organization's information assets. Its purpose is to translate high-level goals into practical, enterprise-wide security controls.</p>
+
+                            <h4 class="text-lg font-semibold text-white mb-3">b. Business Case, Scope, and Charter</h4>
+                            <p class="text-gray-400 mb-4">The justification for the program, its authority, and its boundaries are defined here.</p>
+                            <div class="card-grid">
+                                <div class="unified-card" data-group="charter-scope" data-key="business-case"><span class="card-title">Business Case</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-group="charter-scope" data-key="charter"><span class="card-title">Charter and Scope</span><div class="card-description"></div></div>
+                            </div>
+                             
+                            <h4 class="text-lg font-semibold text-white mb-3">c. Roadmap</h4>
+                            <p class="text-gray-400 mb-4">A strategic plan that outlines the initiatives, timelines, and resources needed to achieve the program's objectives. It breaks the overall goal into smaller, manageable projects, allowing for adjustments as conditions change.</p>
+
+                            <h4 class="text-lg font-semibold text-white mb-3">d. System Development Life Cycle (SDLC)</h4>
+                            <p class="text-gray-400 mb-4">Security must be integrated into all phases of system development to be effective and cost-efficient. The CISM perspective emphasizes that building security in from the start ("shifting left") is far cheaper and less disruptive than trying to bolt it on after a system is built. The phases include:</p>
+                             <div class="sdlc-cycle-container">
+                                <div class="unified-card sdlc-step-card" data-group="sdlc-phases" data-key="initiation"><span class="card-title">Initiation</span><div class="card-description"></div></div>
+                                <span class="step-arrow">↓</span>
+                                <div class="unified-card sdlc-step-card" data-group="sdlc-phases" data-key="development"><span class="card-title">Development/Acquisition</span><div class="card-description"></div></div>
+                                 <span class="step-arrow">↓</span>
+                                <div class="unified-card sdlc-step-card" data-group="sdlc-phases" data-key="implementation"><span class="card-title">Implementation</span><div class="card-description"></div></div>
+                                 <span class="step-arrow">↓</span>
+                                <div class="unified-card sdlc-step-card" data-group="sdlc-phases" data-key="operations"><span class="card-title">Operations/Maintenance</span><div class="card-description"></div></div>
+                                 <span class="step-arrow">↓</span>
+                                <div class="unified-card sdlc-step-card" data-group="sdlc-phases" data-key="disposal"><span class="card-title">Disposal</span><div class="card-description"></div></div>
+                            </div>
+
+                            <h4 class="text-lg font-semibold text-white mb-3">e. Identify and allocate internal/external staff, tools, and technologies.</h4>
                             <p class="text-gray-400 mb-4">Effective resource planning is crucial. This involves assessing current capabilities and identifying where additional people, tools, or technologies are needed, aligning them with the program's scope and budget. Below is a simulation of budget allocation:</p>
                             <div class="content-box mb-6">
                                 <h6 class="text-md font-semibold text-white mb-4 text-center">Simulated Security Budget Allocation</h6>
@@ -416,24 +457,57 @@
                                 <p class="text-gray-500 text-sm italic mt-2 text-center">Adjust the percentages and total budget to see the allocation changes.</p>
                             </div>
 
-                            <h4 class="text-lg font-semibold text-white mb-3">b. Align resources with organizational structure and program scope.</h4>
+                            <h4 class="text-lg font-semibold text-white mb-3">f. Align resources with organizational structure and program scope.</h4>
                             <p class="text-gray-400 mb-4">Security resources must be strategically positioned within the organization to maximize their effectiveness. This means understanding reporting lines, collaboration points, and the overall scope of the security program relative to business operations.</p>
-                            <h4 class="text-lg font-semibold text-white">c. Ensure roles and responsibilities are defined and supported.</h4>
+                            <h4 class="text-lg font-semibold text-white mb-3">g. Ensure roles and responsibilities are defined and supported.</h4>
                             <p class="text-gray-400">Clear roles, documented responsibilities, and management support are vital. This ensures accountability and empowers security personnel to carry out their duties effectively, fostering a security-conscious culture.</p>
                         </div>
                     </div>
 
-                    <!-- Sub-Domain: Information Asset Identification and Classification -->
+                    <!-- 3.A.2: Information Asset Identification and Classification -->
                     <div>
                         <button class="accordion-button w-full">
                             <span>2. Information Asset Identification and Classification</span>
                             <span class="accordion-icon text-2xl">+</span>
                         </button>
                         <div class="accordion-content hidden">
-                            <p class="text-gray-300 mb-4">You can't protect what you don't know you have. Identifying and classifying information assets is the foundational step in determining appropriate security controls.</p>
-                            <h4 class="text-lg font-semibold text-white mb-3">a. Maintain an accurate inventory of data, systems, and infrastructure.</h4>
+                            <p class="text-gray-300 mb-4">You cannot protect what you do not know you have. This subsection covers the critical first steps of any practical security effort: identifying what assets the organization owns, determining their value, and classifying them based on their sensitivity and criticality. This process drives all subsequent risk-based decisions and ensures that the most valuable assets receive the highest level of protection throughout their entire lifecycle.</p>
+                            
+                            <h4 class="text-lg font-semibold text-white mb-3">a. Information Life Cycle</h4>
+                            <p class="text-gray-400 mb-4">Data has a lifecycle, and it must be protected at every stage.</p>
+                             <div class="lifecycle-container">
+                                <div class="unified-card lifecycle-step-card" data-group="lifecycle" data-key="creation"><span class="card-title">Creation</span><div class="card-description"></div></div>
+                                 <span class="step-arrow">↓</span>
+                                <div class="unified-card lifecycle-step-card" data-group="lifecycle" data-key="classification"><span class="card-title">Classification</span><div class="card-description"></div></div>
+                                 <span class="step-arrow">↓</span>
+                                <div class="unified-card lifecycle-step-card" data-group="lifecycle" data-key="storage"><span class="card-title">Storage</span><div class="card-description"></div></div>
+                                 <span class="step-arrow">↓</span>
+                                <div class="unified-card lifecycle-step-card" data-group="lifecycle" data-key="usage"><span class="card-title">Usage</span><div class="card-description"></div></div>
+                                 <span class="step-arrow">↓</span>
+                                <div class="unified-card lifecycle-step-card" data-group="lifecycle" data-key="archive"><span class="card-title">Archive</span><div class="card-description"></div></div>
+                                 <span class="step-arrow">↓</span>
+                                <div class="unified-card lifecycle-step-card" data-group="lifecycle" data-key="destruction"><span class="card-title">Destruction</span><div class="card-description"></div></div>
+                            </div>
+
+                            <h4 class="text-lg font-semibold text-white mb-3">b. Asset Classification and Valuation</h4>
+                            <p class="text-gray-400 mb-4">This is the process of assigning value and sensitivity labels to assets.</p>
+                            <div class="card-grid">
+                                <div class="unified-card" data-group="asset-class" data-key="asset"><span class="card-title">Asset</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-group="asset-class" data-key="valuation"><span class="card-title">Valuation</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-group="asset-class" data-key="classification"><span class="card-title">Classification</span><div class="card-description"></div></div>
+                            </div>
+                            
+                            <h4 class="text-lg font-semibold text-white mb-3">c. Data Protection Technologies</h4>
+                             <p class="text-gray-400 mb-4">These are systems designed to protect sensitive data based on its classification.</p>
+                            <div class="card-grid">
+                                <div class="unified-card" data-group="data-tech" data-key="dlp"><span class="card-title">Data Loss Prevention (DLP)</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-group="data-tech" data-key="drm"><span class="card-title">Digital Rights Management (DRM)</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-group="data-tech" data-key="casb"><span class="card-title">Cloud Access Security Broker (CASB)</span><div class="card-description"></div></div>
+                            </div>
+
+                            <h4 class="text-lg font-semibold text-white mb-3">d. Maintain an accurate inventory of data, systems, and infrastructure.</h4>
                             <p class="text-gray-400 mb-4">A comprehensive and up-to-date inventory is essential. This includes all forms of data (at rest, in transit, in processing), hardware, software, and network components, ensuring all critical assets are accounted for.</p>
-                            <h4 class="text-lg font-semibold text-white mb-3">b. Apply classification based on business impact (e.g., confidentiality, criticality).</h4>
+                            <h4 class="text-lg font-semibold text-white mb-3">e. Apply classification based on business impact (e.g., confidentiality, criticality).</h4>
                             <p class="text-gray-400 mb-4">Information classification categorizes data based on its sensitivity, value, and the impact its compromise would have on the business (e.g., financial, reputational, legal). This drives control selection. See an example classification table below:</p>
                             <div class="content-box mb-6">
                                 <h6 class="text-md font-semibold text-white mb-4 text-center">Sample Information Classification and Business Impact</h6>
@@ -482,20 +556,32 @@
                                 </div>
                                 <p class="text-gray-500 text-sm italic mt-2 text-center">Classification dictates the level of protection an asset requires.</p>
                             </div>
-                            <h4 class="text-lg font-semibold text-white">c. Assign data ownership and handling guidelines.</h4>
+                            <h4 class="text-lg font-semibold text-white mb-3">f. Assign data ownership and handling guidelines.</h4>
                             <p class="text-gray-400">Assigning clear data ownership ensures accountability for protecting specific datasets. Data owners, typically business managers, define access rights and approve handling procedures, ensuring data is used and protected according to its classification.</p>
                         </div>
                     </div>
 
-                    <!-- Sub-Domain: Industry Standards and Frameworks -->
+                    <!-- 3.A.3: Industry Standards and Frameworks -->
                     <div>
                         <button class="accordion-button w-full">
                             <span>3. Industry Standards and Frameworks for Information Security</span>
                             <span class="accordion-icon text-2xl">+</span>
                         </button>
                         <div class="accordion-content hidden">
-                            <p class="text-gray-300 mb-4">Leveraging established frameworks provides a structured, recognized approach to designing and managing an information security program. They offer best practices and help ensure compliance and effectiveness.</p>
-                            <h4 class="text-lg font-semibold text-white mb-3">a. Use frameworks such as ISO/IEC 27001, NIST CSF, COBIT, TOGAF, and SABSA.</h4>
+                            <p class="text-gray-300 mb-4">A security manager does not need to create a program from scratch. This subsection explores the various industry standards and frameworks that provide established, repeatable models for building and managing a security program. The CISM exam will not require you to memorize the details of these frameworks, but you must understand their purpose and know when and why you would use them. Leveraging established frameworks provides a structured, recognized approach to designing and managing an information security program. They offer best practices and help ensure compliance and effectiveness.</p>
+                            
+                            <h4 class="text-lg font-semibold text-white mb-3">a. Framework Types</h4>
+                            <p class="text-gray-400 mb-4">Frameworks provide structured models for building and managing a security program.</p>
+                             <div class="card-grid">
+                                <div class="unified-card" data-group="framework-types" data-key="control"><span class="card-title">Control Frameworks</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-group="framework-types" data-key="risk"><span class="card-title">Risk Management Frameworks</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-group="framework-types" data-key="program"><span class="card-title">Program Management Frameworks</span><div class="card-description"></div></div>
+                            </div>
+                             
+                            <h4 class="text-lg font-semibold text-white mb-3">b. Enterprise Information Security Architecture (EISA)</h4>
+                            <p class="text-gray-400 mb-4">The "security blueprint" for the entire organization. It aligns security requirements with business strategy and the IT infrastructure, ensuring a consistent and integrated approach.</p>
+                            
+                            <h4 class="text-lg font-semibold text-white mb-3">c. Use frameworks such as ISO/IEC 27001, NIST CSF, COBIT, TOGAF, and SABSA.</h4>
                             <p class="text-gray-400 mb-4">Each framework serves a distinct purpose, offering guidance for different aspects of information security management and governance. Click on a card to learn more about its primary use case:</p>
                             <div class="flex flex-wrap justify-center gap-4 mb-6">
                                 <div class="unified-card" data-group="framework" data-key="iso27001"><span class="card-title">ISO/IEC 27001</span><div class="card-description"></div></div>
@@ -504,21 +590,31 @@
                                 <div class="unified-card" data-group="framework" data-key="togaf"><span class="card-title">TOGAF</span><div class="card-description"></div></div>
                                 <div class="unified-card" data-group="framework" data-key="sabsa"><span class="card-title">SABSA</span><div class="card-description"></div></div>
                             </div>
-                            <h4 class="text-lg font-semibold text-white mb-3">b. Align program practices with regulatory, business, and technical standards.</h4>
+                            <h4 class="text-lg font-semibold text-white mb-3">d. Align program practices with regulatory, business, and technical standards.</h4>
                             <p class="text-gray-400 mb-4">A well-designed security program integrates legal mandates, industry best practices, and internal business requirements. This ensures compliance, relevance, and operational efficiency.</p>
-                            <h4 class="text-lg font-semibold text-white">c. Map frameworks to enterprise and security objectives.</h4>
+                            <h4 class="text-lg font-semibold text-white mb-3">e. Map frameworks to enterprise and security objectives.</h4>
                             <p class="text-gray-400">The chosen frameworks should not be implemented in isolation but explicitly mapped to the organization's strategic goals and security objectives. This demonstrates the business value of security initiatives.</p>
                         </div>
                     </div>
 
-                    <!-- Sub-Domain: Information Security Policies, Procedures, and Guidelines -->
+                    <!-- 3.A.4: Information Security Policies, Procedures, and Guidelines -->
                     <div>
                         <button class="accordion-button w-full">
                             <span>4. Information Security Policies, Procedures, and Guidelines</span>
                             <span class="accordion-icon text-2xl">+</span>
                         </button>
                         <div class="accordion-content hidden">
-                            <p class="text-gray-300 mb-4">These documents form the backbone of the security program, translating strategic objectives into actionable requirements for the entire organization.</p>
+                            <p class="text-gray-300 mb-4">This subsection covers the hierarchy of documentation that governs the security program. These documents translate high-level management intent into specific, actionable instructions for the entire organization. Understanding the difference between these document types is essential for establishing clear and enforceable security rules.</p>
+                            
+                            <h4 class="text-lg font-semibold text-white mb-3">a. The Documentation Hierarchy</h4>
+                            <p class="text-gray-400 mb-4">These documents translate high-level intent into specific instructions.</p>
+                             <div class="card-grid">
+                                <div class="unified-card" data-group="doc-hierarchy" data-key="policy"><span class="card-title">Policy</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-group="doc-hierarchy" data-key="standard"><span class="card-title">Standard</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-group="doc-hierarchy" data-key="procedure"><span class="card-title">Procedure</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-group="doc-hierarchy" data-key="guideline"><span class="card-title">Guideline</span><div class="card-description"></div></div>
+                            </div>
+                             
                             <h4 class="text-lg font-semibold text-white mb-3">b. Establish version control and review cycles.</h4>
                             <p class="text-gray-400 mb-4">Security documentation is dynamic. Implementing version control ensures consistency and auditability, while regular review cycles (e.g., annually, or after significant changes) keep them current and effective. See the continuous policy review cycle below:</p>
                             <div class="content-box mb-6">
@@ -539,23 +635,42 @@
                                 </div>
                                 <p class="text-gray-500 text-sm italic mt-2 text-center">Policies require a continuous lifecycle. Click on each step to learn more.</p>
                             </div>
-                            <h4 class="text-lg font-semibold text-white">c. Ensure policies support compliance and are auditable.</h4>
+                            <h4 class="text-lg font-semibold text-white mb-3">c. Ensure policies support compliance and are auditable.</h4>
                             <p class="text-gray-400">Policies must clearly align with regulatory requirements and industry standards. They should also be written in a way that allows for easy verification and auditing of compliance.</p>
                         </div>
                     </div>
 
-                    <!-- Sub-Domain: Information Security Program Metrics -->
+                    <!-- 3.A.5: Information Security Program Metrics -->
                     <div>
                         <button class="accordion-button w-full">
                             <span>5. Information Security Program Metrics</span>
                             <span class="accordion-icon text-2xl">+</span>
                         </button>
                         <div class="accordion-content hidden">
-                            <p class="text-gray-300 mb-4">Measuring the performance of the security program is crucial for demonstrating value, identifying areas for improvement, and making data-driven decisions.</p>
-                            <h4 class="text-lg font-semibold text-white mb-3">a. Define KPIs (Key Performance Indicators) (e.g., control implementation rate, training participation).</h4>
+                            <p class="text-gray-300 mb-4">"You can't manage what you can't measure." This subsection focuses on the critical process of developing and using metrics to assess the effectiveness of the security program. Good metrics demonstrate value to leadership, justify budgets, and identify areas for improvement.</p>
+                            
+                            <h4 class="text-lg font-semibold text-white mb-3">a. Effective Metrics (SMART)</h4>
+                            <p class="text-gray-400 mb-4">Good metrics should be: Specific, Measurable, Achievable, Relevant, and Time-bound.</p>
+                            
+                            <h4 class="text-lg font-semibold text-white mb-3">b. Types of Metrics</h4>
+                            <p class="text-gray-400 mb-4">Metrics are used to measure performance and progress toward goals.</p>
+                             <div class="card-grid">
+                                <div class="unified-card" data-group="metric-types" data-key="kpi"><span class="card-title">Key Performance Indicators (KPIs)</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-group="metric-types" data-key="kgi"><span class="card-title">Key Goal Indicators (KGIs)</span><div class="card-description"></div></div>
+                             </div>
+                             
+                            <h4 class="text-lg font-semibold text-white mb-3">c. Tailoring Metrics to the Audience</h4>
+                             <p class="text-gray-400 mb-4">Metrics must be relevant to who is receiving them.</p>
+                             <div class="card-grid">
+                                <div class="unified-card" data-group="metric-audience" data-key="strategic"><span class="card-title">Strategic (for Executives)</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-group="metric-audience" data-key="managerial"><span class="card-title">Managerial (for Program Managers)</span><div class="card-description"></div></div>
+                                <div class="unified-card" data-group="metric-audience" data-key="operational"><span class="card-title">Operational (for Technical Teams)</span><div class="card-description"></div></div>
+                             </div>
+
+                            <h4 class="text-lg font-semibold text-white mb-3">d. Define KPIs (Key Performance Indicators)</h4>
                             <p class="text-gray-400 mb-4">KPIs assess the effectiveness of security activities and processes. They indicate whether the program is meeting its objectives. Examples include percentage of critical vulnerabilities patched on time, successful security awareness training completion rates, and incident response times.</p>
-                            <h4 class="text-lg font-semibold text-white mb-3">b. Establish KRIs (Key Risk Indicators) (e.g., number of unpatched systems, failed audits).</h4>
-                            <p class="text-gray-400 mb-4">KRIs are forward-looking metrics that provide early warning signals of increasing risk exposure. They help proactive risk management by indicating potential future problems. Examples include a rising number of unpatched systems, an.increase in successful phishing attacks, or repeated audit findings. View the trends for simulated KPIs and KRIs below:</p>
+                            <h4 class="text-lg font-semibold text-white mb-3">e. Establish KRIs (Key Risk Indicators)</h4>
+                            <p class="text-gray-400 mb-4">KRIs are forward-looking metrics that provide early warning signals of increasing risk exposure. They help proactive risk management by indicating potential future problems. Examples include a rising number of unpatched systems, an increase in successful phishing attacks, or repeated audit findings. View the trends for simulated KPIs and KRIs below:</p>
                             <div class="content-box">
                                 <div class="chart-container mb-6">
                                     <canvas id="programMetricsChart"></canvas>
@@ -571,7 +686,7 @@
                                 </div>
                                 <p class="text-gray-500 text-sm italic text-center">This line chart illustrates simulated trends for various Key Performance Indicators (KPIs) and Key Risk Indicators (KRIs).</p>
                             </div>
-                            <h4 class="text-lg font-semibold text-white mt-4">c. Use dashboards to report maturity, coverage, and gaps.</h4>
+                            <h4 class="text-lg font-semibold text-white mb-3">f. Use dashboards to report maturity, coverage, and gaps.</h4>
                             <p class="text-gray-400">Visual dashboards consolidate metrics, providing a clear and concise overview of the program's maturity, the extent of control coverage, and any existing gaps to senior management and other stakeholders.</p>
                         </div>
                     </div>
@@ -581,25 +696,39 @@
             <!-- Information Security Program Management Section -->
             <section id="program-management" class="content-section hidden">
                 <h2 class="text-3xl font-bold section-header mb-6">Section B: Information Security Program Management</h2>
-                <p class="mb-8 text-gray-400">This section focuses on the operational aspects of the information security program, from designing and implementing controls to ongoing monitoring, training, and managing external relationships.</p>
+                <p class="mb-8 text-gray-400">This section covers the ongoing operational activities required to run and maintain the security program developed in Part A. It focuses on the operational aspects of the information security program, from designing and implementing controls to ongoing monitoring, training, and managing external relationships.</p>
 
                 <div class="space-y-4">
-                    <!-- Sub-Domain: Information Security Control Design and Selection -->
+                    <!-- 3.B.1: Information Security Control Design and Selection -->
                     <div>
                         <button class="accordion-button w-full">
                             <span>1. Information Security Control Design and Selection</span>
                             <span class="accordion-icon text-2xl">+</span>
                         </button>
                         <div class="accordion-content hidden">
-                            <p class="text-gray-300 mb-4">Controls are the safeguards that mitigate risks. Their design and selection must be strategic, balancing protection with business enablement.</p>
-                            <h4 class="text-lg font-semibold text-white mb-3">a. Identify appropriate administrative, technical, and physical controls based on risk analysis.</h4>
+                            <p class="text-gray-300 mb-4">This subsection delves into the process of choosing the right security controls. It emphasizes a balanced approach that considers people, processes, and technology. The focus is not just on the technical effectiveness of a control, but also on its cost, its impact on user productivity, and its fit within the overall security architecture.</p>
+                            
+                            <h4 class="text-lg font-semibold text-white mb-3">a. Balance People, Process, and Technology</h4>
+                            <p class="text-gray-400 mb-4">A successful program balances all three. You can have the best technology in the world, but it will fail if the people aren't trained and the processes are not followed.</p>
+
+                            <h4 class="text-lg font-semibold text-white mb-3">b. Define Control Objectives</h4>
+                            <p class="text-gray-400 mb-4">A clear statement of what a control is meant to achieve. Example: "The objective of our access control system is to ensure that only authorized users can access sensitive data."</p>
+
+                            <h4 class="text-lg font-semibold text-white mb-3">c. Use Control Selection Criteria</h4>
+                            <div class="card-grid">
+                               <div class="unified-card" data-group="control-criteria" data-key="cost"><span class="card-title">Cost-Effectiveness</span><div class="card-description"></div></div>
+                               <div class="unified-card" data-group="control-criteria" data-key="productivity"><span class="card-title">Productivity Impact</span><div class="card-description"></div></div>
+                               <div class="unified-card" data-group="control-criteria" data-key="scalability"><span class="card-title">Scalability & Adaptability</span><div class="card-description"></div></div>
+                            </div>
+
+                            <h4 class="text-lg font-semibold text-white mb-3">d. Identify appropriate administrative, technical, and physical controls based on risk analysis.</h4>
                             <p class="text-gray-400 mb-4">Control selection is a risk-driven process. Controls should directly address identified threats and vulnerabilities. Click on a control type to see examples:</p>
                             <div class="flex flex-wrap justify-center gap-4 mb-6">
                                 <div class="unified-card" data-group="control-type" data-key="administrative"><span class="card-title">Administrative</span><div class="card-description"></div></div>
                                 <div class="unified-card" data-group="control-type" data-key="technical"><span class="card-title">Technical</span><div class="card-description"></div></div>
                                 <div class="unified-card" data-group="control-type" data-key="physical"><span class="card-title">Physical</span><div class="card-description"></div></div>
                             </div>
-                            <h4 class="text-lg font-semibold text-white mb-3">d. Incorporate layered defense (defense-in-depth) and compensating controls where needed.</h4>
+                            <h4 class="text-lg font-semibold text-white mb-3">e. Incorporate layered defense (defense-in-depth) and compensating controls where needed.</h4>
                             <p class="text-gray-400 mb-4">These are crucial strategies for building resilient security. Click on each card to learn more:</p>
                             <div class="flex flex-wrap justify-center gap-4 mb-6">
                                 <div class="unified-card" data-group="control-concept" data-key="defense-in-depth"><span class="card-title">Defense-in-Depth</span><div class="card-description"></div></div>
@@ -608,15 +737,30 @@
                         </div>
                     </div>
 
-                    <!-- Sub-Domain: Information Security Control Integration and Implementation -->
+                    <!-- 3.B.2: Information Security Control Integration and Implementation -->
                     <div>
                         <button class="accordion-button w-full">
                             <span>2. Information Security Control Integration and Implementation</span>
                             <span class="accordion-icon text-2xl">+</span>
                         </button>
                         <div class="accordion-content hidden">
-                             <p class="text-gray-300 mb-4">This phase turns security plans into reality, integrating controls seamlessly into the operational environment.</p>
-                            <h4 class="text-lg font-semibold text-white mb-3">a. Implement selected controls into operational systems, processes, and third-party environments.</h4>
+                            <p class="text-gray-300 mb-4">Once controls are selected, they must be implemented correctly and integrated into the fabric of the organization's IT and business processes. This subsection covers the different categories and types of controls and emphasizes the importance of embedding security into core processes like change management and system development.</p>
+                            
+                            <h4 class="text-lg font-semibold text-white mb-3">a. Understand Control Categories and Types</h4>
+                            <div class="card-grid">
+                               <div class="unified-card" data-group="control-cats-types" data-key="categories"><span class="card-title">Control Categories</span><div class="card-description"></div></div>
+                               <div class="unified-card" data-group="control-cats-types" data-key="types"><span class="card-title">Control Types (by function)</span><div class="card-description"></div></div>
+                            </div>
+                            
+                            <h4 class="text-lg font-semibold text-white mb-3">b. Integrate with IT Processes</h4>
+                            <p class="text-gray-400 mb-4">Security cannot operate in a silo. It must be integrated into:</p>
+                            <div class="card-grid">
+                               <div class="unified-card" data-group="it-processes" data-key="devsecops"><span class="card-title">DevSecOps</span><div class="card-description"></div></div>
+                               <div class="unified-card" data-group="it-processes" data-key="change"><span class="card-title">Change Management</span><div class="card-description"></div></div>
+                               <div class="unified-card" data-group="it-processes" data-key="config"><span class="card-title">Configuration Management</span><div class="card-description"></div></div>
+                            </div>
+
+                             <h4 class="text-lg font-semibold text-white mb-3">c. Implement selected controls into operational systems, processes, and third-party environments.</h4>
                             <p class="text-gray-400 mb-4">Implementation involves configuring technical solutions, embedding security into workflows, and extending security requirements to external partners. See key steps below:</p>
                             <div class="content-box mb-6">
                                 <h6 class="text-md font-semibold text-white mb-4 text-center">Control Implementation Steps</h6>
@@ -636,16 +780,24 @@
                         </div>
                     </div>
                     
-                    <!-- Sub-Domain: Information Security Control Testing and Evaluation -->
+                    <!-- 3.B.3: Information Security Control Testing and Evaluation -->
                     <div>
                         <button class="accordion-button w-full">
                             <span>3. Information Security Control Testing and Evaluation</span>
                             <span class="accordion-icon text-2xl">+</span>
                         </button>
                         <div class="accordion-content hidden">
-                            <p class="text-gray-300 mb-4">Continuous testing and evaluation are essential to confirm that controls remain effective and that the organization's security posture is sound.</p>
-                            <h4 class="text-lg font-semibold text-white mb-3">a. Test controls for effectiveness, reliability, and coverage through internal audits, penetration testing, and vulnerability scanning.</h4>
-                            <p class="text-gray-400 mb-4">Various methods are used to validate controls. Click on a method to learn more:</p>
+                            <p class="text-gray-300 mb-4">Implementing a control is not a "fire and forget" activity. This subsection covers the continuous process of testing and evaluating controls to ensure they are working as intended and remain effective over time.</p>
+                            
+                            <h4 class="text-lg font-semibold text-white mb-3">a. Understand Control Strength</h4>
+                            <p class="text-gray-400 mb-4">This is a measure of how well a control resists threats. It's a balance between:</p>
+                            <div class="card-grid">
+                               <div class="unified-card" data-group="control-strength" data-key="inherent"><span class="card-title">Inherent Strength</span><div class="card-description"></div></div>
+                               <div class="unified-card" data-group="control-strength" data-key="practical"><span class="card-title">Practical Strength</span><div class="card-description"></div></div>
+                            </div>
+                            
+                            <h4 class="text-lg font-semibold text-white mb-3">b. Test controls for effectiveness, reliability, and coverage.</h4>
+                            <p class="text-gray-400 mb-4">Various testing methods are used to validate controls, such as internal audits, penetration testing, and vulnerability scanning. Click on a method to learn more:</p>
                             <div class="flex flex-wrap justify-center gap-4 mb-6">
                                 <div class="unified-card" data-group="control-testing" data-key="internal-audits"><span class="card-title">Internal Audits</span><div class="card-description"></div></div>
                                 <div class="unified-card" data-group="control-testing" data-key="penetration-testing"><span class="card-title">Penetration Testing</span><div class="card-description"></div></div>
@@ -655,16 +807,32 @@
                         </div>
                     </div>
 
-                    <!-- Sub-Domain: Information Security Awareness and Training -->
+                    <!-- 3.B.4: Information Security Awareness and Training -->
                     <div>
                         <button class="accordion-button w-full">
                             <span>4. Information Security Awareness and Training</span>
                             <span class="accordion-icon text-2xl">+</span>
                         </button>
                         <div class="accordion-content hidden">
-                            <p class="text-gray-300 mb-4">People are often the most critical component of an organization's security posture. Effective awareness and training programs empower employees to be a strong defense.</p>
-                            <h4 class="text-lg font-semibold text-white mb-3">c. Use varied delivery methods (e.g., eLearning, simulations, briefings).</h4>
-                            <p class="text-gray-400 mb-4">Diverse delivery methods improve engagement and retention. Click on a method to see its characteristics:</p>
+                            <p class="text-gray-300 mb-4">Employees are often described as the "human firewall" and can be either the strongest or weakest link in the security chain. This subsection covers the critical task of creating and maintaining a program to educate users, reduce human error, and build a security-aware culture.</p>
+                            
+                            <h4 class="text-lg font-semibold text-white mb-3">a. Define Goals and Use Role-Based Training</h4>
+                            <p class="text-gray-400 mb-4">The goal is to embed security consciousness into daily tasks and organizational culture. Training content must be tailored to roles:</p>
+                            <div class="card-grid">
+                               <div class="unified-card" data-group="role-training" data-key="all"><span class="card-title">All Employees</span><div class="card-description"></div></div>
+                               <div class="unified-card" data-group="role-training" data-key="execs"><span class="card-title">Executives</span><div class="card-description"></div></div>
+                               <div class="unified-card" data-group="role-training" data-key="admins"><span class="card-title">IT Admins</span><div class="card-description"></div></div>
+                            </div>
+                             
+                             <h4 class="text-lg font-semibold text-white mb-3">b. Measure Effectiveness with Behavioral Metrics</h4>
+                             <p class="text-gray-400 mb-4">The success of a training program is not measured by completion rates, but by behavioral change.</p>
+                             <ul>
+                                <li><strong>Good Metric:</strong> A decrease in the click-rate on phishing simulations.</li>
+                                <li><strong>Bad Metric:</strong> "100% of employees completed the training."</li>
+                             </ul>
+
+                            <h4 class="text-lg font-semibold text-white mb-3">c. Use varied delivery methods.</h4>
+                            <p class="text-gray-400 mb-4">Diverse delivery methods (e.g., eLearning, simulations, briefings) improve engagement and retention. Click on a method to see its characteristics:</p>
                             <div class="flex flex-wrap justify-center gap-4 mb-6">
                                 <div class="unified-card" data-group="training-method" data-key="elearning"><span class="card-title">eLearning Modules</span><div class="card-description"></div></div>
                                 <div class="unified-card" data-group="training-method" data-key="simulations"><span class="card-title">Simulations</span><div class="card-description"></div></div>
@@ -674,14 +842,23 @@
                         </div>
                     </div>
 
-                    <!-- Sub-Domain: Management of External Services -->
+                    <!-- 3.B.5: Management of External Services -->
                     <div>
                         <button class="accordion-button w-full">
                             <span>5. Management of External Services</span>
                             <span class="accordion-icon text-2xl">+</span>
                         </button>
                         <div class="accordion-content hidden">
-                            <p class="text-gray-300 mb-4">Outsourcing services introduces third-party risk. Effective management is critical to ensure external providers maintain adequate security for your data and systems.</p>
+                            <p class="text-gray-300 mb-4">An organization's security posture is only as strong as its weakest link, which often includes third-party vendors and service providers. This subsection covers the process of managing the risks associated with outsourcing and external relationships. The key principle is: You can outsource the responsibility, but you can never outsource the accountability for security.</p>
+                            
+                            <h4 class="text-lg font-semibold text-white mb-3">a. Use Vendor Due Diligence and Contractual Clauses</h4>
+                            <p class="text-gray-400 mb-4">Assessing a vendor's security posture before signing a contract is critical. The contract is the primary tool for enforcing security requirements on a vendor. Key clauses include:</p>
+                            <div class="card-grid">
+                               <div class="unified-card" data-group="vendor-clauses" data-key="sla"><span class="card-title">Service Level Agreements (SLAs)</span><div class="card-description"></div></div>
+                               <div class="unified-card" data-group="vendor-clauses" data-key="audit"><span class="card-title">Right to Audit</span><div class="card-description"></div></div>
+                               <div class="unified-card" data-group="vendor-clauses" data-key="ownership"><span class="card-title">Data Ownership and Return</span><div class="card-description"></div></div>
+                            </div>
+
                             <h4 class="text-lg font-semibold text-white mb-3">b. Conduct risk assessments and due diligence for vendors, MSPs, and cloud providers.</h4>
                             <p class="text-gray-400 mb-4">Before engaging external services, perform thorough risk assessments and due diligence to evaluate their security posture and capabilities. Key steps include:</p>
                             <div class="content-box mb-6">
@@ -704,14 +881,27 @@
                         </div>
                     </div>
 
-                    <!-- Sub-Domain: Information Security Program Communications and Reporting -->
+                    <!-- 3.B.6: Information Security Program Communications and Reporting -->
                     <div>
                         <button class="accordion-button w-full">
                             <span>6. Information Security Program Communications and Reporting</span>
                             <span class="accordion-icon text-2xl">+</span>
                         </button>
                         <div class="accordion-content hidden">
-                            <p class="text-gray-300 mb-4">Effective communication is paramount. It builds trust, ensures understanding, and drives informed decision-making across all levels of the organization.</p>
+                            <p class="text-gray-300 mb-4">This final subsection focuses on the ongoing task of communicating the program's status and effectiveness to all stakeholders. This involves evaluating the program's performance, using structured models like the Plan-Do-Check-Act cycle for continuous improvement, and tailoring reports for different audiences.</p>
+
+                            <h4 class="text-lg font-semibold text-white mb-3">a. Use the Plan-Do-Check-Act (PDCA) Cycle</h4>
+                            <p class="text-gray-400 mb-4">A four-step model for continuous improvement:</p>
+                            <div class="card-grid">
+                               <div class="unified-card" data-group="pdca-cycle" data-key="plan"><span class="card-title">Plan</span><div class="card-description"></div></div>
+                               <div class="unified-card" data-group="pdca-cycle" data-key="do"><span class="card-title">Do</span><div class="card-description"></div></div>
+                               <div class="unified-card" data-group="pdca-cycle" data-key="check"><span class="card-title">Check</span><div class="card-description"></div></div>
+                               <div class="unified-card" data-group="pdca-cycle" data-key="act"><span class="card-title">Act</span><div class="card-description"></div></div>
+                            </div>
+                             
+                             <h4 class="text-lg font-semibold text-white mb-3">b. Conduct Regular Program Evaluation</h4>
+                             <p class="text-gray-400 mb-4">Regularly assessing the program against its objectives, checking for alignment with business goals, and ensuring it has sufficient financial, human, and technical resources to be successful.</p>
+
                             <h4 class="text-lg font-semibold text-white mb-3">c. Tailor communication to technical and non-technical audiences.</h4>
                             <p class="text-gray-400 mb-4">The level of detail and language used should vary based on the audience. Executives need high-level business impact, while technical teams require granular data. Click on an audience type to see what kind of communication they typically need:</p>
                             <div class="content-box mb-6">
@@ -786,7 +976,7 @@
             const contentData = {
                 framework: {
                     iso27001: "Establishing, implementing, maintaining, and continually improving an Information Security Management System (ISMS). It’s a certifiable standard that provides a systematic approach to managing sensitive company information.",
-                    nistcsf: "Providing a voluntary, flexible framework for managing cybersecurity risk for organizations, particularly critical infrastructure. It offers a common language and systematic approach to improve cybersecurity posture.",
+                    nistcsf: "Providing a voluntary, flexible framework for managing cybersecurity risk for organizations, particularly critical infrastructure. It organizes activities into five functions: Identify, Protect, Detect, Respond, Recover.",
                     cobit: "A comprehensive framework for governance and management of enterprise IT, which includes information security as a key domain. It helps align IT with business goals, ensuring value delivery and risk optimization.",
                     togaf: "An enterprise architecture framework for designing, planning, implementing, and governing an enterprise information technology architecture. It can be used to integrate security architecture into the broader enterprise structure.",
                     sabsa: "A framework for developing business-driven security architectures. It emphasizes a top-down approach, ensuring that security solutions are directly aligned with business needs and objectives."
@@ -840,25 +1030,113 @@
                     technical: "Vulnerability details, technical control performance, incident forensics, operational procedures, threat intelligence specifics. Example: Weekly dashboard review of SIEM alerts and patch compliance.",
                     endUsers: "Policy awareness, common threats (e.g., phishing), secure behaviors, how to report incidents. Simple, actionable advice. Example: Phishing simulation results, security tips newsletter.",
                     legalCompliance: "Regulatory compliance status, audit findings, data privacy adherence, incident legal implications, contractual obligations. Example: Annual compliance report, data breach notification procedures."
+                },
+                 'charter-scope': {
+                    'business-case': "The justification for the program's existence, presented in business terms. It demonstrates how investing in security will deliver value, reduce risk, and align with strategic goals. This is how you secure funding and executive support.",
+                    'charter': "As covered in Domain 1, the charter grants the program authority, while the scope defines its boundaries."
+                },
+                'roadmap': {
+                    'roadmap': "A strategic plan that outlines the initiatives, timelines, and resources needed to achieve the program's objectives. It breaks the overall goal into smaller, manageable projects, allowing for adjustments as conditions change."
+                },
+                'lifecycle': {
+                    'creation': "Data is generated by a user or system.",
+                    'classification': "The data is assigned a sensitivity level (e.g., Public, Confidential).",
+                    'storage': "Data is protected 'at rest' using encryption and access controls.",
+                    'usage': "Data is protected 'in use' and 'in transit.'",
+                    'archive': "Data is retained securely for compliance or business needs.",
+                    'destruction': "Data is securely and permanently destroyed when no longer needed to minimize risk."
+                },
+                'asset-class': {
+                    'asset': "Anything of value to the organization (data, systems, personnel, reputation).",
+                    'valuation': "Determining an asset's worth, considering both its tangible (replacement cost) and intangible (reputational damage) value.",
+                    'classification': "The process of assigning a label to an asset based on its sensitivity and criticality. This dictates the required level of protection. Examples of classification levels: Public, Internal Use, Confidential, Restricted."
+                },
+                'data-tech': {
+                    'dlp': "A system that can identify, monitor, and automatically protect sensitive data based on its content and classification, preventing unauthorized disclosure.",
+                    'drm': "Technology that enforces restrictions on the use of digital content, typically used for media like ebooks and music.",
+                    'casb': "A security policy enforcement point that sits between cloud service users and cloud applications."
+                },
+                'framework-types': {
+                    'control': "Focus on what specific controls to implement (e.g., CIS Controls, NIST 800-53).",
+                    'risk': "Focus on the process of identifying, assessing, and treating risk (e.g., NIST Cybersecurity Framework (CSF), ISO 31000).",
+                    'program': "Focus on how to establish and run the entire security program (e.g., ISO 27001, COBIT)."
+                },
+                'doc-hierarchy': {
+                    'policy': "A high-level, general statement of management's intent. It explains the 'why.' It is mandatory. Example: 'All sensitive customer data must be protected from unauthorized access.'",
+                    'standard': "A mandatory technical specification that implements a policy. It defines the 'what.' Example: 'All databases containing customer data must be encrypted with AES-256.'",
+                    'procedure': "Detailed, step-by-step instructions on how to perform a task to comply with a standard. It defines the 'how.' It is mandatory. Example: 'Step 1: Open the database management console. Step 2: Navigate to the encryption settings...'",
+                    'guideline': "A recommendation or best practice. It is not mandatory but strongly advised."
+                },
+                'metric-types': {
+                    'kpi': "Measure the performance of a specific activity. They are often operational. Example: 'Mean Time to Remediate (MTTR) critical vulnerabilities is less than 30 days.'",
+                    'kgi': "Measure progress toward a strategic goal. Example: 'Reduce the number of successful phishing attacks by 50% this year.'"
+                },
+                'metric-audience': {
+                    'strategic': "High-level metrics focused on risk and business alignment (e.g., ROI of security investments).",
+                    'managerial': "Metrics on process effectiveness and compliance (e.g., audit finding closure rate).",
+                    'operational': "Detailed metrics on control performance (e.g., number of firewall blocks)."
+                },
+                'sdlc-phases': {
+                    'initiation': 'Defining security requirements.',
+                    'development': 'Incorporating security controls into the design.',
+                    'implementation': 'Testing and validating controls before going live.',
+                    'operations': 'Monitoring and updating controls.',
+                    'disposal': 'Securely archiving or destroying data and systems.'
+                },
+                'control-criteria': {
+                    cost: 'Does the benefit of risk reduction justify the cost of the control?',
+                    productivity: 'Does the control significantly hinder legitimate business operations?',
+                    scalability: 'Can the control grow with the business and adapt to new threats?'
+                },
+                'control-cats-types': {
+                    categories: 'Technical (or Logical): Hardware and software (e.g., firewalls, antivirus).<br>Administrative: Policies and procedures (e.g., security awareness training).<br>Physical: Tangible items (e.g., locks, fences, security guards).',
+                    types: 'Preventive: Stop an incident from occurring (e.g., a firewall rule).<br>Detective: Identify that an incident has occurred (e.g., an intrusion detection system).<br>Corrective: Remediate and recover from an incident (e.g., restoring from backups).'
+                },
+                'it-processes': {
+                    devsecops: 'Embedding automated security testing into the CI/CD pipeline.',
+                    change: 'Requiring a security review and risk assessment for all proposed changes to systems or networks.',
+                    config: 'Using security baselines to ensure consistent, hardened configurations for all systems.'
+                },
+                'control-strength': {
+                    inherent: 'How strong the control is by design (e.g., AES-256 encryption is inherently strong).',
+                    practical: 'How strong the control is in the real world, considering factors like user acceptance and ease of bypass.'
+                },
+                'role-training': {
+                    all: 'General awareness on topics like phishing and password security.',
+                    execs: 'Training on risk appetite and strategic decision-making.',
+                    admins: 'In-depth technical training on securing systems.'
+                },
+                'vendor-clauses': {
+                    sla: 'Defining specific, measurable performance and security expectations.',
+                    audit: 'A clause that gives you the right to audit the vendor\'s security controls.',
+                    ownership: 'Clearly stating that you own your data and defining the process for getting it back when the contract ends.'
+                },
+                 'pdca-cycle': {
+                    plan: 'Design the security program and its objectives.',
+                    do: 'Implement the plan.',
+                    check: 'Monitor and measure the results against the objectives.',
+                    act: 'Make adjustments and improvements based on the results.'
                 }
             };
 
             const keyTermsData = [
-                { term: "Security Program", definition: "A comprehensive set of policies, procedures, and controls designed to protect an organization's information assets." },
-                { term: "Asset Classification", definition: "Categorizing information based on its sensitivity, value, and the impact its compromise would have on the business." },
-                { term: "ISO/IEC 27001", definition: "A globally recognized standard for establishing, implementing, maintaining, and continually improving an Information Security Management System (ISMS)." },
-                { term: "NIST CSF", definition: "A voluntary framework providing a common language and systematic methodology for managing cybersecurity risk." },
-                { term: "COBIT", definition: "A comprehensive framework for governance and management of enterprise IT, including information security." },
-                { term: "TOGAF", definition: "An enterprise architecture framework that can be used to integrate security architecture into the broader enterprise structure." },
-                { term: "SABSA", definition: "A framework for developing business-driven security architectures, ensuring security solutions align with business needs." },
-                { term: "Security Policy", definition: "High-level statements of management's intent and direction for information security." },
-                { term: "KPI", definition: "A measurable value that demonstrates how effectively a company is achieving key business objectives related to security activities." },
-                { term: "KRI", definition: "Forward-looking metrics that provide an early warning signal of increasing risk exposure." },
-                { term: "Defense-in-Depth", definition: "Implementing multiple layers of security controls to protect critical assets." },
-                { term: "Compensating Controls", definition: "Alternative security controls implemented when a primary control is not feasible or practical." },
-                { term: "Third-Party Risk", definition: "The process of identifying, assessing, and mitigating risks associated with external vendors." },
-                { term: "SLA", definition: "A contract between a service provider and a customer that specifies the level of service expected, including security." },
-                { term: "Awareness Training", definition: "Educational programs designed to inform employees about information security risks, policies, and best practices." }
+                { term: "Security Program", definition: "The formal combination of people, processes, and technology that executes the security strategy." },
+                { term: "SDLC", definition: "A structured process for developing and maintaining systems, into which security must be integrated." },
+                { term: "Asset Classification", definition: "The process of labeling information based on its sensitivity and criticality to determine the appropriate level of protection." },
+                { term: "Information Life Cycle", definition: "The stages data goes through from creation to destruction, with security controls required at each stage." },
+                { term: "DLP", definition: "Technology designed to prevent the unauthorized disclosure of sensitive data." },
+                { term: "Policy", definition: "A high-level statement of management intent (the 'why')." },
+                { term: "Standard", definition: "A mandatory technical specification (the 'what')." },
+                { term: "Procedure", definition: "A detailed, step-by-step instruction (the 'how')." },
+                { term: "Guideline", definition: "A non-mandatory recommendation or best practice." },
+                { term: "KPI", definition: "A metric that measures the performance of a specific activity." },
+                { term: "Control Objective", definition: "A statement of the desired result or purpose of a security control." },
+                { term: "Control Categories", definition: "Technical (logical), Administrative, and Physical controls." },
+                { term: "Control Types", definition: "Preventive, Detective, and Corrective controls." },
+                { term: "DevSecOps", definition: "The practice of integrating security into the DevOps CI/CD pipeline." },
+                { term: "Role-Based Training", definition: "Tailoring security training content to an employee's specific job function and level of access." },
+                { term: "SLA", definition: "A contractual commitment that defines specific, measurable levels of service from a vendor." },
+                { term: "PDCA", definition: "A continuous improvement cycle for managing and refining processes (Plan-Do-Check-Act)." }
             ];
 
             let resourceAllocationChartInstance, programMetricsChartInstance;
@@ -947,6 +1225,7 @@
 
             function updateResourceAllocationChart() {
                 const totalBudgetInput = document.getElementById('totalBudgetInput');
+                if (!totalBudgetInput) return;
                 const rawTotalBudget = totalBudgetInput.value.replace(/,/g, '');
                 let totalBudget = parseFloat(rawTotalBudget) || 0;
                 totalBudgetInput.value = totalBudget.toLocaleString('en-US');
@@ -1045,13 +1324,19 @@
             initProgramMetricsChart();
             
             ['totalBudgetInput', 'peopleAllocation', 'toolsAllocation', 'trainingAllocation', 'complianceAllocation'].forEach(id => {
-                document.getElementById(id)?.addEventListener('input', updateResourceAllocationChart);
+                const element = document.getElementById(id);
+                if (element) {
+                   element.addEventListener('input', updateResourceAllocationChart);
+                }
             });
             updateResourceAllocationChart();
 
-            document.getElementById('programMetricSelect')?.addEventListener('change', (e) => {
-                updateProgramMetricsChart(e.target.value);
-            });
+            const metricSelect = document.getElementById('programMetricSelect');
+            if (metricSelect) {
+                metricSelect.addEventListener('change', (e) => {
+                    updateProgramMetricsChart(e.target.value);
+                });
+            }
 
         });
     </script>
