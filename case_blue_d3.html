@@ -13,11 +13,11 @@
         :root {
             --dark-navy-bg: #0a101f;
             --surface-color: #10192b;
-            --accent-glow: #00bfff; /* Deep Sky Blue */
+            --accent-glow: #22c55e; /* Emerald Green for development/growth */
             --text-primary: #e2e8f0;
             --text-secondary: #94a3b8;
             --border-color: #2d3748;
-            --shadow-color: rgba(0, 191, 255, 0.1);
+            --shadow-color: rgba(34, 197, 94, 0.1);
             --transition-fast: all 0.3s ease-in-out;
         }
 
@@ -82,7 +82,7 @@
         header.main-header h1 {
             font-family: 'Poppins', sans-serif;
             letter-spacing: 0.5px;
-            text-shadow: 0 0 15px rgba(0, 191, 255, 0.2);
+            text-shadow: 0 0 15px var(--shadow-color);
         }
 
         /* Main Content & Sections */
@@ -130,7 +130,7 @@
         }
         .accordion-button:hover {
             border-color: var(--accent-glow);
-            background-color: rgba(0, 191, 255, 0.05);
+            background-color: rgba(34, 197, 94, 0.05);
         }
         .accordion-icon {
             transition: transform 0.3s ease-in-out;
@@ -207,7 +207,25 @@
         </header>
 
         <main id="content-area" class="fade-in">
-            <!-- Content section will be inserted here -->
+             <!-- Company Profile Section -->
+            <section id="company-profile" class="mb-10 prose prose-custom max-w-none">
+                <h2 class="section-header !mb-6">Company Profile</h2>
+                <div class="p-6 bg-gray-900/30 border border-gray-700/50 rounded-lg">
+                    <h4>Overview</h4>
+                    <p>Heartland Health Systems (HHS) is a major non-profit healthcare provider headquartered in Evansville, Indiana. For over 60 years, it has been a cornerstone of the community, serving patients across the tristate region of Indiana, Kentucky, and Illinois.</p>
+                    
+                    <h4>Scope of Operations</h4>
+                    <p>HHS operates 3 major hospitals, over 25 primary and specialty care clinics, and a growing home health service. It employs over 8,000 staff, including physicians, nurses, and administrative personnel, and serves a patient population of approximately 500,000.</p>
+                    
+                    <h4>IT & Technology Landscape</h4>
+                    <p>The IT environment at HHS is a complex hybrid. Core systems, including a legacy Electronic Health Record (EHR) platform, are hosted in an on-premise datacenter. However, HHS has recently invested in a cloud-based telehealth platform to expand digital services and is planning a major data analytics initiative. This has resulted in a fragmented technology landscape with significant integration challenges.</p>
+
+                    <h4>Your Role</h4>
+                    <p>You have just been hired as the first <strong>Chief Information Security Manager (CISM)</strong> for Heartland Health Systems. Your position was created by the Board of Directors following a high-profile ransomware attack on a competing healthcare system, which highlighted significant vulnerabilities and the potential for massive financial and reputational damage. You report directly to the Chief Information Officer (CIO) and have a dotted-line reporting relationship to the board's risk committee.</p>
+                </div>
+            </section>
+            
+            <!-- Domain 3 Content will be inserted here -->
         </main>
 
         <footer class="text-center py-8 mt-10 text-gray-500 text-sm">
@@ -249,7 +267,7 @@
                 const checklistHtml = domain.checklist.map(item => `<li class="checklist">${item}</li>`).join('');
                 const deliverablesHtml = domain.expectedDeliverables.map(item => `<li>${item}</li>`).join('');
 
-                contentArea.innerHTML = `
+                const sectionHtml = `
                     <section id="${domain.id}" class="content-section">
                         <h2 class="text-3xl font-bold section-header mb-8">${domain.title}</h2>
                         <div class="space-y-4">
@@ -277,6 +295,7 @@
                             </div>
                         </div>
                     </section>`;
+                contentArea.insertAdjacentHTML('beforeend', sectionHtml);
             },
 
             setupAccordionListeners() {
@@ -336,8 +355,8 @@
             getDomainContent() {
                 return {
                     id: 'domain3',
-                    title: 'Domain 3: Program Dev.',
-                    scenario: `Your risk assessment was well-received. The Steering Committee has allocated an initial budget and asked you to develop the core components of the security program. Your focus now shifts from planning and assessing to building and managing.`,
+                    title: 'Domain 3: Program Development',
+                    scenario: `Your risk assessment was well-received and has been used to secure an initial budget. The Steering Committee now expects you to translate your plans into action by developing the core components of the security program. Your focus shifts from high-level planning and assessing to building and managing tangible security controls and processes.`,
                     learningObjectives: ['Translate risk treatment plans into actionable security program initiatives.','Understand the development of key program elements like policies, security awareness, and data classification.','Incorporate security into the system development life cycle (SDLC) and third-party management.','Develop and manage security resources (personnel, budget, technology) effectively.'],
                     tasks: [{ title: 'Develop a Security Awareness Initiative', description: 'Outline a security awareness and training plan to combat phishing. Include target audiences, key topics, delivery methods, and a way to measure effectiveness.' }, { title: 'Draft a Data Classification Policy', description: 'Draft a simple, three-tiered data classification policy (e.g., Public, Internal, Confidential/PHI). Define each level, provide examples, and specify handling requirements for the highest level.' }, { title: 'Plan for Acquisition Due Diligence', description: 'Create a high-level Information Security Due Diligence Checklist with at least 10 key questions to investigate at "Prairie Clinics" before their network is integrated.' }, { title: 'Resource Management', description: 'Write a job description summary (3-4 paragraphs) for one additional security role you believe is critical to hire first (e.g., Security Analyst, IT Auditor). Justify your priority.' }],
                     supportingDocuments: [
