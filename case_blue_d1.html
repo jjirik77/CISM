@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CISM Case Study: Domain 1 - Heartland Health Systems</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Global Styles & Font Import */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&display=swap');
+
+        :root {
+            --dark-navy-bg: #0a101f;
+            --surface-color: #10192b;
+            --accent-glow: #00bfff; /* Deep Sky Blue */
+            --text-primary: #e2e8f0;
+            --text-secondary: #94a3b8;
+            --border-color: #2d3748;
+            --shadow-color: rgba(0, 191, 255, 0.1);
+            --transition-fast: all 0.3s ease-in-out;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-navy-bg);
+            background-image: radial-gradient(circle at top, #10192b, var(--dark-navy-bg));
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('https://www.transparenttextures.com/patterns/subtle-noise.png');
+            opacity: 0.03;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+        }
+
+        /* Header */
+        header.main-header {
+            background: linear-gradient(180deg, var(--surface-color), #0a101fcc);
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+        
+        .header-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 400px;
+            height: 200px;
+            background: var(--accent-glow);
+            border-radius: 50%;
+            filter: blur(100px);
+            transform: translate(-50%, -50%);
+            opacity: 0.1;
+            animation: pulseGlow 8s infinite alternate;
+            z-index: 0;
+        }
+
+        @keyframes pulseGlow {
+            from { opacity: 0.05; transform: translate(-50%, -50%) scale(0.8); }
+            to { opacity: 0.15; transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        header.main-header .header-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        header.main-header h1 {
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 15px rgba(0, 191, 255, 0.2);
+        }
+
+        /* Main Content & Sections */
+        main {
+            background-color: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+            overflow: hidden;
+            padding: 2rem;
+        }
+        
+        .section-header {
+            border-left: 6px solid var(--accent-glow);
+            padding-left: 1.25rem;
+            font-size: 2rem;
+            font-family: 'Poppins', sans-serif;
+            letter-spacing: 0.5px;
+            color: var(--text-primary);
+        }
+        
+        .fade-in {
+            animation: enhancedFadeIn 0.7s ease-out;
+        }
+        @keyframes enhancedFadeIn {
+            from { opacity: 0; transform: translateY(25px) scale(0.98); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        /* Accordion Styles */
+        .accordion-button {
+            background-color: var(--dark-navy-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            padding: 1rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            transition: var(--transition-fast);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            width: 100%;
+        }
+        .accordion-button:hover {
+            border-color: var(--accent-glow);
+            background-color: rgba(0, 191, 255, 0.05);
+        }
+        .accordion-icon {
+            transition: transform 0.3s ease-in-out;
+            font-size: 1.5rem;
+            font-weight: 300;
+        }
+        .accordion-button.open .accordion-icon {
+            transform: rotate(45deg);
+        }
+        .accordion-content {
+            background-color: transparent;
+            border: 1px solid var(--border-color);
+            border-top: none;
+            border-radius: 0 0 0.75rem 0.75rem;
+            padding: 1.5rem;
+            margin-top: -0.75rem;
+            animation: enhancedFadeIn 0.5s ease-in-out;
+        }
+        .accordion-content.hidden {
+            display: none;
+        }
+        .prose-custom p, .prose-custom li { color: var(--text-secondary); }
+        .prose-custom h4 { color: var(--text-primary); font-weight: 600; margin-top: 1em; margin-bottom: 0.5em; }
+        .prose-custom ul { list-style-type: disc; padding-left: 1.5rem; }
+        .prose-custom ol { list-style-type: decimal; padding-left: 1.5rem; }
+        .prose-custom .doc-link { color: var(--accent-glow); text-decoration: none; font-weight: 500; }
+        .prose-custom .doc-link:hover { text-decoration: underline; }
+        .checklist li { list-style-type: none; position: relative; padding-left: 1.5rem; }
+        .checklist li::before { content: '☐'; position: absolute; left: 0; color: var(--accent-glow); }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(10, 16, 31, 0.8);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 32px rgba(0,0,0,0.5);
+        }
+        .modal-close {
+            float: right; font-size: 1.5rem; font-weight: bold; line-height: 1;
+            cursor: pointer; color: var(--text-secondary); transition: var(--transition-fast);
+        }
+        .modal-close:hover { color: var(--text-primary); transform: rotate(90deg); }
+        .modal-content table { width: 100%; text-align: left; border-collapse: collapse; }
+        .modal-content th, .modal-content td { border: 1px solid var(--border-color); padding: 0.75rem; }
+        .modal-content th { background-color: var(--dark-navy-bg); }
+    </style>
+</head>
+<body class="leading-relaxed">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        
+        <header class="main-header text-center p-8 mb-8 rounded-xl overflow-hidden">
+            <div class="header-glow"></div>
+            <div class="header-content">
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-white mb-2">CISM Interactive Case Study</h1>
+                <p class="text-xl sm:text-2xl text-gray-400">Heartland Health Systems: Domain 1</p>
+                <p class="text-md text-gray-500 mt-2" id="current-time"></p>
+            </div>
+        </header>
+
+        <main id="content-area" class="fade-in">
+            <!-- Content section will be inserted here -->
+        </main>
+
+        <footer class="text-center py-8 mt-10 text-gray-500 text-sm">
+            <p>&copy; 2024 CISM Case Study. For educational purposes.</p>
+        </footer>
+
+        <!-- Modal Placeholder -->
+        <div id="modal-container"></div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const app = {
+            init() {
+                this.renderDomainSection();
+                this.setupAccordionListeners();
+                this.setupDocLinkListeners();
+                this.updateClock();
+                setInterval(() => this.updateClock(), 60000); 
+            },
+
+            updateClock() {
+                document.getElementById('current-time').textContent = new Date().toLocaleString('en-US', {
+                    dateStyle: 'full',
+                    timeStyle: 'short',
+                    timeZone: 'America/Chicago'
+                });
+            },
+
+            renderDomainSection() {
+                const contentArea = document.getElementById('content-area');
+                const domain = this.getDomainContent();
+                
+                const objectivesHtml = domain.learningObjectives.map(obj => `<li>${obj}</li>`).join('');
+                const tasksHtml = domain.tasks.map(task => `<h4>${task.title}</h4><p>${task.description}</p>`).join('');
+                const documentsHtml = domain.supportingDocuments.map((doc, index) => 
+                    `<li><button class="doc-link" data-doc-index="${index}">${doc.title}</button></li>`
+                ).join('');
+                const checklistHtml = domain.checklist.map(item => `<li class="checklist">${item}</li>`).join('');
+                const deliverablesHtml = domain.expectedDeliverables.map(item => `<li>${item}</li>`).join('');
+
+                contentArea.innerHTML = `
+                    <section id="${domain.id}" class="content-section">
+                        <h2 class="text-3xl font-bold section-header mb-8">${domain.title}</h2>
+                        <div class="space-y-4">
+                            <div>
+                                <button class="accordion-button open"><span class="flex-grow">Scenario</span> <span class="accordion-icon">–</span></button>
+                                <div class="accordion-content prose prose-custom"><p>${domain.scenario}</p></div>
+                            </div>
+                            <div>
+                                <button class="accordion-button"><span class="flex-grow">Learning Objectives & Tasks</span> <span class="accordion-icon">+</span></button>
+                                <div class="accordion-content hidden prose prose-custom">
+                                    <h4>Learning Objectives</h4><ol>${objectivesHtml}</ol>
+                                    <h4>Tasks</h4>${tasksHtml}
+                                </div>
+                            </div>
+                            <div>
+                                <button class="accordion-button"><span class="flex-grow">Supporting Documents</span> <span class="accordion-icon">+</span></button>
+                                <div class="accordion-content hidden prose prose-custom"><ul>${documentsHtml}</ul></div>
+                            </div>
+                            <div>
+                                <button class="accordion-button"><span class="flex-grow">Checklist & Expected Deliverables</span> <span class="accordion-icon">+</span></button>
+                                <div class="accordion-content hidden prose prose-custom">
+                                    <h4>Checklist</h4><ul class="list-none">${checklistHtml}</ul>
+                                    <h4>Expected Deliverables</h4><ul>${deliverablesHtml}</ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>`;
+            },
+
+            setupAccordionListeners() {
+                document.querySelectorAll('.accordion-button').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const content = button.nextElementSibling;
+                        const icon = button.querySelector('.accordion-icon');
+                        const isOpen = !content.classList.contains('hidden');
+                        
+                        content.classList.toggle('hidden');
+                        button.classList.toggle('open', !isOpen);
+                        icon.textContent = isOpen ? '+' : '–';
+                        if (!isOpen) icon.style.transform = 'rotate(0deg)';
+                    });
+                });
+            },
+
+            setupDocLinkListeners() {
+                 document.querySelectorAll('.doc-link').forEach(link => {
+                    link.addEventListener('click', e => {
+                        e.preventDefault();
+                        const docIndex = e.target.dataset.docIndex;
+                        this.showModal(docIndex);
+                    });
+                });
+            },
+            
+            showModal(docIndex) {
+                const domain = this.getDomainContent();
+                const doc = domain.supportingDocuments[docIndex];
+                if (!doc) return;
+
+                const modalHtml = `
+                    <div id="modal-overlay" class="modal-overlay fade-in">
+                        <div class="modal-content">
+                            <span id="modal-close" class="modal-close">&times;</span>
+                            <div class="prose prose-custom">
+                                <h3 class="section-header !text-2xl !border-l-4 !pl-4">${doc.title}</h3>
+                                <div class="mt-4">${doc.content}</div>
+                            </div>
+                        </div>
+                    </div>`;
+                
+                document.getElementById('modal-container').innerHTML = modalHtml;
+                
+                document.getElementById('modal-close').addEventListener('click', () => this.hideModal());
+                document.getElementById('modal-overlay').addEventListener('click', e => {
+                    if (e.target.id === 'modal-overlay') this.hideModal();
+                });
+            },
+            
+            hideModal() {
+                document.getElementById('modal-container').innerHTML = '';
+            },
+            
+            // Central data source for Domain 1
+            getDomainContent() {
+                return {
+                    id: 'domain1',
+                    title: 'Domain 1: Governance',
+                    scenario: `It's your first week at HHS. The CEO and the board are eager for you to establish control and provide strategic direction. They have asked for a foundational plan that demonstrates how information security will support their business objectives. Your first task is to establish a formal governance structure.`,
+                    learningObjectives: ['Understand the process of developing an information security strategy that aligns with business goals.', 'Articulate the value of information security governance to executive leadership.', 'Define the necessary organizational structures, roles, and responsibilities for effective security governance.', 'Identify key legal, regulatory, and contractual requirements (specifically HIPAA) that must inform the security strategy.'],
+                    tasks: [{ title: 'Develop an Information Security Charter', description: 'Draft a high-level Information Security Charter for HHS. This document should define the purpose, scope, vision, and authority of the information security function. It should clearly state management\'s commitment and your authority as the CISM.' }, { title: 'Create a Strategy Presentation Outline', description: `Outline a 5-slide presentation for the Board of Directors to secure their buy-in. Include slides for: Title, The "Why" (linking security to business objectives), The "What" (program vision), The "How" (proposing a Steering Committee with defined roles), and The "Next Steps" (90-day plan).` }, { title: 'Define Key Metrics', description: 'Propose two Key Performance Indicators (KPIs) and two Key Risk Indicators (KRIs) that you will use to report the state of security governance to the new Steering Committee. Justify why each metric is relevant to HHS\'s business context.'}],
+                    supportingDocuments: [
+                        { title: "HHS Annual Report (Excerpt)", content: `<h4>A Message from our CEO</h4><p>As we look to the future, Heartland Health Systems is poised for unprecedented growth, guided by three core strategic pillars:</p><ol><li><b>Digital Transformation:</b> We are committed to aggressively expanding our telehealth services...</li><li><b>Data-Driven Care:</b> We will be implementing a new, state-of-the-art data analytics platform...</li><li><b>Market Growth:</b> We are in the final stages of a plan to acquire "Prairie Clinics"...</li></ol><p>Achieving these goals requires innovation, dedication, and a secure foundation upon which to build.</p>`},
+                        { title: "Board of Directors Meeting Minutes (Excerpt)", content: `<h4>Subject: IT & Security Risk</h4><p><b>Discussion:</b> The board reviewed the recent cybersecurity incident at Midwest Health Corp... The ransomware attack resulted in significant service disruption... and reports of a multi-million dollar regulatory fine under HIPAA.</p><p><b>Motion:</b> A motion was passed to approve the creation of a new executive role, Chief Information Security Manager (CISM)...</p>` },
+                        { title: "News Article: Competitor Ransomware Attack", content: `<h4>Midwest Health Corp Scrambles to Recover from Crippling Ransomware Attack</h4><p><b>St. Louis, MO</b> – Midwest Health Corp... has been forced to divert emergency patients... after a debilitating ransomware attack encrypted critical systems, including their Electronic Health Record (EHR) database...</p><p>...cybersecurity experts suggest the financial impact, including recovery costs and potential HIPAA fines for the data breach, could reach into the tens of millions.</p>`}
+                    ],
+                    checklist: ["Drafted a charter with purpose, scope, vision, and authority.", "Outlined a 5-slide presentation deck.", "Ensured presentation links security to business goals.", "Proposed a steering committee with members and responsibilities.", "Defined 2 KPIs and 2 KRIs with justifications."],
+                    expectedDeliverables: ["A one-page Information Security Charter document.", "An outline for a 5-slide strategy presentation.", "A list of two KPIs and two KRIs with justifications."]
+                };
+            }
+        };
+
+        app.init();
+    });
+    </script>
+
+</body>
+</html>
