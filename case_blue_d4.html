@@ -13,11 +13,11 @@
         :root {
             --dark-navy-bg: #0a101f;
             --surface-color: #10192b;
-            --accent-glow: #ff4500; /* OrangeRed for alert status */
+            --accent-glow: #ef4444; /* Red-500 for incident/alert */
             --text-primary: #e2e8f0;
             --text-secondary: #94a3b8;
             --border-color: #2d3748;
-            --shadow-color: rgba(255, 69, 0, 0.1);
+            --shadow-color: rgba(239, 68, 68, 0.1);
             --transition-fast: all 0.3s ease-in-out;
         }
 
@@ -130,7 +130,7 @@
         }
         .accordion-button:hover {
             border-color: var(--accent-glow);
-            background-color: rgba(255, 69, 0, 0.05);
+            background-color: rgba(239, 68, 68, 0.05);
         }
         .accordion-icon {
             transition: transform 0.3s ease-in-out;
@@ -207,7 +207,25 @@
         </header>
 
         <main id="content-area" class="fade-in">
-            <!-- Content section will be inserted here -->
+             <!-- Company Profile Section -->
+            <section id="company-profile" class="mb-10 prose prose-custom max-w-none">
+                <h2 class="section-header !mb-6">Company Profile</h2>
+                <div class="p-6 bg-gray-900/30 border border-gray-700/50 rounded-lg">
+                    <h4>Overview</h4>
+                    <p>Heartland Health Systems (HHS) is a major non-profit healthcare provider headquartered in Evansville, Indiana. For over 60 years, it has been a cornerstone of the community, serving patients across the tristate region of Indiana, Kentucky, and Illinois.</p>
+                    
+                    <h4>Scope of Operations</h4>
+                    <p>HHS operates 3 major hospitals, over 25 primary and specialty care clinics, and a growing home health service. It employs over 8,000 staff, including physicians, nurses, and administrative personnel, and serves a patient population of approximately 500,000.</p>
+                    
+                    <h4>IT & Technology Landscape</h4>
+                    <p>The IT environment at HHS is a complex hybrid. Core systems, including a legacy Electronic Health Record (EHR) platform, are hosted in an on-premise datacenter. However, HHS has recently invested in a cloud-based telehealth platform to expand digital services and is planning a major data analytics initiative. This has resulted in a fragmented technology landscape with significant integration challenges.</p>
+
+                    <h4>Your Role</h4>
+                    <p>You have just been hired as the first <strong>Chief Information Security Manager (CISM)</strong> for Heartland Health Systems. Your position was created by the Board of Directors following a high-profile ransomware attack on a competing healthcare system, which highlighted significant vulnerabilities and the potential for massive financial and reputational damage. You report directly to the Chief Information Officer (CIO) and have a dotted-line reporting relationship to the board's risk committee.</p>
+                </div>
+            </section>
+            
+            <!-- Domain 4 Content will be inserted here -->
         </main>
 
         <footer class="text-center py-8 mt-10 text-gray-500 text-sm">
@@ -230,10 +248,12 @@
             },
 
             updateClock() {
-                document.getElementById('current-time').textContent = new Date().toLocaleString('en-US', {
+                // Set a specific date and time for the scenario context
+                const scenarioDate = new Date('2025-07-28T12:32:00.000-05:00'); // CDT is UTC-5
+                document.getElementById('current-time').textContent = scenarioDate.toLocaleString('en-US', {
                     dateStyle: 'full',
                     timeStyle: 'short',
-                    timeZone: 'America/Chicago'
+                    timeZone: 'America/Chicago' // This will correctly show CDT during DST
                 });
             },
 
@@ -249,7 +269,7 @@
                 const checklistHtml = domain.checklist.map(item => `<li class="checklist">${item}</li>`).join('');
                 const deliverablesHtml = domain.expectedDeliverables.map(item => `<li>${item}</li>`).join('');
 
-                contentArea.innerHTML = `
+                const sectionHtml = `
                     <section id="${domain.id}" class="content-section">
                         <h2 class="text-3xl font-bold section-header mb-8">${domain.title}</h2>
                         <div class="space-y-4">
@@ -277,6 +297,7 @@
                             </div>
                         </div>
                     </section>`;
+                contentArea.insertAdjacentHTML('beforeend', sectionHtml);
             },
 
             setupAccordionListeners() {
@@ -336,12 +357,12 @@
             getDomainContent() {
                 return {
                     id: 'domain4',
-                    title: 'Domain 4: Incident Mgmt.',
+                    title: 'Domain 4: Incident Management',
                     scenario: `Six months into your tenure, at 2:00 AM, you receive a high-priority alert. Several servers supporting the legacy EHR system are exhibiting behavior consistent with a ransomware attack: rapid file encryption and lateral movement. This is not a drill.`,
                     learningObjectives: ['Apply the phases of the incident response lifecycle to a live event.','Develop and execute effective communication plans during a security incident.','Understand the importance of post-incident activities, including lessons learned.','Integrate incident response with business continuity (BCP) and disaster recovery (DRP) concepts.'],
                     tasks: [{ title: 'Immediate Response Actions', description: 'Outline the specific, immediate actions for the Containment, Eradication, and Recovery phases of the incident response lifecycle.' }, { title: 'Develop Communication Drafts', description: 'Draft two separate communications: 1) An internal technical brief for IT staff. 2) An external holding statement for the Public Relations department.' }, { title: 'Post-Incident Planning', description: 'Plan the "Lessons Learned" phase. Outline an agenda for the review meeting, identify three likely weaknesses that allowed the incident, and propose one improvement to the Incident Response Plan.'}],
                     supportingDocuments: [
-                        { title: "High-Priority EDR Alert", content: `<div class="font-mono text-sm bg-gray-900 text-white p-4 rounded-lg"><p><span class="text-red-400"><strong>SEVERITY:</strong></span> CRITICAL</p><p><span class="text-green-400"><strong>TIMESTAMP:</strong></span> 02:01:15 AM CST</p><p><span class="text-blue-400"><strong>RULE:</strong></span> Ransomware Behavior Detected</p><p><strong>DESCRIPTION:</strong> Process 'svchost.exe' initiated rapid encryption of files with the '.lockbit' extension... The same process attempted to connect to other servers on port 445.</p></div>`},
+                        { title: "High-Priority EDR Alert", content: `<div class="font-mono text-sm bg-gray-900 text-white p-4 rounded-lg"><p><span class="text-red-400"><strong>SEVERITY:</strong></span> CRITICAL</p><p><span class="text-yellow-400"><strong>TIMESTAMP:</strong></span> 02:01:15 AM CDT</p><p><span class="text-blue-400"><strong>RULE:</strong></span> Ransomware Behavior Detected</p><p><strong>DESCRIPTION:</strong> Process 'svchost.exe' initiated rapid encryption of files with the '.lockbit' extension... The same process attempted to connect to other servers on port 445.</p></div>`},
                         { title: "HHS Network Diagram (Simplified Description)", content: `<h4>Network Architecture Overview</h4><p>HHS operates a hub-and-spoke network topology.</p><ul><li><b>Hub:</b> The primary on-premise datacenter... houses all core systems, including the EHR servers.</li><li><b>Spokes:</b> Each hospital and major clinic connects back to the central datacenter.</li><li><b>Segmentation:</b> Basic network segmentation is in place, but most servers within the core datacenter can communicate with each other on common ports.</li></ul>`},
                         { title: "Draft Incident Response Plan (Key Sections)", content: `<h4>HHS Incident Response Plan - DRAFT</h4><ol><li><b>Preparation:</b> Harden systems, train staff...</li><li><b>Identification:</b> Detect and validate incidents...</li><li><b>Containment:</b> Isolate affected systems...</li><li><b>Eradication:</b> Remove the threat...</li><li><b>Recovery:</b> Restore systems from clean backups...</li><li><b>Lessons Learned:</b> Conduct a post-incident review...</li></ol>`}
                     ],
