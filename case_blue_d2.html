@@ -13,11 +13,11 @@
         :root {
             --dark-navy-bg: #0a101f;
             --surface-color: #10192b;
-            --accent-glow: #00bfff; /* Deep Sky Blue */
+            --accent-glow: #ffbf00; /* Amber for risk/caution */
             --text-primary: #e2e8f0;
             --text-secondary: #94a3b8;
             --border-color: #2d3748;
-            --shadow-color: rgba(0, 191, 255, 0.1);
+            --shadow-color: rgba(255, 191, 0, 0.1);
             --transition-fast: all 0.3s ease-in-out;
         }
 
@@ -82,7 +82,7 @@
         header.main-header h1 {
             font-family: 'Poppins', sans-serif;
             letter-spacing: 0.5px;
-            text-shadow: 0 0 15px rgba(0, 191, 255, 0.2);
+            text-shadow: 0 0 15px var(--shadow-color);
         }
 
         /* Main Content & Sections */
@@ -130,7 +130,7 @@
         }
         .accordion-button:hover {
             border-color: var(--accent-glow);
-            background-color: rgba(0, 191, 255, 0.05);
+            background-color: rgba(255, 191, 0, 0.05);
         }
         .accordion-icon {
             transition: transform 0.3s ease-in-out;
@@ -207,7 +207,25 @@
         </header>
 
         <main id="content-area" class="fade-in">
-            <!-- Content section will be inserted here -->
+             <!-- Company Profile Section -->
+            <section id="company-profile" class="mb-10 prose prose-custom max-w-none">
+                <h2 class="section-header !mb-6">Company Profile</h2>
+                <div class="p-6 bg-gray-900/30 border border-gray-700/50 rounded-lg">
+                    <h4>Overview</h4>
+                    <p>Heartland Health Systems (HHS) is a major non-profit healthcare provider headquartered in Evansville, Indiana. For over 60 years, it has been a cornerstone of the community, serving patients across the tristate region of Indiana, Kentucky, and Illinois.</p>
+                    
+                    <h4>Scope of Operations</h4>
+                    <p>HHS operates 3 major hospitals, over 25 primary and specialty care clinics, and a growing home health service. It employs over 8,000 staff, including physicians, nurses, and administrative personnel, and serves a patient population of approximately 500,000.</p>
+                    
+                    <h4>IT & Technology Landscape</h4>
+                    <p>The IT environment at HHS is a complex hybrid. Core systems, including a legacy Electronic Health Record (EHR) platform, are hosted in an on-premise datacenter. However, HHS has recently invested in a cloud-based telehealth platform to expand digital services and is planning a major data analytics initiative. This has resulted in a fragmented technology landscape with significant integration challenges.</p>
+
+                    <h4>Your Role</h4>
+                    <p>You have just been hired as the first <strong>Chief Information Security Manager (CISM)</strong> for Heartland Health Systems. Your position was created by the Board of Directors following a high-profile ransomware attack on a competing healthcare system, which highlighted significant vulnerabilities and the potential for massive financial and reputational damage. You report directly to the Chief Information Officer (CIO) and have a dotted-line reporting relationship to the board's risk committee.</p>
+                </div>
+            </section>
+            
+            <!-- Domain 2 Content will be inserted here -->
         </main>
 
         <footer class="text-center py-8 mt-10 text-gray-500 text-sm">
@@ -249,7 +267,7 @@
                 const checklistHtml = domain.checklist.map(item => `<li class="checklist">${item}</li>`).join('');
                 const deliverablesHtml = domain.expectedDeliverables.map(item => `<li>${item}</li>`).join('');
 
-                contentArea.innerHTML = `
+                const sectionHtml = `
                     <section id="${domain.id}" class="content-section">
                         <h2 class="text-3xl font-bold section-header mb-8">${domain.title}</h2>
                         <div class="space-y-4">
@@ -277,6 +295,7 @@
                             </div>
                         </div>
                     </section>`;
+                contentArea.insertAdjacentHTML('beforeend', sectionHtml);
             },
 
             setupAccordionListeners() {
@@ -337,7 +356,7 @@
                 return {
                     id: 'domain2',
                     title: 'Domain 2: Risk Management',
-                    scenario: `The board has approved your charter. During the first Steering Committee meeting, concerns are raised about the legacy Electronic Health Record (EHR) system and the new cloud-based telehealth platform. The committee has tasked you with conducting an initial, high-level risk assessment to identify and prioritize the most significant threats to HHS.`,
+                    scenario: `The board has approved your charter and foundational strategy. During the first Steering Committee meeting, concerns are raised about the specific risks associated with the legacy Electronic Health Record (EHR) system and the new cloud-based telehealth platform. The committee has tasked you with conducting an initial, high-level risk assessment to identify and prioritize the most significant threats to HHS's critical assets.`,
                     learningObjectives: ['Apply a risk management framework to a real-world business environment.','Identify, analyze, and evaluate information security risks.','Differentiate between qualitative and quantitative risk analysis.','Develop and recommend appropriate risk treatment (response) options.'],
                     tasks: [{ title: 'Select a Risk Management Framework', description: 'Choose a framework (e.g., NIST RMF, ISO 27005) and write a brief memo to the Steering Committee justifying your choice for a healthcare organization.' }, { title: 'Identify and Analyze Key Risks', description: `Based on the HHS profile, identify five key risks. Then, perform a qualitative risk analysis (e.g., using a 3x3 matrix) for two of these risks, justifying their likelihood and impact ratings.` }, { title: 'Propose Risk Treatment Plans', description: 'For the two risks you analyzed, propose a primary risk treatment option (Accept, Mitigate, Transfer, or Avoid) and justify it. For "Mitigate" recommendations, list at least two specific controls.' }],
                     supportingDocuments: [
