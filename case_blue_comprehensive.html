@@ -238,6 +238,24 @@
         </nav>
 
         <main id="content-area">
+            <!-- New Company Profile Section -->
+            <section id="company-profile" class="mb-10 prose prose-custom max-w-none">
+                <h2 class="section-header !mb-6">Company Profile</h2>
+                <div class="p-6 bg-gray-900/30 border border-gray-700/50 rounded-lg">
+                    <h4>Overview</h4>
+                    <p>Heartland Health Systems (HHS) is a major non-profit healthcare provider headquartered in Evansville, Indiana. For over 60 years, it has been a cornerstone of the community, serving patients across the tristate region of Indiana, Kentucky, and Illinois.</p>
+                    
+                    <h4>Scope of Operations</h4>
+                    <p>HHS operates 3 major hospitals, over 25 primary and specialty care clinics, and a growing home health service. It employs over 8,000 staff, including physicians, nurses, and administrative personnel, and serves a patient population of approximately 500,000.</p>
+                    
+                    <h4>IT & Technology Landscape</h4>
+                    <p>The IT environment at HHS is a complex hybrid. Core systems, including a legacy Electronic Health Record (EHR) platform, are hosted in an on-premise datacenter. However, HHS has recently invested in a cloud-based telehealth platform to expand digital services and is planning a major data analytics initiative. This has resulted in a fragmented technology landscape with significant integration challenges.</p>
+
+                    <h4>Your Role</h4>
+                    <p>You have just been hired as the first <strong>Chief Information Security Manager (CISM)</strong> for Heartland Health Systems. Your position was created by the Board of Directors following a high-profile ransomware attack on a competing healthcare system, which highlighted significant vulnerabilities and the potential for massive financial and reputational damage. You report directly to the Chief Information Officer (CIO) and have a dotted-line reporting relationship to the board's risk committee.</p>
+                </div>
+            </section>
+            
             <!-- Content sections will be inserted here -->
         </main>
 
@@ -294,7 +312,10 @@
 
             renderAllSections() {
                 const contentArea = document.getElementById('content-area');
-                contentArea.innerHTML = this.getFullContent().map(domain => {
+                // Use a temporary div to build content to avoid manipulating the DOM repeatedly
+                const tempDiv = document.createElement('div');
+                
+                tempDiv.innerHTML = this.getFullContent().map(domain => {
                     const objectivesHtml = domain.learningObjectives.map(obj => `<li>${obj}</li>`).join('');
                     const tasksHtml = domain.tasks.map(task => `<h4>${task.title}</h4><p>${task.description}</p>`).join('');
                     const documentsHtml = domain.supportingDocuments.map((doc, index) => 
@@ -332,6 +353,8 @@
                             </div>
                         </section>`;
                 }).join('');
+                // Append the generated sections to the content area
+                 contentArea.append(...tempDiv.children);
             },
 
             updateActiveSection() {
@@ -406,7 +429,7 @@
                 {
                     id: 'domain1',
                     title: 'Domain 1: Governance',
-                    scenario: `It's your first week at HHS. The CEO and the board are eager for you to establish control and provide strategic direction. They have asked for a foundational plan that demonstrates how information security will support their business objectives. Your first task is to establish a formal governance structure.`,
+                    scenario: `As the newly appointed CISM for Heartland Health Systems, your first week is focused on establishing control and providing strategic direction. The CEO and the board, aware of the risks highlighted by the competitor's recent incident, are eager for you to establish a formal governance structure. They have asked for a foundational plan that demonstrates how information security will support HHS's key business objectives.`,
                     learningObjectives: ['Understand the process of developing an information security strategy that aligns with business goals.', 'Articulate the value of information security governance to executive leadership.', 'Define the necessary organizational structures, roles, and responsibilities for effective security governance.', 'Identify key legal, regulatory, and contractual requirements (specifically HIPAA) that must inform the security strategy.'],
                     tasks: [{ title: 'Develop an Information Security Charter', description: 'Draft a high-level Information Security Charter for HHS. This document should define the purpose, scope, vision, and authority of the information security function. It should clearly state management\'s commitment and your authority as the CISM.' }, { title: 'Create a Strategy Presentation Outline', description: `Outline a 5-slide presentation for the Board of Directors to secure their buy-in. Include slides for: Title, The "Why" (linking security to business objectives), The "What" (program vision), The "How" (proposing a Steering Committee with defined roles), and The "Next Steps" (90-day plan).` }, { title: 'Define Key Metrics', description: 'Propose two Key Performance Indicators (KPIs) and two Key Risk Indicators (KRIs) that you will use to report the state of security governance to the new Steering Committee. Justify why each metric is relevant to HHS\'s business context.'}],
                     supportingDocuments: [
@@ -420,7 +443,7 @@
                 {
                     id: 'domain2',
                     title: 'Domain 2: Risk Management',
-                    scenario: `The board has approved your charter. During the first Steering Committee meeting, concerns are raised about the legacy Electronic Health Record (EHR) system and the new cloud-based telehealth platform. The committee has tasked you with conducting an initial, high-level risk assessment to identify and prioritize the most significant threats to HHS.`,
+                    scenario: `The board has approved your charter and foundational strategy. During the first Steering Committee meeting, concerns are raised about the specific risks associated with the legacy Electronic Health Record (EHR) system and the new cloud-based telehealth platform. The committee has tasked you with conducting an initial, high-level risk assessment to identify and prioritize the most significant threats to HHS's critical assets.`,
                     learningObjectives: ['Apply a risk management framework to a real-world business environment.','Identify, analyze, and evaluate information security risks.','Differentiate between qualitative and quantitative risk analysis.','Develop and recommend appropriate risk treatment (response) options.'],
                     tasks: [{ title: 'Select a Risk Management Framework', description: 'Choose a framework (e.g., NIST RMF, ISO 27005) and write a brief memo to the Steering Committee justifying your choice for a healthcare organization.' }, { title: 'Identify and Analyze Key Risks', description: `Based on the HHS profile, identify five key risks. Then, perform a qualitative risk analysis (e.g., using a 3x3 matrix) for two of these risks, justifying their likelihood and impact ratings.` }, { title: 'Propose Risk Treatment Plans', description: 'For the two risks you analyzed, propose a primary risk treatment option (Accept, Mitigate, Transfer, or Avoid) and justify it. For "Mitigate" recommendations, list at least two specific controls.' }],
                     supportingDocuments: [
@@ -434,7 +457,7 @@
                 {
                     id: 'domain3',
                     title: 'Domain 3: Program Dev.',
-                    scenario: `Your risk assessment was well-received. The Steering Committee has allocated an initial budget and asked you to develop the core components of the security program. Your focus now shifts from planning and assessing to building and managing.`,
+                    scenario: `Your risk assessment was well-received and has been used to secure an initial budget. The Steering Committee now expects you to translate your plans into action by developing the core components of the security program. Your focus shifts from high-level planning and assessing to building and managing tangible security controls and processes.`,
                     learningObjectives: ['Translate risk treatment plans into actionable security program initiatives.','Understand the development of key program elements like policies, security awareness, and data classification.','Incorporate security into the system development life cycle (SDLC) and third-party management.','Develop and manage security resources (personnel, budget, technology) effectively.'],
                     tasks: [{ title: 'Develop a Security Awareness Initiative', description: 'Outline a security awareness and training plan to combat phishing. Include target audiences, key topics, delivery methods, and a way to measure effectiveness.' }, { title: 'Draft a Data Classification Policy', description: 'Draft a simple, three-tiered data classification policy (e.g., Public, Internal, Confidential/PHI). Define each level, provide examples, and specify handling requirements for the highest level.' }, { title: 'Plan for Acquisition Due Diligence', description: 'Create a high-level Information Security Due Diligence Checklist with at least 10 key questions to investigate at "Prairie Clinics" before their network is integrated.' }, { title: 'Resource Management', description: 'Write a job description summary (3-4 paragraphs) for one additional security role you believe is critical to hire first (e.g., Security Analyst, IT Auditor). Justify your priority.' }],
                     supportingDocuments: [
@@ -447,7 +470,7 @@
                 {
                     id: 'domain4',
                     title: 'Domain 4: Incident Mgmt.',
-                    scenario: `Six months into your tenure, at 2:00 AM, you receive a high-priority alert. Several servers supporting the legacy EHR system are exhibiting behavior consistent with a ransomware attack: rapid file encryption and lateral movement. This is not a drill.`,
+                    scenario: `Six months into your tenure, your preparations are about to be tested. At 2:00 AM on a Monday, you receive a high-priority alert from your new Endpoint Detection and Response (EDR) tool. Several servers supporting the legacy EHR system are exhibiting behavior consistent with a ransomware attack. This is not a drill.`,
                     learningObjectives: ['Apply the phases of the incident response lifecycle to a live event.','Develop and execute effective communication plans during a security incident.','Understand the importance of post-incident activities, including lessons learned.','Integrate incident response with business continuity (BCP) and disaster recovery (DRP) concepts.'],
                     tasks: [{ title: 'Immediate Response Actions', description: 'Outline the specific, immediate actions for the Containment, Eradication, and Recovery phases of the incident response lifecycle.' }, { title: 'Develop Communication Drafts', description: 'Draft two separate communications: 1) An internal technical brief for IT staff. 2) An external holding statement for the Public Relations department.' }, { title: 'Post-Incident Planning', description: 'Plan the "Lessons Learned" phase. Outline an agenda for the review meeting, identify three likely weaknesses that allowed the incident, and propose one improvement to the Incident Response Plan.'}],
                     supportingDocuments: [
