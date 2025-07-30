@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Health Corp. Risk Governance Challenge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #e2e8f0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+        /* Active state for menu and content */
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .menu-item.active {
+            background-color: #0c4a6e; /* Darker blue for active state */
+            color: #ffffff;
+            font-weight: 600;
+        }
+        .menu-item.active svg {
+            color: #7dd3fc; /* Light blue for active icon */
+        }
+
+        /* Simple fade-in animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out forwards;
+        }
+        /* Card hover effect */
+        .card-hover {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="flex h-screen">
+        <!-- Sidebar Menu -->
+        <aside class="w-72 bg-slate-800 text-white flex-shrink-0 flex flex-col">
+            <div class="p-6 border-b border-slate-700 flex items-center space-x-3">
+                <div class="bg-sky-500 p-2 rounded-lg">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-white">Nexus Health</h1>
+                    <p class="text-sm text-slate-400">Risk Governance Challenge</p>
+                </div>
+            </div>
+            <nav id="sidebar-menu" class="p-4 flex-1">
+                <ul class="space-y-1">
+                    <li><a href="#overview" class="menu-item flex items-center p-3 rounded-lg text-slate-300 hover:bg-slate-700 transition-colors duration-200 active">
+                        <svg class="w-5 h-5 mr-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                        Overview
+                    </a></li>
+                    <li><a href="#phase1" class="menu-item flex items-center p-3 rounded-lg text-slate-300 hover:bg-slate-700 transition-colors duration-200">
+                        <svg class="w-5 h-5 mr-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        Phase 1: Setup & Roles
+                    </a></li>
+                    <li><a href="#phase2" class="menu-item flex items-center p-3 rounded-lg text-slate-300 hover:bg-slate-700 transition-colors duration-200">
+                        <svg class="w-5 h-5 mr-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                        Phase 2: The Challenge
+                    </a></li>
+                    <li><a href="#phase3" class="menu-item flex items-center p-3 rounded-lg text-slate-300 hover:bg-slate-700 transition-colors duration-200">
+                        <svg class="w-5 h-5 mr-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Phase 3: Debrief
+                    </a></li>
+                     <li class="pt-2 mt-2 border-t border-slate-700"><a href="#scenario" class="menu-item flex items-center p-3 rounded-lg text-slate-300 hover:bg-slate-700 transition-colors duration-200">
+                        <svg class="w-5 h-5 mr-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Scenario Brief
+                    </a></li>
+                    <li><a href="#documents" class="menu-item flex items-center p-3 rounded-lg text-slate-300 hover:bg-slate-700 transition-colors duration-200">
+                        <svg class="w-5 h-5 mr-3 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                        Supporting Documents
+                    </a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="flex-1 p-6 md:p-10 bg-slate-100 overflow-y-auto">
+            <div id="content-container">
+                <!-- Overview Section -->
+                <section id="overview" class="content-section active fade-in">
+                    <h2 class="text-3xl font-bold text-slate-900 border-b-2 border-sky-300 pb-2 mb-6">Overview</h2>
+                    <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200">
+                        <h3 class="text-xl font-semibold text-sky-900 mb-3">Objective</h3>
+                        <p class="mb-6 text-slate-600">To apply the core concepts of Information Security Governance (Domain 1) and Information Risk Management (Domain 2) in a realistic, collaborative scenario designed for a remote learning environment.</p>
+                        
+                        <h3 class="text-xl font-semibold text-sky-900 mb-3">Time Allotment</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                                <p class="text-2xl font-bold text-sky-700">10 <span class="text-base font-medium">min</span></p>
+                                <p class="text-sm text-slate-500">Phase 1: Setup & Roles</p>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                                <p class="text-2xl font-bold text-sky-700">35 <span class="text-base font-medium">min</span></p>
+                                <p class="text-sm text-slate-500">Phase 2: The Challenge</p>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                                <p class="text-2xl font-bold text-sky-700">15 <span class="text-base font-medium">min</span></p>
+                                <p class="text-sm text-slate-500">Phase 3: Debrief</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Phase 1 Section -->
+                <section id="phase1" class="content-section fade-in">
+                    <h2 class="text-3xl font-bold text-slate-900 border-b-2 border-sky-300 pb-2 mb-6">Phase 1: Setup & Role Assignment</h2>
+                    <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200 space-y-8">
+                        <div>
+                            <h3 class="text-xl font-semibold text-sky-900 mb-3">Student Instructions</h3>
+                            <div class="bg-sky-50 border-l-4 border-sky-500 text-sky-800 p-4 rounded-r-lg">
+                                <p>Welcome to the Nexus Health Corp. challenge! You are now in your breakout room. Your first task is to choose your roles for this exercise. Read through the role cards below and decide as a team who will play each part. One person should be designated to take notes in your group's shared document.</p>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-sky-900 mb-3">Role Cards</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="p-4 bg-slate-50 rounded-lg border border-slate-200 card-hover">
+                                    <h4 class="font-bold text-slate-800">Chief Information Security Officer (CISO)</h4>
+                                    <p class="text-sm text-slate-600 mt-1">You are ultimately responsible for the platform's security. Your goal is to manage risk effectively while enabling the business to succeed.</p>
+                                </div>
+                                <div class="p-4 bg-slate-50 rounded-lg border border-slate-200 card-hover">
+                                    <h4 class="font-bold text-slate-800">Head of Product Development</h4>
+                                    <p class="text-sm text-slate-600 mt-1">You must launch "ConnectWell" on time and on budget. You worry that excessive security will cause delays and create a poor user experience.</p>
+                                </div>
+                                <div class="p-4 bg-slate-50 rounded-lg border border-slate-200 card-hover">
+                                    <h4 class="font-bold text-slate-800">General Counsel (Legal)</h4>
+                                    <p class="text-sm text-slate-600 mt-1">Your priority is compliance with HIPAA and GDPR. A data breach would be catastrophic, leading to massive fines and reputational damage.</p>
+                                </div>
+                                <div class="p-4 bg-slate-50 rounded-lg border border-slate-200 card-hover">
+                                    <h4 class="font-bold text-slate-800">Chief Financial Officer (CFO)</h4>
+                                    <p class="text-sm text-slate-600 mt-1">You control the budget. Every security expense must be justified with a clear ROI. You are focused on the bottom line and the company's risk appetite.</p>
+                                </div>
+                                <div class="p-4 bg-slate-50 rounded-lg border border-slate-200 card-hover col-span-1 md:col-span-2">
+                                    <h4 class="font-bold text-slate-800">Lead Risk Analyst</h4>
+                                    <p class="text-sm text-slate-600 mt-1">You are the CISO's right hand. Your job is to identify threats, analyze their impact using qualitative and quantitative methods, and recommend treatment options.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Phase 2 Section -->
+                <section id="phase2" class="content-section fade-in">
+                    <h2 class="text-3xl font-bold text-slate-900 border-b-2 border-sky-300 pb-2 mb-6">Phase 2: The Challenge</h2>
+                     <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200 space-y-8">
+                        <div class="bg-amber-100 border-l-4 border-amber-500 text-amber-800 p-4 rounded-r-lg">
+                            <p class="font-bold">Your Team's Mission:</p>
+                            <p>As a team, use your shared document to work through the two parts of the challenge below. Use the menu on the left to access the <strong>Scenario Brief</strong> and <strong>Supporting Documents</strong> to inform your decisions.</p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-semibold text-sky-900 mb-3">Part 1: Governance and Strategy (15 minutes)</h3>
+                            <ol class="list-decimal list-inside space-y-3 text-slate-600">
+                                <li><strong>Establish the "Why":</strong> Draft a simple, one-sentence **Information Security Policy** statement for the ConnectWell platform.</li>
+                                <li><strong>Define Roles:</strong> Fill out the **RACI Matrix** for the task: "Approving third-party access to patient data within the ConnectWell platform."</li>
+                            </ol>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-semibold text-sky-900 mb-3">Part 2: Risk Management (20 minutes)</h3>
+                            <p class="mb-4 text-slate-600">Your Lead Risk Analyst has identified a critical risk related to the "Family Share" feature. Analyze it and decide how to respond.</p>
+                            <ol class="list-decimal list-inside space-y-3 text-slate-600">
+                                <li><strong>Qualitative Analysis:</strong> Assign a "High," "Medium," or "Low" rating for both the **Likelihood** and **Impact** of this risk. Justify your ratings.</li>
+                                <li><strong>Quantitative Analysis:</strong> Using the figures in the Supporting Documents, calculate the **SLE** and **ALE**.</li>
+                                <li><strong>Risk Response Decision:</strong> Choose one of the three proposed options (Mitigate, Transference, or Accept) and write a justification for your choice.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Phase 3 Section -->
+                <section id="phase3" class="content-section fade-in">
+                    <h2 class="text-3xl font-bold text-slate-900 border-b-2 border-sky-300 pb-2 mb-6">Phase 3: Debrief & Discussion</h2>
+                     <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200 space-y-8">
+                        <div>
+                            <h3 class="text-xl font-semibold text-sky-900 mb-3">Group Discussion</h3>
+                            <p class="mb-4 text-slate-600">The facilitator will now lead a discussion with the entire class. Be prepared to share your screen and present your group's findings and decisions.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-sky-900 mb-3">Discussion Questions</h3>
+                            <ul class="list-disc list-inside space-y-3 text-slate-600">
+                                <li>How did your assigned roles influence your decisions? Was there conflict between the CFO's budget concerns and the General Counsel's compliance focus?</li>
+                                <li>Which was more helpful in making your decision: the qualitative or the quantitative analysis? Why?</li>
+                                <li>How did the company's stated **risk appetite** affect your final choice?</li>
+                                <li>What are the potential consequences of each of the three risk response options you didn't choose?</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Scenario Section -->
+                <section id="scenario" class="content-section fade-in">
+                    <h2 class="text-3xl font-bold text-slate-900 border-b-2 border-sky-300 pb-2 mb-6">Scenario Brief</h2>
+                    <div class="bg-white p-8 rounded-xl shadow-sm border border-slate-200 space-y-4 text-slate-600">
+                        <p>Nexus Health Corp. is a fast-growing health technology company. Your team is about to launch a new flagship product: <strong>"ConnectWell,"</strong> a cloud-based platform that allows patients to access their medical records, communicate with doctors, and share data with family members. The platform will store Protected Health Information (PHI) and will be marketed to customers in both the United States and the European Union.</p>
+                        <p>The Board of Directors has set an aggressive launch date (6 months away) and has defined the company's <strong>risk appetite</strong> as "moderate," willing to accept some risks for innovation but intolerant of any that could lead to major legal violations or reputational harm.</p>
+                        <div class="p-6 bg-sky-50 rounded-lg border border-sky-200 mt-6">
+                            <h4 class="font-bold text-sky-900 text-lg">Identified Risk</h4>
+                            <p class="text-sm text-sky-800 mt-2">The platform's "Family Share" feature allows patients to grant access to their health records to family members. However, there is no strong identity verification process for those family members.</p>
+                            <ul class="list-disc list-inside mt-3 text-sm text-sky-800 space-y-1">
+                                <li><strong>Threat:</strong> A malicious actor could impersonate a family member to gain unauthorized access to a patient's sensitive health records.</li>
+                                <li><strong>Vulnerability:</strong> Weak identity verification for non-patient users.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Documents Section -->
+                <section id="documents" class="content-section fade-in">
+                    <h2 class="text-3xl font-bold text-slate-900 border-b-2 border-sky-300 pb-2 mb-6">Supporting Documents</h2>
+                    <div class="space-y-6">
+                        <!-- Document 1 -->
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 card-hover">
+                            <h3 class="text-lg font-semibold text-slate-700 mb-2">INTERNAL MEMO: Board of Directors</h3>
+                            <p class="text-sm text-slate-500 mb-4"><strong>Subject:</strong> Risk Appetite for the ConnectWell Initiative</p>
+                            <p class="text-slate-600">The Board has approved a <strong>"moderate" risk appetite</strong> for the ConnectWell platform. We encourage innovation and speed to market. However, the Board is intolerant of any risks that could result in significant regulatory fines (HIPAA, GDPR) or cause lasting damage to the Nexus Health brand. Financial prudence is expected in all mitigation efforts.</p>
+                        </div>
+                        <!-- Document 2 -->
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 card-hover">
+                            <h3 class="text-lg font-semibold text-slate-700 mb-2">WORKSHEET: Lead Risk Analyst</h3>
+                            <p class="text-sm text-slate-500 mb-4"><strong>Subject:</strong> Quantitative Analysis for "Family Share" Vulnerability</p>
+                            <table class="w-full text-left text-sm">
+                                <thead class="bg-slate-50">
+                                    <tr class="border-b border-slate-200">
+                                        <th class="p-3 font-semibold text-slate-600">Metric</th>
+                                        <th class="p-3 font-semibold text-slate-600">Value</th>
+                                        <th class="p-3 font-semibold text-slate-600">Notes</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-slate-600">
+                                    <tr class="border-b border-slate-200">
+                                        <td class="p-3 font-medium">Asset Value</td>
+                                        <td class="p-3">$5,000,000</td>
+                                        <td class="p-3">Estimated cost of fines and reputational damage from a single major breach.</td>
+                                    </tr>
+                                    <tr class="border-b border-slate-200">
+                                        <td class="p-3 font-medium">Exposure Factor (EF)</td>
+                                        <td class="p-3">20%</td>
+                                        <td class="p-3">A breach of this type would likely result in a partial loss.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3 font-medium">Annualized Rate of Occurrence (ARO)</td>
+                                        <td class="p-3">0.5</td>
+                                        <td class="p-3">An incident of this type is likely to occur once every two years.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- Document 3 -->
+                        <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 card-hover">
+                            <h3 class="text-lg font-semibold text-slate-700 mb-2">PROPOSAL: Solutions Team</h3>
+                            <p class="text-sm text-slate-500 mb-4"><strong>Subject:</strong> Risk Response Options for "Family Share" Vulnerability</p>
+                            <div class="space-y-4">
+                                <div class="p-4 bg-green-50 rounded-lg border border-green-200">
+                                    <h4 class="font-bold text-green-800">Option A (Mitigate)</h4>
+                                    <p class="text-sm text-green-700">Implement a multi-factor authentication (MFA) and identity verification service for all "Family Share" users. This will significantly reduce the risk.</p>
+                                    <p class="text-sm font-semibold mt-1 text-green-900">Cost: $80,000 per year.</p>
+                                </div>
+                                <div class="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                                    <h4 class="font-bold text-blue-800">Option B (Transference)</h4>
+                                    <p class="text-sm text-blue-700">Purchase a specialized cyber insurance policy that would cover the financial losses from this specific type of breach. This does not reduce the likelihood but transfers the financial impact.</p>
+                                    <p class="text-sm font-semibold mt-1 text-blue-900">Cost: $50,000 per year.</p>
+                                </div>
+                                <div class="p-4 bg-red-50 rounded-lg border border-red-200">
+                                    <h4 class="font-bold text-red-800">Option C (Accept)</h4>
+                                    <p class="text-sm text-red-700">Launch with the current design to meet the deadline. Acknowledge the risk in a risk register and plan to address it in a future update.</p>
+                                    <p class="text-sm font-semibold mt-1 text-red-900">Cost: $0 (initially).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // JavaScript for sidebar navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const menu = document.getElementById('sidebar-menu');
+            const menuItems = menu.querySelectorAll('.menu-item');
+            const contentSections = document.querySelectorAll('.content-section');
+
+            // Function to switch active content
+            function switchContent(hash) {
+                // Remove active class from all items and sections
+                menuItems.forEach(item => item.classList.remove('active'));
+                contentSections.forEach(section => {
+                    section.classList.remove('active');
+                    section.classList.remove('fade-in');
+                });
+
+                // Find the new active item and section
+                const activeMenuItem = menu.querySelector(`a[href="${hash}"]`);
+                const activeContentSection = document.querySelector(hash);
+
+                // Add active class to the new active item and section
+                if (activeMenuItem) {
+                    activeMenuItem.classList.add('active');
+                }
+                if (activeContentSection) {
+                    // Use a short timeout to allow the display property to change before adding the animation class
+                    setTimeout(() => {
+                        activeContentSection.classList.add('active');
+                        activeContentSection.classList.add('fade-in');
+                    }, 50);
+                }
+            }
+
+            // Event listener for menu clicks
+            menu.addEventListener('click', function(event) {
+                // Check if a menu item was clicked
+                const menuItem = event.target.closest('.menu-item');
+                if (menuItem) {
+                    event.preventDefault();
+                    const hash = menuItem.getAttribute('href');
+                    // Update URL hash without jumping
+                    if(history.pushState) {
+                        history.pushState(null, null, hash);
+                    } else {
+                        location.hash = hash;
+                    }
+                    switchContent(hash);
+                }
+            });
+
+            // Handle initial page load based on hash
+            const initialHash = window.location.hash || '#overview';
+            switchContent(initialHash);
+        });
+    </script>
+
+</body>
+</html>
