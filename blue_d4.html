@@ -189,16 +189,11 @@
             padding: 1.5rem;
             cursor: pointer;
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            flex: 0 1 280px;
             width: 280px;
-            min-height: 120px; 
-            max-height: 120px; 
-            overflow: hidden; 
-            transition: all 0.3s ease-in-out, max-height 0.5s ease-in-out;
+            box-sizing: border-box;
+            display: grid; /* FIX: Use grid for layout */
+            grid-template-rows: auto 0fr; /* FIX: Title row auto, description row collapsed */
+            transition: all 0.3s ease-in-out, grid-template-rows 0.5s ease-in-out;
         }
         .unified-card:hover {
             transform: translateY(-5px) scale(1.02);
@@ -206,8 +201,7 @@
             border-color: var(--accent-glow);
         }
         .unified-card.active {
-            max-height: 700px; /* Expanded max-height */
-            justify-content: flex-start;
+            grid-template-rows: auto 1fr; /* FIX: Expand description row to fit content */
             border-color: var(--accent-glow);
             box-shadow: 0 0 25px var(--shadow-color-hover);
             background-color: rgba(0, 191, 255, 0.1);
@@ -223,23 +217,23 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 100%; /* Ensure title container takes full width */
+            width: 100%;
         }
         .unified-card:hover .card-title {
             text-shadow: 0 0 8px var(--accent-glow);
         }
         .unified-card .card-description {
-            display: none; /* FIX: Hide from layout flow when inactive */
             font-weight: 400;
             font-size: 0.95em;
             color: var(--text-secondary);
             text-align: left;
             width: 100%;
             opacity: 0;
-            transition: opacity 0.3s ease-in-out 0.2s; /* Fade in after expansion */
+            transition: opacity 0.3s ease-in-out 0.2s;
+            overflow: hidden; /* FIX: Hide content during collapse animation */
+            overflow-wrap: break-word; 
         }
         .unified-card.active .card-description {
-            display: block; /* FIX: Show in layout flow when active */
             opacity: 1;
             margin-top: 0.6rem;
         }
@@ -460,7 +454,7 @@
                             <p class="text-gray-400 mb-4">A documented procedure that defines when, how, and to whom an incident should be reported as its severity increases or if it remains unresolved for too long. It includes predefined triggers, clear authority for actions, and pre-approved notification lists and channels.</p>
 
                             <h4 class="text-lg font-semibold text-white mb-3">c. Example Classification Levels</h4>
-                            <p class="text-gray-300 mb-4">Incidents are classified using defined criteria such as potential financial loss, number of affected users, sensitivity of compromised data (e.g., PII, PHI), and regulatory reporting obligations. Click each level to learn more.</p>
+                            <p class="text-gray-400 mb-4">Incidents are classified using defined criteria such as potential financial loss, number of affected users, sensitivity of compromised data (e.g., PII, PHI), and regulatory reporting obligations. Click each level to learn more.</p>
                             <div class="flex flex-col items-center gap-4" data-interactive-group="incident-classification">
                                 <div class="unified-card incident-classification-card" data-classification="critical" data-key="critical"><span class="card-title">Critical (Severity 1)</span><div class="card-description"></div></div>
                                 <div class="unified-card incident-classification-card" data-classification="high" data-key="high"><span class="card-title">High (Severity 2)</span><div class="card-description"></div></div>
